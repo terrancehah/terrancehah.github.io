@@ -84,20 +84,21 @@ header a.active {
     margin : auto;
 }
 
-#intro1, #intro2 {
+#intro1, #intro2, #intro3, #intro4, #intro5 {
     position: relative;
     width: 100%;
     height: 250px;
     object-fit: cover;
     margin-top: 50px;
+    margin-bottom: 50px;
     margin: 30 auto; 
     overflow: hidden;
+    text-align: center;
 }
 
-#intro1 img, #intro2 img {
+#intro1 img, #intro2 img, #intro3 img, #intro4 img, #intro5 img {
     opacity: 0.3;
     height: 250px;
-    width: 100%;
     margin: 0;
     position: absolute;
     object-fit: cover;
@@ -105,20 +106,21 @@ header a.active {
     transition: 0.5s all ease-in-out;
 } 
 
-#intro1 img:hover, #intro2 img:hover {  
+#intro1 img:hover, #intro2 img:hover, #intro3 img:hover, #intro4 img:hover, #intro5 img:hover {  
     opacity: 0.6;
     width: 100%;
     transform: scale(1.1); 
 }
 
-#intro1 h3, #intro2 h3 {
+#intro1 h3, #intro2 h3, #intro3 h3, #intro4 h3, #intro5 h3 {
     color: #012d4b;
     opacity: 1;
     position: relative;
     font-family: Oswald;
     font-size: 30px;
     text-align: center;
-    margin-top: 108px;
+    display: inline-block;
+    padding: 30px 0;
     pointer-events: none;
 }
 
