@@ -1,48 +1,62 @@
 @font-face {
     font-family: 'Oswald';
-    src: url('./oswald-variablefont_wght-webfont.woff2'),
-        url('./oswald-variablefont_wght-webfont.woff');
+    src: url('./resources/oswald-variablefont_wght-webfont.woff'),
+        url('./resources/oswald-variablefont_wght-webfont.woff');
     font-style: normal;
 }
 
 body {
     margin: 0;
-    background: white;
+    position: relative;
 }
 
+
 header {
-    background-color: white;
-    margin: 0;
+    width: 100%;
+    margin-bottom: 16px;
+    display: inline-block;
 }
+
+
 
 header h1 {
     font-family: Oswald;
     font-weight: 700;
     font-size: 35px;
     padding-top: 5px;
-    padding-left: 25px;
-    padding-right: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
     color:  #1b4f72;
     margin: 0;
-    margin-bottom: 15px;
+    width: 300px;
+    display: inline-block;
 }
 
-header a {
-    position: static;
-    padding: 15px;
+header .navbutton {
+    padding: 10px;
     font-family: Oswald;
     font-weight: 800;
     font-size: 24px;
     color: #1b4f72;
-    margin-left: 0px;
+    position: relative;
 }
 
-header a:hover {
+header .navbutton:hover {
     background-color: #035a94;
     color: #bed9e4;
 }
 
-header a.active {
+.contacts {
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    float: right;
+    padding-right: 5px;
+    opacity: 1;
+    filter: saturate(70%);
+}
+
+header .active {
     background-color: #002d4b;
     color: rgb(203, 227, 236);
 }
@@ -70,8 +84,8 @@ header a.active {
     font-family: Oswald;
     font-size: 72px;
     text-align: center;
-    padding-top: 65px;
     margin: auto;
+    padding-top: 50px;
 }
 
 #banner h2 {
@@ -84,56 +98,44 @@ header a.active {
     margin : auto;
 }
 
-#intro1, #intro2, #intro3, #intro4, #intro5 {
-    position: relative;
+.intro {
     width: 100%;
     height: 250px;
-    object-fit: cover;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin: 30 auto; 
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px; 
     overflow: hidden;
-    text-align: center;
 }
 
-#intro1 img, #intro2 img, #intro3 img, #intro4 img, #intro5 img {
+.intro img {
     opacity: 0.3;
     height: 250px;
-    margin: 0;
     position: absolute;
+    width: 100%;
     object-fit: cover;
-    width: 100%; 
     transition: 0.5s all ease-in-out;
 } 
 
-#intro1 img:hover, #intro2 img:hover, #intro3 img:hover, #intro4 img:hover, #intro5 img:hover {  
+.intro img:hover {  
     opacity: 0.6;
     width: 100%;
     transform: scale(1.1); 
 }
 
-#intro1 h3, #intro2 h3, #intro3 h3, #intro4 h3, #intro5 h3 {
-    color: #012d4b;
-    opacity: 1;
-    position: relative;
-    font-family: Oswald;
-    font-size: 30px;
-    text-align: center;
-    display: inline-block;
-    padding: 30px 0;
-    pointer-events: none;
-}
-
-/*  #intro1 h3:hover {
+.intro h3 {
     color: #012d4b;
     opacity: 1;
     position: relative;
     font-family: Oswald;
     font-size: 25px;
+    font-weight: 600;
     text-align: center;
-    margin-top: 110px;
     pointer-events: none;
-} */
+    height: 170px;
+    margin-left: 45px;
+    margin-right: 45px;
+    transform: translate(0%, 25%);
+}
 
 .article {
     padding: 16px 16px;
