@@ -53,7 +53,8 @@ header .navbutton:hover {
     float: right;
     padding-right: 5px;
     opacity: 1;
-    filter: saturate(70%);
+    filter: saturate(90%);
+
 }
 
 header .active {
@@ -108,7 +109,7 @@ header .active {
 }
 
 .intro img {
-    opacity: 0.3;
+    opacity: 0.25;
     height: 250px;
     position: absolute;
     width: 100%;
@@ -117,7 +118,7 @@ header .active {
 } 
 
 .intro img:hover {  
-    opacity: 0.6;
+    opacity: 0.5;
     width: 100%;
     transform: scale(1.1); 
 }
@@ -131,10 +132,19 @@ header .active {
     font-weight: 600;
     text-align: center;
     pointer-events: none;
-    height: 170px;
+    height: 200px;
     margin-left: 45px;
     margin-right: 45px;
-    transform: translate(0%, 25%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    text-align: center;
+    font-family: Oswald;
+    font-weight: 400;
+    color: #082233;
 }
 
 .article {
@@ -147,7 +157,6 @@ header .active {
     font-family: 'Oswald';
     font-size: 48px;
     font-weight: 600;
-    /* font-style: oblique; */
     text-align: left;
     color:     #2874a6;
     opacity: 1;
