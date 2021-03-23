@@ -32,6 +32,10 @@ header h1 {
     display: inline-block;
 }
 
+header a {
+    text-decoration: none;
+}
+
 header .navbutton {
     padding: 10px;
     font-family: Oswald;
@@ -54,7 +58,10 @@ header .navbutton:hover {
     padding-right: 5px;
     opacity: 1;
     filter: saturate(90%);
+}
 
+.contacts:hover{
+    filter: saturate(50%);
 }
 
 header .active {
