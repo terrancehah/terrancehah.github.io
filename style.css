@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 @font-face {
     font-family: 'Oswald';
     src: url('./resources/oswald-variablefont_wght-webfont.woff'),
@@ -5,9 +9,16 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Merriweather';
+    src: url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap');
+    font-style: normal;
+}
+
 body {
     margin: 0;
     position: relative;
+    height: 100%;
 }
 
 
@@ -22,13 +33,13 @@ header {
 header h1 {
     font-family: Oswald;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 3vw;
     padding-top: 5px;
     padding-left: 15px;
     padding-right: 15px;
     color:  #1b4f72;
     margin: 0;
-    width: 300px;
+    width: max-content;
     display: inline-block;
 }
 
@@ -40,7 +51,7 @@ header .navbutton {
     padding: 10px;
     font-family: Oswald;
     font-weight: 800;
-    font-size: 24px;
+    font-size: 2vw;
     color: #1b4f72;
     position: relative;
 }
@@ -70,41 +81,43 @@ header .active {
 }
 
 #banner {
-    margin: 0;
-    padding: 0px;
-    position: relative;
+    width: 100%;
     height: 350px;
+    position: relative; 
 }
 
 #banner img {
     opacity: 0.5;
     height: 350px;
-    width: 100%;
-    margin: 0;
     position: absolute;
+    width: 100%;
     object-fit: cover;
 }
 
-#banner h1 {
+#name {
     color: #082233;
     opacity: 1;
     position: relative;
     font-family: Oswald;
-    font-size: 72px;
+    font-size: 6vw;
     text-align: center;
-    margin: auto;
-    padding-top: 50px;
+    margin: 0;
 }
 
-#banner h2 {
+#banner p {
     color: #082233;
     opacity: 1;
     position: relative;
     font-family: Oswald;
-    font-size: 45px;
+    font-size: 3vw;
     text-align: center;
     margin : auto;
+    justify-content: center;
+    align-content: center;
+    height: 350px;
+    display: grid;
 }
+
 
 .intro {
     width: 100%;
@@ -135,7 +148,7 @@ header .active {
     opacity: 1;
     position: relative;
     font-family: Oswald;
-    font-size: 25px;
+    font-size: 2vw;
     font-weight: 600;
     text-align: center;
     pointer-events: none;
@@ -152,46 +165,100 @@ footer {
     font-family: Oswald;
     font-weight: 400;
     color: #082233;
+    bottom: 5;
+    width: 100%;
+    position: absolute;
+    }
+
+.articles {
+    margin: 20px 150px;
+}
+
+.articles h1 {
+    font-size: 50px;
+    color: #002d4b;
+    font-family: Oswald;
+}
+
+.articles h2 {
+    margin: 0;
+}
+
+.articles a:hover { 
+    color: #0063a5 !important;
+}
+
+.articles a:visited { 
+    text-decoration: none;
+    color: #04436d;
+}
+
+.articles h3 {
+    font-family: Oswald;
+    color: #2f6d97;
+    margin: 0;
+}
+
+.articledescription {
+    color: #68a4cc !important;
+    font-weight: lighter;
+    line-height: 1.5;
+}
+
+#articlelink {
+    font-family: Oswald;
+    font-size: 35px;
 }
 
 .article {
-    padding: 16px 16px;
     margin-right: 150px;
-    margin-left: 20px;
+    margin-left: 150px;
+    margin-top: 60px;
 }
 
 .article h1{
     font-family: 'Oswald';
-    font-size: 48px;
+    font-size: 4vw;
     font-weight: 600;
-    text-align: left;
-    color:     #2874a6;
+    color:     #123e5c;
     opacity: 1;
-    padding-top: 10px;
     width: auto;
-    margin-bottom: 0%;
+    padding: 0;
+    margin: 0;
+    text-align: center;
 }
 
-.article #time {
+#time {
     font-family: 'Oswald';
     font-size: 18px;
     /* font-style: oblique; */
     font-weight: 600;
-    border-bottom: 2px solid #2874a6;
-    color:   #2e86c1;
+    /* border-bottom: 2px solid #2874a6; */
+    color:   #122f42;
     margin-top: 0%;
+    text-align: center;
 }
 
 .article p {
-    font-family: Helvetica;
+    font-family: Merriweather;
     font-size: 20px;
     color: black;
     text-align: left;
     width: auto;
-    line-height: 150%;
+    line-height: 180%;
+    margin: 70px 60px;
 }
 
 .link {
     font-style: normal;
     color: blue;
+}
+
+#postscript {
+    font-style: italic;
+}
+
+#inwork {
+    text-align: center;
+    margin: 250px 0;
 }
