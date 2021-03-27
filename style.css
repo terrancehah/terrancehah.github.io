@@ -4,8 +4,7 @@ html {
 
 @font-face {
     font-family: 'Oswald';
-    src: url('./resources/oswald-variablefont_wght-webfont.woff'),
-        url('./resources/oswald-variablefont_wght-webfont.woff');
+    src: url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
     font-style: normal;
 }
 
