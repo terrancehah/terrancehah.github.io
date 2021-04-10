@@ -87,6 +87,7 @@ body {
     margin: 0;
     position: relative;
     height: 100%;
+    background-color: #F1FAEE;
 }
 
 
@@ -100,12 +101,12 @@ header {
 
 header h1 {
     font-family: Oswald;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 3vw;
     padding-top: 5px;
     padding-left: 15px;
     padding-right: 15px;
-    color:  #1b4f72;
+    color:  #1d3557;
     margin: 0;
     width: max-content;
     display: inline-block;
@@ -118,15 +119,19 @@ header a {
 header .navbutton {
     padding: 10px;
     font-family: Oswald;
-    font-weight: 800;
+    font-weight: 600;
     font-size: 2vw;
-    color: #1b4f72;
+    color: #457B9D;
     position: relative;
 }
 
 header .navbutton:hover {
-    background-color: #035a94;
-    color: #bed9e4;
+    background-color: #A8DADC;
+    color: #457B9D;
+}
+
+header .active {
+    background-color: #A8DADC;
 }
 
 .contacts {
@@ -137,21 +142,18 @@ header .navbutton:hover {
     padding-right: 5px;
     opacity: 1;
     filter: saturate(90%);
+    background-color: #F1FAEE;
 }
 
 .contacts:hover{
     filter: saturate(50%);
 }
 
-header .active {
-    background-color: #002d4b;
-    color: rgb(203, 227, 236);
-}
-
 #banner {
     width: 100%;
     height: 350px;
-    position: relative; 
+    position: relative;
+    color: #1d3557; 
 }
 
 #banner img {
@@ -163,7 +165,6 @@ header .active {
 }
 
 #name {
-    color: #082233;
     opacity: 1;
     position: relative;
     font-family: Oswald;
@@ -173,7 +174,6 @@ header .active {
 }
 
 #banner p {
-    color: #082233;
     opacity: 1;
     position: relative;
     font-family: Oswald;
@@ -192,7 +192,6 @@ header .active {
     height: 250px;
     position: relative;
     margin-top: 30px;
-    margin-bottom: 30px; 
     overflow: hidden;
 }
 
@@ -212,7 +211,7 @@ header .active {
 }
 
 .intro h3 {
-    color: #012d4b;
+    color: #1d3557;
     opacity: 1;
     position: relative;
     font-family: Oswald;
@@ -232,101 +231,14 @@ footer {
     text-align: center;
     font-family: Oswald;
     font-weight: 400;
-    color: #082233;
+    color: #1d3557;
     bottom: 5;
     width: 100%;
     position: absolute;
     }
 
-.articles {
-    margin: 20px 150px;
-}
-
-.articles h1 {
-    font-size: 50px;
-    color: #002d4b;
-    font-family: Oswald;
-}
-
-.articles h2 {
-    margin: 0;
-}
-
-.articles a:hover { 
-    color: #0063a5 !important;
-}
-
-.articles a:visited { 
-    text-decoration: none;
-    color: #04436d;
-}
-
-.articles h3 {
-    font-family: Oswald;
-    color: #2f6d97;
-    margin: 0;
-}
-
-.articledescription {
-    color: #68a4cc !important;
-    font-weight: lighter;
-    line-height: 1.5;
-}
-
-#articlelink {
-    font-family: Oswald;
-    font-size: 35px;
-}
-
-.article {
-    margin-right: 150px;
-    margin-left: 150px;
-    margin-top: 60px;
-}
-
-.article h1{
-    font-family: 'Oswald';
-    font-size: 4vw;
-    font-weight: 600;
-    color:     #123e5c;
-    opacity: 1;
-    width: auto;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-}
-
-#time {
-    font-family: 'Oswald';
-    font-size: 18px;
-    /* font-style: oblique; */
-    font-weight: 600;
-    /* border-bottom: 2px solid #2874a6; */
-    color:   #122f42;
-    margin-top: 0%;
-    text-align: center;
-}
-
-.article p {
-    font-family: Merriweather;
-    font-size: 20px;
-    color: black;
-    text-align: left;
-    width: auto;
-    line-height: 180%;
-    margin: 70px 60px;
-}
-
-.link {
-    font-style: normal;
-    color: blue;
-}
-
-#postscript {
-    font-style: italic;
-}
-
 #inwork {
     text-align: center;
-    margin: 250px 0;
+    margin: 16.7vw 0;
+    font-size: 2.5vw;
 }
