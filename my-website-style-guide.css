@@ -15,7 +15,9 @@ h1{
     margin: 0px 0px 0px 20px;
     font-family: Oswald;
     color: #1d3557;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 3vw;
+    text-align: center;
 }
 
 h2 {
@@ -33,7 +35,7 @@ h3 {
 }
 
 p {
-    margin: 0px 20px;
+    margin: 0px 20px !important;
     font-family: Merriweather;
     font-size: 1vw;
     font-weight: 300;
@@ -41,7 +43,7 @@ p {
 
 #colors,#fonts,#headings {
     border: solid white 0.5px;
-    margin: 20px 100px;
+    margin: 20px 40px;
     align-content: center;
     padding: 20px 15px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;

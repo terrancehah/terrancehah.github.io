@@ -229,14 +229,18 @@ header .active {
 }
 
 footer {
-    text-align: center;
-    font-family: Oswald;
-    font-weight: 400;
-    color: #1d3557;
-    bottom: 5;
+    margin: 10px 0px;
     width: 100%;
-    position: absolute;
+    position: relative;
     }
+
+footer h3 {
+    margin: 0;
+    text-align: center;
+    font-family: Oswald !important;
+    font-weight: 600;
+    color: #1d3557;
+}
 
 #inwork {
     text-align: center;
