@@ -2,6 +2,7 @@
 
     <head>
         <link href="./style.css" type="text/css" rel="stylesheet">
+        <link href="./articles.css" type="text/css" rel="stylesheet">
         <link href="./my-website-style-guide.css" type='text/css' rel='stylesheet'>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Oswald:wght@300;400;700&display=swap" rel="stylesheet"> 
@@ -15,13 +16,14 @@
             <a class="navbutton active" href="./articles.html">Articles</a>
             <a class="navbutton" href="./projects.html">Projects</a>
             <a class="navbutton" href="./playground.html">Playground</a>
-            <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img class="contacts" src="./resources/fb.jpg"></a>
-            <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img class="contacts" src="./resources/ig.jpg"></a>
-            <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img class="contacts" src="./resources/linkedin.jpg"></a>
+            <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img class="contacts" src="./resources/facebook.png"></a>
+            <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img class="contacts" src="./resources/instagram.png"></a>
+            <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img class="contacts" src="./resources/linkedin.png"></a>
+            <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img class="contacts" src="./resources/github.png"></a>
         </header>
     
-        <content>
-            <h1 style='margin-left: 100px'>My Website Style Guide</h1>
+        <content class="article">
+            <h1>My Website Style Guide</h1>
             
             <div id='colors'>
                 <h2>Colors</h2>
@@ -36,7 +38,7 @@
                 <h2>Fonts</h2>
                 <br>
                 <div>
-                    <h3 class='oswald'>Oswald</h3>
+                    <h3 class='oswald' style="font-size: 2vw; text-decoration: underline;">Oswald</h3>
                     <p class='oswald'>Hello, this is Terrance.
                         <br><span style="font-style:italic;">Hello, this is Terrance.</span>
                         <br><span style="font-weight:bold;">Hello, this is Terrance.</span>
@@ -44,7 +46,7 @@
                 </div>
                 <br>
                 <div>
-                    <h3 class='merriweather'>Merriweather</h3>
+                    <h3 class='merriweather' style="font-size: 2vw; text-decoration: underline;">Merriweather</h3>
                     <p class='merriweather'>Hello, this is Terrance.
                         <br><span style="font-style:italic;">Hello, this is Terrance.</span>
                         <br><span style="font-weight:bold;">Hello, this is Terrance.</span>
@@ -55,7 +57,7 @@
             <div id='headings'>
                 <h2>Headings</h2>
                 <br>
-                <h1>H1: Page Heading</h1>
+                <h1 style="text-align: left; margin-left: 20px; font-size: 3vw;">H1: Page Heading</h1>
                     <ul>
                         <li>Font-family: Oswald</li>
                         <li>Font-size: 3vw</li>
@@ -84,7 +86,7 @@
 
         </content>
 
-        <footer><h3>Copyright &copy; 2021, Terrance Hah. All rights reserved.</h3></footer>
+        <footer><h3 class='oswald'>Copyright &copy; 2021, Terrance Hah. All rights reserved.</h3></footer>
     </body>
 
 </html>
