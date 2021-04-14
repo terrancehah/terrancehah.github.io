@@ -44,9 +44,9 @@ p {
 }
 
 .colors {   
-    padding: 15px 20px;
-    margin: 5px 15px 20px 15px;
-    width: 100px;
+    padding: 10px 15px;
+    margin: 20px 10px;
+    width: auto;
     height: 55px;
     display: inline-flex;
     text-align: center;
@@ -71,7 +71,6 @@ p {
 #honeydew {
     background-color: #F1FAEE;
     color: #1d3557;
-    top: 11px;
     position: relative;
 }
 
