@@ -1,5 +1,63 @@
+body {
+    background-color: white !important;
+    margin: 0 20px;
+}
+
+.contacts {
+    background-color: white;
+}
+
+h1{
+    margin: 0px 0px 0px 20px;
+    font-family: Oswald;
+    color: #1d3557;
+    font-weight: 700;
+}
+
+h2 {
+    margin: 0px 20px;
+    font-family: Merriweather;
+    font-size: 2vw;
+    font-weight: 700;
+}
+
+h3 {
+    margin: 0px 20px;
+    font-family: Merriweather;
+    font-size: 1.5vw;
+    font-weight: 400;
+}
+
+p {
+    margin: 0px 20px;
+    font-family: Merriweather;
+    font-size: 1vw;
+    font-weight: 300;
+}
+
+#colors,#fonts,#headings {
+    border: solid white 0.5px;
+    margin: 20px 20px;
+    align-content: center;
+    padding: 20px 15px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.colors {   
+    padding: 15px 20px;
+    margin: 5px 15px 20px 15px;
+    width: 100px;
+    height: 55px;
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    font-size: 1.4vw;
+}
+
 #prussianblue {
     background-color: #1d3557;
+    color: #F1FAEE;
+    
 }
 
 #celadonblue {
@@ -12,4 +70,29 @@
 
 #honeydew {
     background-color: #F1FAEE;
+    color: #1d3557;
+    top: 11px;
+    position: relative;
+}
+
+#imperialred {
+    background-color: #e63946;
+    color: #F1FAEE;
+}
+
+.fonts {
+    padding: 5px 10px;
+    margin: 0px 20px 0px 20px; 
+}
+
+.oswald {
+    font-family: Oswald;
+}
+
+.merriweather {
+    font-family: Merriweather;
+}
+
+ul {
+    margin-top: 5px;
 }
