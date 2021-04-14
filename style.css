@@ -135,14 +135,14 @@ header .active {
 }
 
 .contacts {
-    width: 40px;
-    height: 40px;
+    width: 3vw;
+    height: 3vw;
     float: right;
-    padding: 5px;
+    padding: 0.5vw;
     opacity: 1;
     filter: saturate(90%);
     background-color: #F1FAEE;
-    top: 7px;
+    top: 4px;
     position: relative;
 }
 
