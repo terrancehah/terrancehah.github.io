@@ -134,20 +134,19 @@ header .active {
     background-color: #A8DADC;
 }
 
-.contacts {
+header img {
     width: 3vw;
     height: 3vw;
-    float: right;
-    padding: 0.5vw;
-    opacity: 1;
-    filter: saturate(90%);
-    background-color: #F1FAEE;
-    top: 4px;
-    position: relative;
 }
-
-.contacts:hover{
-    filter: saturate(50%);
+    
+.contacts {
+    width: 3vw;
+    height: 3vw;    
+    float: right;
+    padding: 0.4vw;
+    top: 0.9vw;
+    position: relative;
+    margin: 0.2vw 0.1vw;
 }
 
 #banner {
