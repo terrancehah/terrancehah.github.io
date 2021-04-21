@@ -1,0 +1,92 @@
+.projects {
+    margin: 20px 150px;
+    background-color: #F1FAEE;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+h1 {
+    font-size: 3vw;
+    color: #1d3557;
+    font-family: Oswald;
+    margin: 0;
+    text-align: center;
+}
+
+.projects h2 {
+    margin: 0;
+}
+
+.projects a:hover { 
+    color: #457B9D !important;
+}
+
+.projects a:visited { 
+    text-decoration: none;
+    color: #04436d;
+}
+
+.projects h3 {
+    font-family: Oswald;
+    color: #1d3557;
+    margin: 0;
+}
+
+.projectdescription {
+    color: #457B9D !important;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+#projectlink {
+    font-family: Oswald;
+    font-size: 35px;
+}
+
+content {
+    margin-left: 150px;
+    margin-right: 150px;
+    position: relative;
+    display:block;
+}
+
+.article h1{
+    font-family: 'Oswald';
+    font-size: 3vw;
+    font-weight: 600;
+    color:     #123e5c;
+    opacity: 1;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+#time {
+    font-family: 'Oswald';
+    font-size: 1.3vw;
+    font-weight: 600;
+    color:   #122f42;
+    margin: 0;
+    text-align: center;
+}
+
+.project p {
+    font-family: Merriweather;
+    font-size: 20px;
+    color: black;
+    text-align: left;
+    width: auto;
+    line-height: 180%;
+    margin: 50px 60px;
+}
+
+.project a {
+    text-decoration: none;
+}
+
+
+.link {
+    font-style: normal;
+    color: blue;
+}

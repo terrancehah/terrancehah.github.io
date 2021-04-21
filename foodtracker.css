@@ -1,0 +1,154 @@
+html {
+    margin: 0px 0px;
+}
+
+content {
+    margin: 0vw 3vw;
+}
+
+header ul {
+    list-style-type: none;
+    font-size: 25;
+}
+
+header li a:hover {
+    background-color: #A8DADC;
+    height: fit-content;
+}
+
+header li {
+    padding: 8px;
+    margin-bottom: 8px;
+    width: auto;
+    padding: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+    height: max-content;
+  }
+
+nav {
+    background-color: #F1FAEE;
+    position: relative;
+    box-shadow: 00 2px +5px rgb(88, 86, 86);
+    width: 95%;
+    padding: 0%;
+    margin: 1vw 2vw;
+}
+
+nav ul {
+    padding: 0vw 0.6vw;
+}
+
+nav li {
+    padding: 0.3vw 0.6vw;
+}
+
+nav a {
+    font-size: 1.9vw;
+    font-family: Oswald;
+    font-weight: 600;
+   /*  text-decoration: none; */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    color: #1D3557;
+    padding: 0.5vw 0.8vw;
+}
+
+nav li a:hover {
+    background-color: #A8DADC;
+    height: fit-content;
+}
+
+nav img {
+    height: 3vw;
+    width: auto;
+    margin: 0.5vw;
+}
+
+nav * {
+    display: inline-block;
+    
+}
+
+.foodstyle {
+    font-size: 3.2vw;
+    font-family: Merriweather;
+    margin-left: 2vw;
+}
+
+.items {
+padding: 0;
+}
+
+.items ul {
+    padding: 0%;
+    margin: 0 20px;
+    width: max-content;
+}
+
+.items li {
+    list-style: none;
+    display: inline-grid;
+    max-width: max-content;
+    margin: 20px 30px;
+    padding: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+
+.foodpics {
+    width: 30vw;
+    height: 20vw;
+}
+
+info {
+    margin: 0;
+    position: relative;
+    display: block;
+    top: 15px;
+    left: 0px;
+    height: 30vw;
+    width: 30vw;
+    text-align: left;
+    line-height: 1;
+}
+
+info h1 {
+    font-size: 3vw;
+    font-family: Merriweather;
+    font-weight: 800;
+    margin: 0%;
+}
+
+info h2 {
+    font-size: 2vw;
+    font-family: Merriweather;
+    font-weight: 300;
+}
+
+info h3 {
+    font-size: 1.5vw;
+    font-family: Merriweather;
+    font-weight: 300;
+    font-style: italic;
+}
+
+a#backtotop {
+    position: fixed;
+    bottom: 1vw;
+    right: 1vw;
+    font-family: Oswald;
+    font-size: 1.5vw;
+    font-weight: 600;
+    text-decoration: none;
+    color: #1D3557;
+    background-color: #A8DADC;
+    padding: 0.8vw;
+    
+}
+
+#backtotop:hover {
+    background-color: #457B9D;
+    color: #A8DADC;
+}
