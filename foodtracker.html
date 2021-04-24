@@ -1,5 +1,5 @@
 <head>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./style.css" type="text/css" rel="stylesheet">
     <link href="./foodtracker.css" type="text/css" rel="stylesheet">
     <style>
@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
     <header>
         <h1>Terrance's Playground</h1>
         <a class="navbutton" href="./index.html">Home</a>
@@ -40,7 +41,13 @@
             <h1 class="foodstyle">Korean</h1>
                 <ul>
                     <li>
-                        <img class="foodpics" src="./resources/koreanbbq.jpg" alt="a korean barbeque picture">
+                        <div class="picscontainer">
+                            <img class="foodpics palsaik" src="./resources/koreanbbq.jpg" alt="a korean barbeque picture">
+                            <img class="foodpics palsaik" src="./resources/palsaik2.jpg" alt="a korean barbeque picture">
+                            <img class="foodpics palsaik" src="./resources/palsaik3.jpg" alt="a korean barbeque picture">
+                            <button class="prev" onclick="plusDivs(-1)">&#10094;</button>
+                            <button class="next" onclick="plusDivs(+1)">&#10095;</button>
+                        </div>
                         <info>
                             <h1>Palsaik Korean BBQ</h1>
                             <h2 class="foodname">by Palsaik Korean BBQ Sutera</h2>
@@ -191,4 +198,26 @@
     <footer><h3>Copyright &copy; 2021, Terrance Hah. All rights reserved.</h3></footer>
     
     <a id="backtotop" href="#top">Back to Top</a>
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+        
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+        
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("palsaik");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+          }
+          x[slideIndex-1].style.display = "block";  
+        }
+    </script>
+    
+
 </body>
