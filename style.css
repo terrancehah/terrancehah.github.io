@@ -102,8 +102,8 @@ header {
 header h1 {
     font-family: Oswald;
     font-weight: 600;
-    font-size: 3vw;
-    padding: 1% 2%;
+    font-size: 3.5vw;
+    padding: 1% 1% 1% 2%;
     color:  #1d3557;
     margin: 0;
     width: max-content;
@@ -115,10 +115,10 @@ header a {
 }
 
 .navbutton {
-    padding: 1%;
+    padding: 0.5%;
     font-family: Oswald;
     font-weight: 600;
-    font-size: 2vw;
+    font-size: 2.5vw;
     color: #457B9D;
     position: relative;
 }
