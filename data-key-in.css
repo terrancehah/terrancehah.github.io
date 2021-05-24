@@ -83,112 +83,65 @@ html {
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
-body {
-    margin: 0;
-    position: relative;
-    height: 100%;
-    background-color: #F1FAEE;
+
+form {
+    text-align: right;
+    /* align-items: center; */
+    margin: 2vw 15vw;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 2vw 15vw 4.5vw 15vw;
 }
 
-
-header {
-    width: 100%;
-    margin-bottom: 16px;
-    display: inline-block;
-}
-
-
-
-header h1 {
+h1 {
     font-family: Oswald;
-    font-weight: 600;
-    font-size: 3.5vw;
-    padding: 1% 1% 1% 2%;
-    color:  #1d3557;
+    text-align: center;
+    font-size: 3vw;
+    color: #1D3557;
     margin: 0;
-    width: max-content;
+    margin-bottom: 0.5vw;
+}
+
+label {
+    font-family: Merriweather;
+    font-size: 1.4vw;
+    line-height: 2vw;
+    color: #1D3557;
+    font-weight: 550;
+    position: relative;
     display: inline-block;
+    right: 60%;
+    margin-bottom: 0.7vw;
 }
 
-header a {
-    text-decoration: none;
+input {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  padding: 0.3vw;
+  position: absolute;
+  left: 47%;
+  width: 16vw;
 }
 
-.navbutton {
-    padding: 1%;
-    font-family: Oswald;
-    font-weight: 600;
-    font-size: 2.5vw;
-    color: #457B9D;
-    position: relative;
+.longkeyin {
+    margin-bottom: 5vw;
 }
 
-.navbutton:hover {
+#restaurantdescription, #address, #googlemapnav {
+    height: 5vw;
+}
+
+#submit {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    padding: 0.6vw 1vw;
     background-color: #A8DADC;
-    color: #457B9D;
-}
-
-header .active {
-    background-color: #A8DADC;
-}
-
-header img {
-    width: 3.5vw;
-    height: 3.5vw;
-}
-    
-.contacts {   
-    float: right;
-    padding: 0%;
-    top: 1vw;
-    right: 1vw;
-    position: relative;
-    margin: 1vw 0.4vw;
-}
-
-footer {
-    margin: 10px 0px;
-    width: 100%;
-    position: relative;
-    }
-
-footer h3 {
-    font-size: 2vw;
-    margin: 0;
-    text-align: center;
-    font-family: Oswald !important;
+    font-family: Merriweather;
+    border-radius: 4px;
+    font-size: 1vw;
     font-weight: 600;
-    color: #1d3557;
+    left: 40%;
+    margin-bottom: 1vw;
 }
 
-#inwork {
-    text-align: center;
-    margin: 16.7vw 0;
-    font-size: 2.5vw;
-}
-
-@media only screen and (max-width: 768px) {
-    header {
-        margin-bottom: 1vw;
-    }
-    header h1 {
-        width: 100%;
-        font-size: 5.5vw;
-        text-align: left;
-    }
-    .navbutton {
-        font-size: 3.5vw;
-        left: 2%;
-    }
-    .contacts {
-        top: 5%;
-        margin: 0vw 0.6vw;
-    }
-    header img {
-        width: 5.5vw;
-        height: 5.5vw;
-    }
-    footer h3 {
-        font-size: 3.5vw;
-    }
+#submit:hover {
+    background-color: #457B9D;
+    color: #F1FAEE;
 }

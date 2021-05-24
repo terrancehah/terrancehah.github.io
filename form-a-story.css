@@ -92,7 +92,7 @@ input[type="radio"] {
 }
 
 #originalstory, #startover {
-    font-size: 3vw;
+    font-size: 2vw;
 }
   
 @media all and (min-width: 320px) and (max-width: 768px), (orientation: portrait) {
@@ -115,11 +115,4 @@ input[type="radio"] {
         line-height: 6vw;
         font-size: 3vw;
     }
-    /* #message {
-        columns: 40;
-    } */
 }
-
-@media all and (min-width: 768px), (orientation: landscape) {
-
-  }

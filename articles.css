@@ -1,5 +1,5 @@
 .articles {
-    margin: 20px 150px;
+    margin: 3% 10%;
     background-color: #F1FAEE;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -44,12 +44,12 @@ h1 {
 
 #articlelink {
     font-family: Oswald;
-    font-size: 35px;
+    font-size: 3vw;
 }
 
 content {
-    margin-left: 150px;
-    margin-right: 150px;
+    margin-left: 5%;
+    margin-right: 5%;
     position: relative;
     display:block;
 }
@@ -77,12 +77,12 @@ content {
 
 .article p {
     font-family: Merriweather;
-    font-size: 20px;
+    font-size: 2vw;
     color: black;
     text-align: left;
     width: auto;
     line-height: 180%;
-    margin: 50px 60px;
+    margin: 5% 5%;
 }
 
 .link {
@@ -110,4 +110,21 @@ content {
 
 #postscript {
     font-style: italic;
+}
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 4.5vw;
+    }
+    #articlelink {
+        font-size: 5.5vw;
+    }
+    .article h1 {
+        font-size: 4.5vw;
+    }
+    #time {
+        font-size: 3vw;
+    }
+    .article p {
+        font-size: 3vw;
 }
