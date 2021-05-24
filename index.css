@@ -1,0 +1,104 @@
+#banner {
+    width: 100%;
+    height: 350px;
+    position: relative;
+    color: #1d3557; 
+}
+
+#banner img {
+    opacity: 0.5;
+    height: 350px;
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+}
+
+#name {
+    opacity: 1;
+    position: relative;
+    font-family: Oswald;
+    font-size: 6vw;
+    text-align: center;
+    margin: 0;
+}
+
+#banner p {
+    opacity: 1;
+    position: relative;
+    font-family: Oswald;
+    font-size: 3vw;
+    text-align: center;
+    margin : auto;
+    justify-content: center;
+    align-content: center;
+    height: 350px;
+    display: grid;
+}
+
+
+.intro {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.intro img {
+    opacity: 0.25;
+    height: 250px;
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    transition: 0.5s all ease-in-out;
+} 
+
+.intro img:hover {  
+    opacity: 0.5;
+    width: 100%;
+    transform: scale(1.1); 
+}
+
+.intro h3 {
+    color: #1d3557;
+    opacity: 1;
+    position: relative;
+    font-family: Oswald;
+    font-size: 2vw;
+    font-weight: 600;
+    text-align: center;
+    pointer-events: none;
+    height: 200px;
+    margin-left: 45px;
+    margin-right: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .intro h3 {
+        font-size: 3vw;
+    }
+    #banner {
+        height: 170px;
+    }
+    #banner img {
+        height: 170px;
+    }
+    #banner p {
+        height: 170px;
+        font-size: 4vw;
+    }
+    .intro {
+        height: 100px;
+    }
+    .intro img {
+        height: 100px;
+    }
+    .intro h3 {
+        height: 80px;
+    }
+
+}
