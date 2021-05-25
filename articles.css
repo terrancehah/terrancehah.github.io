@@ -18,7 +18,7 @@ h1 {
 }
 
 .article a {
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 
 .articles a:hover { 
@@ -77,7 +77,7 @@ content {
 
 .article p {
     font-family: Merriweather;
-    font-size: 2vw;
+    font-size: 1.5vw;
     color: black;
     text-align: left;
     width: auto;
@@ -88,24 +88,28 @@ content {
 .link {
     font-style: normal;
     color: blue;
+    text-decoration: underline;
 }
 
 .images {
-   /*  background-color: #A8DADC; */
-    width: 100%;
-    margin-top: 20px;
-    /* display: flex; */
+    width: 60%;
+    margin: 0% 20%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .articleimages {
-    /* width: 70%; */
-    margin: 15px 0px 0px 0px;
+    width: 100%;
+    margin: 2% 0px 0px 0px;
     display: flex;
     align-items: center;
+    text-align: center;
 }
 
 .caption {
     font-style: italic;
+    text-align: center;
+    width: 100%;
 }
 
 #postscript {
@@ -127,4 +131,9 @@ content {
     }
     .article p {
         font-size: 3vw;
+    }
+    .images {
+        width: 80%;
+        margin: 0% 10%;
+    }
 }
