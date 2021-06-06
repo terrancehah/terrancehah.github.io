@@ -9,10 +9,6 @@
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://terrancehah.com/ar-test.html" />
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-        <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-
         <!-- style for the loader -->
         <style>
         .arjs-loader {
@@ -37,6 +33,10 @@
         <title>AR Test - Terrance's Playground</title>
     </head>
 
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+
     <body style="margin : 0; overflow: hidden;">
         <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
         <div class="arjs-loader">
@@ -57,7 +57,7 @@
         
         <a-nft
             type="nft"
-            url='https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex'
+            url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
             smooth="true"
             smoothCount="10"
             smoothTolerance=".01"
@@ -66,7 +66,7 @@
 
             <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
             <a-entity
-                gltf-model='https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf'
+                gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
                 scale="5 5 5"
                 position="50 150 0"
             >
