@@ -26,10 +26,14 @@ h1 {
     color: #04436d;
 }
 
-.toys h3 {
+.toys h3, a {
     font-family: Oswald;
     color: #1d3557;
     margin: 0;
+}
+
+a {
+    text-decoration: underline;
 }
 
 #toylink {
