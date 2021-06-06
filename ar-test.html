@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
         <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
         <!-- style for the loader -->
         <style>
@@ -54,7 +55,7 @@
         <!-- the path should end with the name without the extension e.g. if file is 'pinball.fset' the path should end with 'pinball' -->
         <a-nft
             type="nft"
-            url="<path-to-your-image-descriptors>"
+            url='https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex'
             smooth="true"
             smoothCount="10"
             smoothTolerance=".01"
@@ -62,9 +63,9 @@
         >
             <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
             <a-entity
-                gltf-model="<path-to-your-model>"
+                gltf-model='https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf'
                 scale="5 5 5"
-                position="50 150 0"
+                position="100 100 0"
             >
             </a-entity>
         </a-nft>
