@@ -52,6 +52,7 @@ content {
     margin-right: 5%;
     position: relative;
     display:block;
+    text-align: justify;
 }
 
 .article h1{
@@ -81,8 +82,9 @@ content {
     color: black;
     text-align: left;
     width: auto;
-    line-height: 180%;
-    margin: 5% 5%;
+    line-height: 190%;
+    margin: 5% 10%;
+    text-align: justify;
 }
 
 .link {
@@ -98,6 +100,16 @@ content {
     flex-wrap: wrap;
 }
 
+.list {
+    width: 70%;
+    margin: 0% 15%;
+    display: block; 
+}
+
+.listheading {
+    font-size: 1.5em;
+}
+
 .articleimages {
     width: 100%;
     margin: 2% 0px 0px 0px;
@@ -110,6 +122,10 @@ content {
     font-style: italic;
     text-align: center;
     width: 100%;
+}
+
+.bold {
+    font-weight: 800;
 }
 
 #postscript {
@@ -131,6 +147,14 @@ content {
     }
     .article p {
         font-size: 3vw;
+        margin: 5% 5%;
+    }
+    .listheading {
+        font-size: 1.2em;
+    }
+    .list {
+        width: 80%;
+        margin: 0% 10%;  
     }
     .images {
         width: 80%;
