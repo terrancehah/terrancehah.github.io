@@ -22,11 +22,9 @@
   }
 </style>
 
-<!-- rawgithack development URL -->
 <script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
 
 <body style='margin : 0px; overflow: hidden;'>
-   <!-- minimal loader shown until image descriptors are loaded -->
   <div class="arjs-loader">
     <div>Loading, please wait...</div>
   </div>
@@ -46,10 +44,11 @@
             <a-entity
                 gltf-model='./resources/rusted_myvi.glb'
                 scale="60 60 60"
-                position="0 0 0"
+                position="100 100 0"
                 light="type: ambient; color: #CCC"
                 >
             </a-entity>
         </a-nft>
+        <a-entity camera></a-entity>
     </a-scene>
 </body>
