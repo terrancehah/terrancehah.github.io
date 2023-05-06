@@ -1,0 +1,150 @@
+
+
+h1 {
+    font-family: 'Oswald';
+    font-size: 3vw;
+    font-weight: 600;
+    color:     #123e5c;
+    opacity: 1;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+h3 {
+    font-family: Oswald;
+    font-size: 1.8vw;
+    font-weight: 400;
+    color:   #117892;
+    padding: 0;
+    text-align: center;
+    /* display: flex; */
+}
+
+
+content {
+    margin-left: 5%;
+    margin-right: 5%;
+    position: relative;
+    /* display:block; */
+    text-align: center;
+}
+
+.subheading {    
+    margin: 2% 20%;
+}
+
+
+p {
+    font-family: Merriweather;
+    font-size: 1.5vw;
+    font-weight: 300;
+    color: black;
+    line-height: 190%;
+    margin: 0%;
+}
+
+.link {
+    font-style: normal;
+    color: blue;
+    text-decoration: underline;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3% 20%;
+    align-items: center;
+    text-align: center;
+}
+
+.elements {
+    display: flex;
+    margin: 0% 10%;
+    text-align: center;
+    align-items: center;
+}
+
+.elementcaption {
+    width: 90%;
+    margin: 5% 2.5%;
+    align-items: center;
+    display: block;
+    line-height: 160%;
+    font-size: 1.3vw;
+}
+
+.elementcaption b {
+    font-weight: 700;
+    font-size: 2vw;
+    margin-bottom: 1vw;
+}
+
+.elementimage {
+    width: 50%;
+    margin: 2.5% 2.5%;
+    align-items: center;
+}
+
+.faq {
+    margin: 2% 10%;
+    background-color: #ffffff;
+    padding: 2vw;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
+    display: block;
+    font-family: Merriweather;
+    line-height: 170%;
+}
+
+.faq b {
+    font-size: 1.5vw;
+}
+
+.faq p {
+    font-size: 1.2vw;
+    line-height: 150%;
+}
+
+.faqtitle {
+    font-family: Oswald;
+    box-shadow: 0;
+    margin: 0% 5%;
+    color: #000;
+}
+
+
+.italic{
+    font-style: italic;
+}
+
+#postscript {
+    font-style: italic;
+}
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 4.5vw;
+    }
+    h3 {
+        font-size: 3vw;
+    }
+    p {
+        font-size: 2vw;
+    }
+    .article p {
+        font-size: 3vw;
+        margin: 5% 5%;
+    }
+    .listheading {
+        font-size: 1.2em;
+    }
+    .list {
+        width: 80%;
+        margin: 0% 10%;  
+    }
+    .images {
+        width: 80%;
+    }
+}
