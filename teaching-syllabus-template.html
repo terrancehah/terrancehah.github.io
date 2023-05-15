@@ -46,7 +46,6 @@
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" height="7vw" version="1.1">  <defs>    <filter id="goo">      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />      <feBlend in="SourceGraphic" in2="goo" />    </filter>  </defs></svg>
-            
                 </div>    
                 <span>
                     <img class='images image' style='width: 60%;' src="./resources/notion-front-page.png">    
@@ -85,7 +84,11 @@
                             <li>Intuitive Lesson Plan List</li>
                             <li>Built-in Collaboration</li>
                         </ul>
-                        <div class="button-container">
+                        <stripe-buy-button
+                            buy-button-id="buy_btn_1N84o8I41yHwVfoxr37OISZv"
+                            publishable-key="pk_live_51MtLXgI41yHwVfoxoenCC4Y3iWAv4dwTMPFtBsuAWnJItf6KjcLgtClHE281ixQp5j7tQdmHt9JCtyVSvGaVOI4N00AXx9Bg3a">
+                        </stripe-buy-button>  
+                        <!-- <div class="button-container">
                             <div class="button-wrapper">
                                 <a class="submit" href="https://checkout.stripe.com/c/pay/cs_live_a1CAVI7bpb70agJ2K1yq4vlrgpqvudFWVtzmrnvIhEt5hus66VQhMOHrZd#fidkdWxOYHwnPyd1blppbHNgWjA0SHFJXWJMMTR8TXJTY2p9amBrRkYxXDZsUkRzMWFyUUhVQ3FHdnBEUmtPTHFjM05vZklicUZpTUA3PTRsfVR1MG8ycVRhaE1xPE9GcXxTVnNCZFNKTDFLNTVEXX08R2I2ZCcpJ3VpbGtuQH11anZgYUxhJz8nYFNkMGkyZDRAZzVfN29OPXJyJyknd2BjYHd3YHdKd2xibGsnPydtcXF1dj8qKnJycitranFsamsrdmoqJ3gl">Purchase</a>
                                 <div class="loader-wrapper">
@@ -100,7 +103,7 @@
                                 </div>  
                             </div>       
                             <svg xmlns="http://www.w3.org/2000/svg" height="7vw" version="1.1">  <defs>    <filter id="goo">      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />      <feBlend in="SourceGraphic" in2="goo" />    </filter>  </defs></svg>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div>
@@ -145,7 +148,10 @@
                         }, 8000);
                     }
                 });
-            </script>                
+            </script>
+            <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+            </script>              
         </body>
         <footer>
             <h3>Copyright &copy; <script type="text/javascript">document.write( new Date().getFullYear() );</script>, Terrance Hah. All rights reserved.</h3>
