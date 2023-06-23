@@ -19,7 +19,7 @@ h3 {
 }
 
 
-content {
+main {
     margin-left: 5%;
     margin-right: 5%;
     position: relative;
@@ -167,55 +167,53 @@ ul li:before {
 
 @media only screen and (max-width: 900px) {
     h1 {
-        font-size: 4.5vw;
+        font-size: clamp(1.5rem, 4.5vw, 2.5rem);
     }
     .subheading {
-        font-size: 4vw;
+        font-size: clamp(1.2rem, 4vw, 2rem);
     }
-    p {
-        font-size: 3vw;
+    p, li {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+        text-align: center;
     }
-    .faq p {
-        font-size: 2.5vw;
-    }
-    b{
-        font-size: 3.5vw;
-    }
-    .faq b {
-        font-size: 3vw;
-        line-height: 0%;
+
+    b, ul {
+        font-size: clamp(1.2rem, 3.5vw, 2rem);
+        text-align: center;
     }
     ul {
         width: 90%;
-        font-size: 3.5vw;
-        /* text-align: center; */
     }
 
     li {
         width: 90%;
     }
     .pricingdetails {
-        margin: 1% 10%;
-        width: auto;
+        margin: 2rem auto;
+        width: 80%;
     }
     .button-container {
         height: 20vw;
     }
     .button-wrapper{
-        height: 20vw
+        height: 20vw;
     }
     .submit {
       height: 16vw;
-      margin: 2% auto;
       width: 25vw;
+      max-width: 10rem;
+      max-height: 5rem;
     }
     .elements {
         display: block;
+        text-align: center;
     }
     
     .image {
         width: 90%;
+        max-width: 300px;
         display: block;
+        margin: 0 auto;
     }
 }
 
