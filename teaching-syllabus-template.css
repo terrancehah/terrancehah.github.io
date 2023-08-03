@@ -27,6 +27,12 @@ main {
     text-align: center;
 }
 
+#slogan {
+  margin: 3% 5%;
+  font-weight: 700;
+  font-size: 2vw;
+}
+
 .heading {
     margin: 5% 10%;
     width: 80%;
@@ -75,6 +81,7 @@ p {
 .featurecaption {
     width: 90%;
     margin: 5% 5%;
+    font-size: 1.5vw;
     align-items: center;
     display: block;
     line-height: 160%;
@@ -165,13 +172,26 @@ ul li:before {
     h1 {
         font-size: clamp(1.5rem, 4.5vw, 2.5rem);
     }
-    .subheading {
-        font-size: clamp(1.2rem, 4vw, 2rem);
-    }
-    p, li {
-        font-size:  3vw;
-        text-align: center;
 
+    .heading {
+      margin: 5% 5%;
+      width: 90%;
+    }
+
+    .subheading {
+      font-size: 4vw;
+    }
+
+    p, li {
+      font-size:  3vw;
+      text-align: center;
+    }
+
+    #slogan {
+      margin: 8% 5%;
+      font-weight: 700;
+      font-size: 3.2vw;
+      line-height: 180%;
     }
 
     b, ul {
@@ -208,6 +228,10 @@ ul li:before {
         text-align: center;
     }
     
+    .featurecaption {
+      font-size: 3vw;
+    }
+
     .image {
         width: 90%;
         max-width: 300px;
