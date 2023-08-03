@@ -10,7 +10,7 @@ h1 {
 
 h3 {
     font-family: Oswald;
-    font-size: 1.8vw;
+    font-size: 2.5vw;
     font-weight: 400;
     color:   #117892;
     padding: 0;
@@ -28,12 +28,12 @@ main {
 }
 
 .heading {
-    margin: 0 10%;
+    margin: 5% 10%;
     width: 80%;
 }
 
 .subheading {    
-    margin: 2% 10%;
+    margin: 2% 5%;
 }
 
 
@@ -62,18 +62,19 @@ p {
 
 .image {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 8px;
+    width: 60%;
 }
 
-.elements {
+.features {
     display: flex;
-    margin: 0% 10%;
+    margin: 5% 5%;
     text-align: center;
     align-items: center;
 }
 
-.elementcaption {
+.featurecaption {
     width: 90%;
-    margin: 5% 2.5%;
+    margin: 5% 5%;
     align-items: center;
     display: block;
     line-height: 160%;
@@ -85,11 +86,6 @@ b {
     margin-bottom: 1vw;
 }
 
-.elementimage {
-    width: 45%;
-    margin: 2.5% 2.5%;
-    align-items: center;
-}
 
 .faq {
     margin: 1% 10%;
@@ -125,7 +121,7 @@ b {
 }
 
 .pricingdetails {
-    margin: 1% 25%;
+    margin: 1% 28%;
     align-items: center;
     background-color: #ffffff;
     padding: 1%;
@@ -173,12 +169,13 @@ ul li:before {
         font-size: clamp(1.2rem, 4vw, 2rem);
     }
     p, li {
-        font-size: clamp(1rem, 3vw, 1.5rem);
+        font-size:  3vw;
         text-align: center;
+
     }
 
     b, ul {
-        font-size: clamp(1.2rem, 3.5vw, 2rem);
+        font-size: 3.5vw;
         text-align: center;
     }
     ul {
@@ -187,10 +184,12 @@ ul li:before {
 
     li {
         width: 90%;
+        font-size: 4vw;
     }
     .pricingdetails {
         margin: 2rem auto;
-        width: 80%;
+        width: 85%;
+        padding: 5% 0%;
     }
     .button-container {
         height: 20vw;
@@ -198,13 +197,13 @@ ul li:before {
     .button-wrapper{
         height: 20vw;
     }
-    .submit {
+    /* .submit {
       height: 16vw;
       width: 25vw;
       max-width: 10rem;
       max-height: 5rem;
-    }
-    .elements {
+    } */
+    .features {
         display: block;
         text-align: center;
     }
@@ -214,6 +213,21 @@ ul li:before {
         max-width: 300px;
         display: block;
         margin: 0 auto;
+    }
+
+    .submit {
+      z-index:2;
+      width: 28vw;
+      height:14vw;
+      margin: 1vw auto;
+      background: linear-gradient(to right, #8ecae6 0%,#023047 100%); 
+      display:block;
+      border-radius:200px;
+      text-align:center;
+      color:rgba(255,255,255,1);
+      text-decoration:none;
+      line-height:420%;
+      transition: all 0.7s ease, line-height 0s ease, color 0.4s ease, filter 0.2s ease;
     }
 }
 
