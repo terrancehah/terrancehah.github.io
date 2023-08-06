@@ -1,15 +1,16 @@
 h1 {
-    font-family: 'Oswald';
+    font-family: 'Lato';
     font-size: 3vw;
     font-weight: 600;
     color:     #123e5c;
     opacity: 1;
     padding: 0;
     text-align: center;
+    font-style: normal;
 }
 
 h3 {
-    font-family: Oswald;
+    font-family: Lato;
     font-size: 2.5vw;
     font-weight: 400;
     color:   #117892;
@@ -29,22 +30,24 @@ main {
 
 #slogan {
   margin: 3% 5%;
+  line-height: 160%;
   font-weight: 700;
   font-size: 2vw;
 }
 
 .heading {
-    margin: 5% 10%;
+    margin: 3% 10%;
     width: 80%;
 }
 
 .subheading {    
     margin: 2% 5%;
+    font-weight: 300;
 }
 
 
 p {
-    font-family: Merriweather;
+    font-family: Lato;
     /* font-size: 1.5vw; */
     font-weight: 300;
     color: black;
@@ -101,7 +104,7 @@ b {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     text-align: center;
     display: block;
-    font-family: Merriweather;
+    font-family: Lato;
     line-height: 170%;
 }
 
@@ -110,19 +113,19 @@ b {
 }
 
 .faq p {
-    /* font-size: 1.2vw; */
+    font-size: 1.4vw;
     line-height: 150%;
 }
 
 .faqtitle {
-    font-family: Merriweather;
+    font-family: Lato;
     box-shadow: 0;
     margin: 1% 5%;
     color: #000;
 }
 
 .pricingtitle {
-    font-family: Merriweather;
+    font-family: Lato;
     margin: 0% 5%;
     color: #000;
 }
@@ -136,7 +139,7 @@ b {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     text-align: center;
     display:block;
-    font-family: Merriweather;
+    font-family: Lato;
     font-size: 3.5vw;
 }
 
@@ -182,13 +185,14 @@ ul li:before {
       font-size: 4vw;
     }
 
-    p, li {
+    .faq p, li {
       font-size:  3vw;
       text-align: center;
     }
 
     #slogan {
       margin: 8% 5%;
+      line-height: 120%;
       font-weight: 700;
       font-size: 3.2vw;
       line-height: 180%;
@@ -256,6 +260,10 @@ ul li:before {
 }
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:400');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
