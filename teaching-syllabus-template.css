@@ -185,6 +185,10 @@ ul li:before {
       font-size: 4vw;
     }
 
+    .faq {
+      padding: 4vw;
+    }
+
     .faq p, li {
       font-size:  3vw;
       text-align: center;

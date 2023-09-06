@@ -44,6 +44,10 @@ header a {
     font-weight: 600;
 }
 
+nav {
+    display: inline;
+}
+
 .navbutton {
     padding: 1%;
     font-family: Lato;
