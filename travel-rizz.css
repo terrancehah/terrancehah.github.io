@@ -1,0 +1,884 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+h1, h2, h3, p {
+  font-family: Lato;
+}
+
+
+h1 {
+    font-family: Lato;
+    font-size: 3vw;
+    font-weight: 600;
+    color:#123e5c;
+    opacity: 1;
+    padding: 0;
+    text-align: center;
+    font-style: normal;
+}
+
+h2 {
+  font-family: Lato;
+  font-size: 2.2vw;
+  font-weight: 700;
+  color: black;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  /* display: flex; */
+}
+
+h3 {
+    font-family: Lato;
+    font-size: 2.5vw;
+    font-weight: 400;
+    padding: 0;
+    text-align: center;
+    /* display: flex; */
+}
+
+
+main {
+    /* margin-left: 5%;
+    margin-right: 5%; */
+    position: relative;
+    /* display:block; */
+    text-align: center;
+}
+
+#slogan {
+  margin: 3% 5%;
+  line-height: 160%;
+  font-weight: 700;
+  font-size: 2vw;
+}
+
+.intro {
+  position: relative;
+  width: 100%;
+  height: 50vw;
+  overflow: hidden;
+}
+
+.intro video {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.intro-caption {
+  position: relative;
+  z-index: 1;
+  margin: auto;
+  padding: 12% 0%;
+}
+
+.heading {
+    margin: 3% 10%;
+    width: 80%;
+}
+
+.subheading {    
+    margin: 5% 5%;
+    font-weight: 400;
+    color:   #0b5567;
+
+}
+
+#prompt {
+  color:#2e536a;
+}
+
+p {
+    font-family: Lato;
+    font-size: 1.5vw;
+    font-weight: 300;
+    color: black;
+    line-height: 190%;
+    margin: 0%;
+}
+
+.link {
+    font-style: normal;
+    color: blue;
+    text-decoration: underline;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3% 20%;
+    align-items: center;
+    text-align: center;
+}
+
+.image {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 8px;
+    width: 60%;
+}
+
+.features {
+    display: flex;
+    margin: 5% 5%;
+    text-align: center;
+    align-items: center;
+}
+
+.itinerary-planner {
+  padding: 3% 0%;
+}
+
+.date-picker-container {
+  display: flex;
+  justify-content: center;
+}
+
+.date-picker {
+  margin: 0 10px;
+  width: 25%;
+  height: 2vw;
+}
+
+.start-date {
+  width: 40%;
+  display: inline-block;
+}
+
+.end-date {
+  width: 40%;
+  display: inline-block;
+}
+
+label {
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+.flatpickr-input {
+  display: block !important;
+  padding: 3%;
+  font-size: 1.5vw;
+  font-family: Lato;
+}
+
+.flatpickr-calendar {
+  display: inline-block !important;
+  position: absolute; /* Position the calendar within the form-group container */
+  right: 100%; /* Position below the input field */
+  left: 0;
+  z-index: 1;
+  font-family: Lato;
+}
+
+.itinerary-form-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+
+#destination {
+  position: relative;
+  cursor: text;
+  font-size: 1.7vw;
+  line-height: 2vw;
+  padding: 0.5vw 2vw;
+  margin: 0.8em;
+  height: 3.5vw;
+  width: 25%;
+  background-color: #ffffff;
+  border: 2.5px solid #d6d6e7;
+  border-radius: 3px;
+  color: rgb(35, 38, 59);
+  box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
+  overflow: hidden;
+  transition: all 100ms ease-in-out;
+  :focus {
+      border-color: #3c4fe0;
+      box-shadow: 0 2px 0 0 rgb(35 38 59 / 5%);
+  }
+}
+
+#generate-button {
+  font-family: Lato;
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border: none;
+  padding: 0 56px;
+  height: 4vw;
+  line-height: 45px;
+  border-radius: 1vw;
+  background-color: white;
+  color: #4798cc;
+  font-weight: 600;
+  font-size: 1.5vw;
+  box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+}
+
+#generate-button:hover {
+    background: rgba(58, 125, 201, 0.9);
+    color: white;
+    box-shadow: 0 0.8vw 28px #2e536a;
+    transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease;
+    transform: translateY(-4px);
+}
+
+
+input {
+  position: relative;
+  cursor: text;
+  font-family: Lato;
+  font-size: 1.7vw;
+  line-height: 2vw;
+  padding: 0.5vw 2vw;
+  margin: 0.8em;
+  height: 3vw;
+  background-color: #fff;
+  border: 2.5px solid #d6d6e7;
+  border-radius: 3px;
+  color: rgb(35, 38, 59);
+  box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
+  overflow: hidden;
+  transition: all 100ms ease-in-out;
+  :focus {
+      border-color: #3c4fe0;
+      box-shadow: 0 2px 0 0 rgb(35 38 59 / 5%);
+  }
+}
+
+.destination-input-form:valid a {
+display: block;
+}
+
+.featurecaption {
+    width: 90%;
+    margin: 5% 5%;
+    font-size: 1.5vw;
+    align-items: center;
+    display: block;
+    line-height: 160%;
+}
+
+.popup-window {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 10% 25%; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+  overflow-y: auto; /* Enable scrolling within the popup */
+  position: fixed;
+}
+
+#loadingSpinner {
+  position: fixed; /* or absolute */
+  z-index: 1; /* Sit on top */
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.3); /* white w/ opacity */
+}
+
+#plane {
+  width: 50%;
+  margin: 14% 25%;
+}
+
+.close-btn {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  left: 3%;
+  top: 1%;
+  position: sticky;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.generated-content {
+  margin-top: 15px;
+  font-family: Lato;
+  font-size: 1.2vw;
+  line-height: 1.8;
+}
+
+
+b {
+    font-weight: 700;
+    font-size: 2vw;
+    margin-bottom: 1vw;
+}
+
+
+.faq {
+    margin: 1% 10%;
+    background-color: #ffffff;
+    padding: 2.5vw;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
+    display: block;
+    font-family: Lato;
+    line-height: 170%;
+}
+
+.faq b {
+    font-size: 1.5vw;
+}
+
+.faq p {
+    font-size: 1.4vw;
+    line-height: 150%;
+}
+
+.faqtitle {
+    font-family: Lato;
+    box-shadow: 0;
+    margin: 1% 5%;
+    color: #000;
+}
+
+.bold {
+    font-weight: 700;
+}
+.italic{
+    font-style: italic;
+}
+
+#postscript {
+    font-style: italic;
+}
+
+/*CSS for mobile screen*/
+@media screen and (max-width: 480px) {
+    h1 {
+      font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 4vw, 2.0rem);
+    }
+
+    .heading {
+      margin: 5% 5%;
+      width: 90%;
+    }
+
+    .subheading {
+      font-size: 5vw;
+    }
+
+
+    .intro {
+      position: relative;
+      width: 100%;
+      height: 200vw;
+      overflow: hidden;
+    }
+    
+    .intro video {
+      width: auto;
+      height: 200vw;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.6;
+    }
+    
+    .intro-caption {
+      position: relative;
+      z-index: 1;
+      margin: auto;
+      padding: 72% 0%;
+    }
+
+    .faq {
+      padding: 4vw;
+    }
+
+    .faq p, li {
+      font-size:  3vw;
+      text-align: center;
+    }
+
+    #destination {
+      font-size: 4vw;
+      line-height: 2vw;
+      padding: 0.5vw 2vw;
+      /* margin: 1em; */
+      height: 2.2em;
+      width: 50%;
+    }
+
+    .flatpickr-input {
+      display: block !important;
+      padding: 3%;
+      font-size: 4vw;
+      font-family: Lato;
+    }
+
+    input {
+      font-size: 4vw;
+    }
+
+    .date-picker {
+      margin: 0 5px;
+      width: 50%;
+      height: 6.5vw;
+    }
+
+    /* label {
+      bottom: 2px; 
+    } */
+    
+    .start-date {
+      width: 100%;
+      display: inline-block;
+      align-items: center;
+      margin: 2% 0%;
+    }
+    
+    .end-date {
+      width: 100%;
+      display: inline-block;
+      align-items: center;
+      margin: 0;
+    }
+
+    .flatpickr-calendar {
+      left: 0;
+      z-index: 1;
+    }
+
+    .flatpickr-prev-month, .flatpickr-next-month {
+      z-index: 1 !important;
+    }
+
+
+    .flatpickr-calendar.inline {
+      display: inline-block !important;
+      position: absolute; /* Position the calendar within the form-group container */
+      left: 0;
+      z-index: auto;
+      align-items: center;
+    }
+
+    #slogan {
+      margin: 8% 5%;
+      line-height: 120%;
+      font-weight: 700;
+      font-size: 3.2vw;
+      line-height: 180%;
+    }
+
+    #generate-button {
+      width: auto;
+      padding: 0 30px;
+      height: 12vw;
+      line-height: 45px;
+      border-radius: 2.8vw;
+      font-weight: 600;
+      font-size: 4.5vw;
+      box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+    }
+
+
+    .popup-window {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    .popup-content {
+      background-color: #fefefe;
+      margin: 15% 5%; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      height: auto;
+      width: 80%; /* Could be more or less, depending on screen size */
+      overflow-y: auto; /* Enable scrolling within the popup */
+    }
+
+    .close-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* #generatedContent h1 {
+
+    } */
+
+    .generated-content {
+      margin-top: 15px;
+      /* line-height: 180%; */
+    }
+
+    .generated-content p {
+      font-size: 4vw;
+    }
+
+    .generated-content h3 {
+      font-size: 4.5vw;
+    }
+
+    #plane {
+      width: 80%;
+      margin: 80% 10%;
+
+    }
+
+    b, ul {
+        font-size: 3.5vw;
+        text-align: center;
+    }
+    ul {
+        width: 90%;
+    }
+
+    li {
+        width: 90%;
+        font-size: 4vw;
+    }
+    
+    .button-container {
+        height: 20vw;
+    }
+    .button-wrapper{
+        height: 20vw;
+    }
+    
+    .features {
+        display: block;
+        text-align: center;
+    }
+    
+    .featurecaption {
+      font-size: 3vw;
+    }
+
+    .image {
+        width: 90%;
+        max-width: 300px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+/*CSS for tablet and iPad screen*/
+@media  screen and (min-width: 481px) and (max-width: 1024px) {
+
+  h2 {
+    font-size: 4vw;
+  }
+
+  .heading {    
+    font-size: 5.5vw;
+    margin: 5% 5%;
+    width: 90%;
+  }
+
+  .subheading {
+    font-size: 4vw;
+  }
+
+
+  .intro {
+    position: relative;
+    width: 100%;
+    height: 100vw;
+    overflow: hidden;
+  }
+  
+  .intro video {
+    width: auto;
+    height: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0.6;
+  }
+  
+  .intro-caption {
+    position: relative;
+    z-index: 1;
+    margin: auto;
+    padding: 32% 0%;
+  }
+
+  .faq {
+    padding: 4vw;
+  }
+
+  .faq p, li {
+    font-size:  3vw;
+    text-align: center;
+  }
+
+  #destination {
+    font-size: 3vw;
+    line-height: 20px;
+    padding: 0.5vw 2vw;
+    margin: 1em;
+    height: 7.5vw;
+    width: 50%;
+  }
+
+  .flatpickr-input {
+    display: block !important;
+    padding: 3%;
+    font-size: 4vw;
+    font-family: Lato;
+  }
+
+  /* input {
+    font-size: 4vw;
+  } */
+
+  .date-picker {
+    margin: 0 5px;
+    width: 50%;
+    height: 5.5vw;
+  }
+
+  /* label {
+    bottom: 2px;
+  } */
+  
+  .flatpickr-months, .flatpickr-month  {
+    height: 6vw !important;
+    width: 100%;
+  }
+
+  .flatpickr-current-month {
+    width: 100% !important;
+    height: auto !important;
+    left: 0 !important;
+  }
+
+  .flatpickr-day,.flatpickr-days, .dayContainer {
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 100% !important;
+  }
+  .flatpickr-day {
+    margin-top: 1% !important;
+    margin-bottom: 1% !important;
+    font-size: 3.1vw;
+  }
+
+  .dayContainer {
+    margin: 5% 0%;
+  }
+
+  .flatpickr-monthDropdown-months {
+    width: 55% !important;
+  }
+
+  .flatpickr-prev-month svg, .flatpickr-next-month svg {
+    height: 80% !important;
+    width: 80% !important;
+    margin-top: 105%;
+  }
+
+  .start-date {
+    width: 100%;
+    height: fit-content;
+    display: inline-block;
+    align-items: center;
+    margin: 2% 0%;
+  }
+  
+  .end-date {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    align-items: center;
+    margin: 0;
+  }
+
+
+  .flatpickr-calendar.inline {
+    display: inline-block !important;
+    position: absolute; /* Position the calendar within the form-group container */
+    width: 45%;
+    height: 45%;
+    left: 0;
+    z-index: auto;
+    align-items: center;
+    font-size: 2.8vw;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    padding-left: 3%;    
+    padding-right: 3%;
+
+  }
+
+  #slogan {
+    margin: 8% 5%;
+    line-height: 120%;
+    font-weight: 700;
+    font-size: 3.2vw;
+    line-height: 180%;
+  }
+
+  #generate-button {
+    width: auto;
+    padding: 0 30px;
+    height: 12vw;
+    line-height: 45px;
+    border-radius: 2.8vw;
+    font-weight: 600;
+    font-size: 4.5vw;
+    box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+  }
+
+
+  /* Popup Window Styles */
+  .popup-window {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+
+  .popup-content {
+    background-color: #fefefe;
+    margin: 15% 5%; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-height: 70vh; /* Maximum height */
+    overflow-y: auto; /* Enable scrolling within the popup */
+  }
+
+  .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .generated-content {
+    margin-top: 15px;
+    /* line-height: 180%; */
+  }
+
+  .generated-content p {
+    font-size: 4vw;
+  }
+
+  .generated-content h3 {
+    font-size: 4.5vw;
+  }
+
+  #plane {
+    width: 80%;
+    margin: 94% 25%;
+
+  }
+
+  b, ul {
+      font-size: 3.5vw;
+      text-align: center;
+  }
+  ul {
+      width: 90%;
+  }
+
+  li {
+      width: 90%;
+      font-size: 4vw;
+  }
+  
+  .button-container {
+      height: 20vw;
+  }
+  .button-wrapper{
+      height: 20vw;
+  }
+  
+  .features {
+      display: block;
+      text-align: center;
+  }
+  
+  .featurecaption {
+    font-size: 3vw;
+  }
+
+  .image {
+      width: 90%;
+      max-width: 300px;
+      display: block;
+      margin: 0 auto;
+  }
+}
+
+
+* {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    outline:none;
+}

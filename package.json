@@ -1,0 +1,18 @@
+{
+  "name": "travel-rizz.json",
+  "version": "1.0.0",
+  "description": "Travel-Rizz - Your friendly AI-powered travel companion.",
+  "main": "travel-rizz-server.js",
+  "scripts": {
+    "test": "\"scripts\": {"
+  },
+  "author": "Terrance Hah",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "openai": "^4.24.2"
+  }
+}
