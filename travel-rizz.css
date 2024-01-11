@@ -177,7 +177,16 @@ label {
   left: 0;
   z-index: 1;
   font-family: Lato;
+  padding: 2% !important;
+  width: auto !important;
 }
+
+.flatpickr-day {
+  margin-top: 1% !important;
+  margin-bottom: 1% !important;
+  font-size: 1.2vw;
+}
+
 
 .itinerary-form-container {
   display: flex;
@@ -194,7 +203,7 @@ label {
 #destination {
   position: relative;
   cursor: text;
-  font-size: 1.7vw;
+  font-size: 1.5vw;
   line-height: 2vw;
   padding: 0.5vw 2vw;
   margin: 0.8em;
@@ -238,12 +247,11 @@ label {
     transform: translateY(-4px);
 }
 
-
 input {
   position: relative;
   cursor: text;
   font-family: Lato;
-  font-size: 1.7vw;
+  font-size: 1.5vw;
   line-height: 2vw;
   padding: 0.5vw 2vw;
   margin: 0.8em;
@@ -291,7 +299,8 @@ display: block;
   margin: 10% 25%; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 50%; /* Could be more or less, depending on screen size */
+  width: 50%;
+  height: 70%;
   overflow-y: auto; /* Enable scrolling within the popup */
   position: fixed;
 }
@@ -304,12 +313,24 @@ display: block;
   width: 100%;
   height: 100%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.3); /* white w/ opacity */
+  background-color: rgba(255, 255, 255, 0.75); /* white w/ opacity */
+}
+
+#loadingSpinner p {
+  text-align: center;
+  z-index: 1;
+  position: fixed;
+  width: 50%;
+  margin: 32% 25%;
+  font-weight: 500;
+  font-size: 1.7vw;
 }
 
 #plane {
   width: 50%;
-  margin: 14% 25%;
+  margin: 13% 25%;
+  position: absolute;
+  height: 50%;
 }
 
 .close-btn {
@@ -333,8 +354,35 @@ display: block;
   font-family: Lato;
   font-size: 1.2vw;
   line-height: 1.8;
+  text-align: justify;
 }
 
+#exportPDF {
+  font-family: Lato;
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border: none;
+  width: 40%;
+  margin: 2% 30%;
+  padding: 0 56px;
+  height: 4vw;
+  line-height: 45px;
+  border-radius: 1vw;
+  background-color: white;
+  color: #4798cc;
+  font-weight: 600;
+  font-size: 1.5vw;
+  box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+}
+
+#exportPDF:hover {
+    background: rgba(58, 125, 201, 0.9);
+    color: white;
+    box-shadow: 0 0.8vw 28px #2e536a;
+    transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease;
+    transform: translateY(-4px);
+}
 
 b {
     font-weight: 700;
@@ -461,6 +509,12 @@ b {
       height: 6.5vw;
     }
 
+    .flatpickr-day {
+      margin-top: 1% !important;
+      margin-bottom: 1% !important;
+      font-size: 4.1vw;
+    }
+
     /* label {
       bottom: 2px; 
     } */
@@ -534,7 +588,7 @@ b {
       margin: 15% 5%; /* 15% from the top and centered */
       padding: 20px;
       border: 1px solid #888;
-      height: auto;
+      height: 80%;
       width: 80%; /* Could be more or less, depending on screen size */
       overflow-y: auto; /* Enable scrolling within the popup */
     }
@@ -553,12 +607,10 @@ b {
       cursor: pointer;
     }
 
-    /* #generatedContent h1 {
-
-    } */
 
     .generated-content {
       margin-top: 15px;
+      text-align: justify;
       /* line-height: 180%; */
     }
 
@@ -571,9 +623,32 @@ b {
     }
 
     #plane {
-      width: 80%;
-      margin: 80% 10%;
+      width: 100%;
+      margin: 80% 0%;
+      height: 25%;
+    }
 
+    #loadingSpinner p {
+      text-align: center;
+      z-index: 1;
+      position: fixed;
+      width: 80%;
+      margin: 112% 10%;
+      font-weight: 500;
+      font-size: 4vw;
+      line-height: 1.5;
+    }
+
+    #exportPDF {
+      width: 60%;
+      margin: 2% 20%;
+      padding: 0 30px;
+      height: 12vw;
+      line-height: 45px;
+      border-radius: 2.8vw;
+      font-weight: 600;
+      font-size: 4vw;
+      box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
     }
 
     b, ul {
@@ -666,7 +741,7 @@ b {
   }
 
   #destination {
-    font-size: 3vw;
+    font-size: 3.5vw;
     line-height: 20px;
     padding: 0.5vw 2vw;
     margin: 1em;
@@ -681,19 +756,19 @@ b {
     font-family: Lato;
   }
 
-  /* input {
-    font-size: 4vw;
-  } */
+  input {
+    font-size: 3.5vw;
+  }
 
   .date-picker {
     margin: 0 5px;
-    width: 50%;
+    width: 30%;
     height: 5.5vw;
   }
 
-  /* label {
-    bottom: 2px;
-  } */
+  .flatpickr-prev-month, .flatpickr-next-month {
+    z-index: 1 !important;
+  }
   
   .flatpickr-months, .flatpickr-month  {
     height: 6vw !important;
@@ -706,19 +781,24 @@ b {
     left: 0 !important;
   }
 
+  .flatpickr-weekdaycontainer {
+    margin: 3% 0;
+  }
+
   .flatpickr-day,.flatpickr-days, .dayContainer {
     max-width: 100% !important;
-    width: 100% !important;
+    width: 45vw !important;
     max-height: 100% !important;
   }
+
   .flatpickr-day {
-    margin-top: 1% !important;
-    margin-bottom: 1% !important;
+    margin-top: 2% !important;
+    margin-bottom: 2% !important;
     font-size: 3.1vw;
   }
 
   .dayContainer {
-    margin: 5% 0%;
+    margin: 2% 0%;
   }
 
   .flatpickr-monthDropdown-months {
@@ -779,14 +859,13 @@ b {
     line-height: 45px;
     border-radius: 2.8vw;
     font-weight: 600;
-    font-size: 4.5vw;
+    font-size: 4vw;
     box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
   }
 
 
-  /* Popup Window Styles */
   .popup-window {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -800,10 +879,10 @@ b {
   .popup-content {
     background-color: #fefefe;
     margin: 15% 5%; /* 15% from the top and centered */
-    padding: 20px;
+    padding: 5%;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
-    max-height: 70vh; /* Maximum height */
+    height: 75%; /* Maximum height */
     overflow-y: auto; /* Enable scrolling within the popup */
   }
 
@@ -822,8 +901,12 @@ b {
   }
 
   .generated-content {
-    margin-top: 15px;
+    text-align: justify;
     /* line-height: 180%; */
+  }
+
+  .generated-content h1 {
+    font-size: 6vw;
   }
 
   .generated-content p {
@@ -836,8 +919,32 @@ b {
 
   #plane {
     width: 80%;
-    margin: 94% 25%;
+    margin: 40% 10%;
+    height: auto;
 
+  }
+
+  #loadingSpinner p {
+    text-align: center;
+    z-index: 1;
+    position: fixed;
+    width: 80%;
+    margin: 67% 10%;
+    font-weight: 500;
+    font-size: 4vw;
+    line-height: 1.3;
+  }
+
+  #exportPDF {
+    width: 50%;
+    margin: 2% 25%;
+    padding: 0 30px;
+    height: 12vw;
+    line-height: 45px;
+    border-radius: 2.8vw;
+    font-weight: 600;
+    font-size: 4vw;
+    box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
   }
 
   b, ul {

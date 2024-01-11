@@ -18,6 +18,7 @@
             <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
             <script defer src="/_vercel/speed-insights/script.js"></script>
             <script defer data-domain="terrancehah.com" src="https://plausible.io/js/script.tagged-events.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
             </style>
@@ -77,8 +78,7 @@
                         <br>
                         <br>
                         <button id="generate-button" type="submit">Take Me There</button>
-                        
-                    </div>
+                    </form>
                 </section>
             </main>
 
@@ -88,10 +88,12 @@
                     <div id="generatedContent" class="generated-content">
                         <!-- Generated content will be displayed here -->
                     </div>
+                    <button id="exportPDF">Export as PDF</button>
                 </div>
             </div>
             <div id="loadingSpinner" style="display: none;">
                 <img id="plane" src="flyingplane.gif"  alt="Loading..."/>
+                <p>Fasten your seat belt while we are working on your travel itinerary...</p>
             </div>            
 
             <footer>
@@ -209,6 +211,36 @@
                     document.getElementById("popupWindow").style.display = "none";
                 }
             </script>
+
+            <script>
+                document.getElementById('exportPDF').addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default action
+                    e.stopPropagation(); // Stop the event from bubbling up
+
+                    var city = document.getElementById("destination").value;
+                    var startDate = document.getElementById("start-date").value;
+                    var endDate = document.getElementById("end-date").value;
+                    var filename = 'Travel-Itinerary';
+
+                    if (city) {
+                        filename = city + '-' + filename;
+                    }
+                    if (startDate && endDate) {
+                        filename += '-' + startDate + '-to-' + endDate;
+                    }
+
+                    var element = document.getElementById('generatedContent');
+                    var opt = {
+                        margin:       [10, 15, 10, 15],
+                        filename:     filename + '.pdf',
+                        image:        { type: 'jpeg', quality: 0.98 },
+                        html2canvas:  { scale: 2 },
+                        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    };
+                    html2pdf().from(element).set(opt).save();
+                });
+            </script>
+
         </body>
         
     </html>
