@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link href="./style.css" type="text/css" rel="stylesheet">
+            <link href="./travel-rizz.css" type="text/css" rel="stylesheet">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+            <link rel="icon" type="image/x-icon" href="/resources/TH-logo.png">
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+            <meta property="og:title" content="Travel-Rizz - Your friendly AI-powered travel companion.">
+            <meta name="og:description" content="Experience the charm of travel planning with Travel-Rizz. Let AI be your guide!">
+            <meta property="og:image" content="https://terrancehah.com/resources/portrait.jpg">
+            <meta property="og:type" content="article">
+            <meta property="og:url" content="https://terrancehah.com/travel-planner-index.html">
+            <meta name="description" content="Travel-Rizz: Revolutionizing your travel experience with AI-driven ease and charm.">
+            <script defer data-domain="terrancehah.com" src="https://plausible.io/js/script.tagged-events.js"></script>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+            </style>
+            <title>Travel-Rizz - Your friendly AI-powered travel companion.</title>
+        </head>
+
+        <body>
+            <header>
+                <h1>Travel-Rizz</h1>
+                <nav>
+                    <a class="navbutton" href="./index.html">Home</a>
+                    <a class="navbutton" href="./articles.html">Articles</a>
+                    <a class="navbutton active" href="./projects.html">Projects</a>
+                    <a class="navbutton" href="./playground.html">Playground</a>
+                </nav>
+                <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png" alt="facebook"></a>
+                <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png" alt="instagram"></a>
+                <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png" alt="linkedin"></a>
+                <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png" alt="github"></a>
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+                </style>
+            </header>
+            
+            <main>
+                <div class="intro">
+                    <video autoplay loop muted>
+                        <source src="Patagonia Lake 20X 720P_compressed.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="intro-caption">
+                        <h1 class="heading">Welcome to Travel-Rizz: 
+                            <br>Your Personalized Journey Awaits</h1>
+                    <h3 class="subheading">Discover the joy of seamless travel planning with Travel-Rizz, your friendly AI travel assistant.</h3>
+                    </div>
+                    
+                </div>
+                <section class="itinerary-planner">   
+                    <form id="trip-form" action="http://localhost:3000/generate_itinerary" method="POST">
+                        <h2 id="prompt">Any place in your mind?</h2>
+                        <div class="destination-input-form" action="">
+                            <input type="search" id="destination"name="city" required>
+                        </div>                
+                        <div class="start-date">
+                            <div class="planner-input-form inline-calendar" id="start-calendar">
+                                <label for="start-date">Start Date:</label>
+                                <input id="start-date" name="startDate" class="date-picker planner-input-form" required>
+                            </div>
+                        </div>
+                        <div class="end-date">
+                            <div class="planner-input-form inline-calendar" id="end-calendar">
+                                <label for="end-date">End Date:</label>
+                                <input id="end-date" name="endDate" class="date-picker planner-input-form" required>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <button id="generate-button" type="submit">Take Me There</button>
+                        
+                    </div>
+                </section>
+            </main>
+
+            <div id="popupWindow" class="popup-window">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup()">&times;</span>
+                    <div id="generatedContent" class="generated-content">
+                        <!-- Generated content will be displayed here -->
+                    </div>
+                </div>
+            </div>
+            <div id="loadingSpinner" style="display: none;">
+                <img id="plane" src="flyingplane.gif"  alt="Loading..."/>
+            </div>            
+
+            <footer>
+                <h3>Copyright &copy; <script>document.write( new Date().getFullYear() );</script>, Terrance Hah. All rights reserved.</h3>
+                <!-- <h4>Last modified on: <script>document.write(document.lastModified);</script></h4> -->
+                <h4>This site uses Plausible Analytics and does not store cookies on your computer.</h4>
+            </footer>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <script>
+                var wrappers = $(".button-wrapper");
+            
+                $(".submit").click(function(e) {
+                    e.preventDefault(); // Prevent the default behavior (navigation) on button click
+            
+                    var clickedWrapper = $(this).parent(".button-wrapper");
+            
+                    if(!clickedWrapper.hasClass("checked")) {
+                        clickedWrapper.addClass("checked");
+            
+                        // Add a delay before redirecting to the payment page
+                        setTimeout(function(){
+                            window.location.href = $(e.target).attr("href");
+                        }, 5000); // Change the value to adjust the delay (in milliseconds)
+            
+                        setTimeout(function(){
+                            clickedWrapper.removeClass("checked");
+                        }, 8000);
+                    }
+                });
+            </script>
+
+            <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+            </script>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var stripeButton = document.querySelector('.stripe-buy-button');
+                    if (stripeButton) {
+                        stripeButton.addEventListener('click', function() {
+                        plausible('Stripe Purchase Button Click');
+                        });
+                    }
+                });
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+            <script>
+                // Initialize two separate inline flatpickr instances for start and end dates
+                flatpickr("#start-calendar", {
+                    inline: true,
+                    dateFormat: "Y-m-d",
+                    onChange: function(selectedDates, dateStr) {
+                        document.getElementById("start-date").value = dateStr;
+                    }
+                });
+        
+                flatpickr("#end-calendar", {
+                    inline: true,
+                    dateFormat: "Y-m-d",
+                    onChange: function(selectedDates, dateStr) {
+                        document.getElementById("end-date").value = dateStr;
+                    }
+                });
+            </script>
+
+            <script>
+                // Listen to the input, parse into JSON format and receive the JSON format response
+                document.getElementById("trip-form").addEventListener("submit", function(e) {
+                    e.preventDefault();
+
+                    // Show loading spinner
+                    document.getElementById("loadingSpinner").style.display = "block";
+
+
+                    var city = document.getElementById("destination").value;
+                    var startDate = document.getElementById("start-date").value;
+                    var endDate = document.getElementById("end-date").value;
+
+                    fetch('http://localhost:3000/generate_itinerary', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ city, startDate, endDate }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        document.getElementById("generatedContent").innerHTML = data.response;
+
+                        // Hide loading spinner
+                        document.getElementById("loadingSpinner").style.display = "none";
+
+                        openPopup(); // Open the popup with the response
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        // Hide loading spinner in case of an error as well
+                        document.getElementById("loadingSpinner").style.display = "none";
+                    });
+                });
+            </script>
+            
+
+            <script>
+                function openPopup() {
+                    document.getElementById("popupWindow").style.display = "block";
+                }
+
+                // Function to close the popup
+                function closePopup() {
+                    document.getElementById("popupWindow").style.display = "none";
+                }
+            </script>
+        </body>
+        
+    </html>

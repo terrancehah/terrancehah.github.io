@@ -2,18 +2,18 @@ body {
     background-color: #F1FAEE;
     font-family: Merriweather;
 }
-  
+
 form {
     line-height: 5vw;
     margin: 1% 0%;
 }
-  
+
 
 label, #yesorno, option, select {
     font-size: 2vw;
     text-align: left;
 }
-  
+
 input[type="text"], input[type="number"], select {
     height: 4vw;
     width: 30vw;
@@ -27,13 +27,13 @@ input[type="text"], input[type="number"], select {
 input[type="text"]:focus, input[type="number"]:focus, select:focus {
     border: 2px solid #646161ab;
 }
-  
+
 input[type="radio"] {
     display: inline-flex;
     margin: 0;
     align-content: center;
 }
-  
+
 #main {
     background-color: #F1FAEE;
     text-align: center;
@@ -42,7 +42,7 @@ input[type="radio"] {
     overflow: auto;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-  
+
 #main h1 {
     font-size: 4vw;
 }
@@ -60,8 +60,8 @@ input[type="radio"] {
 }
 
 #submit:hover {
-  background-color: #457B9D;
-  color: #F1FAEE;
+    background-color: #457B9D;
+    color: #F1FAEE;
 }
 
 #story {
@@ -69,23 +69,23 @@ input[type="radio"] {
     margin: 0% 5%;
     line-height: 3vw;
 }
-  
+
 #top {
     background-color: rgb(255, 255, 255);
     margin: 2% 10%;
     border-radius: 15px;
 }
-  
+
 #top img {
     display: block;
     width: 35%;
     margin: 0 auto;
 }
-  
+
 .italics {
     font-style: italic;
 }
-  
+
 .word {
     font-weight: bold;
     text-decoration: underline;
@@ -94,11 +94,11 @@ input[type="radio"] {
 #originalstory, #startover {
     font-size: 2vw;
 }
-  
+
 @media all and (min-width: 320px) and (max-width: 768px), (orientation: portrait) {
     label, #yesorno, option, select {
         font-size: 3vw;
-  }
+    }
     form {
         line-height: 7vw;
     }
