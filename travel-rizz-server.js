@@ -32,7 +32,7 @@ app.post('/generate_itinerary', async (req, res) => {
                 Also, the itinerary should be provided in a daily schedule form; for each day, arrange the schedule so that the traveller can get to 3-4 attractions. 
                 The attractions that are visited each day should not be too far, they should be in around the nearby area; if possible, briefly introduce a little how the traveller can get to all the attractions (by foot or public transport etc).
                 Remember not to provide the response in a dialogue or conversation form, instead you should reply in an informative and descriptive way.
-                Do not ever include the opening and closing tags of '''html and ''' in the generated content.
+                Do not ever include the opening and closing tags of '''html, </ and ''' in the generated content.
 
                 Since the response here will be redirected to be shown on a HTML page, please format the response with HTML tags.
                 Use <h1>, <h2> for different headings accordingly, 
