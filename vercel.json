@@ -1,6 +1,5 @@
 {
     "cleanUrls": true,
-
     "version": 2,
     "builds": [
         {
@@ -10,8 +9,13 @@
     ],
     "routes": [
         {
-        "src": "/(.*)",
-        "dest": "travel-rizz-server.js"
+            "src": "/api/(.*)",
+            "dest": "api/$1",
+            "status": 200,
+            "headers": {
+                "Content-Type": "application/json",
+                "Cache-Control": "s-maxage=43200"
+            }
         }
     ]
 }
