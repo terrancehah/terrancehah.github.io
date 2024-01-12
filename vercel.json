@@ -6,15 +6,10 @@
         "use": "@vercel/node"
         }
     ],
-    "routes": [
+    "rewrites": [
         {
-            "src": "/api/(.*)",
-            "dest": "api/$1",
-            "status": 200,
-            "headers": {
-                "Content-Type": "application/json",
-                "Cache-Control": "s-maxage=43200"
-            }
+            "source": "/(.*)",
+            "destination": "/"
         }
     ]
 }
