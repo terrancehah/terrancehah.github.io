@@ -147,6 +147,12 @@ p {
   height: 2vw;
 }
 
+.flatpickr-prev-month, .flatpickr-next-month {
+  z-index: 1 !important;
+  position: relative !important;
+  padding: 7.48px 0 0 0 !important;
+}
+
 .start-date {
   width: 40%;
   display: inline-block;
@@ -540,6 +546,9 @@ b {
 
     .flatpickr-prev-month, .flatpickr-next-month {
       z-index: 1 !important;
+      height: 6vw !important;
+      position: relative !important;
+      padding: 7.48px 0 0 0 !important;
     }
 
 
@@ -768,12 +777,26 @@ b {
 
   .flatpickr-prev-month, .flatpickr-next-month {
     z-index: 1 !important;
+    height: 7vw !important;
+    position: relative !important;
+    padding: 7.48px 0 0 0 !important;
+  }
+
+  .flatpickr-prev-month svg, .flatpickr-next-month svg {
+    height: 70% !important;
+    width: 70% !important;
   }
   
   .flatpickr-months, .flatpickr-month  {
     height: 6vw !important;
     width: 100%;
+    position: relative !important;
   }
+
+  .flatpickr-monthDropdown-months {
+    width: 60% !important;
+  }
+
 
   .flatpickr-current-month {
     width: 100% !important;
@@ -800,16 +823,7 @@ b {
   .dayContainer {
     margin: 2% 0%;
   }
-
-  .flatpickr-monthDropdown-months {
-    width: 55% !important;
-  }
-
-  .flatpickr-prev-month svg, .flatpickr-next-month svg {
-    height: 80% !important;
-    width: 80% !important;
-    margin-top: 105%;
-  }
+  
 
   .start-date {
     width: 100%;
