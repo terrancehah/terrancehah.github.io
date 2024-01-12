@@ -174,8 +174,7 @@
                     var city = document.getElementById("destination").value;
                     var startDate = document.getElementById("start-date").value;
                     var endDate = document.getElementById("end-date").value;
-                    const apiUrl = process.env.NODE_ENV === 'production' ? '/generate_itinerary' : 'http://localhost:3000/generate_itinerary';
-
+                    const apiUrl = window.location.hostname === 'localhost' ? 'http://localhost:3000/generate_itinerary' : '/generate_itinerary';
 
                     fetch(apiUrl, {
                         method: 'POST',
