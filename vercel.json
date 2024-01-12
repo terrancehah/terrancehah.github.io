@@ -1,15 +1,10 @@
 {
+    "cleanUrls": true,
     "version": 2,
     "builds": [
         {
         "src": "travel-rizz-server.js", 
         "use": "@vercel/node"
-        }
-    ],
-    "rewrites": [
-        {
-            "source": "/api/(.*)",
-            "destination": "/api/$1"
         }
     ]
 }
