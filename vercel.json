@@ -1,5 +1,4 @@
 {
-    "cleanUrls": true,
     "version": 2,
     "builds": [
         {
@@ -7,11 +6,15 @@
         "use": "@vercel/node"
         }
     ],
-    "rewrites": [
+    "routes": [
         {
-            "source": "/api/:path*",
-            "destination": "/api/travel-rizz-server"
+            "src": "/api/(.*)",
+            "dest": "api/$1",
+            "status": 200,
+            "headers": {
+                "Content-Type": "application/json",
+                "Cache-Control": "s-maxage=43200"
+            }
         }
     ]
 }
-
