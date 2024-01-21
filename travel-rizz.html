@@ -44,42 +44,37 @@
             </header>
             
             <main>
-                <div class="intro">
-                    <video autoplay loop muted>
-                        <source src="Patagonia Lake 20X 720P_compressed.mp4" type="video/mp4">
+                    <video id="background" autoplay loop muted>
+                        <source src="./resources/Patagonia Lake 20X 720P_compressed.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+
                     <div class="intro-caption">
                         <h1 class="heading">Welcome to Travel-Rizz: 
                             <br>Your Personalized Journey Awaits</h1>
                     <h3 class="subheading">Discover the joy of seamless travel planning with Travel-Rizz, your friendly AI travel assistant.</h3>
                     </div>
-                    
-                </div>
-                <section class="itinerary-planner">   
-                    <form id="trip-form">
-                        <h2 id="prompt">Any place in your mind?</h2>
-                        <div class="destination-input-form" action="">
-                            <input type="search" id="destination"name="city" required>
-                        </div>                
-                        <div class="start-date">
-                            <div class="planner-input-form inline-calendar" id="start-calendar">
-                                <label for="start-date">Start Date:</label>
-                                <input id="start-date" name="startDate" class="date-picker planner-input-form" required>
+
+                    <div class="itinerary-planner">   
+                        <form id="trip-form">
+                            <div class="destination-input-form" action="">
+                                <!-- <h2 id="prompt">Any place in your mind?</h2> -->
+                                <input type="search" id="destination"name="city" placeholder="Any place in your mind?" autocomplete="off">
+                                <div id="cityList"></div>
+                            </div>                
+                            <div class="calendar-container">
+                                <div class="planner-input-form inline-calendar" id="start-calendar">
+                                    <input id="start-date" name="startDate" class="date-picker planner-input-form" placeholder="Start Date" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="end-date">
-                            <div class="planner-input-form inline-calendar" id="end-calendar">
-                                <label for="end-date">End Date:</label>
-                                <input id="end-date" name="endDate" class="date-picker planner-input-form" required>
+                            <div class="calendar-container">
+                                <div class="planner-input-form inline-calendar" id="end-calendar">
+                                    <input id="end-date" name="endDate" class="date-picker planner-input-form" placeholder="End Date" required>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <button id="generate-button" type="submit">Take Me There</button>
-                    </form>
-                </section>
+                            <button id="generate-button" type="submit">Take Me There</button>
+                        </form>
+                    </div>
             </main>
 
             <div id="popupWindow" class="popup-window">
@@ -144,23 +139,115 @@
             <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
             <script>
-                // Initialize two separate inline flatpickr instances for start and end dates
-                flatpickr("#start-calendar", {
-                    inline: true,
-                    dateFormat: "Y-m-d",
-                    onChange: function(selectedDates, dateStr) {
-                        document.getElementById("start-date").value = dateStr;
-                    }
-                });
+                //City name autocomplete
+                $(document).ready(function(){
+                    $('#destination').on('input', function(){
+                        var query = $(this).val();
+                        if (query.length >= 3) {
+                            $.ajax({
+                                url: "http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + query,
+                                type: "GET",
+                                dataType: "json",
+                                success: function(data){
+                                    var cityList = data.map(function(city){
+                                        return '<div class="city-item">' + city + '</div>';
+                                    }).join('');
         
-                flatpickr("#end-calendar", {
-                    inline: true,
-                    dateFormat: "Y-m-d",
-                    onChange: function(selectedDates, dateStr) {
-                        document.getElementById("end-date").value = dateStr;
-                    }
+                                    $('#cityList').html(cityList);
+                                    $('#cityList').css('display', 'block');
+                                }
+                            });
+                        } else {
+                            $('#cityList').html('');
+                            $('#cityList').css('display', 'none');
+                        }
+                    });
+        
+                    $(document).on('click', '.city-item', function(){
+                        $('#destination').val($(this).text());
+                        $('#cityList').css('display', 'none');
+                    });
                 });
             </script>
+
+
+            <script>
+                var today = new Date();
+                var mainCalendar, endCalendar;
+                var currentMode = "";
+
+                function initializeCalendar() {
+                    var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
+                    var wideMode = isMobile ? "mobile" : "desktop";
+
+                    if (currentMode !== wideMode) {
+                        // Destroy existing calendars
+                        if (mainCalendar) {
+                            mainCalendar.destroy();
+                            mainCalendar = null;
+                        }
+                        if (endCalendar) {
+                            endCalendar.destroy();
+                            endCalendar = null;
+                        }
+
+                        //Mobile mode
+                        if (isMobile) {
+                            // Initialize the mobile calendar in range mode
+                            mainCalendar = flatpickr("#start-calendar", {
+                                inline: true,
+                                dateFormat: "d-m-Y",
+                                minDate: today,
+                                mode: "range",
+                                onChange: function(selectedDates, dateStr) {
+                                    // Update the start-date input with the full range string
+                                    document.getElementById("start-date").value = dateStr;
+                                },
+                            });
+                            document.getElementById("end-calendar").style.display = 'none';
+                        } else {
+                            // Initialize the main calendar for desktop in single mode
+                            mainCalendar = flatpickr("#start-calendar", {
+                                inline: true,
+                                dateFormat: "d-m-Y",
+                                minDate: today,
+                                onChange: function(selectedDates, dateStr) {
+                                    document.getElementById("start-date").value = dateStr;
+                                    endCalendar.set('minDate', dateStr);
+                                },
+                            });
+
+                            // Initialize the end calendar for desktop
+                            endCalendar = flatpickr("#end-calendar", {
+                                inline: true,
+                                dateFormat: "d-m-Y",
+                                minDate: today,
+                                onChange: function(selectedDates, dateStr) {
+                                    document.getElementById("end-date").value = dateStr;
+                                }
+                            });
+                        }
+
+                        // Toggle visibility
+                        document.getElementById("start-calendar").style.display = 'block';
+                        document.getElementById("start-date").style.display = 'relative';
+                        document.getElementById("end-date").style.display = isMobile ? 'none' : 'relative';
+
+                        currentMode = wideMode;
+                    }
+                }
+
+                $(document).ready(function() {
+                    initializeCalendar();
+                });
+
+                var resizeTimer;
+                $(window).resize(function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(initializeCalendar, 250);
+                });
+            </script>
+
 
             <script>
                 // Listen to the input, parse into JSON format and receive the JSON format response

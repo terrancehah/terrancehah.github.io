@@ -2,23 +2,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-h1, h2, h3, p {
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+
+h1, h2 {
   font-family: Lato;
 }
 
-
-h1 {
-    font-family: Lato;
-    font-size: 3vw;
-    font-weight: 600;
-    color:#123e5c;
-    opacity: 1;
-    padding: 0;
-    text-align: center;
-    font-style: normal;
+h3, p {
+  font-family: Raleway;
 }
+
+
+
 
 h2 {
   font-family: Lato;
@@ -32,7 +31,7 @@ h2 {
 }
 
 h3 {
-    font-family: Lato;
+    font-family: Raleway;
     font-size: 2.5vw;
     font-weight: 400;
     padding: 0;
@@ -59,46 +58,58 @@ main {
 .intro {
   position: relative;
   width: 100%;
-  height: 50vw;
+  height: max-content;
   overflow: hidden;
 }
 
-.intro video {
-  width: 100%;
-  height: auto;
+#background {
+  /* width: 100%; */
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .intro-caption {
   position: relative;
   z-index: 1;
   margin: auto;
-  padding: 12% 0%;
+  padding: 2% 0%;
 }
 
 .heading {
-    margin: 3% 10%;
+    margin: 2% 10%;
     width: 80%;
+    font-family: Caveat;
+    font-size: 5.2vw;
+    font-weight: 700;
+    color:#123e5c;
+    opacity: 1;
+    padding: 0;
+    text-align: center;
+    font-style: normal;
 }
 
 .subheading {    
-    margin: 5% 5%;
-    font-weight: 400;
-    color:   #0b5567;
-
+  width: 80%;
+  padding: 0% 10%;
+  text-align: center;  
+  font-weight: 500;
+  color:   #0b5567;
+  margin: 0%;
 }
 
 #prompt {
-  color:#2e536a;
+  color:#123e5c;
+  font-family: Raleway;
+  font-weight: 400;
 }
 
 p {
-    font-family: Lato;
+    font-family: Raleway;
     font-size: 1.5vw;
     font-weight: 300;
     color: black;
@@ -133,7 +144,7 @@ p {
 }
 
 .itinerary-planner {
-  padding: 3% 0%;
+  padding: 2% 0%;
 }
 
 .date-picker-container {
@@ -143,7 +154,7 @@ p {
 
 .date-picker {
   margin: 0 10px;
-  width: 25%;
+  width: 35%;
   height: 2vw;
 }
 
@@ -153,14 +164,10 @@ p {
   padding: 7.48px 0 0 0 !important;
 }
 
-.start-date {
-  width: 40%;
+.calendar-container {
+  width: 45%;
   display: inline-block;
-}
-
-.end-date {
-  width: 40%;
-  display: inline-block;
+  margin-bottom: 2%;
 }
 
 label {
@@ -173,24 +180,7 @@ label {
   display: block !important;
   padding: 3%;
   font-size: 1.5vw;
-  font-family: Lato;
-}
-
-.flatpickr-calendar {
-  display: inline-block !important;
-  position: absolute; /* Position the calendar within the form-group container */
-  right: 100%; /* Position below the input field */
-  left: 0;
-  z-index: 1;
-  font-family: Lato;
-  padding: 2% !important;
-  width: auto !important;
-}
-
-.flatpickr-day {
-  margin-top: 1% !important;
-  margin-bottom: 1% !important;
-  font-size: 1.2vw;
+  font-family: Raleway;
 }
 
 
@@ -205,14 +195,23 @@ label {
   flex: 1;
 }
 
+.destination-input-form {
+  position: relative;
+  margin-bottom: 2%;
+}
+
+
+.destination-input-form:valid a {
+display: block;
+}
 
 #destination {
   position: relative;
   cursor: text;
   font-size: 1.5vw;
   line-height: 2vw;
-  padding: 0.5vw 2vw;
-  margin: 0.8em;
+  padding: 0.5vw 1vw;
+  margin: 0.6%;
   height: 3.5vw;
   width: 25%;
   background-color: #ffffff;
@@ -228,8 +227,38 @@ label {
   }
 }
 
+#cityList {
+  display: none;
+  position: absolute;
+  top: 77%; /* Position the top edge of the dropdown right below the input box */
+  width: 24.7%; 
+  max-height: 200px; 
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 2.5px solid #d6d6e7;
+  border-top: none !important;
+  border-radius: 3px;
+  box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
+  z-index: 1000;
+  margin: 0;
+  font-family: Raleway;
+  font-size: 1.5vw;
+  line-height: 2vw;
+  left: 37.5%;
+}
+
+.city-item {
+  padding: 0.5vw 2vw;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out;
+}
+
+.city-item:hover {
+  background-color: #f2f2f2;
+}
+
 #generate-button {
-  font-family: Lato;
+  font-family: Raleway;
   display: inline-block;
   outline: 0;
   cursor: pointer;
@@ -239,14 +268,16 @@ label {
   line-height: 45px;
   border-radius: 1vw;
   background-color: white;
-  color: #4798cc;
+  color: #3a7dc9e6;
   font-weight: 600;
-  font-size: 1.5vw;
+  font-size: 1.7vw;
   box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 
 #generate-button:hover {
-    background: rgba(58, 125, 201, 0.9);
+    background: #3a7dc9e6;
     color: white;
     box-shadow: 0 0.8vw 28px #2e536a;
     transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease;
@@ -256,7 +287,7 @@ label {
 input {
   position: relative;
   cursor: text;
-  font-family: Lato;
+  font-family: Raleway;
   font-size: 1.5vw;
   line-height: 2vw;
   padding: 0.5vw 2vw;
@@ -275,8 +306,48 @@ input {
   }
 }
 
-.destination-input-form:valid a {
-display: block;
+.flatpickr-calendar {
+  display: inline-block !important;
+  position: absolute; /* Position the calendar within the form-group container */
+  right: 100%; /* Position below the input field */
+  left: 0;
+  z-index: 1;
+  font-family: Lato;
+  padding: 2% !important;
+  width: 60% !important;
+}
+
+
+.flatpickr-rContainer {
+  max-width: 100% !important;
+}
+
+.flatpickr-day {
+  margin-top: 1% !important;
+  margin-bottom: 1% !important;
+  font-size: 1.4vw;
+  max-width: 14.2857143% !important;
+}
+
+
+.flatpickr-days {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+}
+
+.flatpickr-weekdays {
+  /* max-width: 100% !important;
+  max-height: 100% !important; */
+  width: 100% !important;
+  font-size: 1.3vw;
+}
+
+.dayContainer {
+  max-width: 100% !important;
+  min-width: 100% !important;
+  width: 100% !important;
+  max-height: 100% !important;
 }
 
 .featurecaption {
@@ -356,14 +427,14 @@ display: block;
 
 .generated-content {
   margin-top: 15px;
-  font-family: Lato;
+  font-family: Raleway;
   font-size: 1.2vw;
   line-height: 1.8;
   text-align: justify;
 }
 
 #exportPDF {
-  font-family: Lato;
+  font-family: Raleway;
   display: inline-block;
   outline: 0;
   cursor: pointer;
@@ -447,23 +518,19 @@ b {
     .heading {
       margin: 5% 5%;
       width: 90%;
+      font-size: 8vw;
     }
 
     .subheading {
-      font-size: 5vw;
+      font-size: 4vw;
     }
 
 
-    .intro {
-      position: relative;
-      width: 100%;
-      height: 200vw;
-      overflow: hidden;
-    }
+ 
     
-    .intro video {
-      width: auto;
-      height: 200vw;
+    #background {
+      /* width: auto; */
+      height: 100%;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -476,7 +543,7 @@ b {
       position: relative;
       z-index: 1;
       margin: auto;
-      padding: 72% 0%;
+      /* padding: 72% 0%; */
     }
 
     .faq {
@@ -492,16 +559,32 @@ b {
       font-size: 4vw;
       line-height: 2vw;
       padding: 0.5vw 2vw;
-      /* margin: 1em; */
-      height: 2.2em;
-      width: 50%;
+      height: 9.5vw;
+      width: 60%;
+    }
+
+    #cityList {
+      width: 59%; 
+      max-height: 200px; 
+      border: 2.5px solid #d6d6e7;
+      border-radius: 3px;
+      box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
+      font-size: 3.6vw;
+      line-height: 3vw;
+      left: 20%;
+    }
+
+    .city-item {
+      padding: 2vw 2vw;
     }
 
     .flatpickr-input {
-      display: block !important;
-      padding: 3%;
+      display: grid !important;
+      padding: 0% 2%;
+      place-items: center;
       font-size: 4vw;
-      font-family: Lato;
+      margin: 0%;
+      width: 50%;
     }
 
     input {
@@ -509,9 +592,10 @@ b {
     }
 
     .date-picker {
-      margin: 0 5px;
-      width: 50%;
+      margin: 3% 20%;
+      width: 100%;
       height: 6.5vw;
+      padding: 1% 4%;
     }
 
     .flatpickr-day {
@@ -524,24 +608,13 @@ b {
       bottom: 2px; 
     } */
     
-    .start-date {
-      width: 100%;
-      display: inline-block;
-      align-items: center;
-      margin: 2% 0%;
-    }
-    
-    .end-date {
-      width: 100%;
-      display: inline-block;
-      align-items: center;
-      margin: 0;
+    .calendar-container {
+      width: 96%;
+      display: grid;
+      place-items: center;
+      margin: 2% 2%;
     }
 
-    .flatpickr-calendar {
-      left: 0;
-      z-index: 1;
-    }
 
     .flatpickr-prev-month, .flatpickr-next-month {
       z-index: 1 !important;
@@ -558,6 +631,38 @@ b {
       z-index: auto;
       align-items: center;
     }
+
+    .flatpickr-calendar {
+      left: 0;
+      z-index: 1;
+      padding: 2% !important;
+      width: 80% !important;
+    }
+
+    .flatpickr-rContainer {
+      max-width: 100% !important;
+    }
+    
+    .flatpickr-day {
+      margin-top: 1% !important;
+      margin-bottom: 1% !important;
+    }
+    
+    
+    .flatpickr-days {
+      width: 100% !important;
+    }
+    
+    .flatpickr-weekdays {
+      width: 100% !important;
+      font-size: 4vw;
+    }
+    
+    .dayContainer {
+      width: 100% !important;
+      min-width: 100% !important;
+    }
+
 
     #slogan {
       margin: 8% 5%;
@@ -709,7 +814,7 @@ b {
   }
 
   .heading {    
-    font-size: 5.5vw;
+    font-size: 7.5vw;
     margin: 5% 5%;
     width: 90%;
   }
@@ -722,13 +827,13 @@ b {
   .intro {
     position: relative;
     width: 100%;
-    height: 100vw;
+    height: max-content;
     overflow: hidden;
   }
   
-  .intro video {
-    width: auto;
-    height: 100vw;
+  #background {
+    /* width: auto; */
+    height: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -741,7 +846,7 @@ b {
     position: relative;
     z-index: 1;
     margin: auto;
-    padding: 32% 0%;
+    /* padding: 32% 0%; */
   }
 
   .faq {
@@ -757,16 +862,31 @@ b {
     font-size: 3.5vw;
     line-height: 20px;
     padding: 0.5vw 2vw;
-    margin: 1em;
+    margin: 0.8%;
     height: 7.5vw;
     width: 50%;
+  }
+
+  #cityList {
+    width: 49.5%; 
+    max-height: 300px; 
+    border: 2.5px solid #d6d6e7;
+    border-radius: 3px;
+    box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
+    font-size: 3vw;
+    line-height: 3vw;
+    left: 25%;
+    top: 75%;
+  }
+
+  .city-item {
+    padding: 2.2vw 2vw;
   }
 
   .flatpickr-input {
     display: block !important;
     padding: 3%;
     font-size: 4vw;
-    font-family: Lato;
   }
 
   input {
@@ -775,7 +895,7 @@ b {
 
   .date-picker {
     margin: 0 5px;
-    width: 30%;
+    width: 40%;
     height: 5.5vw;
   }
 
@@ -812,9 +932,20 @@ b {
     margin: 3% 0;
   }
 
-  .flatpickr-day,.flatpickr-days, .dayContainer {
+  .flatpickr-rContainer {
     max-width: 100% !important;
-    width: 45vw !important;
+  }
+
+  .flatpickr-days {
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 100% !important;
+  }
+
+  .dayContainer {
+    max-width: 100% !important;
+    min-width: 100%;
+    width: 100% !important;
     max-height: 100% !important;
   }
 
@@ -822,6 +953,8 @@ b {
     margin-top: 2% !important;
     margin-bottom: 2% !important;
     font-size: 3.1vw;
+    width: 14.2857143% !important;
+    max-width: none !important;
   }
 
   .dayContainer {
@@ -829,15 +962,7 @@ b {
   }
   
 
-  .start-date {
-    width: 100%;
-    height: fit-content;
-    display: inline-block;
-    align-items: center;
-    margin: 2% 0%;
-  }
-  
-  .end-date {
+  .calendar-container {
     width: 100%;
     height: auto;
     display: inline-block;
@@ -859,7 +984,13 @@ b {
     padding-bottom: 3%;
     padding-left: 3%;    
     padding-right: 3%;
+  }
 
+  .flatpickr-calendar {
+    left: 0;
+    z-index: 1;
+    padding: 2% !important;
+    width: 60% !important;
   }
 
   #slogan {

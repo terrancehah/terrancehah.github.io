@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 h1 {
     font-family: 'Lato';
     font-size: 3vw;
@@ -41,7 +47,7 @@ main {
 }
 
 .subheading {    
-    margin: 2% 5%;
+    margin: 4% 5%;
     font-weight: 300;
 }
 
@@ -176,13 +182,17 @@ ul li:before {
         font-size: clamp(1.5rem, 4.5vw, 2.5rem);
     }
 
+    p {
+      font-size: 3vw;
+    }
+
     .heading {
       margin: 5% 5%;
       width: 90%;
     }
 
     .subheading {
-      font-size: 4vw;
+      font-size: 5vw;
     }
 
     .faq {
@@ -198,7 +208,7 @@ ul li:before {
       margin: 8% 5%;
       line-height: 120%;
       font-weight: 700;
-      font-size: 3.2vw;
+      font-size: 3.7vw;
       line-height: 180%;
     }
 
@@ -262,12 +272,6 @@ ul li:before {
       transition: all 0.7s ease, line-height 0s ease, color 0.4s ease, filter 0.2s ease;
     }
 }
-
-@import url('https://fonts.googleapis.com/css?family=Roboto:400');
-
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
