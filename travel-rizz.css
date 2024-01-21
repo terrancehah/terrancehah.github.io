@@ -433,6 +433,10 @@ input {
   text-align: justify;
 }
 
+.generated-content h1 {
+  text-align: center;
+}
+
 #exportPDF {
   font-family: Raleway;
   display: inline-block;
@@ -729,6 +733,7 @@ b {
     }
 
     .generated-content h1 {
+      text-align: center;
       font-size: 6vw;
     }
 
@@ -1056,6 +1061,7 @@ b {
   }
 
   .generated-content h1 {
+    text-align: center;
     font-size: 6vw;
   }
 
