@@ -17,6 +17,7 @@
             <meta name="description" content="Travel-Rizz: Revolutionizing your travel experience with AI-driven ease and charm.">
             <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
             <script defer src="/_vercel/speed-insights/script.js"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvcgBgSprgTRQO_6BWh5EAOPu1vdS6KD4&libraries=places&callback=initAutocomplete" async defer></script>
             <script defer data-domain="terrancehah.com" src="https://plausible.io/js/script.tagged-events.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
             <style>
@@ -70,6 +71,7 @@
                             <div class="calendar-container">
                                 <div class="planner-input-form inline-calendar" id="end-calendar">
                                     <input id="end-date" name="endDate" class="date-picker planner-input-form" placeholder="End Date" required>
+                                    <input type="hidden" id="hidden-end-date" name="endDate">
                                 </div>
                             </div>
                             <button id="generate-button" type="submit">Take Me There</button>
@@ -136,40 +138,26 @@
                     }
                 });
             </script>
+
             <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
             <script>
                 //City name autocomplete
-                $(document).ready(function(){
-                    $('#destination').on('input', function(){
-                        var query = $(this).val();
-                        if (query.length >= 3) {
-                            $.ajax({
-                                url: "http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + query,
-                                type: "GET",
-                                dataType: "json",
-                                success: function(data){
-                                    var cityList = data.map(function(city){
-                                        return '<div class="city-item">' + city + '</div>';
-                                    }).join('');
-        
-                                    $('#cityList').html(cityList);
-                                    $('#cityList').css('display', 'block');
-                                }
-                            });
-                        } else {
-                            $('#cityList').html('');
-                            $('#cityList').css('display', 'none');
+                function initAutocomplete() {
+                    var input = document.getElementById('destination');
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+                    autocomplete.addListener('place_changed', function() {
+                        var place = autocomplete.getPlace();
+                        if (!place.geometry) {
+                            console.log("No details available for input: '" + place.name + "'");
+                            return;
                         }
+            
+                        // Additional actions upon selecting a place
+                        // can be added here if needed.
                     });
-        
-                    $(document).on('click', '.city-item', function(){
-                        $('#destination').val($(this).text());
-                        $('#cityList').css('display', 'none');
-                    });
-                });
-            </script>
-
+                }
+            </script>            
 
             <script>
                 var today = new Date();
@@ -200,11 +188,17 @@
                                 minDate: today,
                                 mode: "range",
                                 onChange: function(selectedDates, dateStr) {
-                                    // Update the start-date input with the full range string
-                                    document.getElementById("start-date").value = dateStr;
+                                    var dates = dateStr.split(" to ");
+                                    document.getElementById("start-date").value = dates[0];
+                                    if(dates.length > 1) {
+                                        document.getElementById("hidden-end-date").value = dates[1];
+                                    } else {
+                                        document.getElementById("hidden-end-date").value = dates[0];
+                                    }
                                 },
                             });
                             document.getElementById("end-calendar").style.display = 'none';
+                            document.getElementById("end-date").required = false;
                         } else {
                             // Initialize the main calendar for desktop in single mode
                             mainCalendar = flatpickr("#start-calendar", {
@@ -226,6 +220,8 @@
                                     document.getElementById("end-date").value = dateStr;
                                 }
                             });
+                            document.getElementById("end-date").required = true;
+                            document.getElementById("end-calendar").style.display = 'block';
                         }
 
                         // Toggle visibility
@@ -257,11 +253,13 @@
                     // Show loading spinner
                     document.getElementById("loadingSpinner").style.display = "block";
 
-
+                    var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
                     var city = document.getElementById("destination").value;
                     var startDate = document.getElementById("start-date").value;
-                    var endDate = document.getElementById("end-date").value;
-                    const apiUrl = '/api/travel-rizz-server';
+                    var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
+                    // const apiUrl = '/api/travel-rizz-server';
+                    const apiUrl = 'http://localhost:3001/api/travel-rizz-server';
+
 
                     fetch(apiUrl, {
                         method: 'POST',
@@ -301,13 +299,14 @@
             </script>
 
             <script>
+                //Export to PDF
                 document.getElementById('exportPDF').addEventListener('click', (e) => {
                     e.preventDefault(); // Prevent default action
                     e.stopPropagation(); // Stop the event from bubbling up
 
                     var city = document.getElementById("destination").value;
                     var startDate = document.getElementById("start-date").value;
-                    var endDate = document.getElementById("end-date").value;
+                    var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
                     var filename = 'Travel-Itinerary';
 
                     if (city) {

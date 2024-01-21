@@ -1,2 +1,4 @@
 .env
 node_modules
+travel-rizz-server.js
+.vercel
