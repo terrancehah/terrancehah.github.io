@@ -3,6 +3,18 @@
     "functions": {
         "api/travel-rizz-server.js": {
             "maxDuration": 300
+        },
+        "api/travel-rizz-basic-info.js": {
+            "maxDuration": 300
+        },
+        "api/travel-rizz-details.js": {
+            "maxDuration": 300
+        },
+        "api/travel-rizz-daily-itinerary.js": {
+            "maxDuration": 300
+        },
+        "api/export-to-pdf.js": {
+            "maxDuration": 300
         }
     }
 }
