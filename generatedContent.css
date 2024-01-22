@@ -1,0 +1,39 @@
+
+body {
+    margin-top: 15px;
+    font-family: Raleway;
+    font-size: 1.2vw;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.page-break {
+    page-break-after: always;
+    margin-bottom: 0;
+    page-break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+
+h1, h2 {
+    font-family: Caveat;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+}
+
+strong {
+    font-size: 1.6vw;
+}
+
+p {
+    font-size: 1.4vw;
+    line-height: 180%;
+}
