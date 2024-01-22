@@ -46,7 +46,7 @@
             
             <main>
                     <video id="background" autoplay loop muted>
-                        <source src="./resources/Patagonia Lake 20X 720P_compressed.mp4" type="video/mp4">
+                        <source src="./resources/Patagonia_Lake_20X_720P_compressed.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
 
@@ -59,7 +59,6 @@
                     <div class="itinerary-planner">   
                         <form id="trip-form">
                             <div class="destination-input-form" action="">
-                                <!-- <h2 id="prompt">Any place in your mind?</h2> -->
                                 <input type="search" id="destination"name="city" placeholder="Any place in your mind?" autocomplete="off">
                                 <div id="cityList"></div>
                             </div>                
@@ -75,6 +74,8 @@
                                 </div>
                             </div>
                             <button id="generate-button" type="submit">Take Me There</button>
+                            <button id="loadTestData" type="submit">Load Test Data</button>
+
                         </form>
                     </div>
             </main>
@@ -83,19 +84,17 @@
                 <div class="popup-content">
                     <span class="close-btn" onclick="closePopup()">&times;</span>
                     <div id="generatedContent" class="generated-content">
-                        <!-- Generated content will be displayed here -->
                     </div>
                     <button id="exportPDF">Export as PDF</button>
                 </div>
             </div>
             <div id="loadingSpinner" style="display: none;">
-                <img id="plane" src="flyingplane.gif"  alt="Loading..."/>
+                <img id="plane" src="resources/flyingplane.gif"  alt="Loading..."/>
                 <p>Fasten your seat belt while we are working on your travel itinerary...</p>
             </div>            
 
             <footer>
                 <h3>Copyright &copy; <script>document.write( new Date().getFullYear() );</script>, Terrance Hah. All rights reserved.</h3>
-                <!-- <h4>Last modified on: <script>document.write(document.lastModified);</script></h4> -->
                 <h4>This site uses Plausible Analytics and does not store cookies on your computer.</h4>
             </footer>
 
@@ -105,17 +104,16 @@
                 var wrappers = $(".button-wrapper");
             
                 $(".submit").click(function(e) {
-                    e.preventDefault(); // Prevent the default behavior (navigation) on button click
+                    e.preventDefault();
             
                     var clickedWrapper = $(this).parent(".button-wrapper");
             
                     if(!clickedWrapper.hasClass("checked")) {
                         clickedWrapper.addClass("checked");
             
-                        // Add a delay before redirecting to the payment page
                         setTimeout(function(){
                             window.location.href = $(e.target).attr("href");
-                        }, 5000); // Change the value to adjust the delay (in milliseconds)
+                        }, 5000);
             
                         setTimeout(function(){
                             clickedWrapper.removeClass("checked");
@@ -257,9 +255,9 @@
                     var city = document.getElementById("destination").value;
                     var startDate = document.getElementById("start-date").value;
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
-                    const apiUrl = '/api/travel-rizz-server';
-                    // const apiUrl = 'http://localhost:3001/api/travel-rizz-server';
 
+                    var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                    const apiUrl = isLocal ? 'http://localhost:3000/api/travel-rizz-server' : '/api/travel-rizz-server';
 
                     fetch(apiUrl, {
                         method: 'POST',
@@ -271,21 +269,30 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
-                        document.getElementById("generatedContent").innerHTML = data.response;
+                        document.getElementById("generatedContent").innerHTML = data.generatedContent;
 
-                        // Hide loading spinner
+
+                    document.getElementById("generatedContent").innerHTML = testData;
+
                         document.getElementById("loadingSpinner").style.display = "none";
-
-                        openPopup(); // Open the popup with the response
+                        openPopup();
                     })
                     .catch((error) => {
                         console.error('Error:', error);
-                        // Hide loading spinner in case of an error as well
                         document.getElementById("loadingSpinner").style.display = "none";
                     });
                 });
             </script>
             
+            <!-- <script>
+                 // Static data for testing
+                var testData = "<div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header><h1>Introduction to Vienna, Austria</h1><p>Vienna, the capital of Austria, is renowned for its rich history, cultural heritage, and stunning architecture. As the former seat of the Habsburg Empire, it is home to an array of historic buildings, museums, and opera houses, making it a center for classical music and the arts.</p><h2>Season, Climate, and Weather Forecast</h2><p>The dates 22-03-2024 to 24-03-2024 fall in the early spring season when Vienna transitions from the cold of winter to the milder temperatures of spring. Weather during this period can be unpredictable, with a chance of both sunny days and spring showers. Temperatures typically range from cool to moderately warm. For the most accurate weather forecast during your travel, <a href=\"https://www.weather.com/\" target=\"_blank\">Weather.com</a> or <a href=\"https://www.accuweather.com/\" target=\"_blank\">AccuWeather</a> provide updated information on local climate conditions.</p><h2>Languages Spoken</h2><p>German is the official language of Vienna, and the majority of the population speaks it. Many residents are bilingual, and a significant proportion of the population speaks English, especially in the service industry, making it quite accessible for international tourists. Other languages commonly spoken due to Vienna's multicultural population include Turkish, Serbian, and Croatian.</p><h2>Population</h2><p>As of the latest estimates, which may vary, Vienna's population stands at approximately 1.9 million inhabitants. It is both the largest city in Austria and its cultural, economic, and political center. The metropolitan area of Vienna extends beyond the city limits, encompassing an even larger population and a broader cultural diversity.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h1>Travel Details for Vienna, Austria</h1><h2>Currency in Vienna</h2><p>The official currency of Austria is the Euro (EUR). When traveling, it's helpful to have some cash on hand for smaller establishments or tips, though many places accept credit cards. Check the current exchange rate before your trip at <a href=\"https://www.x-rates.com/table/?from=EUR&amount=1\" target=\"_blank\">X-Rates</a>.</p><h2>Safety in Vienna</h2><p>Vienna is considered one of the safest cities in Europe. However, just like in any major city, it's advisable to stay aware of your surroundings, especially in crowded tourist areas and on public transport, where pickpockets may operate. For emergency services, dial 112.</p><h2>Navigation in Vienna</h2><p>Getting around Vienna is convenient with its efficient public transport network consisting of the U-Bahn (subway), trams, and buses. The city also offers extensive bike lanes for cyclists. For public transport information, maps, and ticketing, visit the official Vienna public transport website <a href=\"https://www.wienerlinien.at/eportal3/\" target=\"_blank\">Wiener Linien</a>.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h1>Vienna Itinerary for 22-03-2024 to 24-03-2024</h1><h2>Day 1: 22nd March 2024</h2><strong>Morning:</strong><p>Start your Viennese adventure at the historic <a href=\"https://www.stephanskirche.at/\" target=\"_blank\">St. Stephen's Cathedral</a>, located in the heart of the city. It's a short walk from Stephansplatz, which is easily accessible by U-Bahn (U1 and U3 lines). After exploring the cathedral, enjoy a stroll through the nearby Graben and Kohlmarkt streets, which are famous for their elegant shopping opportunities.</p><strong>Afternoon:</strong><p>Visit the imperial <a href=\"https://www.hofburg-wien.at/\" target=\"_blank\">Hofburg Palace</a>, a mere 10-minute walk from St. Stephen's Cathedral. Discover the history and luxury that defined the Austro-Hungarian monarchy. Just next door you can indulge in the treasures of the <a href=\"https://www.khm.at/\" target=\"_blank\">Kunsthistorisches Museum</a> (Museum of Art History), reachable by a few minutes' walk or a short tram ride with tram line 1 or 2.</p><strong>Evening:</strong><p>Dine in the charming ambiance of a traditional Viennese restaurant in the vicinity of the museum quarter. Afterwards, take a leisurely evening walk through the beautifully lit streets of the Inner City, culminating with a visit to the nearby <a href=\"https://www.wiener-staatsoper.at/\" target=\"_blank\">Vienna State Opera</a>, where you could catch a world-class performance if you book in advance.</p><strong>Night:</strong><p>Wrap up your night with a visit to a cozy café or a sophisticated wine bar in the Opera area, ideal for relaxing and reflecting on the day's experiences.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h2>Day 2: 23rd March 2024</h2><strong>Morning:</strong><p>Begin your day at the splendid <a href=\"https://www.belvedere.at/\" target=\"_blank\">Belvedere Palace</a>, which is easily accessible by tram (D, 18, or 71) or by U-Bahn (U1 to Südtiroler Platz). Wander through its Baroque gardens and explore the extensive art collection, including Gustav Klimt's renowned painting \"The Kiss\".</p><strong>Afternoon:</strong><p>Explore the vibrant neighborhood surrounding the <a href=\"https://www.naschmarkt.at/\" target=\"_blank\">Naschmarkt</a>, Vienna’s most popular market. It's within walking distance from the Belvedere. Sample local and international delicacies or pick up some unique souvenirs. Then, take a short walk or tram ride to the nearby <a href=\"https://www.secession.at/\" target=\"_blank\">Secession Building</a> to admire its unique architecture and contemporary art exhibits.</p><strong>Evening:</strong><p>Enjoy dinner at one of the many restaurants lining Naschmarkt. After your meal, take a casual stroll along the Ringstraße, where you can see grand buildings such as the <a href=\"https://www.parlament.gv.at/\" target=\"_blank\">Parliament</a> and <a href=\"https://www.burgtheater.at/\" target=\"_blank\">Burgtheater</a>, which are beautifully illuminated at night.</p><strong>Night:</strong><p>For those interested in late-night culture, consider attending a performance at the Burgtheater or enjoy a classical concert at a venue such as the nearby <a href=\"https://www.musikverein.at/\" target=\"_blank\">Musikverein</a>, home to the Vienna Philharmonic Orchestra.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h2>Day 3: 24th March 2024</h2><strong>Morning:</strong><p>Start your final day with a visit to the <a href=\"https://www.schoenbrunn.at/\" target=\"_blank\">Schönbrunn Palace</a>, accessible via the U-Bahn (U4 to Schönbrunn station). Explore the former summer residence of the Habsburgs and stroll through its extensive gardens. </p><strong>Afternoon:</strong><p>After soaking in the grandeur of Schönbrunn, take the U4 back towards the city center and get off at Karlsplatz to visit the stunning <a href=\"https://www.karlskirche.at/\" target=\"_blank\">Karlskirche</a> (St. Charles's Church). Following this, enjoy a relaxing afternoon at the nearby <a href=\"https://www.wienmuseum.at/\" target=\"_blank\">Vienna Museum</a>, which offers a deep dive into the city's rich history.</p><strong>Evening:</strong><p>End your day with a visit to the vibrant and trendy <a href=\"https://www.mqw.at/\" target=\"_blank\">MuseumsQuartier</a>, one of the largest cultural quarters in the world. Here, you can find a variety of cafes, restaurants, and bars to choose from for your evening meal.</p><strong>Night:</strong><p>As your trip comes to a close, take a leisurely walk along the Danube River, enjoying the beautiful night views of the city.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h2>Travel Reminder</h2><p>As you prepare to depart from Vienna, remember to check all your belongings, ensure your travel documents are in order, and arrive at the airport or train station well ahead of your scheduled departure. Vienna's weather can be unpredictable in spring, so be prepared for sudden weather changes. Lastly, don't forget to collect any VAT refunds if applicable and cherish the memories of your splendid Viennese journey!</p></div>";
+
+                document.getElementById('loadTestData').addEventListener('click', function() {
+                    document.getElementById("generatedContent").innerHTML = testData;
+                    openPopup();
+                });
+            </script> -->
 
             <script>
                 function openPopup() {
@@ -299,34 +306,37 @@
             </script>
 
             <script>
-                //Export to PDF
-                document.getElementById('exportPDF').addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default action
-                    e.stopPropagation(); // Stop the event from bubbling up
+                document.getElementById('exportPDF').addEventListener('click', function(e) {
+                    e.preventDefault();
 
                     var city = document.getElementById("destination").value;
-                    var startDate = document.getElementById("start-date").value;
-                    var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
-                    var filename = 'Travel-Itinerary';
+                    var content = document.getElementById("generatedContent");
 
-                    if (city) {
-                        filename = city + '-' + filename;
-                    }
-                    if (startDate && endDate) {
-                        filename += '-' + startDate + '-to-' + endDate;
-                    }
+                    //Show headers
+                    var headers = document.querySelectorAll('.generated-content header');
+                    headers.forEach(function(header) {
+                        header.style.display = 'inline-flex';
+                    });
 
-                    var element = document.getElementById('generatedContent');
                     var opt = {
-                        margin:       [10, 15, 10, 15],
-                        filename:     filename + '.pdf',
-                        image:        { type: 'jpeg', quality: 0.98 },
-                        html2canvas:  { scale: 2 },
-                        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                        margin: [0.5, 0.7, 0.5, 0.7], // Top, Right, Bottom, Left in inches
+                        filename: city + '-' + 'Travel-Itinerary.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
                     };
-                    html2pdf().from(element).set(opt).save();
-                });
+
+                    html2pdf().from(content).set(opt).save();
+
+                    // Hide headers again
+                    setTimeout(function() {
+                    headers.forEach(function(header) {
+                        header.style.display = 'none';
+                    });
+                }, 1000); // Adjust delay as needed to ensure PDF has been generated
+            });
             </script>
+
 
         </body>
         

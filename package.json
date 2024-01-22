@@ -1,20 +1,21 @@
 {
-  "name": "travel-rizz.json",
+  "name": "travel-rizz",
   "version": "1.0.0",
   "description": "Travel-Rizz - Your friendly AI-powered travel companion.",
-  "main": "travel-rizz-server.js",
   "scripts": {
-    "test": "\"scripts\": {"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Terrance Hah",
   "license": "ISC",
   "dependencies": {
     "@vercel/speed-insights": "^1.0.2",
+    "axios": "^1.6.5",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "node-fetch": "^2.6.1",
     "openai": "^4.24.2",
     "uuid": "^9.0.1"
   }
