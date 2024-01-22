@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
 body {
     margin-top: 15px;
-    font-family: Raleway;
-    font-size: 1.2vw;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
     line-height: 1.8;
     text-align: justify;
 }
@@ -14,28 +13,19 @@ body {
     page-break-after: always;
     margin-bottom: 0;
     page-break-inside: avoid;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
 }
 
 h1, h2 {
-    font-family: Caveat;
-}
-
-h1 {
     text-align: center;
-    margin: 0;
+    font-family: 'Caveat', cursive;
+    margin: 10px 0;
 }
 
 strong {
-    font-size: 1.6vw;
+    font-weight: bold;
 }
 
 p {
-    font-family: Raleway;
-    font-size: 1.4vw;
-    line-height: 180%;
+    font-size: 12px;
+    line-height: 1.5;
 }
