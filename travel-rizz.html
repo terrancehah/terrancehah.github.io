@@ -74,6 +74,7 @@
                                 </div>
                             </div>
                             <button id="generate-button" type="submit">Take Me There</button>
+                            <!-- //Test button -->
                             <!-- <button id="loadTestData" type="submit">Load Test Data</button> -->
 
                         </form>
@@ -89,7 +90,7 @@
                 </div>
             </div>
             <div id="loadingSpinner" style="display: none;">
-                <img id="plane" src="resources/flyingplane.gif"  alt="Loading..."/>
+                <img id="plane" src="resources/flyingplane-crop.gif"  alt="Loading..."/>
                 <p>Fasten your seat belt while we are working on your travel itinerary...</p>
             </div>            
 
@@ -249,7 +250,7 @@
                     e.preventDefault();
 
                     // Show loading spinner
-                    document.getElementById("loadingSpinner").style.display = "block";
+                    document.getElementById("loadingSpinner").style.display = "flex";
 
                     var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
                     var city = document.getElementById("destination").value;
@@ -269,10 +270,10 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
+
+                        //Deployed version generatedContent or testData
                         document.getElementById("generatedContent").innerHTML = data.generatedContent;
-
-
-                    document.getElementById("generatedContent").innerHTML = testData;
+                        // document.getElementById("generatedContent").innerHTML = testData;
 
                         document.getElementById("loadingSpinner").style.display = "none";
                         openPopup();
@@ -285,8 +286,157 @@
             </script>
             
             <!-- <script>
-                 // Static data for testing
-                var testData = "<div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header><h1>Introduction to Vienna, Austria</h1><p>Vienna, the capital of Austria, is renowned for its rich history, cultural heritage, and stunning architecture. As the former seat of the Habsburg Empire, it is home to an array of historic buildings, museums, and opera houses, making it a center for classical music and the arts.</p><h2>Season, Climate, and Weather Forecast</h2><p>The dates 22-03-2024 to 24-03-2024 fall in the early spring season when Vienna transitions from the cold of winter to the milder temperatures of spring. Weather during this period can be unpredictable, with a chance of both sunny days and spring showers. Temperatures typically range from cool to moderately warm. For the most accurate weather forecast during your travel, <a href=\"https://www.weather.com/\" target=\"_blank\">Weather.com</a> or <a href=\"https://www.accuweather.com/\" target=\"_blank\">AccuWeather</a> provide updated information on local climate conditions.</p><h2>Languages Spoken</h2><p>German is the official language of Vienna, and the majority of the population speaks it. Many residents are bilingual, and a significant proportion of the population speaks English, especially in the service industry, making it quite accessible for international tourists. Other languages commonly spoken due to Vienna's multicultural population include Turkish, Serbian, and Croatian.</p><h2>Population</h2><p>As of the latest estimates, which may vary, Vienna's population stands at approximately 1.9 million inhabitants. It is both the largest city in Austria and its cultural, economic, and political center. The metropolitan area of Vienna extends beyond the city limits, encompassing an even larger population and a broader cultural diversity.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h1>Travel Details for Vienna, Austria</h1><h2>Currency in Vienna</h2><p>The official currency of Austria is the Euro (EUR). When traveling, it's helpful to have some cash on hand for smaller establishments or tips, though many places accept credit cards. Check the current exchange rate before your trip at <a href=\"https://www.x-rates.com/table/?from=EUR&amount=1\" target=\"_blank\">X-Rates</a>.</p><h2>Safety in Vienna</h2><p>Vienna is considered one of the safest cities in Europe. However, just like in any major city, it's advisable to stay aware of your surroundings, especially in crowded tourist areas and on public transport, where pickpockets may operate. For emergency services, dial 112.</p><h2>Navigation in Vienna</h2><p>Getting around Vienna is convenient with its efficient public transport network consisting of the U-Bahn (subway), trams, and buses. The city also offers extensive bike lanes for cyclists. For public transport information, maps, and ticketing, visit the official Vienna public transport website <a href=\"https://www.wienerlinien.at/eportal3/\" target=\"_blank\">Wiener Linien</a>.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h1>Vienna Itinerary for 22-03-2024 to 24-03-2024</h1><h2>Day 1: 22nd March 2024</h2><strong>Morning:</strong><p>Start your Viennese adventure at the historic <a href=\"https://www.stephanskirche.at/\" target=\"_blank\">St. Stephen's Cathedral</a>, located in the heart of the city. It's a short walk from Stephansplatz, which is easily accessible by U-Bahn (U1 and U3 lines). After exploring the cathedral, enjoy a stroll through the nearby Graben and Kohlmarkt streets, which are famous for their elegant shopping opportunities.</p><strong>Afternoon:</strong><p>Visit the imperial <a href=\"https://www.hofburg-wien.at/\" target=\"_blank\">Hofburg Palace</a>, a mere 10-minute walk from St. Stephen's Cathedral. Discover the history and luxury that defined the Austro-Hungarian monarchy. Just next door you can indulge in the treasures of the <a href=\"https://www.khm.at/\" target=\"_blank\">Kunsthistorisches Museum</a> (Museum of Art History), reachable by a few minutes' walk or a short tram ride with tram line 1 or 2.</p><strong>Evening:</strong><p>Dine in the charming ambiance of a traditional Viennese restaurant in the vicinity of the museum quarter. Afterwards, take a leisurely evening walk through the beautifully lit streets of the Inner City, culminating with a visit to the nearby <a href=\"https://www.wiener-staatsoper.at/\" target=\"_blank\">Vienna State Opera</a>, where you could catch a world-class performance if you book in advance.</p><strong>Night:</strong><p>Wrap up your night with a visit to a cozy café or a sophisticated wine bar in the Opera area, ideal for relaxing and reflecting on the day's experiences.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h2>Day 2: 23rd March 2024</h2><strong>Morning:</strong><p>Begin your day at the splendid <a href=\"https://www.belvedere.at/\" target=\"_blank\">Belvedere Palace</a>, which is easily accessible by tram (D, 18, or 71) or by U-Bahn (U1 to Südtiroler Platz). Wander through its Baroque gardens and explore the extensive art collection, including Gustav Klimt's renowned painting \"The Kiss\".</p><strong>Afternoon:</strong><p>Explore the vibrant neighborhood surrounding the <a href=\"https://www.naschmarkt.at/\" target=\"_blank\">Naschmarkt</a>, Vienna’s most popular market. It's within walking distance from the Belvedere. Sample local and international delicacies or pick up some unique souvenirs. Then, take a short walk or tram ride to the nearby <a href=\"https://www.secession.at/\" target=\"_blank\">Secession Building</a> to admire its unique architecture and contemporary art exhibits.</p><strong>Evening:</strong><p>Enjoy dinner at one of the many restaurants lining Naschmarkt. After your meal, take a casual stroll along the Ringstraße, where you can see grand buildings such as the <a href=\"https://www.parlament.gv.at/\" target=\"_blank\">Parliament</a> and <a href=\"https://www.burgtheater.at/\" target=\"_blank\">Burgtheater</a>, which are beautifully illuminated at night.</p><strong>Night:</strong><p>For those interested in late-night culture, consider attending a performance at the Burgtheater or enjoy a classical concert at a venue such as the nearby <a href=\"https://www.musikverein.at/\" target=\"_blank\">Musikverein</a>, home to the Vienna Philharmonic Orchestra.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h2>Day 3: 24th March 2024</h2><strong>Morning:</strong><p>Start your final day with a visit to the <a href=\"https://www.schoenbrunn.at/\" target=\"_blank\">Schönbrunn Palace</a>, accessible via the U-Bahn (U4 to Schönbrunn station). Explore the former summer residence of the Habsburgs and stroll through its extensive gardens. </p><strong>Afternoon:</strong><p>After soaking in the grandeur of Schönbrunn, take the U4 back towards the city center and get off at Karlsplatz to visit the stunning <a href=\"https://www.karlskirche.at/\" target=\"_blank\">Karlskirche</a> (St. Charles's Church). Following this, enjoy a relaxing afternoon at the nearby <a href=\"https://www.wienmuseum.at/\" target=\"_blank\">Vienna Museum</a>, which offers a deep dive into the city's rich history.</p><strong>Evening:</strong><p>End your day with a visit to the vibrant and trendy <a href=\"https://www.mqw.at/\" target=\"_blank\">MuseumsQuartier</a>, one of the largest cultural quarters in the world. Here, you can find a variety of cafes, restaurants, and bars to choose from for your evening meal.</p><strong>Night:</strong><p>As your trip comes to a close, take a leisurely walk along the Danube River, enjoying the beautiful night views of the city.</p></div><div class='page-break'><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2></header><h2>Travel Reminder</h2><p>As you prepare to depart from Vienna, remember to check all your belongings, ensure your travel documents are in order, and arrive at the airport or train station well ahead of your scheduled departure. Vienna's weather can be unpredictable in spring, so be prepared for sudden weather changes. Lastly, don't forget to collect any VAT refunds if applicable and cherish the memories of your splendid Viennese journey!</p></div>";
+                 // Static data for testing only
+                var testData = 
+                `<div class="page-break">
+                    <header>
+                        <img id='logo' src='resources/TH-logo.png' alt='logo'/>
+                        <h2 id='brand'>Travel-Rizz</h2>
+                        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>
+                    </header>
+                    <h1>Welcome to Hallstatt, Austria!</h1>
+                    <h2>Introduction</h2>
+                    <p>Hallstatt is a small village in the district of Gmunden, in the Austrian state of Upper Austria. Situated on Hallstätter See (Hallstatt Lake), it is known for its production of salt, dating back to prehistoric times, and its picturesque village of pastel-hued houses reflected in the glassy waters of the lake, embraced by dramatic mountain ranges.</p>
+
+                    <h2>Season & Climate</h2>
+                    <p>The period from May 28th to May 30th, 2024, is late spring in Hallstatt. During these dates, you can expect mild temperatures and a fair amount of sunshine as the area transitions into summer. Spring is a great time to visit, as the crowds are fewer and the natural scenery is especially vibrant.</p>
+
+                    <h2>Weather Forecast</h2>
+                    <p>For the most accurate and updated weather forecast during your visit, it is recommended to check closer to your date of travel. For a detailed daily forecast, follow this link: <a href="https://www.accuweather.com/en/at/hallstatt/53113/may-weather/53113?year=2024" target="_blank">Hallstatt May Weather</a>.</p>
+
+                    <h2>Languages Spoken</h2>
+                    <p>The official language of Austria is German, and it is the primary language spoken in Hallstatt. Many locals, especially those working in the tourism industry, also speak English to cater to international visitors. Other European languages such as French and Italian may also be understood by some.</p>
+
+                    <h2>Population</h2>
+                    <p>Hallstatt is a small village with a population of just under 800 residents. The village is part of the wider Dachstein-Salzkammergut area, a UNESCO World Heritage site known for its cultural heritage and natural beauty.</p>
+
+                    <br>
+                </div>
+                <div class="page-break">
+                    <header>
+                        <img id='logo' src='resources/TH-logo.png' alt='logo'/>
+                        <h2 id='brand'>Travel-Rizz</h2>
+                        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>
+                    </header>
+                    <h1>Notable Details about Hallstatt, Austria</h1>
+                    
+                    <h2>Currency Information</h2>
+                    <p>The official currency in Hallstatt, as in the rest of Austria, is the Euro (€, EUR). Cash is commonly used, although cards are also widely accepted. For the most current exchange rates, visit this <a href="https://www.x-rates.com/table/?from=EUR&amount=1" target="_blank">exchange rate table</a>.</p>
+                    
+                    <h2>Safety Tips</h2>
+                    <p>Hallstatt is generally a safe destination for travelers. It is advised to maintain regular precautions such as safeguarding your belongings and being cautious of your surroundings. Emergency services can be reached by dialing 112.</p>
+                    
+                    <h2>Business Operating Hours</h2>
+                    <p>In Hallstatt, shops typically open from 9:00 AM to 6:00 PM, though times can vary and some may close for a lunch break. Restaurants and cafes may have different hours, often staying open later into the evening.</p>
+                    
+                    <h2>Local Navigation</h2>
+                    <p>To navigate through Hallstatt, walking is a great option due to its small size. There's also a local shuttle and ferries across the lake. For transportation schedules and fare information, leverage local transport websites with this hyperlink format for greater convenience: <a href="https://www.oebb.at/en/" target="_blank">ÖBB transport info</a>.</p>
+                    <br>
+                </div>
+                <div class="page-break">
+                    <header>
+                        <img id='logo' src='resources/TH-logo.png' alt='logo'/>
+                        <h2 id='brand'>Travel-Rizz</h2>
+                        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>
+                    </header>
+                    <h1>Day 1: Arrival & Exploring Hallstatt's Charm (28-05-2024)</h1>
+
+                    <strong>Morning</strong>
+                    <p>Begin your journey by immersing yourself in the enchanting village of Hallstatt. Start at the <a href="https://www.google.com/maps/place/Classic+Village+Viewpoint/" target="_blank">Classic Village Viewpoint</a>, a spot for a must-capture photo of the village. Then, walk to the <a href="https://www.schifffahrt-hallstatt.at/en/" target="_blank">Hallstatt Lahn</a> to embark on a peaceful boat ride on the Hallstatt Lake. This up-close view of Hallstatt from the water is unforgettable.</p>
+
+                    <strong>Afternoon</strong>
+                    <p>After lunch, explore the <a href="https://www.salzwelten.at/en/home/" target="_blank">Salzwelten Hallstatt</a>, the oldest known salt mine in the world, to learn about the history of salt mining. Then, venture a short walk to the nearby <a href="https://www.dachstein-salzkammergut.com/en/dachstein/" target="_blank">Skywalk Lookout</a>, offering panoramic views of Hallstatt and its majestic alpine surroundings.</p>
+
+                    <strong>Evening</strong>
+                    <p>Stroll through the picturesque Hallstatt Market Square, where you will find local shops and eateries. Enjoy authentic Austrian cuisine at a cozy restaurant, such as the Gasthof Zauner, renowned for its traditional dishes and atmosphere. After dinner, walk along the lake promenade to witness the sunset casting golden hues over the town.</p>
+
+                    <br> 
+                </div>
+
+                <div class="page-break">
+                    <header>
+                        <img id='logo' src='resources/TH-logo.png' alt='logo'/>
+                        <h2 id='brand'>Travel-Rizz</h2>
+                        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>
+                    </header>
+                    <h1>Day 2: Culture and Nature in Hallstatt (29-05-2024)</h1>
+
+                    <strong>Morning</strong>
+                    <p>Visit the iconic <a href="https://www.tourmycountry.com/austria/hallstatt-bonehouse.htm" target="_blank">Hallstatt Charnel House</a> in the Saint Michael's Chapel, home to an extraordinary collection of painted skulls. A short walk takes you to the nearby <a href="https://www.museum-hallstatt.at/en" target="_blank">Hallstatt Museum</a>, where you can delve deeper into the region's history, art, and culture.</p>
+
+                    <strong>Afternoon</strong>
+                    <p>Spend the afternoon enjoying nature. Hike from the town or take the <a href="https://www.dachstein-salzkammergut.com/en/dachstein/" target="_blank">Dachstein Krippenstein Cable Car</a> to the <a href="https://www.dachstein-salzkammergut.com/en/dachstein/" target="_blank">Five Fingers Viewing Platform</a>. This provides a stunning view of the surrounding mountains and lakes. Afterward, explore the nearby <a href="https://www.dachstein-salzkammergut.com/en/dachstein/" target="_blank">Dachstein Cave World</a>, featuring the Giant Ice Cave and the Mammoth Cave.</p>
+
+                    <strong>Evening</strong>
+                    <p>Return to Hallstatt for an evening at leisure. Dine at one of the local eateries, such as the Seehotel Grüner Baum, to enjoy lakeside dining with a view of the mountains. After dinner, take a leisurely walk through the peaceful streets of Hallstatt, indulging in the serene atmosphere of this beautiful lakeside town at night.</p>
+
+                    <br>
+                </div>
+
+                <div class="page-break">
+                    <header>
+                        <img id='logo' src='resources/TH-logo.png' alt='logo'/>
+                        <h2 id='brand'>Travel-Rizz</h2>
+                        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>
+                    </header>
+                    <h1>Day 3: Departure & Lasting Impressions (30-05-2024)</h1>
+
+                    <strong>Morning</strong>
+                    <p>Enjoy a tranquil morning walk to the <a href="https://www.hallstatt.net/about-hallstatt/sehenswertes/gletschergarten/" target="_blank">Hallstatt Glacier Garden</a>, showcasing natural monuments over 7000 years old. Next, head to the <a href="https://www.hallstatt.net/about-hallstatt/sehenswertes/" target="_blank">Hallstatt Waterfall</a> for an invigorating encounter with nature's force and grace.</p>
+
+                    <strong>Afternoon</strong>
+                    <p>Spend your final hours in Hallstatt visiting any shops or cafes you might have missed. Enjoy a light lunch while taking in the last views of the lake and the mountains. Be sure to leave enough time for your travel back to the airport or your next destination.</p>
+
+                    <strong>Evening</strong>
+                    <p>As there are no activities planned for the evening, ensure a smooth departure by checking travel arrangements and gathering your belongings. Reflect on your stay in Hallstatt and prepare for your onward journey.</p>
+
+                    <br>
+                </div>
+
+                <div class="page-break">
+                    <header>
+                        <img id='logo' src='resources/TH-logo.png' alt='logo'/>
+                        <h2 id='brand'>Travel-Rizz</h2>
+                        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>
+                    </header>
+                <h1>Travel Reminder</h1>
+
+                <h2>Travel Document and Visa Requirement</h2>
+                <p>Ensure your passport is valid for at least six months beyond your stay. Check visa requirements for your specific country at <a href="https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html" target="_blank">Czech Visa Application</a>. Keep a digital copy of your important documents.</p>
+
+                <h2>Tax Refund Procedures</h2>
+                <p>Non-EU residents are entitled to a VAT refund on purchases made in Austria when exported within three months. Visit <a href="https://www.globalblue.com/tax-free-shopping/austria" target="_blank">Global Blue</a> or <a href="https://www.planetpayment.com/en/shoppers/" target="_blank">Planet Payment</a> for details on the tax refund process.</p>
+
+                <h2>Latest Current Issues and Advisories</h2>
+                <p>Stay informed about the latest travel advisories and safety updates by visiting your government's travel advisory website before departure.</p>
+
+                <h2>Local Etiquette and Cultural Norms</h2>
+                <p>Austrians value punctuality, politeness, and a level of formality. Greet people with a firm handshake and maintain eye contact. Remember to say "please" ("bitte") and "thank you" ("danke"). In restaurants, it’s customary to round up the bill for a tip.</p>
+
+                <h2>Health and Vaccination Record Requirement</h2>
+                <p>Consult with a travel clinic for health advisories and vaccination recommendations. Depending on your home country and travel itinerary, you may need specific vaccinations.</p>
+                </div>
+
+                <div class ="page-break">
+                    <header>
+                        <img id='logo' src='resources/TH-logo.png' alt='logo'/>
+                        <h2 id='brand'>Travel-Rizz</h2>
+                        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>
+                    </header>
+                <h1>Emergency Contacts</h1>
+                <p>Local Police: 133</p>
+                <p>Ambulance: 144</p>
+                <p>Fire Department: 122</p>
+                <p>European Emergency Number: 112</p>
+                <p>Be sure to be aware of the location and contact information of your respective embassy in the city, which can be found at <a href="https://www.embassy-worldwide.com/" target="_blank">Embassy Worldwide</a>.</p>
+                </div>
+
+                <div class="page-break">
+                <h2 id='conclusion'>We wish you an enchanting journey to Hallstatt and hope your visit is filled with unforgettable moments.
+                As you return home with cherished memories, we invite you to share your experiences and feedback with us at Travel-Rizz.</h2>
+                </div>
+                `
+
 
                 document.getElementById('loadTestData').addEventListener('click', function() {
                     document.getElementById("generatedContent").innerHTML = testData;
@@ -299,7 +449,6 @@
                     document.getElementById("popupWindow").style.display = "block";
                 }
 
-                // Function to close the popup
                 function closePopup() {
                     document.getElementById("popupWindow").style.display = "none";
                 }
@@ -309,34 +458,54 @@
                 document.getElementById('exportPDF').addEventListener('click', function(e) {
                     e.preventDefault();
 
+                    var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
                     var city = document.getElementById("destination").value;
-                    var content = document.getElementById("generatedContent");
+                    var originalContent = document.getElementById("generatedContent");
+                    var startDate = document.getElementById("start-date").value;
+                    var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
+
+                    // Clone the content for PDF generation
+                    var contentForPdf = originalContent.cloneNode(true);
+                    contentForPdf.id = 'contentForPdf';
+                    document.body.appendChild(contentForPdf);
+
+                    // Apply PDF specific styling
+                    contentForPdf.querySelectorAll('h1').forEach(el => el.style.fontSize = '50px');
+                    contentForPdf.querySelectorAll('h2').forEach(el => el.style.fontSize = '32px');
+                    contentForPdf.querySelectorAll('.generated-content #brand').forEach(el => el.style.fontSize = '26px');
+                    contentForPdf.querySelectorAll('.generated-content #header-slogan').forEach(el => el.style.fontSize = '20px');
+                    contentForPdf.querySelectorAll('strong').forEach(el => el.style.fontSize = '22px');
+                    contentForPdf.querySelectorAll('p').forEach(el => el.style.fontSize = '18px');                    
+                    contentForPdf.querySelectorAll('.page-break').forEach(el => el.style.marginBottom = '0');                    
+                    // contentForPdf.querySelectorAll('img').forEach(el => el.style.marginTop = '0.5%');
+                    contentForPdf.querySelectorAll('#conclusion').forEach(el => el.style.height = '95vh');
+
+
+
 
                     //Show headers
-                    var headers = document.querySelectorAll('.generated-content header');
+                    var headers = contentForPdf.querySelectorAll('.generated-content header');
                     headers.forEach(function(header) {
                         header.style.display = 'inline-flex';
                     });
 
                     var opt = {
-                        margin: [0.5, 0.7, 0.5, 0.7], // Top, Right, Bottom, Left in inches
-                        filename: city + '-' + 'Travel-Itinerary.pdf',
+                        margin: [8, 17, 10, 17], // Top, Right, Bottom, Left in mm
+                        filename: city + '_' + 'Travel_Itinerary' + '_' + startDate + 'to' + endDate + '.pdf',
                         image: { type: 'jpeg', quality: 0.98 },
                         html2canvas: { scale: 2 },
-                        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                        // pagebreak: { mode: 'css' }
                     };
 
-                    html2pdf().from(content).set(opt).save();
-
-                    // Hide headers again
-                    setTimeout(function() {
-                    headers.forEach(function(header) {
-                        header.style.display = 'none';
+                    html2pdf().from(contentForPdf).set(opt).save().then(() => {
+                        // Hide headers and remove the clone after PDF generation
+                        setTimeout(function() {
+                            document.body.removeChild(contentForPdf);
+                        }, 1000);
                     });
-                }, 1000); // Adjust delay as needed to ensure PDF has been generated
-            });
+                });
             </script>
-
 
         </body>
         

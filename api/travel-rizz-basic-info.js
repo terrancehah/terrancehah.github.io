@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
                     Do not ever include the opening and closing tags of '''html, </ and ''' in the generated content.
                     Since the response here will be redirected to be shown on a HTML page, please format the response with HTML tags.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> to start and end the whole content, limited to about 3000 characters.
-                    For the content inside, use <h1>, <h2> for different headings accordingly, 
+                    For the content inside, use <h1>Welcome to ${city}!</h1>, then <h2> for different headings accordingly, 
                     <href target="_blank"> to insert weather related websites for the city during the period, 
                     and <p> for paragraphs.
                     Provide this information in a format suitable for a single page, then finally ending with a <br> tag to signify a page break.

@@ -23,13 +23,13 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are a knowledgeable travel assistant providing detailed information about specific aspects of travel destinations."},
                     {"role": "user", "content": 
-                    `Can you provide details about currency, safety, and navigation for travelers in ${city}?
+                    `Can you provide details about currency information, safety tips, business operating hours and local navigation for travelers in ${city}?
                     Each aspect will take one section/paragraph, at most 2-3 sentences.
                     Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and concise way.
                     Do not include the opening and closing tags of '''html, </ and ''' in the generated content.
                     Since the response here will be redirected to be shown on a HTML page, please format the response with HTML tags.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> to start and end the whole content, limited to about 3000 characters.
-                    Use <h1>, <h2> for different headings accordingly, 
+                    Use <h1>Notable Details about ${city}</h1>, then <h2> for different headings accordingly, 
                     <href target="_blank"> hyperlinks to replace transports related websites, 
                     <href target="_blank"> hyperlinks to exchanges rate table of the destination country currency on x-rates.com, 
                     and <p> for paragraphs.

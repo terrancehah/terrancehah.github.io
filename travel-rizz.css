@@ -17,9 +17,6 @@ h3, p {
   font-family: Raleway;
 }
 
-
-
-
 h2 {
   font-family: Lato;
   font-size: 2.2vw;
@@ -392,23 +389,27 @@ input {
   height: 100%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.75); /* white w/ opacity */
+  display: flex;
 }
 
 #loadingSpinner p {
   text-align: center;
   z-index: 1;
-  position: fixed;
-  width: 50%;
-  margin: 32% 25%;
+  justify-content: center;
+  align-items: center;
+  display: flex;  
   font-weight: 500;
   font-size: 1.7vw;
+  margin: 0% 25%;
 }
 
 #plane {
-  width: 50%;
-  margin: 13% 25%;
+  width: 40%;
+  margin: 0% 30%;
   position: absolute;
-  height: 50%;
+  height: 30%;
+  top: 26%;
+  display: flex;
 }
 
 .close-btn {
@@ -417,6 +418,7 @@ input {
   font-weight: bold;
   /* right: 10%; */
   position: fixed;
+  z-index: 1000;
 }
 
 .close-btn:hover,
@@ -435,7 +437,7 @@ input {
 }
 
 .page-break {
-  page-break-after: always;
+  page-break-after: auto;
   page-break-inside: avoid;
   display: flex;
   flex-direction: column;
@@ -443,23 +445,27 @@ input {
   align-items: center;
   height: 100%;
   position: relative;
+  margin-bottom: 2%;
 }
 
 .generated-content header {
-  margin-top: 0.5%;
+  margin-top: 1%;
+  height: 12%;
   display: none;
+  page-break-inside: avoid;
 }
 
 .generated-content #brand {
   width: fit-content;
   font-size: 2vw;
   color: #123e5c;
+  margin: 0;
 }
 
 .generated-content img {
   width: 5%;
   height: 5%;
-  margin-right: 1%;
+  margin-right: 0.5%;
 }
 
 .generated-content #header-slogan {
@@ -467,13 +473,14 @@ input {
   color: #3a7398;
   position: absolute;
   right: 0;
-  margin-top: 0,5%;
+  margin-top: 0.6%;
 }
+
 
 .generated-content h1 {
   text-align: center;
   font-size: 4vw;
-  line-height: 130%;
+  line-height: 110%;
   margin: 0;
   margin-bottom: 2%;
 }
@@ -483,6 +490,7 @@ input {
   font-size: 2.5vw;
   line-height: 130%;
   margin: 0;
+  margin-top: 2%;
 }
 
 .generated-content h1, h2 {
@@ -496,7 +504,15 @@ font-size: 1.6vw;
 .generated-content p {
   font-size: 1.4vw;
   line-height: 180%;
-  }
+}
+
+.generated-content #conclusion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2vw;
+}
 
 #exportPDF {
   font-family: Raleway;
@@ -776,6 +792,7 @@ b {
       font-size: 28px;
       font-weight: bold;
       position: fixed;
+      z-index: 1000;
     }
 
     .close-btn:hover,
@@ -818,21 +835,19 @@ b {
       font-size: 4.5vw;
     }
 
+    .generated-content #conclusion {
+      font-size: 5.5vw;
+    }
+
     #plane {
       width: 100%;
-      margin: 80% 0%;
+      margin: 5% 0%;
       height: 25%;
     }
 
     #loadingSpinner p {
-      text-align: center;
-      z-index: 1;
-      position: fixed;
-      width: 80%;
-      margin: 112% 10%;
-      font-weight: 500;
-      font-size: 4vw;
-      line-height: 1.5;
+      font-size: 5vw;
+      margin: 0% 15%;
     }
 
     #exportPDF {
@@ -1020,6 +1035,13 @@ b {
     max-height: 100% !important;
   }
 
+  .flatpickr-weekdays {
+    /* max-width: 100% !important;
+    max-height: 100% !important; */
+    width: 100% !important;
+    font-size: 3vw;
+  }
+
   .dayContainer {
     max-width: 100% !important;
     min-width: 100%;
@@ -1138,30 +1160,36 @@ b {
     font-size: 6vw;
   }
 
+  .generated-content h2 {
+    font-size: 5vw;
+    line-height: 110%;
+  }
+
   .generated-content p {
-    font-size: 3.8vw;
+    font-size: 3.5vw;
+  }
+
+  .generated-content strong {
+    font-size: 3.5vw;
   }
 
   .generated-content h3 {
     font-size: 4.5vw;
   }
 
+  .generated-content #conclusion {
+    font-size: 4.5vw;
+  }
+
   #plane {
     width: 80%;
-    margin: 40% 10%;
+    margin: 0% 10%;
     height: auto;
-
   }
 
   #loadingSpinner p {
-    text-align: center;
-    z-index: 1;
-    position: fixed;
-    width: 80%;
-    margin: 67% 10%;
-    font-weight: 500;
     font-size: 4vw;
-    line-height: 1.3;
+    margin: 0% 15%;
   }
 
   #exportPDF {
