@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
                     `I need basic information about ${city}. Please provide an introduction of the city, information about the season, climate and weather during the period from ${startDate} to ${endDate}, the languages spoken, and the population.
                     Response Intros:
                     Each aspect will take one section/paragraph, and made up by at most 2 to 4 sentences.
-                    Provide all these information in a word count suitable for a single A4 page, about 200-250 words max per page/div.
+                    Provide all these information in a word count suitable for a single A4 page, about 200 words per page/div.
                     
                     Response Format:
                     Since the response here will be redirected to be shown on a HTML page, please format the response with HTML tags.
@@ -36,7 +36,8 @@ module.exports = async (req, res) => {
                     <href target="_blank"> to insert weather related websites for the city during the period and other relative informations,
                     and <p> for paragraphs.
                     The direct link to the monthly weather forecast for the city, it should look like this: https://www.accuweather.com/en/at/vienna/31868/march-weather/31868?year=2024 instead of a general accuweather.com homepage link.
-                    
+
+
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and concise way.
                     As for the tone and mood of your response, try to be passionate and friendly.

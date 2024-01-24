@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
                     Response Intros:
                     Each section will take one div/page.
                     First, make a page/div for the travel reminders, separate content into Travel Document and Visa Requirement, Tax Refund Procedures, Latest Current Issues and Advisories, Local Etiquette and Cultural Norms, and Health and Vaccination Record Requirement.
-                    Then, do one page/div for Emergency Contacts. Provide emergency contact numbers, including local police, ambulance, and fire department and so on.
+                    Then, do one page/div for Emergency Contacts. Provide emergency contact numbers, including local police, ambulance, and fire department and so on. Then, provide 2-4 hospitals in the city along with their contacts and address.
                     In the same div/page, construct messages under the emergency contacts to remind users to be aware of the location and contact information of their respective embassies in the city. Attach the link https://www.embassy-worldwide.com/ in your message.
                     Lastly, Do one last page/div for the Farewell Messages, wishing travelers a wonderful journey and inviting them to share their experiences or feedback.
                     
@@ -36,9 +36,9 @@ module.exports = async (req, res) => {
                     Since the response here will be redirected to be shown on a HTML page, you must format each section with HTML tags.
                     Do not ever include the opening and closing tags of '''html, </ and ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a page/section/div, and </div> to end a page/section/div.
-                    Use <h1>, <h2> and <strong> for different headings,
-                    <href target="_blank"> to replace every related helpful website,
-                    and <p> for paragraphs.
+                    Use <h1>, <h2> and for different headings,
+                    <href target="_blank"> to replace every related helpful website like governmental websites, and links to hospital maps.
+                    and <p> for content and paragraphs.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
                     The direct link to the visa application, it should be government-related official website like this: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html instead of some general website link.
                     Do this too to the remaining links if possible.
