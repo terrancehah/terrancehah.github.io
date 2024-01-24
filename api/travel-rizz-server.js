@@ -104,16 +104,21 @@ module.exports = async (req, res) => {
                 ? 'http://localhost:3000/api/travel-rizz-daily-itinerary' 
                 : 'https://terrancehah.com/api/travel-rizz-daily-itinerary';
 
+            const conclusionURL = isLocal
+                ? 'http://localhost:3000/api/travel-rizz-conclusion' 
+                : 'https://terrancehah.com/api/travel-rizz-conclusion';
+
             // Then use these URLs in your axios calls
             const basicInfoPromise = axios.post(basicInfoURL, { city, startDate, endDate });
             const detailsPromise = axios.post(detailsURL, { city, startDate, endDate });
             const itineraryPromise = axios.post(itineraryURL, { city, startDate, endDate });
+            const conclusionPromise = axios.post(conclusionURL, { city, startDate, endDate });
 
             // Use Promise.all to wait for all promises to resolve
-            const [basicInfoResponse, detailsResponse, itineraryResponse] = await Promise.all([basicInfoPromise, detailsPromise, itineraryPromise]);
+            const [basicInfoResponse, detailsResponse, itineraryResponse, conclusionReponse] = await Promise.all([basicInfoPromise, detailsPromise, itineraryPromise, conclusionPromise]);
 
             // Combine responses
-            const generatedContent = basicInfoResponse.data.response + detailsResponse.data.response + itineraryResponse.data.response;
+            const generatedContent = basicInfoResponse.data.response + detailsResponse.data.response + itineraryResponse.data.response + conclusionReponse.data.response;
 
             res.send({ generatedContent });
         } catch (error) {

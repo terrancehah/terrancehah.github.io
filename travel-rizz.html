@@ -141,7 +141,7 @@
             <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
             <script>
-                //City name autocomplete
+                // City name autocomplete
                 function initAutocomplete() {
                     var input = document.getElementById('destination');
                     var autocomplete = new google.maps.places.Autocomplete(input);
@@ -152,11 +152,27 @@
                             return;
                         }
             
+                        // Extract city and country from address components
+                        var city, country;
+                        for (var i = 0; i < place.address_components.length; i++) {
+                            var component = place.address_components[i];
+                            if (component.types.includes("locality")) {
+                                city = component.long_name;
+                            }
+                            if (component.types.includes("country")) {
+                                country = component.long_name;
+                            }
+                        }
+            
+                        var simplifiedPlaceName = city && country ? city + ", " + country : place.name;
+                        console.log('Simplified place name:', simplifiedPlaceName);
+            
                         // Additional actions upon selecting a place
                         // can be added here if needed.
                     });
                 }
-            </script>            
+            </script>
+            
 
             <script>
                 var today = new Date();

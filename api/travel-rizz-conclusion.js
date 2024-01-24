@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') {
         const { city, startDate, endDate } = req.body;
 
-        console.log("Received itinerary request for:", { city, startDate, endDate });
+        console.log("Received conclusion request for:", { city, startDate, endDate });
 
         try {
             const gptResponse = await openai.chat.completions.create({
@@ -23,33 +23,33 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are an knowledgeable friendly travel assistant specializing in creating detailed daily travel itineraries for cities worldwide."},
                     {"role": "user", "content": 
-                    `Please create daily itinerary for a trip to ${city} from ${startDate} to ${endDate}.
+                    `Please create travel reminders, emergency contacts, and Farewell Message for a trip to ${city} from ${startDate} to ${endDate}.
                     
                     Response Intros:
-                    Each day will take one div/page.
-                    Provide the daily itinerary a daily schedule form; do not respond in hourly format, separate every day into Morning, Afternoon, Evening and Night time sections.
-                    The schedule for each time session should be at least 3-4 sentences, keep them informative.
-                    For each day, start a new div/section/page, plan the schedule so that the travellers can get to at least 3-4 attractions.
-                    The attractions that are visited each day should not be too far, try to group attractions for each day in around the nearby area; if possible, briefly introduce a little how the traveller can get to all the attractions (by foot or public transport etc).
-                    Provide each day's itinerary in a total word count suitable for a single A4 page, about 200-250 words max per page/div.
+                    Each section will take one div/page.
+                    First, make a page/div for the travel reminders, separate content into Travel Document and Visa Requirement, Tax Refund Procedures, Latest Current Issues and Advisories, Local Etiquette and Cultural Norms, and Health and Vaccination Record Requirement.
+                    Then, do one page/div for Emergency Contacts. Provide emergency contact numbers, including local police, ambulance, and fire department and so on.
+                    In the same div/page, construct messages under the emergency contacts to remind users to be aware of the location and contact information of their respective embassies in the city. Attach the link https://www.embassy-worldwide.com/ in your message.
+                    Lastly, Do one last page/div for the Farewell Messages, wishing travelers a wonderful journey and inviting them to share their experiences or feedback.
                     
                     Response Format:
                     Since the response here will be redirected to be shown on a HTML page, you must format each section with HTML tags.
                     Do not ever include the opening and closing tags of '''html, </ and ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a page/section/div, and </div> to end a page/section/div.
-                    Use <h1>, <h2> for different headings,
-                    <strong> for different times in a day,
-                    <href target="_blank"> to replace every attraction with Google Map link or reputable websites hyperlinks, and also to replace transports related website,
+                    Use <h1>, <h2> and <strong> for different headings,
+                    <href target="_blank"> to replace every related helpful website,
                     and <p> for paragraphs.
-                    You must provide hyperlinks for every attraction in the daily schedule.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
+                    The direct link to the visa application, it should be government-related official website like this: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html instead of some general website link.
+                    Do this too to the remaining links if possible.
+                    For the last page of Farewell Messages, no <h1> title needed, no <p></p> needed, just wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>.
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead you should reply in an informative and descriptive way.
                     As for the tone and mood of your response, try to be passionate and friendly.
                     `}
                 ],
-                max_tokens: 2000
+                max_tokens: 1500
             });
 
             if (gptResponse && gptResponse.choices && gptResponse.choices.length > 0) {
@@ -57,17 +57,17 @@ module.exports = async (req, res) => {
                 console.log("Itinerary Content:", itineraryContent);
                 res.send({ response: itineraryContent });
             } else {
-                console.error("Unexpected OpenAI API response structure for itinerary:");
-                res.status(500).send("The response from the API does not have the expected content for itinerary.");
+                console.error("Unexpected OpenAI API response structure for conclusion:");
+                res.status(500).send("The response from the API does not have the expected content for conclusion.");
             }
         } catch (error) {
-            console.error("Error in fetching itinerary:", error);
-            res.status(500).send("Error processing your itinerary request");
+            console.error("Error in fetching conclusion:", error);
+            res.status(500).send("Error processing your conclusion request");
         }
     } else {
-        res.status(405).send('Method Not Allowed for itinerary');
+        res.status(405).send('Method Not Allowed for conclusion');
     }
 };
 
-const PORT = process.env.PORT || 3004; // Different port for this service
+const PORT = process.env.PORT || 3005; // Different port for this service
 app.listen(PORT, () => console.log(`Itinerary Service running on port ${PORT}`));
