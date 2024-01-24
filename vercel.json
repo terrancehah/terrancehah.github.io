@@ -13,7 +13,7 @@
         "api/travel-rizz-daily-itinerary.js": {
             "maxDuration": 300
         },
-        "api/export-to-pdf.js": {
+        "api/travel-rizz-conclusion.js": {
             "maxDuration": 300
         }
     }

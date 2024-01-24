@@ -21,20 +21,27 @@ module.exports = async (req, res) => {
             const gptResponse = await openai.chat.completions.create({
                 model: 'gpt-4-1106-preview',
                 messages: [
-                    {"role": "system", "content": "You are a knowledgeable travel assistant providing detailed information about specific aspects of travel destinations."},
+                    {"role": "system", "content": "You are a knowledgeable friendly travel assistant providing detailed information about specific aspects of travel destinations for travel purpose."},
                     {"role": "user", "content": 
                     `Can you provide details about currency information, safety tips, business operating hours and local navigation for travelers in ${city}?
+                    
+                    Response Intros:
                     Each aspect will take one section/paragraph, at most 2-3 sentences.
-                    Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and concise way.
+                    Provide this information in a word count suitable for a single A4 page, about 200-2500 words max per page/div.
+
+                    Response Format:
+                    Since the response here will be redirected to be shown on a HTML page, format the response with HTML tags.
                     Do not include the opening and closing tags of '''html, </ and ''' in the generated content.
-                    Since the response here will be redirected to be shown on a HTML page, please format the response with HTML tags.
-                    Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> to start and end the whole content, limited to about 3000 characters.
+                    Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> to start and end a whole page/section/div.
                     Use <h1>Notable Details about ${city}</h1>, then <h2> for different headings accordingly, 
                     <href target="_blank"> hyperlinks to replace transports related websites, 
-                    <href target="_blank"> hyperlinks to exchanges rate table of the destination country currency on x-rates.com, 
-                    and <p> for paragraphs.
-                    Provide this information in a format suitable for a single page, then finally ending with a <br> tag to signify a page break.
+                    <href target="_blank"> hyperlinks to exchanges rate table of the destination country currency on x-rates.com.
                     The direct link to the exchange rate table of the currency, it should look like this: https://www.x-rates.com/table/?from=CZK&amount=1 instead of a general x-rates.com homepage link.
+                    Use <p> for paragraphs, then finally ending with a </div> tag to signify the end of one section/div.
+                    
+                    Response Tone:
+                    Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and concise way.
+                    As for the tone and mood of your response, try to be passionate and friendly.
                     `}
                 ],
                 max_tokens: 700
