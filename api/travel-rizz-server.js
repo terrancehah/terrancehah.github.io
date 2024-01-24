@@ -90,7 +90,10 @@ module.exports = async (req, res) => {
         console.log("Received request for:", { city, startDate, endDate });
 
         try {
-            const isLocal = process.env.NODE_ENV !== 'production';
+            const isLocal = process.env.NODE_ENV === 'development'; // Use 'development' for local
+
+            console.log("NODE_ENV:", process.env.NODE_ENV);
+            console.log("isLocal:", isLocal);
 
             const basicInfoURL = isLocal 
                 ? 'http://localhost:3000/api/travel-rizz-basic-info' 
