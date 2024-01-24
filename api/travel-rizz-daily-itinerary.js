@@ -35,14 +35,15 @@ module.exports = async (req, res) => {
                     
                     Response Format:
                     Since the response here will be redirected to be shown on a HTML page, you must format each section with HTML tags.
-                    Do not ever include the opening and closing tags of '''html, </ and ''' in the generated content.
+                    Do not ever start or end the content with the opening and closing tags of '''html, </ and ''' in the generated content, just start with <div class="page-break">.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a page/section/div, and </div> to end a page/section/div.
                     Use <h1>, <h2> for different headings,
                     <strong> for different times in a day,
                     <href target="_blank"> to replace every attraction with Google Map link or reputable websites hyperlinks, and also to replace transports related website,
-                    and <p> for paragraphs.
+                    and <p> for content.
                     You must provide hyperlinks for every attraction in the daily schedule.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
+
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead you should reply in an informative and descriptive way.

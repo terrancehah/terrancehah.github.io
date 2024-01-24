@@ -437,7 +437,7 @@ input {
 }
 
 .page-break {
-  page-break-after: auto;
+  page-break-after: always;
   page-break-inside: avoid;
   display: flex;
   flex-direction: column;

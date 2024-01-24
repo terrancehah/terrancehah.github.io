@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
                     
                     Response Intros:
                     Each aspect will take one section/paragraph, at most 2-3 sentences.
-                    Provide this information in a word count suitable for a single A4 page, about 200-2500 words max per page/div.
+                    Provide this information in a word count suitable for a single A4 page, about 200 words per page/div.
 
                     Response Format:
                     Since the response here will be redirected to be shown on a HTML page, format the response with HTML tags.
@@ -38,6 +38,7 @@ module.exports = async (req, res) => {
                     <href target="_blank"> hyperlinks to exchanges rate table of the destination country currency on x-rates.com.
                     The direct link to the exchange rate table of the currency, it should look like this: https://www.x-rates.com/table/?from=CZK&amount=1 instead of a general x-rates.com homepage link.
                     Use <p> for paragraphs, then finally ending with a </div> tag to signify the end of one section/div.
+
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and concise way.
