@@ -90,22 +90,19 @@ module.exports = async (req, res) => {
         console.log("Received request for:", { city, startDate, endDate });
 
         try {
-            const isLocal = process.env.NODE_ENV === 'development'; // Use 'development' for local
-
-            console.log("NODE_ENV:", process.env.NODE_ENV);
-            console.log("isLocal:", isLocal);
+            const isLocal = process.env.NODE_ENV !== 'production';
 
             const basicInfoURL = isLocal 
                 ? 'http://localhost:3000/api/travel-rizz-basic-info' 
-                : '/api/travel-rizz-basic-info';
+                : 'https://terrancehah.com/api/travel-rizz-basic-info';
 
             const detailsURL = isLocal 
                 ? 'http://localhost:3000/api/travel-rizz-details' 
-                : '/api/travel-rizz-details';
+                : 'https://terrancehah.com/api/travel-rizz-details';
 
             const itineraryURL = isLocal 
                 ? 'http://localhost:3000/api/travel-rizz-daily-itinerary' 
-                : '/api/travel-rizz-daily-itinerary';
+                : 'https://terrancehah.com/api/travel-rizz-daily-itinerary';
 
             // Then use these URLs in your axios calls
             const basicInfoPromise = axios.post(basicInfoURL, { city, startDate, endDate });
