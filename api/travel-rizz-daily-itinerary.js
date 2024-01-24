@@ -28,9 +28,10 @@ module.exports = async (req, res) => {
                     Response Intros:
                     Each day will take one div/page.
                     Provide the daily itinerary a daily schedule form; do not respond in hourly format, separate every day into Morning, Afternoon, Evening and Night time sections.
-                    The schedule for each time session should be at least 3-4 sentences, keep them informative.
+                    The schedule for each time session should be at least 4 sentences, keep them informative.
                     For each day, start a new div/section/page, plan the schedule so that the travellers can get to at least 3-4 attractions.
                     The attractions that are visited each day should not be too far, try to group attractions for each day in around the nearby area; if possible, briefly introduce a little how the traveller can get to all the attractions (by foot or public transport etc).
+                    Also, you can occasionally introduce some high-rating famous restaurants or bars near the attractions.
                     Provide each day's itinerary in a total word count suitable for a single A4 page, about 200-250 words max per page/div.
                     
                     Response Format:
@@ -41,9 +42,8 @@ module.exports = async (req, res) => {
                     <strong> for different times in a day,
                     <href target="_blank"> to replace every attraction with Google Map link or reputable websites hyperlinks, and also to replace transports related website,
                     and <p> for content.
-                    You must provide hyperlinks for every attraction in the daily schedule.
+                    You must provide hyperlinks for every attraction in the daily schedule, use the link in the format of https://maps.app.goo.gl/TAfSA3zqcwvv2yE49 instead of https://goo.gl/maps/jZCgdakB8xp8KQ6D9, also,verify to make sure the links work.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
-
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead you should reply in an informative and descriptive way.

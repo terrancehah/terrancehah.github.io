@@ -41,8 +41,8 @@ module.exports = async (req, res) => {
                     and <p> for content and paragraphs.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
                     The direct link to the visa application, it should be government-related official website like this: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html instead of some general website link.
-                    Do this too to the remaining links if possible.
-                    For the last page of Farewell Messages, no <h1> title needed, no <p></p> needed, just wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>.
+                    Do this too to the other links as well.
+                    For the last page of Farewell Messages, no <h1> title needed, no <p></p> needed, just wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>, you can try <br> to break lines between sentences if you have to.
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead you should reply in an informative and descriptive way.
