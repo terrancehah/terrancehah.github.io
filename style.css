@@ -42,11 +42,11 @@ header a {
 }
 
 nav {
-    display: inline;
+    display: inline-flex;
 }
 
 .navbutton {
-    padding: 1%;
+    padding: 2% 2%;
     font-family: Raleway;
     font-weight: 500;
     font-size: 2vw;
@@ -111,7 +111,7 @@ footer h4 {
     font-size: 2.5vw;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 480px) {
     header {
         margin-bottom: 0.6vw;
     }
@@ -123,6 +123,7 @@ footer h4 {
     .navbutton {
         font-size: 3.5vw;
         left: 2%;
+        padding: 1% 2%;
     }
     .contacts {
         top: 5%;
@@ -133,11 +134,49 @@ footer h4 {
         height: 5.5vw;
     }
     footer h3 {
+        font-size: 4vw;
+        margin: 0;
+    }
+    footer h4 {
         font-size: 3.5vw;
+        margin: 0% 15%;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    header {
+        margin-bottom: 0.6vw;
+    }
+    header h1 {
+        width: 100%;
+        font-size: 4.5vw;
+        text-align: left;
+        padding: 1% 1% 0% 2%;
+    }
+    nav {
+        margin-top: 0.5%;
+    }
+    .navbutton {
+        font-size: 3vw;
+        left: 2%;
+        margin: 0% 1%;
+        padding: 1% 1.5%;
+
+    }
+    .contacts {
+        top: 5%;
+        margin: 0vw 0.6vw;
+    }
+    header img {
+        width: 5vw;
+        height: 5vw;
+    }
+    footer h3 {
+        font-size: 3vw;
         margin: 0;
     }
     footer h4 {
         font-size: 2.5vw;
-        /* margin: 0% 29%; */
+        margin: 0% 10%;
     }
 }

@@ -35,18 +35,18 @@
                     <a class="navbutton active" href="./projects.html">Projects</a>
                     <a class="navbutton" href="./playground.html">Playground</a>
                 </nav>
-                <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png" alt="facebook"></a>
-                <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png" alt="instagram"></a>
-                <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png" alt="linkedin"></a>
-                <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png" alt="github"></a>
+                    <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png" alt="facebook"></a>
+                    <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png" alt="instagram"></a>
+                    <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png" alt="linkedin"></a>
+                    <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png" alt="github"></a>
                 <style>
                     @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
                 </style>
             </header>
             
             <main>
-                    <video id="background" autoplay loop muted>
-                        <source src="./resources/Patagonia_Lake_20X_720P_compressed.mp4" type="video/mp4">
+                    <video id="backgroundVideo" autoplay muted>
+                        <source id="videoSource" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
 
@@ -64,12 +64,12 @@
                             </div>                
                             <div class="calendar-container">
                                 <div class="planner-input-form inline-calendar" id="start-calendar">
-                                    <input id="start-date" name="startDate" class="date-picker planner-input-form" placeholder="Start Date" required>
+                                    <input id="start-date" name="startDate" class="date-picker planner-input-form" placeholder="Start Date" readonly required>
                                 </div>
                             </div>
                             <div class="calendar-container">
                                 <div class="planner-input-form inline-calendar" id="end-calendar">
-                                    <input id="end-date" name="endDate" class="date-picker planner-input-form" placeholder="End Date" required>
+                                    <input id="end-date" name="endDate" class="date-picker planner-input-form" placeholder="End Date" readonly required>
                                     <input type="hidden" id="hidden-end-date" name="endDate">
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            <script>
+            <!-- <script>
                 var wrappers = $(".button-wrapper");
             
                 $(".submit").click(function(e) {
@@ -121,7 +121,38 @@
                         }, 8000);
                     }
                 });
-            </script>
+            </script> -->
+
+
+            <script>
+                //Random loop autoplay background videos
+                document.addEventListener('DOMContentLoaded', function() {
+                    var videos = [
+                        './resources/Dubai_Night_1080P_20X_compressed.mp4',
+                        './resources/London_Skyline_720P_8X_compressed.mp4',
+                        './resources/Patagonia_Lake_720P_20X_compressed.mp4',
+                        './resources/Grand_Canyon_720P_8X_compresed.mp4',
+                        './resources/Greenland_Evening_1080P_20X_compressed.mp4',
+                        './resources/San_Fransisco_Bay_720P_5X_compressed.mp4'
+                        // Add more video paths as needed
+                    ];
+            
+                    // Randomly select the first video
+                    var firstVideoIndex = Math.floor(Math.random() * videos.length);
+                    var videoElement = document.getElementById('backgroundVideo');
+                    videoElement.src = videos[firstVideoIndex];
+                    videoElement.load(); // Ensure the new source is loaded
+            
+                    videoElement.addEventListener('ended', function(e) {
+                        // Determine the next video index
+                        var currentVideoIndex = videos.indexOf(videoElement.getAttribute('src'));
+                        var nextVideoIndex = (currentVideoIndex + 1) % videos.length;
+                        videoElement.src = videos[nextVideoIndex];
+                        videoElement.load(); // Load the new video source
+                        videoElement.play(); // Play the next video
+                    });
+                });
+            </script>            
 
             <script async
             src="https://js.stripe.com/v3/buy-button.js">
@@ -196,6 +227,9 @@
 
                         //Mobile mode
                         if (isMobile) {
+                             // Set a different placeholder for mobile view
+                            document.getElementById("start-date").setAttribute("placeholder", "Start and End Dates");
+
                             // Initialize the mobile calendar in range mode
                             mainCalendar = flatpickr("#start-calendar", {
                                 inline: true,
@@ -203,12 +237,16 @@
                                 minDate: today,
                                 mode: "range",
                                 onChange: function(selectedDates, dateStr) {
-                                    var dates = dateStr.split(" to ");
-                                    document.getElementById("start-date").value = dates[0];
-                                    if(dates.length > 1) {
-                                        document.getElementById("hidden-end-date").value = dates[1];
+                                    if (selectedDates.length === 2) {
+                                        // Format and display both dates when two dates are selected
+                                        var startDateFormatted = flatpickr.formatDate(selectedDates[0], "d-m-Y");
+                                        var endDateFormatted = flatpickr.formatDate(selectedDates[1], "d-m-Y");
+                                        document.getElementById("start-date").value = `${startDateFormatted} to ${endDateFormatted}`;
+                                        document.getElementById("hidden-end-date").value = endDateFormatted;
                                     } else {
-                                        document.getElementById("hidden-end-date").value = dates[0];
+                                        // Display only the start date when one date is selected
+                                        document.getElementById("start-date").value = dateStr;
+                                        document.getElementById("hidden-end-date").value = dateStr;
                                     }
                                 },
                             });
@@ -224,6 +262,12 @@
                                     document.getElementById("start-date").value = dateStr;
                                     endCalendar.set('minDate', dateStr);
                                 },
+                                onMonthChange: function(selectedDates, dateStr, instance) {
+                                    // Update the month of the end calendar when the main calendar month changes
+                                    var year = instance.currentYear;
+                                    var month = instance.currentMonth;
+                                    endCalendar.jumpToDate(new Date(year, month));
+                                }
                             });
 
                             // Initialize the end calendar for desktop
