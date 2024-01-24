@@ -60,7 +60,7 @@ main {
   overflow: hidden;
 }
 
-#background {
+#backgroundVideo {
   /* width: 100%; */
   height: 100%;
   position: absolute;
@@ -267,7 +267,7 @@ display: block;
   border-radius: 1vw;
   background-color: white;
   color: #3a7dc9e6;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.7vw;
   box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
   margin-bottom: 2%;
@@ -609,7 +609,7 @@ b {
 
  
     
-    #background {
+    #backgroundVideo {
       /* width: auto; */
       height: 100%;
       position: absolute;
@@ -756,11 +756,11 @@ b {
       width: auto;
       padding: 0 30px;
       height: 12vw;
-      line-height: 45px;
-      border-radius: 2.8vw;
-      font-weight: 600;
-      font-size: 4.5vw;
+      border-radius: 3.5vw;
+      font-weight: 500;
+      font-size: 4.3vw;
       box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+      margin-bottom: 4%;
     }
 
 
@@ -924,7 +924,7 @@ b {
     overflow: hidden;
   }
   
-  #background {
+  #backgroundVideo {
     /* width: auto; */
     height: 100%;
     position: absolute;
@@ -988,7 +988,7 @@ b {
 
   .date-picker {
     margin: 0 5px;
-    width: 40%;
+    width: 49%;
     height: 5.5vw;
   }
 
@@ -1104,11 +1104,11 @@ b {
   #generate-button {
     width: auto;
     padding: 0 30px;
-    height: 12vw;
+    height: 10vw;
     line-height: 45px;
-    border-radius: 2.8vw;
-    font-weight: 600;
-    font-size: 4vw;
+    border-radius: 3.5vw;
+    font-weight: 500;
+    font-size: 3vw;
     box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
   }
 
