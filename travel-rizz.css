@@ -446,6 +446,7 @@ input {
   height: 100%;
   position: relative;
   margin-bottom: 2%;
+  margin-top: 0.5%;
 }
 
 .generated-content header {
@@ -504,6 +505,7 @@ font-size: 1.6vw;
 .generated-content p {
   font-size: 1.4vw;
   line-height: 180%;
+  width: 100%;
 }
 
 .generated-content #conclusion {
