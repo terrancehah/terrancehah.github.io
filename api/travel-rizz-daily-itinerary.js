@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
         try {
             const gptResponse = await openai.chat.completions.create({
-                model: 'gpt-4-1106-preview',
+                model: 'gpt-4o-2024-08-06',
                 messages: [
                     {"role": "system", "content": "You are an knowledgeable friendly travel assistant specializing in creating detailed daily travel itineraries for cities worldwide."},
                     {"role": "user", "content": 
