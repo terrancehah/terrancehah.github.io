@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
                     Since the response here will be redirected to be shown on a HTML page, certain sections of the content will be formatted with HTML tags.
                     Remember, do not start or end the content with the opening and closing tags of '''html, </ or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> EVERY TIME you start and end a whole page/section/div.
-                    For the content inside, start with <h1>Welcome to ${city}!</h1>, then <h2> for the following headings/aspects accordingly, 
+                    For the content inside, start with <h1>Welcome to (the name of the city)!</h1>, then <h2> for the following headings/aspects accordingly, 
                     <href target="_blank"> to insert weather related websites for the city during the period and other relative informations,
                     and <p> for paragraphs.
                     The direct link to the monthly weather forecast for the city, it should look like: https://www.accuweather.com/en/at/vienna/31868/october-weather/31868?year=2024 instead of a general accuweather.com homepage link.
