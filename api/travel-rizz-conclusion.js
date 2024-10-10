@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
                     Use <h1>, <h2> and for different headings,
                     <href target="_blank"> to replace every related helpful website like governmental websites, and links to hospital maps,
                     and <p> for content and paragraphs.
-                    Use <br> to break lines between hospitals.
+                    Use <br> to break lines between each hospital.
                     For any link that utiilises Google Map, use the link in the format of https://maps.app.goo.gl/TAfSA3zqcwvv2yE49 instead of https://goo.gl/maps/jZCgdakB8xp8KQ6D9, also, verify to make sure the links work.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
                     The direct link to the visa application, it should be governmental official website like this: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html instead of some general website link.

@@ -30,8 +30,8 @@ module.exports = async (req, res) => {
                     Provide this information in a word count suitable for a single A4 page, about 200 words per page/div.
 
                     Response Format:
-                    Since the response here will be redirected to be shown on a HTML page, format the response with HTML tags.
-                    Do not include the opening and closing tags of '''html, </ and ''' in the generated content.
+                    Since the response here will be redirected to be shown on a HTML page, certain sections of the content will be formatted with HTML tags.
+                    Remember, do not start or end the content with the opening and closing tags of '''html, </ or ''' in the generated content, simply start with <div class="page-break">.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> to start and end a whole page/section/div.
                     Use <h1>Notable Details about ${city}</h1>, then <h2> for different headings accordingly, 
                     <href target="_blank"> hyperlinks to replace the transports related websites, 
