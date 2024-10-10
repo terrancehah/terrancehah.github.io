@@ -33,10 +33,11 @@ module.exports = async (req, res) => {
                     The attractions that are visited each day should not be too far, try to group attractions for each day in walkable distance or nearby area.
                     If possible, briefly introduce how the traveller can get to all the attractions (by foot or public transport, walkable distance, travel time etc).
                     Also, you can occasionally introduce high-rating famous restaurants or bars near the attractions.
-                    Provide each day's itinerary in a total word count suitable for a single A4 page, about 220 words max per div.
-                    
+                    Provide each day's itinerary in about 220 words in one page/div, the word count suitable for one single A4 page.
+
+
                     Response Format:
-                    Since the response here will be redirected to be shown on a HTML page, certain sections of the content will be formatted with HTML tags.
+                    Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with HTML tags.
                     Remember, do not start or end the content with the opening and closing tags of '''html, </ or ''' in the generated content, simply start with <div class="page-break">.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a div, and </div> to end the div.
                     Use <h1> <h2> for different headings, and <strong> for different time sections in a day,
