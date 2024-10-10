@@ -2,19 +2,19 @@
     "cleanUrls": true,
     "functions": {
         "api/travel-rizz-server.js": {
-            "maxDuration": 300
+            "maxDuration": 60
         },
         "api/travel-rizz-basic-info.js": {
-            "maxDuration": 300
+            "maxDuration": 60
         },
         "api/travel-rizz-details.js": {
-            "maxDuration": 300
+            "maxDuration": 60
         },
         "api/travel-rizz-daily-itinerary.js": {
-            "maxDuration": 300
+            "maxDuration": 60
         },
         "api/travel-rizz-conclusion.js": {
-            "maxDuration": 300
+            "maxDuration": 60
         }
     }
 }
