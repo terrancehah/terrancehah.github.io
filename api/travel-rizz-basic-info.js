@@ -23,24 +23,25 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are a knowledgeable travel assistant focused on providing basic information about cities for travel purposes."},
                     {"role": "user", "content": 
-                    `I need basic information about ${city}. Please provide an introduction of the city, information about the season, climate and weather during the period from ${startDate} to ${endDate}, the languages spoken, and the population.
+                    `Provide an introduction of ${city}, information about the season, climate and weather during the period from ${startDate} to ${endDate}, the languages spoken, and the population.
+                    
                     Response Intros:
-                    Each aspect will take one section/paragraph, and made up by at most 2 to 4 sentences.
-                    Provide all these information in a word count suitable for a single A4 page, about 200 words per page/div.
+                    Each aspect will take one section/paragraph, and made up by 2 to 4 sentences.
+                    Provide all these information in about 220 words in one page/div, the word count suitable for one single A4 page.
                     
                     Response Format:
-                    Since the response here will be redirected to be shown on a HTML page, please format the response with HTML tags.
-                    Do not ever include the opening and closing tags of '''html, </ and ''' in the generated content.
+                    Since the response here will be redirected to be shown on a HTML page, certain sections of the content will be formatted with HTML tags.
+                    Remember, do not start or end the content with the opening and closing tags of '''html, </ or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> EVERY TIME you start and end a whole page/section/div.
-                    For the content inside, use <h1>Welcome to ${city}!</h1>, then <h2> for different headings accordingly, 
+                    For the content inside, start with <h1>Welcome to ${city}!</h1>, then <h2> for the following headings/aspects accordingly, 
                     <href target="_blank"> to insert weather related websites for the city during the period and other relative informations,
                     and <p> for paragraphs.
-                    The direct link to the monthly weather forecast for the city, it should look like this: https://www.accuweather.com/en/at/vienna/31868/march-weather/31868?year=2024 instead of a general accuweather.com homepage link.
+                    The direct link to the monthly weather forecast for the city, it should look like: https://www.accuweather.com/en/at/vienna/31868/october-weather/31868?year=2024 instead of a general accuweather.com homepage link.
 
 
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and concise way.
-                    As for the tone and mood of your response, try to be passionate and friendly.
+                    As for the tone and mood of your response, be passionate and friendly.
                     `}
                 ],
                 max_tokens: 700
