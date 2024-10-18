@@ -30,20 +30,63 @@ h2 {
 
 h3 {
     font-family: Raleway;
-    font-size: 2.5vw;
     font-weight: 400;
     padding: 0;
     text-align: center;
     /* display: flex; */
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
 
 main {
     /* margin-left: 5%;
     margin-right: 5%; */
     position: relative;
     /* display:block; */
+    /* height: 87.5%; */
     text-align: center;
+    flex-grow: 1;
+    /* overflow-y: auto; */
+}
+
+main {
+  position: relative;
+  text-align: center;
+  flex-grow: 1;
+  /* overflow-y: auto; */
+  padding: 2% 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* header {
+  height: 6.5%;
+} */
+
+header h1 {
+  padding: 0.7% 1% 0% 2%;
+
+}
+
+footer {
+  /* height: 6%; */
+  padding: 1% 0%;
+  margin: 0;
+}
+
+header, footer {
+  flex-shrink: 0;
 }
 
 #slogan {
@@ -53,12 +96,12 @@ main {
   font-size: 2vw;
 }
 
-.intro {
+/* .intro {
   position: relative;
   width: 100%;
   height: max-content;
   overflow: hidden;
-}
+} */
 
 #backgroundVideo {
   /* width: 100%; */
@@ -68,21 +111,24 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1;
-  opacity: 0.4;
+  opacity: 0.35;
 }
 
 .intro-caption {
   position: relative;
   z-index: 1;
-  margin: auto;
-  padding: 2% 0%;
+  margin: 1% 2%;
+  /* padding: 2% 0%; */
 }
 
 .heading {
-    margin: 2% 10%;
+    margin: 0% 10%;
+    /* margin-top: 2%; */
     width: 80%;
     font-family: Caveat;
-    font-size: 5.2vw;
+    /* font-size: 4.5vw; */
+    font-size: clamp(2rem, 4.5vw, 4.5rem);
+    line-height: 1.1;
     font-weight: 700;
     color:#123e5c;
     opacity: 1;
@@ -92,8 +138,10 @@ main {
 }
 
 .subheading {    
-  width: 80%;
-  padding: 0% 10%;
+  width: 90%;
+  padding: 2% 5%;
+  font-size: clamp(1rem, 2vw, 2rem);
+  /* font-size: 2vw; */
   text-align: center;  
   font-weight: 500;
   color:   #0b5567;
@@ -142,7 +190,7 @@ p {
 }
 
 .itinerary-planner {
-  padding: 2% 0%;
+  padding: 0%;
 }
 
 .date-picker-container {
@@ -195,7 +243,7 @@ label {
 
 .destination-input-form {
   position: relative;
-  margin-bottom: 2%;
+  /* margin-bottom: 2%; */
 }
 
 
@@ -264,14 +312,14 @@ display: block;
   padding: 0 56px;
   height: 4vw;
   line-height: 45px;
-  border-radius: 1vw;
+  border-radius: 1.5vw;
   background-color: white;
   color: #3a7dc9e6;
   font-weight: 500;
   font-size: 1.7vw;
   box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
-  margin-bottom: 2%;
-  margin-top: 2%;
+  /* margin-bottom: 1%; */
+  /* margin-top: 2%; */
 }
 
 #generate-button:hover {
@@ -312,7 +360,7 @@ input {
   z-index: 1;
   font-family: Lato;
   padding: 2% !important;
-  width: 60% !important;
+  width: 70% !important;
 }
 
 
@@ -324,6 +372,7 @@ input {
   margin-top: 1% !important;
   margin-bottom: 1% !important;
   font-size: 1.4vw;
+  /* height: 35px !important; */
   max-width: 14.2857143% !important;
 }
 
@@ -599,13 +648,17 @@ b {
     }
 
     .heading {
-      margin: 5% 5%;
+      margin: 0% 5%;
       width: 90%;
-      font-size: 8vw;
+      font-size: 9vw;
+      line-height: 1.2;
     }
 
     .subheading {
-      font-size: 4vw;
+      /* font-size: 4vw; */
+      font-size: clamp(0.8rem, 4vw, 1.2rem);
+      line-height: 1.3;
+
     }
 
 
@@ -619,14 +672,14 @@ b {
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: -1;
-      opacity: 0.6;
+      opacity: 0.35;
     }
     
     .intro-caption {
       position: relative;
       z-index: 1;
-      margin: auto;
-      /* padding: 72% 0%; */
+      margin: 2%;
+      /* padding: 2% 0%; */
     }
 
     .faq {
@@ -675,7 +728,7 @@ b {
     }
 
     .date-picker {
-      margin: 3% 20%;
+      margin: 5% 20%;
       width: 100%;
       height: 6.5vw;
       padding: 1% 4%;
@@ -713,13 +766,14 @@ b {
       left: 0;
       z-index: auto;
       align-items: center;
+      margin: 2%;
     }
 
     .flatpickr-calendar {
       left: 0;
       z-index: 1;
       padding: 2% !important;
-      width: 80% !important;
+      width: 90% !important;
     }
 
     .flatpickr-rContainer {
@@ -758,11 +812,11 @@ b {
       width: auto;
       padding: 0 30px;
       height: 12vw;
-      border-radius: 3.5vw;
+      border-radius: 3vw;
       font-weight: 500;
       font-size: 4.3vw;
       box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
-      margin-bottom: 4%;
+      margin-bottom: 2%;
     }
 
 
@@ -908,40 +962,50 @@ b {
     font-size: 4vw;
   }
 
+  /* header {
+    height: 9%;
+  } */
+
+  /* main {
+    height: 84%;
+  } */
+
   .heading {    
-    font-size: 7.5vw;
-    margin: 5% 5%;
+    font-size: 7vw;
+    margin: 0% 5%;
     width: 90%;
   }
+  
 
   .subheading {
-    font-size: 4vw;
+    font-size: 3vw;
   }
 
 
-  .intro {
+  /* .intro {
     position: relative;
     width: 100%;
     height: max-content;
     overflow: hidden;
-  }
+  } */
   
   #backgroundVideo {
     /* width: auto; */
     height: 100%;
+    object-fit: cover;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
-    opacity: 0.6;
+    opacity: 0.35;
   }
   
   .intro-caption {
     position: relative;
     z-index: 1;
-    margin: auto;
-    /* padding: 32% 0%; */
+    margin: 1% 2%;
+    /* padding: 2% 0%; */
   }
 
   .faq {
@@ -980,7 +1044,7 @@ b {
 
   .flatpickr-input {
     display: block !important;
-    padding: 3%;
+    padding: 1% 3%;
     font-size: 4vw;
   }
 
@@ -1092,7 +1156,7 @@ b {
     left: 0;
     z-index: 1;
     padding: 2% !important;
-    width: 60% !important;
+    width: 70% !important;
   }
 
   #slogan {
@@ -1105,10 +1169,10 @@ b {
 
   #generate-button {
     width: auto;
-    padding: 0 30px;
-    height: 10vw;
+    padding: 0 5%;
+    height: 8vw;
     line-height: 45px;
-    border-radius: 3.5vw;
+    border-radius: 3vw;
     font-weight: 500;
     font-size: 3vw;
     box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
