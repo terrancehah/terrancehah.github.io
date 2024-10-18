@@ -18,7 +18,7 @@ body {
 
 header {
     width: 100%;
-    margin-bottom: 0.5vw;
+    /* margin-bottom: 0.5vw; */
     display: inline-block;
 }
 
@@ -72,24 +72,30 @@ header img {
 .contacts {   
     float: right;
     padding: 0%;
-    top: 0.5vw;
+    /* top: 0.5vw; */
     right: 1vw;
     position: relative;
     margin: 0.8vw 0.4vw;
 }
 
 footer {
-    margin: 0%;
+    margin: 2% 0%;
     width: 100%;
     position: relative;
-    display: block;
     text-align: center;
-    padding: 1.5vw 0;
+    /* padding: 1.5vw 0; */
     z-index: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* This centers horizontally as well */
+    flex-direction: column;
+    /* height: 6%; */
     }
 
 footer h3 {
-    font-size: 2vw;
+    font-size: 1.5vw;
+    width: 100%;
+    display: inline-block;
     margin: 0.5%;
     text-align: center;
     font-family: Lato !important;
@@ -99,6 +105,8 @@ footer h3 {
 
 footer h4 {
     font-size: 1.5vw;
+    width: 80%;
+    display: inline-block;
     margin: 0;
     text-align: center;
     font-family: Raleway !important;
@@ -112,10 +120,10 @@ footer h4 {
     font-size: 2.5vw;
 }
 
-@media only screen and (max-width: 480px) {
-    header {
+@media screen and (max-width: 480px) {
+    /* header {
         margin-bottom: 0.6vw;
-    }
+    } */
     header h1 {
         width: 100%;
         font-size: 5.5vw;
@@ -127,7 +135,7 @@ footer h4 {
         padding: 1% 2%;
     }
     .contacts {
-        top: 5%;
+        /* top: 5%; */
         margin: 0vw 0.6vw;
     }
     header img {
@@ -139,15 +147,15 @@ footer h4 {
         margin: 0;
     }
     footer h4 {
-        font-size: 3.5vw;
-        margin: 0% 15%;
+        font-size: 3.2vw;
+        margin: 0% 10%;
     }
 }
 
-@media only screen and (max-width: 1024px) {
-    header {
+@media  screen and (min-width: 481px) and (max-width: 1024px) {
+    /* header {
         margin-bottom: 0.6vw;
-    }
+    } */
     header h1 {
         width: 100%;
         font-size: 4.5vw;
@@ -161,12 +169,12 @@ footer h4 {
         font-size: 3vw;
         left: 2%;
         margin: 0% 1%;
-        padding: 1% 1.5%;
+        /* padding: 1% 1.5%; */
 
     }
     .contacts {
-        top: 5%;
-        margin: 0vw 0.6vw;
+        top: 0%;
+        margin: 0.4vw 0.6vw;
     }
     header img {
         width: 5vw;
