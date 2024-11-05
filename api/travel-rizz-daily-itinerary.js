@@ -13,9 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
-        const { city, startDate, endDate } = req.body;
+        const { language, city, startDate, endDate } = req.body;
 
-        console.log("Received itinerary request for:", { city, startDate, endDate });
+        console.log("Received itinerary request for:", { language, city, startDate, endDate });
 
         try {
             const gptResponse = await openai.chat.completions.create({
