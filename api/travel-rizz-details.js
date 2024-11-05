@@ -13,9 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
-        const { city } = req.body;
+        const { language, city } = req.body;
 
-        console.log("Received detailed info request for:", city);
+        console.log("Received detailed info request for:", language, city);
 
         try {
             const gptResponse = await openai.chat.completions.create({
