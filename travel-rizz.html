@@ -54,7 +54,7 @@
                     <div class="intro-caption">
                         <h1 class="heading">Welcome to Travel-Rizz: 
                             <br>Your Personalized Journey Awaits</h1>
-                    <h3 class="subheading">Discover the joy of seamless travel planning with Travel-Rizz, your friendly AI travel assistant.</h3>
+                    <h3 class="subheading">Discover the joy of seamless travel planning with Travel-Rizz,<br> your friendly AI travel assistant.</h3>
                     </div>
 
                     <div class="itinerary-planner">   
@@ -74,6 +74,20 @@
                                     <input type="hidden" id="hidden-end-date" name="endDate">
                                 </div>
                             </div>
+
+                            <div class="language-selector">
+                                <select id="language-option">
+                                    <option value="en">English</option>
+                                    <option value="es">Español</option>
+                                    <option value="fr">Français</option>
+                                    <option value="de">Deutsch</option>
+                                    <option value="it">Italiano</option>
+                                    <option value="zh">Simplified Chinese (简体中文)</option>
+                                    <option value="ja">Japanese (日本語)</option>
+                                    <option value="ko">Korean (한국어)</option>
+                                </select>
+                            </div>
+
                             <button id="generate-button" type="submit">Take Me There</button>
                             <!-- //Test button -->
                             <!-- <button id="loadTestData" type="submit">Load Test Data</button> -->
@@ -312,7 +326,7 @@
                     var city = document.getElementById("destination").value;
                     var startDate = document.getElementById("start-date").value;
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
-
+                    var language = document.getElementById("language-option").value;
                     var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                     const apiUrl = isLocal ? 'http://localhost:3000/api/travel-rizz-server' : '/api/travel-rizz-server';
 
@@ -321,11 +335,14 @@
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ city, startDate, endDate }),
+                        body: JSON.stringify({ city, startDate, endDate, language }),
                     })
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
+
+                        // Store the selected language in localStorage for use during PDF generation
+                        localStorage.setItem('selectedLanguage', language);
 
                         //Deployed version generatedContent or testData
                         document.getElementById("generatedContent").innerHTML = data.generatedContent;
@@ -341,8 +358,9 @@
                 });
             </script>
             
+
+            <!-- // Static data for testing only -->
             <!-- <script>
-                 // Static data for testing only
                 var testData = 
                     `<div class=\"page-break\">\n  <header>\n    <img id='logo' src='resources/TH-logo.png' alt='logo'/>\n    <h2 id='brand'>Travel-Rizz</h2>\n    <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n  </header>\n  <h1>Welcome to Kyoto, Japan!</h1>\n  <h2>Introduction to Kyoto</h2>\n  <p>Known for its classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines, and traditional wooden houses, Kyoto is a city steeped in history and Japanese culture. Once the capital of Japan, Kyoto is now a city that blends its rich heritage with modernity, creating a unique and enchanting atmosphere for visitors from around the world.</p>\n\n  <h2>Weather Forecast for January 2024</h2>\n  <p>Kyoto experiences a temperate climate with distinct seasons. During your visit from January 26 to January 28, 2024, expect chilly temperatures as this is winter time. Layering clothes is recommended due to cold days and possibly colder nights. For precise weather forecasts and to plan your wardrobe, click on the monthly forecast link: <a href=\"https://www.accuweather.com/en/jp/kyoto/221790/january-weather/221790?year=2024\" target=\"_blank\">Kyoto January Weather</a>.</p>\n\n  <h2>Languages in Kyoto</h2>\n  <p>The primary language spoken in Kyoto is Japanese. However, due to its status as a world-renowned tourist destination, you will also find that many people in the hospitality industry speak English, making communication for international visitors more convenient.</p>\n\n  <h2>Population</h2>\n  <p>As of my last updated data, Kyoto has a population of approximately 1.5 million people. This number makes it sizable yet much less densely populated than Tokyo, offering a more relaxed atmosphere while still being a large urban center.</p>\n</div><div class=\"page-break\">\n<header>\n<img id='logo' src='resources/TH-logo.png' alt='logo'/>\n<h2 id='brand'>Travel-Rizz</h2>\n<h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n</header>\n\n<h1>Notable Details about Kyoto, Japan</h1>\n\n<h2>Currency Information</h2>\n<p>The local currency in Kyoto is the Japanese Yen (JPY). Banknotes come in denominations of ¥1000, ¥2000 (less common), ¥5000, and ¥10000, while the coins are in denominations of ¥1, ¥5, ¥10, ¥50, ¥100, and ¥500. It's essential to have cash on you as some shops, especially smaller ones, may not accept credit cards. For current exchange rates, visit this <a href=\"https://www.x-rates.com/table/?from=JPY&amount=1\" target=\"_blank\">exchange rate table</a>.</p>\n\n<h2>Safety Tips</h2>\n<p>Kyoto is considered a safe city with low crime rates. However, travelers should always be vigilant, especially in crowded places such as tourist attractions or public transportation, to avoid pickpocketing. Additionally, it's important to respect local customs and traditions to avoid inadvertent offenses and to ensure that your visit is enjoyable and safe.</p>\n\n<h2>Business Operating Hours</h2>\n<p>Most shops in Kyoto open around 10:00 or 11:00 and close at 19:00 or 20:00. However, opening hours may vary, with some stores in tourist areas open later. Department stores usually stay open until 20:00 or 21:00. Museums and other cultural sites typically open from 09:00 or 10:00 and close at 17:00 or 18:00, often with the last entry an hour before closing.</p>\n\n<h2>Local Navigation</h2>\n<p>Getting around Kyoto is relatively easy with an efficient public transportation system. The city offers buses and trains as the primary means of transport. For real-time train and bus schedules, travelers can refer to reliable online resources like the <a href=\"http://www.hyperdia.com\" target=\"_blank\">HyperDia website</a> for train times and connections, as well as route planning. Prepaid cards such as ICOCA can be used to simplify payment for these services.</p>\n\n</div><div class=\"page-break\">\n    <header>\n        <img id='logo' src='resources/TH-logo.png' alt='logo'/>\n        <h2 id='brand'>Travel-Rizz</h2>\n        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n    </header>\n    <h1>Day 1: Exploring Southern Higashiyama</h1>\n    <strong>Morning:</strong>\n    <p>Start your Kyoto adventure with a visit to the iconic <a href=\"https://goo.gl/maps/ENr7HZsAddcGBbVH6\" target=\"_blank\">Kiyomizu-dera Temple</a>. One of Kyoto's most famous temples, it offers breathtaking views of the city from its wooden terrace. A morning stroll down the charming preserved streets of <a href=\"https://goo.gl/maps/1FDFhBZwDkEUDpME7\" target=\"_blank\">Sannenzaka and Ninenzaka</a> will unveil traditional shops and tea houses where you can enjoy a moment of tranquility.</p>\n    <strong>Afternoon:</strong>\n    <p>Continue to the tranquil <a href=\"https://goo.gl/maps/1D3rLhQQhdC2\" target=\"_blank\">Kodai-ji Temple</a>, known for its beautiful gardens and bamboo grove. After exploring the temple, take a short walk to the <a href=\"https://goo.gl/maps/FVmNkkvW6do\" target=\"_blank\">Maruyama Park</a>, a perfect spot for a relaxed lunch amidst nature. Afterwards, visit the grand <a href=\"https://goo.gl/maps/nGJX4C4m1Q42\" target=\"_blank\">Yasaka Shrine</a>, which is close to the park.</p>\n    <strong>Evening:</strong>\n    <p>As the evening sets in, head towards the atmospheric <a href=\"https://goo.gl/maps/Qyc1kLJ2Wxp\" target=\"_blank\">Gion</a>, Kyoto's famous geisha district. The area is best explored on foot, with its historical buildings and possibility of spotting a geisha on her way to an engagement. Enjoy dinner at one of the local restaurants serving Kyoto cuisine.</p>\n    <strong>Night:</strong>\n    <p>After dinner, take a leisurely stroll along the <a href=\"https://goo.gl/maps/TCuwCe39mP52\" target=\"_blank\">Shirakawa Canal</a> in Gion, which is beautifully lit up at night providing a wonderful ending to your eventful day.</p>\n</div>\n\n<div class=\"page-break\">\n    <header>\n        <img id='logo' src='resources/TH-logo.png' alt='logo'/>\n        <h2 id='brand'>Travel-Rizz</h2>\n        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n    </header>\n    <h1>Day 2: Arashiyama & Central Kyoto</h1>\n    <strong>Morning:</strong>\n    <p>Embark on your second day with a visit to the enchanting district of <a href=\"https://goo.gl/maps/Vu8Cqy37a4K2\" target=\"_blank\">Arashiyama</a>. Start with the famous <a href=\"https://goo.gl/maps/Vc8X4gEhFuE2\" target=\"_blank\">Bamboo Grove</a> known for its towering bamboo stalks. It’s a short walk from the Arashiyama train station, easily accessible by public transport from central Kyoto. Next, visit the serene <a href=\"https://goo.gl/maps/8mBVq4D1XzL2\" target=\"_blank\">Tenryu-ji Temple</a>, which boasts a stunning landscape garden.</p>\n    <strong>Afternoon:</strong>\n    <p>In the afternoon, make your way back towards central Kyoto. Visit <a href=\"https://goo.gl/maps/fQzP1hATMJK2\" target=\"_blank\">Nijo Castle</a>, which was the residence of Tokugawa shoguns. Walk through the historic castle grounds, marvel at the intricate architecture and 'nightingale floors'. Later, have lunch at a nearby restaurant in the castle area.</p>\n    <strong>Evening:</strong>\n    <p>As evening approaches, explore the <a href=\"https://goo.gl/maps/yaD5u4LUwMG2\" target=\"_blank\">Nishiki Market</a>, a bustling marketplace known as “Kyoto's pantry”. It's an ideal place for food enthusiasts to taste a variety of local specialties and to shop for unique Kyoto delicacies and souvenirs.</p>\n    <strong>Night:</strong>\n    <p>To conclude the day, enjoy the neon lights and bustling atmosphere of <a href=\"https://goo.gl/maps/SgTn59bgGG72\" target=\"_blank\">Pontocho Alley</a>. This historic alleyway is lined with restaurants and bars offering dinner with the option of riverside dining or traditional kaiseki meals.</p>\n</div>\n\n<div class=\"page-break\">\n    <header>\n        <img id='logo' src='resources/TH-logo.png' alt='logo'/>\n        <h2 id='brand'>Travel-Rizz</h2>\n        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n    </header>\n    <h1>Day 3: Northern Kyoto and Departure</h1>\n    <strong>Morning:</strong>\n    <p>Begin your final day in Kyoto with a visit to the majestic <a href=\"https://goo.gl/maps/iUvZKzxFHGQ2\" target=\"_blank\">Kinkaku-ji</a> (Golden Pavilion), a Zen temple whose top two floors are completely covered in gold leaf. After soaking in the temple’s beauty, stop by the nearby <a href=\"https://goo.gl/maps/HaavPfaPBM92\" target=\"_blank\">Ryoan-ji Temple</a>, known for its enigmatic rock garden.</p>\n    <strong>Afternoon:</strong>\n    <p>Continuing your journey in the north, head toward the <a href=\"https://goo.gl/maps/Yx6esQ6nJmQ2\" target=\"_blank\">Philosopher's Path</a>, a scenic walkway that follows a cherry-tree-lined canal. It's a pleasant area for a leisurely stroll and to grab a light lunch from one of the many quaint cafes along the path.</p>\n    <strong>Evening:</strong>\n    <p>Your Kyoto trip comes to an end as the evening arrives. Depending on your departure time, you may have time to browse the shops for last-minute souvenirs or enjoy a quick dinner. Make your way to the <a href=\"https://goo.gl/maps/1YX25hFty352\" target=\"_blank\">Kyoto Station</a> complex for easy access to trains, buses, or taxis for your onward journey.</p>\n</div><div class=\"page-break\">\n<header>\n<img id='logo' src='resources/TH-logo.png' alt='logo'/>\n<h2 id='brand'>Travel-Rizz</h2>\n<h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2>\n</header>\n<h1>Travel Reminders for Kyoto, Japan</h1>\n<h2>Travel Document and Visa Requirement</h2>\n<p>Ensure your passport has at least six months of validity from the date of entry into Japan. Depending on your country of origin, you may need a visa to enter Japan. Please apply for a visa well in advance of your trip by visiting the official Japanese consulate or embassy website: <a href=\"http://www.mofa.go.jp/j_info/visit/visa/\" target=\"_blank\">Ministry of Foreign Affairs of Japan</a>.</p>\n\n<h2>Tax Refund Procedures</h2>\n<p>Eligible tourists can claim a tax refund on their purchases made in Japan. To do so, ensure you shop at stores that display the 'Tax-Free' sign, present your passport at the time of purchase, and keep all receipts. Refer to Japan's Tax-Free Guide here: <a href=\"https://tax-freeshop.jnto.go.jp/eng/index.php\" target=\"_blank\">Japan Tax-Free Shop Guide</a> for detailed information.</p>\n\n<h2>Latest Current Issues and Advisories</h2>\n<p>Stay informed of local news and check travel advisories from your government regularly leading up to your trip. This can include updates on weather, health notices, or political situations that may affect your travel plans.</p>\n\n<h2>Local Etiquette and Cultural Norms</h2>\n<p>Japan is known for its unique etiquette. Be sure to remove shoes before entering someone's home or certain traditional accommodations (ryokan), temples, and shrines. When using public transportation, speak softly and set mobile phones to silent. Bowing is a customary way to greet, thank, or apologize.</p>\n\n<h2>Health and Vaccination Record Requirement</h2>\n<p>Ensure your routine vaccinations are up to date before traveling to Japan. Although there are no mandatory vaccination requirements, it's advisable to check with your health provider or visit the official health travel page for Japan here: <a href=\"https://wwwnc.cdc.gov/travel/destinations/traveler/none/japan\" target=\"_blank\">CDC - Travel to Japan</a>.</p>\n</div>\n\n<div class=\"page-break\">\n<header>\n<img id='logo' src='resources/TH-logo.png' alt='logo'/>\n<h2 id='brand'>Travel-Rizz</h2>\n<h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2>\n</header>\n<h1>Emergency Contacts</h1>\n<p><strong>Local Police: </strong>110<br/>\n<strong>Ambulance and Fire Department: </strong>119<br/>\n<strong>Local Emergency Dial (coast guard, disaster relief): </strong>118<br/>\n<strong>Japan Helpline (24-hour English assistance): </strong>+81-570-000-911<br/>\nPlease note, in case of emergency, dialing these numbers from a Japanese phone line will connect you to the relevant services.</p>\n\n<h2>Embassy Information</h2>\n<p>For assistance from your home country, it’s important to know the location and contact information of your respective embassy or consulate in Japan. Bookmark the following link to have a detailed list of embassies around the world when you need it: <a href=\"https://www.embassy-worldwide.com/\" target=\"_blank\">Embassy-Worldwide.com</a>.</p>\n</div>\n\n<div class=\"page-break\">\n<header>\n<img id='logo' src='resources/TH-logo.png' alt='logo'/>\n<h2 id='brand'>Travel-Rizz</h2>\n<h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2>\n</header>\n<h2 id='conclusion'>As your adventure in Kyoto comes to an end, we sincerely hope the memories of serene temples, lush gardens, and exquisite cuisine linger on. Travel-Rizz wishes you a safe return journey and looks forward to hearing about your travels. Share your stories, insights, or any feedback with us, and let the spirit of wanderlust thrive. Until next time, keep exploring and cherishing the beauty our world has to offer!</h2>\n</div>`
 
@@ -371,41 +389,123 @@
                     var originalContent = document.getElementById("generatedContent");
                     var startDate = document.getElementById("start-date").value;
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
+                    var language = localStorage.getItem('selectedLanguage') || 'en'; // Get stored language or default to English
 
                     // Clone the content for PDF generation
                     var contentForPdf = originalContent.cloneNode(true);
                     contentForPdf.id = 'contentForPdf';
                     document.body.appendChild(contentForPdf);
 
-                    // Apply PDF specific styling
+                    // Apply PDF specific font sizing
                     contentForPdf.querySelectorAll('h1').forEach(el => el.style.fontSize = '50px');
                     contentForPdf.querySelectorAll('h2').forEach(el => el.style.fontSize = '32px');
                     contentForPdf.querySelectorAll('.generated-content #brand').forEach(el => el.style.fontSize = '26px');
                     contentForPdf.querySelectorAll('.generated-content #header-slogan').forEach(el => el.style.fontSize = '20px');
                     contentForPdf.querySelectorAll('strong').forEach(el => el.style.fontSize = '22px');
                     contentForPdf.querySelectorAll('p').forEach(el => el.style.fontSize = '18px');                    
-                    contentForPdf.querySelectorAll('.page-break').forEach(el => el.style.marginBottom = '0');                    
+                    // contentForPdf.querySelectorAll('.page-break').forEach(el => el.style.marginBottom = '0');                    
                     // contentForPdf.querySelectorAll('img').forEach(el => el.style.marginTop = '0.5%');
-                    contentForPdf.querySelectorAll('#conclusion').forEach(el => el.style.height = '95vh');
+                    // contentForPdf.querySelectorAll('#conclusion').forEach(el => el.style.height = '95vh');
 
-
-
-
-                    //Show headers
-                    var headers = contentForPdf.querySelectorAll('.generated-content header');
-                    headers.forEach(function(header) {
+                    // Style headers
+                    contentForPdf.querySelectorAll('.generated-content header').forEach(header => {
                         header.style.display = 'inline-flex';
+                        // header.style.position = 'absolute';
+                        header.style.top = '0';
+                        header.style.left = '0';
+                        header.style.right = '0';
+                        // header.style.padding = '20px';
+                    });
+
+                    // Get all page breaks and identify the last one
+                    const pageBreaks = contentForPdf.querySelectorAll('.page-break');
+                    const lastPageIndex = pageBreaks.length - 1;
+
+                    // Style page breaks and handle content
+                    pageBreaks.forEach((el, index) => {
+                        el.style.position = 'relative';
+                        el.style.display = 'flex';
+                        el.style.flexDirection = 'column';
+                        el.style.minHeight = '100vh';
+
+                        
+                        // Only set minHeight for non-last pages
+                        // if (index !== lastPageIndex) {
+                        //     el.style.minHeight = '100vh';
+                        // }
+                        
+                        // Create content wrapper
+                        const content = document.createElement('div');
+                        content.style.flex = '1';
+                        content.style.display = 'flex';
+                        content.style.flexDirection = 'column';
+                        content.style.justifyContent = 'center';
+                        
+                        // Special handling for conclusion page
+                        const conclusionH2 = el.querySelector('#conclusion');
+                        if (conclusionH2) {
+                            conclusionH2.style.whiteSpace = 'normal';
+                            conclusionH2.style.width = '100%';
+                            conclusionH2.style.maxWidth = '100%';
+                            conclusionH2.style.wordBreak = 'normal';
+                            conclusionH2.style.wordWrap = 'break-word';
+                            conclusionH2.style.overflowWrap = 'break-word';
+                            conclusionH2.style.textAlign = 'center';
+                            conclusionH2.style.display = 'block';
+                            conclusionH2.style.lineHeight = '1.5';
+                            conclusionH2.style.margin = '0 auto';
+                            conclusionH2.style.padding = '0 20px';
+
+                            // Ensure the content wrapper takes full height for vertical centering
+                            content.style.minHeight = 'calc(100vh - 150px)'; // Adjust for header height
+                            content.style.justifyContent = 'center';
+
+                            // Remove any bottom margin/padding that might cause extra space
+                            el.style.marginBottom = '0';
+                            el.style.paddingBottom = '0';
+                            content.style.marginBottom = '0';
+                            content.style.paddingBottom = '0';
+                            
+                            // // For the conclusion page, set a specific height
+                            // if (index === lastPageIndex) {
+                            //     el.style.height = 'auto';
+                            //     el.style.minHeight = 'auto';
+                            //     // content.style.paddingBottom = '40px'; // Add some bottom padding
+                            // }
+                        }
+
+                        // Move all non-header content to wrapper
+                        Array.from(el.children).forEach(child => {
+                            if (child.tagName.toLowerCase() !== 'header') {
+                                content.appendChild(child);
+                            }
+                        });
+                        
+                        el.appendChild(content);
                     });
 
                     var opt = {
-                        margin: [10, 17, 12, 17], // Top, Right, Bottom, Left in mm
-                        filename: city + '_' + 'Travel_Itinerary' + '_' + startDate + '_to_' + endDate + '.pdf',
+                        margin: [10, 17, 12, 17],
+                        filename: city + '_' + 'Travel_Itinerary' + '_' + language + '_' + startDate + '_to_' + endDate + '.pdf',
                         image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: { scale: 2 },
-                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                        // pagebreak: { mode: 'css' }
+                        html2canvas: { 
+                            scale: 2,
+                            removeContainer: true, // Add this to help prevent extra blank page
+                            height: contentForPdf.offsetHeight // Only capture the actual content height
+                        },
+                        jsPDF: { 
+                            unit: 'mm', 
+                            format: 'a4', 
+                            orientation: 'portrait',
+                            compress: true,
+                            putTotalPages: false // Prevent extra blank page
+                        },
+                        pagebreak: { 
+                            mode: 'css',
+                            avoid: 'tr' // Prevent breaks within table rows
+                        }
                     };
-
+                    
                     html2pdf().from(contentForPdf).set(opt).save().then(() => {
                         // Hide headers and remove the clone after PDF generation
                         setTimeout(function() {

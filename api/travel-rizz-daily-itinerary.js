@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are an knowledgeable friendly travel assistant specializing in creating detailed daily travel itineraries for cities worldwide."},
                     {"role": "user", "content": 
-                    `Please create daily itinerary for a trip to ${city} from ${startDate} to ${endDate}.
+                    `In ${language}, please create daily itinerary for a trip to ${city} from ${startDate} to ${endDate}.
                     
                     Response Intros:
                     Each day will take one div.

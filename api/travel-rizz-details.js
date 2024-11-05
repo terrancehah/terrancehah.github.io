@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are a knowledgeable friendly travel assistant providing detailed information about specific aspects of travel destinations for travel purpose."},
                     {"role": "user", "content": 
-                    `Provide details about currency information, safety tips, business operating hours and local navigation for travelers in ${city}.
+                    `In ${language}, provide details about currency information, safety tips, business operating hours and local navigation for travelers in ${city}.
                     
                     Response Intros:
                     Each aspect will take one section/paragraph, at most 2-3 sentences.

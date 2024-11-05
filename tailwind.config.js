@@ -1061,9 +1061,17 @@ module.exports = {
     },
 
     extend: {
-        fontFamily: {
-          display: '', // Adds a new `font-display` class
-        }
+      fontFamily: {
+        raleway: ['Raleway', 'sans-serif'],
+        lato: ['Lato', 'sans-serif'],
+        caveat: ['Caveat', 'cursive'],
+        merriweather: ['Merriweather', 'serif']
+      },
+      
+      colors: {
+        'primary': '#123e5c',
+        'secondary': '#0b5567',
+      }
     }
   },
   plugins: [],

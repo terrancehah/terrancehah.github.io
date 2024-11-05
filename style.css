@@ -28,7 +28,7 @@ header h1 {
     font-family: Lato;
     font-weight: 600;
     font-style: bold;
-    font-size: 2.5vw;
+    font-size: 2vw;
     padding: 1% 1% 1% 2%;
     color:  #1d3557;
     margin: 0;
@@ -50,7 +50,7 @@ nav {
     padding: 2% 2%;
     font-family: Raleway;
     font-weight: 500;
-    font-size: 2vw;
+    font-size: 1.7vw;
     color: #457B9D;
     position: relative;
 }
@@ -65,21 +65,21 @@ header .active {
 }
 
 header img {
-    width: 3vw;
-    height: 3vw;
+    width: 2.5vw;
+    height: 2.5vw;
 }
     
 .contacts {   
     float: right;
     padding: 0%;
-    /* top: 0.5vw; */
+    top: 0.2vw;
     right: 1vw;
     position: relative;
-    margin: 0.8vw 0.4vw;
+    margin: 0.7vw 0.4vw;
 }
 
 footer {
-    margin: 2% 0%;
+    margin: 0.5% 0%;
     width: 100%;
     position: relative;
     text-align: center;
@@ -93,10 +93,10 @@ footer {
     }
 
 footer h3 {
-    font-size: 1.5vw;
+    font-size: 1.3vw;
     width: 100%;
     display: inline-block;
-    margin: 0.5%;
+    margin: 0%;
     text-align: center;
     font-family: Lato !important;
     font-weight: 600;
@@ -104,7 +104,7 @@ footer h3 {
 }
 
 footer h4 {
-    font-size: 1.5vw;
+    font-size: 1.1vw;
     width: 80%;
     display: inline-block;
     margin: 0;
