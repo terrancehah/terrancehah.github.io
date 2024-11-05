@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are an knowledgeable friendly travel assistant specializing in creating detailed daily travel itineraries for cities worldwide."},
                     {"role": "user", "content": 
-                    `Please create travel reminders, emergency contacts, and Farewell Message for a trip to ${city} from ${startDate} to ${endDate}.
+                    `In ${language}, please create travel reminders, emergency contacts, and Farewell Message for a trip to ${city} from ${startDate} to ${endDate}.
                     
                     Response Intros:
                     Each section will take one div.

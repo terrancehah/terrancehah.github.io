@@ -2,11 +2,11 @@
 
 
 .projects {
-    margin: 3% 5% 5% 5%;
+    margin: 3% 5% 3% 5%;
     background-color: #F1FAEE;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    border-radius: 3vw;
+    border-radius: 2vw;
 }
 
 h1 {
@@ -38,7 +38,7 @@ h1 {
 
 .projectdescription {
     color: #457B9D !important;
-    font-size: 2vw;
+    font-size: 1.6vw;
     font-weight: 400;
     line-height: 1.3;
     padding: 0.7vw 0vw;
@@ -46,7 +46,7 @@ h1 {
 
 #projectlink {
     font-family: Lato;
-    font-size: 3vw;
+    font-size: 2.3vw;
     color: #04436d;
 
 }
@@ -100,6 +100,10 @@ content {
 } */
 
 @media only screen and (min-width: 481px) and (max-width: 1024px) {
+    .projects {
+        margin: 3% 5% 5% 5%;
+    }
+
     h1 {
         font-size: 3.5vw;
     }
@@ -117,6 +121,10 @@ content {
 }
 
 @media only screen and (max-width: 480px) {
+    .projects {
+        margin: 3% 5% 5% 5%;
+    }
+
     h1 {
         font-size: 4.5vw;
     }
