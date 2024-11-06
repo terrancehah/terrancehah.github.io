@@ -23,15 +23,15 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are a knowledgeable travel assistant focused on providing basic information about cities for travel purposes."},
                     {"role": "user", "content": 
-                    `In the language of code ${language}, provide an introduction of ${city}, information about the season, climate and weather during the period from ${startDate} to ${endDate}, the languages spoken, and the population.
+                    `In the language of ${language}, provide an introduction of ${city}, information about the season, climate and weather during the period from ${startDate} to ${endDate}, the languages spoken, and the population.
                     
                     Response Intros:
                     Each aspect will take one section/paragraph, and made up by 2 to 4 sentences.
                     Provide all these information in about 220 words in one page/div, the word count suitable for one single A4 page.
                     
                     Response Format:
-                    Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with HTML tags.
-                    Remember, do not start or end the content with the opening and closing tags of '''html, </ or ''' in the generated content.
+                    Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
+                    Do not use the HTML tags like '''html, </ or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> EVERY TIME you start and end a whole page/section/div.
                     For the content inside, start with <h1>Welcome to (the name of the city)!</h1>, then <h2> for the following headings/aspects accordingly, 
                     <href target="_blank"> to insert weather related websites for the city during the period and other relative informations,

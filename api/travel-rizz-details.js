@@ -23,15 +23,15 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are a knowledgeable friendly travel assistant providing detailed information about specific aspects of travel destinations for travel purpose."},
                     {"role": "user", "content": 
-                    `In the language of code ${language}, provide details about currency information, safety tips, business operating hours and local navigation for travelers in ${city}.
+                    `In the language of ${language}, provide details about currency information, safety tips, business operating hours and local navigation for travelers in ${city}.
                     
                     Response Intros:
                     Each aspect will take one section/paragraph, at most 2-3 sentences.
                     Provide all these information in about 220 words in one page/div, the word count suitable for one single A4 page.
 
                     Response Format:
-                    Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with HTML tags.
-                    Do not ever start or end the div with the opening and closing HTML tags of '''html, </ or ''', simply start with <div class="page-break">.
+                    Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
+                    Do not use the HTML tags like '''html, </ or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> to start and end the section/div.
                     Use <h1>Notable Details about (name of the city)</h1>, then <h2> for different headings accordingly, 
                     <href target="_blank"> hyperlinks to replace the transports related websites, 
