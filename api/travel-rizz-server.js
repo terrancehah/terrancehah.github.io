@@ -72,6 +72,12 @@ module.exports = async (req, res) => {
                 console.log('Calling Details API:', endpoints.details);
                 responses.details = await axios.post(endpoints.details, 
                     { language, city });
+                // Clean up the backticks and concatenation format before validation
+                if (responses.details.data.response.includes('```')) {
+                    responses.details.data.response = responses.details.data.response
+                        .replace(/```html\n|```/g, '')
+                        .replace(/\n\s+\+\s+/g, '');
+                }
                 validateResponse(responses.details, 'details');
             } catch (error) {
                 console.error('Details API error:', error.response?.data || error.message);

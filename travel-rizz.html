@@ -18,7 +18,7 @@
             <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
             <script defer src="/_vercel/speed-insights/script.js"></script>
             <script defer data-domain="terrancehah.com" src="https://plausible.io/js/script.tagged-events.js"></script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvcgBgSprgTRQO_6BWh5EAOPu1vdS6KD4&libraries=places&callback=initAutocomplete" async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvcgBgSprgTRQO_6BWh5EAOPu1vdS6KD4&libraries=places" async defer></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
             <script src="./footer.js"></script>
             <style>
@@ -183,35 +183,47 @@
 
             <script>
                 // City name autocomplete
-                function initAutocomplete() {
-                    var input = document.getElementById('destination');
-                    var autocomplete = new google.maps.places.Autocomplete(input);
-                    autocomplete.addListener('place_changed', function() {
-                        var place = autocomplete.getPlace();
-                        if (!place.geometry) {
-                            console.log("No details available for input: '" + place.name + "'");
-                            return;
-                        }
-            
-                        // Extract city and country from address components
-                        var city, country;
-                        for (var i = 0; i < place.address_components.length; i++) {
-                            var component = place.address_components[i];
-                            if (component.types.includes("locality")) {
-                                city = component.long_name;
+                document.addEventListener('DOMContentLoaded', function() {
+                    // City name autocomplete
+                    function initAutocomplete() {
+                        var input = document.getElementById('destination');
+                        var autocomplete = new google.maps.places.Autocomplete(input);
+                        autocomplete.addListener('place_changed', function() {
+                            var place = autocomplete.getPlace();
+                            if (!place.geometry) {
+                                console.log("No details available for input: '" + place.name + "'");
+                                return;
                             }
-                            if (component.types.includes("country")) {
-                                country = component.long_name;
+
+                            // Extract city and country from address components
+                            var city, country;
+                            for (var i = 0; i < place.address_components.length; i++) {
+                                var component = place.address_components[i];
+                                if (component.types.includes("locality")) {
+                                    city = component.long_name;
+                                }
+                                if (component.types.includes("country")) {
+                                    country = component.long_name;
+                                }
                             }
-                        }
-            
-                        var simplifiedPlaceName = city && country ? city + ", " + country : place.name;
-                        console.log('Simplified place name:', simplifiedPlaceName);
-            
-                        // Additional actions upon selecting a place
-                        // can be added here if needed.
-                    });
-                }
+
+                            var simplifiedPlaceName = city && country ? city + ", " + country : place.name;
+                            console.log('Simplified place name:', simplifiedPlaceName);
+                        });
+                    }
+
+                    // Initialize autocomplete once Maps API is loaded
+                    if (google && google.maps && google.maps.places) {
+                        initAutocomplete();
+                    } else {
+                        // If Maps API isn't loaded yet, wait for it
+                        window.addEventListener('load', function() {
+                            if (google && google.maps && google.maps.places) {
+                                initAutocomplete();
+                            }
+                        });
+                    }
+                });
             </script>
             
 
