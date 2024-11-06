@@ -38,33 +38,58 @@ module.exports = async (req, res) => {
             };
 
             let responses = {};
+
+            // Function to validate response
+            const validateResponse = (response, endpoint) => {
+                console.log(`Raw ${endpoint} response:`, response.data);
+                if (!response.data || typeof response.data.response !== 'string') {
+                    throw new Error(`Invalid response format from ${endpoint}`);
+                }
+                return response;
+            };
+
+            // Basic Info
             try {
-                console.log('Attempting Basic Info API call to:', endpoints.basicInfo);
+                console.log('Calling Basic Info API:', endpoints.basicInfo);
                 responses.basicInfo = await axios.post(endpoints.basicInfo, 
                     { language, city, startDate, endDate });
+                validateResponse(responses.basicInfo, 'basicInfo');
             } catch (error) {
-                throw new Error(`Basic Info API failed: ${error.message}, URL: ${error.config?.url}`);
+                console.error('Basic Info API error:', error.response?.data || error.message);
+                throw new Error(`Basic Info API failed: ${error.message}`);
             }
 
+            // Details
             try {
+                console.log('Calling Details API:', endpoints.details);
                 responses.details = await axios.post(endpoints.details, 
                     { language, city });
+                validateResponse(responses.details, 'details');
             } catch (error) {
-                throw new Error(`Details API failed: ${error.message}, URL: ${error.config?.url}`);
+                console.error('Details API error:', error.response?.data || error.message);
+                throw new Error(`Details API failed: ${error.message}`);
             }
 
+            // Itinerary
             try {
+                console.log('Calling Itinerary API:', endpoints.itinerary);
                 responses.itinerary = await axios.post(endpoints.itinerary, 
                     { language, city, startDate, endDate });
+                validateResponse(responses.itinerary, 'itinerary');
             } catch (error) {
-                throw new Error(`Itinerary API failed: ${error.message}, URL: ${error.config?.url}`);
+                console.error('Itinerary API error:', error.response?.data || error.message);
+                throw new Error(`Itinerary API failed: ${error.message}`);
             }
 
+            // Conclusion
             try {
+                console.log('Calling Conclusion API:', endpoints.conclusion);
                 responses.conclusion = await axios.post(endpoints.conclusion, 
                     { language, city, startDate, endDate });
+                validateResponse(responses.conclusion, 'conclusion');
             } catch (error) {
-                throw new Error(`Conclusion API failed: ${error.message}, URL: ${error.config?.url}`);
+                console.error('Conclusion API error:', error.response?.data || error.message);
+                throw new Error(`Conclusion API failed: ${error.message}`);
             }
 
             // Log responses before combining
@@ -81,9 +106,13 @@ module.exports = async (req, res) => {
                 responses.conclusion.data.response
             ].join('\n');
 
+            console.log('Final content length:', generatedContent.length);
+            console.log('Content preview:', generatedContent.substring(0, 200) + '...');
+
             console.log('Final generated content:', generatedContent);
 
-            res.json({ generatedContent });
+            JSON.stringify( { generatedContent} ); // This will throw if invalid
+            res.json( generatedContent );
 
         } catch (error) {
             console.error("Error in processing request:", error);
@@ -92,7 +121,7 @@ module.exports = async (req, res) => {
                 response: error.response?.data,
                 endpoint: error.config?.url
             });
-                        
+
             res.status(500).json({ 
                 error: "Error processing your request",
                 details: error.message,
