@@ -327,6 +327,14 @@
                     var startDate = document.getElementById("start-date").value;
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
                     var language = document.getElementById("language").value;
+
+                    // Log the raw values
+                    console.log('Raw form values:', {
+                        city,
+                        startDate,
+                        endDate,
+                        language
+                    });
                     
                     // Validate data before sending
                     if (!city || !startDate || !endDate || !language) {
