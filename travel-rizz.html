@@ -346,21 +346,34 @@
                         },
                         body: JSON.stringify(requestData)
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })                    
                     .then(data => {
                         console.log('Success:', data);
+                        if (data.generatedContent) {
+                            //Deployed version generatedContent or testData
+                            document.getElementById("generatedContent").innerHTML = data.generatedContent;
+                            // document.getElementById("generatedContent").innerHTML = testData;
 
-                        //Deployed version generatedContent or testData
-                        document.getElementById("generatedContent").innerHTML = data.generatedContent;
-                        // document.getElementById("generatedContent").innerHTML = testData;
-
-                        document.getElementById("loadingSpinner").style.display = "none";
-                        openPopup();
+                            document.getElementById("loadingSpinner").style.display = "none";
+                            openPopup();
+                        } else {
+                            throw new Error('No content received from server');
+                        }
                     })
                     .catch(error => {
                         console.error('Error:', error);
                         document.getElementById("loadingSpinner").style.display = "none";
-                        alert(error.message || 'An error occurred while generating the itinerary');
+                        // Provide more specific error message
+                        if (error instanceof SyntaxError) {
+                            alert('Error parsing server response. Please try again.');
+                        } else {
+                            alert(error.message || 'An error occurred while generating the itinerary');
+                        }
                     });
                 });
             </script>
