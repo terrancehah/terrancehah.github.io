@@ -55,9 +55,9 @@ module.exports = async (req, res) => {
             });
 
             if (gptResponse && gptResponse.choices && gptResponse.choices.length > 0) {
-                const itineraryContent = gptResponse.choices[0].message.content;
-                console.log("Itinerary Content:", itineraryContent);
-                res.send({ response: itineraryContent });
+                const conclusionContent = gptResponse.choices[0].message.content;
+                console.log("Conclusion Content:", conclusionContent);
+                res.send({ response: conclusionContent });
             } else {
                 console.error("Unexpected OpenAI API response structure for conclusion:");
                 res.status(500).send("The response from the API does not have the expected content for conclusion.");

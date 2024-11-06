@@ -112,7 +112,7 @@ module.exports = async (req, res) => {
                     As for the tone and mood of the response, be passionate and friendly.
                     `}
                 ],
-                max_tokens: 5000
+                max_tokens: 6000
             });
 
             if (!gptResponse.choices?.[0]?.message?.content) {
