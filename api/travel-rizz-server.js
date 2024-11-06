@@ -16,10 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
         const { language, city, startDate, endDate } = req.body;
+        const isLocal = process.env.NODE_ENV === 'development';
         
         try {
             // Different URL construction for local vs production
-            const isLocal = process.env.NODE_ENV === 'development';
             const baseURL = isLocal 
                 ? 'http://localhost' // Local development
                 : 'https://terrancehah.com/api'; // Production
@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
                     hasResponse: 'response' in response.data,
                     responseContentType: typeof response.data.response
                 });
-                
+
                 if (!response.data || typeof response.data.response !== 'string') {
                     throw new Error(`Invalid response format from ${endpoint}`);
                 }
