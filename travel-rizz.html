@@ -515,12 +515,17 @@
             </script>
 
             <script>
-                // Load Google Maps API with environment variable
-                const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places&callback=initAutocomplete`;
-                script.async = true;
-                script.defer = true;
-                document.head.appendChild(script);
+                // Fetch the key from our server endpoint first
+                fetch('/api/maps-key')
+                    .then(response => response.json())
+                    .then(data => {
+                        const script = document.createElement('script');
+                        script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initAutocomplete`;
+                        script.async = true;
+                        script.defer = true;
+                        document.head.appendChild(script);
+                    })
+                    .catch(error => console.error('Error loading Google Maps:', error));
             </script>
 
         </body>
