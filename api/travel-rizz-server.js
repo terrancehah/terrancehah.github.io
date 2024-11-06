@@ -18,38 +18,53 @@ module.exports = async (req, res) => {
         const { language, city, startDate, endDate } = req.body;
         
         try {
-            const baseURL = process.env.NODE_ENV === 'development' 
-                ? 'http://localhost:' 
-                : 'https://terrancehah.com/api/';
+            // Different URL construction for local vs production
+            const isLocal = process.env.NODE_ENV === 'development';
+            const baseURL = isLocal 
+                ? 'http://localhost' // Local development
+                : 'https://terrancehah.com/api'; // Production
 
-            // Make separate API calls to track errors better
+            // Construct endpoints based on environment
+            const endpoints = isLocal ? {
+                basicInfo: `${baseURL}:3002/`,
+                details: `${baseURL}:3003/`,
+                itinerary: `${baseURL}:3004/`,
+                conclusion: `${baseURL}:3005/`
+            } : {
+                basicInfo: `${baseURL}/travel-rizz-basic-info`,
+                details: `${baseURL}/travel-rizz-details`,
+                itinerary: `${baseURL}/travel-rizz-daily-itinerary`,
+                conclusion: `${baseURL}/travel-rizz-conclusion`
+            };
+
             let responses = {};
             try {
-                responses.basicInfo = await axios.post(baseURL + '3002/travel-rizz-basic-info', 
+                console.log('Attempting Basic Info API call to:', endpoints.basicInfo);
+                responses.basicInfo = await axios.post(endpoints.basicInfo, 
                     { language, city, startDate, endDate });
             } catch (error) {
-                throw new Error(`Basic Info API failed: ${error.message}`);
+                throw new Error(`Basic Info API failed: ${error.message}, URL: ${error.config?.url}`);
             }
 
             try {
-                responses.details = await axios.post(baseURL + '3003/travel-rizz-details', 
+                responses.details = await axios.post(endpoints.details, 
                     { language, city });
             } catch (error) {
-                throw new Error(`Details API failed: ${error.message}`);
+                throw new Error(`Details API failed: ${error.message}, URL: ${error.config?.url}`);
             }
 
             try {
-                responses.itinerary = await axios.post(baseURL + '3004/travel-rizz-daily-itinerary', 
+                responses.itinerary = await axios.post(endpoints.itinerary, 
                     { language, city, startDate, endDate });
             } catch (error) {
-                throw new Error(`Itinerary API failed: ${error.message}`);
+                throw new Error(`Itinerary API failed: ${error.message}, URL: ${error.config?.url}`);
             }
 
             try {
-                responses.conclusion = await axios.post(baseURL + '3005/travel-rizz-conclusion', 
+                responses.conclusion = await axios.post(endpoints.conclusion, 
                     { language, city, startDate, endDate });
             } catch (error) {
-                throw new Error(`Conclusion API failed: ${error.message}`);
+                throw new Error(`Conclusion API failed: ${error.message}, URL: ${error.config?.url}`);
             }
 
             // Combine responses
@@ -68,7 +83,8 @@ module.exports = async (req, res) => {
                 error: "Error processing your request",
                 details: error.message,
                 source: error.response?.data || 'Unknown error source',
-                failedEndpoint: error.config?.url || 'Unknown endpoint'
+                failedEndpoint: error.config?.url || 'Unknown endpoint',
+                environment: isLocal ? 'development' : 'production'
             });
         }
     } else {
