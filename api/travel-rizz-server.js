@@ -61,6 +61,11 @@ module.exports = async (req, res) => {
                 console.log('Calling Basic Info API:', endpoints.basicInfo);
                 responses.basicInfo = await axios.post(endpoints.basicInfo, 
                     { language, city, startDate, endDate });
+                if (responses.basicInfo.data.response.includes('```')) {
+                    responses.basicInfo.data.response = responses.basicInfo.data.response
+                        .replace(/```html\n|```/g, '')
+                        .replace(/\n\s+\+\s+/g, '');
+                }
                 validateResponse(responses.basicInfo, 'basicInfo');
             } catch (error) {
                 console.error('Basic Info API error:', error.response?.data || error.message);
@@ -72,7 +77,6 @@ module.exports = async (req, res) => {
                 console.log('Calling Details API:', endpoints.details);
                 responses.details = await axios.post(endpoints.details, 
                     { language, city });
-                // Clean up the backticks and concatenation format before validation
                 if (responses.details.data.response.includes('```')) {
                     responses.details.data.response = responses.details.data.response
                         .replace(/```html\n|```/g, '')
@@ -89,6 +93,11 @@ module.exports = async (req, res) => {
                 console.log('Calling Itinerary API:', endpoints.itinerary);
                 responses.itinerary = await axios.post(endpoints.itinerary, 
                     { language, city, startDate, endDate });
+                if (responses.itinerary.data.response.includes('```')) {
+                    responses.itinerary.data.response = responses.itinerary.data.response
+                        .replace(/```html\n|```/g, '')
+                        .replace(/\n\s+\+\s+/g, '');
+                }
                 validateResponse(responses.itinerary, 'itinerary');
             } catch (error) {
                 console.error('Itinerary API error:', error.response?.data || error.message);
@@ -100,6 +109,11 @@ module.exports = async (req, res) => {
                 console.log('Calling Conclusion API:', endpoints.conclusion);
                 responses.conclusion = await axios.post(endpoints.conclusion, 
                     { language, city, startDate, endDate });
+                if (responses.conclusion.data.response.includes('```')) {
+                    responses.conclusion.data.response = responses.conclusion.data.response
+                        .replace(/```html\n|```/g, '')
+                        .replace(/\n\s+\+\s+/g, '');
+                }
                 validateResponse(responses.conclusion, 'conclusion');
             } catch (error) {
                 console.error('Conclusion API error:', error.response?.data || error.message);
