@@ -361,29 +361,31 @@
                         body: JSON.stringify(requestData)
                     })
                     .then(response => {
-                        // Check if the response is ok first
-                        if (!response.ok) {
-                            return response.text().then(text => {
-                                throw new Error(`Server error: ${text}`);
-                            });
-                        }
-                        return response.json();
+                        console.log('Raw response:', response);
+                        // Log the response text first
+                        return response.text().then(text => {
+                            console.log('Response text:', text);
+                            try {
+                                return JSON.parse(text);
+                            } catch (e) {
+                                console.error('JSON Parse Error:', e);
+                                console.log('Failed to parse text:', text);
+                                throw e;
+                            }
+                        });
                     })                 
                     .then(data => {
-                        // Log received data for debugging
-                        console.log('Received data:', data);
-
-                         // Validate received content
+                        // Log received data
+                        console.log('Parsed data:', data);
+                        
+                        // Validate received content
                         if (!data || typeof data.generatedContent !== 'string') {
                             throw new Error('Invalid response format from server');
                         }
-        
+
                         console.log('Success:', data);
                         if (data.generatedContent) {
-                            //Deployed version generatedContent or testData
                             document.getElementById("generatedContent").innerHTML = data.generatedContent;
-                            // document.getElementById("generatedContent").innerHTML = testData;
-
                             document.getElementById("loadingSpinner").style.display = "none";
                             openPopup();
                         } else {
