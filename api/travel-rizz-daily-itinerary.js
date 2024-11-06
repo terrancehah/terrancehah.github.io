@@ -2,14 +2,39 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const { OpenAI } = require('openai');
+const { generateMapsLink } = require('./maps-util');
 const app = express();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const cors = require('cors');
+
+app.get('/api/maps-key', (req, res) => {
+    res.json({ key: process.env.GOOGLE_MAPS_API_KEY });
+});
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
+const processItineraryContent = async (content, city) => {
+    // Find all attraction placeholders in the format {PLACE:Attraction Name}
+    const placePattern = /\{PLACE:(.*?)\}/g;
+    let processedContent = content;
+    const matches = [...content.matchAll(placePattern)];
+
+    // Replace each placeholder with a proper maps link
+    for (const match of matches) {
+        const placeName = match[1];
+        const mapsLink = await generateMapsLink(placeName, city);
+        processedContent = processedContent.replace(
+            `{PLACE:${placeName}}`,
+            `<a href="${mapsLink}" target="_blank">${placeName}</a>`
+        );
+    }
+
+    return processedContent;
+};
 
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
@@ -43,7 +68,8 @@ module.exports = async (req, res) => {
                     Use <h1> <h2> for different headings, and <strong> for different time sections in a day,
                     <href target="_blank"> to replace every attraction with Google Map link or reputable websites hyperlinks, and also to replace transports related website,
                     and <p> for content.
-                    You must provide hyperlinks for every attraction in the daily schedule, use the link in the format of https://maps.app.goo.gl/TAfSA3zqcwvv2yE49 instead of https://goo.gl/maps/jZCgdakB8xp8KQ6D9, also,verify to make sure the links work.
+                    For each attraction in the itinerary, you need to provide in the format {PLACE:Attraction Name}.
+                    Example: Start your morning at {PLACE:Tokyo Skytree}, then walk to {PLACE:Senso-ji Temple}.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
                     
                     Response Tone:
@@ -54,10 +80,12 @@ module.exports = async (req, res) => {
                 max_tokens: 2000
             });
 
-            if (gptResponse && gptResponse.choices && gptResponse.choices.length > 0) {
-                const itineraryContent = gptResponse.choices[0].message.content;
-                console.log("Itinerary Content:", itineraryContent);
-                res.send({ response: itineraryContent });
+            if (gptResponse.choices?.[0]?.message?.content) {
+                const rawContent = gptResponse.choices[0].message.content;
+                // Process the content to replace placeholders with actual map links
+                const processedContent = await processItineraryContent(rawContent, city);
+                console.log("Processed Itinerary Content:", processedContent);
+                res.send({ response: processedContent });
             } else {
                 console.error("Unexpected OpenAI API response structure for itinerary:");
                 res.status(500).send("The response from the API does not have the expected content for itinerary.");

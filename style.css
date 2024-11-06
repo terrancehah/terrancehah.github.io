@@ -15,14 +15,11 @@ body {
     overflow-x: hidden;
 }
 
-
 header {
     width: 100%;
     /* margin-bottom: 0.5vw; */
     display: inline-block;
 }
-
-
 
 header h1 {
     font-family: Lato;
