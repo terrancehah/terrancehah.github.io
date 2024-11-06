@@ -111,7 +111,7 @@ module.exports = async (req, res) => {
 
             console.log('Final generated content:', generatedContent);
 
-            JSON.stringify( { generatedContent} ); // This will throw if invalid
+            JSON.stringify( { generatedContent } ); // This will throw if invalid
             res.json({ generatedContent });;
 
         } catch (error) {
