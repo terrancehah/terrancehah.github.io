@@ -346,8 +346,6 @@
                     .then(data => {
                         console.log('Success:', data);
 
-                        // Store the selected language in localStorage for use during PDF generation
-                        localStorage.setItem('selectedLanguage', data.language);
 
                         //Deployed version generatedContent or testData
                         document.getElementById("generatedContent").innerHTML = data.generatedContent;
@@ -395,7 +393,6 @@
                     var originalContent = document.getElementById("generatedContent");
                     var startDate = document.getElementById("start-date").value;
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
-                    var language = localStorage.getItem('selectedLanguage') || 'en'; // Get stored language or default to English
 
                     // Clone the content for PDF generation
                     var contentForPdf = originalContent.cloneNode(true);
@@ -492,7 +489,7 @@
 
                     var opt = {
                         margin: [10, 17, 12, 17],
-                        filename: city + '_' + 'Travel_Itinerary' + '_' + language + '_' + startDate + '_to_' + endDate + '.pdf',
+                        filename: city + '_' + 'Travel_Itinerary' + '_' + startDate + '_to_' + endDate + '.pdf',
                         image: { type: 'jpeg', quality: 0.98 },
                         html2canvas: { 
                             scale: 2,
