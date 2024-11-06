@@ -339,7 +339,7 @@
                     var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                     const apiUrl = isLocal ? 'http://localhost:3000/api/travel-rizz-server' : '/api/travel-rizz-server';
 
-                    fetch(apiurl, {
+                    fetch(apiUrl, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
