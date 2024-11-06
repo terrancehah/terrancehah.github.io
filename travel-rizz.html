@@ -326,7 +326,7 @@
                     var city = document.getElementById("destination").value;
                     var startDate = document.getElementById("start-date").value;
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
-                    var language = document.getElementById("language-option").value;
+                    var language = document.getElementById("language").value;
                     var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                     const apiUrl = isLocal ? 'http://localhost:3000/api/travel-rizz-server' : '/api/travel-rizz-server';
 
