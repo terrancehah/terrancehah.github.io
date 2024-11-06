@@ -106,16 +106,6 @@ module.exports = async (req, res) => {
             console.log('Itinerary Response:', responses.itinerary.data);
             console.log('Conclusion Response:', responses.conclusion.data);
 
-            // First send debug response to see raw data from each API
-            res.json({
-                debug: {
-                    basicInfo: responses.basicInfo.data.response,
-                    details: responses.details.data.response,
-                    itinerary: responses.itinerary.data.response,
-                    conclusion: responses.conclusion.data.response
-                }
-            });
-
             // Combine responses
             const generatedContent = [
                 responses.basicInfo.data.response,
@@ -127,7 +117,7 @@ module.exports = async (req, res) => {
             console.log('Final content length:', generatedContent.length);
             console.log('Content preview:', generatedContent.substring(0, 200) + '...');
 
-            JSON.stringify( { generatedContent } ); // This will throw if invalid
+            // JSON.stringify( { generatedContent } ); // This will throw if invalid
             res.json({ generatedContent });
 
 

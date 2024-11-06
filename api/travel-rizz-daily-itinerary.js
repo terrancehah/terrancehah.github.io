@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const { OpenAI } = require('openai');
-const { generateMapsLink } = require('./maps-util.js');
+const { generateMapsLink } = require('../maps-util.js');
 const app = express();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const cors = require('cors');
