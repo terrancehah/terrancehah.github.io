@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
                         .replace(/\n\s+\+\s+/g, '')  // Remove line concatenation
                         .trim();  // Clean up any extra whitespace
                 }
-                
+
                 return response;
             };
 
@@ -99,7 +99,12 @@ module.exports = async (req, res) => {
             try {
                 console.log('Calling Itinerary API:', endpoints.itinerary);
                 responses.itinerary = await axios.post(endpoints.itinerary, 
-                    { language, city, startDate, endDate });
+                    { language, city, startDate, endDate }, 
+                    { 
+                        maxBodyLength: Infinity,
+                        maxContentLength: Infinity 
+                    }
+                );
                 if (responses.itinerary.data.response.includes('```')) {
                     responses.itinerary.data.response = responses.itinerary.data.response
                         .replace(/```html\n|```/g, '')
@@ -108,6 +113,11 @@ module.exports = async (req, res) => {
                 validateResponse(responses.itinerary, 'itinerary');
             } catch (error) {
                 console.error('Itinerary API error:', error.response?.data || error.message);
+                console.error('Itinerary API error details:', {
+                    message: error.message,
+                    code: error.code,
+                    responseSize: error.response?.data ? JSON.stringify(error.response.data).length : 'N/A'
+                });
                 throw new Error(`Itinerary API failed: ${error.message}`);
             }
 
