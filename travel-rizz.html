@@ -361,25 +361,25 @@
                         body: JSON.stringify(requestData)
                     })
                     .then(response => {
-                        console.log('Raw response:', response);
-                        // Log the response text first
+                        console.log('Response status:', response.status);
                         return response.text().then(text => {
-                            console.log('Response text:', text);
+                            console.log('Raw response text:', text);
                             try {
                                 return JSON.parse(text);
                             } catch (e) {
-                                console.error('JSON Parse Error:', e);
-                                console.log('Failed to parse text:', text);
+                                console.error('JSON parse error:', e);
+                                console.log('Failed text:', text);
                                 throw e;
                             }
                         });
-                    })                 
+                    })             
                     .then(data => {
                         // Log received data
                         console.log('Parsed data:', data);
                         
                         // Validate received content
                         if (!data || typeof data.generatedContent !== 'string') {
+                            console.error('Invalid response format:', data);
                             throw new Error('Invalid response format from server');
                         }
 
