@@ -67,6 +67,12 @@ module.exports = async (req, res) => {
                 throw new Error(`Conclusion API failed: ${error.message}, URL: ${error.config?.url}`);
             }
 
+            // Log responses before combining
+            console.log('Basic Info Response:', responses.basicInfo.data);
+            console.log('Details Response:', responses.details.data);
+            console.log('Itinerary Response:', responses.itinerary.data);
+            console.log('Conclusion Response:', responses.conclusion.data);
+
             // Combine responses
             const generatedContent = [
                 responses.basicInfo.data.response,
@@ -75,10 +81,18 @@ module.exports = async (req, res) => {
                 responses.conclusion.data.response
             ].join('\n');
 
+            console.log('Final generated content:', generatedContent);
+
             res.json({ generatedContent });
 
         } catch (error) {
             console.error("Error in processing request:", error);
+            console.error("Error details:", {
+                message: error.message,
+                response: error.response?.data,
+                endpoint: error.config?.url
+            });
+                        
             res.status(500).json({ 
                 error: "Error processing your request",
                 details: error.message,
