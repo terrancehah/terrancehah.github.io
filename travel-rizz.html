@@ -330,19 +330,24 @@
                     var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                     const apiUrl = isLocal ? 'http://localhost:3000/api/travel-rizz-server' : '/api/travel-rizz-server';
 
-                    fetch(apiUrl, {
+                    fetch('/api/travel-rizz-server', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ language, city, startDate, endDate }),
+                        body: JSON.stringify({ 
+                            language, 
+                            city, 
+                            startDate, 
+                            endDate 
+                        }),
                     })
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
 
                         // Store the selected language in localStorage for use during PDF generation
-                        localStorage.setItem('selectedLanguage', language);
+                        localStorage.setItem('selectedLanguage', data.language);
 
                         //Deployed version generatedContent or testData
                         document.getElementById("generatedContent").innerHTML = data.generatedContent;
@@ -353,11 +358,8 @@
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        if (error.response?.data?.details) {
-                            alert(`Error: ${error.response.data.details}`);
-                        } else {
-                            alert('An error occurred while generating the itinerary');
-                        }
+                        document.getElementById("loadingSpinner").style.display = "none";
+                        alert(error.message || 'An error occurred while generating the itinerary');
                     });
                 });
             </script>
