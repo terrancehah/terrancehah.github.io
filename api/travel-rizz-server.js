@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') {
         const { language, city, startDate, endDate } = req.body;
         
-        console.log("Received request for:", formattedData);
+        // console.log("Received request for:", formattedData);
 
         try {
              // Base URL configuration
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
                 detailsResponse.data.response,
                 itineraryResponse.data.response,
                 conclusionResponse.data.response
-            ].join('');
+            ].join('\n');  // just add newline
 
             res.json({ generatedContent });
 
