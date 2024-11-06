@@ -269,8 +269,8 @@ display: block;
   overflow: hidden;
   transition: all 100ms ease-in-out;
   :focus {
-      border-color: #3c4fe0;
-      box-shadow: 0 2px 0 0 rgb(35 38 59 / 5%);
+      border-color: 2.5px solid #3c4fe0;
+      box-shadow: inset 0 2px 0 0 rgb(35 38 59 / 5%);
   }
 }
 
@@ -331,35 +331,48 @@ display: block;
     transform: translateY(-4px);
 }
 
-#language-option {
+#language {
   font-family: Raleway;
   display: inline-block;
   outline: 0;
   cursor: pointer;
   border: 2.5px solid #d6d6e7;
-  padding: 0 30px;
+  padding: 0 10px;
   height: 3.2vw;
-  border-radius: 1.5vw;
+  border-radius: 0vw;
   background-color: white;
-  color: #3a7dc9e6;
+  color: rgb(35, 38, 59);
   font-weight: 500;
   font-size: 1.3vw;
-  box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+  box-shadow: inset 0 2px 2px 0 rgb(0 118 255 / 9%);
 }
 
-#language-option:hover {
-  background: #3a7dc9e6;
-  color: white;
-  box-shadow: 0 0.8vw 28px #2e536a;
-  transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease;
-  transform: translateY(-4px);
-}
-
-#language-option option {
+#language:hover {
   background: white;
-  color: #333;
-  font-size: 1.2vw;
-  padding: 10px;
+  color: black;
+  box-shadow: inset 4px 4px 4px 0 rgb(0 118 255 / 15%);
+  /* transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease; */
+  /* transform: translateY(-4px); */
+}
+
+#language-option {
+  /* display: none; */
+  position: absolute;
+  top: 77%; /* Position the top edge of the dropdown right below the input box */
+  width: 24.7%; 
+  max-height: 200px; 
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 2.5px solid #d6d6e7;
+  border-top: none !important;
+  border-radius: 3px;
+  box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
+  z-index: 1000;
+  margin: 0;
+  font-family: Raleway;
+  font-size: 1.5vw;
+  line-height: 2vw;
+  left: 37.5%;
 }
 
 
@@ -854,7 +867,7 @@ b {
       margin-bottom: 2%;
     }
 
-    #language-option {
+    #language {
       width: auto;
       padding: 0 20px;
       height: 12vw;
@@ -863,7 +876,7 @@ b {
       font-size: 4.3vw;
     }
     
-    #language-option option {
+    #language-option {
       font-size: 4vw;
     }
 
@@ -1226,7 +1239,7 @@ b {
     box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
   }
 
-  #language-option {
+  #language {
     width: auto;
     padding: 0 5%;
     height: 8vw;
@@ -1235,7 +1248,7 @@ b {
     font-size: 3vw;
   }
   
-  #language-option option {
+  #language-option {
     font-size: 2.8vw;
   }
 
