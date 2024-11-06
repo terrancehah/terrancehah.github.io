@@ -20,16 +20,24 @@ module.exports = async (req, res) => {
         // console.log("Received request for:", formattedData);
 
         try {
-             // Base URL configuration
-            const baseURL = 'https://terrancehah.com/api/';
+             // Use localhost URLs in development
+            const baseURL = process.env.NODE_ENV === 'development' 
+            ? 'http://localhost:' 
+            : 'https://terrancehah.com/api/';
 
-             // Make API calls
+            // Make API calls with better error handling
             const [basicInfoResponse, detailsResponse, itineraryResponse, conclusionResponse] = await Promise.all([
-                axios.post(baseURL + 'travel-rizz-basic-info', { language, city, startDate, endDate }),
-                axios.post(baseURL + 'travel-rizz-details', { language, city }),
-                axios.post(baseURL + 'travel-rizz-daily-itinerary', { language, city, startDate, endDate }),
-                axios.post(baseURL + 'travel-rizz-conclusion', { language, city, startDate, endDate })
+                axios.post(baseURL + '3002/travel-rizz-basic-info', { language, city, startDate, endDate }),
+                axios.post(baseURL + '3003/travel-rizz-details', { language, city }),
+                axios.post(baseURL + '3004/travel-rizz-daily-itinerary', { language, city, startDate, endDate }),
+                axios.post(baseURL + '3005/travel-rizz-conclusion', { language, city, startDate, endDate })
             ]);
+
+            // Verify each response has the expected data
+            if (!basicInfoResponse.data.response || !detailsResponse.data.response || 
+                !itineraryResponse.data.response || !conclusionResponse.data.response) {
+                throw new Error('Invalid response from one of the services');
+            }
 
              // Combine responses
             const generatedContent = [
@@ -45,7 +53,8 @@ module.exports = async (req, res) => {
             console.error("Error in processing request:", error);
             res.status(500).json({ 
                 error: "Error processing your request",
-                details: error.message
+                details: error.message,
+                source: error.response?.data || 'Unknown error source'
             });
         }
     } else {
