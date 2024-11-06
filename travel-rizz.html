@@ -328,6 +328,13 @@
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
                     var language = document.getElementById("language").value;
                     
+                    // Validate data before sending
+                    if (!city || !startDate || !endDate || !language) {
+                        document.getElementById("loadingSpinner").style.display = "none";
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+
                     // Use explicit object notation
                     var requestData = {
                         "language": language,
@@ -339,6 +346,13 @@
                     var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                     const apiUrl = isLocal ? 'http://localhost:3000/api/travel-rizz-server' : '/api/travel-rizz-server';
 
+                    // Log the request for debugging
+                    console.log('Sending request:', {
+                        url: apiUrl,
+                        data: requestData
+                    });
+
+                    // Make the fetch request
                     fetch(apiUrl, {
                         method: 'POST',
                         headers: {
@@ -347,12 +361,23 @@
                         body: JSON.stringify(requestData)
                     })
                     .then(response => {
+                        // Check if the response is ok first
                         if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
+                            return response.text().then(text => {
+                                throw new Error(`Server error: ${text}`);
+                            });
                         }
                         return response.json();
-                    })                    
+                    })                 
                     .then(data => {
+                        // Log received data for debugging
+                        console.log('Received data:', data);
+
+                         // Validate received content
+                        if (!data || typeof data.generatedContent !== 'string') {
+                            throw new Error('Invalid response format from server');
+                        }
+        
                         console.log('Success:', data);
                         if (data.generatedContent) {
                             //Deployed version generatedContent or testData
@@ -368,11 +393,12 @@
                     .catch(error => {
                         console.error('Error:', error);
                         document.getElementById("loadingSpinner").style.display = "none";
-                        // Provide more specific error message
-                        if (error instanceof SyntaxError) {
-                            alert('Error parsing server response. Please try again.');
+                        
+                        // More descriptive error message
+                        if (error.name === 'SyntaxError') {
+                            alert('Received malformed data from server. Please try again.');
                         } else {
-                            alert(error.message || 'An error occurred while generating the itinerary');
+                            alert(`Error: ${error.message || 'Failed to generate itinerary'}`);
                         }
                     });
                 });
