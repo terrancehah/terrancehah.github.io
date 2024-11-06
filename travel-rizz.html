@@ -327,25 +327,28 @@
                     var startDate = document.getElementById("start-date").value;
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
                     var language = document.getElementById("language").value;
+                    
+                    // Use explicit object notation
+                    var requestData = {
+                        "language": language,
+                        "city": city,
+                        "startDate": startDate,
+                        "endDate": endDate
+                    };
+
                     var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                     const apiUrl = isLocal ? 'http://localhost:3000/api/travel-rizz-server' : '/api/travel-rizz-server';
 
-                    fetch('/api/travel-rizz-server', {
+                    fetch(apiurl, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ 
-                            language, 
-                            city, 
-                            startDate, 
-                            endDate 
-                        }),
+                        body: JSON.stringify(requestData)
                     })
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
-
 
                         //Deployed version generatedContent or testData
                         document.getElementById("generatedContent").innerHTML = data.generatedContent;
