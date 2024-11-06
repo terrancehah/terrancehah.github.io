@@ -112,7 +112,7 @@ module.exports = async (req, res) => {
                 responses.details.data.response,
                 responses.itinerary.data.response,
                 responses.conclusion.data.response
-            ].join('\n');
+            ].join('\n').replace(/```html\n|```/g, '');  // Clean directly when joining
 
             console.log('Final content length:', generatedContent.length);
             console.log('Content preview:', generatedContent.substring(0, 200) + '...');
