@@ -42,6 +42,7 @@ module.exports = async (req, res) => {
             // Function to validate response
             const validateResponse = (response, endpoint) => {
                 console.log(`Raw ${endpoint} response:`, response.data);
+
                 // Add detailed logging of the response
                 console.log(`${endpoint} response content:`, {
                     responseData: response.data,
@@ -50,9 +51,15 @@ module.exports = async (req, res) => {
                     responseContentType: typeof response.data.response
                 });
 
-                if (!response.data || typeof response.data.response !== 'string') {
-                    throw new Error(`Invalid response format from ${endpoint}`);
+                // Clean the response string of html prefix/tags and code blocks
+                if (response.data.response) {
+                    response.data.response = response.data.response
+                        .replace(/^html\s+/, '')  // Remove 'html ' prefix
+                        .replace(/```html\n|```/g, '')  // Remove code block markers
+                        .replace(/\n\s+\+\s+/g, '')  // Remove line concatenation
+                        .trim();  // Clean up any extra whitespace
                 }
+                
                 return response;
             };
 

@@ -83,7 +83,7 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are an knowledgeable friendly travel assistant specializing in creating detailed daily travel itineraries for cities worldwide."},
                     {"role": "user", "content": 
-                    `In the language of code ${language}, please create daily itinerary for a trip to ${city} from ${startDate} to ${endDate}.
+                    `In the language of ${language}, please create daily itinerary for a trip to ${city} from ${startDate} to ${endDate}.
                     
                     Response Intros:
                     Each day will take one div.
@@ -97,8 +97,8 @@ module.exports = async (req, res) => {
 
 
                     Response Format:
-                    Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with HTML tags.
-                    Remember, do not start or end the content with the opening and closing tags of '''html, </ or ''' in the generated content, simply start with <div class="page-break">.
+                    Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
+                    Do not use the HTML tags like '''html, </ or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a div, and </div> to end the div.
                     Use <h1> <h2> for different headings, and <strong> for different time sections in a day,
                     <href target="_blank"> to replace every attraction with Google Map link or reputable websites hyperlinks, and also to replace transports related website,
