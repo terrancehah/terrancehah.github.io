@@ -335,7 +335,7 @@
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ city, startDate, endDate, language }),
+                        body: JSON.stringify({ language, city, startDate, endDate }),
                     })
                     .then(response => response.json())
                     .then(data => {
@@ -351,9 +351,13 @@
                         document.getElementById("loadingSpinner").style.display = "none";
                         openPopup();
                     })
-                    .catch((error) => {
+                    .catch(error => {
                         console.error('Error:', error);
-                        document.getElementById("loadingSpinner").style.display = "none";
+                        if (error.response?.data?.details) {
+                            alert(`Error: ${error.response.data.details}`);
+                        } else {
+                            alert('An error occurred while generating the itinerary');
+                        }
                     });
                 });
             </script>

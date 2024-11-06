@@ -18,22 +18,57 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 const processItineraryContent = async (content, city) => {
-    // Find all attraction placeholders in the format {PLACE:Attraction Name}
-    const placePattern = /\{PLACE:(.*?)\}/g;
-    let processedContent = content;
-    const matches = [...content.matchAll(placePattern)];
+    try {
+        // Validate input content
+        if (!content || typeof content !== 'string') {
+            throw new Error('Invalid content provided');
+        }
 
-    // Replace each placeholder with a proper maps link
-    for (const match of matches) {
-        const placeName = match[1];
-        const mapsLink = await generateMapsLink(placeName, city);
-        processedContent = processedContent.replace(
-            `{PLACE:${placeName}}`,
-            `<a href="${mapsLink}" target="_blank">${placeName}</a>`
-        );
+        // Find all attraction placeholders in the format {PLACE:Attraction Name}
+        const placePattern = /\{PLACE:(.*?)\}/g;
+        let processedContent = content;
+        const matches = [...content.matchAll(placePattern)];
+
+        // Replace each placeholder with a proper maps link
+        for (const match of matches) {
+            const placeName = match[1];
+            if (!placeName) continue; // Skip if placeName is empty
+            
+            try {
+                const mapsLink = await generateMapsLink(placeName, city);
+                processedContent = processedContent.replace(
+                    `{PLACE:${placeName}}`,
+                    `<a href="${mapsLink}" target="_blank">${placeName}</a>`
+                );
+            } catch (err) {
+                console.error(`Error generating maps link for ${placeName}:`, err);
+                // Fallback to plain text if map link generation fails
+                processedContent = processedContent.replace(
+                    `{PLACE:${placeName}}`,
+                    placeName
+                );
+            }
+        }
+
+        // Validate HTML structure
+        const divPattern = /<div class="page-break">[\s\S]*?<\/div>/g;
+        if (!divPattern.test(processedContent)) {
+            // Wrap content in proper div if missing
+            processedContent = `<div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>${processedContent}</div>`;
+        }
+
+        // Clean up any malformed HTML
+        processedContent = processedContent
+            .replace(/\n/g, ' ') // Replace newlines with spaces
+            .replace(/\s+/g, ' ') // Remove extra spaces
+            .replace(/>\s+</g, '><') // Remove spaces between tags
+            .trim(); // Remove leading/trailing whitespace
+
+        return processedContent;
+    } catch (error) {
+        console.error('Error in processItineraryContent:', error);
+        throw new Error('Failed to process itinerary content');
     }
-
-    return processedContent;
 };
 
 module.exports = async (req, res) => {
@@ -80,22 +115,23 @@ module.exports = async (req, res) => {
                 max_tokens: 2000
             });
 
-            if (gptResponse.choices?.[0]?.message?.content) {
-                const rawContent = gptResponse.choices[0].message.content;
-                // Process the content to replace placeholders with actual map links
-                const processedContent = await processItineraryContent(rawContent, city);
-                console.log("Processed Itinerary Content:", processedContent);
-                res.send({ response: processedContent });
-            } else {
-                console.error("Unexpected OpenAI API response structure for itinerary:");
-                res.status(500).send("The response from the API does not have the expected content for itinerary.");
+            if (!gptResponse.choices?.[0]?.message?.content) {
+                throw new Error('Invalid response from OpenAI API');
             }
+
+            const rawContent = gptResponse.choices[0].message.content;
+            const processedContent = await processItineraryContent(rawContent, city);
+
+            res.json({ response: processedContent });
         } catch (error) {
             console.error("Error in fetching itinerary:", error);
-            res.status(500).send("Error processing your itinerary request");
+            res.status(500).json({ 
+                error: "Error processing your itinerary request",
+                details: error.message 
+            });
         }
     } else {
-        res.status(405).send('Method Not Allowed for itinerary');
+        res.status(405).json({ error: 'Method Not Allowed for itinerary' });
     }
 };
 
