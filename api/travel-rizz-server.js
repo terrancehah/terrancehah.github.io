@@ -42,6 +42,14 @@ module.exports = async (req, res) => {
             // Function to validate response
             const validateResponse = (response, endpoint) => {
                 console.log(`Raw ${endpoint} response:`, response.data);
+                // Add detailed logging of the response
+                console.log(`${endpoint} response content:`, {
+                    responseData: response.data,
+                    responseType: typeof response.data,
+                    hasResponse: 'response' in response.data,
+                    responseContentType: typeof response.data.response
+                });
+                
                 if (!response.data || typeof response.data.response !== 'string') {
                     throw new Error(`Invalid response format from ${endpoint}`);
                 }
@@ -98,6 +106,16 @@ module.exports = async (req, res) => {
             console.log('Itinerary Response:', responses.itinerary.data);
             console.log('Conclusion Response:', responses.conclusion.data);
 
+            // First send debug response to see raw data from each API
+            res.json({
+                debug: {
+                    basicInfo: responses.basicInfo.data.response,
+                    details: responses.details.data.response,
+                    itinerary: responses.itinerary.data.response,
+                    conclusion: responses.conclusion.data.response
+                }
+            });
+
             // Combine responses
             const generatedContent = [
                 responses.basicInfo.data.response,
@@ -109,10 +127,9 @@ module.exports = async (req, res) => {
             console.log('Final content length:', generatedContent.length);
             console.log('Content preview:', generatedContent.substring(0, 200) + '...');
 
-            console.log('Final generated content:', generatedContent);
-
             JSON.stringify( { generatedContent } ); // This will throw if invalid
             res.json({ generatedContent });
+
 
         } catch (error) {
             console.error("Error in processing request:", error);
