@@ -500,15 +500,25 @@
                             conclusionH2.style.display = 'block';
                             conclusionH2.style.lineHeight = '1.5';
                             conclusionH2.style.margin = '0 auto';
-                            conclusionH2.style.padding = '0 20px';
+                            conclusionH2.style.padding = '20px';  // Increased padding
 
                             // Ensure the content wrapper takes full height for vertical centering
                             content.style.minHeight = 'calc(100vh - 150px)'; // Adjust for header height
+                            
+                            // Ensure content is centered vertically
+                            content.style.flex = '1';
+                            content.style.display = 'flex';
+                            content.style.alignItems = 'center';
                             content.style.justifyContent = 'center';
 
+                             // Force the conclusion page to take up full height
+                            el.style.minHeight = '100vh';
+                            el.style.height = '100vh';
+                            
                             // Remove any bottom margin/padding that might cause extra space
                             el.style.marginBottom = '0';
                             el.style.paddingBottom = '0';
+                            content.style.margin = '0';
                             content.style.marginBottom = '0';
                             content.style.paddingBottom = '0';
                             
