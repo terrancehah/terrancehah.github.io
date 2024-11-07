@@ -121,6 +121,7 @@ module.exports = async (req, res) => {
 
             const rawContent = gptResponse.choices[0].message.content;
             const processedContent = await processItineraryContent(rawContent, city);
+            console.log("Itinerary Content:", conclusionContent);
 
             res.json({ response: processedContent });
         } catch (error) {
