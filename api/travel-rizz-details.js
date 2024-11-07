@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
                     Provide all these information in about 220 words in one page/div, the word count suitable for one single A4 page.
 
                     Response Format:
-                    The entire output, including the content and the headings should be in the language of ${language}.
+                    The entire output, including the content and the headings must be in the language of ${language}.
                     Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
                     Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> to start and end the section/div.

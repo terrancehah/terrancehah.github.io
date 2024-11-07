@@ -123,9 +123,9 @@ header, footer {
 }
 
 .heading {
-    margin: 0% 10%;
+    margin: 0% 0%;
     /* margin-top: 2%; */
-    width: 80%;
+    width: 100%;
     font-family: Caveat;
     /* font-size: 4.5vw; */
     font-size: clamp(2rem, 3.6vw, 4.5rem);
