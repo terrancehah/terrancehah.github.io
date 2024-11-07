@@ -115,14 +115,13 @@ module.exports = async (req, res) => {
                 // Test if we can stringify the content
                 JSON.stringify({ generatedContent });
                 console.log('JSON stringify successful');
-                
-                // If it succeeds, send the response
-                res.json({ generatedContent });
+                return res.json({ generatedContent }); // Use return to prevent further execution
+
             } catch (err) {
                 console.error('JSON stringify failed:', err.message);
                 console.error('GeneratedContent type:', typeof generatedContent);
                 console.error('GeneratedContent length:', generatedContent?.length);
-                res.status(500).json({
+                return res.status(500).json({
                     error: 'Failed to stringify response',
                     details: err.message
                 });
