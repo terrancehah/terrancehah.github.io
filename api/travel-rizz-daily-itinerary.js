@@ -94,14 +94,14 @@ module.exports = async (req, res) => {
                     If possible, briefly introduce how the traveller can get to all the attractions (by foot or public transport, walkable distance, travel time etc).
                     Also, you can occasionally introduce high-rating famous restaurants or bars near the attractions.
                     Provide each day's itinerary in about 200 words in one page/div, a word count slightly less than enough for one single A4 page.
-                    
+
                     Response Format:
                     The entire output, including the content and the headings should be in the language of ${language}.
                     Since the response will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
                     Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a div, and </div> to end the div.
                     Then, use <h1> <h2> for different headings, and <strong> for different time sections in a day,
-                    <href target="_blank"> to replace related website,
+                    <a href target="_blank"> to replace related website,
                     and <p> for content.
                     For each attraction in the itinerary, you need to provide in the format {PLACE:Attraction Name}.
                     Example: Start your morning at {PLACE:Tokyo Skytree}, then walk to {PLACE:Senso-ji Temple}.
