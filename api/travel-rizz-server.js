@@ -121,7 +121,6 @@ module.exports = async (req, res) => {
                 // Test if we can stringify the content
                 JSON.stringify({ generatedContent });
                 console.log('JSON stringify successful');
-                console.log('Clean JSON test:', testStr.slice(0, 100));
                 return res.json({ generatedContent }); // Use return to prevent further execution
 
             } catch (err) {
