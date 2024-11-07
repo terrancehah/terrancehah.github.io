@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
                     Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a section/div, and </div> to end a section/div.
                     Use <h1>, <h2> and for different headings,
-                    <href target="_blank"> to replace every related helpful website like governmental websites, and links to hospital maps,
+                    <a href target="_blank"> to replace every related helpful website like governmental websites, and links to hospital maps,
                     and <p> for content and paragraphs.
                     Use <br> to break lines between each hospital.
                     For any link that utiilises Google Map, use the link in the format of https://maps.app.goo.gl/TAfSA3zqcwvv2yE49 instead of https://goo.gl/maps/jZCgdakB8xp8KQ6D9, also, verify to make sure the links work.
