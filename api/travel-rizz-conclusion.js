@@ -34,8 +34,9 @@ module.exports = async (req, res) => {
                     Do not prompt travellers to call us, as we are only a travel itinerary helper, not a travel agency.
                     
                     Response Format:
+                    The entire output, including the content and the headings should be in the language of ${language}.
                     Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
-                    Do not use the HTML tags like '''html, </ or ''' in the generated content.
+                    Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a section/div, and </div> to end a section/div.
                     Use <h1>, <h2> and for different headings,
                     <href target="_blank"> to replace every related helpful website like governmental websites, and links to hospital maps,

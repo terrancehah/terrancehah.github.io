@@ -87,28 +87,28 @@ module.exports = async (req, res) => {
                     
                     Response Intros:
                     Each day will take one div.
-                    Provide the daily itinerary in a daily schedule form; do not respond in hourly format, separate every day into Morning, Afternoon, Evening and Night time sections.
-                    The schedule for each time session should consist at least 4 sentences, keep them informative.
-                    For each day, start a new div/section/page, plan the schedule so that the travellers can get to at least 3-4 attractions.
+                    For each day, start a new div/section/page, plan the schedule so that the travellers can get to 3-4 attractions.
+                    Provide the daily itinerary in a daily schedule form; do not respond in hourly format, separate each day into Morning, Afternoon, Evening and Night time sections.
+                    The itinerary for each time session should consist about 3 to 4 sentences, keep them informative.
                     The attractions that are visited each day should not be too far, try to group attractions for each day in walkable distance or nearby area.
                     If possible, briefly introduce how the traveller can get to all the attractions (by foot or public transport, walkable distance, travel time etc).
                     Also, you can occasionally introduce high-rating famous restaurants or bars near the attractions.
-                    Provide each day's itinerary in about 220 words in one page/div, the word count suitable for one single A4 page.
-
-
+                    Provide each day's itinerary in about 200 words in one page/div, a word count slightly less than enough for one single A4 page.
+                    
                     Response Format:
-                    Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
-                    Do not use the HTML tags like '''html, </ or ''' in the generated content.
+                    The entire output, including the content and the headings should be in the language of ${language}.
+                    Since the response will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
+                    Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a div, and </div> to end the div.
-                    Use <h1> <h2> for different headings, and <strong> for different time sections in a day,
-                    <href target="_blank"> to replace every attraction with Google Map link or reputable websites hyperlinks, and also to replace transports related website,
+                    Then, use <h1> <h2> for different headings, and <strong> for different time sections in a day,
+                    <href target="_blank"> to replace related website,
                     and <p> for content.
                     For each attraction in the itinerary, you need to provide in the format {PLACE:Attraction Name}.
                     Example: Start your morning at {PLACE:Tokyo Skytree}, then walk to {PLACE:Senso-ji Temple}.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
                     
                     Response Tone:
-                    Remember not to provide the response in a dialogue or conversation form, instead you should reply in an informative and descriptive way.
+                    Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and descriptive way.
                     As for the tone and mood of the response, be passionate and friendly.
                     `}
                 ],
