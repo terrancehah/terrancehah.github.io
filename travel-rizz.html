@@ -367,33 +367,8 @@
                     })
                     .then(response => {
                         console.log('Response status:', response.status);
-                        return response.text().then(text => {
-                            console.log('Raw response text:', text);
-                            try {
-                                return JSON.parse(text);
-                            } catch (e) {
-                                console.error('JSON parse error:', e);
-                                console.log('Failed text:', text);
-                                throw e;
-                            }
-                        });
+                        return response.json();  // Use response.json() directly
                     })
-                    .then(text => {
-                        console.log('Raw text before parsing:', text); // Log the raw text
-                        if (!text) {
-                            throw new Error('Empty response received');
-                        }
-                        try {
-                            const data = JSON.parse(text);
-                            console.log('Successfully parsed JSON:', data);
-                            return data;
-                        } catch (e) {
-                            console.error('JSON parse error:', e);
-                            console.log('Failed text:', text);
-                            // console.log('Failed text first 100 chars:', text.substring(0, 100));
-                            throw e;
-                        }
-                    })           
                     .then(data => {
                         // Log received data
                         console.log('Parsed data:', data);
