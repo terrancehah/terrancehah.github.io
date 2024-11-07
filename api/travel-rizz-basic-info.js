@@ -34,10 +34,9 @@ module.exports = async (req, res) => {
                     Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
                     Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> EVERY TIME you start and end a whole page/section/div.
-                    For the content inside, start with <h1>Welcome to (the name of the city)!</h1>, then <h2> for the following headings/aspects accordingly, 
-                    <href target="_blank"> to insert weather related websites for the city during the period and other relative informations,
-                    and <p> for paragraphs.
-                    The direct link to the monthly weather forecast for the city, it should look like: https://www.accuweather.com/en/at/vienna/31868/october-weather/31868?year=2024 inside the href link, instead of a general accuweather.com homepage link.
+                    For the content inside, start with <h1>Welcome to (the name of the city)!</h1>, then <h2></h2> for the following headings/aspects accordingly.
+                    Use <p></p> for paragraphs. 
+                    For weather related websites for the city during the period, use the format of <a href="https://www.accuweather.com/en/my/muar/233140/october-weather/233140?year=2024" target="_blank">Muar November 2024 Weather</href>.
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and concise way.
