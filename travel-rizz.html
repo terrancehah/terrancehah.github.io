@@ -502,18 +502,15 @@
                             conclusionH2.style.margin = '0 auto';
                             conclusionH2.style.padding = '20px';  // Increased padding
 
-                            // Ensure the content wrapper takes full height for vertical centering
-                            content.style.minHeight = 'calc(100vh - 150px)'; // Adjust for header height
-                            
+                            // Force the conclusion page to take up full height
+                            el.style.minHeight = '100vh';
+                            el.style.height = '100vh';
+
                             // Ensure content is centered vertically
                             content.style.flex = '1';
                             content.style.display = 'flex';
                             content.style.alignItems = 'center';
                             content.style.justifyContent = 'center';
-
-                             // Force the conclusion page to take up full height
-                            el.style.minHeight = '100vh';
-                            el.style.height = '100vh';
                             
                             // Remove any bottom margin/padding that might cause extra space
                             el.style.marginBottom = '0';
@@ -546,19 +543,21 @@
                         image: { type: 'jpeg', quality: 0.98 },
                         html2canvas: { 
                             scale: 2,
-                            removeContainer: true, // Add this to help prevent extra blank page
-                            height: contentForPdf.offsetHeight // Only capture the actual content height
+                            useCORS: true,
+                            scrollY: 0,
+                            windowWidth: document.documentElement.clientWidth,   // Ensure full width is captured
+                            windowHeight: document.documentElement.clientHeight, // Ensure full height is captured
+                            logging: true // Enable logging for debugging
                         },
                         jsPDF: { 
                             unit: 'mm', 
                             format: 'a4', 
                             orientation: 'portrait',
-                            compress: true,
-                            putTotalPages: false // Prevent extra blank page
+                            compress: true
                         },
                         pagebreak: { 
                             mode: 'css',
-                            avoid: 'tr' // Prevent breaks within table rows
+                            before: '.page-break'
                         }
                     };
                     
