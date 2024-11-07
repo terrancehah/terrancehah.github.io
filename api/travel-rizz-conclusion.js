@@ -103,7 +103,7 @@ module.exports = async (req, res) => {
                     <a href target="_blank"> to replace every related helpful website like governmental websites.
                     For links to hospital maps, provide in the format {PLACE:Hospital Name}.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
-                    The direct link to the visa application, it should be governmental official website like this: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html instead of some general website link.
+                    The direct link to the visa application, it should be governmental official website like this: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html wrapped in the href.
                     For the last div/page of Farewell Messages, do not use <h1></h1> or <p></p>, wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>, use <br> to break lines between sentences if needed.
                     
                     Response Tone:
