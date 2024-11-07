@@ -93,7 +93,7 @@
 
                             <button id="generate-button" type="submit">Take Me There</button>
                             <!-- //Test button -->
-                            <!-- <button id="loadTestData" type="submit">Load Test Data</button> -->
+                            <button id="loadTestData" type="submit">Load Test Data</button>
 
                         </form>
                     </div>
@@ -336,12 +336,12 @@
                         language
                     });
                     
-                    // Validate data before sending
-                    if (!city || !startDate || !endDate || !language) {
-                        document.getElementById("loadingSpinner").style.display = "none";
-                        alert('Please fill in all required fields');
-                        return;
-                    }
+                    // // Validate data before sending
+                    // if (!city || !startDate || !endDate || !language) {
+                    //     document.getElementById("loadingSpinner").style.display = "none";
+                    //     alert('Please fill in all required fields');
+                    //     return;
+                    // }
 
                     // Use explicit object notation
                     var requestData = {
@@ -407,15 +407,82 @@
             
 
             <!-- // Static data for testing only -->
-            <!-- <script>
+            <script>
                 var testData = 
-                    `<div class=\"page-break\">\n  <header>\n    <img id='logo' src='resources/TH-logo.png' alt='logo'/>\n    <h2 id='brand'>Travel-Rizz</h2>\n    <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n  </header>\n  <h1>Welcome to Kyoto, Japan!</h1>\n  <h2>Introduction to Kyoto</h2>\n  <p>Known for its classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines, and traditional wooden houses, Kyoto is a city steeped in history and Japanese culture. Once the capital of Japan, Kyoto is now a city that blends its rich heritage with modernity, creating a unique and enchanting atmosphere for visitors from around the world.</p>\n\n  <h2>Weather Forecast for January 2024</h2>\n  <p>Kyoto experiences a temperate climate with distinct seasons. During your visit from January 26 to January 28, 2024, expect chilly temperatures as this is winter time. Layering clothes is recommended due to cold days and possibly colder nights. For precise weather forecasts and to plan your wardrobe, click on the monthly forecast link: <a href=\"https://www.accuweather.com/en/jp/kyoto/221790/january-weather/221790?year=2024\" target=\"_blank\">Kyoto January Weather</a>.</p>\n\n  <h2>Languages in Kyoto</h2>\n  <p>The primary language spoken in Kyoto is Japanese. However, due to its status as a world-renowned tourist destination, you will also find that many people in the hospitality industry speak English, making communication for international visitors more convenient.</p>\n\n  <h2>Population</h2>\n  <p>As of my last updated data, Kyoto has a population of approximately 1.5 million people. This number makes it sizable yet much less densely populated than Tokyo, offering a more relaxed atmosphere while still being a large urban center.</p>\n</div><div class=\"page-break\">\n<header>\n<img id='logo' src='resources/TH-logo.png' alt='logo'/>\n<h2 id='brand'>Travel-Rizz</h2>\n<h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n</header>\n\n<h1>Notable Details about Kyoto, Japan</h1>\n\n<h2>Currency Information</h2>\n<p>The local currency in Kyoto is the Japanese Yen (JPY). Banknotes come in denominations of ¥1000, ¥2000 (less common), ¥5000, and ¥10000, while the coins are in denominations of ¥1, ¥5, ¥10, ¥50, ¥100, and ¥500. It's essential to have cash on you as some shops, especially smaller ones, may not accept credit cards. For current exchange rates, visit this <a href=\"https://www.x-rates.com/table/?from=JPY&amount=1\" target=\"_blank\">exchange rate table</a>.</p>\n\n<h2>Safety Tips</h2>\n<p>Kyoto is considered a safe city with low crime rates. However, travelers should always be vigilant, especially in crowded places such as tourist attractions or public transportation, to avoid pickpocketing. Additionally, it's important to respect local customs and traditions to avoid inadvertent offenses and to ensure that your visit is enjoyable and safe.</p>\n\n<h2>Business Operating Hours</h2>\n<p>Most shops in Kyoto open around 10:00 or 11:00 and close at 19:00 or 20:00. However, opening hours may vary, with some stores in tourist areas open later. Department stores usually stay open until 20:00 or 21:00. Museums and other cultural sites typically open from 09:00 or 10:00 and close at 17:00 or 18:00, often with the last entry an hour before closing.</p>\n\n<h2>Local Navigation</h2>\n<p>Getting around Kyoto is relatively easy with an efficient public transportation system. The city offers buses and trains as the primary means of transport. For real-time train and bus schedules, travelers can refer to reliable online resources like the <a href=\"http://www.hyperdia.com\" target=\"_blank\">HyperDia website</a> for train times and connections, as well as route planning. Prepaid cards such as ICOCA can be used to simplify payment for these services.</p>\n\n</div><div class=\"page-break\">\n    <header>\n        <img id='logo' src='resources/TH-logo.png' alt='logo'/>\n        <h2 id='brand'>Travel-Rizz</h2>\n        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n    </header>\n    <h1>Day 1: Exploring Southern Higashiyama</h1>\n    <strong>Morning:</strong>\n    <p>Start your Kyoto adventure with a visit to the iconic <a href=\"https://goo.gl/maps/ENr7HZsAddcGBbVH6\" target=\"_blank\">Kiyomizu-dera Temple</a>. One of Kyoto's most famous temples, it offers breathtaking views of the city from its wooden terrace. A morning stroll down the charming preserved streets of <a href=\"https://goo.gl/maps/1FDFhBZwDkEUDpME7\" target=\"_blank\">Sannenzaka and Ninenzaka</a> will unveil traditional shops and tea houses where you can enjoy a moment of tranquility.</p>\n    <strong>Afternoon:</strong>\n    <p>Continue to the tranquil <a href=\"https://goo.gl/maps/1D3rLhQQhdC2\" target=\"_blank\">Kodai-ji Temple</a>, known for its beautiful gardens and bamboo grove. After exploring the temple, take a short walk to the <a href=\"https://goo.gl/maps/FVmNkkvW6do\" target=\"_blank\">Maruyama Park</a>, a perfect spot for a relaxed lunch amidst nature. Afterwards, visit the grand <a href=\"https://goo.gl/maps/nGJX4C4m1Q42\" target=\"_blank\">Yasaka Shrine</a>, which is close to the park.</p>\n    <strong>Evening:</strong>\n    <p>As the evening sets in, head towards the atmospheric <a href=\"https://goo.gl/maps/Qyc1kLJ2Wxp\" target=\"_blank\">Gion</a>, Kyoto's famous geisha district. The area is best explored on foot, with its historical buildings and possibility of spotting a geisha on her way to an engagement. Enjoy dinner at one of the local restaurants serving Kyoto cuisine.</p>\n    <strong>Night:</strong>\n    <p>After dinner, take a leisurely stroll along the <a href=\"https://goo.gl/maps/TCuwCe39mP52\" target=\"_blank\">Shirakawa Canal</a> in Gion, which is beautifully lit up at night providing a wonderful ending to your eventful day.</p>\n</div>\n\n<div class=\"page-break\">\n    <header>\n        <img id='logo' src='resources/TH-logo.png' alt='logo'/>\n        <h2 id='brand'>Travel-Rizz</h2>\n        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n    </header>\n    <h1>Day 2: Arashiyama & Central Kyoto</h1>\n    <strong>Morning:</strong>\n    <p>Embark on your second day with a visit to the enchanting district of <a href=\"https://goo.gl/maps/Vu8Cqy37a4K2\" target=\"_blank\">Arashiyama</a>. Start with the famous <a href=\"https://goo.gl/maps/Vc8X4gEhFuE2\" target=\"_blank\">Bamboo Grove</a> known for its towering bamboo stalks. It’s a short walk from the Arashiyama train station, easily accessible by public transport from central Kyoto. Next, visit the serene <a href=\"https://goo.gl/maps/8mBVq4D1XzL2\" target=\"_blank\">Tenryu-ji Temple</a>, which boasts a stunning landscape garden.</p>\n    <strong>Afternoon:</strong>\n    <p>In the afternoon, make your way back towards central Kyoto. Visit <a href=\"https://goo.gl/maps/fQzP1hATMJK2\" target=\"_blank\">Nijo Castle</a>, which was the residence of Tokugawa shoguns. Walk through the historic castle grounds, marvel at the intricate architecture and 'nightingale floors'. Later, have lunch at a nearby restaurant in the castle area.</p>\n    <strong>Evening:</strong>\n    <p>As evening approaches, explore the <a href=\"https://goo.gl/maps/yaD5u4LUwMG2\" target=\"_blank\">Nishiki Market</a>, a bustling marketplace known as “Kyoto's pantry”. It's an ideal place for food enthusiasts to taste a variety of local specialties and to shop for unique Kyoto delicacies and souvenirs.</p>\n    <strong>Night:</strong>\n    <p>To conclude the day, enjoy the neon lights and bustling atmosphere of <a href=\"https://goo.gl/maps/SgTn59bgGG72\" target=\"_blank\">Pontocho Alley</a>. This historic alleyway is lined with restaurants and bars offering dinner with the option of riverside dining or traditional kaiseki meals.</p>\n</div>\n\n<div class=\"page-break\">\n    <header>\n        <img id='logo' src='resources/TH-logo.png' alt='logo'/>\n        <h2 id='brand'>Travel-Rizz</h2>\n        <h2 id='header-slogan'>Travel-Rizz: Your Personalized Journey Awaits</h2>\n    </header>\n    <h1>Day 3: Northern Kyoto and Departure</h1>\n    <strong>Morning:</strong>\n    <p>Begin your final day in Kyoto with a visit to the majestic <a href=\"https://goo.gl/maps/iUvZKzxFHGQ2\" target=\"_blank\">Kinkaku-ji</a> (Golden Pavilion), a Zen temple whose top two floors are completely covered in gold leaf. After soaking in the temple’s beauty, stop by the nearby <a href=\"https://goo.gl/maps/HaavPfaPBM92\" target=\"_blank\">Ryoan-ji Temple</a>, known for its enigmatic rock garden.</p>\n    <strong>Afternoon:</strong>\n    <p>Continuing your journey in the north, head toward the <a href=\"https://goo.gl/maps/Yx6esQ6nJmQ2\" target=\"_blank\">Philosopher's Path</a>, a scenic walkway that follows a cherry-tree-lined canal. It's a pleasant area for a leisurely stroll and to grab a light lunch from one of the many quaint cafes along the path.</p>\n    <strong>Evening:</strong>\n    <p>Your Kyoto trip comes to an end as the evening arrives. Depending on your departure time, you may have time to browse the shops for last-minute souvenirs or enjoy a quick dinner. Make your way to the <a href=\"https://goo.gl/maps/1YX25hFty352\" target=\"_blank\">Kyoto Station</a> complex for easy access to trains, buses, or taxis for your onward journey.</p>\n</div><div class=\"page-break\">\n<header>\n<img id='logo' src='resources/TH-logo.png' alt='logo'/>\n<h2 id='brand'>Travel-Rizz</h2>\n<h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2>\n</header>\n<h1>Travel Reminders for Kyoto, Japan</h1>\n<h2>Travel Document and Visa Requirement</h2>\n<p>Ensure your passport has at least six months of validity from the date of entry into Japan. Depending on your country of origin, you may need a visa to enter Japan. Please apply for a visa well in advance of your trip by visiting the official Japanese consulate or embassy website: <a href=\"http://www.mofa.go.jp/j_info/visit/visa/\" target=\"_blank\">Ministry of Foreign Affairs of Japan</a>.</p>\n\n<h2>Tax Refund Procedures</h2>\n<p>Eligible tourists can claim a tax refund on their purchases made in Japan. To do so, ensure you shop at stores that display the 'Tax-Free' sign, present your passport at the time of purchase, and keep all receipts. Refer to Japan's Tax-Free Guide here: <a href=\"https://tax-freeshop.jnto.go.jp/eng/index.php\" target=\"_blank\">Japan Tax-Free Shop Guide</a> for detailed information.</p>\n\n<h2>Latest Current Issues and Advisories</h2>\n<p>Stay informed of local news and check travel advisories from your government regularly leading up to your trip. This can include updates on weather, health notices, or political situations that may affect your travel plans.</p>\n\n<h2>Local Etiquette and Cultural Norms</h2>\n<p>Japan is known for its unique etiquette. Be sure to remove shoes before entering someone's home or certain traditional accommodations (ryokan), temples, and shrines. When using public transportation, speak softly and set mobile phones to silent. Bowing is a customary way to greet, thank, or apologize.</p>\n\n<h2>Health and Vaccination Record Requirement</h2>\n<p>Ensure your routine vaccinations are up to date before traveling to Japan. Although there are no mandatory vaccination requirements, it's advisable to check with your health provider or visit the official health travel page for Japan here: <a href=\"https://wwwnc.cdc.gov/travel/destinations/traveler/none/japan\" target=\"_blank\">CDC - Travel to Japan</a>.</p>\n</div>\n\n<div class=\"page-break\">\n<header>\n<img id='logo' src='resources/TH-logo.png' alt='logo'/>\n<h2 id='brand'>Travel-Rizz</h2>\n<h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2>\n</header>\n<h1>Emergency Contacts</h1>\n<p><strong>Local Police: </strong>110<br/>\n<strong>Ambulance and Fire Department: </strong>119<br/>\n<strong>Local Emergency Dial (coast guard, disaster relief): </strong>118<br/>\n<strong>Japan Helpline (24-hour English assistance): </strong>+81-570-000-911<br/>\nPlease note, in case of emergency, dialing these numbers from a Japanese phone line will connect you to the relevant services.</p>\n\n<h2>Embassy Information</h2>\n<p>For assistance from your home country, it’s important to know the location and contact information of your respective embassy or consulate in Japan. Bookmark the following link to have a detailed list of embassies around the world when you need it: <a href=\"https://www.embassy-worldwide.com/\" target=\"_blank\">Embassy-Worldwide.com</a>.</p>\n</div>\n\n<div class=\"page-break\">\n<header>\n<img id='logo' src='resources/TH-logo.png' alt='logo'/>\n<h2 id='brand'>Travel-Rizz</h2>\n<h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2>\n</header>\n<h2 id='conclusion'>As your adventure in Kyoto comes to an end, we sincerely hope the memories of serene temples, lush gardens, and exquisite cuisine linger on. Travel-Rizz wishes you a safe return journey and looks forward to hearing about your travels. Share your stories, insights, or any feedback with us, and let the spirit of wanderlust thrive. Until next time, keep exploring and cherishing the beauty our world has to offer!</h2>\n</div>`
+                    `
+                    <div class="page-break">
+                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
+                        <h1>欢迎来到麻坡！</h1>
+                        <h2>城市介绍</h2>
+                        <p>麻坡是马来西亚柔佛州的一座具有悠久历史和丰富文化底蕴的城市。它以其美丽的传统建筑、精彩的街头美食和友好的居民而闻名，吸引着众多游客前来探索。麻坡还是连接柔佛州和马六甲的重要交通枢纽，方便旅客在这两地之间往返。</p>
+                        <h2>季节与气候</h2>
+                        <p>麻坡的气候为典型的热带雨林气候，全年温暖潮湿，充满活力。每年的10月到11月属于雨季，降雨较为频繁。然而，降雨通常较为短暂，之后便是湿润的晴天，适合旅行。访问期间的天气情况可以参考<a href="https://www.accuweather.com/en/my/muar/233140/october-weather/233140?year=2024" target="_blank">Muar November 2024 Weather</a>。</p>
+                        <h2>语言</h2>
+                        <p>在麻坡，主要语言包括马来语、中文（普通话及各方言）和英语。由于当地多元文化的特征，您可能会在市场、餐馆及商铺听到多种语言的交流。语言的多样性为游客与本地人之间的互动增添了便利。</p>
+                        <h2>人口</h2>
+                        <p>麻坡的人口大约为23万人，构成多元的种族与文化社区。这里居民主要由马来族、华人和印度裔等组成，这种丰富的文化融汇增强了麻坡的魅力。</p>
+                    </div>
+                    
+                    <div class="page-break">
+                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> 
+                        <h1>Notable Details about Muar, Johor</h1>
+                        <h2>货币信息</h2>
+                        <p>Muar位于马来西亚，使用的货币是马来西亚令吉(MYR)。为了获得实时汇率信息，请访问<a href="https://www.x-rates.com/table/?from=MYR&amount=1" target="_blank">汇率表</a>。建议随身携带少量现金，以便在较小的商店和市场使用。</p>
+                        <h2>安全提示</h2>
+                        <p>Muar总体上是一个安全的旅行目的地，但仍需注意基本安全措施。建议游客尽量避免在夜间独自出行，并随时注意个人物品，以防扒窃事件发生。</p>
+                        <h2>营业时间</h2>
+                        <p>在Muar，大部分商店和餐厅的营业时间为上午10点至晚上10点。需要注意的是，某些地方可能在祷告时间（周五中午）短暂关闭。</p>
+                        <h2>当地交通</h2>
+                        <p>在Muar，游客可以通过公共巴士、出租车或租赁自行车进行导航。更多详细信息与时刻表，请访问公共交通相关网站，使用导航工具时，可通过手机应用程序获取指路服务。</p>
+                    </div>
+                    
+                    <div class="page-break">
+                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
+                        <h1>2024年11月10日: 探索麻坡的魅力</h1>
+                        <h2><strong>上午</strong></h2>
+                        <p>您的麻坡之旅从参观<a href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BB%E5%9D%A1%E5%A4%A7%E9%92%9F%E6%A5%BC%2C%20muar%2C%20johor" target="_blank">麻坡大钟楼</a>开始。麻坡大钟楼是这座城市的象征之一，建于1909年。在这座高耸的建筑中，您可以感受到历史的沉淀。从这里出发，步行不久即可到达<a href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BB%E5%9D%A1%E8%80%81%E8%A1%97%2C%20muar%2C%20johor" target="_blank">麻坡老街</a>。这条街道充满了马来西亚的老式商铺和地道的食品摊位，让您体验本地人的日常生活。</p>
+                        <h2><strong>下午</strong></h2>
+                        <p>午餐后，您可以步行至附近的<a href="https://www.google.com/maps/search/?api=1&query=%E6%B8%85%E7%9C%9F%E5%AF%BA%E8%8B%8F%E4%B8%B9%E4%BE%9D%E5%B8%83%E6%8B%89%E6%AC%A3%E5%A4%A7%E5%8E%A6%2C%20muar%2C%20johor" target="_blank">清真寺苏丹依布拉欣大厦</a>，这是一座融合了摩尔与维多利亚风格的优雅建筑。随后前往<a href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BB%E5%9D%A1%E8%89%BA%E6%9C%AF%E8%A1%97%2C%20muar%2C%20johor" target="_blank">麻坡艺术街</a>，这里的墙壁上装饰着五彩缤纷的壁画和创新的艺术作品，非常适合拍照留念。所有这些景点都在步行距离之内，让您轻松畅游。</p>
+                        <h2><strong>晚上</strong></h2>
+                        <p>晚上，前往<a href="https://www.google.com/maps/search/?api=1&query=Tanjung%20Emas%20%E5%85%AC%E5%9B%AD%2C%20muar%2C%20johor" target="_blank">Tanjung Emas 公园</a>，这是当地居民的热门休闲场所。在公园里，您可以漫步于海滨小径，欣赏夕阳下的麻坡河美景。如果饿了，不远处有一家受欢迎的餐馆，<a href="https://www.google.com/maps/search/?api=1&query=Jeti%20Laut%20%E5%B7%B4%E5%8E%98%E9%A3%8E%E5%91%B3%E9%A4%90%E5%8E%85%2C%20muar%2C%20johor" target="_blank">Jeti Laut 巴厘风味餐厅</a>，提供新鲜的海鲜佳肴。</p>
+                        <h2><strong>夜间</strong></h2>
+                        <p>结束这一天的行程，可以在<a href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BB%E5%9D%A1%E6%B2%B3%E6%BB%A8%E9%95%BF%E5%BB%8A%2C%20muar%2C%20johor" target="_blank">麻坡河滨长廊</a>漫步，享受傍晚的凉风和城市夜景。河滨步道上设有多处美丽的灯光装饰，给夜晚增加了不少浪漫气息。</p>
+                    </div>
+                    
+                    <div class="page-break">
+                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
+                        <h1>旅行提醒</h1><h2>旅行文件和签证要求</h2><p>请确保您的护照在入境至少六个月内有效。有关签证要求，您可以访问 <a href="https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html" target="_blank">官方签证申请网站</a> 了解详细信息。</p>
+                        <h2>退税手续</h2>
+                        <p>在马来西亚购物时，请留意参与退税计划的商店。离境时可到机场办理退税手续，携带好相关发票和商品。</p>
+                        <h2>最新时事和建议</h2>
+                        <p>请及时关注最新的旅行公告和安全建议。了解和遵循当地政府的指导，以确保安全无虞。</p>
+                        <h2>当地礼仪和文化规范</h2>
+                        <p>尊重当地文化是很重要的。在穆斯林区域，着装宜保守。此外，马来西亚人通常比较热情友好，见面问候时可说“你好”或使用当地的马来语“Selamat sejahtera”。</p>
+                        <h2>健康和疫苗接种记录要求</h2><p>建议旅客前往马来西亚前确认所需疫苗接种情况。确保携带最新的疫苗接种记录，以备不时之需。</p>
+                    </div>
+                    
+                    <div class="page-break">
+                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
+                        <h1>紧急联系方式</h1>
+                        <h2>紧急电话</h2>
+                        <p>警察：999</p><p>救护车：999</p><p>消防队：994</p>
+                        <h2>医院</h2>
+                        <p>Tunku Ampuan Najihah Hospital<br>电话：06-952 2600<br>地址：Jalan Temenggung, 84000 Muar, Johor, Malaysia<br><a href="https://goo.gl/maps/LBf6neEzfzQ2" target="_blank"><a href="https://www.google.com/maps/search/?api=1&query=Tunku%20Ampuan%20Najihah%20Hospital%2C%20muar%2C%20johor" target="_blank">Tunku Ampuan Najihah Hospital</a></a></p>
+                        <p>Sultanah Fatimah Specialist Hospital<br>电话：06-952 2500<br>地址：Jalan Salleh, 84000 Muar, Johor, Malaysia<br><a href="https://goo.gl/maps/ZTPpS2EmZ8K2" target="_blank"><a href="https://www.google.com/maps/search/?api=1&query=Sultanah%20Fatimah%20Specialist%20Hospital%2C%20muar%2C%20johor" target="_blank">Sultanah Fatimah Specialist Hospital</a></a></p>
+                        <h2>使馆信息</h2>
+                        <p>为了确保您的安全，请牢记您所在国在马来西亚的使馆或领事馆的地址和联系信息。详情请访问 <a href="https://www.embassy-worldwide.com/" target="_blank">全球使馆指南</a>。</p>
+                    </div>
+
+                    <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
+                        <h2 id='conclusion'>我们衷心祝愿您在麻坡的旅程充满乐趣与惊喜。我们热情地邀请您在旅途中留下美好回忆，并希望您能在线分享您的体验和反馈。如果我们的行程安排对您有帮助，我们会感到非常荣幸。</h2>
+                    </div>
+                    `
 
                 document.getElementById('loadTestData').addEventListener('click', function() {
                     document.getElementById("generatedContent").innerHTML = testData;
                     openPopup();
                 });
-            </script> -->
+            </script>
 
             <script>
                 function openPopup() {
@@ -491,7 +558,7 @@
                         const conclusionH2 = el.querySelector('#conclusion');
                         if (conclusionH2) {
                             conclusionH2.style.whiteSpace = 'normal';
-                            conclusionH2.style.width = '100%';
+                            conclusionH2.style.width = '95%';
                             conclusionH2.style.maxWidth = '100%';
                             conclusionH2.style.wordBreak = 'normal';
                             conclusionH2.style.wordWrap = 'break-word';
@@ -504,7 +571,7 @@
 
                             // Force the conclusion page to take up full height
                             el.style.minHeight = '100vh';
-                            el.style.height = '100vh';
+                            // el.style.height = '100vh';
 
                             // Ensure content is centered vertically
                             content.style.flex = '1';
@@ -545,8 +612,8 @@
                             scale: 2,
                             useCORS: true,
                             scrollY: 0,
-                            windowWidth: document.documentElement.clientWidth,   // Ensure full width is captured
-                            windowHeight: document.documentElement.clientHeight, // Ensure full height is captured
+                            // windowWidth: document.documentElement.clientWidth,   // Ensure full width is captured
+                            // windowHeight: document.documentElement.clientHeight, // Ensure full height is captured
                             logging: true // Enable logging for debugging
                         },
                         jsPDF: { 
@@ -557,7 +624,7 @@
                         },
                         pagebreak: { 
                             mode: 'css',
-                            before: '.page-break'
+                            // before: '.page-break'
                         }
                     };
                     
