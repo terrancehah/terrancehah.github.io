@@ -34,9 +34,9 @@ module.exports = async (req, res) => {
                     Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
                     Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> EVERY TIME you start and end a whole page/section/div.
-                    For the content inside, start with <h1>Welcome to (the name of the city)!</h1>, then <h2></h2> for the following headings/aspects accordingly.
+                    For the content inside, start with <h1>Welcome to ${city}!</h1>, then <h2></h2> for the following headings/aspects accordingly.
                     Use <p></p> for paragraphs. 
-                    For weather related websites for the city during the period, use the format of <a href="https://www.accuweather.com/en/my/muar/233140/october-weather/233140?year=2024" target="_blank">Muar November 2024 Weather</a>.
+                    For weather related websites for the city during the period, use the format similar to <a href="https://www.accuweather.com/en/my/muar/228032/weather-forecast/228032?city=muar" target="_blank">Muar November 2024 Weather</a>.
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and concise way.

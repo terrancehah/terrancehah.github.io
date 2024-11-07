@@ -30,12 +30,12 @@ module.exports = async (req, res) => {
                     Provide all these information in about 220 words in one page/div, the word count suitable for one single A4 page.
 
                     Response Format:
-                    The entire output, including the content and the headings must be in the language of ${language}.
+                    The entire output, including the content and all the headings must be in the language of ${language}.
                     Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
                     Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
                     Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> and </div> to start and end the section/div.
-                    Use <h1>Notable Details about (name of the city)</h1>, then <h2> for different headings accordingly, 
-                    <a href target="_blank"> hyperlinks to replace the transports related websites, 
+                    Use <h1>Notable Details about ${city}</h1>, then <h2> for different headings accordingly, 
+                    <a href target="_blank"> hyperlinks to replace the transports related websites,
                     <a href target="_blank"> hyperlinks to exchanges rate table of the destination country currency on x-rates.com.
                     The direct link to the exchange rate table of the currency, it should look like: https://www.x-rates.com/table/?from=CZK&amount=1 instead of a general x-rates.com homepage link.
                     Use <p> for paragraphs, then finally ending with a </div> tag to signify the end of the section/div.
