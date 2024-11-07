@@ -37,15 +37,15 @@ module.exports = async (req, res) => {
                     The entire output, including the content and the headings should be in the language of ${language}.
                     Since the response here will be redirected to be shown on a webpage, certain sections of the content will be formatted with some HTML tags.
                     Do not use the tags like '''html, </,  '\n' + or ''' in the generated content.
-                    Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a section/div, and </div> to end a section/div.
-                    Use <h1>, <h2> and for different headings,
-                    <a href target="_blank"> to replace every related helpful website like governmental websites, and links to hospital maps,
-                    and <p> for content and paragraphs.
+                    Use <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> EVERY TIME you start a section/div/page.
+                    Then use </div> to end the section/div/page.
+                    Use <h1>, <h2> and for different headings, and <p> for content and paragraphs.
                     Use <br> to break lines between each hospital.
-                    For any link that utiilises Google Map, use the link in the format of https://maps.app.goo.gl/TAfSA3zqcwvv2yE49 instead of https://goo.gl/maps/jZCgdakB8xp8KQ6D9, also, verify to make sure the links work.
+                    <a href target="_blank"> to replace every related helpful website like governmental websites.
+                    For links to hospital maps, provide in the format {PLACE:Hospital Name}.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
                     The direct link to the visa application, it should be governmental official website like this: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html instead of some general website link.
-                    For the last page of Farewell Messages, do not use <h1></h1> or <p></p>, just wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>, use <br> to break lines between sentences if you have to.
+                    For the last div/page of Farewell Messages, do not use <h1></h1> or <p></p>, wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>, use <br> to break lines between sentences if needed.
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and descriptive way.
