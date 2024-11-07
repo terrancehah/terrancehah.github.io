@@ -43,13 +43,13 @@ module.exports = async (req, res) => {
             const validateResponse = (response, endpoint) => {
                 console.log(`Raw ${endpoint} response:`, response.data);
 
-                // Add detailed logging of the response
-                console.log(`${endpoint} response content:`, {
-                    responseData: response.data,
-                    responseType: typeof response.data,
-                    hasResponse: 'response' in response.data,
-                    responseContentType: typeof response.data.response
-                });
+                // // Add detailed logging of the response
+                // console.log(`${endpoint} response content:`, {
+                //     responseData: response.data,
+                //     responseType: typeof response.data,
+                //     hasResponse: 'response' in response.data,
+                //     responseContentType: typeof response.data.response
+                // });
 
                 // Clean the response string of html prefix/tags and code blocks
                 if (response.data.response) {
@@ -57,7 +57,13 @@ module.exports = async (req, res) => {
                         .replace(/^html\s+/, '')  // Remove 'html ' prefix
                         .replace(/```html\n|```/g, '')  // Remove code block markers
                         .replace(/\n\s+\+\s+/g, '')  // Remove line concatenation
-                        .trim();  // Clean up any extra whitespace
+                        .replace(/\n'\s*\+\s*'/g, '') // Remove concatenation artifacts
+                        .replace(/\\n/g, '\n')      // Replace escaped newlines
+                        .replace(/`/g, '')          // Remove backticks
+                        .replace(/\\"/g, '"')       // Fix escaped quotes
+                        .replace(/""([^"]*)""/, '"$1"') // Fix double quotes
+                        .trim();
+
                 }
 
                 return response;
@@ -115,6 +121,7 @@ module.exports = async (req, res) => {
                 // Test if we can stringify the content
                 JSON.stringify({ generatedContent });
                 console.log('JSON stringify successful');
+                console.log('Clean JSON test:', testStr.slice(0, 100));
                 return res.json({ generatedContent }); // Use return to prevent further execution
 
             } catch (err) {
