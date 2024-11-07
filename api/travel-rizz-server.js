@@ -63,78 +63,35 @@ module.exports = async (req, res) => {
                 return response;
             };
 
-            // Basic Info
             try {
-                console.log('Calling Basic Info API:', endpoints.basicInfo);
-                responses.basicInfo = await axios.post(endpoints.basicInfo, 
-                    { language, city, startDate, endDate });
-                if (responses.basicInfo.data.response.includes('```')) {
-                    responses.basicInfo.data.response = responses.basicInfo.data.response
-                        .replace(/```html\n|```/g, '')
-                        .replace(/\n\s+\+\s+/g, '');
-                }
-                validateResponse(responses.basicInfo, 'basicInfo');
-            } catch (error) {
-                console.error('Basic Info API error:', error.response?.data || error.message);
-                throw new Error(`Basic Info API failed: ${error.message}`);
-            }
-
-            // Details
-            try {
-                console.log('Calling Details API:', endpoints.details);
-                responses.details = await axios.post(endpoints.details, 
-                    { language, city });
-                if (responses.details.data.response.includes('```')) {
-                    responses.details.data.response = responses.details.data.response
-                        .replace(/```html\n|```/g, '')
-                        .replace(/\n\s+\+\s+/g, '');
-                }
-                validateResponse(responses.details, 'details');
-            } catch (error) {
-                console.error('Details API error:', error.response?.data || error.message);
-                throw new Error(`Details API failed: ${error.message}`);
-            }
-
-            // Itinerary
-            try {
-                console.log('Calling Itinerary API:', endpoints.itinerary);
-                responses.itinerary = await axios.post(endpoints.itinerary, 
-                    { language, city, startDate, endDate }, 
-                    { 
+                console.log('Calling APIs in parallel');
+                
+                // Make all API calls in parallel
+                const [basicInfoResp, detailsResp, itineraryResp, conclusionResp] = await Promise.all([
+                    axios.post(endpoints.basicInfo, { language, city, startDate, endDate }),
+                    axios.post(endpoints.details, { language, city }),
+                    axios.post(endpoints.itinerary, { language, city, startDate, endDate }, { 
                         maxBodyLength: Infinity,
                         maxContentLength: Infinity 
-                    }
-                );
-                if (responses.itinerary.data.response.includes('```')) {
-                    responses.itinerary.data.response = responses.itinerary.data.response
-                        .replace(/```html\n|```/g, '')
-                        .replace(/\n\s+\+\s+/g, '');
-                }
+                    }),
+                    axios.post(endpoints.conclusion, { language, city, startDate, endDate })
+                ]);
+            
+                // Store responses
+                responses.basicInfo = basicInfoResp;
+                responses.details = detailsResp;
+                responses.itinerary = itineraryResp;
+                responses.conclusion = conclusionResp;
+            
+                // Validate each response
+                validateResponse(responses.basicInfo, 'basicInfo');
+                validateResponse(responses.details, 'details');
                 validateResponse(responses.itinerary, 'itinerary');
-            } catch (error) {
-                console.error('Itinerary API error:', error.response?.data || error.message);
-                console.error('Itinerary API error details:', {
-                    message: error.message,
-                    code: error.code,
-                    responseSize: error.response?.data ? JSON.stringify(error.response.data).length : 'N/A'
-                });
-                throw new Error(`Itinerary API failed: ${error.message}`);
-            }
-
-            // Conclusion
-            try {
-                console.log('Calling Conclusion API:', endpoints.conclusion);
-                responses.conclusion = await axios.post(endpoints.conclusion, 
-                    { language, city, startDate, endDate });
-                if (responses.conclusion.data.response.includes('```')) {
-                    responses.conclusion.data.response = responses.conclusion.data.response
-                        .replace(/```html\n|```/g, '')
-                        .replace(/\n\s+\+\s+/g, '');
-                }
                 validateResponse(responses.conclusion, 'conclusion');
+            
             } catch (error) {
-                console.error('Conclusion API error:', error.response?.data || error.message);
-                throw new Error(`Conclusion API failed: ${error.message}`);
+                console.error("API call error:", error);
+                throw new Error(`API calls failed: ${error.message}`);
             }
 
             // Log responses before combining
@@ -170,10 +127,6 @@ module.exports = async (req, res) => {
                     details: err.message
                 });
             }
-
-            // JSON.stringify( { generatedContent } ); // This will throw if invalid
-            res.json({ generatedContent });
-
 
         } catch (error) {
             console.error("Error in processing request:", error);
