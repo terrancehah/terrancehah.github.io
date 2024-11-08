@@ -197,7 +197,7 @@ p {
   background-color: #ecf8ff;
   border-radius: 10px;
   box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
-  /* border: 2.5px solid #ffffff; */
+  border: 2.5px solid #ffffff;
 } */
 
 .date-picker-container {
