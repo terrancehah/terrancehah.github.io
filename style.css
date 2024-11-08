@@ -132,8 +132,9 @@ footer h4 {
         padding: 1% 2%;
     }
     .contacts {
-        /* top: 5%; */
-        margin: 0vw 0.6vw;
+        padding: 0vw 0.6vw;
+        margin: 0 0.5vw;
+        top: 0vw;
     }
     header img {
         width: 5.5vw;
