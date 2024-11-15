@@ -72,7 +72,7 @@
                     <form id="trip-form" class="w-full mx-auto">
 
                         <!-- Title and subtitle -->
-                        <div class="relative z-10 space-y-2 p-3 text-center w-90% lg:w-4/5 md:w-4/5 mx-auto">
+                        <div class="relative z-10 space-y-2 p-3 text-center w-90% lg:w-4/5 md:w-4/5 mx-auto z-2">
                             <div>
                                 <h1 class="font-caveat font-bold text-3xl md:text-4xl lg:text-[3.5rem] leading-tight md:leading-tight lg:leading-tight text-primary">
                                     Welcome to Travel-Rizz:
@@ -340,6 +340,7 @@
                         minDate: today,
                         mode: "range",
                         static: true,
+                        maxRange: 5,
                         appendTo: document.getElementById('start-calendar'),
                         onChange: function(selectedDates, dateStr) {
                             if (selectedDates.length === 2) {
@@ -384,7 +385,7 @@
                     var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
                     var city = document.getElementById("destination").value;
                     var startDate = document.getElementById("start-date").value;
-                    var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
+                    var endDate = document.getElementById("hidden-end-date").value;                    
                     var language = document.getElementById("language").value;
                     var budget = document.getElementById("budget").value;
 
