@@ -6,6 +6,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link href="./style.css" type="text/css" rel="stylesheet">
             <link href="./travel-rizz.css" type="text/css" rel="stylesheet">
+            <link href="./dist/output.css" rel="stylesheet">
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
             <link rel="icon" type="image/x-icon" href="/resources/TH-logo.png">
             <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -28,21 +29,38 @@
         </head>
 
         <body>
-            <header>
-                <h1>Travel-Rizz</h1>
-                <nav>
-                    <a class="navbutton" href="./index.html">Home</a>
-                    <a class="navbutton" href="./articles.html">Articles</a>
-                    <a class="navbutton active" href="./projects.html">Projects</a>
-                    <a class="navbutton" href="./playground.html">Playground</a>
-                </nav>
-                    <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png" alt="facebook"></a>
-                    <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png" alt="instagram"></a>
-                    <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png" alt="linkedin"></a>
-                    <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png" alt="github"></a>
-                <style>
-                    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-                </style>
+            <header class="w-full inline-block">
+                <div class="flex flex-col md:flex-row justify-between items-center p-2.5 sm:p-3">
+                    <!-- Left side: Logo and Nav -->
+                    <div class="flex flex-col md:flex-row items-center w-full sm:w-auto gap-1">
+                        <h1 class="block font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:w-auto">
+                            Travel-Rizz
+                        </h1>
+                        
+                        <nav class="flex flex-wrap justify-center gap-1">
+                            <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                            <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Articles</a>
+                            <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Projects</a>
+                            <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                        </nav>
+                    </div>
+                
+                    <!-- Right side: Social Icons -->
+                    <div class="flex items-center gap-4 mt-2 md:mt-0">
+                        <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                            <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                        </a>
+                        <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                            <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                        </a>
+                        <a href="https://linkedin.com/terrancehah/" target="_blank" class="w-8 h-8">
+                            <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                        </a>
+                        <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                            <img src="./resources/github.png" alt="github" class="w-full h-full">
+                        </a>
+                    </div>
+                </div>
             </header>
             
             <main>
@@ -51,52 +69,143 @@
                         Your browser does not support the video tag.
                     </video>
 
-                    <div class="intro-caption">
-                        <h1 class="heading">Welcome to Travel-Rizz: 
-                            <br>Your Personalized Journey Awaits</h1>
-                    <h3 class="subheading">Discover the joy of seamless travel planning with Travel-Rizz, your friendly AI travel assistant.</h3>
-                    </div>
+                    <form id="trip-form" class="w-full mx-auto">
 
-                    <div class="itinerary-planner">   
-                        <form id="trip-form">
-                            <div class="destination-input-form" action="">
-                                <input type="search" id="destination"name="city" placeholder="Any place in your mind?" autocomplete="off">
-                                <div id="cityList"></div>
-                            </div>                
-                            <div class="calendar-container">
-                                <div class="planner-input-form inline-calendar" id="start-calendar">
-                                    <input id="start-date" name="startDate" class="date-picker planner-input-form" placeholder="Start Date" readonly required>
-                                </div>
-                            </div>
-                            <div class="calendar-container">
-                                <div class="planner-input-form inline-calendar" id="end-calendar">
-                                    <input id="end-date" name="endDate" class="date-picker planner-input-form" placeholder="End Date" readonly required>
-                                    <input type="hidden" id="hidden-end-date" name="endDate">
-                                </div>
-                            </div>
-
+                        <!-- Title and subtitle -->
+                        <div class="relative z-10 space-y-2 p-3 text-center w-90% lg:w-4/5 md:w-4/5 mx-auto">
                             <div>
-                                <select id="language">
-                                    <option value="en">English</option>
-                                    <option value="ms">Malay (Bahasa Melayu)</option>
-                                    <option value="es">Español</option>
-                                    <option value="fr">Français</option>
-                                    <option value="de">Deutsch</option>
-                                    <option value="it">Italiano</option>
-                                    <option value="cs">Czech (Čeština)</option>
-                                    <option value="zh-CN">Simplified Chinese (简体中文)</option>
-                                    <option value="zh-TW">Traditional Chinese (繁體中文)</option>
-                                    <option value="ja">Japanese (日本語)</option>
-                                    <option value="ko">Korean (한국어)</option>
-                                </select>
+                                <h1 class="font-caveat font-bold text-3xl md:text-4xl lg:text-[3.5rem] leading-tight md:leading-tight lg:leading-tight text-primary">
+                                    Welcome to Travel-Rizz:
+                                    <br>Your Personalized Journey Awaits
+                                </h1>
                             </div>
+                            <div>
+                                <h3 class="font-medium text-base md:text-lg lg:text-xl leading-tight md:leading-tight lg:leading-tight text-secondary max-w-3xl mx-auto">
+                                    Discover the joy of seamless travel planning with Travel-Rizz, your friendly AI travel assistant.
+                                </h3>
+                            </div>
+                        </div> 
 
-                            <button id="generate-button" type="submit">Take Me There</button>
-                            <!-- //Test button -->
-                            <!-- <button id="loadTestData" type="submit">Load Test Data</button> -->
+                        <!-- Destination -->
+                        <div class="destination-input-form relative mx-auto"> 
+                            <input 
+                                type="search" 
+                                id="destination"
+                                name="city" 
+                                placeholder="Let's go somewhere?" 
+                                autocomplete="off"
+                                class="w-80 sm:w-80 md:w-[40%] lg:w-[35%] xl:w-96 h-12 relative cursor-text text-lg px-4 py-2 bg-white bg-opacity-80 border border-[#b8b8bb] rounded-md text-gray-800 shadow-inner font-raleway transition-all duration-100 ease-in-out focus:border-[#456789] focus:shadow-sm"
+                            >
+                            <div id="cityList"></div>
+                        </div>
+                        
+                        <!-- Calendar and filters -->
+                        <div class="flex flex-col md:flex-row mx-auto my-2 justify-center items-center w-full md:gap-8">
 
-                        </form>
-                    </div>
+                            <!-- Calendar container -->
+                            <div class="flex flex-col mx-0 my-3 items-center">
+                            
+                                <!-- Dates box -->
+                                <input 
+                                        id="start-date" 
+                                        name="startDate" 
+                                        class="w-80 h-12 px-4 py-2 text-lg font-raleway text-gray-700 bg-white bg-opacity-80 border border-[#b8b8bb] rounded-md shadow-inner cursor-pointer transition-all duration-100 ease-in-out focus:border-[#456789] focus:shadow-sm"
+                                        placeholder="Start and End Dates" 
+                                        readonly 
+                                        required
+                                    >
+                                <input type="hidden" id="hidden-end-date" name="endDate">
+                                
+                                <div id="start-calendar" class="w-full"></div>
+                            </div>
+                            
+                            <!-- Filters Container -->
+                            <div class="flex flex-col mx-0 my-3 w-min items-center">
+
+                                <!-- Travel Style Section -->
+                                <div class="flex flex-col md:w-min w-80 mx-0 mb-1.5 px-5 py-5 border border-[#b8b8bb] rounded-lg bg-white bg-opacity-80">
+                                    
+                                    <!-- Section Title -->
+                                    <label class="text-lg font-raleway font-semibold text-gray-700 mb-2 text-left w-full">Travel Style</label>
+                                    
+                                    <!-- Travel Style Selections Ticks -->
+                                    <div class="flex flex-wrap gap-3 justify-start items-start text-left w-full">
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 font-light transition-colors duration-200">
+                                            <input type="checkbox" name="travel-style" value="natural" class="peer mr-2 appearance-none h-5 w-5 border border-[#b8b8bb] rounded bg-white checked:bg-[#456789] checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[2px] checked:after:left-[3px]">
+                                            <span class="text-left peer-checked:text-secondary">Natural 🍀</span>
+                                            <div class="absolute inset-0 rounded-md bg-[#456789] opacity-0 peer-checked:opacity-100 transition-opacity duration-200 -z-10"></div>
+                                        </label>
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 font-light transition-colors duration-200">
+                                            <input type="checkbox" name="travel-style" value="cultural" class="peer mr-2 appearance-none h-5 w-5 border border-[#b8b8bb] rounded bg-white checked:bg-[#456789] checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[2px] checked:after:left-[3px]">
+                                            <span class="text-left peer-checked:text-secondary">Cultural 🎏</span>
+                                            <div class="absolute inset-0 rounded-md bg-[#456789] opacity-0 peer-checked:opacity-100 transition-opacity duration-200 -z-10"></div>
+                                        </label>
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 font-light transition-colors duration-200">
+                                            <input type="checkbox" name="travel-style" value="foodie" class="peer mr-2 appearance-none h-5 w-5 border border-[#b8b8bb] rounded bg-white checked:bg-[#456789] checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[2px] checked:after:left-[3px]">
+                                            <span class="text-left peer-checked:text-secondary">Foodie 🍱</span>
+                                            <div class="absolute inset-0 rounded-md bg-[#456789] opacity-0 peer-checked:opacity-100 transition-opacity duration-200 -z-10"></div>
+                                        </label>
+                                        <label class="group inline-flex items-center justify-start w-max px-4 py-1.5 border border-[#b8b8bb] ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 font-light transition-colors duration-200">
+                                            <input type="checkbox" name="travel-style" value="adventurous" class="peer mr-2 appearance-none h-5 w-5 border border-[#b8b8bb] rounded bg-white checked:bg-[#456789] checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[2px] checked:after:left-[3px]">
+                                            <span class="text-left peer-checked:text-secondary">Adventurous 🪂</span>
+                                            <div class="absolute inset-0 rounded-md bg-[#456789] opacity-0 peer-checked:opacity-100 transition-opacity duration-200 -z-10"></div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Language Select Section -->
+                                <div class="flex w-[100%] mx-0 my-1.5 items-center">
+                                    <select 
+                                        id="language"
+                                        class="w-full h-12 outline-none cursor-pointer border border-[#b8b8bb] px-2 py-2 text-lg font-raleway text-gray-700 rounded-md bg-white bg-opacity-80 shadow-inner hover:bg-white hover:text-black"
+                                    >
+                                        <option value="" disabled selected>Select Language</option>
+                                        <option value="en">English</option>
+                                        <option value="ms">Malay (Bahasa Melayu)</option>
+                                        <option value="es">Español</option>
+                                        <option value="fr">Français</option>
+                                        <option value="de">Deutsch</option>
+                                        <option value="it">Italiano</option>
+                                        <option value="cs">Czech (Čeština)</option>
+                                        <option value="zh-CN">Simplified Chinese (简体中文)</option>
+                                        <option value="zh-TW">Traditional Chinese (繁體中文)</option>
+                                        <option value="ja">Japanese (日本語)</option>
+                                        <option value="ko">Korean (한국어)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Budget Select Section -->
+                                <div class="flex w-[100%] mx-0 mt-1 items-center">
+                                    <select 
+                                        id="budget"
+                                        class="w-full h-12 outline-none cursor-pointer border border-[#b8b8bb] px-2 py-2 text-lg font-raleway text-gray-700 rounded-md bg-white bg-opacity-80 shadow-inner hover:bg-white hover:text-black"
+                                    >
+                                        <option value="" disabled selected>Select Budget</option>
+                                        <option value="budget">Budget ($ - $$)</option>
+                                        <option value="midrange">Mid-range ($$ - $$$)</option>
+                                        <option value="luxury">Luxury ($$$+)</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- Submit button -->
+                        <div class="w-[90%] md:w-[66%] lg:w-[40%] xl:w-[33%] mx-auto my-4 text-center">
+                            <button 
+                                id="generate-button" 
+                                type="submit"
+                                class="w-[200px] h-12 rounded-lg bg-white text-[#3a7dc9e6] font-raleway font-semibold text-lg shadow-lg hover:bg-[#3a7dc9e6] hover:text-white hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5"
+                            >
+                                Take Me There
+                            </button>
+                        </div>
+                        
+                        <!-- //Test button -->
+                        <!-- <button id="loadTestData" type="submit">Load Test Data</button> -->
+
+                    </form>
             </main>
 
             <div id="popupWindow" class="popup-window">
@@ -221,98 +330,48 @@
                 var currentMode = "";
 
                 function initializeCalendar() {
-                    var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
-                    var wideMode = isMobile ? "mobile" : "desktop";
-
-                    if (currentMode !== wideMode) {
-                        // Destroy existing calendars
-                        if (mainCalendar) {
-                            mainCalendar.destroy();
-                            mainCalendar = null;
+                    if (mainCalendar) {
+                        mainCalendar.destroy();
+                    }
+                    
+                    mainCalendar = flatpickr("#start-calendar", {
+                        inline: true,
+                        dateFormat: "d-m-Y",
+                        minDate: today,
+                        mode: "range",
+                        static: true,
+                        appendTo: document.getElementById('start-calendar'),
+                        onChange: function(selectedDates, dateStr) {
+                            if (selectedDates.length === 2) {
+                                var startDateFormatted = flatpickr.formatDate(selectedDates[0], "d-m-Y");
+                                var endDateFormatted = flatpickr.formatDate(selectedDates[1], "d-m-Y");
+                                document.getElementById("start-date").value = `${startDateFormatted} to ${endDateFormatted}`;
+                                document.getElementById("hidden-end-date").value = endDateFormatted;
+                            } else {
+                                document.getElementById("start-date").value = dateStr;
+                                document.getElementById("hidden-end-date").value = dateStr;
+                            }
                         }
-                        if (endCalendar) {
-                            endCalendar.destroy();
-                            endCalendar = null;
-                        }
+                    });
 
-                        //Mobile mode
-                        if (isMobile) {
-                             // Set a different placeholder for mobile view
-                            document.getElementById("start-date").setAttribute("placeholder", "Start and End Dates");
-
-                            // Initialize the mobile calendar in range mode
-                            mainCalendar = flatpickr("#start-calendar", {
-                                inline: true,
-                                dateFormat: "d-m-Y",
-                                minDate: today,
-                                mode: "range",
-                                onChange: function(selectedDates, dateStr) {
-                                    if (selectedDates.length === 2) {
-                                        // Format and display both dates when two dates are selected
-                                        var startDateFormatted = flatpickr.formatDate(selectedDates[0], "d-m-Y");
-                                        var endDateFormatted = flatpickr.formatDate(selectedDates[1], "d-m-Y");
-                                        document.getElementById("start-date").value = `${startDateFormatted} to ${endDateFormatted}`;
-                                        document.getElementById("hidden-end-date").value = endDateFormatted;
-                                    } else {
-                                        // Display only the start date when one date is selected
-                                        document.getElementById("start-date").value = dateStr;
-                                        document.getElementById("hidden-end-date").value = dateStr;
-                                    }
-                                },
-                            });
-                            document.getElementById("end-calendar").style.display = 'none';
-                            document.getElementById("end-date").required = false;
-                        } else {
-                            // Initialize the main calendar for desktop in single mode
-                            mainCalendar = flatpickr("#start-calendar", {
-                                inline: true,
-                                dateFormat: "d-m-Y",
-                                minDate: today,
-                                onChange: function(selectedDates, dateStr) {
-                                    document.getElementById("start-date").value = dateStr;
-                                    endCalendar.set('minDate', dateStr);
-                                },
-                                onMonthChange: function(selectedDates, dateStr, instance) {
-                                    // Update the month of the end calendar when the main calendar month changes
-                                    var year = instance.currentYear;
-                                    var month = instance.currentMonth;
-                                    endCalendar.jumpToDate(new Date(year, month));
-                                }
-                            });
-
-                            // Initialize the end calendar for desktop
-                            endCalendar = flatpickr("#end-calendar", {
-                                inline: true,
-                                dateFormat: "d-m-Y",
-                                minDate: today,
-                                onChange: function(selectedDates, dateStr) {
-                                    document.getElementById("end-date").value = dateStr;
-                                }
-                            });
-                            document.getElementById("end-date").required = true;
-                            document.getElementById("end-calendar").style.display = 'block';
-                        }
-
-                        // Toggle visibility
-                        document.getElementById("start-calendar").style.display = 'block';
-                        document.getElementById("start-date").style.display = 'relative';
-                        document.getElementById("end-date").style.display = isMobile ? 'none' : 'relative';
-
-                        currentMode = wideMode;
+                    // Center align the calendar
+                    const calendarContainer = document.getElementById('start-calendar');
+                    const calendarElem = calendarContainer.querySelector('.flatpickr-calendar');
+                    if (calendarElem) {
+                        calendarElem.style.margin = '0 auto';
+                        calendarElem.style.position = 'relative';
+                        calendarElem.style.display = 'inline-block';
                     }
                 }
 
-                $(document).ready(function() {
-                    initializeCalendar();
-                });
-
-                var resizeTimer;
-                $(window).resize(function() {
+                // Initialize calendar on load and resize
+                window.addEventListener('load', initializeCalendar);
+                let resizeTimer;
+                window.addEventListener('resize', () => {
                     clearTimeout(resizeTimer);
                     resizeTimer = setTimeout(initializeCalendar, 250);
                 });
             </script>
-
 
             <script>
                 // Listen to the input, parse into JSON format and receive the JSON format response
@@ -327,28 +386,31 @@
                     var startDate = document.getElementById("start-date").value;
                     var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
                     var language = document.getElementById("language").value;
+                    var budget = document.getElementById("budget").value;
 
                     // Log the raw values
                     console.log('Raw form values:', {
                         city,
                         startDate,
                         endDate,
-                        language
+                        language,
+                        budget
                     });
                     
                     // // Validate data before sending
-                    // if (!city || !startDate || !endDate || !language) {
-                    //     document.getElementById("loadingSpinner").style.display = "none";
-                    //     alert('Please fill in all required fields');
-                    //     return;
-                    // }
+                    if (!city || !startDate || !endDate || !language || !budget) {
+                        document.getElementById("loadingSpinner").style.display = "none";
+                        alert('Please fill in all required fields');
+                        return;
+                    }
 
                     // Use explicit object notation
                     var requestData = {
                         "language": language,
                         "city": city,
                         "startDate": startDate,
-                        "endDate": endDate
+                        "endDate": endDate,
+                        "budget": budget
                     };
 
                     var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';

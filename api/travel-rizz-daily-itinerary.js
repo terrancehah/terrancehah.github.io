@@ -73,9 +73,9 @@ const processItineraryContent = async (content, city) => {
 
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
-        const { language, city, startDate, endDate } = req.body;
+        const { language, city, startDate, endDate, budget } = req.body;
 
-        console.log("Received itinerary request for:", { language, city, startDate, endDate });
+        console.log("Received itinerary request for:", { language, city, startDate, endDate, budget });
 
         try {
             const gptResponse = await openai.chat.completions.create({
@@ -83,7 +83,7 @@ module.exports = async (req, res) => {
                 messages: [
                     {"role": "system", "content": "You are an knowledgeable friendly travel assistant specializing in creating detailed daily travel itineraries for cities worldwide."},
                     {"role": "user", "content": 
-                    `In the language of ${language}, please create daily itinerary for a trip to ${city} from ${startDate} to ${endDate}.
+                    `In the language of ${language}, please create daily itinerary for a trip to ${city} from ${startDate} to ${endDate}, with a ${budget} budget level.
                     
                     Response Intros:
                     Each day will take one div.
@@ -92,7 +92,11 @@ module.exports = async (req, res) => {
                     The itinerary for each time session should consist about 3 to 4 sentences, keep them informative.
                     The attractions that are visited each day should not be too far, try to group attractions for each day in walkable distance or nearby area.
                     If possible, briefly introduce how the traveller can get to all the attractions (by foot or public transport, walkable distance, travel time etc).
-                    Also, you can occasionally introduce high-rating famous restaurants or bars near the attractions.
+                    Based on the ${budget} budget level:
+                    - For dining recommendations, suggest restaurants that match the budget level
+                    - For attractions, prioritize those that align with the budget (e.g., free museums for budget travelers, exclusive experiences for luxury)
+                    - Include transportation recommendations suitable for the budget level
+                    Also, you can occasionally introduce high-rating famous restaurants or bars near the attractions that match the budget level.
                     Provide each day's itinerary in about 200 words in one page/div, a word count slightly less than enough for one single A4 page.
 
                     Response Format:
