@@ -356,7 +356,7 @@ input {
   font-size: 1.1em !important;
   border-radius: 4px !important;
   margin: 2px 1px !important;
-  color: #333 !important;
+  /* color: #333 !important; */
   font-weight: 400 !important;
 }
 
