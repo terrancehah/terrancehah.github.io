@@ -108,7 +108,7 @@ module.exports = async (req, res) => {
                     <a href target="_blank"> to replace related website,
                     and <p> for content.
                     For each attraction in the itinerary, you need to provide in the format {PLACE:Attraction Name}.
-                    Example: Start your morning at {PLACE:Tokyo Skytree}, then walk to {PLACE:Senso-ji Temple}.
+                    Example: {PLACE:Tokyo Skytree} or {PLACE:吉隆坡双峰塔}.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
                     
                     Response Tone:
