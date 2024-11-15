@@ -74,10 +74,9 @@ main {
   height: 6.5%;
 } */
 
-header h1 {
+/* header h1 {
   padding: 0.7% 1% 0% 2%;
-
-}
+} */
 
 /* footer {
   height: 6%;
@@ -113,41 +112,6 @@ header, footer {
   z-index: -1;
   opacity: 0.35;
   object-fit: fill;
-}
-
-.intro-caption {
-  position: relative;
-  z-index: 1;
-  margin: 0% 2%;
-  /* padding: 2% 0%; */
-}
-
-.heading {
-    margin: 0% 0%;
-    /* margin-top: 2%; */
-    width: 100%;
-    font-family: Caveat;
-    /* font-size: 4.5vw; */
-    font-size: clamp(2rem, 3.6vw, 4.5rem);
-    line-height: 1.1;
-    font-weight: 700;
-    color:#123e5c;
-    opacity: 1;
-    padding: 0;
-    text-align: center;
-    font-style: normal;
-}
-
-.subheading {    
-  width: 100%;
-  margin: 1% 0%;
-  font-size: clamp(1rem, 1.3vw, 2rem);
-  /* font-size: 2vw; */
-  text-align: center;  
-  font-weight: 500;
-  color:   #0b5567;
-  display: inline-flex;
-  align-items: center;
 }
 
 #prompt {
@@ -218,7 +182,7 @@ p {
 }
 
 .calendar-container {
-  width: 40%;
+  width: 90%;
   display: inline-block;
   margin-bottom: 1%;
 }
@@ -231,7 +195,7 @@ label {
 
 .flatpickr-input {
   display: block !important;
-  padding: 1% 1%;
+  padding: 0% 1%;
   font-size: 1.5vw;
   font-family: Raleway;
 }
@@ -255,38 +219,15 @@ label {
 
 
 .destination-input-form:valid a {
-display: block;
-}
-
-#destination {
-  position: relative;
-  cursor: text;
-  font-size: 1.3vw;
-  line-height: 2vw;
-  padding: 0.5vw 1vw;
-  /* margin: 0.6%; */
-  /* height: 3.5vw; */
-  width: 25%;
-  background-color: #ffffff;
-  border: 1px solid #b8b8bb;
-  border-radius: 6px;
-  color: rgb(35, 38, 59);
-  box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
-  overflow: hidden;
-  transition: all 100ms ease-in-out;
-  &:focus {
-    border: 1.2px solid #456789;
-    box-shadow: 0 2px 0 0 rgb(35 38 59 / 5%);
-    color:#000;
-}
+  display: block;
 }
 
 #cityList {
   display: none;
   position: absolute;
-  top: 77%; /* Position the top edge of the dropdown right below the input box */
-  width: 24.7%; 
-  max-height: 200px; 
+  top: 77%;
+  width: 24.7%;
+  max-height: 200px;
   overflow-y: auto;
   background-color: #ffffff;
   border: 2.5px solid #d6d6e7;
@@ -295,9 +236,6 @@ display: block;
   box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
   z-index: 1000;
   margin: 0;
-  font-family: Raleway;
-  font-size: 1.5vw;
-  line-height: 2vw;
   left: 37.5%;
 }
 
@@ -311,77 +249,7 @@ display: block;
   background-color: #f2f2f2;
 }
 
-#generate-button {
-  font-family: Raleway;
-  display: inline-block;
-  outline: 0;
-  cursor: pointer;
-  border: none;
-  padding: 0 30px;
-  height: 3.2vw;
-  /* line-height: 45px; */
-  border-radius: 10px;
-  background-color: white;
-  color: #3a7dc9e6;
-  font-weight: 600;
-  font-size: 1.3vw;
-  box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
-  /* margin-bottom: 1%; */
-  /* margin-top: 2%; */
-}
 
-#generate-button:hover {
-    background: #3a7dc9e6;
-    color: white;
-    box-shadow: 0 0.6vw 15px #2e536a;
-    transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease;
-    transform: translateY(-2px);
-}
-
-#language {
-  font-family: Raleway;
-  display: inline-block;
-  outline: 0;
-  cursor: pointer;
-  border: 2.5px solid #d6d6e7;
-  padding: 0 10px;
-  margin-bottom: 1%;
-  height: 3.2vw;
-  border-radius: 0vw;
-  background-color: white;
-  color: rgb(35, 38, 59);
-  font-weight: 500;
-  font-size: 1.3vw;
-  box-shadow: inset 0 2px 2px 0 rgb(0 118 255 / 9%);
-}
-
-#language:hover {
-  background: white;
-  color: black;
-  /* box-shadow: inset 4px 4px 4px 0 rgb(0 118 255 / 15%); */
-  /* transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease; */
-  /* transform: translateY(-4px); */
-}
-
-#language-option {
-  /* display: none; */
-  position: absolute;
-  top: 77%; /* Position the top edge of the dropdown right below the input box */
-  width: 24.7%; 
-  max-height: 200px; 
-  overflow-y: auto;
-  background-color: #ffffff;
-  border: 2.5px solid #d6d6e7;
-  border-top: none !important;
-  border-radius: 3px;
-  box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
-  z-index: 1000;
-  margin: 0;
-  font-family: Raleway;
-  font-size: 1.5vw;
-  line-height: 2vw;
-  left: 37.5%;
-}
 
 input {
   position: relative;
@@ -409,52 +277,177 @@ input {
   }
 }
 
-
+/* Base calendar styles */
 .flatpickr-calendar {
+  background-color: white !important;
+  opacity: 0.90 !important;
+  width: 20rem !important; /* Default width for large screens */
+  margin: 0 auto !important;
   display: inline-block !important;
-  position: absolute; /* Position the calendar within the form-group container */
-  right: 100%; /* Position below the input field */
-  left: 0;
-  z-index: 1;
-  font-family: Lato;
-  padding: 1% !important;
-  width: 60% !important;
+  position: relative !important;
+  font-family: Raleway !important;
+  padding: 15px 6px !important;
+  box-sizing: border-box !important;
+  margin-top: 0.6rem !important; /* Add space between input and calendar */
 }
 
-
-.flatpickr-rContainer {
-  max-width: 100% !important;
+/* Month navigation and header */
+.flatpickr-months {
+  height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-.flatpickr-day {
-  margin-top: 0.5% !important;
-  margin-bottom: 0.5% !important;
-  font-size: 1.1vw;
-  height: 32px !important;
-  line-height: 32px !important;
-  /* height: 35px !important; */
-  max-width: 14.2857143% !important;
+.flatpickr-month {
+  height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-
-.flatpickr-days {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: 100% !important;
+.flatpickr-current-month {
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+  width: max-content !important;
+  padding: 10px 0 !important;
+  height: min-content !important;
 }
 
+.flatpickr-monthDropdown-months {
+  font-family: Raleway !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+}
+
+/* Navigation arrows */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  height: min-content !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Weekday headers */
 .flatpickr-weekdays {
-  /* max-width: 100% !important;
-  max-height: 100% !important; */
-  width: 100% !important;
-  font-size: 1.2vw;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-.dayContainer {
-  max-width: 100% !important;
-  min-width: 100% !important;
-  width: 100% !important;
-  max-height: 100% !important;
+.flatpickr-weekday {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #666 !important;
+  background: transparent !important;
+}
+
+/* Calendar days */
+.flatpickr-day {
+  height: 35px !important;
+  line-height: 35px !important;
+  font-size: 1.1em !important;
+  border-radius: 4px !important;
+  margin: 2px 1px !important;
+  color: #333 !important;
+  font-weight: 400 !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: #3a7dc9e6 !important;
+  border-color: #3a7dc9e6 !important;
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+.flatpickr-day:hover {
+  background: #e6e6e6 !important;
+}
+
+.flatpickr-day.today {
+  border-color: #3a7dc9e6 !important;
+  color: #3a7dc9e6 !important;
+  font-weight: 500 !important;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .flatpickr-calendar {
+    width: 100% !important;
+    padding: 15px 6px !important;
+  }
+
+  .flatpickr-current-month {
+    font-size: 1rem !important;
+  }
+
+  .flatpickr-monthDropdown-months {
+    font-size: 1rem !important;
+  }
+
+  .flatpickr-weekday {
+    font-size: 0.8rem !important;
+  }
+
+  .flatpickr-day {
+    height: 35px !important;
+    line-height: 35px !important;
+    font-size: 0.9rem !important;
+    margin: 1px !important;
+  }
+
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    height: 40px !important;
+    padding: 8px !important;
+  }
+
+  .flatpickr-prev-month svg,
+  .flatpickr-next-month svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+/* Small mobile styles */
+@media screen and (max-width: 480px) {
+  .flatpickr-calendar {
+    margin-top: 0.5rem !important;
+    padding: 8px !important;
+  }
+
+  .flatpickr-current-month {
+    font-size: 1.2rem !important;
+  }
+
+  .flatpickr-monthDropdown-months {
+    font-size: 1.2rem !important;
+  }
+
+  .flatpickr-weekday {
+    font-size: 1.1rem !important;
+  }
+
+  .flatpickr-day {
+    height: 32px !important;
+    line-height: 32px !important;
+    font-size: 1.1rem !important;
+    margin: 1px !important;
+  }
+}
+
+/* Keep these styles for placeholder text */
+.date-picker::placeholder {
+  color: #999;
 }
 
 .featurecaption {
@@ -749,13 +742,7 @@ b {
       text-align: center;
     }
 
-    #destination {
-      font-size: 4vw;
-      line-height: 2vw;
-      padding: 0.5vw 2vw;
-      height: 9.5vw;
-      width: 60%;
-    }
+   */
 
     #cityList {
       width: 59%; 
@@ -813,9 +800,9 @@ b {
 
     .flatpickr-prev-month, .flatpickr-next-month {
       z-index: 1 !important;
-      height: 6vw !important;
+      height: min-content !important;
+      padding: 0 !important;
       position: relative !important;
-      padding: 7.48px 0 0 0 !important;
     }
 
 
@@ -826,13 +813,6 @@ b {
       z-index: auto;
       align-items: center;
       margin: 2%;
-    }
-
-    .flatpickr-calendar {
-      left: 0;
-      z-index: 1;
-      padding: 2% !important;
-      width: 90% !important;
     }
 
     .flatpickr-rContainer {
@@ -879,9 +859,9 @@ b {
     }
 
     #language {
-      width: auto;
+      /* width: auto; */
       padding: 0 20px;
-      margin: 2%;
+      /* margin: 2%; */
       height: 10vw;
       border-radius: 3vw;
       font-weight: 500;
@@ -1028,370 +1008,6 @@ b {
     }
 }
 
-/*CSS for tablet and iPad screen*/
-@media  screen and (min-width: 481px) and (max-width: 1024px) {
-
-  h2 {
-    font-size: 4vw;
-  }
-
-  /* header {
-    height: 9%;
-  } */
-
-  /* main {
-    height: 84%;
-  } */
-
-  .heading {    
-    font-size: 7vw;
-    margin: 0% 5%;
-    width: 90%;
-  }
-  
-
-  .subheading {
-    font-size: 3vw;
-  }
-
-
-  /* .intro {
-    position: relative;
-    width: 100%;
-    height: max-content;
-    overflow: hidden;
-  } */
-  
-  #backgroundVideo {
-    /* width: auto; */
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    opacity: 0.35;
-  }
-  
-  .intro-caption {
-    position: relative;
-    z-index: 1;
-    margin: 1% 2%;
-    /* padding: 2% 0%; */
-  }
-
-  .faq {
-    padding: 4vw;
-  }
-
-  .faq p, li {
-    font-size:  3vw;
-    text-align: center;
-  }
-
-  #destination {
-    font-size: 3.5vw;
-    line-height: 20px;
-    padding: 0.5vw 2vw;
-    margin: 0.8%;
-    height: 7.5vw;
-    width: 50%;
-  }
-
-  #cityList {
-    width: 49.5%; 
-    max-height: 300px; 
-    border: 2.5px solid #d6d6e7;
-    border-radius: 3px;
-    box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
-    font-size: 3vw;
-    line-height: 3vw;
-    left: 25%;
-    top: 75%;
-  }
-
-  .city-item {
-    padding: 2.2vw 2vw;
-  }
-
-  .flatpickr-input {
-    display: block !important;
-    padding: 1% 3%;
-    font-size: 4vw;
-  }
-
-  input {
-    font-size: 3.5vw;
-  }
-
-  .date-picker {
-    margin: 0 5px;
-    width: 49%;
-    height: 5.5vw;
-  }
-
-  .flatpickr-prev-month, .flatpickr-next-month {
-    z-index: 1 !important;
-    height: 7vw !important;
-    position: relative !important;
-    padding: 7.48px 0 0 0 !important;
-  }
-
-  .flatpickr-prev-month svg, .flatpickr-next-month svg {
-    height: 70% !important;
-    width: 70% !important;
-  }
-  
-  .flatpickr-months, .flatpickr-month  {
-    height: 6vw !important;
-    width: 100%;
-    position: relative !important;
-  }
-
-  .flatpickr-monthDropdown-months {
-    width: 60% !important;
-  }
-
-
-  .flatpickr-current-month {
-    width: 100% !important;
-    height: auto !important;
-    left: 0 !important;
-  }
-
-  .flatpickr-weekdaycontainer {
-    margin: 3% 0;
-  }
-
-  .flatpickr-rContainer {
-    max-width: 100% !important;
-  }
-
-  .flatpickr-days {
-    max-width: 100% !important;
-    width: 100% !important;
-    max-height: 100% !important;
-  }
-
-  .flatpickr-weekdays {
-    /* max-width: 100% !important;
-    max-height: 100% !important; */
-    width: 100% !important;
-    font-size: 3vw;
-  }
-
-  .dayContainer {
-    max-width: 100% !important;
-    min-width: 100%;
-    width: 100% !important;
-    max-height: 100% !important;
-  }
-
-  .flatpickr-day {
-    margin-top: 2% !important;
-    margin-bottom: 2% !important;
-    font-size: 3.1vw;
-    width: 14.2857143% !important;
-    max-width: none !important;
-  }
-
-  .dayContainer {
-    margin: 2% 0%;
-  }
-  
-
-  .calendar-container {
-    width: 100%;
-    height: auto;
-    display: inline-block;
-    align-items: center;
-    margin: 0;
-  }
-
-
-  .flatpickr-calendar.inline {
-    display: inline-block !important;
-    position: absolute; /* Position the calendar within the form-group container */
-    width: 45%;
-    height: 45%;
-    left: 0;
-    z-index: auto;
-    align-items: center;
-    font-size: 2.8vw;
-    padding-top: 2%;
-    padding-bottom: 3%;
-    padding-left: 3%;    
-    padding-right: 3%;
-  }
-
-  .flatpickr-calendar {
-    left: 0;
-    z-index: 1;
-    padding: 2% !important;
-    width: 70% !important;
-  }
-
-  #slogan {
-    margin: 8% 5%;
-    line-height: 120%;
-    font-weight: 700;
-    font-size: 3.2vw;
-    line-height: 180%;
-  }
-
-  #generate-button {
-    width: auto;
-    padding: 0 5%;
-    height: 8vw;
-    line-height: 45px;
-    border-radius: 3vw;
-    font-weight: 500;
-    font-size: 3vw;
-    box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
-    margin: 1%;
-  }
-
-  #language {
-    width: auto;
-    padding: 0 1%;
-    height: 8vw;
-    border-radius: 2vw;
-    font-weight: 500;
-    font-size: 3vw;
-  }
-  
-  #language-option {
-    font-size: 2.8vw;
-  }
-
-  .popup-window {
-    display: none;
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  }
-
-  .popup-content {
-    background-color: #fefefe;
-    margin: 15% 5%; /* 15% from the top and centered */
-    padding: 5%;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    height: 75%; /* Maximum height */
-    overflow-y: auto; /* Enable scrolling within the popup */
-  }
-
-  .close-btn {
-    color: #aaa;
-    right: 10%;
-    font-size: 5vw;
-    font-weight: bold;
-    position: fixed;
-  }
-
-  .close-btn:hover,
-  .close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .generated-content {
-    text-align: justify;
-    /* line-height: 180%; */
-  }
-
-  .generated-content h1 {
-    text-align: center;
-    font-size: 6vw;
-  }
-
-  .generated-content h2 {
-    font-size: 5vw;
-    line-height: 110%;
-  }
-
-  .generated-content p {
-    font-size: 3.5vw;
-  }
-
-  .generated-content strong {
-    font-size: 3.5vw;
-  }
-
-  .generated-content h3 {
-    font-size: 4.5vw;
-  }
-
-  .generated-content #conclusion {
-    font-size: 4.5vw;
-  }
-
-  #plane {
-    width: 80%;
-    margin: 0% 10%;
-    height: auto;
-  }
-
-  #loadingSpinner p {
-    font-size: 4vw;
-    margin: 0% 15%;
-  }
-
-  #exportPDF {
-    width: 50%;
-    margin: 2% 25%;
-    padding: 0 30px;
-    height: 12vw;
-    line-height: 45px;
-    border-radius: 2.8vw;
-    font-weight: 600;
-    font-size: 4vw;
-    box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
-  }
-
-  b, ul {
-      font-size: 3.5vw;
-      text-align: center;
-  }
-  ul {
-      width: 90%;
-  }
-
-  li {
-      width: 90%;
-      font-size: 4vw;
-  }
-  
-  .button-container {
-      height: 20vw;
-  }
-  .button-wrapper{
-      height: 20vw;
-  }
-  
-  .features {
-      display: block;
-      text-align: center;
-  }
-  
-  .featurecaption {
-    font-size: 3vw;
-  }
-
-  .image {
-      width: 90%;
-      max-width: 300px;
-      display: block;
-      margin: 0 auto;
-  }
-}
 
 
 * {
