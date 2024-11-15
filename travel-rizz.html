@@ -72,7 +72,7 @@
                     <form id="trip-form" class="w-full mx-auto">
 
                         <!-- Title and subtitle -->
-                        <div class="relative z-10 space-y-2 p-3 text-center w-90% lg:w-4/5 md:w-4/5 mx-auto z-2">
+                        <div class="relative space-y-2 p-3 text-center w-90% lg:w-4/5 md:w-4/5 mx-auto z-2">
                             <div>
                                 <h1 class="font-caveat font-bold text-3xl md:text-4xl lg:text-[3.5rem] leading-tight md:leading-tight lg:leading-tight text-primary">
                                     Welcome to Travel-Rizz:
@@ -565,7 +565,7 @@
                     var city = document.getElementById("destination").value;
                     var originalContent = document.getElementById("generatedContent");
                     var startDate = document.getElementById("start-date").value;
-                    var endDate = isMobile ? document.getElementById("hidden-end-date").value : document.getElementById("end-date").value;
+                    var endDate = document.getElementById("end-date").value;
 
                     // Clone the content for PDF generation
                     var contentForPdf = originalContent.cloneNode(true);
