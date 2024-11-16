@@ -73,9 +73,9 @@ const processItineraryContent = async (content, city) => {
 
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
-        const { language, city, startDate, endDate, budget } = req.body;
+        const { language, city, startDate, endDate, budget, travelPreferences } = req.body;
 
-        console.log("Received itinerary request for:", { language, city, startDate, endDate, budget });
+        console.log("Received itinerary request for:", { language, city, startDate, endDate, budget, travelPreferences });
 
         try {
             const gptResponse = await openai.chat.completions.create({
@@ -88,6 +88,8 @@ module.exports = async (req, res) => {
                     Response Intros:
                     Each day will take one div.
                     For each day, start a new div/section/page, plan the schedule so that the travellers can get to 3-4 attractions.
+                    ${travelPreferences ? `Prioritize attractions and activities that match these travel interests: ${travelPreferences.join(', ')}.
+                    Try to include at least one activity or attraction daily that aligns with each selected interest.` : ''}
                     Provide the daily itinerary in a daily schedule form; do not respond in hourly format, separate each day into Morning, Afternoon, Evening and Night time sections.
                     The itinerary for each time session should consist about 3 to 4 sentences, keep them informative.
                     The attractions that are visited each day should not be too far, try to group attractions for each day in walkable distance or nearby area.

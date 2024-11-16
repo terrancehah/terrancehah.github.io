@@ -187,6 +187,11 @@ p {
   margin-bottom: 1%;
 }
 
+.flatpickr-calendar:hover {
+  border-color: #123456;
+  border: 2px;
+}
+
 label {
   text-align: center;
   margin: 0 auto;
@@ -210,11 +215,6 @@ label {
 
 .form-group {
   flex: 1;
-}
-
-.destination-input-form {
-  position: relative;
-  /* margin-bottom: 2%; */
 }
 
 
@@ -267,28 +267,26 @@ input {
   box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
   overflow: hidden;
   transition: all 100ms ease-in-out;
-  &:focus {
-      border: 1.2px solid #456789;
-      box-shadow: 0 2px 0 0 rgb(35 38 59 / 5%);
-      color:#000;
-  }
-  &:placeholder {
-    color: #999; /* Placeholder text color */
-  }
 }
 
 /* Base calendar styles */
 .flatpickr-calendar {
   background-color: white !important;
-  opacity: 0.90 !important;
+  opacity: 1 !important;
   width: 20rem !important; /* Default width for large screens */
-  margin: 0 auto !important;
+  margin: 0px !important;
   display: inline-block !important;
   position: relative !important;
   font-family: Raleway !important;
   padding: 15px 6px !important;
   box-sizing: border-box !important;
+  border-color: #b8b8bb;
+  border-width: 1px;
   margin-top: 0.6rem !important; /* Add space between input and calendar */
+}
+
+.flatpickr-calendar.inline {
+  top: 0px !important;
 }
 
 /* Month navigation and header */
@@ -867,19 +865,6 @@ b {
       margin: 1%;
     }
 
-    #language {
-      /* width: auto; */
-      padding: 0 20px;
-      /* margin: 2%; */
-      height: 10vw;
-      border-radius: 3vw;
-      font-weight: 500;
-      font-size: 4.3vw;
-    }
-    
-    #language-option {
-      font-size: 4vw;
-    }
 
 
     .popup-window {

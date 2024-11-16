@@ -1069,8 +1069,8 @@ module.exports = {
       },
       
       colors: {
-        'primary': '#123e5c',
-        'secondary': '#0b5567',
+        'primary': '#123456',
+        'secondary': '#456789',
       }
     }
   },
