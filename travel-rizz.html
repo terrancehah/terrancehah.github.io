@@ -33,15 +33,15 @@
                 <div class="flex flex-col md:flex-row justify-between items-center p-2.5 sm:p-3">
                     <!-- Left side: Logo and Nav -->
                     <div class="flex flex-col md:flex-row items-center w-full sm:w-auto gap-1">
-                        <h1 class="block font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:w-auto">
+                        <h1 class="block font-lato font-semibold text-[#1234576] text-2xl md:text-3xl p-0 text-center sm:w-auto">
                             Travel-Rizz
                         </h1>
                         
                         <nav class="flex flex-wrap justify-center gap-1">
-                            <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
-                            <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Articles</a>
-                            <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Projects</a>
-                            <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                            <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-secondary hover:bg-[#c0e9fc]">Home</a>
+                            <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-secondary hover:bg-[#c0e9fc]">Articles</a>
+                            <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-secondary hover:bg-[#c0e9fc] bg-[#c0e9fc]">Projects</a>
+                            <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-secondary hover:bg-[#c0e9fc]">Playground</a>
                         </nav>
                     </div>
                 
@@ -81,7 +81,7 @@
                             </div>
                             <div>
                                 <h3 class="font-medium text-base md:text-lg lg:text-xl leading-tight md:leading-tight lg:leading-tight text-secondary max-w-3xl mx-auto">
-                                    Discover the joy of seamless travel planning with Travel-Rizz, your friendly AI travel assistant.
+                                    Discover the joy of seamless travel planning with Travel-Rizz, your convenient AI travel assistant.
                                 </h3>
                             </div>
                         </div> 
@@ -92,10 +92,10 @@
                                 type="search" 
                                 id="destination"
                                 name="city" 
-                                placeholder="Let's go somewhere?" 
+                                placeholder="Let's go somewhere!" 
                                 autocomplete="off"
-                                class="w-80 sm:w-80 md:w-[40%] lg:w-[35%] xl:w-96 h-12 relative cursor-text text-lg px-4 py-2 bg-white bg-opacity-80 border border-[#b8b8bb] rounded-md text-gray-800 shadow-inner font-raleway transition-all duration-100 ease-in-out focus:border-[#456789] focus:shadow-sm"
-                            >
+                                class="w-80 sm:w-80 md:w-[40%] lg:w-[35%] xl:w-96 h-12 relative cursor-text text-lg px-4 py-2 bg-white bg-opacity-80 border-1 border-secondary rounded-md text-gray-800 shadow-inner font-raleway transition-all duration-100 ease-in-out focus:border-secondary focus:shadow-sm focus:bg-opacity-100 hover:border-secondary hover:border-2 focus:border-2"
+                                >
                             <div id="cityList"></div>
                         </div>
                         
@@ -109,8 +109,8 @@
                                 <input 
                                         id="start-date" 
                                         name="startDate" 
-                                        class="w-80 h-12 px-4 py-2 text-lg font-raleway text-gray-700 bg-white bg-opacity-80 border border-[#b8b8bb] rounded-md shadow-inner cursor-pointer transition-all duration-100 ease-in-out focus:border-[#456789] focus:shadow-sm"
-                                        placeholder="Start and End Dates" 
+                                        class="w-80 h-12 px-4 py-2 text-lg font-raleway text-gray-700 bg-white bg-opacity-90 border-1 rounded-md shadow-inner cursor-pointer transition-all duration-100 ease-in-out hover:border-1 focus:border-secondary focus:shadow-sm"
+                                        placeholder="Select dates below" 
                                         readonly 
                                         required
                                     >
@@ -120,36 +120,54 @@
                             </div>
                             
                             <!-- Filters Container -->
-                            <div class="flex flex-col mx-0 my-3 w-min items-center">
+                            <div class="flex flex-col mx-0 my-3 w-min-80 items-center">
 
                                 <!-- Travel Style Section -->
-                                <div class="flex flex-col md:w-min w-80 mx-0 mb-1.5 px-5 py-5 border border-[#b8b8bb] rounded-lg bg-white bg-opacity-80">
+                                <div class="flex flex-col max-w-96 w-80 my-auto mx-0 mb-1 px-4 py-4 border border-[#b8b8bb] rounded-lg bg-white bg-opacity-100 hover:border-secondary hover:border-1 hover:shadow-md">
                                     
                                     <!-- Section Title -->
-                                    <label class="text-lg font-raleway font-semibold text-gray-700 mb-2 text-left w-full">Travel Style</label>
+                                    <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-full">Travel Preferences</label>
+                                    <label class="text-md font-raleway font-light text-gray-700 mb-2 text-left w-full">You can choose one or more</label>
                                     
                                     <!-- Travel Style Selections Ticks -->
-                                    <div class="flex flex-wrap gap-3 justify-start items-start text-left w-full">
-                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 font-light transition-colors duration-200">
-                                            <input type="checkbox" name="travel-style" value="natural" class="peer mr-2 appearance-none h-5 w-5 border border-[#b8b8bb] rounded bg-white checked:bg-[#456789] checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[2px] checked:after:left-[3px]">
-                                            <span class="text-left peer-checked:text-secondary">Natural 🍀</span>
-                                            <div class="absolute inset-0 rounded-md bg-[#456789] opacity-0 peer-checked:opacity-100 transition-opacity duration-200 -z-10"></div>
+                                    <div class="flex flex-wrap gap-y-3 gap-x-2 justify-start items-start text-left w-full">
+                                        
+                                        <!-- Cultural and Heritage Label -->
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] hover:bg-[#e9edf0] hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="culture and heritage" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Culture & Heritage 🎏</span>
                                         </label>
-                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 font-light transition-colors duration-200">
-                                            <input type="checkbox" name="travel-style" value="cultural" class="peer mr-2 appearance-none h-5 w-5 border border-[#b8b8bb] rounded bg-white checked:bg-[#456789] checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[2px] checked:after:left-[3px]">
-                                            <span class="text-left peer-checked:text-secondary">Cultural 🎏</span>
-                                            <div class="absolute inset-0 rounded-md bg-[#456789] opacity-0 peer-checked:opacity-100 transition-opacity duration-200 -z-10"></div>
+
+                                        <!-- Natural Label -->
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] hover:bg-[#e9edf0] hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="nature" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Nature 🍀</span>
                                         </label>
-                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 font-light transition-colors duration-200">
-                                            <input type="checkbox" name="travel-style" value="foodie" class="peer mr-2 appearance-none h-5 w-5 border border-[#b8b8bb] rounded bg-white checked:bg-[#456789] checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[2px] checked:after:left-[3px]">
-                                            <span class="text-left peer-checked:text-secondary">Foodie 🍱</span>
-                                            <div class="absolute inset-0 rounded-md bg-[#456789] opacity-0 peer-checked:opacity-100 transition-opacity duration-200 -z-10"></div>
+
+                                        <!-- Adventurous Label -->
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] hover:bg-[#e9edf0] hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="adventure" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Adventure 🪂</span>
                                         </label>
-                                        <label class="group inline-flex items-center justify-start w-max px-4 py-1.5 border border-[#b8b8bb] ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 font-light transition-colors duration-200">
-                                            <input type="checkbox" name="travel-style" value="adventurous" class="peer mr-2 appearance-none h-5 w-5 border border-[#b8b8bb] rounded bg-white checked:bg-[#456789] checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[2px] checked:after:left-[3px]">
-                                            <span class="text-left peer-checked:text-secondary">Adventurous 🪂</span>
-                                            <div class="absolute inset-0 rounded-md bg-[#456789] opacity-0 peer-checked:opacity-100 transition-opacity duration-200 -z-10"></div>
+                                        
+                                        <!-- Arts and Museum Label -->
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] hover:bg-[#e9edf0] hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="art and museum" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Arts & Museum 🎨</span>
                                         </label>
+
+                                        <!-- Foodie Label -->
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] hover:bg-[#e9edf0] hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="foodie" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Foodie 🍱</span>
+                                        </label>
+                                        
+                                        <!-- Leisure Label -->
+                                        <label class="group inline-flex items-center justify-start px-4 py-1.5 border border-[#b8b8bb] hover:bg-[#e9edf0] hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="leisure" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Leisure 🌇</span>
+                                        </label>
+                                        
                                     </div>
                                 </div>
 
@@ -157,7 +175,7 @@
                                 <div class="flex w-[100%] mx-0 my-1.5 items-center">
                                     <select 
                                         id="language"
-                                        class="w-full h-12 outline-none cursor-pointer border border-[#b8b8bb] px-2 py-2 text-lg font-raleway text-gray-700 rounded-md bg-white bg-opacity-80 shadow-inner hover:bg-white hover:text-black"
+                                        class="w-full h-12 outline-none cursor-pointer border border-[#b8b8bb] px-2 py-2 text-lg font-raleway text-gray-400 rounded-md bg-white bg-opacity-100 shadow-inner hover:bg-[#e9edf0] hover:border-[#6082a4] hover:shadow-lg"
                                     >
                                         <option value="" disabled selected>Select Language</option>
                                         <option value="en">English</option>
@@ -178,7 +196,7 @@
                                 <div class="flex w-[100%] mx-0 mt-1 items-center">
                                     <select 
                                         id="budget"
-                                        class="w-full h-12 outline-none cursor-pointer border border-[#b8b8bb] px-2 py-2 text-lg font-raleway text-gray-700 rounded-md bg-white bg-opacity-80 shadow-inner hover:bg-white hover:text-black"
+                                        class="w-full h-12 outline-none cursor-pointer border border-[#b8b8bb] px-2 py-2 text-lg font-raleway text-gray-400 rounded-md bg-white bg-opacity-100 shadow-inner hover:bg-[#e9edf0] hover:border-[#6082a4] hover:shadow-lg"
                                     >
                                         <option value="" disabled selected>Select Budget</option>
                                         <option value="budget">Budget ($ - $$)</option>
@@ -388,6 +406,8 @@
                     var endDate = document.getElementById("hidden-end-date").value;                    
                     var language = document.getElementById("language").value;
                     var budget = document.getElementById("budget").value;
+                    var travelPreferences = Array.from(document.querySelectorAll('input[name="travel-preference"]:checked'))
+                    .map(checkbox => checkbox.value);
 
                     // Log the raw values
                     console.log('Raw form values:', {
@@ -395,7 +415,8 @@
                         startDate,
                         endDate,
                         language,
-                        budget
+                        budget,
+                        travelPreferences
                     });
                     
                     // // Validate data before sending
@@ -411,7 +432,8 @@
                         "city": city,
                         "startDate": startDate,
                         "endDate": endDate,
-                        "budget": budget
+                        "budget": budget,
+                        "travelPreferences": travelPreferences
                     };
 
                     var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';

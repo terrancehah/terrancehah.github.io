@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
-        const { language, city, startDate, endDate,budget } = req.body;
+        const { language, city, startDate, endDate, budget, travelPreferences } = req.body;
         const isLocal = process.env.NODE_ENV === 'development';
         
         try {
@@ -76,7 +76,7 @@ module.exports = async (req, res) => {
                 const [basicInfoResp, detailsResp, itineraryResp, conclusionResp] = await Promise.all([
                     axios.post(endpoints.basicInfo, { language, city, startDate, endDate }),
                     axios.post(endpoints.details, { language, city }),
-                    axios.post(endpoints.itinerary, { language, city, startDate, endDate, budget }, { 
+                    axios.post(endpoints.itinerary, { language, city, startDate, endDate, budget, travelPreferences }, { 
                         maxBodyLength: Infinity,
                         maxContentLength: Infinity 
                     }),
