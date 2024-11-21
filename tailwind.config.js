@@ -1071,6 +1071,8 @@ module.exports = {
       colors: {
         'primary': '#123456',
         'secondary': '#456789',
+        'sky-blue': '#4a88c6',
+        'light-blue': '#e3f0f7',
       }
     }
   },
