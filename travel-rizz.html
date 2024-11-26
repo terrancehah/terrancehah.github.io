@@ -79,7 +79,7 @@
                         Your browser does not support the video tag.
                     </video>
 
-                    <form id="trip-form" class="w-full mx-auto">
+                    <form id="trip-form" class="flex flex-col w-full mx-auto justify-center items-center">
 
                         <!-- Title and subtitle -->
                         <div class="relative space-y-2 p-3 text-center w-90% lg:w-4/5 md:w-4/5 mx-auto z-2">
@@ -96,30 +96,48 @@
                             </div>
                         </div> 
 
-                        <!-- Destination -->
-                        <div class="destination-input-form relative mx-auto"> 
-                            <input 
-                                type="search" 
-                                id="destination"
-                                name="city" 
-                                placeholder="Let's go somewhere!" 
-                                autocomplete="off"
-                                class="w-80 sm:w-80 md:w-[40%] lg:w-[35%] xl:w-96 h-12 relative cursor-text text-lg px-4 py-2 bg-white bg-opacity-80 border-1 border-secondary rounded-md text-gray-800 shadow-inner font-raleway transition-all duration-100 ease-in-out focus:border-secondary focus:shadow-sm focus:bg-opacity-100 hover:border-secondary hover:border-2 focus:border-2"
-                                >
-                            <div id="cityList"></div>
-                        </div>
                         
-                        <!-- Calendar and filters -->
-                        <div class="flex flex-col md:flex-row mx-auto my-2 justify-center items-center w-full md:gap-8">
+                        <!-- Destination, Calendar and filters -->
+                        <div class="flex flex-wrap md:w-[750px] relative bg-white mx-2 my-2 justify-center p-0 rounded-3xl items-center w-min h-min group/mainContainer">
+
+                            <!-- Destination -->
+                            <div class="destination-input-form flex flex-col items-center px-4 py-4 w-full basis-full rounded-t-3xl order-1 z-10 focus-within:z-20
+                            group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                            focus-within:bg-white focus-within:hover:bg-white  hover:bg-light-blue focus-within:shadow-all ">
+                                
+                                <!-- Destination label-->
+                                <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-80 sm:w-80 md:w-[60%] lg:w-[50%] xl:w-96 px-4 py-0">Destination</label>
+
+                                <input 
+                                    type="search" 
+                                    id="destination"
+                                    name="city" 
+                                    placeholder="🔍 Search your destination here" 
+                                    autocomplete="off"
+                                    class="w-80 sm:w-80 md:w-[60%] lg:w-[50%] xl:w-96 relative cursor-text text-md px-4 py-0 bg-inherit rounded-md text-gray-700 font-normal font-raleway"
+                                    >
+                                <div id="cityList"></div>
+                            </div>
+
+                            <!-- Horizontal Separator -->
+                            <div class="h-[1px] w-[100%] my-0 border-0 order-2 basis-[100%]
+                            group-active/mainContainer:[&:not(:active)]:bg-light-blue 
+                            group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                            hover:bg-light-blue flex items-center justify-center">
+                                <div class="h-[1px] w-[90%] md:w-[95%] bg-gray-300"></div>
+                            </div>
 
                             <!-- Calendar container -->
-                            <div class="flex flex-col mx-0 my-3 items-center">
+                            <div class="flex flex-col md:basis-1/2 mx-0 pt-3 py-6
+                            px-4 pl-6 items-center justify-center md:rounded-bl-3xl order-3 focus-within:z-20 z-10 focus-within:shadow-all
+                            group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                            hover:bg-light-blue focus-within:hover:bg-white focus-within:bg-white">
                             
                                 <!-- Dates box -->
                                 <input 
                                         id="start-date" 
                                         name="startDate" 
-                                        class="w-80 h-12 px-4 py-2 text-lg font-raleway text-gray-700 bg-white bg-opacity-90 border-1 rounded-md shadow-inner cursor-pointer transition-all duration-100 ease-in-out hover:border-1 focus:border-secondary focus:shadow-sm"
+                                        class="w-80 h-8 px-4 py-0 pb-3 text-md font-raleway font-light text-gray-700 cursor-pointer bg-inherit"
                                         placeholder="Select dates below" 
                                         readonly 
                                         required
@@ -129,7 +147,7 @@
                                 <!-- Calendar placeholder before loading -->
                                 <div id="calendar-loading" class="flex flex-col mx-0 my-0 items-center">
 
-                                    <div class="w-80 h-[20.5rem] bg-white rounded-lg shadow-md px-4 py-6">
+                                    <div class="w-80 h-[19.5rem] bg-white rounded-lg px-4 py-4">
                                         
                                         <!-- Current month header -->
                                         <div class="flex justify-center mb-3">
@@ -202,12 +220,19 @@
                                 <!-- Start-calendar -->
                                 <div id="start-calendar" class="w-full"></div>
                             </div>
+
+                            <!-- Vertical Separator -->
+                            <!-- <div class="h-[90%] w-[1px] mx-0 bg-gray-300 border-0"></div> -->
                             
                             <!-- Filters Container -->
-                            <div class="flex flex-col mx-0 my-3 w-min-80 items-center">
+                            <div class="flex flex-col mx-0 my-0 md:basis-1/2 items-center rounded-br-3xl justify-center order-3">
 
                                 <!-- Travel Style Section -->
-                                <div class="flex flex-col max-w-96 w-80 my-auto mx-0 mb-1 px-4 py-4 border border-[#b8b8bb] rounded-lg bg-white bg-opacity-100 hover:border-secondary hover:border-1 hover:shadow-md">
+                                <div class="flex flex-col w-full my-0 mx-0 px-4 py-4 focus-within:z-20 
+                                focus-within:shadow-all active:shadow-all has-[:focus]:shadow-all has-[:active]:shadow-all
+                                focus-within:bg-white hover:focus-within:bg-white 
+                                group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                                [&:not(:has(:focus,:active))]:hover:bg-light-blue">
                                     
                                     <!-- Section Title -->
                                     <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-full">Travel Preferences</label>
@@ -219,13 +244,25 @@
                                         <!-- Cultural and Heritage Label -->
                                         <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
                                             <input type="checkbox" name="travel-preference" value="culture and heritage" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
-                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Culture & Heritage 🎏</span>
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Culture 🎏</span>
                                         </label>
 
                                         <!-- Natural Label -->
                                         <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
                                             <input type="checkbox" name="travel-preference" value="nature" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
                                             <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Nature 🍀</span>
+                                        </label>
+
+                                        <!-- Food Label -->
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="foodie" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Foodie 🍱</span>
+                                        </label>
+                                        
+                                        <!-- Leisure Label -->
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="leisure" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Leisure 🌇</span>
                                         </label>
 
                                         <!-- Adventurous Label -->
@@ -240,28 +277,29 @@
                                             <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Arts & Museum 🎨</span>
                                         </label>
 
-                                        <!-- Foodie Label -->
-                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
-                                            <input type="checkbox" name="travel-preference" value="foodie" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
-                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Foodie 🍱</span>
-                                        </label>
                                         
-                                        <!-- Leisure Label -->
-                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
-                                            <input type="checkbox" name="travel-preference" value="leisure" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
-                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Leisure 🌇</span>
-                                        </label>
                                         
                                     </div>
                                 </div>
 
+                                <!-- Horizontal Separator -->
+                                <div class="h-[1px] w-[100%] my-0 border-0 
+                                group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                                hover:bg-light-blue flex items-center justify-center">
+                                    <div class="h-[1px] w-[90%] bg-gray-300"></div>
+                                </div>
+
                                 <!-- Language Select Section -->
-                                <div class="flex w-[100%] mx-0 my-1.5 items-center">
+                                <div class="flex w-full mx-0 my-0 items-center pl-2 pr-4 relative focus-within:z-20 z-10
+                                focus-within:bg-white focus-within:hover:bg-white 
+                                focus-within:shadow-all  has-[:focus]:shadow-all has-[:active]:shadow-all
+                                group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                                hover:bg-light-blue">
                                     <select 
                                         id="language"
-                                        class="w-full h-12 outline-none cursor-pointer border border-[#b8b8bb] px-2 py-2 text-lg font-raleway text-gray-400 rounded-md bg-white bg-opacity-100 shadow-inner hover:bg-light-blue hover:border-[#6082a4] hover:shadow-lg"
+                                        class="w-full h-12 outline-none cursor-pointer px-2 py-2 text-lg font-raleway font-light text-gray-700 bg-inherit appearance-none"
                                     >
-                                        <option value="" disabled selected>Select Language</option>
+                                        <option value="" disabled selected class="text-gray-500">Select Language</option>
                                         <option value="en">English</option>
                                         <option value="ms">Malay (Bahasa Melayu)</option>
                                         <option value="es">Español</option>
@@ -274,31 +312,55 @@
                                         <option value="ja">Japanese (日本語)</option>
                                         <option value="ko">Korean (한국어)</option>
                                     </select>
+                                    <!-- Custom dropdown arrow -->
+                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="black">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <!-- Horizontal Separator -->
+                                <div class="h-[1px] w-[100%] my-0 border-0 
+                                group-active/mainContainer:[&:not(:active)]:bg-light-blue 
+                                group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                                hover:bg-light-blue flex items-center justify-center">
+                                    <div class="h-[1px] w-[90%] bg-gray-300"></div>
                                 </div>
 
                                 <!-- Budget Select Section -->
-                                <div class="flex w-[100%] mx-0 mt-1 items-center">
+                                <div class="flex w-full mx-0 my-0 items-center pl-2 pr-4 pb-0.5 relative focus-within:z-20 z-10
+                                hover:bg-light-blue focus-within:bg-white focus-within:hover:bg-white focus-within:shadow-all 
+                                has-[:focus]:shadow-all has-[:active]:shadow-all
+                                group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                                md:rounded-bl-none rounded-b-3xl">
                                     <select 
                                         id="budget"
-                                        class="w-full h-12 outline-none cursor-pointer border border-[#b8b8bb] px-2 py-2 text-lg font-raleway text-gray-400 rounded-md bg-white bg-opacity-100 shadow-inner hover:bg-light-blue hover:border-[#6082a4] hover:shadow-lg"
+                                        class="w-full h-12 outline-none cursor-pointer px-2 py-2 text-lg font-raleway font-light text-gray-700 rounded-b-3xl bg-inherit appearance-none"
                                     >
                                         <option value="" disabled selected>Select Budget</option>
                                         <option value="budget">Budget ($ - $$)</option>
                                         <option value="midrange">Mid-range ($$ - $$$)</option>
                                         <option value="luxury">Luxury ($$$+)</option>
                                     </select>
+                                    <!-- Custom dropdown arrow -->
+                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="black">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
                                 </div>
                                 
                             </div>
-                            
+
                         </div>
                         
                         <!-- Submit button -->
-                        <div class="w-[90%] md:w-[66%] lg:w-[40%] xl:w-[33%] mx-auto my-4 text-center">
+                        <div class="w-[90%] md:w-[66%] lg:w-[40%] xl:w-[33%] rounded-3xl mx-auto my-4 text-center">
                             <button 
                                 id="generate-button" 
                                 type="submit"
-                                class="w-[200px] h-12 rounded-lg bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1"
+                                class="w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1"
                             >
                                 Take Me There
                             </button>
