@@ -185,20 +185,6 @@ p {
   border: 2px;
 }
 
-label {
-  text-align: center;
-  margin: 0 auto;
-  position: relative;
-}
-
-.flatpickr-input {
-  display: block !important;
-  padding: 0% 1%;
-  font-size: 1.5vw;
-  font-family: Raleway;
-}
-
-
 .itinerary-form-container {
   display: flex;
   flex-wrap: wrap;
@@ -209,7 +195,6 @@ label {
 .form-group {
   flex: 1;
 }
-
 
 #cityList {
   display: none;
@@ -238,24 +223,42 @@ label {
   background-color: #f2f2f2;
 }
 
-
 .calendar-grid {
   grid-template-columns: repeat(7, 1fr);
 }
 
 /* Base calendar styles */
 .flatpickr-calendar {
-  background-color: white !important;
+  background-color: transparent !important;
   opacity: 1 !important;
   width: 20rem !important; /* Default width for large screens */
-  margin: 0px !important;
-  display: inline-block !important;
+  margin: 0 !important;
   position: relative !important;
   font-family: Raleway !important;
   padding: 10px 6px !important;
+  /* padding: 0 !important; */
   box-sizing: border-box !important;
-  border-color: #b8b8bb;
-  border-width: 1px;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+.flatpickr-calendar.inline {
+  width: auto !important;
+  box-shadow: none !important;
+}
+
+#calendar-wrapper.hidden {
+  display: none;
+}
+
+/* Remove the display: none from flatpickr-calendar since we'll control visibility via wrapper */
+/* .flatpickr-calendar {
+  background-color: white !important;
+} */
+
+.calendar-active {
+  display: block !important;
 }
 
 .flatpickr-calendar.inline {
@@ -784,8 +787,6 @@ b {
 
 
     .flatpickr-calendar.inline {
-      display: inline-block !important;
-      position: absolute; /* Position the calendar within the form-group container */
       left: 0;
       z-index: auto;
       align-items: center;
