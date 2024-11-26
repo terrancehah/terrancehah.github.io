@@ -91,7 +91,7 @@ module.exports = async (req, res) => {
                     In the same div, construct messages under the emergency contacts to remind users to be aware of the location and contact information of their respective embassies in the city. Attach the link https://www.embassy-worldwide.com/ in your message.
                     Lastly, Do one last div for the Farewell Messages consisting about 2-3 sentences, wishing travelers a wonderful journey and inviting them to share their experiences or feedback online if the itinerary is being helpful. 
                     Do not prompt travellers to call us, as we are only a travel itinerary helper, not a travel agency.
-                    Include #travelrizz at the end of the message.
+                    End the message with one last line: #travelrizz
                     
                     Response Format:
                     The entire output, including the content and the headings should be in the language of ${language}.

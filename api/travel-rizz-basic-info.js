@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
                     
                     Response Intros:
                     Each aspect will take one section/paragraph, and made up by 2 to 4 sentences.
-                    Provide all these information in about 220 words in one page/div, the word count suitable for one single A4 page.
+                    Provide all these information in about 200 words in one page/div, the word count suitable for one single A4 page.
                     
                     Response Format:
                     The entire output, including the content and the headings should be in the language of ${language}.
