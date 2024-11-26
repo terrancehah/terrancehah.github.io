@@ -321,9 +321,14 @@
                     <button id="exportPDF">Export as PDF</button>
                 </div>
             </div>
-            <div id="loadingSpinner" style="display: none;" class="z-100">
-                <img id="plane" src="resources/flyingplane-crop.gif"  alt="Loading..."/>
-                <p>Fasten your seat belt while we are working on your travel itinerary...</p>
+            
+            <div id="loadingSpinner" class="z-50 hidden flex-wrap w-[100%] h-[100%] fixed align-middle items-center content-center">
+                <div class="flex w-[30%] h-max md:w-[20%] md:h-[15%] mx-[20%] md:mx-[40%] my-0 items-center basis-[100%]">
+                    <img id="plane" class="" src="resources/flyingplane-crop-2.gif"  alt="Loading..."/>
+                </div>
+                <div class="flex w-max items-center align-middle text-center mx-auto">
+                    <p class="text-lg text-center">Fasten your seat belt while we are working on your travel itinerary...</p>
+                </div>
             </div>            
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
