@@ -508,6 +508,9 @@ label {
   font-size: 1.2vw;
   line-height: 1.8;
   text-align: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page-break {
@@ -551,6 +554,24 @@ label {
   margin-top: 0.6%;
 }
 
+.generated-content h1,
+.generated-content h2,
+.generated-content h3 {
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+/* Specific fixes for Chinese text */
+.generated-content:lang(zh) h1,
+.generated-content:lang(zh) h2,
+.generated-content:lang(zh) h3 {
+  text-align: center;
+  line-height: 1.5;
+  /* Add specific font for Chinese text */
+  font-family: "Microsoft YaHei", "微软雅黑", "SimHei", "STHeiti", sans-serif;
+}
+
 .generated-content h1 {
   text-align: center;
   font-size: 4vw;
@@ -589,6 +610,8 @@ font-size: 1.6vw;
   font-size: 1.4vw;
   line-height: 180%;
   width: 100%;
+  text-align: center;
+  margin: 0.5em auto;
 }
 
 .generated-content #conclusion {
