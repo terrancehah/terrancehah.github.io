@@ -102,9 +102,10 @@ module.exports = async (req, res) => {
                     Use <h1>, <h2> and for different headings, and <p> for content and paragraphs.
                     Use <br> to break lines between each hospital.
                     <a href target="_blank"> to replace every related helpful website like governmental websites.
-                    For links to hospital maps, provide in the format {PLACE:Hospital Name}.
+                    For links to hospital, you need to provide in the format {PLACE:Hospital Name}.
+                    Example: {PLACE:Singapore General Hospital} or {PLACE:吉隆坡同善医院}.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
-                    The direct link to the visa application, it should be governmental official website like this: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html wrapped in the href.
+                    The direct link to the visa application, it should be the respective governmental official website like: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html or https://www.imi.gov.my/index.php/en/main-services/visa/elementor-4396/ wrapped in the href.
                     For the last div/page of Farewell Messages, do not use <h1></h1> or <p></p>, wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>, use <br> to break lines between sentences if needed.
                     
                     Response Tone:
