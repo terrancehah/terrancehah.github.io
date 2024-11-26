@@ -527,6 +527,7 @@ p {
   position: relative;
   margin-bottom: 2%;
   margin-top: 0.5%;
+  
 }
 
 .generated-content header {
@@ -553,7 +554,7 @@ p {
   font-size: 1.6vw;
   color: #3a7398;
   position: absolute;
-  right: 0;
+  right: 0 !important;
   margin-top: 0.6%;
 }
 
