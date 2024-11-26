@@ -91,7 +91,7 @@ module.exports = async (req, res) => {
                     In the same div, construct messages under the emergency contacts to remind users to be aware of the location and contact information of their respective embassies in the city. Attach the link https://www.embassy-worldwide.com/ in your message.
                     Lastly, Do one last div for the Farewell Messages consisting about 2-3 sentences, wishing travelers a wonderful journey and inviting them to share their experiences or feedback online if the itinerary is being helpful. 
                     Do not prompt travellers to call us, as we are only a travel itinerary helper, not a travel agency.
-                    End the message with one last line: #travelrizz
+                    
                     
                     Response Format:
                     The entire output, including the content and the headings should be in the language of ${language}.
@@ -106,7 +106,7 @@ module.exports = async (req, res) => {
                     Example: {PLACE:Singapore General Hospital} or {PLACE:吉隆坡同善医院}.
                     Do not use <ul></ul> or <li></li> tags, as they do get misaligned when later exported into PDF.
                     The direct link to the visa application, it should be the respective governmental official website like: https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html or https://www.imi.gov.my/index.php/en/main-services/visa/elementor-4396/ wrapped in the href.
-                    For the last div/page of Farewell Messages, do not use <h1></h1> or <p></p>, wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>, use <br> to break lines between sentences if needed.
+                    For the last div/page of Farewell Messages, do not use <h1></h1> or <p></p>, wrap all the farewell messages sentences into one <h2 id='conclusion'></h2>, use <br> to break lines between sentences if needed. In the div, include one last line: #travelrizz
                     
                     Response Tone:
                     Remember not to provide the response in a dialogue or conversation form, instead reply in an informative and descriptive way.
