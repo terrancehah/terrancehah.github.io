@@ -17,7 +17,7 @@
             <meta property="og:url" content="https://terrancehah.com/travel-rizz.html">
             <meta name="description" content="Travel-Rizz: Your Personalized Journey Awaits">
             <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
-            <!-- <script defer src="/_vercel/speed-insights/script.js"></script> -->
+            <script defer src="/_vercel/speed-insights/script.js"></script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvcgBgSprgTRQO_6BWh5EAOPu1vdS6KD4&libraries=places&callback=initAutocomplete" async defer></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
             <script src="./footer.js"></script>
@@ -254,7 +254,7 @@
                                         <option value="ko">Korean (한국어)</option>
                                     </select>
                                     <!-- Custom dropdown arrow -->
-                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 focus-within:z-20 z-1">
+                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 focus-within:z-20 z-10">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="black">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg>
@@ -285,7 +285,7 @@
                                         <option value="luxury">Luxury ($$$+)</option>
                                     </select>
                                     <!-- Custom dropdown arrow -->
-                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 focus-within:z-20 z-1">
+                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 focus-within:z-20 z-10">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="black">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg>
@@ -313,7 +313,7 @@
                     </form>
             </main>
 
-            <div id="popupWindow" class="popup-window">
+            <div id="popupWindow" class="popup-window z-100">
                 <div class="popup-content">
                     <span class="close-btn" onclick="closePopup()">&times;</span>
                     <div id="generatedContent" class="generated-content">
@@ -321,7 +321,7 @@
                     <button id="exportPDF">Export as PDF</button>
                 </div>
             </div>
-            <div id="loadingSpinner" style="display: none;">
+            <div id="loadingSpinner" style="display: none;" class="z-100">
                 <img id="plane" src="resources/flyingplane-crop.gif"  alt="Loading..."/>
                 <p>Fasten your seat belt while we are working on your travel itinerary...</p>
             </div>            
