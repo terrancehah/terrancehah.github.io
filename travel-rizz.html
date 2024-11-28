@@ -17,10 +17,10 @@
             <meta property="og:url" content="https://terrancehah.com/travel-rizz.html">
             <meta name="description" content="Travel-Rizz: Your Personalized Journey Awaits">
             <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
-            <!-- <script defer src="/_vercel/speed-insights/script.js"></script> -->
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvcgBgSprgTRQO_6BWh5EAOPu1vdS6KD4&libraries=places&callback=initAutocomplete" async defer></script>
+            <script defer src="/_vercel/speed-insights/script.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
             <script src="./footer.js"></script>
+            <!-- <script src="./travel-rizz-testdata.js"></script> -->
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
             </style>
@@ -40,7 +40,6 @@
                             Travel-Rizz
                         </h1>
                     </div>
-
 
                     <!-- Middle: Nav buttons -->
                     <nav class="flex flex-wrap justify-center gap-3">
@@ -90,20 +89,19 @@
                                 </h1>
                             </div>
                             <div>
-                                <h3 class="font-medium text-base md:text-lg lg:text-xl leading-tight md:leading-tight lg:leading-tight text-secondary md:max-w-3xl md:w-1/2 mx-auto">
+                                <h3 class="font-medium text-base md:text-lg lg:text-xl leading-tight md:leading-tight lg:leading-tight text-secondary md:max-w-3xl md:w-2/3 lg:w-1/2 mx-auto">
                                     Discover the joy of seamless travel planning with Travel-Rizz, your convenient travel assistant.
                                 </h3>
                             </div>
                         </div> 
-
                         
                         <!-- Destination, Calendar and filters -->
-                        <div class="flex flex-wrap w-[90%] lg:min-w-[930px] 2xl:w-[60%] relative bg-white mx-2 my-2 justify-center p-0 rounded-3xl items-center  h-min group/mainContainer">
+                        <div class="flex flex-wrap w-[90%] lg:min-w-[930px] 2xl:w-[60%] relative bg-white mx-2 my-2 justify-center p-0 rounded-3xl items-center h-min shadow-all group/mainContainer">
 
                             <!-- Destination div -->
                             <div class="destination-input-form flex flex-col px-10 py-5 w-full lg:basis-1/2 rounded-t-3xl md:rounded-tr-none z-10 focus-within:z-20 order-1
-                            group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
-                            focus-within:bg-white focus-within:hover:bg-white  hover:bg-light-blue focus-within:shadow-all">
+                            group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                            focus-within:bg-white focus-within:hover:bg-white  hover:bg-slate-200 focus-within:shadow-all">
                                 
                                 <!-- Destination label-->
                                 <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-80 sm:w-80 md:w-[60%] lg:w-[50%] xl:w-96 px-0 py-0">Destination</label>
@@ -121,17 +119,17 @@
 
                             <!-- Horizontal Separator after Destination -->
                             <div class="h-[1px] w-[100%] my-0 border-0 order-1 lg:order-2 basis-[100%] lg:hidden
-                            group-active/mainContainer:[&:not(:active)]:bg-light-blue 
-                            group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
-                            hover:bg-light-blue flex items-center justify-center">
+                            group-active/mainContainer:[&:not(:active)]:bg-slate-200 
+                            group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                            hover:bg-slate-200 flex items-center justify-center">
                                 <div class="h-[1px] w-[90%] md:w-[90%] bg-gray-300"></div>
                             </div>
 
                             <!-- Calendar container -->
                             <div class="flex flex-col w-full lg:basis-1/2 mx-0 py-5 px-10 relative order-1
                             justify-center md:rounded-tr-3xl focus-within:z-20 z-10 focus-within:shadow-all
-                            group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
-                            hover:bg-light-blue focus-within:hover:bg-white focus-within:bg-white">
+                            group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                            hover:bg-slate-200 focus-within:hover:bg-white focus-within:bg-white">
                             
                                 <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-full sm:w-80 md:w-[60%] lg:w-[50%] xl:w-96 px-0 py-0">Dates</label>
                                 
@@ -147,9 +145,9 @@
                                 <input type="hidden" id="hidden-end-date" name="endDate">
 
                                 <!-- Calendar popup wrapper -->
-                                <div id="calendar-wrapper" class="hidden absolute top-[calc(100%+8px)] w-max md:w-min left-1/2 md:left-1/2 transform -translate-x-1/2 bg-white rounded-2xl shadow-lg p-4 z-100">
+                                <div id="calendar-wrapper" class="hidden absolute top-[calc(100%+8px)] w-max md:w-min left-1/2 md:left-1/2 transform -translate-x-1/2 bg-white rounded-2xl shadow-all p-4 z-100">
                                     <!-- Arrow pointer -->
-                                    <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 rotate-45 w-4 h-4 bg-white border-t border-l border-gray-100"></div>
+                                    <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 rotate-45 w-4 h-4 bg-white border-t border-l border-gray-100 z-90"></div>
                                     
                                     <!-- Calendar container -->
                                     <div id="start-calendar" class="w-full"></div>
@@ -158,9 +156,9 @@
 
                             <!-- Horizontal Separator after DateInput -->
                             <div class="h-[1px] w-[100%] my-0 border-0 order-2 md:order-2 basis-[100%]
-                            group-active/mainContainer:[&:not(:active)]:bg-light-blue 
-                            group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
-                            hover:bg-light-blue flex items-center justify-center">
+                            group-active/mainContainer:[&:not(:active)]:bg-slate-200 
+                            group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                            hover:bg-slate-200 flex items-center justify-center">
                                 <div class="h-[1px] w-[90%] md:w-[90%] bg-gray-300"></div>
                             </div>
                             
@@ -171,8 +169,8 @@
                                 <div class="flex flex-col w-full my-0 mx-0 px-10 py-4 pb-6 focus-within:z-20 order-1
                                 focus-within:shadow-all active:shadow-all has-[:focus]:shadow-all has-[:active]:shadow-all
                                 focus-within:bg-white hover:focus-within:bg-white 
-                                group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
-                                [&:not(:has(:focus,:active))]:hover:bg-light-blue">
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                [&:not(:has(:focus,:active))]:hover:bg-slate-200">
                                     
                                     <!-- Section Title -->
                                     <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-full">Travel Preferences</label>
@@ -182,63 +180,61 @@
                                     <div class="flex flex-wrap gap-y-3 gap-x-3 justify-start items-start text-left w-full">
                                         
                                         <!-- Cultural and Heritage Label -->
-                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
                                             <input type="checkbox" name="travel-preference" value="culture and heritage" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
                                             <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Culture and Heritage 🎏</span>
                                         </label>
 
                                         <!-- Natural Label -->
-                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
                                             <input type="checkbox" name="travel-preference" value="nature" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
                                             <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Nature 🍀</span>
                                         </label>
 
                                         <!-- Food Label -->
-                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
                                             <input type="checkbox" name="travel-preference" value="foodie" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
                                             <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Foodie 🍱</span>
                                         </label>
                                         
                                         <!-- Leisure Label -->
-                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
                                             <input type="checkbox" name="travel-preference" value="leisure" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
                                             <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Leisure 🌇</span>
                                         </label>
 
                                         <!-- Adventurous Label -->
-                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
                                             <input type="checkbox" name="travel-preference" value="adventure" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
                                             <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Adventure 🪂</span>
                                         </label>
                                         
                                         <!-- Arts and Museum Label -->
-                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-light-blue hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
                                             <input type="checkbox" name="travel-preference" value="art and museum" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
                                             <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Arts & Museum 🎨</span>
                                         </label>
-
-                                        
                                         
                                     </div>
                                 </div>
 
                                 <!-- Horizontal Separator after Travel Styles -->
                                 <div class="h-[1px] w-[100%] my-0 border-0 order-2 basis-[100%]
-                                group-active/mainContainer:[&:not(:active)]:bg-light-blue 
-                                group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
-                                hover:bg-light-blue flex items-center justify-center">
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 
+                                group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                hover:bg-slate-200 flex items-center justify-center">
                                     <div class="h-[1px] w-[90%] md:w-[90%] bg-gray-300"></div>
                                 </div>
 
                                 <!-- Language Select Section -->
-                                <div class="flex w-full lg:w-[50%] mx-0 my-0 items-center px-10 pr-4 pb-0.5 relative focus-within:z-20 z-10 order-3
+                                <div class="flex w-full lg:w-[50%] mx-0 my-0 items-center px-10 pb-0.5 relative focus-within:z-20 z-10 order-3
                                 focus-within:bg-white focus-within:hover:bg-white 
                                 focus-within:shadow-all  has-[:focus]:shadow-all has-[:active]:shadow-all
-                                group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
-                                hover:bg-light-blue md:rounded-bl-3xl">
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                hover:bg-slate-200 md:rounded-bl-3xl">
                                     <select 
                                         id="language"
-                                        class="w-full h-12 outline-none cursor-pointer px-0 py-2 z-10 text-lg font-raleway font-light md:rounded-bl-3xl text-gray-700 bg-inherit appearance-none"
+                                        class="w-full h-12 outline-none cursor-pointer px-0 py-2 z-1 text-lg font-raleway font-light md:rounded-bl-3xl text-gray-700 bg-inherit appearance-none"
                                     >
                                         <option value="" disabled selected class="text-gray-500">Select Language 🔡</option>
                                         <option value="en">English</option>
@@ -254,7 +250,7 @@
                                         <option value="ko">Korean (한국어)</option>
                                     </select>
                                     <!-- Custom dropdown arrow -->
-                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                    <span class="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 focus-within:z-20 z-10">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="black">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg>
@@ -263,29 +259,29 @@
 
                                 <!-- Horizontal Separator after Languages Selection -->
                                 <div class="h-[1px] w-[100%] my-0 border-0 lg:hidden order-3
-                                group-active/mainContainer:[&:not(:active)]:bg-light-blue 
-                                group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
-                                hover:bg-light-blue flex items-center justify-center">
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 
+                                group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                hover:bg-slate-200 flex items-center justify-center">
                                 <div class="h-[1px] w-[90%] md:w-[90%] bg-gray-300"></div>
                             </div>
 
                                 <!-- Budget Select Section -->
-                                <div class="flex flex-col w-full lg:w-[50%] mx-0 my-0 items-center px-10 pr-4 pb-0.5 py-auto relative focus-within:z-20 z-10 order-3
-                                hover:bg-light-blue focus-within:bg-white focus-within:hover:bg-white focus-within:shadow-all 
+                                <div class="flex flex-col w-full lg:w-[50%] mx-0 my-0 items-center px-10 pb-0.5 py-auto relative focus-within:z-20 z-10 order-3
+                                hover:bg-slate-200 focus-within:bg-white focus-within:hover:bg-white focus-within:shadow-all 
                                 has-[:focus]:shadow-all has-[:active]:shadow-all
-                                group-active/mainContainer:[&:not(:active)]:bg-light-blue group-focus-within/mainContainer:[&:not(:focus-within)]:bg-light-blue 
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
                                 rounded-b-3xl md:rounded-bl-none">
                                     <select 
                                         id="budget"
-                                        class="w-full h-12 outline-none cursor-pointer px-0 py-2 z-10 text-lg font-raleway font-light text-gray-700 rounded-b-3xl bg-inherit appearance-none"
+                                        class="w-full h-12 outline-none cursor-pointer px-0 py-2 z-1 text-lg font-raleway font-light text-gray-700 rounded-b-3xl bg-inherit appearance-none"
                                     >
                                         <option value="" disabled selected>Select Budget 💲</option>
-                                        <option value="budget">Budget ($ - $$)</option>
-                                        <option value="midrange">Mid-range ($$ - $$$)</option>
+                                        <option value="low-budget">Budget ($ - $$)</option>
+                                        <option value="mid-range">Mid-range ($$ - $$$)</option>
                                         <option value="luxury">Luxury ($$$+)</option>
                                     </select>
                                     <!-- Custom dropdown arrow -->
-                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                    <span class="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 focus-within:z-20 z-10">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="black">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg>
@@ -313,17 +309,25 @@
                     </form>
             </main>
 
-            <div id="popupWindow" class="popup-window">
-                <div class="popup-content">
-                    <span class="close-btn" onclick="closePopup()">&times;</span>
+            <div id="popupWindow" class="fixed hidden inset-0 bg-black bg-opacity-40 z-50 overflow-auto">
+                <div class="relative bg-white mx-[25%] mt-[10%] p-5 w-1/2 h-[70%] overflow-y-auto">
+                    <span class="close-btn absolute right-4 top-4 text-gray-500 text-2xl font-bold hover:text-black cursor-pointer">&times;</span>
                     <div id="generatedContent" class="generated-content">
+                        <!-- API content gets inserted here -->
                     </div>
-                    <button id="exportPDF">Export as PDF</button>
+                    <button id="exportPDF" class="w-[40%] mx-[30%] my-[2%] px-[5%] h-[4vw] rounded-2xl bg-white text-[#4798cc] font-semibold text-[1.5vw] hover:bg-[rgba(58,125,201,0.9)] hover:text-white transition-all duration-400">
+                        Export as PDF
+                    </button>
                 </div>
             </div>
-            <div id="loadingSpinner" style="display: none;">
-                <img id="plane" src="resources/flyingplane-crop.gif"  alt="Loading..."/>
-                <p>Fasten your seat belt while we are working on your travel itinerary...</p>
+            
+            <div id="loadingSpinner" class="z-50 hidden flex-wrap w-[100%] h-[100%] fixed align-middle items-center content-center">
+                <div class="flex w-[30%] h-max md:w-[20%] md:h-[15%] mx-[20%] md:mx-[40%] my-0 items-center basis-[100%]">
+                    <img id="plane" class="" src="resources/flyingplane-crop-2.gif"  alt="Loading..."/>
+                </div>
+                <div class="flex w-max items-center align-middle text-center mx-auto">
+                    <p class="text-2xl text-center">Fasten your seat belt while we are working on your travel itinerary...</p>
+                </div>
             </div>            
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -358,9 +362,7 @@
                         './resources/Dubai_Night_1080P_20X_compressed.mp4',
                         './resources/London_Skyline_720P_8X_compressed.mp4',
                         './resources/Patagonia_Lake_720P_20X_compressed.mp4',
-                        './resources/Grand_Canyon_720P_8X_compresed.mp4',
-                        './resources/Greenland_Evening_1080P_20X_compressed.mp4',
-                        './resources/San_Fransisco_Bay_720P_5X_compressed.mp4'
+                        './resources/Grand_Canyon_720P_8X_compresed.mp4'
                         // Add more video paths as needed
                     ];
             
@@ -398,8 +400,8 @@
 
             <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+            <!-- City name autocomplete -->
             <script>
-                // City name autocomplete
                 function initAutocomplete() {
                     var input = document.getElementById('destination');
                     var autocomplete = new google.maps.places.Autocomplete(input);
@@ -428,6 +430,21 @@
                 }
             </script>
             
+            <script>
+                // Fetch the API key from the server endpoint
+                fetch('/api/maps-key')
+                    .then(response => response.json())
+                    .then(data => {
+                        const script = document.createElement('script');
+                        script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initAutocomplete`;
+                        script.async = true;
+                        script.defer = true;
+                        document.head.appendChild(script);
+                    })
+                    .catch(error => {
+                        console.error('Error loading Google Maps:', error);
+                    });
+            </script>
 
             <!-- Calendar placeholder hiding script -->
             <script>
@@ -578,6 +595,7 @@
                         console.log('Success:', data);
                         if (data.generatedContent) {
                             document.getElementById("generatedContent").innerHTML = data.generatedContent;
+                            // document.getElementById("generatedContent").innerHTML = testData;
                             document.getElementById("loadingSpinner").style.display = "none";
                             openPopup();
                         } else {
@@ -597,85 +615,6 @@
                     });
                 });
             </script>
-            
-
-            <!-- // Static data for testing only -->
-            <!-- <script>
-                var testData = 
-                    `
-                    <div class="page-break">
-                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
-                        <h1>欢迎来到麻坡！</h1>
-                        <h2>城市介绍</h2>
-                        <p>麻坡是马来西亚柔佛州的一座具有悠久历史和丰富文化底蕴的城市。它以其美丽的传统建筑、精彩的街头美食和友好的居民而闻名，吸引着众多游客前来探索。麻坡还是连接柔佛州和马六甲的重要交通枢纽，方便旅客在这两地之间往返。</p>
-                        <h2>季节与气候</h2>
-                        <p>麻坡的气候为典型的热带雨林气候，全年温暖潮湿，充满活力。每年的10月到11月属于雨季，降雨较为频繁。然而，降雨通常较为短暂，之后便是湿润的晴天，适合旅行。访问期间的天气情况可以参考<a href="https://www.accuweather.com/en/my/muar/233140/october-weather/233140?year=2024" target="_blank">Muar November 2024 Weather</a>。</p>
-                        <h2>语言</h2>
-                        <p>在麻坡，主要语言包括马来语、中文（普通话及各方言）和英语。由于当地多元文化的特征，您可能会在市场、餐馆及商铺听到多种语言的交流。语言的多样性为游客与本地人之间的互动增添了便利。</p>
-                        <h2>人口</h2>
-                        <p>麻坡的人口大约为23万人，构成多元的种族与文化社区。这里居民主要由马来族、华人和印度裔等组成，这种丰富的文化融汇增强了麻坡的魅力。</p>
-                    </div>
-                    
-                    <div class="page-break">
-                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header> 
-                        <h1>Notable Details about Muar, Johor</h1>
-                        <h2>货币信息</h2>
-                        <p>Muar位于马来西亚，使用的货币是马来西亚令吉(MYR)。为了获得实时汇率信息，请访问<a href="https://www.x-rates.com/table/?from=MYR&amount=1" target="_blank">汇率表</a>。建议随身携带少量现金，以便在较小的商店和市场使用。</p>
-                        <h2>安全提示</h2>
-                        <p>Muar总体上是一个安全的旅行目的地，但仍需注意基本安全措施。建议游客尽量避免在夜间独自出行，并随时注意个人物品，以防扒窃事件发生。</p>
-                        <h2>营业时间</h2>
-                        <p>在Muar，大部分商店和餐厅的营业时间为上午10点至晚上10点。需要注意的是，某些地方可能在祷告时间（周五中午）短暂关闭。</p>
-                        <h2>当地交通</h2>
-                        <p>在Muar，游客可以通过公共巴士、出租车或租赁自行车进行导航。更多详细信息与时刻表，请访问公共交通相关网站，使用导航工具时，可通过手机应用程序获取指路服务。</p>
-                    </div>
-                    
-                    <div class="page-break">
-                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
-                        <h1>2024年11月10日: 探索麻坡的魅力</h1>
-                        <h2><strong>上午</strong></h2>
-                        <p>您的麻坡之旅从参观<a href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BB%E5%9D%A1%E5%A4%A7%E9%92%9F%E6%A5%BC%2C%20muar%2C%20johor" target="_blank">麻坡大钟楼</a>开始。麻坡大钟楼是这座城市的象征之一，建于1909年。在这座高耸的建筑中，您可以感受到历史的沉淀。从这里出发，步行不久即可到达<a href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BB%E5%9D%A1%E8%80%81%E8%A1%97%2C%20muar%2C%20johor" target="_blank">麻坡老街</a>。这条街道充满了马来西亚的老式商铺和地道的食品摊位，让您体验本地人的日常生活。</p>
-                        <h2><strong>下午</strong></h2>
-                        <p>午餐后，您可以步行至附近的<a href="https://www.google.com/maps/search/?api=1&query=%E6%B8%85%E7%9C%9F%E5%AF%BA%E8%8B%8F%E4%B8%B9%E4%BE%9D%E5%B8%83%E6%8B%89%E6%AC%A3%E5%A4%A7%E5%8E%A6%2C%20muar%2C%20johor" target="_blank">清真寺苏丹依布拉欣大厦</a>，这是一座融合了摩尔与维多利亚风格的优雅建筑。随后前往<a href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BB%E5%9D%A1%E8%89%BA%E6%9C%AF%E8%A1%97%2C%20muar%2C%20johor" target="_blank">麻坡艺术街</a>，这里的墙壁上装饰着五彩缤纷的壁画和创新的艺术作品，非常适合拍照留念。所有这些景点都在步行距离之内，让您轻松畅游。</p>
-                        <h2><strong>晚上</strong></h2>
-                        <p>晚上，前往<a href="https://www.google.com/maps/search/?api=1&query=Tanjung%20Emas%20%E5%85%AC%E5%9B%AD%2C%20muar%2C%20johor" target="_blank">Tanjung Emas 公园</a>，这是当地居民的热门休闲场所。在公园里，您可以漫步于海滨小径，欣赏夕阳下的麻坡河美景。如果饿了，不远处有一家受欢迎的餐馆，<a href="https://www.google.com/maps/search/?api=1&query=Jeti%20Laut%20%E5%B7%B4%E5%8E%98%E9%A3%8E%E5%91%B3%E9%A4%90%E5%8E%85%2C%20muar%2C%20johor" target="_blank">Jeti Laut 巴厘风味餐厅</a>，提供新鲜的海鲜佳肴。</p>
-                        <h2><strong>夜间</strong></h2>
-                        <p>结束这一天的行程，可以在<a href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BB%E5%9D%A1%E6%B2%B3%E6%BB%A8%E9%95%BF%E5%BB%8A%2C%20muar%2C%20johor" target="_blank">麻坡河滨长廊</a>漫步，享受傍晚的凉风和城市夜景。河滨步道上设有多处美丽的灯光装饰，给夜晚增加了不少浪漫气息。</p>
-                    </div>
-                    
-                    <div class="page-break">
-                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
-                        <h1>旅行提醒</h1><h2>旅行文件和签证要求</h2><p>请确保您的护照在入境至少六个月内有效。有关签证要求，您可以访问 <a href="https://mzv.gov.cz/jnp/en/information_for_aliens/visa_form/index.html" target="_blank">官方签证申请网站</a> 了解详细信息。</p>
-                        <h2>退税手续</h2>
-                        <p>在马来西亚购物时，请留意参与退税计划的商店。离境时可到机场办理退税手续，携带好相关发票和商品。</p>
-                        <h2>最新时事和建议</h2>
-                        <p>请及时关注最新的旅行公告和安全建议。了解和遵循当地政府的指导，以确保安全无虞。</p>
-                        <h2>当地礼仪和文化规范</h2>
-                        <p>尊重当地文化是很重要的。在穆斯林区域，着装宜保守。此外，马来西亚人通常比较热情友好，见面问候时可说“你好”或使用当地的马来语“Selamat sejahtera”。</p>
-                        <h2>健康和疫苗接种记录要求</h2><p>建议旅客前往马来西亚前确认所需疫苗接种情况。确保携带最新的疫苗接种记录，以备不时之需。</p>
-                    </div>
-                    
-                    <div class="page-break">
-                        <header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
-                        <h1>紧急联系方式</h1>
-                        <h2>紧急电话</h2>
-                        <p>警察：999</p><p>救护车：999</p><p>消防队：994</p>
-                        <h2>医院</h2>
-                        <p>Tunku Ampuan Najihah Hospital<br>电话：06-952 2600<br>地址：Jalan Temenggung, 84000 Muar, Johor, Malaysia<br><a href="https://goo.gl/maps/LBf6neEzfzQ2" target="_blank"><a href="https://www.google.com/maps/search/?api=1&query=Tunku%20Ampuan%20Najihah%20Hospital%2C%20muar%2C%20johor" target="_blank">Tunku Ampuan Najihah Hospital</a></a></p>
-                        <p>Sultanah Fatimah Specialist Hospital<br>电话：06-952 2500<br>地址：Jalan Salleh, 84000 Muar, Johor, Malaysia<br><a href="https://goo.gl/maps/ZTPpS2EmZ8K2" target="_blank"><a href="https://www.google.com/maps/search/?api=1&query=Sultanah%20Fatimah%20Specialist%20Hospital%2C%20muar%2C%20johor" target="_blank">Sultanah Fatimah Specialist Hospital</a></a></p>
-                        <h2>使馆信息</h2>
-                        <p>为了确保您的安全，请牢记您所在国在马来西亚的使馆或领事馆的地址和联系信息。详情请访问 <a href="https://www.embassy-worldwide.com/" target="_blank">全球使馆指南</a>。</p>
-                    </div>
-
-                    <div class="page-break"><header><img id='logo' src='resources/TH-logo.png' alt='logo'/><h2 id='brand'>Travel-Rizz</h2><h2 id='header-slogan'>Travel-Rizz:Your Personalized Journey Awaits</h2></header>
-                        <h2 id='conclusion'>我们衷心祝愿您在麻坡的旅程充满乐趣与惊喜。我们热情地邀请您在旅途中留下美好回忆，并希望您能在线分享您的体验和反馈。如果我们的行程安排对您有帮助，我们会感到非常荣幸。</h2>
-                    </div>
-                    `
-
-                document.getElementById('loadTestData').addEventListener('click', function() {
-                    document.getElementById("generatedContent").innerHTML = testData;
-                    openPopup();
-                });
-            </script> -->
 
             <script>
                 function openPopup() {
@@ -688,14 +627,18 @@
             </script>
 
             <script>
+                function sanitizeFilename(filename) {
+                    return filename.replace(/[^a-z0-9-_]/gi, '_').toLowerCase();
+                }
+
                 document.getElementById('exportPDF').addEventListener('click', function(e) {
                     e.preventDefault();
 
                     var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
-                    var city = document.getElementById("destination").value;
+                    var city = sanitizeFilename(document.getElementById("destination").value || 'travel');
                     var originalContent = document.getElementById("generatedContent");
-                    var startDate = document.getElementById("start-date").value;
-                    var endDate = document.getElementById("hidden-end-date").value;
+                    var startDate = sanitizeFilename(document.getElementById("start-date").value || 'undated');
+                    var endDate = sanitizeFilename(document.getElementById("hidden-end-date").value || 'undated');
 
                     // Clone the content for PDF generation
                     var contentForPdf = originalContent.cloneNode(true);
@@ -799,21 +742,22 @@
 
                     var opt = {
                         margin: [10, 17, 12, 17],
-                        filename: city + '_' + 'Travel_Itinerary' + '_' + startDate + '_to_' + endDate + '.pdf',
-                        image: { type: 'jpeg', quality: 0.98 },
+                        filename: `travel_itinerary_${city}_${startDate}_to_${endDate}.pdf`,
+                        image: { type: 'jpeg', quality: 0.92 },
                         html2canvas: { 
                             scale: 2,
+                            logging: false,
                             useCORS: true,
-                            scrollY: 0,
+                            scrollY: 0
                             // windowWidth: document.documentElement.clientWidth,   // Ensure full width is captured
                             // windowHeight: document.documentElement.clientHeight, // Ensure full height is captured
-                            logging: true // Enable logging for debugging
                         },
                         jsPDF: { 
                             unit: 'mm', 
                             format: 'a4', 
                             orientation: 'portrait',
-                            compress: true
+                            compress: true,
+                            precision: 2
                         },
                         pagebreak: { 
                             mode: 'css',
@@ -822,27 +766,19 @@
                     };
                     
                     html2pdf().from(contentForPdf).set(opt).save().then(() => {
-                        // Hide headers and remove the clone after PDF generation
-                        setTimeout(function() {
+                        // Clean up after PDF generation
+                        if (document.body.contains(contentForPdf)) {
                             document.body.removeChild(contentForPdf);
-                        }, 1000);
+                        }
+                    }).catch(error => {
+                        console.error('PDF generation failed:', error);
+                        // Clean up on error
+                        if (document.body.contains(contentForPdf)) {
+                            document.body.removeChild(contentForPdf);
+                        }
                     });
                 });
             </script>
-
-            <!-- <script>
-                // Fetch the key from our server endpoint first
-                fetch('/api/maps-key')
-                    .then(response => response.json())
-                    .then(data => {
-                        const script = document.createElement('script');
-                        script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initAutocomplete`;
-                        script.async = true;
-                        script.defer = true;
-                        document.head.appendChild(script);
-                    })
-                    .catch(error => console.error('Error loading Google Maps:', error));
-            </script> -->
 
         </body>
         

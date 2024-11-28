@@ -88,15 +88,15 @@ module.exports = async (req, res) => {
                     Response Intros:
                     Each day will take one div.
                     For each day, start a new div/section/page, plan the schedule so that the travellers can get to 3-4 attractions.
-                    ${travelPreferences ? `Prioritize attractions and activities that match these travel interests: ${travelPreferences.join(', ')}.
+                    ${travelPreferences ? `Prioritize the travel itinerary with attractions and activities that match these travel interests: ${travelPreferences.join(', ')}.
                     Try to include at least one activity or attraction daily that aligns with each selected interest.` : ''}
-                    Provide the daily itinerary in a daily schedule form; do not respond in hourly format, separate each day into Morning, Afternoon, Evening and Night time sections.
-                    The itinerary for each time session should consist about 3 to 4 sentences, keep them informative.
-                    The attractions that are visited each day should not be too far, try to group attractions for each day in walkable distance or nearby area.
-                    If possible, briefly introduce how the traveller can get to all the attractions (by foot or public transport, walkable distance, travel time etc).
+                    Provide the daily itinerary in a daily schedule form;  not in hourly format, separate each day into Morning, Afternoon, Evening and Night time sections.
+                    Each time session should consist about 3 to 4 sentences, keep them informative.
+                    The attractions visited each day should not be too far, group the attractions for each day in walkable distance or nearby areas.
+                    Briefly introduce how the traveller can get to all the attractions whenever possible (by foot or public transport, walkable distance, travel time etc).
                     Based on the ${budget} budget level:
                     - For dining recommendations, suggest restaurants that match the budget level
-                    - For attractions, prioritize those that align with the budget (e.g., free museums for budget travelers, exclusive experiences for luxury)
+                    - For attractions, prioritize those that align with the budget (e.g., free museums for low-budget travelers, exclusive experiences for luxury)
                     - Include transportation recommendations suitable for the budget level
                     Also, you can occasionally introduce high-rating famous restaurants or bars near the attractions that match the budget level.
                     Provide each day's itinerary in about 200 words in one page/div, a word count slightly less than enough for one single A4 page.
