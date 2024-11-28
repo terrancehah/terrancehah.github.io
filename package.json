@@ -4,7 +4,8 @@
   "description": "Travel-Rizz - Your friendly AI-powered travel companion.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "npx tailwindcss build -i style.css article.css form-a-story.css index.css my-website-style-guide.css playground.css projects.css travel-rizz.css -o terrancehah.css"
+    "build-css": "npx tailwindcss build -i style.css article.css form-a-story.css index.css my-website-style-guide.css playground.css projects.css travel-rizz.css -o terrancehah.css",
+    
   },
   "author": "Terrance Hah",
   "license": "ISC",
