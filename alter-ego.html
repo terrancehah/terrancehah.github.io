@@ -1,66 +1,98 @@
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="Alter Ego: Are we lost in our digital selves? - Terrance's Playground">
+        <meta property="og:description" content="In this article, I share my view on our alter ego.">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://terrancehah.com/alter-ego.html">
+        <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
+        <title>Alter Ego: Are we lost in our digital selves? - Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
+    </head>
 
-  <head>
-    <link href="./style.css" type="text/css" rel="stylesheet">
-    <link href="./articles.css" type="text/css" rel="stylesheet">
-    <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
-    <meta property="og:title" content="Alter Ego: Are we lost in our digital selves? - Terrance's Playground" />
-    <meta property="og:description" content="In this article, I share my view on our alter ego." />
-    <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://terrancehah.com/alter-ego.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
-    <script src="./footer.js"></script>
-    <title>Alter Ego: Are we lost in our digital selves? - Terrance's Playground</title>
-  </head>
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
 
-  <body>
-    <header>
-      <h1>Terrance's Playground</h1>
-      <nav>
-        <a class="navbutton" href="./index.html">Home</a>
-        <a class="navbutton active" href="./articles.html">Articles</a>
-        <a class="navbutton" href="./projects.html">Projects</a>
-        <a class="navbutton" href="./playground.html">Playground</a>
-      </nav>
-      <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png"></a>
-      <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png"></a>
-      <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png"></a>
-      <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png"></a>
-    </header>
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+
+                <!-- Left: Logo & Title -->
+                <div class="flex flex-col lg:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
+
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
     
-    <content class="article">
-        <h1>Alter Ego: Are we lost in our digital selves?</h1>
-        <h3 id="time">written on 22 November 2021</h3>
-        <p>In this article, I share my view on our alter ego.
-            <br><br>
-            <span class='quote'>
-                Alter ego: the part of someone's personality that is not usually seen by other people.
-                <br>
-                - <a class='link' href='https://dictionary.cambridge.org/dictionary/english/alter-ego' style='font-style: italic;' target="blank">Cambridge Dictionary</a>
-            </span>
-            <br><br>
-            Decades ago, if the phrase ‘alter ego’ was to be mentioned, most of us would have thought of the hidden identities under the masks of superheroes and villains in the comics. Nowadays, the phrase is more commonly used to depict our second self- our identities on the internet.
-            <br><br>
-            It is already a common acknowledgment that we increasingly spend our time online, be it on the social medias, games, or video streaming sites. We wake up early in the morning to respond to phone notifications, leave comments under posts while having lunch, and publish photos of our dinners on every single platform. 
-            <br><br>
-            We have successfully made our lives look better while ironically, worsening our relationships with those who sit around us. We give up the opportunity to interact with the people right in front of us, to impress those who don’t even care about us. This is unheard of before.
-            <br><br>
-            I have never imagined myself being addicted to the internet. At least not ten years ago. Now, I spend more than 8 hours ,which is already one third of my day on my gadgets. Besides those hours of working from home on my gadgets, I scroll through social media posts, and stream videos after videos. I underestimate the seduction of the internet. Or should I say, I overestimate my mental fortitude to resist temptation. I have inevitably fallen into the sinkhole of ‘internet addiction’.
-            <br><br>
-            We are so obsessed with upkeeping our alter ego, to the level that it actually does harms to our true selves. We take hours to edit our photos, only to post perfectly angled pictures and good-looking selfies. We exchange comments online, yet we end up talking nothing when we meet in real life. Posting beach photos without really relaxing on the beach is hardly called a vacation.
-            <br><br>
-            It is not that the internet is all evil. The key here is the moderation. To use everything we have in hand moderately, and not abusing it. To not being overly obsessed over imaginary things like fame and power. Tools are made to be used. Money is made to be spent. And social medias are made to connect people. We should be in control of them to achieve our goals, not the other way around.
-            <br><br>
-            I am in deep concern over our future generation. Our education system has yet to prove its capability in making our children a better person. Most families and parents are confused and some, reluctant to change and adapt. This will eventually widen the disparity between the well-educated and poor-educated, as habits and attitudes are extremely easy to be instilled along family lines, whether they are good or bad.
-            <br><br>
-            This is an issue worth exploring and reflecting, in my opinion. I hope at some point, we all can find a way to fix this, but first perhaps we should just acknowledge it as a problem to start with.
-        </p>
+        <main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
+            <article class="prose prose-lg lg:prose-xl mx-auto">
+                <h1 class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557] text-center mb-4">Alter Ego: Are we lost in our digital selves?</h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 text-center mb-8 font-light font-raleway">written on 22 November 2021</p>
+                
+                <div class="font-lato text-lg sm:text-xl space-y-6 text-justify">
+                    <p class="leading-loose font-light">In this article, I share my view on our alter ego.</p>
 
-        
-    </content>
-    
-  </body>
+                    <blockquote class="font-caveat text-2xl sm:text-3xl md:text-3xl text-center my-12 italic">
+                        Alter ego: the part of someone's personality that is not usually seen by other people.
+                        <br>
+                        - <a href='https://dictionary.cambridge.org/dictionary/english/alter-ego' class="text-[#457B9D] hover:text-[#1d3557] italic" target="_blank">Cambridge Dictionary</a>
+                    </blockquote>
 
+                    <p class="leading-loose font-light">Decades ago, if the phrase 'alter ego' was to be mentioned, most of us would have thought of the hidden identities under the masks of superheroes and villains in the comics. Nowadays, the phrase is more commonly used to depict our second self- our identities on the internet.</p>
+
+                    <p class="leading-loose font-light">It is already a common acknowledgment that we increasingly spend our time online, be it on the social medias, games, or video streaming sites. We wake up early in the morning to respond to phone notifications, leave comments under posts while having lunch, and publish photos of our dinners on every single platform.</p>
+
+                    <p class="leading-loose font-light">We have successfully made our lives look better while ironically, worsening our relationships with those who sit around us. We give up the opportunity to interact with the people right in front of us, to impress those who don't even care about us. This is unheard of before.</p>
+
+                    <p class="leading-loose font-light">I have never imagined myself being addicted to the internet. At least not ten years ago. Now, I spend more than 8 hours ,which is already one third of my day on my gadgets. Besides those hours of working from home on my gadgets, I scroll through social media posts, and stream videos after videos. I underestimate the seduction of the internet. Or should I say, I overestimate my mental fortitude to resist temptation. I have inevitably fallen into the sinkhole of 'internet addiction'.</p>
+
+                    <p class="leading-loose font-light">We are so obsessed with upkeeping our alter ego, to the level that it actually does harms to our true selves. We take hours to edit our photos, only to post perfectly angled pictures and good-looking selfies. We exchange comments online, yet we end up talking nothing when we meet in real life. Posting beach photos without really relaxing on the beach is hardly called a vacation.</p>
+
+                    <p class="leading-loose font-light">It is not that the internet is all evil. The key here is the moderation. To use everything we have in hand moderately, and not abusing it. To not being overly obsessed over imaginary things like fame and power. Tools are made to be used. Money is made to be spent. And social medias are made to connect people. We should be in control of them to achieve our goals, not the other way around.</p>
+
+                    <p class="leading-loose font-light">I am in deep concern over our future generation. Our education system has yet to prove its capability in making our children a better person. Most families and parents are confused and some, reluctant to change and adapt. This will eventually widen the disparity between the well-educated and poor-educated, as habits and attitudes are extremely easy to be instilled along family lines, whether they are good or bad.</p>
+
+                    <p class="leading-loose font-light">This is an issue worth exploring and reflecting, in my opinion. I hope at some point, we all can find a way to fix this, but first perhaps we should just acknowledge it as a problem to start with.</p>
+                </div>
+            </article>
+        </main>
+
+        <!-- Footer will be inserted by footer.js -->
+    </body>
 </html>

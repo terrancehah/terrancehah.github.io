@@ -1,44 +1,102 @@
-<head>
-  <link href="./style.css" type="text/css" rel="stylesheet">
-  <link href="./form-a-story.css" type="text/css" rel="stylesheet">
-  <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="text/javascript" src="form-a-story.js" defer></script>
-  <title>Form A Story</title>
-</head>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="Your Story - Terrance's Playground">
+        <meta property="og:description" content="Read your unique generated story based on your inputs!">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://terrancehah.com/story.html">
+        <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script type="text/javascript" src="form-a-story.js" defer></script>
+        <script src="./footer.js"></script>
+        <title>Your Story - Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
+    </head>
 
-<body>
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                <!-- Left: Logo -->
+                <div class="flex flex-col lg:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
 
-  <header>
-      <h1>Terrance's Playground</h1>
-      <nav>
-        <a class="navbutton" href="./index.html">Home</a>
-        <a class="navbutton" href="./articles.html">Articles</a>
-        <a class="navbutton active" href="./projects.html">Projects</a>
-        <a class="navbutton" href="./playground.html">Playground</a>
-      </nav>
-      <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png"></a>
-      <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png"></a>
-      <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png"></a>
-      <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png"></a>
-  </header>
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
 
-  <section id="main">
-      <h1 id="title"></h1>
-      <article id="story"></article>
-      <h2 id="moral">Moral of the story:</h2>
-      <article id="moral-message"></article>
-      <hr>
-      <br>
-      <a id="startover" href="form-a-story.html">Start Over!</a> 
-        ||  
-      <a id="originalstory" href="form-a-story-ori.html">Original Story</a>
-      <br>
-      <br>
-  </section>
+        <main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
+            <section class="max-w-2xl mx-auto bg-white rounded-xl shadow-all p-8">
 
-  <script src="./footer.js"></script>
+                <!-- Story Title -->
+                <h1 id="title" class="font-caveat font-bold text-3xl sm:text-4xl lg:text-5xl text-[#1d3557] text-center mb-8"></h1>
 
+                <!-- Separator -->
+                <hr class="border-t border-[#457B9D] my-8">
+                
+                <!-- Story Content -->
+                <article id="story" class="font-raleway text-lg sm:text-xl leading-relaxed text-gray-700 mb-12 text-justify"></article>
+                
+                <!-- Moral Section -->
+                <div class="mt-12">
+                    <h2 id="moral" class="font-lato font-semibold text-2xl text-[#1d3557] mb-4">Moral of the story:</h2>
+                    <article id="moral-message" class="font-raleway text-lg sm:text-xl leading-relaxed text-gray-700 italic mb-8"></article>
+                </div>
+                
+                <!-- Separator -->
+                <hr class="border-t border-[#457B9D] my-8">
+                
+                <!-- Navigation Links -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+                  
+                    <a href="form-a-story.html" 
+                      class="w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1 flex items-center justify-center">
+                        Start Over!
+                    </a>
+                                        
+                    <a href="form-a-story-ori.html" 
+                      class="w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1 flex items-center justify-center">
+                        Original Story
+                    </a>
 
-</body>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer will be inserted by footer.js -->
+    </body>
 </html>

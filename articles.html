@@ -1,88 +1,122 @@
 <!DOCTYPE html>
-
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
         <link href="./style.css" type="text/css" rel="stylesheet">
         <link href="./articles.css" type="text/css" rel="stylesheet">
         <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:title" content="Terrance's Articles">
+        <meta property="og:description" content="Terrance's Articles">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://terrancehah.com/articles.html">
         <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
         <title>Terrance's Articles</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
     </head>
 
-    <body>
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                
+                <!-- Left: Logo & Title -->
+                <div class="flex flex-col lg:flex-row items-center w-auto md:w-[300px] gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
 
-        <header>
-            <h1>Terrance's Playground</h1>
-            <nav>
-                <a class="navbutton" href="./index.html">Home</a>
-                <a class="navbutton active" href="./articles.html">Articles</a>
-                <a class="navbutton" href="./projects.html">Projects</a>
-                <a class="navbutton" href="./playground.html">Playground</a>
-            </nav>
-            <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png"></a>
-            <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png"></a>
-            <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png"></a>
-            <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png"></a>
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue bg-light-blue">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
         </header>
-        
-        <!-- <h1>Articles</h1> -->
 
-        <div class="articles">
-            <h2><a href='./making-things-look-easy-is-hard.html' id='articlelink'>Making Things Look Easy is Hard</a></h2>
-            <h3 class='articledescription'>In this article, I share my view on why making things look easy is hard.</h3><br>
-            <h3>written on 19 December 2021</h3>
-        </div>
+        <main class="w-full p-4">
 
-        <div class="articles">
-            <h2><a href='./alter-ego.html' id='articlelink'>Alter Ego: Are we lost in our digital selves?</a></h2>
-            <h3 class='articledescription'>In this article, I share my view on our alter ego.</h3><br>
-            <h3>written on 22 November 2021</h3>
-        </div>
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./my-website-style-guide.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">My Website Style Guide</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">In this article, I share my website style.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">updated on 29 November 2024</p>
+            </div>
 
-        <div class="articles">
-            <h2><a href='./metaverse-the-next-big-thing-or-a-gimmick.html' id='articlelink'>Metaverse: The Next Big Thing or a Gimmick?</a></h2>
-            <h3 class='articledescription'>In this article, I share my view on Metaverse.</h3><br>
-            <h3>written on 3 November 2021</h3>
-        </div>
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./making-things-look-easy-is-hard.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">Making Things Look Easy is Hard</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">In this article, I share my view on why making things look easy is hard.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 19 December 2021</p>
+            </div>
 
-        <div class="articles">
-            <h2><a href='./the-art-of-writing.html' id='articlelink'>The Art of Writing</a></h2>
-            <h3 class='articledescription'>In this article, I share the reasons why I insist on writing.</h3><br>
-            <h3>written on 7 July 2021</h3>
-        </div>
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./alter-ego.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">Alter Ego: Are we lost in our digital selves?</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">In this article, I share my view on our alter ego.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 22 November 2021</p>
+            </div>
 
-        <div class="articles">
-            <h2><a href='./how-to-be-indistractable.html' id='articlelink'>How to be Indistractable</a></h2>
-            <h3 class='articledescription'>In this article, I share my personal takeaways on being indistractable.</h3><br>
-            <h3>written on 23 June 2021</h3>
-        </div>
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./my-learning-environment.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">My Learning Environment</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">A sharing of how I maintain my motivation to keep learning.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 5 November 2021</p>
+            </div>
 
-        <div class="articles">
-            <h2><a href='./dear-privacy.html' id='articlelink'>Dear Privacy</a></h2>
-            <h3 class='articledescription'>In this article, I share my view on internet privacy, and why I don’t use Google Analytics on my personal website.</h3><br>
-            <h3>written on 25 May 2021</h3>
-        </div>
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./metaverse-the-next-big-thing-or-a-gimmick.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">Metaverse: The Next Big Thing or a Gimmick</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">In this article, I share my view on Metaverse.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 3 November 2021</p>
+            </div>
 
-        <div class="articles">
-            <h2><a href='./my-website-style-guide.html' id='articlelink'>My Website Style Guide</a></h2>
-            <h3 class='articledescription'>In this article, I share my website style guide.</h3><br>
-            <h3>written on 14 April 2021</h3>
-        </div>
-        
-        <div class="articles">
-            <h2><a href='./my-learning-environment.html' id='articlelink'>My learning environment</a></h2>
-            <h3 class='articledescription'>In this article, I share about my learning environment.</h3><br>
-            <h3>written on 11 April 2021</h3>
-        </div>
-        
-        <div class="articles">
-            <h2><a href='./my-first-article.html' id='articlelink'>My first article</a></h2>
-            <h3 class='articledescription'>Hi, This is Terrance.  I am currently an English tuition teacher.</h3><br>
-            <h3>written on 27 March 2021</h3>
-        </div>
-    
-        <script src="./footer.js"></script>
-    
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./dear-privacy.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">Dear Privacy</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">In this article, I share my view on privacy.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 11 October 2021</p>
+            </div>
+
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./the-art-of-writing.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">The Art of Writing</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato"> In this article, I share the reasons why I insist on writing.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 7 July 2021</p>
+            </div>
+
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./how-to-be-indistractable.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">How to Be Indistractable</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">In this article, I share my view on being indistractable.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 23 June 2021</p>
+            </div>
+
+            <div class="articles mb-8 p-5 px-6 rounded-3xl bg-light-blue shadow-md">
+                <h2><a href='./my-first-article.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">My First Article</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">In this article, I share my view on our alter ego.</p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 27 March 2021</p>
+            </div>
+        </main>
+
+        <!-- Footer will be inserted by footer.js -->
     </body>
-
 </html>

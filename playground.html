@@ -1,57 +1,91 @@
 <!DOCTYPE html>
-
+<html lang="en">
     <head>
-        <link href="./style.css" type="text/css" rel="stylesheet">
-        <link href='./playground.css' type="text/css" rel="stylesheet">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link href="./playground.css" type="text/css" rel="stylesheet">
         <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="Terrance's Playground">
+        <meta property="og:description" content="Terrance's Playground">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://terrancehah.com/playground.html">
         <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
         <title>Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
     </head>
 
-    <body>
-        <header>
-            <h1>Terrance's Playground</h1>
-            <nav>
-                <a class="navbutton" href="./index.html">Home</a>
-                <a class="navbutton" href="./articles.html">Articles</a>
-                <a class="navbutton" href="./projects.html">Projects</a>
-                <a class="navbutton active" href="./playground.html">Playground</a>
-            </nav>
-            <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png"></a>
-            <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png"></a>
-            <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png"></a>
-            <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png"></a>
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col md:flex-row justify-between items-center p-2.5 sm:p-3">
+                
+                <!-- Left: Logo & Title -->
+                <div class="flex flex-col lg:flex-row items-center w-auto md:w-[300px] gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
+
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue bg-light-blue">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
         </header>
-    
-        <!-- <h1>Playground</h1> -->
 
-        <div class="toys">
-            <h2><a href='./ar-model-test.html' id='toylink'>Myvi with Marker Test</a></h2>
-            <h3 class='toydescription'>This is the testing page for my updated Myvi AR.<br>
-            Visit the link below on another device to access the photo needed to run the AR Test.<br></h3><br>
-            <a target="_blank" href='./resources/Myvi-QR.png'>Myvi Photo</a><br><br>
-            <h3>written on 16 July 2023</h3>
-        </div>
+        <main class="w-full p-4">
+            <div class="toys mb-8 p-5 rounded-3xl shadow-md bg-[#f8f2f9]">
+                <h2><a href='./ar-model-test.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">Myvi with Marker Test</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">This is the testing page for my updated Myvi AR.</p>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">Visit the link below on another device to access the photo needed to run the AR Test.</p>
+                <p class="mt-2"><a target="_blank" href='./resources/Myvi-QR.png' class="text-lg sm:text-xl md:text-2xl text-[#457B9D] font-normal font-lato hover:text-[#1d3557] underline">Myvi Photo</a></p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 16 July 2023</p>
+            </div>
 
-        <div class="toys">
-            <h2><a href='./car-ar-test.html' id='toylink'>Myvi Test</a></h2>
-            <h3 class='toydescription'>This is the testing page for my Myvi AR.<br>
-            Visit the link below on another device to access the photo needed to run the AR Test.<br></h3><br>
-            <a target="_blank" href='./resources/myvi-purple.jpg'>Myvi Photo</a><br><br>
-            <h3>written on 11 October 2021</h3>
-        </div>
+            <div class="toys mb-8 p-5 rounded-3xl shadow-md bg-[#f8f2f9]">
+                <h2><a href='./car-ar-test.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">Myvi Test</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">This is the testing page for my Myvi AR.</p>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">Visit the link below on another device to access the photo needed to run the AR Test.</p>
+                <p class="mt-2"><a target="_blank" href='./resources/myvi-purple.jpg' class="text-lg sm:text-xl md:text-2xl text-[#457B9D] font-normal font-lato hover:text-[#1d3557] underline">Myvi Photo</a></p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 11 October 2021</p>
+            </div>
 
-        <div class="toys">
-            <h2><a href='./dino-ar-test.html' id='toylink'>T-Rex Test</a></h2>
-            <h3 class='toydescription'>This is the playground for testing AR features.<br>
-            Visit the link below on another device to access the photo needed to run the AR Test.<br></h3><br>
-            <a target="_blank" href='https://raw.githubusercontent.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex-image-big.jpeg'>T-Rex Photo</a><br><br>
-            <h3>written on 7 June 2021</h3>
-        </div>
+            <div class="toys mb-8 p-5 rounded-3xl shadow-md bg-[#f8f2f9]">
+                <h2><a href='./dino-ar-test.html' class="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold font-raleway hover:text-[#457B9D] underline">T-Rex Test</a></h2>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">This is the playground for testing AR features.</p>
+                <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">Visit the link below on another device to access the photo needed to run the AR Test.</p>
+                <p class="mt-2"><a target="_blank" href='https://raw.githubusercontent.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex-image-big.jpeg' class="text-lg sm:text-xl md:text-2xl text-[#457B9D] font-normal font-lato hover:text-[#1d3557] underline">T-Rex Photo</a></p>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">written on 7 June 2021</p>
+            </div>
+        </main>
 
-        <script src="./footer.js"></script>
-
+        <!-- Footer will be inserted by footer.js -->
     </body>
-
 </html>

@@ -1,92 +1,123 @@
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="How to be Indistractable - Terrance's Playground">
+        <meta property="og:description" content="In this article, I share my personal takeaways on being indistractable.">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://terrancehah.com/how-to-be-indistractable.html">
+        <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
+        <title>How to be Indistractable - Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
+    </head>
 
-  <head>
-    <link href="./style.css" type="text/css" rel="stylesheet">
-    <link href="./articles.css" type="text/css" rel="stylesheet">
-    <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
-    <meta property="og:title" content="How to be Indistractable - Terrance's Playground" />
-    <meta property="og:description" content="In this article, I share my personal takeaways on being indistractable." />
-    <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://terrancehah.com/how-to-be-indistractable.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
-    <title>How to be Indistractable - Terrance's Playground</title>
-  </head>
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                <!-- Left: Logo & Title -->
+                <div class="flex flex-col md:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
 
-  <body>
-    <header>
-      <h1>Terrance's Playground</h1>
-      <nav>
-        <a class="navbutton" href="./index.html">Home</a>
-        <a class="navbutton active" href="./articles.html">Articles</a>
-        <a class="navbutton" href="./projects.html">Projects</a>
-        <a class="navbutton" href="./playground.html">Playground</a>
-      </nav>
-      <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png"></a>
-      <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png"></a>
-      <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png"></a>
-      <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png"></a>
-    </header>
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
     
-    <content class="article">
-        <h1>How to be Indistractable</h1>
-        <h3 id="time">written on 23 June 2021</h3>
-        <p>In this article, I share my personal takeaways on being indistractable.
-            <br><br>
-            ‘Indistractable’, a word composed of ‘in’, ‘distract’ and ‘able’. In the first glance, the word may mean ‘being able to not be distracted’. However, it is not a word we can find in any dictionary. In fact, it is a word created by <a class='link' href='https://en.wikipedia.org/wiki/Nir_Eyal' target="blank">Nir Eyal</a>, an author writing on how to regain focus in doing a task. In his book ‘<a class='link' href='https://www.nirandfar.com/indistractable/' target="blank">Indistractable</a>’, he writes about how the ability to stay focused is a competitive advantage, in work and in life. He even referred the ability as ‘the skill of the century’.
-            <br><br>
-            Living in this time of information overload, it is undoubtedly very hard for us to not get distracted. An incoming call, a push notification from our shopping app, a message from our relatives in the family group chat, they all can disturb our workflow. Not to mention the cohesiveness that the current social media apps provide, it makes us even harder to not peek at our phones. So, do all these distractions come from our external environment? Not really. Studies have shown that, almost 90% of our distractions actually comes internally - they are from within ourselves. 
-            <br><br>
-            Boredom in doing things we are not excited for. Laziness. Fear of being wanted. Fear of NOT being wanted. Unwillingness to try something new. Shame at our inability. Discomfort of stepping out of our comfort zones. Procrastination. They are all our distractions. When we constantly look at our devices every few minutes, we expect something to happen. We expect people to reach us. We are afraid of not noticing any urgent messages. We want to escape from uncomfortable situations we are in. That is the truth of distractions.
-            <br><br>
-            So, how do we tackle distractions? Here are some of my personal takeaways:            
-            <br><br>
+        <main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
+            <article class="prose prose-lg lg:prose-xl mx-auto">
+                <h1 class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557] text-center mb-4">How to be Indistractable</h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 text-center mb-8 font-light font-raleway">written on 23 June 2021</p>
+                
+                <div class="font-lato text-lg sm:text-xl space-y-6 text-justify">
+                    <p class="leading-loose font-light">In this article, I share my personal takeaways on being indistractable.</p>
 
-            <span class='list'>
-                <span class='bold listheading'>1. Improve our focus in small increments.</span>
-                <br><br>When it comes to concentration, we tend to think that it is only considered successful when we can concentrate over a long period of time. However, it is extremely difficult, if not deemed impossible, to ask a Year 5 student to study at his/her desk for two hours, without a break. The same applies to anyone who wish to improve their focus – start with small increments. 
-                <br><br>If we used to peek at our phone every five minutes, try to improve it to ten. Most of us may initially want for a significant improvement, so we do something extreme, like locking our phones in our drawer. That could backfire. Suppressing our desires to run away from distractions can only make things worse.<br><br>
-                <span class='bold listheading'>2. Make good use of the technology.</span> 
-                <br><br>There are tons of ways we can use to help us better tackle distractions. Take the ‘Screen Time’ feature on an iPhone, for example. Screen Time allows users to keep track of their, obviously, screen time, so they get to know how much time they have spent on their devices. Users can keep track of the time they have spent on a certain app, they can even set a time limit for the app, so that a reminder pops up whenever the usage exceeds the preset time limit, and locks the app up. The similar feature is also on Android devices, known as ‘Digital Wellbeing’. 
-                <br><br>
-                <span class='images' style='width:100%; margin: 0%;'>
-                    <img class='articleimages' width="100%" src="./resources/apple-screen-time.jpg">
-                <span class='caption'><a class='link' href='https://support.apple.com/en-my/HT208982' target="blank">Apple Screen Time</a> lets us know how much time we and our kids spend on apps, websites, and more. </span>
-                </span>
-                <br><br>
-                <span class='images' style='width:100%; margin: 0%;'>
-                    <img class='articleimages' style='width: 40%; margin: 0% 30%;' src="./resources/android-digital-wellbeing.png">
-                <span class='caption'>The <a class='link' href='https://wellbeing.google/' target="blank">Android Digital Wellbeing</a> dashboard gives us a daily view of how often we check our phone and how frequently we use different apps.</span>
-                </span>
-                <br><br>There is also a famous app named ‘Forest’, which helps users to increase productivity by eliminating distractions in an innovative way – it locks the screen up, and plants a new tree whenever a user successfully stays focused for a period of time. Say being productive and preserving the environment at the same time. Brilliant.<br><br> 
-                <span class='images' style='width:100%; margin: 0%;'>
-                    <img class='articleimages' style='width: 40%; margin: 0% 30%;' src="./resources/forest-app.png">
-                <span class='caption'>The <a class='link' href='https://www.forestapp.cc/' target="blank">Forest</a> app</span>
-                </span>
-                <br>
-                <span class='bold listheading'>3. Allow reward after focusing. </span>
-                <br><br>Reward is very crucial in a habit-forming process. The experience we have at the end of whether a study, a workout, or an assignment, determines if we want to do it again next time. If we end our task in a rewarding way, there is a big chance we will do it again in the future. 
-                <br><br>And that is why we are addicted to surfing on the social media apps, because at the end of that action, it provides us a sense of belonging. Games are fun, because they give us a surge of dopamine. Binging on a drama can be satisfying too. So do smoking and drinking alcohol. 
-                <br><br>Allow ourselves to have some rewards at the end. If we want to binge on a drama, schedule it at the end of the task. It is not like we are torturing ourselves by not having the reward, we are just DELAYING the reward. And that can dramatically improve our productivity, by turning our distractions into motivations.   
-            </span>
+                    <p class="leading-loose font-light">'Indistractable', a word composed of 'in', 'distract' and 'able'. In the first glance, the word may mean 'being able to not be distracted'. However, it is not a word we can find in any dictionary. In fact, it is a word created by <a href='https://en.wikipedia.org/wiki/Nir_Eyal' target="_blank" class="text-[#457B9D] hover:text-[#1d3557]">Nir Eyal</a>, an author writing on how to regain focus in doing a task. In his book '<a href='https://www.nirandfar.com/indistractable/' target="_blank" class="text-[#457B9D] hover:text-[#1d3557]">Indistractable</a>', he writes about how the ability to stay focused is a competitive advantage, in work and in life. He even referred the ability as 'the skill of the century'.</p>
 
-            <br><br>
-            It would be an overstatement to say that this article concludes all the points on being indistractable. These are merely some of my opinions and thoughts. I hope this article can benefit you in a helpful way. If you want to learn more about being focused, I recommend some books such as ‘<a class='link' href='https://jamesclear.com/atomic-habits' target="blank">Atomic Habits</a>’ by James Clear, and ‘<a class='link' href='https://www.nirandfar.com/indistractable/' target="blank">Indistractable</a>’ by Nir Eyal. You can also search for their insightful talks and interviews on any social platform.
-            <br><br>
-            Be focused and achieve higher.            
-            <br><br>
-        </p>
+                    <p class="leading-loose font-light">Living in this time of information overload, it is undoubtedly very hard for us to not get distracted. An incoming call, a push notification from our shopping app, a message from our relatives in the family group chat, they all can disturb our workflow. Not to mention the cohesiveness that the current social media apps provide, it makes us even harder to not peek at our phones. So, do all these distractions come from our external environment? Not really. Studies have shown that, almost 90% of our distractions actually comes internally - they are from within ourselves.</p>
 
-        
-    </content>
-    
-    <footer>
-      <h3>Copyright &copy; <script type="text/javascript">document.write( new Date().getFullYear() );</script>, Terrance Hah. All rights reserved.</h3>
-      <!-- <h4>Last modified on: <script>document.write(document.lastModified);</script></h4> -->
-      <h4>This site uses Plausible Analytics and does not store cookies on your computer.</h4>
-    </footer>
-    
-  </body>
+                    <p class="leading-loose font-light">Boredom in doing things we are not excited for. Laziness. Fear of being wanted. Fear of NOT being wanted. Unwillingness to try something new. Shame at our inability. Discomfort of stepping out of our comfort zones. Procrastination. They are all our distractions. When we constantly look at our devices every few minutes, we expect something to happen. We expect people to reach us. We are afraid of not noticing any urgent messages. We want to escape from uncomfortable situations we are in. That is the truth of distractions.</p>
 
+                    <p class="leading-loose font-light">So, how do we tackle distractions? Here are some of my personal takeaways:</p>
+
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="font-lato font-semibold text-xl sm:text-2xl text-[#1d3557] mb-4">1. Improve our focus in small increments</h3>
+                            <p class="leading-loose font-light">When it comes to concentration, we tend to think that it is only considered successful when we can concentrate over a long period of time. However, it is extremely difficult, if not deemed impossible, to ask a Year 5 student to study at his/her desk for two hours, without a break. The same applies to anyone who wish to improve their focus – start with small increments.</p>
+                            <p class="leading-loose font-light">If we used to peek at our phone every five minutes, try to improve it to ten. Most of us may initially want for a significant improvement, so we do something extreme, like locking our phones in our drawer. That could backfire. Suppressing our desires to run away from distractions can only make things worse.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-lato font-semibold text-xl sm:text-2xl text-[#1d3557] mb-4">2. Make good use of the technology</h3>
+                            <p class="leading-loose font-light">There are tons of ways we can use to help us better tackle distractions. Take the 'Screen Time' feature on an iPhone, for example. Screen Time allows users to keep track of their, obviously, screen time, so they get to know how much time they have spent on their devices. Users can keep track of the time they have spent on a certain app, they can even set a time limit for the app, so that a reminder pops up whenever the usage exceeds the preset time limit, and locks the app up. The similar feature is also on Android devices, known as 'Digital Wellbeing'.</p>
+                            
+                            <div class="my-8 items-center">
+                                <img src="./resources/apple-screen-time.jpg" alt="Apple Screen Time" class="w-4/5 md:w-1/2 mx-auto rounded-lg shadow-lg mb-2">
+                                <p class="text-base text-gray-600 text-center"><a href='https://support.apple.com/en-my/HT208982' target="_blank" class="text-[#457B9D] hover:text-[#1d3557]">Apple Screen Time</a> lets us know how much time we and our kids spend on apps, websites, and more.</p>
+                            </div>
+                            
+                            <div class="my-8">
+                                <img src="./resources/android-digital-wellbeing.png" alt="Android Digital Wellbeing" class="w-3/5 md:w-1/5 mx-auto rounded-lg shadow-lg mb-2">
+                                <p class="text-base text-gray-600 text-center">The <a href='https://wellbeing.google/' target="_blank" class="text-[#457B9D] hover:text-[#1d3557]">Android Digital Wellbeing</a> dashboard gives us a daily view of how often we check our phone and how frequently we use different apps.</p>
+                            </div>
+
+                            <p class="leading-loose font-light">There is also a famous app named 'Forest', which helps users to increase productivity by eliminating distractions in an innovative way – it locks the screen up, and plants a new tree whenever a user successfully stays focused for a period of time. Say being productive and preserving the environment at the same time. Brilliant.</p>
+                            
+                            <div class="my-8">
+                                <img src="./resources/forest-app.png" alt="Forest App" class="w-3/5 md:w-1/5 mx-auto rounded-lg shadow-lg mb-2">
+                                <p class="text-base text-gray-600 text-center">The <a href='https://www.forestapp.cc/' target="_blank" class="text-[#457B9D] hover:text-[#1d3557]">Forest</a> app</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-lato font-semibold text-xl sm:text-2xl text-[#1d3557] mb-4">3. Allow reward after focusing</h3>
+                            <p class="leading-loose font-light">Reward is very crucial in a habit-forming process. The experience we have at the end of whether a study, a workout, or an assignment, determines if we want to do it again next time. If we end our task in a rewarding way, there is a big chance we will do it again in the future.</p>
+                            <p class="leading-loose font-light">And that is why we are addicted to surfing on the social media apps, because at the end of that action, it provides us a sense of belonging. Games are fun, because they give us a surge of dopamine. Binging on a drama can be satisfying too. So do smoking and drinking alcohol.</p>
+                            <p class="leading-loose font-light">Allow ourselves to have some rewards at the end. If we want to binge on a drama, schedule it at the end of the task. It is not like we are torturing ourselves by not having the reward, we are just DELAYING the reward. And that can dramatically improve our productivity, by turning our distractions into motivations.</p>
+                        </div>
+                    </div>
+
+                    <p class="leading-loose font-light">It would be an overstatement to say that this article concludes all the points on being indistractable. These are merely some of my opinions and thoughts. I hope this article can benefit you in a helpful way. If you want to learn more about being focused, I recommend some books such as '<a href='https://jamesclear.com/atomic-habits' target="_blank" class="text-[#457B9D] hover:text-[#1d3557]">Atomic Habits</a>' by James Clear, and '<a href='https://www.nirandfar.com/indistractable/' target="_blank" class="text-[#457B9D] hover:text-[#1d3557]">Indistractable</a>' by Nir Eyal. You can also search for their insightful talks and interviews on any social platform.</p>
+
+                    <p class="leading-loose font-light">Be focused and achieve higher.</p>
+                </div>
+            </article>
+        </main>
+
+        <!-- Footer will be inserted by footer.js -->
+    </body>
 </html>
