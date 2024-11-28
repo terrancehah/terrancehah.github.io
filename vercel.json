@@ -1,5 +1,6 @@
 {
     "cleanUrls": true,
+    "outputDirectory": ".",
     "functions": {
         "api/travel-rizz-server.js": {
             "maxDuration": 60
