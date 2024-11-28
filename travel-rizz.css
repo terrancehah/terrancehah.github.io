@@ -81,13 +81,6 @@ header, footer {
   flex-shrink: 0;
 }
 
-#slogan {
-  margin: 3% 5%;
-  line-height: 160%;
-  font-weight: 700;
-  font-size: 2vw;
-}
-
 /* .intro {
   position: relative;
   width: 100%;
@@ -423,8 +416,6 @@ p {
   }
 }
 
-
-
 .featurecaption {
     width: 90%;
     margin: 5% 5%;
@@ -434,83 +425,28 @@ p {
     line-height: 160%;
 }
 
-.popup-window {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-.popup-content {
-  background-color: #fefefe;
-  margin: 10% 25%; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-  height: 70%;
-  overflow-y: auto; /* Enable scrolling within the popup */
-  position: fixed;
-}
-
 #loadingSpinner {
-  position: fixed; /* or absolute */
-  z-index: 1; /* Sit on top */
   top: 50%;
   left: 50%;
-  width: 100%;
-  height: 100%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.75); /* white w/ opacity */
-  display: flex;
-}
-
-#loadingSpinner p {
-  text-align: center;
-  z-index: 1;
-  justify-content: center;
-  align-items: center;
-  display: flex;  
-  font-weight: 500;
-  font-size: 1.7vw;
-  margin: 0% 25%;
-}
-
-#plane {
-  width: 40%;
-  margin: 0% 30%;
-  position: absolute;
-  height: 30%;
-  top: 26%;
-  display: flex;
 }
 
 .close-btn {
   color: #aaa;
-  font-size: 28px;
-  font-weight: bold;
   /* right: 10%; */
   position: fixed;
   z-index: 1000;
 }
 
-.close-btn:hover,
-.close-btn:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .generated-content {
-  margin-top: 15px;
-  font-family: Raleway;
+  margin-top: 10px;
   font-size: 1.2vw;
   line-height: 1.8;
   text-align: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page-break {
@@ -520,14 +456,15 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 99%;
   position: relative;
-  margin-bottom: 2%;
+  margin-bottom: 0.5%;
   margin-top: 0.5%;
+  
 }
 
 .generated-content header {
-  margin-top: 1%;
+  margin-top: 0.5%;
   height: 12%;
   display: none;
   page-break-inside: avoid;
@@ -550,8 +487,26 @@ p {
   font-size: 1.6vw;
   color: #3a7398;
   position: absolute;
-  right: 0;
+  text-align: right !important;  
   margin-top: 0.6%;
+}
+
+.generated-content h1,
+.generated-content h2,
+.generated-content h3 {
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+/* Specific fixes for Chinese text */
+.generated-content:lang(zh) h1,
+.generated-content:lang(zh) h2,
+.generated-content:lang(zh) h3 {
+  text-align: center;
+  line-height: 1.5;
+  /* Add specific font for Chinese text */
+  font-family: "Microsoft YaHei", "微软雅黑", "SimHei", "STHeiti", sans-serif;
 }
 
 .generated-content h1 {
@@ -567,7 +522,7 @@ p {
   font-size: 2.5vw;
   line-height: 130%;
   margin: 0;
-  margin-top: 2%;
+  margin-top: 1%;
 }
 
 .generated-content a {
@@ -592,6 +547,9 @@ font-size: 1.6vw;
   font-size: 1.4vw;
   line-height: 180%;
   width: 100%;
+  text-align: center;
+  margin: 0.5em auto;
+  font-weight: 300;
 }
 
 .generated-content #conclusion {
@@ -608,22 +566,11 @@ font-size: 1.6vw;
   outline: 0;
   cursor: pointer;
   border: none;
-  width: 40%;
-  margin: 2% 30%;
-  padding: 0 5%;
-  height: 4vw;
   line-height: 45px;
-  border-radius: 1vw;
-  background-color: white;
-  color: #4798cc;
-  font-weight: 600;
-  font-size: 1.5vw;
   box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
 }
 
 #exportPDF:hover {
-    background: rgba(58, 125, 201, 0.9);
-    color: white;
     box-shadow: 0 0.8vw 28px #2e536a;
     transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease;
     transform: translateY(-4px);
@@ -633,34 +580,6 @@ b {
     font-weight: 700;
     font-size: 2vw;
     margin-bottom: 1vw;
-}
-
-
-.faq {
-    margin: 1% 10%;
-    background-color: #ffffff;
-    padding: 2.5vw;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    text-align: center;
-    display: block;
-    font-family: Lato;
-    line-height: 170%;
-}
-
-.faq b {
-    font-size: 1.5vw;
-}
-
-.faq p {
-    font-size: 1.4vw;
-    line-height: 150%;
-}
-
-.faqtitle {
-    font-family: Lato;
-    box-shadow: 0;
-    margin: 1% 5%;
-    color: #000;
 }
 
 .bold {
@@ -817,14 +736,6 @@ b {
       min-width: 100% !important;
     }
 
-    #slogan {
-      margin: 8% 5%;
-      line-height: 120%;
-      font-weight: 700;
-      font-size: 3.2vw;
-      line-height: 180%;
-    }
-
     #generate-button {
       width: auto;
       padding: 0 30px;
@@ -841,7 +752,6 @@ b {
     .popup-window {
       display: none; /* Hidden by default */
       position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
       left: 0;
       top: 0;
       width: 100%; /* Full width */
