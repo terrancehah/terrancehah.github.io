@@ -1,43 +1,87 @@
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="My First Article - Terrance's Playground">
+        <meta property="og:description" content="Hi, This is Terrance. In this article, I share about myself and my thoughts on education.">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://terrancehah.com/my-first-article.html">
+        <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
+        <title>My First Article - Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
+    </head>
 
-  <head>
-    <link href="./style.css" type="text/css" rel="stylesheet">
-    <link href="./articles.css" type="text/css" rel="stylesheet">
-    <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
-    <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
-    <title>My First Article - Terrance's Playground</title>
-  </head>
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                <!-- Left: Title -->
+                <div class="flex flex-col lg:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
 
-  <body>
-    <header>
-      <h1>Terrance's Playground</h1>
-      <nav>
-        <a class="navbutton" href="./index.html">Home</a>
-        <a class="navbutton active" href="./articles.html">Articles</a>
-        <a class="navbutton" href="./projects.html">Projects</a>
-        <a class="navbutton" href="./playground.html">Playground</a>
-      </nav>
-      <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png"></a>
-      <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png"></a>
-      <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png"></a>
-      <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png"></a>
-    </header>
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
     
-    <content class="article">
-      <h1>My first article</h1>
-      <h3 id="time">written on 27 March 2021</h3>
-      <p>Hi, This is Terrance.  I am currently an English tuition teacher. I had majored in International Business in the college. After graduating from college, I co-founded a <a class="link" href="https://www.facebook.com/TalentKingTuitionCentre" title="Talent King Tuition Centre" target="_blank">tuition centre</a> in Johor Bahru with two partners.
-        <br><br>In my years of teaching, I started to see more of the problems in our education system. Our current education system has gone astray. Children are trained to obey. They are praised for doing exactly what they have been told, while the so-called 'disobedient ones' are being punished. No opinion is allowed. Individualism is not encouraged.
-        <br><br>Academic performance is now the 'No.1 priority'. Kids are asked to score high in Science and Maths. Physical Education classes have been 'borrowed' by Maths teachers to conduct Maths exams. Art teachers no longer teach children how to draw, instead, they use the supposed Art Class time to teach Chinese.
-        <br><br>I realised that something has to be changed. In fact, most of us are actually aware of the risk in stake. We are just too proud to admit that it is us, who failed the kids in the first place. Faith on the education system has to be restored. Kids are supposed to learn what they enjoy. We have failed them before. We got to fix it before it was too late.
-        <br><br>I strive to empower children with the power of technology. I deeply believe that, one of the best ways to help children, is to give them choices. Choices to choose what they like. Choices to be well equiped of knowledge. Choices to make their own decisions.
-      </p>
-        <p id='postscript'>PS: Currently I am self teaching to code. I intend to use this website to record my daily learning, also some of my personal milestones. Stay tuned for more updates! Cheers!</p>
-    </content>
-      
-    
-    <script src="./footer.js"></script>
-    
-  </body>
+        <main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
+            <article class="prose prose-lg lg:prose-xl mx-auto">
+                <h1 class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557] text-center mb-4">My First Article</h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 text-center mb-8 font-light font-raleway">written on 27 March 2021</p>
+                
+                <div class="font-lato text-lg sm:text-xl space-y-6 text-justify">
+                    <p class="leading-loose font-light">Hi, This is Terrance. I am currently an English tuition teacher. I had majored in International Business in the college. After graduating from college, I co-founded a <a href="https://www.facebook.com/TalentKingTuitionCentre" title="Talent King Tuition Centre" target="_blank" class="text-[#457B9D] hover:text-[#1d3557]">tuition centre</a> in Johor Bahru with two partners.</p>
 
+                    <p class="leading-loose font-light">In my years of teaching, I started to see more of the problems in our education system. Our current education system has gone astray. Children are trained to obey. They are praised for doing exactly what they have been told, while the so-called 'disobedient ones' are being punished. No opinion is allowed. Individualism is not encouraged.</p>
+
+                    <p class="leading-loose font-light">Academic performance is now the 'No.1 priority'. Kids are asked to score high in Science and Maths. Physical Education classes have been 'borrowed' by Maths teachers to conduct Maths exams. Art teachers no longer teach children how to draw, instead, they use the supposed Art Class time to teach Chinese.</p>
+
+                    <p class="leading-loose font-light">I realised that something has to be changed. In fact, most of us are actually aware of the risk in stake. We are just too proud to admit that it is us, who failed the kids in the first place. Faith on the education system has to be restored. Kids are supposed to learn what they enjoy. We have failed them before. We got to fix it before it was too late.</p>
+
+                    <p class="leading-loose font-light">I strive to empower children with the power of technology. I deeply believe that, one of the best ways to help children, is to give them choices. Choices to choose what they like. Choices to be well equiped of knowledge. Choices to make their own decisions.</p>
+
+                    <blockquote class="font-caveat text-2xl sm:text-3xl md:text-3xl text-center my-12 italic">
+                        PS: Currently I am self teaching to code. I intend to use this website to record my daily learning, also some of my personal milestones. Stay tuned for more updates! Cheers!
+                    </blockquote>
+
+                </div>
+            </article>
+        </main>
+
+        <!-- Footer will be inserted by footer.js -->
+    </body>
 </html>

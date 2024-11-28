@@ -1,277 +1,363 @@
-<head>
-    <link href="./style.css" type="text/css" rel="stylesheet">
-    <link href="./foodtracker.css" type="text/css" rel="stylesheet">
-    <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,900;1,300;1,400&display=swap');
-    </style> 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,900;1,300;1,400&display=swap');
-    </style>
-    <title>Food Tracker</title>
-</head>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="Food Tracker - Terrance's Playground">
+        <meta property="og:description" content="Track and discover great food places in Malaysia">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://terrancehah.com/foodtracker.html">
+        <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
+        <title>Food Tracker - Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
+    </head>
 
-<body>
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                <!-- Left: Logo -->
+                <div class="flex flex-col md:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
 
-    <header>
-        <h1>Terrance's Playground</h1>
-        <nav>
-            <a class="navbutton" href="./index.html">Home</a>
-            <a class="navbutton" href="./articles.html">Articles</a>
-            <a class="navbutton active" href="./projects.html">Projects</a>
-            <a class="navbutton" href="./playground.html">Playground</a>
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Food Type Navigation -->
+        <nav class="bg-light-blue relative shadow-md w-[60%] mx-auto my-4 text-center rounded-3xl items-center" id="top">
+            <ul class="p-0 m-0 w-[90%] flex flex-wrap mx-auto justify-center items-center">
+                <li class="p-2 inline-block">
+                    <a href="#Japanese" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+                        <img src="./resources/Japan.png" alt="Japanese" class="h-8 w-auto m-2">
+                        Japanese
+                    </a>
+                </li>
+                <li class="p-2 inline-block">
+                    <a href="#Korean" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+                        <img src="./resources/korean.png" alt="Korean" class="h-8 w-auto m-2">
+                        Korean
+                    </a>
+                </li>
+                <li class="p-2 inline-block">
+                    <a href="#Western" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+                        <img src="./resources/western.png" alt="Western" class="h-8 w-auto m-2">
+                        Western
+                    </a>
+                </li>
+                <li class="p-2 inline-block">
+                    <a href="#Chinese" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+                        <img src="./resources/chinese.jpg" alt="Chinese" class="h-8 w-auto m-2">
+                        Chinese
+                    </a>
+                </li>
+                <li class="p-2 inline-block">
+                    <a href="#Desserts" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+                        <img src="./resources/desert.webp" alt="Desserts" class="h-8 w-auto m-2">
+                        Desserts
+                    </a>
+                </li>
+            </ul>
         </nav>
-        <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png"></a>
-        <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png"></a>
-        <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png"></a>
-        <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png"></a>
-    </header>
 
-    <nav id="foodTypes">
-        <ul>
-            <li><a href="#Japanese"><img src="./resources/Japan.png">Japanese</a></li>
-            <li><a href="#Korean"><img src="./resources/korean.png">Korean</a></li>
-            <li><a href="#Western"><img src="./resources/western.png">Western</a></li>
-            <li><a href="#Chinese"><img src="./resources/chinese.jpg">Chinese</a></li>
-            <li><a href="#Desserts"><img src="./resources/desert.webp">Desserts</a></li>
-        </ul>
-    </nav>
+        <main class="w-full">
+            <!-- Japanese Section -->
+            <section id="Japanese" class="mb-12">
+                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Japanese</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+                    <!-- Tanba Japanese BBQ -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/tanba.jpg" alt="Tanba Japanese BBQ" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Tanba Japanese BBQ</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Tanba Yakiniku</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant serving Japanese BBQ</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">Twin Galaxy, #01-03 #01-05 #01-06, Jalan Dato Abdullah Tahir, Taman Abad</p>
+                            <a href="tel:+6073821368" class="font-raleway text-sky-blue hover:text-secondary">+607-3821368</a>
+                            <a href="https://goo.gl/maps/yq8Zb93UEDQErrhX6" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
 
-   
-    <content>
+                    <!-- Yakiniku Hinata -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/hinata.jpg" alt="Yakiniku Hinata" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Yakiniku Hinata</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Hinata Authentic Japanese Cuisine</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant serving Japanese Yakiniku</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">Ground Floor, St.Mary, 1, Jalan Tengah, Kuala Lumpur</p>
+                            <a href="tel:+60320222349" class="font-raleway text-sky-blue hover:text-secondary">+603-20222349</a>
+                            <a href="https://goo.gl/maps/CfpNLtzcjAQNKbwRA" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
 
-        <div class="items" id="Japanese">
-            <h1 class="foodstyle">Japanese</h1>
-                <ul>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/tanba.jpg">
+                    <!-- Jyunzen Japanese Food -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/jyunzen.jpg" alt="Jyunzen Japanese Food" class="w-full h-64 object-cover rounded-lg">
                         </div>
-                        <info>
-                            <h1>Tanba Japanese BBQ</h1>
-                            <h2 class="foodname">by Tanba Yakiniku</h2>
-                            <h3 class="description">A restaurant serving Japanese BBQ</h3>
-                            <h3 class="price">$$$$</h3>
-                            <h3 class="address">Twin Galaxy, #01-03 #01-05 #01-06, Jalan Dato Abdullah Tahir, Taman Abad</h3>
-                            <h3><a href="tel:+6073821368" class="contact">+607-3821368</a></h3>
-                            <h3><a href="https://goo.gl/maps/yq8Zb93UEDQErrhX6" target="_blank">Tanba Japanese BBQ Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/hinata.jpg">
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Jyunzen Japanese Food</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Jyunzen Japanese Restaurant</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant serving Japanese food</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">56&58-G, Jalan Pertama 1, Pusat Perdagangan Danga Utama</p>
+                            <a href="tel:+60196111222" class="font-raleway text-sky-blue hover:text-secondary">+6019-6111222</a>
+                            <a href="https://goo.gl/maps/AVQrTtWMjZtP9sb9A" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
                         </div>
-                        <info>
-                            <h1>Yakiniku Hinata</h1>
-                            <h2 class="foodname">by Hinata Authentic Japanese Cuisine</h2>
-                            <h3 class="description">An infamous restaurant serving Japanese Yakiniku</h3>
-                            <h3 class="price">$$$$</h3>
-                            <h3 class="address">Ground Floor, St.Mary, 1, Jalan Tengah, Kuala Lumpur</h3>
-                            <h3><a href="tel:+60320222349" class="contact">+60320222349</a></h3>
-                            <h3><a href="https://goo.gl/maps/CfpNLtzcjAQNKbwRA" target="_blank">Yakiniku Hinata Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/jyunzen.jpg">
-                        </div>
-                        <info>
-                            <h1>Jyunzen Japanese Food</h1>
-                            <h2 class="foodname">by Jyunzen Japanese Restaurant</h2>
-                            <h3 class="description">A restaurant serving Japanese food</h3>
-                            <h3 class="price">$$$</h3>
-                            <h3 class="address">56&58-G, Jalan Pertama 1, Pusat Perdagangan Danga Utama</h3>
-                            <h3><a href="tel:+60196111222" class="contact">+6019-6111222</a></h3>
-                            <h3><a href="https://goo.gl/maps/AVQrTtWMjZtP9sb9A" target="_blank">Jyunzen Japanese Restaurant Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/kirishima.jpg" >
-                        </div>
-                        <info>
-                            <h1>Kirishima Shuzou</h1>
-                            <h2 class="foodname">by Kirishima Shuzou Japanese Restaurant</h2>
-                            <h3 class="description">An authentic izakaya serving Japanese food and umeshu</h3>
-                            <h3 class="price">$$$</h3>
-                            <h3 class="address"> 1st floor, Crystal Crown Hotel, 117 Jalan Tebrau, Taman Century</h3>
-                            <h3><a href="tel:+607-276 2838" class="contact">+607-2762838</a></h3>
-                            <h3><a href="https://goo.gl/maps/cB1n3nK7TAKApPY5A" target="_blank">Kirishima Shuzou Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                </ul>
-        </div>
+                    </div>
 
-        <div class="items" id="Korean">
-            <h1 class="foodstyle">Korean</h1>
-                <ul>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics palsaik" src="./resources/koreanbbq.jpg" alt="a korean barbeque picture">
-                            <img class="foodpics palsaik" src="./resources/palsaik2.jpg" alt="a korean barbeque picture">
-                            <img class="foodpics palsaik" src="./resources/palsaik3.jpg" alt="a korean barbeque picture">
-                            <!-- <button class="prev" onclick="plusDivs(-1)">&#10094;</button>
-                            <button class="next" onclick="plusDivs(+1)">&#10095;</button> -->
+                    <!-- Kirishima Shuzou -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/kirishima.jpg" alt="Kirishima Shuzou" class="w-full h-64 object-cover rounded-lg">
                         </div>
-                        <info>
-                            <h1>Palsaik Korean BBQ</h1>
-                            <h2 class="foodname">by Palsaik Korean BBQ Sutera</h2>
-                            <h3 class="description">A restaurant serving korean BBQ </h3>
-                            <h3 class="price">$$$</h3>
-                            <h3 class="address">51, Jalan Sutera Tanjung 8/2, Taman Sutera Utama</h3>
-                            <h3><a href="tel:+6075563833" class="contact">+607-5563833</a></h3>
-                            <h3><a href="https://goo.gl/maps/EBPUQkGfAi24i5xJ6" target="_blank">Palsaik Korean BBQ Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-    
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics gyumore" src="./resources/gyumore.jpg" alt="a korean barbeque picture" >
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Kirishima Shuzou</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Kirishima Shuzou Japanese Restaurant</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">An authentic izakaya serving Japanese food and umeshu</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">1st floor, Crystal Crown Hotel, 117 Jalan Tebrau, Taman Century</p>
+                            <a href="tel:+607-2762838" class="font-raleway text-sky-blue over:text-secondary mt-2">View on Google Maps</a>
                         </div>
-                        <info>
-                            <h1>Gyumore Yakiniku</h1>
-                            <h2 class="foodname">by Gyumore Yakiniku 牛魔日韩烧烤专卖店</h2>
-                            <h3 class="description">A restaurant specializing in serving beef </h3>
-                            <h3 class="price">$$$$</h3>
-                            <h3 class="address">32, Jalan Sutera Tanjung 8/3, Taman Sutera Utama</h3>
-                            <h3><a href="tel:+60125678606" class="contact">+6012-5678606</a></h3>
-                            <h3><a href="https://goo.gl/maps/fx5uVYHd6T5rGNWw6" target="_blank">Gyumore Yakiniku Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                </ul>
-        </div>
-    
-        <div class="items" id="Western">
-            <h1 class="foodstyle">Western</h1>
-                <ul>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/anmour.jpg" >
-                        </div>
-                        <info>
-                            <h1>AnMour Western Food</h1>
-                            <h2 class="foodname">by AnMour Cafe</h2>
-                            <h3 class="description">Steak. Pasta. Burger.</h3>
-                            <h3 class="price">$$$</h3>
-                            <h3 class="address">36, Jalan Sutera Tanjung 8/3, Taman Sutera Utama</h3>
-                            <h3><a href="tel:+6075563420" class="contact">+607-5563420</a></h3>
-                            <h3><a href="https://goo.gl/maps/AVQrTtWMjZtP9sb9A" target="_blank">Anmour Cafe Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/grillbar.jpg" >
-                        </div>
-                        <info>
-                            <h1>Grill Bar</h1>
-                            <h2 class="foodname">by Grill Bar Steakhouse</h2>
-                            <h3 class="description">An steakhouse serving beef and lamb steaks</h3>
-                            <h3 class="price">$$$$</h3>
-                            <h3 class="address">202, Jalan Sri Pelangi, Taman Pelangi</h3>
-                            <h3><a href="tel:+6019-337 3400" class="contact">+6019-3373400</a></h3>
-                            <h3><a href="https://goo.gl/maps/wWLTjkAej2X7pRqe7" target="_blank">Grill Bar Steakhouse Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                </ul>
-        </div>
-    
-        <div class="items" id="Chinese">
-            <h1 class="foodstyle">Chinese</h1>
-                <ul>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/caiji.jpg" >
-                        </div>
-                        <info>
-                            <h1>Chua Kee Seafood</h1>
-                            <h2 class="foodname">by Restoran Chua Kee</h2>
-                            <h3 class="description">Seafood Restaurant, especially famous with their crabs</h3>
-                            <h3 class="price">$$$</h3>
-                            <h3 class="address">Jalan Kacang Panjang, Gelang Patah</h3>
-                            <h3><a href="tel:+6012-7610529" class="contact">+6012-7610529</a></h3>
-                            <h3><a href="https://goo.gl/maps/ZsJDr56QUo2awm9VA" target="_blank">Restoran Chua Kee Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/kiangkee.jpg" >
-                        </div>
-                        <info>
-                            <h1>Bak Kut Teh</h1>
-                            <h2 class="foodname">by Kiang Kee Bak Kut Teh 強記肉骨茶</h2>
-                            <h3 class="description">An infamous Bak Kut Teh shop</h3>
-                            <h3 class="price">$$</h3>
-                            <h3 class="address">Batu 8, Jalan Mawai, Kampung Haji Mohd Jambi</h3>
-                            <h3><a href="tel:+6019-747 9416" class="contact">+6019-7479416</a></h3>
-                            <h3><a href="https://g.page/KiangKeeBKT?share" target="_blank">Kiang Kee Bak Kut Teh Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                </ul>
-        </div>
-    
-        <div class="items" id="Desserts">
-            <h1 class="foodstyle">Desserts</h1>
-                <ul>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/fam.jpg" > 
-                        </div>
-                        <info>
-                            <h1>Fam Cafe Cake</h1>
-                            <h2 class="foodname">by Fam Cafe</h2>
-                            <h3 class="description">A cafe serving main courses and cakes of the day</h3>
-                            <h3 class="price">$$$</h3>
-                            <h3 class="address">Sutera Mall, Jalan Sutera Tanjung 8/4, Taman Sutera Utama</h3>
-                            <h3><a href="tel:+6018-7704035" class="contact">+6018-7704035</a></h3>
-                            <h3><a href="https://goo.gl/maps/NuZWwEGqkxVkod7E9" target="_blank">Fam Cafe Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                    <li>
-                        <div class="picscontainer">
-                            <img class="foodpics" src="./resources/dreamz.jpg" >
-                        </div>
-                        <info>
-                            <h1>Monster Lava Cookies</h1>
-                            <h2 class="foodname">by Dreamz Bakery</h2>
-                            <h3 class="description">A bakery serving out-of-the-box desserts</h3>
-                            <h3 class="price">$$$</h3>
-                            <h3 class="address">No 32-1, The Strand, Jalan PJU 5/20D, Pusat Perdagangan, Kota Damansara</h3>
-                            <h3><a href="tel:+6012-2003441" class="contact">+6012-2003441</a></h3>
-                            <h3><a href="https://goo.gl/maps/qPXt2Ejtsqm9x6XP8" target="_blank">Dreamz Bakery Google Map Navigation</a></h3>
-                        </info>
-                    </li>
-                </ul>
-        </div>
-    </content>
+                    </div>
+                </div>
+            </section>
 
-    <footer>
-        <h3>Copyright &copy; <script type="text/javascript">document.write( new Date().getFullYear() );</script>, Terrance Hah. All rights reserved.</h3>
-        <!-- <h4>Last modified on: <script>document.write(document.lastModified);</script></h4> -->
-        <h4>This site uses Plausible Analytics and does not store cookies on your computer.</h4>
-      </footer>
-    
-    <a id="backtotop" href="#top">Back to Top</a>
+            <!-- Korean Section -->
+            <section id="Korean" class="mb-12">
+                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Korean</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+                    <!-- Palsaik Korean BBQ -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2 relative">
+                            <div class="carousel">
+                                <img src="./resources/koreanbbq.jpg" alt="Palsaik Korean BBQ 1" class="w-full h-64 object-cover rounded-lg carousel-item">
+                                <img src="./resources/palsaik2.jpg" alt="Palsaik Korean BBQ 2" class="w-full h-64 object-cover rounded-lg carousel-item hidden">
+                                <img src="./resources/palsaik3.jpg" alt="Palsaik Korean BBQ 3" class="w-full h-64 object-cover rounded-lg carousel-item hidden">
+                            </div>
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Palsaik Korean BBQ</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Palsaik Korean BBQ Sutera</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant serving korean BBQ</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">51, Jalan Sutera Tanjung 8/2, Taman Sutera Utama</p>
+                            <a href="tel:+6075563833" class="font-raleway text-sky-blue hover:text-secondary">+607-5563833</a>
+                            <a href="https://goo.gl/maps/EBPUQkGfAi24i5xJ6" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
 
-    <script>
-        var slideIndex = 1;
-        showDivs(slideIndex);
-        
-        function plusDivs(n) {
-          showDivs(slideIndex += n);
-        }
-        
-        function showDivs(n) {
-          var i;
-          var x = document.getElementsByClassName("palsaik");
-          if (n > x.length) {slideIndex = 1}
-          if (n < 1) {slideIndex = x.length}
-          for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";  
-          }
-          x[slideIndex-1].style.display = "block";  
-        }
-    </script>
-    
+                    <!-- Gyumore Yakiniku -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/gyumore.jpg" alt="Gyumore Yakiniku" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Gyumore Yakiniku</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Gyumore Yakiniku 牛魔日韩烧烤专卖店</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant specializing in serving beef</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">32, Jalan Sutera Tanjung 8/3, Taman Sutera Utama</p>
+                            <a href="tel:+60125678606" class="font-raleway text-sky-blue hover:text-secondary">+6012-5678606</a>
+                            <a href="https://goo.gl/maps/fx5uVYHd6T5rGNWw6" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-</body>
+            <!-- Western Section -->
+            <section id="Western" class="mb-12">
+                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Western</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+                    <!-- AnMour Western Food -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/anmour.jpg" alt="AnMour Western Food" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">AnMour Western Food</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by AnMour Cafe</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">Steak. Pasta. Burger.</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">36, Jalan Sutera Tanjung 8/3, Taman Sutera Utama</p>
+                            <a href="tel:+6075563420" class="font-raleway text-sky-blue hover:text-secondary">+607-5563420</a>
+                            <a href="https://goo.gl/maps/AVQrTtWMjZtP9sb9A" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
+
+                    <!-- Grill Bar -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/grillbar.jpg" alt="Grill Bar" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Grill Bar</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Grill Bar Steakhouse</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">An steakhouse serving beef and lamb steaks</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">202, Jalan Sri Pelangi, Taman Pelangi</p>
+                            <a href="tel:+60193373400" class="font-raleway text-sky-blue hover:text-secondary">+6019-3373400</a>
+                            <a href="https://goo.gl/maps/wWLTjkAej2X7pRqe7" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chinese Section -->
+            <section id="Chinese" class="mb-12">
+                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Chinese</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+                    <!-- Chua Kee Seafood -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/caiji.jpg" alt="Chua Kee Seafood" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Chua Kee Seafood</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Restoran Chua Kee</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">Seafood Restaurant, especially famous with their crabs</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">Jalan Kacang Panjang, Gelang Patah</p>
+                            <a href="tel:+60127610529" class="font-raleway text-sky-blue hover:text-secondary">+6012-7610529</a>
+                            <a href="https://goo.gl/maps/ZsJDr56QUo2awm9VA" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
+
+                    <!-- Kiang Kee Bak Kut Teh -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/kiangkee.jpg" alt="Kiang Kee Bak Kut Teh" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Bak Kut Teh</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Kiang Kee Bak Kut Teh 強記肉骨茶</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">An infamous Bak Kut Teh shop</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">Batu 8, Jalan Mawai, Kampung Haji Mohd Jambi</p>
+                            <a href="tel:+60197479416" class="font-raleway text-sky-blue hover:text-secondary">+6019-7479416</a>
+                            <a href="https://g.page/KiangKeeBKT?share" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desserts Section -->
+            <section id="Desserts" class="mb-12">
+                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Desserts</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+                    <!-- Fam Cafe -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/fam.jpg" alt="Fam Cafe" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Fam Cafe Cake</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Fam Cafe</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">A cafe serving main courses and cakes</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">Sutera Mall, Jalan Sutera Tanjung 8/4, Taman Sutera Utama</p>
+                            <a href="tel:+60187704035" class="font-raleway text-sky-blue hover:text-secondary">+6018-7704035</a>
+                            <a href="https://goo.gl/maps/NuZWwEGqkxVkod7E9" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
+
+                    <!-- Dreamz Bakery -->
+                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <img src="./resources/dreamz.jpg" alt="Dreamz Bakery" class="w-full h-64 object-cover rounded-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Monster Lava Cookies</h3>
+                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Dreamz Bakery</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">A bakery serving out-of-the-box desserts</p>
+                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
+                            <p class="font-raleway text-base text-gray-600 mb-2">No 32-1, The Strand, Jalan PJU 5/20D, Pusat Perdagangan, Kota Damansara</p>
+                            <a href="tel:+60122003441" class="font-raleway text-sky-blue hover:text-secondary">+6012-2003441</a>
+                            <a href="https://goo.gl/maps/qPXt2Ejtsqm9x6XP8" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Back to Top Button -->
+        <a href="#top" class="fixed bottom-4 right-4 bg-light-blue text-[#1D3557] px-4 py-2 rounded-lg font-raleway font-semibold text-lg hover:bg-[#457B9D] hover:text-light-blue hover:shadow-all transition-all duration-300">
+            Back to Top
+        </a>
+
+        <!-- Footer will be inserted by footer.js -->
+
+        <!-- Carousel Script
+        <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function showSlides(n) {
+                const slides = document.getElementsByClassName("carousel-item");
+                if (n > slides.length) {slideIndex = 1}
+                if (n < 1) {slideIndex = slides.length}
+                
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].classList.add('hidden');
+                }
+                
+                slides[slideIndex-1].classList.remove('hidden');
+            }
+
+            // Auto advance slides every 4 seconds
+            setInterval(() => {
+                plusSlides(1);
+            }, 4000);
+        </script> -->
+    </body>
+</html>
