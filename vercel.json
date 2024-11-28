@@ -1,6 +1,17 @@
 {
     "cleanUrls": true,
-    "outputDirectory": ".",
+    "builds": [
+        {
+            "src": "build.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "public"
+            }
+        }
+    ],
+    "routes": [
+        { "src": "/(.*)", "dest": "/$1" }
+    ],
     "functions": {
         "api/travel-rizz-server.js": {
             "maxDuration": 60

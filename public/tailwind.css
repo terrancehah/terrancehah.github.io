@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add your custom styles in a layer to prevent conflicts */
+@layer base {
+    html {
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+@layer components {
+    header .active {
+        @apply bg-[#c0e9fc];
+    }
+
+    .contacts {   
+        @apply float-right p-0 relative mr-[0.4vw] ml-[0.4vw] mt-[0.7vw] mb-[0.7vw];
+        top: 0.2vw;
+        right: 1vw;
+    }
+
+    #inwork {
+        @apply text-center;
+        margin: 16.7vw 0;
+        font-size: 2.5vw;
+    }
+}
+
+/* Add responsive design using Tailwind breakpoints */
+@screen sm {
+    header h1 {
+        @apply w-full text-left;
+        font-size: 5.5vw;
+    }
+
+    .navbutton {
+        @apply left-[2%] px-[2%] py-[1%];
+        font-size: 3.5vw;
+    }
+
+    .contacts {
+        @apply px-[0.6vw] m-0 my-[0.5vw] top-0;
+    }
+
+    header img {
+        width: 5.5vw;
+        height: 5.5vw;
+    }
+}
+
+@screen md {
+    header h1 {
+        @apply w-full text-left px-[2%] py-[1%] pb-0;
+        font-size: 4.5vw;
+    }
+
+    nav {
+        @apply mt-[0.5%];
+    }
+
+    .navbutton {
+        @apply left-[2%] mx-[1%];
+        font-size: 3vw;
+    }
+
+    .contacts {
+        @apply top-0 mx-[0.6vw] my-[0.4vw];
+    }
+
+    header img {
+        width: 5vw;
+        height: 5vw;
+    }
+}

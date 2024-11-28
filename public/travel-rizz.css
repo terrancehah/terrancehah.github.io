@@ -1,0 +1,891 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
+h1, h2 {
+  font-family: Lato;
+}
+
+h3, p {
+  font-family: Raleway;
+}
+
+h2 {
+  font-family: Lato;
+  font-size: 2.2vw;
+  font-weight: 700;
+  color: black;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  /* display: flex; */
+}
+
+h3 {
+    font-family: Raleway;
+    font-weight: 400;
+    padding: 0;
+    text-align: center;
+    /* display: flex; */
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+    /* margin-left: 5%;
+    margin-right: 5%; */
+    position: relative;
+    /* display:block; */
+    /* height: 87.5%; */
+    text-align: center;
+    flex-grow: 1;
+    /* overflow-y: auto; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* overflow-y: auto; */
+}
+
+
+/* header {
+  height: 6.5%;
+} */
+
+/* header h1 {
+  padding: 0.7% 1% 0% 2%;
+} */
+
+/* footer {
+  height: 6%;
+  padding: 1% 0%;
+  margin: 0;
+} */
+
+header, footer {
+  flex-shrink: 0;
+}
+
+/* .intro {
+  position: relative;
+  width: 100%;
+  height: max-content;
+  overflow: hidden;
+} */
+
+#backgroundVideo {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  z-index: -1;
+  opacity: 0.35;
+  object-fit: fill;
+}
+
+#prompt {
+  color:#123e5c;
+  font-family: Raleway;
+  font-weight: 400;
+}
+
+p {
+    font-family: Raleway;
+    font-size: 1.5vw;
+    font-weight: 300;
+    color: black;
+    line-height: 190%;
+    margin: 0%;
+}
+
+.link {
+    font-style: normal;
+    color: blue;
+    text-decoration: underline;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3% 20%;
+    align-items: center;
+    text-align: center;
+}
+
+.image {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 8px;
+    width: 60%;
+}
+
+.features {
+    display: flex;
+    margin: 5% 5%;
+    text-align: center;
+    align-items: center;
+}
+
+/* .itinerary-planner {
+  padding: 2%;
+  width: 70%;
+  background-color: #ecf8ff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
+  border: 2.5px solid #ffffff;
+} */
+
+.date-picker-container {
+  display: flex;
+  justify-content: center;
+}
+
+.date-picker {
+  /* margin: 0 10px; */
+  width: 30%;
+  height: 1.6vw;
+}
+
+.flatpickr-prev-month, .flatpickr-next-month {
+  z-index: 1 !important;
+  position: relative !important;
+  padding: 7.48px 0 0 0 !important;
+}
+
+.calendar-container {
+  width: 90%;
+  display: inline-block;
+  margin-bottom: 1%;
+}
+
+.flatpickr-calendar:hover {
+  border-color: #123456;
+  border: 2px;
+}
+
+.itinerary-form-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+#cityList {
+  display: none;
+  position: absolute;
+  top: 77%;
+  width: 24.7%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 2.5px solid #d6d6e7;
+  border-top: none !important;
+  border-radius: 3px;
+  box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
+  z-index: 1000;
+  margin: 0;
+  left: 37.5%;
+}
+
+.city-item {
+  padding: 0.5vw 2vw;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out;
+}
+
+.city-item:hover {
+  background-color: #f2f2f2;
+}
+
+.calendar-grid {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* Base calendar styles */
+.flatpickr-calendar {
+  background-color: transparent !important;
+  opacity: 1 !important;
+  width: 20rem !important; /* Default width for large screens */
+  margin: 0 !important;
+  position: relative !important;
+  font-family: Raleway !important;
+  padding: 10px 6px !important;
+  /* padding: 0 !important; */
+  box-sizing: border-box !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+.flatpickr-calendar.inline {
+  width: auto !important;
+  box-shadow: none !important;
+}
+
+#calendar-wrapper.hidden {
+  display: none;
+}
+
+/* Remove the display: none from flatpickr-calendar since we'll control visibility via wrapper */
+/* .flatpickr-calendar {
+  background-color: white !important;
+} */
+
+.calendar-active {
+  display: block !important;
+}
+
+.flatpickr-calendar.inline {
+  top: 0px !important;
+}
+
+/* Month navigation and header */
+.flatpickr-months {
+  height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.flatpickr-month {
+  height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.flatpickr-current-month {
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+  width: max-content !important;
+  padding: 10px 0 !important;
+  height: min-content !important;
+  display: flex !important;
+  justify-content: center !important;
+  justify-items: center !important;
+  position: relative !important;
+  left: 0% !important;
+}
+
+.flatpickr-monthDropdown-months {
+  font-family: Raleway !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+}
+
+/* Navigation arrows */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  height: min-content !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Weekday headers */
+.flatpickr-weekdays {
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.flatpickr-weekday {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #666 !important;
+  background: transparent !important;
+}
+
+/* Calendar days */
+.flatpickr-day {
+  height: 35px !important;
+  line-height: 35px !important;
+  font-size: 1.1em !important;
+  border-radius: 4px !important;
+  margin: 2px 1px !important;
+  /* color: #333 !important; */
+  font-weight: 400 !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: #3a7dc9e6 !important;
+  border-color: #3a7dc9e6 !important;
+  font-weight: 500 !important;
+}
+
+.flatpickr-day:hover {
+  background: #e6e6e6 !important;
+}
+
+.flatpickr-day.today {
+  border-color: #3a7dc9e6 !important;
+  color: #3a7dc9e6 !important;
+  font-weight: 500 !important;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .flatpickr-calendar {
+    width: 100% !important;
+    padding: 15px 6px !important;
+  }
+
+  .flatpickr-current-month {
+    font-size: 1rem !important;
+  }
+
+  .flatpickr-monthDropdown-months {
+    font-size: 1rem !important;
+  }
+
+  .flatpickr-weekday {
+    font-size: 0.8rem !important;
+  }
+
+  .flatpickr-day {
+    height: 35px !important;
+    line-height: 35px !important;
+    font-size: 0.9rem !important;
+    margin: 1px !important;
+  }
+
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    height: 40px !important;
+    padding: 8px !important;
+  }
+
+  .flatpickr-prev-month svg,
+  .flatpickr-next-month svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+/* Small mobile styles */
+@media screen and (max-width: 480px) {
+  .flatpickr-calendar {
+    margin-top: 0.5rem !important;
+    padding: 8px !important;
+  }
+
+  .flatpickr-current-month {
+    font-size: 1.2rem !important;
+  }
+
+  .flatpickr-monthDropdown-months {
+    font-size: 1.2rem !important;
+  }
+
+  .flatpickr-weekday {
+    font-size: 1.1rem !important;
+  }
+
+  .flatpickr-day {
+    height: 32px !important;
+    line-height: 32px !important;
+    font-size: 1.1rem !important;
+    margin: 1px !important;
+  }
+}
+
+.featurecaption {
+    width: 90%;
+    margin: 5% 5%;
+    font-size: 1.5vw;
+    align-items: center;
+    display: block;
+    line-height: 160%;
+}
+
+#loadingSpinner {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.75); /* white w/ opacity */
+}
+
+.close-btn {
+  color: #aaa;
+  /* right: 10%; */
+  position: fixed;
+  z-index: 1000;
+}
+
+.generated-content {
+  margin-top: 10px;
+  font-size: 1.2vw;
+  line-height: 1.8;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-break {
+  page-break-after: always;
+  page-break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 99%;
+  position: relative;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  
+}
+
+.generated-content header {
+  margin-top: 0.5%;
+  height: 12%;
+  display: none;
+  page-break-inside: avoid;
+}
+
+.generated-content #brand {
+  width: fit-content;
+  font-size: 2vw;
+  color: #123e5c;
+  margin: 0;
+}
+
+.generated-content img {
+  width: 5%;
+  height: 5%;
+  margin-right: 0.5%;
+}
+
+.generated-content #header-slogan {
+  font-size: 1.6vw;
+  color: #3a7398;
+  position: absolute;
+  text-align: right !important;  
+  margin-top: 0.6%;
+}
+
+.generated-content h1,
+.generated-content h2,
+.generated-content h3 {
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+/* Specific fixes for Chinese text */
+.generated-content:lang(zh) h1,
+.generated-content:lang(zh) h2,
+.generated-content:lang(zh) h3 {
+  text-align: center;
+  line-height: 1.5;
+  /* Add specific font for Chinese text */
+  font-family: "Microsoft YaHei", "微软雅黑", "SimHei", "STHeiti", sans-serif;
+}
+
+.generated-content h1 {
+  text-align: center;
+  font-size: 4vw;
+  line-height: 110%;
+  margin: 0;
+  margin-bottom: 2%;
+}
+
+.generated-content h2 {
+  text-align: center;
+  font-size: 2.5vw;
+  line-height: 130%;
+  margin: 0;
+  margin-top: 1%;
+}
+
+.generated-content a {
+  color: #0645AD;
+  text-decoration: underline;
+}
+
+.generated-content a:hover {
+  color: #0B0080;
+  text-decoration: underline;
+}
+
+.generated-content h1, h2 {
+  font-family: Caveat;
+}
+
+.generated-content strong {
+font-size: 1.6vw;
+}
+
+.generated-content p {
+  font-size: 1.4vw;
+  line-height: 180%;
+  width: 100%;
+  text-align: center;
+  margin: 0.5em auto;
+  font-weight: 300;
+}
+
+.generated-content #conclusion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2vw;
+}
+
+#exportPDF {
+  font-family: Raleway;
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border: none;
+  line-height: 45px;
+  box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+}
+
+#exportPDF:hover {
+    box-shadow: 0 0.8vw 28px #2e536a;
+    transition: background 0.4s ease,color 0.4s ease,box-shadow 0.4s ease, transform 0.4s ease;
+    transform: translateY(-4px);
+}
+
+b {
+    font-weight: 700;
+    font-size: 2vw;
+    margin-bottom: 1vw;
+}
+
+.bold {
+    font-weight: 700;
+}
+.italic{
+    font-style: italic;
+}
+
+#postscript {
+    font-style: italic;
+}
+
+/*CSS for mobile screen*/
+@media screen and (max-width: 480px) {
+    h1 {
+      font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 4vw, 2.0rem);
+    }
+
+    .heading {
+      margin: 0% 5%;
+      width: 90%;
+      font-size: 9vw;
+      line-height: 1.2;
+    }
+
+    .subheading {
+      /* font-size: 4vw; */
+      font-size: clamp(0.8rem, 4vw, 1.2rem);
+      line-height: 1.3;
+
+    }
+
+    
+    #backgroundVideo {
+      /* width: auto; */
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.35;
+    }
+    
+    .intro-caption {
+      position: relative;
+      z-index: 1;
+      margin: 0% 2%;
+      /* padding: 2% 0%; */
+    }
+
+    .faq {
+      padding: 4vw;
+    }
+
+    .faq p, li {
+      font-size:  3vw;
+      text-align: center;
+    }
+
+   */
+
+    #cityList {
+      width: 59%; 
+      max-height: 200px; 
+      border: 2.5px solid #d6d6e7;
+      border-radius: 3px;
+      box-shadow: 0 4px 6px 0 rgba(119, 122, 175, 0.3);
+      font-size: 3.6vw;
+      line-height: 3vw;
+      left: 20%;
+    }
+
+    .city-item {
+      padding: 2vw 2vw;
+    }
+
+    .flatpickr-input {
+      display: grid !important;
+      padding: 0% 2%;
+      place-items: center;
+      margin: 0%;
+      width: 50%;
+      /* height: min-content; */
+    }
+
+
+    .date-picker {
+      margin: 3% 20%;
+      width: 100%;
+      height: 6.5vw;
+      padding: 1% 4%;
+    }
+
+    .flatpickr-day {
+      margin-top: 1% !important;
+      margin-bottom: 1% !important;
+      font-size: 4.1vw;
+    }
+
+    /* label {
+      bottom: 2px; 
+    } */
+    
+    .calendar-container {
+      width: 96%;
+      display: grid;
+      place-items: center;
+      margin: 0% 2%;
+    }
+
+
+    .flatpickr-prev-month, .flatpickr-next-month {
+      z-index: 1 !important;
+      height: min-content !important;
+      padding: 0 !important;
+      position: relative !important;
+    }
+
+
+    .flatpickr-calendar.inline {
+      left: 0;
+      z-index: auto;
+      align-items: center;
+      margin: 2%;
+    }
+
+    .flatpickr-rContainer {
+      max-width: 100% !important;
+    }
+    
+    .flatpickr-day {
+      margin-top: 1% !important;
+      margin-bottom: 1% !important;
+    }
+    
+    
+    .flatpickr-days {
+      width: 100% !important;
+    }
+    
+    .flatpickr-weekdays {
+      width: 100% !important;
+      font-size: 4vw;
+    }
+    
+    .dayContainer {
+      width: 100% !important;
+      min-width: 100% !important;
+    }
+
+    #generate-button {
+      width: auto;
+      padding: 0 30px;
+      height: 12vw;
+      border-radius: 3vw;
+      font-weight: 500;
+      font-size: 4.3vw;
+      box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+      margin: 1%;
+    }
+
+
+
+    .popup-window {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    .popup-content {
+      background-color: #fefefe;
+      margin: 15% 5%; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      height: 80%;
+      width: 80%; /* Could be more or less, depending on screen size */
+      overflow-y: auto; /* Enable scrolling within the popup */
+    }
+
+    .close-btn {
+      color: #aaa;
+      right: 10%;
+      font-size: 28px;
+      font-weight: bold;
+      position: fixed;
+      z-index: 1000;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    .generated-content {
+      margin-top: 15px;
+      text-align: justify;
+      /* line-height: 180%; */
+    }
+
+    .generated-content h1 {
+      text-align: center;
+      font-size: 9vw;
+      line-height: 130%;
+      margin-bottom: 2%;
+    }
+
+    .generated-content h2 {
+      text-align: center;
+      font-size: 7vw;
+      line-height: 130%;
+    }
+
+    .generated-content strong {
+      font-size: 3.8vw;
+      }
+      
+
+    .generated-content p {
+      font-size: 3.8vw;
+    }
+
+    .generated-content h3 {
+      font-size: 4.5vw;
+    }
+
+    .generated-content #conclusion {
+      font-size: 5.5vw;
+    }
+
+    #plane {
+      width: 100%;
+      margin: 5% 0%;
+      height: 25%;
+    }
+
+    #loadingSpinner p {
+      font-size: 5vw;
+      margin: 0% 15%;
+    }
+
+    #exportPDF {
+      width: 60%;
+      margin: 2% 20%;
+      padding: 0 30px;
+      height: 12vw;
+      line-height: 45px;
+      border-radius: 2.8vw;
+      font-weight: 600;
+      font-size: 4vw;
+      box-shadow: 0 0.4vw 14px 0 rgb(0 118 255 / 39%);
+    }
+
+    b, ul {
+        font-size: 3.5vw;
+        text-align: center;
+    }
+    ul {
+        width: 90%;
+    }
+
+    li {
+        width: 90%;
+        font-size: 4vw;
+    }
+    
+    .button-container {
+        height: 20vw;
+    }
+    .button-wrapper{
+        height: 20vw;
+    }
+    
+    .features {
+        display: block;
+        text-align: center;
+    }
+    
+    .featurecaption {
+      font-size: 3vw;
+    }
+
+    .image {
+        width: 90%;
+        max-width: 300px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+
+
+* {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    outline:none;
+}

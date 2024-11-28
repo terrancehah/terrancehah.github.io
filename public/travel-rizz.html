@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link href="./style.css" type="text/css" rel="stylesheet">
+            <link href="./travel-rizz.css" type="text/css" rel="stylesheet">
+            <link href="./dist/output.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+            <link rel="icon" type="image/x-icon" href="/resources/TH-logo.png">
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+            <meta property="og:title" content="Travel-Rizz - Your convenient travel assistant.">
+            <meta name="og:description" content="Travel-Rizz - Your convenient travel assistant.">
+            <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.jpg">
+            <meta property="og:type" content="article">
+            <meta property="og:url" content="https://terrancehah.com/travel-rizz.html">
+            <meta name="description" content="Travel-Rizz: Your Personalized Journey Awaits">
+            <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
+            <script defer src="/_vercel/speed-insights/script.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+            <script src="./footer.js"></script>
+            <!-- <script src="./travel-rizz-testdata.js"></script> -->
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+            </style>
+            <title>Travel-Rizz - Your convenient travel assistant.</title>
+        </head>
+
+        <body>
+            
+            <header class="w-full inline-block">
+
+                <div class="flex flex-col md:flex-row justify-between items-center p-2.5 sm:p-3">
+
+                    <!-- Left: Title -->
+                    <div class="flex flex-col md:flex-row items-center w-auto md:w-56 gap-1">
+                        
+                        <h1 class="block font-lato font-semibold text-[#1234576] text-2xl md:text-3xl p-0 text-center sm:w-auto">
+                            Travel-Rizz
+                        </h1>
+                    </div>
+
+                    <!-- Middle: Nav buttons -->
+                    <nav class="flex flex-wrap justify-center gap-3">
+                        <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Home</a>
+                        <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Articles</a>
+                        <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue bg-light-blue">Projects</a>
+                        <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Playground</a>
+                    </nav>
+                
+                    <!-- Right side: Social Icons -->
+                    <div class="flex items-center gap-4 mt-2 md:mt-0">
+                        <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                            <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                        </a>
+                        <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                            <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                        </a>
+                        <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                            <img src="./resources/x.png" alt="github" class="w-full h-full">
+                        </a>
+                        <a href="https://linkedin.com/terrancehah/" target="_blank" class="w-8 h-8">
+                            <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                        </a>
+                        <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                            <img src="./resources/github.png" alt="github" class="w-full h-full">
+                        </a>
+                    </div>
+
+                </div>
+                
+            </header>
+            
+            <main>
+                    <video id="backgroundVideo" autoplay muted>
+                        <source id="videoSource" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <form id="trip-form" class="flex flex-col w-full mx-auto justify-center items-center">
+
+                        <!-- Title and subtitle -->
+                        <div class="relative space-y-2 p-3 text-center w-90% lg:w-4/5 md:w-4/5 mx-auto z-2">
+                            <div>
+                                <h1 class="font-caveat font-bold text-3xl md:text-4xl lg:text-[3.5rem] leading-tight md:leading-tight lg:leading-tight text-primary">
+                                    Welcome to Travel-Rizz:
+                                    <br>Your Personalized Journey Awaits
+                                </h1>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-base md:text-lg lg:text-xl leading-tight md:leading-tight lg:leading-tight text-secondary md:max-w-3xl md:w-2/3 lg:w-1/2 mx-auto">
+                                    Discover the joy of seamless travel planning with Travel-Rizz, your convenient travel assistant.
+                                </h3>
+                            </div>
+                        </div> 
+                        
+                        <!-- Destination, Calendar and filters -->
+                        <div class="flex flex-wrap w-[90%] lg:min-w-[930px] 2xl:w-[60%] relative bg-white mx-2 my-2 justify-center p-0 rounded-3xl items-center h-min shadow-all group/mainContainer">
+
+                            <!-- Destination div -->
+                            <div class="destination-input-form flex flex-col px-10 py-5 w-full lg:basis-1/2 rounded-t-3xl md:rounded-tr-none z-10 focus-within:z-20 order-1
+                            group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                            focus-within:bg-white focus-within:hover:bg-white  hover:bg-slate-200 focus-within:shadow-all">
+                                
+                                <!-- Destination label-->
+                                <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-80 sm:w-80 md:w-[60%] lg:w-[50%] xl:w-96 px-0 py-0">Destination</label>
+
+                                <input 
+                                    type="search" 
+                                    id="destination"
+                                    name="city" 
+                                    placeholder="🔍 Search your destination here" 
+                                    autocomplete="off"
+                                    class="w-full xl:w-96 relative cursor-text text-md px-0 py-0 pt-1 bg-inherit rounded-md text-gray-700 font-normal font-raleway"
+                                    >
+                                <div id="cityList"></div>
+                            </div>
+
+                            <!-- Horizontal Separator after Destination -->
+                            <div class="h-[1px] w-[100%] my-0 border-0 order-1 lg:order-2 basis-[100%] lg:hidden
+                            group-active/mainContainer:[&:not(:active)]:bg-slate-200 
+                            group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                            hover:bg-slate-200 flex items-center justify-center">
+                                <div class="h-[1px] w-[90%] md:w-[90%] bg-gray-300"></div>
+                            </div>
+
+                            <!-- Calendar container -->
+                            <div class="flex flex-col w-full lg:basis-1/2 mx-0 py-5 px-10 relative order-1
+                            justify-center md:rounded-tr-3xl focus-within:z-20 z-10 focus-within:shadow-all
+                            group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                            hover:bg-slate-200 focus-within:hover:bg-white focus-within:bg-white">
+                            
+                                <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-full sm:w-80 md:w-[60%] lg:w-[50%] xl:w-96 px-0 py-0">Dates</label>
+                                
+                                <!-- Dates box -->
+                                <input 
+                                        id="start-date" 
+                                        name="startDate" 
+                                        class="w-full px-0 py-0 pt-1 text-md relative font-raleway font-light text-gray-700 cursor-pointer bg-inherit"
+                                        placeholder="📅 Select dates here" 
+                                        readonly 
+                                        required
+                                    >
+                                <input type="hidden" id="hidden-end-date" name="endDate">
+
+                                <!-- Calendar popup wrapper -->
+                                <div id="calendar-wrapper" class="hidden absolute top-[calc(100%+8px)] w-max md:w-min left-1/2 md:left-1/2 transform -translate-x-1/2 bg-white rounded-2xl shadow-all p-4 z-100">
+                                    <!-- Arrow pointer -->
+                                    <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 rotate-45 w-4 h-4 bg-white border-t border-l border-gray-100 z-90"></div>
+                                    
+                                    <!-- Calendar container -->
+                                    <div id="start-calendar" class="w-full"></div>
+                                </div>  
+                            </div>
+
+                            <!-- Horizontal Separator after DateInput -->
+                            <div class="h-[1px] w-[100%] my-0 border-0 order-2 md:order-2 basis-[100%]
+                            group-active/mainContainer:[&:not(:active)]:bg-slate-200 
+                            group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                            hover:bg-slate-200 flex items-center justify-center">
+                                <div class="h-[1px] w-[90%] md:w-[90%] bg-gray-300"></div>
+                            </div>
+                            
+                            <!-- Filters Container -->
+                            <div class="flex flex-wrap mx-0 my-0 md:basis-[100%] items-center rounded-br-3xl justify-center order-3">
+
+                                <!-- Travel Style Section -->
+                                <div class="flex flex-col w-full my-0 mx-0 px-10 py-4 pb-6 focus-within:z-20 order-1
+                                focus-within:shadow-all active:shadow-all has-[:focus]:shadow-all has-[:active]:shadow-all
+                                focus-within:bg-white hover:focus-within:bg-white 
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                [&:not(:has(:focus,:active))]:hover:bg-slate-200">
+                                    
+                                    <!-- Section Title -->
+                                    <label class="text-lg font-raleway font-semibold text-gray-700 text-left w-full">Travel Preferences</label>
+                                    <label class="text-md font-raleway font-light text-gray-700 mb-2 text-left w-full">You can choose one or more</label>
+                                    
+                                    <!-- Travel Style Selections Ticks -->
+                                    <div class="flex flex-wrap gap-y-3 gap-x-3 justify-start items-start text-left w-full">
+                                        
+                                        <!-- Cultural and Heritage Label -->
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="culture and heritage" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Culture and Heritage 🎏</span>
+                                        </label>
+
+                                        <!-- Natural Label -->
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="nature" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Nature 🍀</span>
+                                        </label>
+
+                                        <!-- Food Label -->
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="foodie" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Foodie 🍱</span>
+                                        </label>
+                                        
+                                        <!-- Leisure Label -->
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="leisure" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Leisure 🌇</span>
+                                        </label>
+
+                                        <!-- Adventurous Label -->
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="adventure" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Adventure 🪂</span>
+                                        </label>
+                                        
+                                        <!-- Arts and Museum Label -->
+                                        <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 mr-0 ml-0 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                            <input type="checkbox" name="travel-preference" value="art and museum" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                            <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Arts & Museum 🎨</span>
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+
+                                <!-- Horizontal Separator after Travel Styles -->
+                                <div class="h-[1px] w-[100%] my-0 border-0 order-2 basis-[100%]
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 
+                                group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                hover:bg-slate-200 flex items-center justify-center">
+                                    <div class="h-[1px] w-[90%] md:w-[90%] bg-gray-300"></div>
+                                </div>
+
+                                <!-- Language Select Section -->
+                                <div class="flex w-full lg:w-[50%] mx-0 my-0 items-center px-10 pb-0.5 relative focus-within:z-20 z-10 order-3
+                                focus-within:bg-white focus-within:hover:bg-white 
+                                focus-within:shadow-all  has-[:focus]:shadow-all has-[:active]:shadow-all
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                hover:bg-slate-200 md:rounded-bl-3xl">
+                                    <select 
+                                        id="language"
+                                        class="w-full h-12 outline-none cursor-pointer px-0 py-2 z-1 text-lg font-raleway font-light md:rounded-bl-3xl text-gray-700 bg-inherit appearance-none"
+                                    >
+                                        <option value="" disabled selected class="text-gray-500">Select Language 🔡</option>
+                                        <option value="en">English</option>
+                                        <option value="ms">Malay (Bahasa Melayu)</option>
+                                        <option value="es">Español</option>
+                                        <option value="fr">Français</option>
+                                        <option value="de">Deutsch</option>
+                                        <option value="it">Italiano</option>
+                                        <option value="cs">Czech (Čeština)</option>
+                                        <option value="zh-CN">Simplified Chinese (简体中文)</option>
+                                        <option value="zh-TW">Traditional Chinese (繁體中文)</option>
+                                        <option value="ja">Japanese (日本語)</option>
+                                        <option value="ko">Korean (한국어)</option>
+                                    </select>
+                                    <!-- Custom dropdown arrow -->
+                                    <span class="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 focus-within:z-20 z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="black">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <!-- Horizontal Separator after Languages Selection -->
+                                <div class="h-[1px] w-[100%] my-0 border-0 lg:hidden order-3
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 
+                                group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                hover:bg-slate-200 flex items-center justify-center">
+                                <div class="h-[1px] w-[90%] md:w-[90%] bg-gray-300"></div>
+                            </div>
+
+                                <!-- Budget Select Section -->
+                                <div class="flex flex-col w-full lg:w-[50%] mx-0 my-0 items-center px-10 pb-0.5 py-auto relative focus-within:z-20 z-10 order-3
+                                hover:bg-slate-200 focus-within:bg-white focus-within:hover:bg-white focus-within:shadow-all 
+                                has-[:focus]:shadow-all has-[:active]:shadow-all
+                                group-active/mainContainer:[&:not(:active)]:bg-slate-200 group-focus-within/mainContainer:[&:not(:focus-within)]:bg-slate-200 
+                                rounded-b-3xl md:rounded-bl-none">
+                                    <select 
+                                        id="budget"
+                                        class="w-full h-12 outline-none cursor-pointer px-0 py-2 z-1 text-lg font-raleway font-light text-gray-700 rounded-b-3xl bg-inherit appearance-none"
+                                    >
+                                        <option value="" disabled selected>Select Budget 💲</option>
+                                        <option value="low-budget">Budget ($ - $$)</option>
+                                        <option value="mid-range">Mid-range ($$ - $$$)</option>
+                                        <option value="luxury">Luxury ($$$+)</option>
+                                    </select>
+                                    <!-- Custom dropdown arrow -->
+                                    <span class="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 focus-within:z-20 z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="black">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        
+                        <!-- Submit button -->
+                        <div class="w-[90%] md:w-[66%] lg:w-[40%] xl:w-[33%] rounded-3xl mx-auto my-4 text-center">
+                            <button 
+                                id="generate-button" 
+                                type="submit"
+                                class="w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1"
+                            >
+                                Take Me There
+                            </button>
+                        </div>
+                        
+                        <!-- //Test button -->
+                        <!-- <button id="loadTestData" type="submit">Load Test Data</button> -->
+
+                    </form>
+            </main>
+
+            <div id="popupWindow" class="fixed hidden inset-0 bg-black bg-opacity-40 z-50 overflow-auto">
+                <div class="relative bg-white mx-[25%] mt-[10%] p-5 w-1/2 h-[70%] overflow-y-auto">
+                    <span class="close-btn absolute right-4 top-4 text-gray-500 text-2xl font-bold hover:text-black cursor-pointer">&times;</span>
+                    <div id="generatedContent" class="generated-content">
+                        <!-- API content gets inserted here -->
+                    </div>
+                    <button id="exportPDF" class="w-[40%] mx-[30%] my-[2%] px-[5%] h-[4vw] rounded-2xl bg-white text-[#4798cc] font-semibold text-[1.5vw] hover:bg-[rgba(58,125,201,0.9)] hover:text-white transition-all duration-400">
+                        Export as PDF
+                    </button>
+                </div>
+            </div>
+            
+            <div id="loadingSpinner" class="z-50 hidden flex-wrap w-[100%] h-[100%] fixed align-middle items-center content-center">
+                <div class="flex w-[30%] h-max md:w-[20%] md:h-[15%] mx-[20%] md:mx-[40%] my-0 items-center basis-[100%]">
+                    <img id="plane" class="" src="resources/flyingplane-crop-2.gif"  alt="Loading..."/>
+                </div>
+                <div class="flex w-max items-center align-middle text-center mx-auto">
+                    <p class="text-2xl text-center">Fasten your seat belt while we are working on your travel itinerary...</p>
+                </div>
+            </div>            
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <!-- <script>
+                var wrappers = $(".button-wrapper");
+            
+                $(".submit").click(function(e) {
+                    e.preventDefault();
+            
+                    var clickedWrapper = $(this).parent(".button-wrapper");
+            
+                    if(!clickedWrapper.hasClass("checked")) {
+                        clickedWrapper.addClass("checked");
+            
+                        setTimeout(function(){
+                            window.location.href = $(e.target).attr("href");
+                        }, 5000);
+            
+                        setTimeout(function(){
+                            clickedWrapper.removeClass("checked");
+                        }, 8000);
+                    }
+                });
+            </script> -->
+
+
+            <script>
+                //Random loop autoplay background videos
+                document.addEventListener('DOMContentLoaded', function() {
+                    var videos = [
+                        './resources/Dubai_Night_1080P_20X_compressed.mp4',
+                        './resources/London_Skyline_720P_8X_compressed.mp4',
+                        './resources/Patagonia_Lake_720P_20X_compressed.mp4',
+                        './resources/Grand_Canyon_720P_8X_compresed.mp4'
+                        // Add more video paths as needed
+                    ];
+            
+                    // Randomly select the first video
+                    var firstVideoIndex = Math.floor(Math.random() * videos.length);
+                    var videoElement = document.getElementById('backgroundVideo');
+                    videoElement.src = videos[firstVideoIndex];
+                    videoElement.load(); // Ensure the new source is loaded
+            
+                    videoElement.addEventListener('ended', function(e) {
+                        // Determine the next video index
+                        var currentVideoIndex = videos.indexOf(videoElement.getAttribute('src'));
+                        var nextVideoIndex = (currentVideoIndex + 1) % videos.length;
+                        videoElement.src = videos[nextVideoIndex];
+                        videoElement.load(); // Load the new video source
+                        videoElement.play(); // Play the next video
+                    });
+                });
+            </script>            
+
+            <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+            </script>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var stripeButton = document.querySelector('.stripe-buy-button');
+                    if (stripeButton) {
+                        stripeButton.addEventListener('click', function() {
+                        plausible('Stripe Purchase Button Click');
+                        });
+                    }
+                });
+            </script>
+
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+            <!-- City name autocomplete -->
+            <script>
+                function initAutocomplete() {
+                    var input = document.getElementById('destination');
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+                    autocomplete.addListener('place_changed', function() {
+                        var place = autocomplete.getPlace();
+                        if (!place.geometry) {
+                            console.log("No details available for input: '" + place.name + "'");
+                            return;
+                        }
+
+                        // Extract city and country from address components
+                        var city, country;
+                        for (var i = 0; i < place.address_components.length; i++) {
+                            var component = place.address_components[i];
+                            if (component.types.includes("locality")) {
+                                city = component.long_name;
+                            }
+                            if (component.types.includes("country")) {
+                                country = component.long_name;
+                            }
+                        }
+
+                        var simplifiedPlaceName = city && country ? city + ", " + country : place.name;
+                        console.log('Simplified place name:', simplifiedPlaceName);
+                    });
+                }
+            </script>
+            
+            <script>
+                // Fetch the API key from the server endpoint
+                fetch('/api/maps-key')
+                    .then(response => response.json())
+                    .then(data => {
+                        const script = document.createElement('script');
+                        script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initAutocomplete`;
+                        script.async = true;
+                        script.defer = true;
+                        document.head.appendChild(script);
+                    })
+                    .catch(error => {
+                        console.error('Error loading Google Maps:', error);
+                    });
+            </script>
+
+            <!-- Calendar placeholder hiding script -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const loading = document.getElementById('calendar-loading');
+                    
+                    // Watch for flatpickr calendar initialization
+                    const observer = new MutationObserver(function(mutations) {
+                        if (document.querySelector('.flatpickr-calendar')) {
+                                loading.style.display = 'none';
+                                observer.disconnect();
+                            }
+                        });
+                        
+                        observer.observe(document.body, { 
+                            childList: true, 
+                            subtree: true 
+                    });
+                });
+            </script>
+
+            <script>
+                var today = new Date();
+                var mainCalendar;
+
+                function initializeCalendar() {
+                    if (mainCalendar) {
+                        mainCalendar.destroy();
+                    }
+
+                    const dateInput = document.getElementById('start-date');
+                    const calendarWrapper = document.getElementById('calendar-wrapper');
+                    
+                    // Initialize flatpickr
+                    mainCalendar = flatpickr("#start-date", {
+                        inline: true,
+                        appendTo: document.getElementById('start-calendar'),
+                        dateFormat: "d-m-Y",
+                        minDate: today,
+                        mode: "range",
+                        onChange: function(selectedDates, dateStr) {
+                            if (selectedDates.length === 2) {
+                                var startDateFormatted = flatpickr.formatDate(selectedDates[0], "d-m-Y");
+                                var endDateFormatted = flatpickr.formatDate(selectedDates[1], "d-m-Y");
+                                dateInput.value = `${startDateFormatted} to ${endDateFormatted}`;
+                                document.getElementById("hidden-end-date").value = endDateFormatted;
+                            } else {
+                                dateInput.value = dateStr;
+                                document.getElementById("hidden-end-date").value = dateStr;
+                            }
+                        }
+                    });
+                    
+                    // Toggle calendar when clicking date input
+                    dateInput.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        calendarWrapper.classList.toggle('hidden');
+                    });
+                    
+                    // Hide calendar when clicking outside
+                    document.addEventListener('click', function(e) {
+                        if (!dateInput.contains(e.target) && 
+                            !calendarWrapper.contains(e.target)) {
+                            calendarWrapper.classList.add('hidden');
+                        }
+                    });
+                }
+
+                // Initialize calendar on load
+                window.addEventListener('load', initializeCalendar);
+            </script>
+
+            <script>
+                // Listen to the input, parse into JSON format and receive the JSON format response
+                document.getElementById("trip-form").addEventListener("submit", function(e) {
+                    e.preventDefault();
+
+                    // Show loading spinner
+                    document.getElementById("loadingSpinner").style.display = "flex";
+
+                    var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
+                    var city = document.getElementById("destination").value;
+                    var startDate = document.getElementById("start-date").value;
+                    var endDate = document.getElementById("hidden-end-date").value;                    
+                    var language = document.getElementById("language").value;
+                    var budget = document.getElementById("budget").value;
+                    var travelPreferences = Array.from(document.querySelectorAll('input[name="travel-preference"]:checked'))
+                    .map(checkbox => checkbox.value);
+
+                    // Log the raw values
+                    console.log('Raw form values:', {
+                        city,
+                        startDate,
+                        endDate,
+                        language,
+                        budget,
+                        travelPreferences
+                    });
+                    
+                    // // Validate data before sending
+                    if (!city || !startDate || !endDate || !language || !budget) {
+                        document.getElementById("loadingSpinner").style.display = "none";
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+
+                    // Use explicit object notation
+                    var requestData = {
+                        "language": language,
+                        "city": city,
+                        "startDate": startDate,
+                        "endDate": endDate,
+                        "budget": budget,
+                        "travelPreferences": travelPreferences
+                    };
+
+                    var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                    const apiUrl = isLocal ? 'http://localhost:3000/api/travel-rizz-server' : '/api/travel-rizz-server';
+
+                    // Log the request for debugging
+                    console.log('Sending request:', {
+                        url: apiUrl,
+                        data: requestData
+                    });
+
+                    // Make the fetch request
+                    fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestData)
+                    })
+                    .then(response => {
+                        console.log('Response status:', response.status);
+                        return response.json();  // Use response.json() directly
+                    })
+                    .then(data => {
+                        // Log received data
+                        console.log('Parsed data:', data);
+                        
+                        // Validate received content
+                        if (!data || typeof data.generatedContent !== 'string') {
+                            console.error('Invalid response format:', data);
+                            throw new Error('Invalid response format from server');
+                        }
+
+                        console.log('Success:', data);
+                        if (data.generatedContent) {
+                            document.getElementById("generatedContent").innerHTML = data.generatedContent;
+                            // document.getElementById("generatedContent").innerHTML = testData;
+                            document.getElementById("loadingSpinner").style.display = "none";
+                            openPopup();
+                        } else {
+                            throw new Error('No content received from server');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById("loadingSpinner").style.display = "none";
+                        
+                        // More descriptive error message
+                        if (error.name === 'SyntaxError') {
+                            alert('Received malformed data from server. Please try again.');
+                        } else {
+                            alert(`Error: ${error.message || 'Failed to generate itinerary'}`);
+                        }
+                    });
+                });
+            </script>
+
+            <script>
+                function openPopup() {
+                    document.getElementById("popupWindow").style.display = "block";
+                }
+
+                function closePopup() {
+                    document.getElementById("popupWindow").style.display = "none";
+                }
+            </script>
+
+            <script>
+                function sanitizeFilename(filename) {
+                    return filename.replace(/[^a-z0-9-_]/gi, '_').toLowerCase();
+                }
+
+                document.getElementById('exportPDF').addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    var isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
+                    var city = sanitizeFilename(document.getElementById("destination").value || 'travel');
+                    var originalContent = document.getElementById("generatedContent");
+                    var startDate = sanitizeFilename(document.getElementById("start-date").value || 'undated');
+                    var endDate = sanitizeFilename(document.getElementById("hidden-end-date").value || 'undated');
+
+                    // Clone the content for PDF generation
+                    var contentForPdf = originalContent.cloneNode(true);
+                    contentForPdf.id = 'contentForPdf';
+                    document.body.appendChild(contentForPdf);
+
+                    // Apply PDF specific font sizing
+                    contentForPdf.querySelectorAll('h1').forEach(el => el.style.fontSize = '50px');
+                    contentForPdf.querySelectorAll('h2').forEach(el => el.style.fontSize = '32px');
+                    contentForPdf.querySelectorAll('.generated-content #brand').forEach(el => el.style.fontSize = '26px');
+                    contentForPdf.querySelectorAll('.generated-content #header-slogan').forEach(el => el.style.fontSize = '20px');
+                    contentForPdf.querySelectorAll('strong').forEach(el => el.style.fontSize = '22px');
+                    contentForPdf.querySelectorAll('p').forEach(el => el.style.fontSize = '18px');                    
+                    // contentForPdf.querySelectorAll('.page-break').forEach(el => el.style.marginBottom = '0');                    
+                    // contentForPdf.querySelectorAll('img').forEach(el => el.style.marginTop = '0.5%');
+                    // contentForPdf.querySelectorAll('#conclusion').forEach(el => el.style.height = '95vh');
+
+                    // Style headers
+                    contentForPdf.querySelectorAll('.generated-content header').forEach(header => {
+                        header.style.display = 'inline-flex';
+                        // header.style.position = 'absolute';
+                        header.style.top = '0';
+                        header.style.left = '0';
+                        header.style.right = '0';
+                        // header.style.padding = '20px';
+                    });
+
+                    // Get all page breaks and identify the last one
+                    const pageBreaks = contentForPdf.querySelectorAll('.page-break');
+                    const lastPageIndex = pageBreaks.length - 1;
+
+                    // Style page breaks and handle content
+                    pageBreaks.forEach((el, index) => {
+                        el.style.position = 'relative';
+                        el.style.display = 'flex';
+                        el.style.flexDirection = 'column';
+                        el.style.minHeight = '100vh';
+
+                        
+                        // Only set minHeight for non-last pages
+                        // if (index !== lastPageIndex) {
+                        //     el.style.minHeight = '100vh';
+                        // }
+                        
+                        // Create content wrapper
+                        const content = document.createElement('div');
+                        content.style.flex = '1';
+                        content.style.display = 'flex';
+                        content.style.flexDirection = 'column';
+                        content.style.justifyContent = 'center';
+                        
+                        // Special handling for conclusion page
+                        const conclusionH2 = el.querySelector('#conclusion');
+                        if (conclusionH2) {
+                            conclusionH2.style.whiteSpace = 'normal';
+                            conclusionH2.style.width = '95%';
+                            conclusionH2.style.maxWidth = '100%';
+                            conclusionH2.style.wordBreak = 'normal';
+                            conclusionH2.style.wordWrap = 'break-word';
+                            conclusionH2.style.overflowWrap = 'break-word';
+                            conclusionH2.style.textAlign = 'center';
+                            conclusionH2.style.display = 'block';
+                            conclusionH2.style.lineHeight = '1.5';
+                            conclusionH2.style.margin = '0 auto';
+                            conclusionH2.style.padding = '20px';  // Increased padding
+
+                            // Force the conclusion page to take up full height
+                            el.style.minHeight = '100vh';
+                            // el.style.height = '100vh';
+
+                            // Ensure content is centered vertically
+                            content.style.flex = '1';
+                            content.style.display = 'flex';
+                            content.style.alignItems = 'center';
+                            content.style.justifyContent = 'center';
+                            
+                            // Remove any bottom margin/padding that might cause extra space
+                            el.style.marginBottom = '0';
+                            el.style.paddingBottom = '0';
+                            content.style.margin = '0';
+                            content.style.marginBottom = '0';
+                            content.style.paddingBottom = '0';
+                            
+                            // // For the conclusion page, set a specific height
+                            // if (index === lastPageIndex) {
+                            //     el.style.height = 'auto';
+                            //     el.style.minHeight = 'auto';
+                            //     // content.style.paddingBottom = '40px'; // Add some bottom padding
+                            // }
+                        }
+
+                        // Move all non-header content to wrapper
+                        Array.from(el.children).forEach(child => {
+                            if (child.tagName.toLowerCase() !== 'header') {
+                                content.appendChild(child);
+                            }
+                        });
+                        
+                        el.appendChild(content);
+                    });
+
+                    var opt = {
+                        margin: [10, 17, 12, 17],
+                        filename: `travel_itinerary_${city}_${startDate}_to_${endDate}.pdf`,
+                        image: { type: 'jpeg', quality: 0.92 },
+                        html2canvas: { 
+                            scale: 2,
+                            logging: false,
+                            useCORS: true,
+                            scrollY: 0
+                            // windowWidth: document.documentElement.clientWidth,   // Ensure full width is captured
+                            // windowHeight: document.documentElement.clientHeight, // Ensure full height is captured
+                        },
+                        jsPDF: { 
+                            unit: 'mm', 
+                            format: 'a4', 
+                            orientation: 'portrait',
+                            compress: true,
+                            precision: 2
+                        },
+                        pagebreak: { 
+                            mode: 'css',
+                            // before: '.page-break'
+                        }
+                    };
+                    
+                    html2pdf().from(contentForPdf).set(opt).save().then(() => {
+                        // Clean up after PDF generation
+                        if (document.body.contains(contentForPdf)) {
+                            document.body.removeChild(contentForPdf);
+                        }
+                    }).catch(error => {
+                        console.error('PDF generation failed:', error);
+                        // Clean up on error
+                        if (document.body.contains(contentForPdf)) {
+                            document.body.removeChild(contentForPdf);
+                        }
+                    });
+                });
+            </script>
+
+        </body>
+        
+    </html>

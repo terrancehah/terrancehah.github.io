@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="Form A Story - Terrance's Playground">
+        <meta property="og:description" content="Form a Story is a fun project where you input words to create a funny story.">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://terrancehah.com/form-a-story.html">
+        <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
+        <title>Form A Story - Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
+    </head>
+
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                <!-- Left: Logo -->
+                <div class="flex flex-col md:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
+
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-all p-8">
+                <h1 class="font-lato font-bold text-3xl sm:text-4xl text-[#1d3557] text-center mb-8">
+                    Complete the Form -<br>Complete the Story!
+                </h1>
+                
+                <hr class="border-t border-[#457B9D] my-8">
+                
+                <form action="./story.html" method="get" class="space-y-6">
+                    <!-- Animal Inputs -->
+                    <div class="space-y-4">
+                        <div class="form-group">
+                            <label for="animal-1" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">Animal:</label>
+                            <input id="animal-1" type="text" name="animal-1" required 
+                                class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="animal-2" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">Another Animal:</label>
+                            <input id="animal-2" name="animal-2" type="text" required 
+                                class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="animal-3" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">One More Animal:</label>
+                            <input id="animal-3" name="animal-3" type="text" required 
+                                class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway">
+                        </div>
+                    </div>
+
+                    <!-- Other Inputs -->
+                    <div class="space-y-4">
+                        <div class="form-group">
+                            <label for="adj-1" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">Adjective (past participle):</label>
+                            <input id="adj-1" name="adj-1" type="text" required 
+                                class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="verb-1" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">Verb (ends in -ing):</label>
+                            <input id="verb-1" name="verb-1" type="text" required 
+                                class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="num-1" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">Number:</label>
+                            <input id="num-1" name="num-1" type="number" required 
+                                class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway">
+                        </div>
+                    </div>
+
+                    <!-- Radio Buttons -->
+                    <div class="form-group">
+                        <span class="block text-lg font-raleway font-medium text-[#1d3557] mb-3">Yes or No:</span>
+                        <div class="flex gap-6">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="answer" value="yes" required 
+                                    class="form-radio h-4 w-4 text-[#457B9D] border-gray-300 focus:ring-[#457B9D]">
+                                <span class="ml-2 text-lg font-raleway text-gray-700">Yes</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="answer" value="no"
+                                      class="form-radio h-4 w-4 text-[#457B9D] border-gray-300 focus:ring-[#457B9D]">
+                                <span class="ml-2 text-lg font-raleway text-gray-700">No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Select Dropdown -->
+                    <div class="form-group">
+                        <label for="speed" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">Relative Speed:</label>
+                        <select id="speed" name="speed" type="text" required 
+                                class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway bg-white">
+                            <option value="super duper slow">Super Duper Slow</option>
+                            <option value="a little slow">A Little Slow</option>
+                            <option value="quite fast">Quite Fast</option>
+                            <option value="real fast">Real Fast</option>
+                            <option value="super duper fast">Super Duper Fast</option>
+                        </select>
+                    </div>
+
+                    <!-- Datalist Input -->
+                    <div class="form-group">
+                        <label for="quote" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">Motivational Quote:</label>
+                        <input id="quote" name="quote" type="text" required list="quote-choices"
+                            class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway">
+                        <datalist id="quote-choices">
+                            <option value="Haste Makes Waste"></option>
+                            <option value="Go Go Power Rangers!"></option>
+                            <option value="What doesn't kill you makes you stronger!"></option>
+                            <option value="One Step at A Time"></option>
+                        </datalist>
+                    </div>
+
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label for="message" class="block text-lg font-raleway font-medium text-[#1d3557] mb-2">Meaningful Message:</label>
+                        <textarea id="message" name="message" required rows="8"
+                            class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent font-raleway resize-none"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-8">
+                        <button type="submit" 
+                                class="w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1">
+                            Form My Story!
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Footer will be inserted by footer.js -->
+    </body>
+</html>

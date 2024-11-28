@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your AR Model</title>
+    <link rel="stylesheet" type="text/css" href="./ar-model-test.css">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+</head>
+<body style='margin : 0px; overflow: hidden;'>
+    <div class="arjs-loader">
+        <div>Loading, please wait...</div>
+        <div class="spinner">
+            <div class="cube1"></div>
+            <div class="cube2"></div>
+        </div>
+    </div>
+    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono; markerMode: marker; patternRatio: 0.9;'>
+        <a-light type="ambient" intensity="1"></a-light>
+        <a-light type="directional" position="1 1 1" intensity="2.2"></a-light>
+        <a-marker preset='custom' type='pattern' url='./resources/ar-marker.patt'>
+            <a-entity id="model" gltf-model='./resources/ar-model-test.glb' animation-mixer scale="0.5 0.5 0.5"></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <div id="animationButton" class="playPauseButton">
+        <svg id="playButton" width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5V19L19 12L8 5Z" fill="white"/>
+        </svg>
+        <svg id="pauseButton" style="display: none;" width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 19H10V5H6V19ZM14 5V19H18V5H14Z" fill="white"/>
+        </svg>
+    </div>
+
+    <div id="instructions">
+        <p>Tap and drag to rotate the model</p>
+        <p>Pinch to zoom in or out</p>
+    </div>
+
+<script>
+    document.querySelector('a-scene').addEventListener('loaded', function () {
+        console.log("Scene is loaded");
+        setTimeout(function() {
+            document.querySelector('.arjs-loader').style.display = 'none';
+        }, 2000); // delay hiding the loader for 2 seconds
+    });
+    
+    document.querySelector('#model').addEventListener('model-loaded', function() {
+        console.log("Model is loaded");
+        model.components['animation-mixer'].pause();  // Add this line to pause the animation initially
+    });
+
+
+    document.querySelector('a-marker').addEventListener('markerFound', function() {
+        console.log("Marker is found");
+    });
+</script>
+<script src="./app.js"></script>
+
+
+</body>
+</html>

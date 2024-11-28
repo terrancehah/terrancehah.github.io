@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="Dear Privacy - Terrance's Playground">
+        <meta property="og:description" content="In this article, I share my view on internet privacy, and why I don't use Google Analytics on my personal website.">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://terrancehah.com/dear-privacy.html">
+        <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
+        <title>Dear Privacy - Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
+    </head>
+
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                <!-- Left: Logo & Title -->
+                <div class="flex flex-col md:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
+
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
+    
+        <main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
+            <article class="prose prose-lg lg:prose-xl mx-auto">
+                <h1 class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557] text-center mb-4">Dear Privacy</h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 text-center mb-8 font-light font-raleway">written on 25 May 2021</p>
+                
+                <div class="font-lato text-lg sm:text-xl space-y-6 text-justify">
+                    <p class="leading-loose font-light">In this article, I share my view on internet privacy, and why I don't use Google Analytics on my personal website.</p>
+
+                    <p class="leading-loose font-light">When It comes to internet privacy, most people express concern about their passwords, user IDs, or credit card numbers. It is actually much more than those. Before we dive deeper into this topic, I would like to help you understand more about Google Analytics, a tool that helps website owners analyse their visitors' data.</p>
+
+                    <p class="leading-loose font-light"><a href="https://analytics.google.com/analytics/web/provision/#/provision" class="text-[#457B9D] hover:text-[#1d3557] underline" target="_blank">Google Analytics</a> is one of the most popular analytic tools available on the web, and it is free. In short, it helps website owners to gather and analyse data of the visitors.</p>
+
+                    <div class="my-8 flex flex-col items-center">
+                        <img src="./resources/google-analytic-intro.jpg" alt="Google Analytics Introduction" class="w-4/5 md:w-[60%] rounded-lg shadow-md">
+                        <p class="text-base text-gray-600 mt-2 italic">Google Analytics Introduction</p>
+                    </div>
+
+                    <p class="leading-loose font-light">Data such as IP address, the URL of the page, and a unique identifier (it helps Google to identify whether if you are you, without asking if you are you) are sent to Google. In return, website owners gain insights over their website traffic (the geographic regions of the visitors and type of devices being used) and user activity (page views and link clicks).</p>
+
+                    <div class="my-8 flex flex-col items-center">
+                        <img src="./resources/google-analytic-home.png" alt="Google Analytics Home interface" class="w-4/5 md:w-[60%] rounded-lg shadow-md">
+                        <p class="text-base text-gray-600 mt-2 italic">Google Analytic Home, where website owners can view insight of website's key aspects</p>
+                    </div>
+
+                    <p class="leading-loose font-light">However, it is not the website owners who need to worry. Instead, it is the website users/website visitors who should be. When a website uses Google Analytics to help analyses data, Google tracks the website visitors by storing cookies on their computers. If you have not heard of cookies, it is a tool that helps Google "remember" what a user has done on previous pages / interactions with the website.</p>
+
+                    <div class="my-8 flex flex-col items-center">
+                        <img src="./resources/google-privacy-terms.jpg" alt="Google Privacy Terms" class="w-4/5 md:w-[60%] rounded-lg shadow-md">
+                        <p class="text-base text-gray-600 mt-2 italic">Screenshot of <a href="https://policies.google.com/technologies/partner-sites" class="text-[#457B9D] hover:text-[#1d3557] underline" target="_blank">Google Privacy & Terms</a>, which states the use of cookies to better personalize ads you see</p>
+                    </div>
+
+                    <p class="leading-loose font-light">Google makes good use of the data they have, to study your behaviour, and target advertising on you better. And more than half of all websites on the web use Google Analytics. So now, it is understandable why Google Analytics is free for website owners.</p>
+
+                    <p class="leading-loose font-light">I do not use Google Analytics on my website. Instead, I use <a href="https://plausible.io/" class="text-[#457B9D] hover:text-[#1d3557] underline" target="_blank">Plausible Analytics</a> as my website analytic tool. Plausible Analytics is a privacy-driven analytic tool, and it does not store cookies on your computer. Your data and privacy are protected.</p>
+
+                    <div class="my-8 flex flex-col items-center">
+                        <img src="./resources/plausible-home.jpg" alt="Plausible Analytics interface" class="w-4/5 md:w-[60%] rounded-lg shadow-md">
+                        <p class="text-base text-gray-600 mt-2 italic">Plausible Analytics which I am using right now</p>
+                    </div>
+
+                    <p class="leading-loose font-light">I pay to use Plausible Analytics, so you don't have to pay with your data and privacy.</p>
+
+                    <p class="leading-loose font-light">I deeply believe that everyone should be informed on how our data will be processed. When the service is free, it is mostly possible that WE ARE THE PRODUCT. It is undeniable that companies can monetise our data when we least notice it. We all can do more to protect ourselves, but it have to start with us.</p>
+                </div>
+            </article>
+        </main>
+
+        <!-- Footer will be inserted by footer.js -->
+    </body>
+</html>
