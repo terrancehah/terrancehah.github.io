@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Travel-Rizz - Your friendly AI-powered travel companion.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tailwindcss -i ./tailwind.css -o ./dist/output.css --watch",
-    "build:prod": "tailwindcss -i ./tailwind.css -o ./dist/output.css --minify"
+    "dev": "tailwindcss -i ./tailwind.css -o ./dist/output.css --watch",
+    "build": "tailwindcss -i ./tailwind.css -o ./dist/output.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Terrance Hah",
   "license": "ISC",
