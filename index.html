@@ -1,4 +1,120 @@
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link href="./dist/output.css" rel="stylesheet">
+        <meta property="og:title" content="Terrance's Homepage">
+        <meta property="og:description" content="Terrance's Homepage">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://terrancehah.com/index.html">
+        <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
+        <script src="./footer.js"></script>
+        <title>Terrance's Homepage</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
+    </head>
+
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                
+                <!-- Left: Logo -->
+                <div class="flex flex-col md:flex-row items-center w-auto md:w-[300px] gap-1">
+                    <h1 class="block font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
+
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue bg-light-blue">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Playground</a>
+                </nav>
+            
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <main class="w-full">
+            <div id="banner" class="w-full md:h-[500px] h-[250px] relative">
+                <img src="./resources/books.jpg" alt="Books" class="opacity-50 h-full w-full absolute object-cover">
+                <div class="relative h-full flex flex-col items-center justify-center text-[#1d3557]">
+                    <span id="name" class="font-lato text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center m-0">I am Terrance!</span>
+                    <p class="font-lato text-lg sm:text-xl md:text-2xl lg:text-3xl text-center m-0">A tuition tutor, and a self-teaching programmer.</p>
+                </div>
+            </div>
+
+            <div class="w-full md:h-[450px] h-[220px] relative mt-[30px] overflow-hidden flex justify-center items-center">
+                <img src="./resources/business-building.jpg" alt="business building" 
+                    class="opacity-25 h-full w-full absolute object-cover transition-all duration-500 ease-in-out hover:opacity-50 hover:scale-110">
+                <h3 class="relative font-lato text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-[#1d3557] text-center mx-[10%] pointer-events-none">
+                    I'm an International Business major. After I graduated, I decided to get involved in the educational field.
+                </h3>
+            </div>
+
+            <div class="w-full md:h-[450px] h-[220px] relative mt-[30px] overflow-hidden flex justify-center items-center">
+                <img src="./resources/education.jpg" alt="education"
+                    class="opacity-25 h-full w-full absolute object-cover transition-all duration-500 ease-in-out hover:opacity-50 hover:scale-110">
+                <h3 class="relative font-lato text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-[#1d3557] text-center mx-[10%] pointer-events-none">
+                    After working in the field for a while, I realized that there's a lot of work to be done. A lot of our current education system just doesn't work.
+                </h3>
+            </div>
+
+            <div class="w-full md:h-[450px] h-[220px] relative mt-[30px] overflow-hidden flex justify-center items-center">
+                <img src="./resources/employee.jpg" alt="employee"
+                    class="opacity-25 h-full w-full absolute object-cover transition-all duration-500 ease-in-out hover:opacity-50 hover:scale-110">
+                <h3 class="relative font-lato text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-[#1d3557] text-center mx-[10%] pointer-events-none">
+                    Kids are only taught to be good employees. No one asked if they enjoy learning in school. Grades matter more than ever. Talents beyond academic performance aren't valued.
+                </h3>
+            </div>
+
+            <div class="w-full md:h-[450px] h-[220px] relative mt-[30px] overflow-hidden flex justify-center items-center">
+                <img src="./resources/kids-playing-phone.jpg" alt="kids playing phone"
+                    class="opacity-25 h-full w-full absolute object-cover transition-all duration-500 ease-in-out hover:opacity-50 hover:scale-110">
+                <h3 class="relative font-lato text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-[#1d3557] text-center mx-[10%] pointer-events-none">
+                    And there's a trend of kids being addicted to technology. I started to think, instead of stopping kids from using phones and computers, why not help them embrace the power of technology?
+                </h3>
+            </div>
+
+            <div class="w-full md:h-[450px] h-[220px] relative mt-[30px] overflow-hidden flex justify-center items-center mb-8">
+                <img src="./resources/technology.jpg" alt="technology"
+                    class="opacity-25 h-full w-full absolute object-cover transition-all duration-500 ease-in-out hover:opacity-50 hover:scale-110">
+                <h3 class="relative font-lato text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-[#1d3557] text-center mx-[10%] pointer-events-none">
+                    So here I am, teaching myself to be a programmer so I can empower the children with the power of technology.
+                </h3>
+            </div>
+        </main>
+
+    </body>
+
+    </html>
+=======
+<!DOCTYPE html>
 
   <head>
     <link href="./style.css" type="text/css" rel="stylesheet">

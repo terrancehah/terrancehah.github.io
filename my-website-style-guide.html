@@ -1,101 +1,324 @@
 <!DOCTYPE html>
-
+<html lang="en">
     <head>
-        <link href="./style.css" type="text/css" rel="stylesheet">
-        <link href="./articles.css" type="text/css" rel="stylesheet">
-        <link href="./my-website-style-guide.css" type='text/css' rel='stylesheet'>
-        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="./dist/output.css" rel="stylesheet">
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="./resources/TH-logo.png" type="image/x-icon">
+        <meta property="og:title" content="Website Style Guide - Terrance's Playground">
+        <meta property="og:description" content="The official style guide for Terrance's Playground website.">
+        <meta property="og:image" content="https://terrancehah.com/resources/TH-logo.png">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://terrancehah.com/my-website-style-guide.html">
         <script async defer data-domain="terrancehah.com" src="https://plausible.io/js/plausible.js"></script>
-        <title>My Website Style Guide - Terrance's Playground</title>
+        <script src="./footer.js"></script>
+        <title>Website Style Guide - Terrance's Playground</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
     </head>
 
-    <body>
-        <header>
-            <h1>Terrance's Playground</h1>
-            <nav>
-                <a class="navbutton" href="./index.html">Home</a>
-                <a class="navbutton active" href="./articles.html">Articles</a>
-                <a class="navbutton" href="./projects.html">Projects</a>
-                <a class="navbutton" href="./playground.html">Playground</a>
-            </nav>
-            <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="./resources/facebook.png"></a>
-            <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="./resources/instagram.png"></a>
-            <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="./resources/linkedin.png"></a>
-            <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="./resources/github.png"></a>
-    </header>
-    
-        <content class="article">
-            <h1>My Website Style Guide</h1>
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+                <!-- Left: Logo & Title -->
+                <div class="flex flex-col md:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
+
+                <!-- Middle: Nav buttons -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="./index.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Articles</a>
+                    <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Projects</a>
+                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
             
-            <div id='colors'>
-                <h2>Colors</h2>
-                <br>
-                <div id='color'>
-                    <h3 class='colors' id='prussianblue'>Prussian Blue<br>#1D3557</h3>
-                    <h3 class='colors' id='celadonblue'>Celadon Blue<br>#457B9D</h3>
-                    <h3 class='colors' id='powderblue'>Powder Blue<br>#A8DADC</h3>
-                    <h3 class='colors' id='honeydew'>     Honeydew<br>#F1FAEE</h3>
-                    <h3 class='colors' id='imperialred'>Imperial Red<br>#E63946</h3>
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="./resources/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="./resources/github.png" alt="github" class="w-full h-full">
+                    </a>
                 </div>
+            </div>
+        </header>
+    
+        <main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
+            <article class="prose prose-lg lg:prose-xl mx-auto">
+                <h1 class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557] text-center mb-4">My Website Style Guide</h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 text-center mb-8 font-light font-raleway">updated on 29 Nov 2024</p>
+
                 
-            </div>
+                <div class="font-lato text-lg sm:text-xl space-y-12">
+                    <!-- Colors Section -->
+                    <section>
+                        <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-6">Colors</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="flex flex-col">
+                                <div class="h-32 bg-[#1d3557] rounded-t-lg"></div>
+                                <div class="bg-gray-100 p-4 rounded-b-lg">
+                                    <p class="font-medium">Primary Blue</p>
+                                    <p class="text-gray-600">#1d3557</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col">
+                                <div class="h-32 bg-[#457B9D] rounded-t-lg"></div>
+                                <div class="bg-gray-100 p-4 rounded-b-lg">
+                                    <p class="font-medium">Secondary Blue</p>
+                                    <p class="text-gray-600">#457B9D</p>
+                                </div>
+                            </div>
 
-            <div id='fonts'>
-                <h2>Fonts</h2>
-                <br>
-                <div>
-                    <h3 class='oswald' style="text-decoration: underline;">Oswald</h3>
-                    <p class='oswald'>Hello, this is Terrance.
-                        <br><span style="font-style:italic;">Hello, this is Terrance.</span>
-                        <br><span style="font-weight:bold;">Hello, this is Terrance.</span>
-                    </p>
+                            <div class="flex flex-col">
+                                <div class="h-32 bg-sky-blue rounded-t-lg"></div>
+                                <div class="bg-gray-100 p-4 rounded-b-lg">
+                                    <p class="font-medium">Sky Blue</p>
+                                    <p class="text-gray-600">#4a88c6</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <div class="h-32 bg-[#c0e9fc] rounded-t-lg"></div>
+                                <div class="bg-gray-100 p-4 rounded-b-lg">
+                                    <p class="font-medium">Light Blue</p>
+                                    <p class="text-gray-600">#c0e9fc</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- Typography Section -->
+                    <section>
+                        <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-6">Typography</h2>
+                        
+                        <div class="space-y-8">
+                            <!-- Lato -->
+                            <div class="space-y-4">
+                                <h3 class="font-lato font-semibold text-xl text-[#1d3557]">Lato</h3>
+                                <div class="space-y-2">
+                                    <p class="font-lato text-base">Regular: The quick brown fox jumps over the lazy dog</p>
+                                    <p class="font-lato font-bold text-base">Bold: The quick brown fox jumps over the lazy dog</p>
+                                    <p class="font-lato italic text-base">Italic: The quick brown fox jumps over the lazy dog</p>
+                                </div>
+                            </div>
+
+                            <!-- Raleway -->
+                            <div class="space-y-4">
+                                <h3 class="font-raleway font-semibold text-xl text-[#1d3557]">Raleway</h3>
+                                <div class="space-y-2">
+                                    <p class="font-raleway text-base">Regular: The quick brown fox jumps over the lazy dog</p>
+                                    <p class="font-raleway font-bold text-base">Bold: The quick brown fox jumps over the lazy dog</p>
+                                    <p class="font-raleway italic text-base">Italic: The quick brown fox jumps over the lazy dog</p>
+                                </div>
+                            </div>
+
+                            <!-- Caveat -->
+                            <div class="space-y-4">
+                                <h3 class="font-caveat font-semibold text-xl text-[#1d3557]">Caveat</h3>
+                                <div class="space-y-2">
+                                    <p class="font-caveat text-2xl">Regular: The quick brown fox jumps over the lazy dog</p>
+                                    <p class="font-caveat font-bold text-2xl">Bold: The quick brown fox jumps over the lazy dog</p>
+                                    <p class="font-caveat italic text-2xl">Italic: The quick brown fox jumps over the lazy dog</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Text Styles Section -->
+                    <section>
+                        <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-6">Text Styles</h2>
+                        
+                        <div class="space-y-8">
+                            <div>
+                                <h1 class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557]">Heading 1</h1>
+                                <p class="text-gray-600 mt-2">
+                                    font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557]
+                                </p>
+                            </div>
+
+                            <div>
+                                <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557]">Heading 2</h2>
+                                <p class="text-gray-600 mt-2">
+                                    font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557]
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 class="font-lato font-semibold text-xl sm:text-2xl text-[#1d3557]">Heading 3</h3>
+                                <p class="text-gray-600 mt-2">
+                                    font-lato font-semibold text-xl sm:text-2xl text-[#1d3557]
+                                </p>
+                            </div>
+
+                            <div>
+                                <p class="font-lato text-lg sm:text-xl">Body Text</p>
+                                <p class="text-gray-600 mt-2">
+                                    font-lato text-lg sm:text-xl
+                                </p>
+                            </div>
+
+                            <div>
+                                <a href="#" class="font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] p-2">Navigation Link</a>
+                                <p class="text-gray-600 mt-2">
+                                    font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]
+                                </p>
+                            </div>
+
+                            <div>
+                                <blockquote class="font-caveat text-2xl sm:text-3xl md:text-3xl text-center my-12 italic">
+                                    Blockquote Text Style
+                                </blockquote>
+                                <p class="text-gray-600 mt-2">
+                                    font-caveat text-2xl sm:text-3xl md:text-3xl text-center italic
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Spacing Section -->
+                    <section>
+                        <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-6">Spacing</h2>
+                        
+                        <div class="space-y-4">
+                            <p class="text-gray-700">Main Content Padding:</p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-600">
+                                <li>Mobile: px-4 (1rem)</li>
+                                <li>Tablet: md:px-8 (2rem)</li>
+                                <li>Desktop: lg:px-16 (4rem)</li>
+                                <li>Large Desktop: xl:px-32 (8rem)</li>
+                            </ul>
+                            
+                            <p class="text-gray-700 mt-6">Vertical Spacing:</p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-600">
+                                <li>Between Sections: space-y-12 (3rem)</li>
+                                <li>Between Elements: space-y-6 (1.5rem)</li>
+                                <li>Small Gaps: space-y-4 (1rem)</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Components Section -->
+                    <section>
+                        <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-6">Components</h2>
+                        
+                        <div class="space-y-8">
+                            <!-- Buttons -->
+                            <div>
+                                <h3 class="font-lato font-semibold text-xl text-[#1d3557] mb-4">Buttons</h3>
+                                
+                                <div class="space-y-4">
+                                    <!-- Primary Button -->
+                                    <div>
+                                        <button class="w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1">
+                                            Primary Button
+                                        </button>
+                                        <p class="text-gray-600 mt-2">
+                                            Classes: w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Navigation -->
+                            <div>
+                                <h3 class="font-lato font-semibold text-xl text-[#1d3557] mb-4">Navigation</h3>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow mb-4">
+                                    <nav class="flex flex-wrap justify-center gap-3">
+                                        <a href="#" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Link 1</a>
+                                        <a href="#" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Active Link</a>
+                                        <a href="#" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Link 3</a>
+                                    </nav>
+                                    <p class="text-gray-600 mt-4">
+                                        Link Classes: relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]<br>
+                                        Active Link Additional Class: bg-[#c0e9fc]
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card -->
+                            <div>
+                                <h3 class="font-lato font-semibold text-xl text-[#1d3557] mb-4">Cards</h3>
+                                
+                                <div class="mb-4">
+                                    <div class="projects mb-8 p-5 bg-white rounded-lg shadow-lg">
+                                        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold font-raleway text-[#1d3557] hover:text-[#457B9D]">Card Title</h2>
+                                        <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">Card description text goes here</p>
+                                        <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">Additional information</p>
+                                    </div>
+                                    <p class="text-gray-600">
+                                        Container: projects mb-8 p-5 bg-white rounded-lg shadow-lg<br>
+                                        Title: text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold font-raleway text-[#1d3557] hover:text-[#457B9D]<br>
+                                        Description: text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato<br>
+                                        Info: text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Forms -->
+                            <div>
+                                <h3 class="font-lato font-semibold text-xl text-[#1d3557] mb-4">Form Elements</h3>
+                                
+                                <!-- Text Input -->
+                                <div class="mb-6">
+                                    <label class="text-lg font-raleway font-semibold text-gray-700 text-left block mb-2">Text Input</label>
+                                    <input type="text" placeholder="Placeholder text" class="w-full px-4 py-2 text-md relative cursor-text rounded-md text-gray-700 font-normal font-raleway border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent">
+                                    <p class="text-gray-600 mt-2">
+                                        Label: text-lg font-raleway font-semibold text-gray-700<br>
+                                        Input: w-full px-4 py-2 text-md relative cursor-text rounded-md text-gray-700 font-normal font-raleway border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D]
+                                    </p>
+                                </div>
+
+                                <!-- Select -->
+                                <div class="mb-6">
+                                    <label class="text-lg font-raleway font-semibold text-gray-700 text-left block mb-2">Select Input</label>
+                                    <select class="w-full h-12 outline-none cursor-pointer px-4 py-2 text-lg font-raleway font-light text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent appearance-none bg-white">
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                    </select>
+                                    <p class="text-gray-600 mt-2">
+                                        Classes: w-full h-12 outline-none cursor-pointer px-4 py-2 text-lg font-raleway font-light text-gray-700 rounded-md appearance-none
+                                    </p>
+                                </div>
+
+                                <!-- Checkbox -->
+                                <div class="mb-6">
+                                    <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
+                                        <input type="checkbox" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
+                                        <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Checkbox Label</span>
+                                    </label>
+                                    <p class="text-gray-600 mt-2">
+                                        Container: group inline-flex items-center justify-start px-3.5 py-1.5 border...<br>
+                                        Checkbox: mr-2 peer appearance-none h-5 w-5 border...<br>
+                                        Label: text-left font-raleway peer-checked:text-secondary peer-checked:font-medium
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
-                <br>
-                <div>
-                    <h3 class='merriweather' style="text-decoration: underline;">Merriweather</h3>
-                    <p class='merriweather'>Hello, this is Terrance.
-                        <br><span style="font-style:italic;">Hello, this is Terrance.</span>
-                        <br><span style="font-weight:bold;">Hello, this is Terrance.</span>
-                    </p>
-                </div>
-            </div>
+            </article>
+        </main>
 
-            <div id='headings'>
-                <h2>Headings</h2>
-                <br>
-                <h1 style="text-align: left; margin-left: 20px; font-size: 3vw;">H1: Page Heading</h1>
-                    <ul>
-                        <li>Font-family: Oswald</li>
-                        <li>Font-size: 3vw</li>
-                    </ul>
-                <h2>H2: Subheading</h2>
-                    <ul>
-                        <li>Font-family: Merriweather</li>
-                        <li>Font-size: 2vw</li>
-                        <li>Font-weight: 600</li>
-                    </ul>
-                <h3>H3: Paragraph Heading</h3>
-                    <ul>
-                        <li>Font-family: Merriweather</li>
-                        <li>Font-size: 1.5vw</li>
-                        <li>Font-weight: 400</li>
-                    </ul>
-                <p>P: Paragraph text</p>
-                    <ul>
-                        <li>Font-family: Merriweather</li>
-                        <li>Font-size: 1vw</li>
-                        <li>Font-weight:300</li>
-                    </ul>
-
-
-            </div>
-
-        </content>
-
-        <script src="./footer.js"></script>
-
+        <!-- Footer will be inserted by footer.js -->
     </body>
-
 </html>
