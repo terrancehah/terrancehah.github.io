@@ -3,3 +3,5 @@ node_modules
 travel-rizz-server.js
 .vercel
 .export-to-pdf.js
+node_modules/
+dist/
