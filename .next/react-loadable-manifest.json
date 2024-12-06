@@ -1,0 +1,14 @@
+{
+  "pages/chat/index.tsx -> ../../components/map-component": {
+    "id": "pages/chat/index.tsx -> ../../components/map-component",
+    "files": [
+      "static/chunks/components_map-component_tsx.js"
+    ]
+  },
+  "pages/chat/index.tsx -> ../../components/travel-chat": {
+    "id": "pages/chat/index.tsx -> ../../components/travel-chat",
+    "files": [
+      "static/chunks/components_travel-chat_tsx.js"
+    ]
+  }
+}

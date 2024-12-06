@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "middleware": {},
+  "functions": {
+    "/api/chat-update": {
+      "files": [
+        "server/edge-runtime-webpack.js",
+        "server/pages/api/chat-update.js"
+      ],
+      "name": "pages/api/chat-update",
+      "page": "/api/chat-update",
+      "matchers": [
+        {
+          "regexp": "^/api/chat\\-update$",
+          "originalSource": "/api/chat-update"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "nkvLNrNg5kEfWTgZz8f5KYQHodq+YJ/hOgwy9CEnqhk="
+      }
+    }
+  },
+  "sortedMiddleware": []
+}
