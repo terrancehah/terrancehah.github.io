@@ -358,7 +358,7 @@ body.biwa-page {
 }
 
 /* Clear separation between the brand block and the views below it. */
-#biwa-main { margin-top: var(--biwa-space-md); }
+#biwa-main { margin-top: 0; }
 
 /* ---------- View switching ---------- */
 .biwa-view { display: none; }
@@ -1414,6 +1414,7 @@ body.biwa-page {
 .biwa-map-page { display: flex; flex-direction: column; gap: var(--biwa-space-sm); }
 .biwa-map-canvas {
   width: 100%;
+  margin: var(--biwa-space-md) 0;
   height: min(62vh, 30rem);
   border-radius: var(--biwa-radius-md);
   background: var(--biwa-alabaster);
@@ -1654,32 +1655,56 @@ body.biwa-page {
 
 /* ---------- Desktop ---------- */
 @media (min-width: 56rem) {
-  .biwa-shell { padding-bottom: var(--biwa-space-xl); }
+  /* Two-column page: a slim left rail for the view switcher, the active
+     view filling the wide column, the footer following the view. */
+  .biwa-shell {
+    padding-bottom: var(--biwa-space-xl);
+    display: grid;
+    grid-template-columns: minmax(9.5rem, 11rem) minmax(0, 1fr);
+    column-gap: var(--biwa-space-xl);
+  }
 
+  /* The mobile bottom bar becomes a vertical rail: one paper tile of
+     icon+label rows, sticky so it rides alongside the scrolled view.
+     align-self:start keeps it out of the full-height row stretch so the
+     sticky constraint has room to travel. */
   .biwa-nav {
-    position: static;
-    border: 0;
-    background: none;
-    box-shadow: none;
-    justify-content: flex-start;
-    gap: var(--biwa-space-sm);
-    padding: 0;
+    position: sticky;
+    top: var(--biwa-space-lg);
+    left: auto;
+    right: auto;
+    bottom: auto;
+    align-self: start;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--biwa-space-xs);
+    padding: var(--biwa-space-xs);
     margin-top: var(--biwa-space-md);
-    margin-bottom: var(--biwa-space-md);
+    margin-bottom: 0;
+    background: var(--biwa-paper);
+    border-radius: var(--biwa-radius-md);
+    box-shadow: none;
+    z-index: auto;
   }
   .biwa-nav-button {
     flex: none;
     flex-direction: row;
+    justify-content: flex-start;
     min-height: var(--biwa-tap);
-    padding: 0 var(--biwa-space-lg);
-    border-radius: 999px;
-    background: var(--biwa-paper);
-    gap: var(--biwa-space-xs);
+    padding: 0 var(--biwa-space-md);
+    border-radius: var(--biwa-radius-sm);
+    background: none;
+    gap: var(--biwa-space-sm);
   }
   .biwa-nav-button[aria-current='page'] {
     background: var(--biwa-petal);
     color: var(--biwa-clay-deep);
   }
+
+  /* The wide column must be able to shrink below content width — grid
+     items default to min-width:auto and would overflow the rail. */
+  #biwa-main { min-width: 0; }
+  .biwa-footer { grid-column: 2; }
 
   /* Ample width: the track gets a little more room around the spine. */
   .biwa-track-row { gap: var(--biwa-space-md); }
