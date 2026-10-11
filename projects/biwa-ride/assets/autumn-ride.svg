@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 160" role="img" aria-labelledby="biwa-art-title biwa-art-desc">
+  <title id="biwa-art-title">Three cyclists riding along Lake Biwa in autumn</title>
+  <desc id="biwa-art-desc">A simple illustration of three riders on bicycles passing autumn trees beside a blue lake under a bright sky.</desc>
+  <!-- bright sky -->
+  <rect width="360" height="160" fill="#f3e9e2"/>
+  <circle cx="312" cy="30" r="18" fill="#f0d9a8"/>
+  <!-- distant hills -->
+  <path d="M0 78 Q60 52 120 74 T240 70 T360 76 V160 H0 Z" fill="#e2cfc4"/>
+  <!-- lake strip -->
+  <rect y="86" width="360" height="34" fill="#7fa8b8"/>
+  <path d="M0 92 Q45 88 90 92 T180 92 T270 92 T360 92" stroke="#a8c6d1" stroke-width="2" fill="none"/>
+  <path d="M20 104 Q65 100 110 104 T200 104 T290 104" stroke="#a8c6d1" stroke-width="2" fill="none" opacity="0.7"/>
+  <!-- shore road -->
+  <rect y="118" width="360" height="42" fill="#d9c4ba"/>
+  <rect y="136" width="360" height="3" fill="#eee2df" stroke-dasharray="14 10"/>
+  <!-- koyo trees -->
+  <g>
+    <rect x="28" y="88" width="5" height="32" rx="2" fill="#7a5548"/>
+    <circle cx="30" cy="80" r="16" fill="#c97c5d"/>
+    <circle cx="42" cy="88" r="11" fill="#b36a5e"/>
+  </g>
+  <g>
+    <rect x="322" y="90" width="5" height="30" rx="2" fill="#7a5548"/>
+    <circle cx="324" cy="82" r="15" fill="#b36a5e"/>
+    <circle cx="335" cy="90" r="10" fill="#c97c5d"/>
+  </g>
+  <!-- drifting koyo leaves -->
+  <g fill="#c97c5d">
+    <ellipse cx="120" cy="40" rx="5" ry="3" transform="rotate(-24 120 40)"/>
+    <ellipse cx="186" cy="28" rx="4" ry="2.6" transform="rotate(18 186 28)"/>
+    <ellipse cx="252" cy="52" rx="5" ry="3" transform="rotate(-40 252 52)"/>
+  </g>
+  <g fill="#b36a5e">
+    <ellipse cx="150" cy="58" rx="4" ry="2.5" transform="rotate(32 150 58)"/>
+    <ellipse cx="288" cy="38" rx="4" ry="2.5" transform="rotate(-12 288 38)"/>
+  </g>
+  <!-- cyclists: simple figures of three male riders -->
+  <g stroke="#3a2a26" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- rider 1 (lead, clay jersey) -->
+    <g transform="translate(88 0)">
+      <circle cx="0" cy="138" r="11"/>
+      <circle cx="34" cy="138" r="11"/>
+      <path d="M0 138 L14 118 L34 138 M14 118 L28 118 M14 118 L10 138"/>
+      <path d="M14 118 L10 104 L22 100" />
+      <path d="M10 104 L4 124 M10 104 L18 126" stroke-width="2.6"/>
+      <path d="M22 100 L32 112" stroke-width="2.6"/>
+      <circle cx="24" cy="96" r="5" fill="#3a2a26"/>
+      <path d="M8 108 L22 101 L26 110 L12 114 Z" fill="#b36a5e" stroke="none"/>
+    </g>
+    <!-- rider 2 -->
+    <g transform="translate(168 6) scale(0.92)">
+      <circle cx="0" cy="138" r="11"/>
+      <circle cx="34" cy="138" r="11"/>
+      <path d="M0 138 L14 118 L34 138 M14 118 L28 118 M14 118 L10 138"/>
+      <path d="M14 118 L10 104 L22 100"/>
+      <path d="M10 104 L4 124 M10 104 L18 126" stroke-width="2.6"/>
+      <path d="M22 100 L32 112" stroke-width="2.6"/>
+      <circle cx="24" cy="96" r="5" fill="#3a2a26"/>
+      <path d="M8 108 L22 101 L26 110 L12 114 Z" fill="#2f5d6f" stroke="none"/>
+    </g>
+    <!-- rider 3 -->
+    <g transform="translate(242 10) scale(0.85)">
+      <circle cx="0" cy="138" r="11"/>
+      <circle cx="34" cy="138" r="11"/>
+      <path d="M0 138 L14 118 L34 138 M14 118 L28 118 M14 118 L10 138"/>
+      <path d="M14 118 L10 104 L22 100"/>
+      <path d="M10 104 L4 124 M10 104 L18 126" stroke-width="2.6"/>
+      <path d="M22 100 L32 112" stroke-width="2.6"/>
+      <circle cx="24" cy="96" r="5" fill="#3a2a26"/>
+      <path d="M8 108 L22 101 L26 110 L12 114 Z" fill="#c97c5d" stroke="none"/>
+    </g>
+  </g>
+</svg>

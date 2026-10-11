@@ -56,6 +56,20 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // Route the Biwa ride's API calls to its isolated dev runner (biwa-dev.py).
+  // Only /projects/biwa-ride/api/biwa-* is forwarded, ahead of all other
+  // routing; everything else on the site is untouched.
+  if (req.url.startsWith('/projects/biwa-ride/api/')) {
+    const apiPath = req.url.replace('/projects/biwa-ride/api/', '/api/');
+    console.log(`[PROXY] ${req.method} ${req.url} -> http://localhost:${API_PORT}${apiPath}`);
+    req.url = apiPath;
+    proxy.web(req, res, {
+      target: `http://localhost:${API_PORT}`,
+      changeOrigin: true
+    });
+    return;
+  }
+
   // Route Pacey's API calls to the FastAPI /race-goal/* endpoints. The app now
   // calls /pacey/api/*; the old /projects/pacey/api/* prefix is kept so a
   // cached page still works.

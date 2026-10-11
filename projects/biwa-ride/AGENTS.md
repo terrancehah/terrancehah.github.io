@@ -1,0 +1,73 @@
+# AGENTS.md — Lake Biwa Ride Companion
+
+Mobile-first companion for three friends riding Otsu → Hikone → Takashima → Otsu. Public static app at `/projects/biwa-ride/` (linked from the Biwa card in `projects.html`, still `noindex`) backed by isolated Vercel functions `api/biwa-{trip,route,place,photo}.py` with helpers under `lib/biwa/biwa-*.py` (outside `api/` so Vercel's function discovery never builds them). The shared trip is public — no invite token anywhere. This file is the persistent project doc for the app — do not add README/design docs.
+
+## Design context
+
+Three riders, phones roadside in daylight. Personality: a compact Japanese autumn ride journal — warm, quiet, a little handmade — not a generic dashboard. Repo-level `.impeccable.md` principles carry over (clarity, hierarchy, AA contrast, reduced-motion floor) but Biwa pins its own tokens in `biwa-tokens.css`; no Pacey tokens or board materials.
+
+Palette (exact): `#eee2df` alabaster, `#eed7c5` petal, `#c89f9c` rosy, `#c97c5d` peach, `#b36a5e` clay, plus warm ink `#3a2a26`, lake blue `#2f5d6f`. Soft hues are surfaces only; primary actions use `--biwa-clay-deep` for AA contrast. Momo Trust Display headings (regular 400 only — heading-face elements are pinned to `font-weight: 400` so nothing synthesises a bold; body bolds still use Quattrocento Sans 700), Japanese glyph fallbacks, font-display swap.
+
+Rules of thumb: mobile bottom nav + `env(safe-area-inset-bottom)`; desktop split ≥56rem; 48px touch targets (44px inline/selects); 16px body text; visible focus ring; text+icon status (never colour alone); no emoji icons (inline SVG); flat/lineless surfaces (tinted fills and shadow steps, no decorative borders — the 2px lake focus outline stays); button-first editing, no drag-only actions; honest states over false confidence (missing endpoints, unconfirmed names, unavailable metrics, stale data are labelled, never zeroed/hidden); "Road preview, not cycling guidance" always visible beside route content.
+
+## Data provenance
+
+`data/checkpoints.json` — 33 unique places: the 26 canonical checkpoints (17 official — user's newer dataset; the official site lists 16 — + 10 user-supplied rally stops, shared Mizudori merged into one place with both memberships) plus 7 additional places (3 accommodations, Shirahige Shrine and the legacy Omi-Takashima Station record as custom stops, and 2 `route-waypoint` anchors) that carry verified Google place ids/addresses and `lat`/`lng: null` — provider coordinates are never stored. `source.{longitude,latitude}` preserves supplied pairs; `lat`/`lng` is the explicit conversion. `lib/biwa/biwa-checkpoints.json` is a mechanical copy — the server's immutable manifest; regenerate it whenever the client catalogue changes.
+
+User-requested classification pass (map icons + dataset corrections): `extra-chomeiji-183` and `extra-oura` are `route-waypoint` anchors — they keep their Day 1/Day 2 occurrences and steer the road line but are hidden from the itinerary, checklists and completion (see `Rules.visibleDayPoints` vs `Rules.dayPoints`). `official-west-information` carries an `official-east` programme override despite its west-geography naming — the stable id and canonical coordinates/`googlePlaceId` are unchanged, only the label gained the "(Omi-Takashima Station)" suffix. `extra-takashima-station` is that same physical stop under a legacy id — kept in the manifest for backward compatibility, never rendered as a second pin, and old snapshots referencing it are retargeted client-side by `TripStore._normalizeTrip` (no server write is triggered; the corrected snapshot persists on the next normal save). Normalization migrates `label`/`notes` only while a snapshot still carries the pre-correction default — a rider-renamed label or user-written note is always preserved.
+
+`data/trip-seed.json` — the blueprint 3-day plan. Day boundaries are shared: a day's end is the next day's start. Lodging chain: Day 1 Guest House Hana → Comfort Hotel Hikone, Day 2 Comfort → 临湖庄 (stay-rinkoso — the copied "1-17 Katsuno" address IS this lodging, not a separate place), Day 3 临湖庄 → Biwako rental return. Endpoint rows carry implicit occurrence ids `day-N-start`/`day-N-end` for manual arrival ticks.
+
+Rally window announced 2026-09-01 → 2026-12-31.
+
+`assets/cycling-scene.svg` is a generated illustration kept on disk but NOT used — it was rejected in favour of user-supplied artwork. The full-width `.biwa-masthead` hosts a layered decorative scene (`aria-hidden`, no user controls — motion stops only automatically under `prefers-reduced-motion` or while scrolled offscreen via IntersectionObserver): self-drawn mountains/water/road under bright scene tokens `--biwa-scene-sky/-lake` (art colours, not UI palette; the road is one plain band). Everything on the shore anchors to `--biwa-scene-road-height` (15%) on `.biwa-masthead` — road band, tree belt base, torii base — and the water is `calc(100% - 46% - var)` so no empty strip can open between lake and road. Three supplied rider GIFs (`wired-flat-667-…`) at 75% of the original spec (`clamp(67.5px,10.125vw,127.5px)`), wheel-base aligned to the masthead bottom — frames pad 18/256 transparent at the bottom, corrected by `translateY(7.03125%)`. The supplied torii GIF (`wired-flat-1984-…`, no loop block — plays once per load) passes occasionally on a 22s pass. `assets/tree-01..06.svg` are vector traces (colour-region contours, edge-connected background removed) of crops from the user-supplied `6075400.jpg`, not redrawn — their viewBoxes are trimmed to real path bounds so each visible trunk base lands exactly on the belt's bottom edge. The belt is `max(200%,1800px)` wide: each half holds the same trees arranged ONCE by `arrangeSceneTrees()` — Fisher-Yates asset order (each asset 3× over the 18 blueprint slots; extra imgs keep their authored src/place), 12 jittered groups, then DOM-cloned into the second half for a seamless `-50%` wrap; trip polls never re-randomise. Tree height is owned by the HTML inline `height` per img (editable), CSS only clamps it to 80–100px (`min/max-height`, 90px fallback). Supplied art is user-provided with unknown licence — licensing is the user's responsibility; do not attribute or claim terms. GIFs can't be paused by CSS, so `biwa-ride.js` swaps each `<img>` between `data-animated` and a `*-still.png` mid-frame capture when motion is disallowed (the still is representative, not the exact frame), and `prefers-reduced-motion` never downloads a GIF.
+
+`assets/maple-leaf.svg` is the OpenMoji maple leaf (source https://github.com/hfg-gmuend/openmoji) preserved unmodified as provenance; the leaf-burst renders `assets/maple-leaf-flat.svg`, a user-requested adaptation of the same silhouette with the outline group removed — used as a CSS mask so each of the 36 leaves is tinted a palette colour (peach/clay/rosy/petal/clay-deep). Both ship under CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0/; attribution lives in `terms.html`. Do not recolour or redraw the original; derive flat variants from its `g#color` path only.
+
+## Configuration
+
+| Env var | Purpose |
+| --- | --- |
+| `BIWA_REDIS_URL` | Preferred backend — direct Redis URI (`redis://`/`rediss://`) to the dedicated Biwa DB, used via `lib/biwa/biwa-redis.py` |
+| `BIWA_REDIS_REST_URL`, `BIWA_REDIS_REST_TOKEN` | Dedicated Upstash DB (never Pacey's) — fallback when `BIWA_REDIS_URL` is unset |
+| `BIWA_GOOGLE_SERVER_KEY` | Routes + Elevation, server-side |
+| `BIWA_GOOGLE_PLACES_KEY` | Places details/photos, server-side — separate from the Routes key so scopes rotate independently; falls back to `BIWA_GOOGLE_SERVER_KEY` |
+| `BIWA_GOOGLE_BROWSER_KEY` | Maps JS, referrer-restricted; returned to every visitor on the public GET |
+| `BIWA_DEV_ALLOW_MEMORY` | `=1` opts into the in-memory backend for local dev only |
+
+There is **no `BIWA_TRIP_TOKEN`** — GET/PUT are public shared state; the only guards are same-origin mutation checks, rate limits and body caps. Missing Redis vars → `sharingAvailable: false` on GET (the trip still renders from the seed and provider/browser config stays live; writes fail closed). The `BIWA_DEV_ALLOW_MEMORY=1` in-memory backend is ignored on Vercel (`VERCEL` env present) and is shared across all endpoint stores in one process. Referrer policy is `strict-origin-when-cross-origin` (Google's key needs the origin).
+
+`BIWA_REDIS_URL` may be parked in `.env.local` for local use — a value in that file does NOT mean the deployed site has it configured; the Vercel/dashboard env setup is user-owned. The `redis` Python package (requirements.txt) must be installed before the direct-URI backend works; the launcher env does not vendor it. All four endpoint modules share whichever backend resolves, so trip state and rate limits live in one Biwa-namespaced database (durable `TRIP_KEY`, no TTL — the shared trip never expires).
+
+Provider status (as configured): Places (New), Routes and Elevation all work on the current key — real day polylines and sampled ascent paint on the map. If a future key lacks an API, the app reports a specific "enable the Routes API"-style notice and falls back to markers/schematic (never fake metrics or straight-line road claims). Geocoding is not required — do not enable it for this app.
+
+## Local development
+
+One-shot launcher for both servers (loads `.env.local`, memory store): `./biwa-dev.sh` at the repo root. Or manually:
+
+```bash
+# terminal 1 — isolated Biwa API (in-memory store; loads .env.local for the
+# Google keys). Kebab-case module name → load by path; use the 3.13 venv.
+BIWA_DEV_ALLOW_MEMORY=1 venv/bin/python -c "
+import importlib.util, sys, uvicorn
+spec = importlib.util.spec_from_file_location('biwa_dev', 'lib/biwa/biwa-dev.py')
+m = importlib.util.module_from_spec(spec); sys.modules['biwa_dev'] = m
+spec.loader.exec_module(m)
+uvicorn.run(m.app, host='127.0.0.1', port=8000, log_level='warning')
+"
+
+# terminal 2 — static site + proxy on :3000
+node proxy-server.js
+```
+
+Open `http://localhost:3000/projects/biwa-ride/` — plain URL, no invite. The proxy forwards only `/projects/biwa-ride/api/biwa-*`. The legacy `api.index` target in `start-dev.sh`/`package.json` is broken and intentionally untouched.
+
+## Sync & safety invariants
+
+- CAS writes (`expectedRevision`, Redis Lua); 409 carries the latest trip and is consumed. Drafts are never discarded — recoverable `pendingDraft`, explicit conflict UI ("Replace shared trip with mine" = whole-snapshot overwrite).
+- Only idempotent checkbox intents rebase (one retry, after a successful refresh, dropped cleanly if the target was deleted). Reads can't adopt over an open editor or in-flight write (read-generation bump).
+- 503 ⇒ temporary `unavailable`, keeps polling; edits hold as pendingDraft and retry on recovery. A guard response (401/403) ⇒ local seed/draft only — cached shared state is never shown.
+- Routes: DRIVE + TRAFFIC_UNAWARE + `optimizeWaypointOrder=false` + avoidance prefs + METRIC + narrow mask; 2..27 locations/day incl. endpoints. Provider errors are generic (no key/URL leakage); all API answers `Cache-Control: private, no-store`.
+- Google content is transient; route/elevation render only on a real Google Map with attribution — the SVG fallback is a user-owned "stop schematic". Timeline distance gaps are the one permitted off-map metric — text-only legs via `stop-distances.js` with an inline Google terms link and the "road preview, not cycling guidance" note; provider geometry still never renders off-map.
+- The Google cache (`lib/biwa/biwa-google-cache.py`) is policy-limited to exactly what Places terms allow: resolved Google place IDs under `biwa:v2:google:id:*` (no expiry) and lat/lng under `biwa:v2:google:coords:*` (30-day TTL). Photos, photo URLs/bytes, hours, ratings, route geometry and elevation are NEVER persisted — they stay transient per request. A failed live details call may surface `source.cachedLocation` (coords only); a cached Google id only shortcuts the search step and still falls through to proximity validation when details fail.
+- Tests: `tests/biwa-ride/` — `node --test tests/biwa-ride/rules.test.js` and `.venv/bin/python tests/biwa-ride/test_biwa_api.py` (+ `test_biwa_elevation.py`). All external services stubbed.

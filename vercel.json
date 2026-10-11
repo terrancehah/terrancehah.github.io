@@ -4,7 +4,7 @@
     "functions": {
         "api/*.py": {
             "maxDuration": 60,
-            "excludeFiles": "{resources,public,playground,articles,projects,pacey,dist,src,styles,.archive,node_modules,.venv,venv,.vercel}/**"
+            "excludeFiles": "{resources,public,playground,articles,projects,pacey,dist,src,styles,.archive,node_modules,.venv,venv,.vercel,.vercel.bak,tests}/**"
         }
     },
     "redirects": [
@@ -33,6 +33,10 @@
         {
             "source": "/projects/running-posture-analyser/analyse",
             "destination": "/api/analyse"
+        },
+        {
+            "source": "/projects/biwa-ride/api/(.*)",
+            "destination": "/api/$1"
         },
         {
             "source": "/pacey/api/(.*)",

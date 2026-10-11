@@ -1,0 +1,569 @@
+{
+  "meta": {
+    "description": "Checkpoint catalogue for the Lake Biwa ride. Source coordinates were supplied as (longitude, latitude) pairs and are preserved verbatim under 'source'; 'lat'/'lng' are the explicit conversion used throughout the app. Enrichment adds verified Google place IDs and addresses; the seven additional places (stays and address-only stops) carry null coordinates by design — Google data resolves transiently, never persisted.",
+    "provenance": [
+      "Official programme: 17 checkpoints in the user's supplied dataset (m.biwako1.jp/flow currently lists 16; the user's newer dataset is authoritative).",
+      "Rally: 10 mandatory stops supplied by the user, superseding an earlier user-provided list of six.",
+      "Rally window announced as 2026-09-01 through 2026-12-31; eligibility for other dates is not guaranteed.",
+      "'Roadside station Kohoku Mizudori station' appears in both programmes and is stored once with two programme memberships.",
+      "'1039-2 Kitahira' (rally) and '観光船のりば' (official west) names are unconfirmed but retained as supplied.",
+      "Accommodation confirmed by the user: Guest House Hana (day 1 start), Comfort Hotel Hikone (day 1 end / day 2 start), 临湖庄 at Katsuno — the supplied '1-17 Katsuno' endpoint resolves to it (day 2 end / day 3 start); the loop finishes at the Biwako rental shop, not Hana.",
+      "Google place IDs/addresses verified by the lead against Places; coordinates for the additional places are intentionally absent (googleCoordinatesTransientOnly)."
+    ]
+  },
+  "places": [
+    {
+      "placeId": "official-south-otsu",
+      "label": "大津港",
+      "lat": 35.012715,
+      "lng": 135.8658363,
+      "source": {
+        "longitude": 135.8658363,
+        "latitude": 35.012715
+      },
+      "programmes": [
+        "official-south"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": null,
+      "address": "5-3-10 Hamaotsu, Otsu, Shiga 520-0047, Japan"
+    },
+    {
+      "placeId": "official-south-kusatsu",
+      "label": "Roadside Station Kusatsu",
+      "lat": 35.07000379999999,
+      "lng": 135.9394328,
+      "source": {
+        "longitude": 135.9394328,
+        "latitude": 35.07000379999999
+      },
+      "programmes": [
+        "official-south"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJW1yRtId0AWARvGNVCcTn4w8",
+      "address": "1436 Oroshimochō, Kusatsu, Shiga 525-0001, Japan"
+    },
+    {
+      "placeId": "official-south-marriott",
+      "label": "Lake Biwa Marriott Hotel",
+      "lat": 35.1251483,
+      "lng": 135.9552582,
+      "source": {
+        "longitude": 135.9552582,
+        "latitude": 35.1251483
+      },
+      "programmes": [
+        "official-south"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJJ8FuX5Z1AWARluK0yV_zggg",
+      "address": "2876-1 Imahamachō, Moriyama, Shiga 524-0101, Japan"
+    },
+    {
+      "placeId": "official-south-otsuka",
+      "label": "Hotel Biwa Lake Otsuka",
+      "lat": 35.237198,
+      "lng": 135.96081,
+      "source": {
+        "longitude": 135.96081,
+        "latitude": 35.237198
+      },
+      "programmes": [
+        "official-south"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJw3nqUxOZAWARlpz0l8R1Gys",
+      "address": "1054 Minamikomatsu, Otsu, Shiga 520-0502, Japan"
+    },
+    {
+      "placeId": "official-south-shiga",
+      "label": "Shiga Sightseeing Association",
+      "lat": 35.2019169,
+      "lng": 135.9243995,
+      "source": {
+        "longitude": 135.9243995,
+        "latitude": 35.2019169
+      },
+      "programmes": [
+        "official-south"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJlbYuI8qYAWAR_gDuOMCSPYo",
+      "address": "130-2 Kido, Otsu, Shiga 520-0514, Japan"
+    },
+    {
+      "placeId": "official-east-chomei",
+      "label": "Chomei-an",
+      "lat": 35.1588193,
+      "lng": 136.0626903,
+      "source": {
+        "longitude": 136.0626903,
+        "latitude": 35.1588193
+      },
+      "programmes": [
+        "official-east"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJ8YG8lvV5AWARKf_QQL9XuCg",
+      "address": "47-1-2 Chōmeijichō, Omihachiman, Shiga 523-0808, Japan"
+    },
+    {
+      "placeId": "official-east-notogawa",
+      "label": "Notogawa River Waterwheel and Canoe Land",
+      "lat": 35.1849006,
+      "lng": 136.137606,
+      "source": {
+        "longitude": 136.137606,
+        "latitude": 35.1849006
+      },
+      "programmes": [
+        "official-east"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": null,
+      "address": null
+    },
+    {
+      "placeId": "official-east-mitsuya",
+      "label": "湖岸緑地 南三ツ谷",
+      "lat": 35.2253288,
+      "lng": 136.1498576,
+      "source": {
+        "longitude": 136.1498576,
+        "latitude": 35.2253288
+      },
+      "programmes": [
+        "official-east"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJZXMsxZZ_AWAR27kBesrzVMk",
+      "address": "65G2+23, Minamimitsuyacho, Hikone, Shiga 521-1145, Japan"
+    },
+    {
+      "placeId": "official-east-hikone",
+      "label": "Ohmi Marine Hikone Port",
+      "lat": 35.285656,
+      "lng": 136.247576,
+      "source": {
+        "longitude": 136.247576,
+        "latitude": 35.285656
+      },
+      "programmes": [
+        "official-east"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJEfnxYCcrAmAR3W47wq3YHX0",
+      "address": "3753 Matsubarachō, Hikone, Shiga 522-0002, Japan"
+    },
+    {
+      "placeId": "official-north-maibara",
+      "label": "Maibara Cycle Station",
+      "lat": 35.3144581,
+      "lng": 136.2904829,
+      "source": {
+        "longitude": 136.2904829,
+        "latitude": 35.3144581
+      },
+      "programmes": [
+        "official-north"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": null,
+      "address": null
+    },
+    {
+      "placeId": "official-north-hahanosato",
+      "label": "Roadside Station Omi Hahanosato",
+      "lat": 35.3433538,
+      "lng": 136.2772332,
+      "source": {
+        "longitude": 136.2772332,
+        "latitude": 35.3433538
+      },
+      "programmes": [
+        "official-north"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": null,
+      "address": null
+    },
+    {
+      "placeId": "official-north-nagahama",
+      "label": "Nagahama-ko Port",
+      "lat": 35.3721302,
+      "lng": 136.2655772,
+      "source": {
+        "longitude": 136.2655772,
+        "latitude": 35.3721302
+      },
+      "programmes": [
+        "official-north"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": null,
+      "address": null
+    },
+    {
+      "placeId": "mizudori-station",
+      "label": "Roadside station Kohoku Mizudori station",
+      "lat": 35.4452335,
+      "lng": 136.190516,
+      "source": {
+        "longitude": 136.190516,
+        "latitude": 35.4452335
+      },
+      "programmes": [
+        "official-north",
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "One physical stop counting toward both the official north area and the rally.",
+      "googlePlaceId": "ChIJx2FEtOqJAWAR4J20VdxQSJg",
+      "address": "1731-1 Kohokuchō Imanishi, Nagahama, Shiga 529-0365, Japan"
+    },
+    {
+      "placeId": "official-north-koti",
+      "label": "JR永原駅コミュニティハウス koti",
+      "lat": 35.498296,
+      "lng": 136.122117,
+      "source": {
+        "longitude": 136.122117,
+        "latitude": 35.498296
+      },
+      "programmes": [
+        "official-north"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": null,
+      "address": null
+    },
+    {
+      "placeId": "official-west-boat",
+      "label": "観光船のりば",
+      "lat": 35.397236,
+      "lng": 136.03507,
+      "source": {
+        "longitude": 136.03507,
+        "latitude": 35.397236
+      },
+      "programmes": [
+        "official-west"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": false,
+      "notes": "Name unconfirmed; retained as supplied.",
+      "googlePlaceId": "ChIJo5aJVSKSAWAR6Um9RaSvBXE",
+      "address": "30 Imazuchō Imazu, Takashima, Shiga 520-1621, Japan"
+    },
+    {
+      "placeId": "official-west-stagex",
+      "label": "STAGEX Takashima",
+      "lat": 35.3504932,
+      "lng": 136.0669881,
+      "source": {
+        "longitude": 136.0669881,
+        "latitude": 35.3504932
+      },
+      "programmes": [
+        "official-west"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJxUAIROiPAWAR14ROaJbcIWQ",
+      "address": "336 Shinasahichō Warasono, Takashima, Shiga 520-1511, Japan"
+    },
+    {
+      "placeId": "official-west-information",
+      "label": "Omitakashima Information Center (Omi-Takashima Station)",
+      "lat": 35.2927963,
+      "lng": 136.0103053,
+      "source": {
+        "longitude": 136.0103053,
+        "latitude": 35.2927963
+      },
+      "programmes": [
+        "official-east"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJZdLarmeaAWARH-FOKr_iVwE",
+      "address": null
+    },
+    {
+      "placeId": "rally-rental",
+      "label": "ビワイチバイク Biwako Rental Bike Shop",
+      "lat": 35.0126979,
+      "lng": 135.8658448,
+      "source": {
+        "longitude": 135.8658448,
+        "latitude": 35.0126979
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "Neighbouring Otsu harbour; kept as a distinct stop.",
+      "googlePlaceId": "ChIJXXrb8NsNAWARAi_bzR3F1Fc",
+      "address": null
+    },
+    {
+      "placeId": "rally-mizunomori",
+      "label": "Mizunomori Water Botanical Park",
+      "lat": 35.0743436,
+      "lng": 135.9399054,
+      "source": {
+        "longitude": 135.9399054,
+        "latitude": 35.0743436
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJ2R-WToh0AWAR-Yb-I9s0CXY",
+      "address": "1091 Oroshimochō, Kusatsu, Shiga 525-0001, Japan"
+    },
+    {
+      "placeId": "rally-mentai",
+      "label": "Kanefuku Mentai Park Biwako",
+      "lat": 35.1294373,
+      "lng": 135.9812493,
+      "source": {
+        "longitude": 135.9812493,
+        "latitude": 35.1294373
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJYxqJldt3AWARf1GR7BC5Ox0",
+      "address": "4187 Yoshikawa, Yasu, Shiga 520-2401, Japan"
+    },
+    {
+      "placeId": "rally-castle",
+      "label": "Hikone Castle",
+      "lat": 35.276452,
+      "lng": 136.251846,
+      "source": {
+        "longitude": 136.251846,
+        "latitude": 35.276452
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJw9u_XSsrAmARMIwpeAshKu4",
+      "address": "1-1 Konkichō, Hikone, Shiga 522-0061, Japan"
+    },
+    {
+      "placeId": "rally-dome",
+      "label": "Nagahama Dome",
+      "lat": 35.352524,
+      "lng": 136.2814897,
+      "source": {
+        "longitude": 136.2814897,
+        "latitude": 35.352524
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJeQngjfkrAmARx7NhpcXPzuA",
+      "address": "1320 Tamurachō, Nagahama, Shiga 526-0829, Japan"
+    },
+    {
+      "placeId": "rally-shiotsu",
+      "label": "Roadside station Shiotsukaido Ajikama-no-sato",
+      "lat": 35.5205487,
+      "lng": 136.1628989,
+      "source": {
+        "longitude": 136.1628989,
+        "latitude": 35.5205487
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJgWNdwdL0AWARcFgQKa5A7Sc",
+      "address": "1765 Nishiazaichō Shiotsuhama, Nagahama, Shiga 529-0701, Japan"
+    },
+    {
+      "placeId": "rally-kitahira",
+      "label": "1039-2 Kitahira",
+      "lat": 35.2332846,
+      "lng": 135.9426759,
+      "source": {
+        "longitude": 135.9426759,
+        "latitude": 35.2332846
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": false,
+      "notes": "Name unconfirmed; retained as supplied.",
+      "googlePlaceId": "ChIJxXgisgKZAWARTy-8BEtOU2U",
+      "address": "1039-2 Kitahira, Otsu, Shiga 520-0503, Japan"
+    },
+    {
+      "placeId": "rally-ogoto",
+      "label": "Otsushiogotoonsen Kanko Park",
+      "lat": 35.0887353,
+      "lng": 135.8939713,
+      "source": {
+        "longitude": 135.8939713,
+        "latitude": 35.0887353
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJvXcdg8UKAWAR1FQbLFyBMK4",
+      "address": "1-chōme-2-2-17 Ogoto, Otsu, Shiga 520-0101, Japan"
+    },
+    {
+      "placeId": "rally-otsukan",
+      "label": "Biwako Ōtsu-kan",
+      "lat": 35.026737,
+      "lng": 135.8677248,
+      "source": {
+        "longitude": 135.8677248,
+        "latitude": 35.026737
+      },
+      "programmes": [
+        "rally"
+      ],
+      "category": "checkpoint",
+      "nameConfirmed": true,
+      "notes": "",
+      "googlePlaceId": "ChIJOwOW6IAMAWARLL9CC5P3aE0",
+      "address": "5-35 Yanagasaki, Otsu, Shiga 520-0022, Japan"
+    },
+    {
+      "placeId": "stay-hana",
+      "label": "Guest House Hana",
+      "lat": null,
+      "lng": null,
+      "programmes": [],
+      "category": "accommodation",
+      "nameConfirmed": true,
+      "notes": "Day 1 start.",
+      "googlePlaceId": "ChIJywsFgWAMAWAR7ceHyARQ9Gw",
+      "address": "1-2-3 Hamaotsu, Otsu, Shiga 520-0047, Japan"
+    },
+    {
+      "placeId": "stay-comfort",
+      "label": "Comfort Hotel Hikone",
+      "lat": null,
+      "lng": null,
+      "programmes": [],
+      "category": "accommodation",
+      "nameConfirmed": true,
+      "notes": "Day 1 overnight and Day 2 start. Replaces the copied 108-17 endpoint as confirmed by the user.",
+      "googlePlaceId": "ChIJX3VF3cfUA2ARNUBR5VdDmIs",
+      "address": "18-7 Ekihigashichō, Hikone, Shiga 522-0010, Japan"
+    },
+    {
+      "placeId": "stay-rinkoso",
+      "label": "临湖庄",
+      "lat": null,
+      "lng": null,
+      "programmes": [],
+      "category": "accommodation",
+      "nameConfirmed": true,
+      "notes": "Day 2 overnight and Day 3 start. The user confirmed the copied 1-17 Katsuno destination represents this accommodation.",
+      "googlePlaceId": "ChIJ8Zenbz6bAWAR7ihwYMZr7Mg",
+      "address": "204 1 Katsuno, Takashima, Shiga 520-1121, Japan"
+    },
+    {
+      "placeId": "extra-chomeiji-183",
+      "label": "183 Chōmeijichō",
+      "lat": null,
+      "lng": null,
+      "programmes": [],
+      "category": "route-waypoint",
+      "nameConfirmed": false,
+      "notes": "Routing waypoint to preserve the lakeside road; not a check-in destination.",
+      "googlePlaceId": "ChIJb1dIcSF4AWARkhTq41J1pq8",
+      "address": "183 Chōmeijichō, Omihachiman, Shiga 523-0808, Japan"
+    },
+    {
+      "placeId": "extra-oura",
+      "label": "1640-2 Nishiazaichō Ōura",
+      "lat": null,
+      "lng": null,
+      "programmes": [],
+      "category": "route-waypoint",
+      "nameConfirmed": false,
+      "notes": "Routing waypoint to preserve the lakeside road; not a check-in destination.",
+      "googlePlaceId": "ChIJ74aoSbmMAWAR4CzZVb8F_Rg",
+      "address": "1640-2 Nishiazaichō Ōura, Nagahama, Shiga 529-0721, Japan"
+    },
+    {
+      "placeId": "extra-takashima-station",
+      "label": "Omi-Takashima Station",
+      "lat": null,
+      "lng": null,
+      "programmes": [],
+      "category": "custom",
+      "nameConfirmed": true,
+      "notes": "Station stop supplied by the user. The official information-centre checkpoint remains separately available nearby.",
+      "googlePlaceId": "ChIJP0aTsmeaAWAREFh1w2CKygo",
+      "address": "Omi-Takashima Station, Katsuno, Takashima, Shiga 520-1121, Japan"
+    },
+    {
+      "placeId": "extra-ukawa",
+      "label": "Shirahige Shrine",
+      "lat": null,
+      "lng": null,
+      "programmes": [],
+      "category": "custom",
+      "nameConfirmed": true,
+      "notes": "Additional attraction; not part of either certificate programme.",
+      "googlePlaceId": "ChIJ_6TFyR-MA2ARy33QFlMAor0",
+      "address": "215 Ukawa, Takashima, Shiga 520-1122, Japan"
+    }
+  ]
+}

@@ -1,0 +1,1560 @@
+/* biwa-ride.css — layout and components for the Lake Biwa ride companion.
+ * Three views (Timeline / Map / Nearby), mobile-first: bottom navigation
+ * with safe-area padding on phones, inline nav and a roomier layout on wider
+ * screens. The timeline is a calendar-like vertical track; place details
+ * open in a bottom sheet. All colour values come from biwa-tokens.css;
+ * nothing hardcodes a hex here.
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body.biwa-page {
+  margin: 0;
+  font-family: var(--biwa-font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--biwa-ink);
+  background: var(--biwa-alabaster);
+  -webkit-font-smoothing: antialiased;
+}
+
+.biwa-shell {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 var(--biwa-space-md) calc(var(--biwa-tap) + var(--biwa-space-xl) + env(safe-area-inset-bottom));
+}
+
+/* ---------- Masthead: full-width supplied-art scene, title top-left ------
+   The header lives OUTSIDE .biwa-shell as the body's first child so it
+   spans the viewport edge-to-edge without 100vw scrollbar tricks. The scene
+   is decorative (aria-hidden) and layered absolute inside an
+   overflow-hidden header; the title block sits above it with a soft paper
+   fade behind the text only. */
+.biwa-masthead {
+  position: relative;
+  width: 100%;
+  min-height: clamp(260px, 40vw, 380px);
+  background: var(--biwa-petal);
+  overflow: hidden;
+  /* Shared ground line: the road band's height. The road, the tree belt
+     and the torii all anchor to this var so the shore line (road top)
+     stays exact — no gap and no overlap, whatever the band becomes. */
+  --biwa-scene-road-height: 15%;
+}
+.biwa-masthead-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--biwa-scene-sky);
+}
+/* Self-drawn ridge silhouettes — filled duotone paths stretched to the
+   box (preserveAspectRatio="none"), so the ridge always sits inside its
+   bounded band (bottom edge on the water line at 46%) instead of scaling
+   by viewport width and towering into the sky. */
+.biwa-scene-mountains {
+  position: absolute;
+  left: -10%;
+  bottom: 54%;
+  width: 120%;
+  height: 60%;
+}
+/* Calm lake band running exactly to the road top (46% + road height) —
+   no empty shore gap. Glints are rotated squares, opacity-only. */
+.biwa-scene-water {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 46%;
+  height: calc(100% - 46% - var(--biwa-scene-road-height));
+  background: var(--biwa-scene-lake);
+}
+.biwa-scene-sparkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.55);
+  transform: rotate(45deg);
+  animation: biwa-sparkle 3.4s ease-in-out infinite alternate;
+}
+@keyframes biwa-sparkle {
+  from { opacity: 0.15; }
+  to   { opacity: 0.65; }
+}
+/* Tree belt: translateX(-50%) loop on a doubled tile — seamless
+   right-to-left drift along the far shore. Vector-traced supplied art. */
+.biwa-scene-trees {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--biwa-scene-road-height);
+  height: 100px;
+}
+/* Belt is at least 1800px so each 50% half tiles ~900px minimum — the 18
+   trees spread as scattered groves instead of a dense row on phones. The
+   second half is a DOM clone of the first, so the wrap is seamless even
+   where edge groups spill past the tile boundary. */
+.biwa-scene-belt {
+  display: flex;
+  width: max(200%, 1800px);
+  height: 100%;
+  animation: biwa-belt-scroll 19s linear infinite;
+}
+.biwa-scene-belt-half {
+  flex: 0 0 50%;
+  min-width: 0;
+  position: relative;
+}
+/* Absolute group placement comes from --tree-x (percent along the half)
+   plus --tree-offset (px spread inside a group, centred on the base) —
+   both written once by JS, with an inline spread as the no-JS fallback. */
+.biwa-scene-tree {
+  position: absolute;
+  bottom: 0;
+  left: var(--tree-x, 50%);
+  transform: translateX(calc(-50% + var(--tree-offset, 0px)));
+  width: auto;
+  max-width: none;
+  /* Tree height lives in the HTML (editable per img); CSS only clamps the
+     permitted band — min/max-height bound even inline styles, no
+     !important needed — and 90px is the unstyled fallback. */
+  height: 80px;
+  min-height: 60px;
+  max-height: 100px;
+}
+@keyframes biwa-belt-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+/* The supplied torii gets its own long pass: it drifts in from off-screen
+   right, crosses the shore, and is opacity-0 outside that window — an
+   occasional landmark, never parked mid-scene. The translateY grounds the
+   GIF's visible base (its frames carry ~12% empty padding at the bottom). */
+.biwa-scene-torii {
+  position: absolute;
+  left: 0;
+  bottom: var(--biwa-scene-road-height);
+  height: 150px;
+  opacity: 0;
+  transform: translate(105vw, 12.5%);
+  animation: biwa-torii-pass 22s linear infinite;
+}
+@keyframes biwa-torii-pass {
+  0%   { transform: translate(105vw, 12.5%); opacity: 0; }
+  4%   { opacity: 1; }
+  52%  { transform: translate(-16vw, 12.5%); opacity: 1; }
+  56%  { opacity: 0; }
+  100% { transform: translate(-16vw, 12.5%); opacity: 0; }
+}
+/* Lakeside road — one continuous flat warm band, no markings. */
+.biwa-scene-road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 15%;
+  background: #ddbfae;
+}
+/* The three supplied rider GIFs — frames carry 17px left / 13px right /
+   29px top / 18px bottom of transparent padding (measured alpha bbox
+   17,29–243,238 of 256), so the translateY of exactly 18/256 = 7.03125%
+   aligns the lowest visible wheel pixel with the bottom edge. */
+.biwa-scene-rider {
+  position: absolute;
+  left: var(--rider-x, 50%);
+  bottom: 0;
+  width: clamp(67.5px, 10.125vw, 127.5px);
+  transform: translate(-50%, 7.03125%);
+}
+/* Paused (automatic — reduced motion or offscreen): freeze every CSS-
+   driven layer in place; GIFs are swapped to stills by JS. */
+.biwa-masthead-scene.is-paused .biwa-scene-belt,
+.biwa-masthead-scene.is-paused .biwa-scene-torii,
+.biwa-masthead-scene.is-paused .biwa-scene-sparkle {
+  animation-play-state: paused;
+}
+/* Reduced motion: stills stay (JS never swaps in GIFs), belts freeze at
+   their natural start — all tree clusters visible — and the torii stays
+   at opacity 0. The scene offers no controls, so none needs hiding. */
+@media (prefers-reduced-motion: reduce) {
+  .biwa-scene-belt,
+  .biwa-scene-torii,
+  .biwa-scene-sparkle { animation: none; }
+}
+.biwa-masthead-text {
+  position: absolute;
+  z-index: 3;
+  top: var(--biwa-space-lg);              /* 24px */
+  left: var(--biwa-space-md);             /* 16px on phones */
+  padding: 6px 56px 8px 0;
+  /* Soft paper fade behind the title only — keeps it legible over art
+     without outlining the artwork. */
+  /* background: linear-gradient(90deg, rgba(238, 226, 223, 0.88) 0%, rgba(238, 226, 223, 0) 100%); */
+}
+@media (min-width: 56rem) {
+  .biwa-masthead-text { left: var(--biwa-space-lg); }  /* 24px desktop */
+}
+
+.biwa-masthead h1 {
+  font-family: var(--biwa-font-heading);
+  font-size: 1.6rem;
+  line-height: 1.15;
+  margin: 0 0 0.15rem;
+}
+
+/* Momo Trust Display ships a single regular cut — every element wearing
+   the heading face is pinned to 400 so the browser never synthesises a
+   bold it cannot draw. Sizes keep their existing purposeful roles; body
+   bolds (card names, buttons) still use Quattrocento Sans 700. */
+.biwa-card h2, .biwa-card h3, .biwa-day-title, .biwa-next-stop-name,
+.biwa-dialog h2, .biwa-sheet-body h2, .biwa-dayroute-row strong,
+.biwa-route-meta dd, .biwa-masthead h1 {
+  font-weight: 400;
+}
+
+.biwa-masthead-sub {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--biwa-ink-soft);
+}
+
+/* Clear separation between the brand block and the views below it. */
+#biwa-main { margin-top: var(--biwa-space-md); }
+
+/* ---------- View switching ---------- */
+.biwa-view { display: none; }
+.biwa-view.is-active { display: block; }
+
+/* ---------- Bottom navigation (mobile) ---------- */
+.biwa-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  background: var(--biwa-paper);
+  /* Lineless — a whisper of upward shadow separates the fixed bar from
+     content scrolling beneath it. */
+  box-shadow: 0 -1px 8px rgba(var(--biwa-ink-rgb), 0.07);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 30;
+}
+
+.biwa-nav-button {
+  flex: 1;
+  min-height: 56px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--biwa-ink-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+}
+/* The active view is a filled petal wash with deep clay text — colour and
+   weight carry the current page, no outlined pill. */
+.biwa-nav-button[aria-current='page'] {
+  color: var(--biwa-clay-deep);
+  font-weight: 700;
+  background: var(--biwa-petal);
+}
+.biwa-nav-icon { line-height: 1; display: inline-flex; }
+
+/* ---------- Certificate progress strip ---------- */
+/* Emphasis block: two big counts with bars on plain paper. */
+.biwa-progress-strip {
+  background: var(--biwa-paper);
+  border-radius: var(--biwa-radius-md);
+  margin: var(--biwa-space-md) 0;
+}
+.biwa-progress-content {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--biwa-space-sm) var(--biwa-space-xl);
+  align-items: baseline;
+  padding: var(--biwa-space-sm) var(--biwa-space-md);
+}
+.biwa-progress-metric { display: flex; flex-direction: column; gap: 2px; }
+/* Keep the count and its label on one baseline, with the bar below. */
+.biwa-progress-summary { display: flex; align-items: baseline; gap: var(--biwa-space-sm); }
+.biwa-progress-num {
+  font-family: var(--biwa-font-heading);
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--biwa-lake-deep);
+}
+.biwa-progress-metric[data-done='true'] .biwa-progress-num { color: var(--biwa-success); }
+.biwa-progress-label { font-size: 1rem; color: var(--biwa-ink-soft); }
+.biwa-progress-bar {
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--biwa-line);
+  overflow: hidden;
+}
+.biwa-progress-bar > span { display: block; height: 100%; background: var(--biwa-clay-deep); }
+.biwa-progress-metric[data-done='true'] .biwa-progress-bar > span { background: var(--biwa-success); }
+.biwa-progress-complete { font-weight: 700; color: var(--biwa-success); }
+
+/* ---------- Day tabs ---------- */
+.biwa-day-tabs {
+  display: flex;
+  gap: var(--biwa-space-sm);
+  margin: var(--biwa-space-sm) 0;
+}
+
+/* Filled tabs, no outlines: petal resting, solid clay-deep when selected
+   (the deep stop keeps the paper label AA). */
+.biwa-day-tab {
+  flex: 1;
+  min-height: 44px;
+  padding: 0 var(--biwa-space-sm);
+  border-radius: 999px;
+  border: 0;
+  background: var(--biwa-petal);
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--biwa-ink);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.biwa-day-tab[aria-pressed='true'] {
+  background: var(--biwa-clay-deep);
+  color: var(--biwa-paper);
+}
+
+.biwa-day-title {
+  font-family: var(--biwa-font-heading);
+  font-size: 1.35rem;
+  margin: var(--biwa-space-sm) 0 var(--biwa-space-md);
+}
+
+/* ---------- Cards ---------- */
+.biwa-card {
+  background: var(--biwa-paper);
+  border-radius: var(--biwa-radius-md);
+  box-shadow: var(--biwa-shadow-card);
+  padding: var(--biwa-space-md);
+  margin-bottom: var(--biwa-space-md);
+}
+
+.biwa-card h2, .biwa-card h3 {
+  font-family: var(--biwa-font-heading);
+  margin: 0 0 var(--biwa-space-sm);
+  line-height: 1.25;
+}
+.biwa-card h2 { font-size: 1.2rem; }
+.biwa-card h3 { font-size: 1.05rem; }
+
+/* The up-next card stands out via a warm full-surface tint, no side stripe.
+   When the stop's own Google photo loads it sits blurred behind the content
+   under a paper fade — position/overflow contain the absolute layer. */
+.biwa-next-stop {
+  position: relative;
+  overflow: hidden;
+  background: var(--biwa-peach-wash);
+}
+.biwa-next-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(1px);
+}
+.biwa-next-veil {
+  position: absolute;
+  inset: 0;
+  /* Strong opaque fade — the ink text must stay AA over any photo. */
+  background: linear-gradient(to right,
+    rgba(247, 241, 236, 0.95), rgba(247, 241, 236, 0.86) 60%, rgba(247, 241, 236, 0.7));
+}
+.biwa-next-content { position: relative; }
+/* Every slot in the next card is height-reserved — 'Up Next' labels,
+   clamped names, the 48px directions button and the credit line all keep
+   their space whether content is live, loading or absent, so the card
+   never resizes under async updates. */
+.biwa-next-stop-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--biwa-ink-soft);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biwa-next-stop-name {
+  font-family: var(--biwa-font-heading);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin: 0 0 var(--biwa-space-sm);
+  /* Exactly three lines tall — longer names clamp and the full text stays
+     reachable on the title attribute. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: calc(1.25rem * 1.3 * 3);
+  /* The name is a <button> (it opens the sheet) styled as plain text —
+     no chrome, full width, left-aligned, pointer only while enabled. */
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--biwa-ink);
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+.biwa-next-stop-name:disabled { cursor: default; }
+/* Two equal 48px actions side by side; the row wraps on narrow screens.
+   Buttons hide by visibility (never display) so the row always holds its
+   height and the card never resizes between states. */
+.biwa-next-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--biwa-space-sm);
+}
+.biwa-next-actions > * {
+  flex: 1 1 10rem;
+  min-height: var(--biwa-tap);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.biwa-next-credit {
+  position: relative;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--biwa-ink-soft);
+  margin: var(--biwa-space-sm) 0 0;
+  /* Exactly three lines tall — long attribution scrolls inside the
+     reserved block (vertical only) so the card never grows; the title
+     attribute carries the full text too. */
+  height: calc(0.72rem * 1.35 * 3);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.biwa-next-credit a { color: var(--biwa-lake-deep); }
+/* Programme check-in row — permanently reserved below the action row at
+   exactly two 48px slots (grid rows, full width) so single, dual and empty
+   states are all the same height at every screen size; links for
+   non-programme next stops hide by visibility (never display). */
+.biwa-next-checkins {
+  display: grid;
+  grid-template-rows: repeat(2, var(--biwa-tap));
+  gap: var(--biwa-space-sm);
+  height: calc(var(--biwa-tap) * 2 + var(--biwa-space-sm));
+  margin-top: var(--biwa-space-sm);
+}
+/* Check-in links are filled paper blocks on the peach wash — bounded by
+   their shape, no outline. */
+/* Check-in links are ordinary secondary buttons — same pill geometry,
+   petal fill and 48px floor as Directions/complete — so the up-next card
+   reads as one uniform action family. The class stays for grid placement
+   and the visibility-hidden placeholder. */
+.biwa-next-checkin-empty { visibility: hidden; }
+/* Skeleton overlay — a quiet rectangle covering the credit slot while
+   details or the photo itself are still in flight. It sits over whatever
+   content is already resolved, so nothing needs to be emptied or moved,
+   and it is static under reduced motion. */
+.biwa-next-skeleton {
+  display: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: var(--biwa-line);
+  animation: biwa-skeleton-pulse 1.6s ease-in-out infinite;
+}
+.biwa-next-stop.is-loading .biwa-next-skeleton { display: block; }
+@keyframes biwa-skeleton-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biwa-next-stop.is-loading .biwa-next-skeleton { animation: none; }
+}
+
+/* ---------- Completion leaves ---------- */
+/* Decorative burst layer for manual arrival ticks: fixed over the timeline
+   view, above even the sheet (z 42), and pointer-events:none so it can
+   celebrate without ever intercepting a tap. Leaves fall for 6-8s with a
+   gentle drift/spin; reduced motion removes the animation entirely. */
+.biwa-leaves {
+  position: fixed;
+  inset: 0;
+  z-index: 42;
+  pointer-events: none;
+  overflow: hidden;
+}
+/* Each leaf is three nested layers so the transforms never fight:
+   the outer span falls straight down, a middle wrapper sways sideways,
+   and the inner art span tumbles. All motion is transform/opacity — the
+   compositor owns it, no layout work per frame. */
+.biwa-leaf {
+  position: absolute;
+  top: -28px;
+  opacity: 0;
+  animation-name: biwa-leaf-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.biwa-leaf-sway {
+  display: block;
+  animation: biwa-leaf-sway var(--leaf-sway-period, 3s) ease-in-out infinite alternate;
+}
+/* The leaf silhouette is a mask over a palette colour block — one asset,
+   many colours, no <img> and no duplicated artwork. */
+.biwa-leaf-art {
+  display: block;
+  width: 26px;
+  height: 26px;
+  background: var(--leaf-color, var(--biwa-peach));
+  -webkit-mask-image: url('assets/maple-leaf-flat.svg');
+  mask-image: url('assets/maple-leaf-flat.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  animation: biwa-leaf-tumble var(--leaf-tumble-period, 3.2s) ease-in-out infinite alternate;
+}
+@keyframes biwa-leaf-fall {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+  8%   { opacity: 0.9; }
+  80%  { opacity: 0.85; }
+  100% { transform: translate3d(0, 110vh, 0); opacity: 0; }
+}
+@keyframes biwa-leaf-sway {
+  from { transform: translateX(calc(var(--leaf-sway, 4vw) * -1)); }
+  to   { transform: translateX(var(--leaf-sway, 4vw)); }
+}
+/* A slow flutter, not a corkscrew: the tilt swings between mirrored
+   angles around the leaf's initial rotation — occasional past-90 Y tilts
+   read as a flip while the silhouette stays visible. */
+@keyframes biwa-leaf-tumble {
+  from {
+    transform: rotate(var(--leaf-rotate, 0deg))
+               rotateX(var(--leaf-tilt-x, 0deg))
+               rotateY(var(--leaf-tilt-y, 0deg))
+               rotateZ(var(--leaf-tilt-z, 0deg))
+               scale(var(--leaf-scale, 1));
+  }
+  to {
+    transform: rotate(var(--leaf-rotate, 0deg))
+               rotateX(calc(var(--leaf-tilt-x, 0deg) * -1))
+               rotateY(calc(var(--leaf-tilt-y, 0deg) * -1))
+               rotateZ(calc(var(--leaf-tilt-z, 0deg) * -1))
+               scale(var(--leaf-scale, 1));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biwa-leaf, .biwa-leaf-sway, .biwa-leaf-art { animation: none; }
+}
+
+/* ---------- Vertical day track ----------
+   A calendar-like spine: numbered markers sit on a ruled column, cards hang
+   to the right. Endpoints are pinned first/last and read as lodging. */
+.biwa-track {
+  list-style: none;
+  margin: 0 0 var(--biwa-space-md);
+  padding: 0;
+  position: relative;
+}
+/* The spine line runs behind the row markers. */
+.biwa-track::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--biwa-line);
+}
+
+.biwa-track-row {
+  display: flex;
+  align-items: stretch;
+  gap: var(--biwa-space-sm);
+  padding: var(--biwa-space-xs) 0;
+  position: relative;
+}
+
+/* Spine marker: index dot for stops, a ring for endpoints. */
+.biwa-track-marker {
+  flex: none;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--biwa-space-sm);
+}
+.biwa-track-marker-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.biwa-track-row[data-kind='start'] .biwa-track-marker-dot,
+.biwa-track-row[data-kind='end'] .biwa-track-marker-dot {
+  background: var(--biwa-lake);
+  color: #fff;
+  font-size: 0.72rem;
+}
+
+/* Road-leg gap: a quiet line between consecutive cards carrying the
+   distance to the row that FOLLOWS it (the leg's destination). The empty
+   marker cell aligns the text under the card column; data-kind="gap" rows
+   are static — they never enter drag/drop index math. */
+.biwa-track-gap { padding: 0.5rem 0; }
+/* Distance and the rider-speed estimate share one wrapping line — a narrow
+   screen wraps them instead of ellipsizing the time away. */
+.biwa-track-gap-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.75rem;
+  color: var(--biwa-ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--biwa-space-xs);
+}
+.biwa-track-gap-duration { font-style: italic; }
+/* One-line disclaimer above the day's rows — off-map road metrics stay a
+   preview, never cycling guidance, and it carries the single visible
+   Google Maps attribution all the gap lines share. */
+.biwa-track-note { padding: 0 0 var(--biwa-space-xs); }
+.biwa-track-note-attr { color: var(--biwa-lake-deep); }
+.biwa-track-note-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--biwa-ink-soft);
+}
+
+/* Stop card: tap target for the sheet, with a 48px tick and a drag handle. */
+.biwa-stop-card {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--biwa-space-xs);
+  background: var(--biwa-paper);
+  border-radius: var(--biwa-radius-md);
+  box-shadow: var(--biwa-shadow-card);
+  padding: var(--biwa-space-xs) var(--biwa-space-sm);
+  /* Photo backdrops paint absolutely inside the card — clipped to its
+     radius, with controls lifted above the veil. */
+  position: relative;
+  overflow: hidden;
+}
+/* Photo backdrop — the up-next card's treatment on a smaller scale:
+   absolute image under an opaque paper veil so text stays AA over any
+   photo; the card's type wash still reads through the veil. */
+.biwa-card-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(1px);
+}
+.biwa-card-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+    rgba(247, 241, 236, 0.95), rgba(247, 241, 236, 0.88) 55%, rgba(247, 241, 236, 0.72));
+}
+.biwa-stop-card > .biwa-arrival-check,
+.biwa-stop-card > .biwa-card-body,
+.biwa-stop-card > .biwa-drag-handle { position: relative; z-index: 1; }
+/* Quiet photo credit — a real link pinned to its own bottom strip. The
+   has-photo padding reserves that strip so the credit can never overlay
+   the tick, body or handle; height changes once on first paint only. */
+/* .biwa-stop-card.has-photo { padding-bottom: calc(var(--biwa-space-xs) + 0.85rem); } */
+.biwa-card-photo-credit {
+  position: absolute;
+  right: 6px;
+  bottom: 2px;
+  z-index: 1;
+  max-width: 45%;
+  font-size: 0.62rem;
+  color: var(--biwa-ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: none;
+}
+
+/* Clickable rows — flagged data-interactive by the renderers — sit one
+   shadow step above static cards and press down on tap: translateY + a
+   lower shadow, never scale, so nothing shifts layout. The press class is
+   delegated JS (more reliable than :active across Safari/touch), cleared
+   on release/cancel/leave/dragstart so a native drag leaves no residue. */
+.biwa-stop-card[data-interactive='true'],
+.biwa-next-stop[data-interactive='true'] {
+  box-shadow: var(--biwa-shadow-interactive);
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
+}
+/* Hover lift only on devices that can actually hover — no sticky states
+   on touch. Declared BEFORE the press rule so a held press always wins
+   over hover at equal specificity. */
+@media (hover: hover) and (pointer: fine) {
+  .biwa-stop-card[data-interactive='true']:hover {
+    box-shadow: 0 2px 8px rgba(var(--biwa-ink-rgb), 0.10);
+  }
+}
+.biwa-stop-card[data-interactive='true'].biwa-card-press,
+.biwa-next-stop[data-interactive='true'].biwa-card-press {
+  transform: translateY(1px);
+  box-shadow: var(--biwa-shadow-pressed);
+}
+@media (prefers-reduced-motion: reduce) {
+  .biwa-stop-card.biwa-card-press,
+  .biwa-next-stop.biwa-card-press { transform: none; }
+}
+
+/* The day's live target: exactly one data-current row (the next unvisited
+   visible point, endpoints included). A stronger warm wash replaces the
+   old bold border — same box, same padding, no geometry change; the name
+   gains weight and the photo veil warms to match instead of a stroke. */
+.biwa-track-row[data-current='true'] .biwa-stop-card {
+  background: var(--biwa-wash-current);
+}
+.biwa-track-row[data-current='true'] .biwa-card-veil {
+  background: linear-gradient(to right,
+    rgba(238, 215, 197, 0.95), rgba(238, 215, 197, 0.88) 55%, rgba(238, 215, 197, 0.72));
+}
+.biwa-track-row[data-current='true'] .biwa-card-name {
+  color: var(--biwa-ink);
+  font-weight: 700;
+}
+/* Card-type surface tints — the whole card takes its programme-family
+   wash (never a side stripe, no outline). Badges and labels still name
+   the programme in text, so colour is never the only signal. */
+[data-card-type='accommodation'] { --biwa-card-wash: var(--biwa-wash-accommodation); --biwa-card-edge: rgba(77, 97, 54, 0.45); }
+[data-card-type='official'] { --biwa-card-wash: var(--biwa-wash-official); --biwa-card-edge: rgba(47, 93, 111, 0.4); }
+[data-card-type='rally'] { --biwa-card-wash: var(--biwa-wash-rally); --biwa-card-edge: rgba(201, 124, 93, 0.55); }
+[data-card-type='shared'] { --biwa-card-wash: var(--biwa-wash-shared); --biwa-card-edge: rgba(200, 159, 156, 0.8); }
+[data-card-type='completed'] { --biwa-card-wash: var(--biwa-wash-completed); --biwa-card-edge: rgba(63, 107, 79, 0.45); }
+[data-card-type='extra'] { --biwa-card-wash: var(--biwa-wash-extra); --biwa-card-edge: var(--biwa-line); }
+.biwa-stop-card[data-card-type],
+.biwa-next-stop[data-card-type] {
+  background: var(--biwa-card-wash, var(--biwa-paper));
+}
+/* The sheet echoes the family quietly through the grab tint; the surface
+   itself stays opaque paper. */
+.biwa-sheet[data-card-type] .biwa-sheet-grab { background: var(--biwa-card-edge, var(--biwa-line)); }
+/* Visited rows keep their family wash — the green tick and softened name
+   carry the completion signal, no outline. */
+.biwa-track-row[data-visited='true'] .biwa-card-name { color: var(--biwa-ink-soft); }
+
+/* Card body is the sheet trigger — a button so it is keyboard reachable. */
+.biwa-card-body {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  padding: var(--biwa-space-xs) 0;
+  cursor: pointer;
+  color: inherit;
+}
+.biwa-card-name {
+  font-weight: 600;
+  font-size: 1rem;   /* the card title reads at full body size */
+  overflow-wrap: anywhere;
+}
+.biwa-card-meta {
+  font-size: 0.82rem;
+  color: var(--biwa-ink-soft);
+  margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: center;
+}
+.biwa-card-address {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.biwa-stop-unconfirmed { color: var(--biwa-warning); font-weight: 600; }
+
+/* 48px checkbox hitbox, 26px inner visual — the same contract as stamps. */
+.biwa-arrival-check {
+  flex: none;
+  width: var(--biwa-tap);
+  height: var(--biwa-tap);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+/* Filled-square checkboxes: petal while pending, solid success green with
+   the white tick once pressed — no outlined box in either state. */
+.biwa-arrival-box {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--biwa-alabaster);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: 0.9rem;
+}
+.biwa-arrival-check[aria-pressed='true'] .biwa-arrival-box {
+  background: var(--biwa-success);
+  color: #fff;
+}
+
+/* Drag handle — a real 44px target, and it never opens the sheet. */
+.biwa-drag-handle {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 0;
+  color: var(--biwa-ink-soft);
+  cursor: grab;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.65;
+  /* Pointer drags must own the gesture: no scroll/zoom/text-select once a
+     touch lands here, or the browser cancels the pointer stream. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.biwa-stop-card:hover .biwa-drag-handle { opacity: 1; }
+@media (pointer: coarse) {
+  .biwa-drag-handle { opacity: 0.9; }
+  /* Long-press on the track must not highlight text mid-drag. */
+  .biwa-track,
+  .biwa-track *:not(input):not(select):not(textarea) {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+/* Drag in flight: the source card dims, the insertion line shows the slot. */
+.biwa-stop-card[data-dragging='true'] { opacity: 0.4; }
+.biwa-track-row[data-drop-before='true']::after {
+  content: '';
+  position: absolute;
+  left: 44px;
+  right: 0;
+  top: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--biwa-lake);
+}
+.biwa-track-row[data-drop-after='true']::after {
+  content: '';
+  position: absolute;
+  left: 44px;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--biwa-lake);
+}
+
+.biwa-timeline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--biwa-space-sm);
+  margin-bottom: var(--biwa-space-md);
+}
+
+/* ---------- Checklist rows (the nearby parking list) ---------- */
+.biwa-stamp-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+/* Stamp rows are a grid, not a flex line: the checkbox owns column 1, the
+   name owns column 2 row 1, and the actions wrap to column 2 row 2 — so a
+   long name can never be squeezed into a one-character column. */
+.biwa-stamp-item {
+  display: grid;
+  grid-template-columns: var(--biwa-tap) minmax(0, 1fr);
+  column-gap: var(--biwa-space-sm);
+  row-gap: var(--biwa-space-xs);
+  align-items: center;
+  padding: var(--biwa-space-xs) 0;
+}
+/* The sheet footer's Completed toggle reuses this box — it fills green
+   under the button's own aria-pressed. */
+.biwa-btn[aria-pressed='true'] .biwa-stamp-box {
+  background: var(--biwa-success);
+  color: #fff;
+}
+.biwa-stamp-name {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 56rem) {
+  /* Ample width: actions move back onto the name row as a third column. */
+  .biwa-stamp-item {
+    grid-template-columns: var(--biwa-tap) minmax(0, 1fr) auto;
+  }
+  .biwa-stamp-actions { grid-column: 3; grid-row: 1; justify-content: end; }
+}
+.biwa-stamp-box {
+  /* flex:none — the box must not shrink inside the footer's flex buttons.
+     Same filled-square language as the arrival checks: petal pending. */
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--biwa-petal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: 0.9rem;
+}
+.biwa-stamp-item[data-checked='true'] .biwa-stamp-name { color: var(--biwa-ink-soft); }
+
+.biwa-stamp-actions {
+  grid-column: 2;
+  grid-row: 2;
+  display: inline-flex;
+  gap: var(--biwa-space-xs);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+/* The add-to-day select must never force the row wider than its column. */
+.biwa-stamp-actions select { max-width: 100%; min-width: 0; }
+
+.biwa-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+/* Programme chips are full tints — lake wash for official, peach wash for
+   rally — so the family reads at a glance without a ring. */
+.biwa-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 999px;
+  color: var(--biwa-lake-deep);
+  background: var(--biwa-alabaster);
+  white-space: nowrap;
+}
+.biwa-badge[data-programme='rally'] {
+  color: var(--biwa-clay-deep);
+  background: var(--biwa-wash-rally);
+}
+.biwa-badge[data-programme='official'] {
+  color: var(--biwa-lake-deep);
+  background: var(--biwa-lake-wash);
+}
+.biwa-badge[data-checked='true'] {
+  background: var(--biwa-success);
+  color: #fff;
+}
+
+.biwa-place-link { color: inherit; text-decoration: none; min-width: 0; }
+.biwa-place-link:hover { color: var(--biwa-lake-deep); text-decoration: underline; }
+.biwa-organiser-links { font-size: 0.88rem; margin: 0 0 var(--biwa-space-sm); }
+.biwa-organiser-links a { color: var(--biwa-lake-deep); }
+.biwa-map-attribution { font-size: 0.8rem; color: var(--biwa-ink-soft); margin: var(--biwa-space-xs) 0; }
+.biwa-map-attribution a { color: var(--biwa-lake-deep); }
+
+/* ---------- Buttons ---------- */
+.biwa-btn {
+  font: inherit;
+  font-weight: 700;
+  min-height: var(--biwa-tap);
+  padding: 0 var(--biwa-space-lg);
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  line-height: normal;
+}
+.biwa-btn-primary {
+  background: var(--biwa-clay-deep);
+  color: #fff;
+}
+.biwa-btn-primary:hover { background: var(--biwa-clay-press); }
+/* Secondary and danger actions keep the flat fills — a deeper tint on
+   hover, never an outline. */
+.biwa-btn-secondary {
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+}
+.biwa-btn-secondary:hover { background: var(--biwa-rosy); }
+.biwa-btn-danger {
+  background: var(--biwa-danger-wash);
+  color: var(--biwa-danger);
+}
+
+.biwa-btn-inline {
+  font: inherit;
+  font-size: 0.85rem;
+  min-height: 44px;
+  padding: 0 var(--biwa-space-sm);
+  border-radius: 8px;
+  border: 0;
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+.biwa-btn-inline:hover { background: var(--biwa-rosy); }
+.biwa-btn-inline[data-tone='danger'] { color: var(--biwa-danger); background: var(--biwa-danger-wash); }
+.biwa-btn-inline[disabled] { opacity: 0.5; cursor: default; }
+
+/* Selects inside action rows get the same 44px touch floor as buttons —
+   an opaque petal fill gives them a clear bounded shape without a line. */
+.biwa-stamp-actions select {
+  font: inherit;
+  font-size: 0.85rem;
+  min-height: 44px;
+  padding: 0 var(--biwa-space-sm);
+  border: 0;
+  border-radius: 8px;
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+}
+
+/* ---------- Forms ---------- */
+.biwa-field { margin-bottom: var(--biwa-space-md); }
+.biwa-field label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+/* Inputs are bounded by an opaque petal fill and radius, not a border —
+   the 2px lake focus outline below still marks the active field. */
+.biwa-field input, .biwa-field select, .biwa-field textarea {
+  font: inherit;
+  font-size: 16px; /* prevent iOS zoom */
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: var(--biwa-radius-sm);
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+}
+.biwa-field-hint { font-size: 0.82rem; color: var(--biwa-ink-soft); margin: 4px 0 0; font-weight: 400; }
+
+.biwa-field-row { display: flex; gap: var(--biwa-space-sm); }
+.biwa-field-row .biwa-field { flex: 1; }
+
+/* ---------- Dialogs ---------- */
+.biwa-dialog {
+  /* Explicit border:0 — a native <dialog> ships a UA default border and
+     the flat design removes it rather than inheriting it. */
+  border: 0;
+  border-radius: var(--biwa-radius-lg);
+  background: var(--biwa-paper);
+  padding: var(--biwa-space-lg);
+  max-width: 30rem;
+  width: calc(100% - 2rem);
+  /* Bounded height so long forms stay scrollable inside the viewport. */
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+}
+.biwa-dialog::backdrop { background: rgba(var(--biwa-ink-rgb), 0.4); }
+.biwa-dialog h2 { font-family: var(--biwa-font-heading); margin-top: 0; }
+.biwa-dialog-actions { display: flex; gap: var(--biwa-space-sm); justify-content: flex-end; flex-wrap: wrap; }
+
+/* ---------- Destination bottom sheet ----------
+   85dvh slide-up on phones, a right-hand panel on desktop. A div (not
+   <dialog>) so it can ride over the open-editor flag the same way dialogs
+   do while keeping the page layout visible behind it. */
+.biwa-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(var(--biwa-ink-rgb), 0.4);
+  z-index: 40;
+}
+/* The hidden attribute must win over display:flex — the sheet was leaking
+   on first paint without this scoped override. */
+.biwa-sheet[hidden],
+.biwa-sheet-backdrop[hidden] { display: none; }
+.biwa-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 41;
+  height: auto;
+  max-height: 92dvh;
+  /* Flat opaque paper — the backdrop and the separation shadow do the
+     framing, so the sheet itself needs no border. */
+  background: var(--biwa-paper);
+  border-radius: var(--biwa-radius-lg) var(--biwa-radius-lg) 0 0;
+  box-shadow: 0 -8px 30px rgba(var(--biwa-ink-rgb), 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.biwa-sheet-grab {
+  flex: none;
+  width: 44px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--biwa-line);
+  margin: var(--biwa-space-sm) auto var(--biwa-space-xs);
+}
+.biwa-sheet-close {
+  position: absolute;
+  top: var(--biwa-space-sm);
+  right: var(--biwa-space-sm);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+  font: inherit;
+  cursor: pointer;
+}
+.biwa-sheet-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 var(--biwa-space-lg) var(--biwa-space-md);
+}
+
+.biwa-sheet-body h2 {
+  font-family: var(--biwa-font-heading);
+  font-size: 1.35rem;
+  margin: 0 52px var(--biwa-space-xs) 0;
+  overflow-wrap: anywhere;
+}
+.biwa-sheet-section { margin: var(--biwa-space-md) 0; }
+.biwa-sheet-section h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--biwa-ink-soft);
+  margin: 0 0 var(--biwa-space-xs);
+}
+/* Photo-led gallery: one large 16:9 slide at a time with the next slide
+   peeking in at the edge, so the swipe affordance reads on touch. */
+.biwa-sheet-gallery {
+  display: flex;
+  gap: var(--biwa-space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  /* The swipe/prev-next affordance replaces the visible scrollbar. */
+  scrollbar-width: none;
+}
+.biwa-sheet-gallery::-webkit-scrollbar { display: none; }
+.biwa-sheet-gallery img {
+  flex: 0 0 calc(100% - var(--biwa-space-lg));
+  /* The explicit width keeps an intrinsically large image from dominating
+     the flex base / aspect-ratio math. */
+  width: calc(100% - var(--biwa-space-lg));
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  scroll-snap-align: center;
+  border-radius: var(--biwa-radius-sm);
+  background: var(--biwa-alabaster);
+}
+/* A single photo fills the frame — no dead sliver beside it. */
+.biwa-sheet-gallery img:only-child { flex-basis: 100%; width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .biwa-sheet-gallery { scroll-behavior: auto; }
+}
+/* Keyboard focus on the scroller gets the same ring as other controls. */
+.biwa-sheet-gallery:focus-visible { outline: 2px solid var(--biwa-lake); outline-offset: 2px; }
+/* Prev/next + counter under the scroller — touch swipe stays native. */
+.biwa-sheet-gallery-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--biwa-space-xs);
+}
+.biwa-gallery-btn {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.biwa-gallery-btn:hover:not([disabled]) { background: var(--biwa-rosy); }
+.biwa-gallery-btn[disabled] { opacity: 0.4; cursor: default; }
+.biwa-gallery-count { font-size: 0.82rem; color: var(--biwa-ink-soft); }
+/* Compact fact line under the name: provider type, rating, review count. */
+.biwa-sheet-facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px var(--biwa-space-sm);
+  margin: 0 0 var(--biwa-space-xs);
+  font-size: 0.85rem;
+  color: var(--biwa-ink-soft);
+}
+.biwa-sheet-rating { display: inline-flex; align-items: center; gap: 2px; }
+.biwa-sheet-star { display: inline-flex; color: var(--biwa-clay); }
+.biwa-sheet-credit { font-size: 0.78rem; color: var(--biwa-ink-soft); }
+.biwa-sheet-credit a { color: var(--biwa-lake-deep); }
+/* Labelled facts (address, open-now) read as quiet body rows, not debug text. */
+.biwa-sheet-fact { margin: var(--biwa-space-xs) 0; }
+.biwa-sheet-fact strong { color: var(--biwa-ink-soft); font-weight: 600; margin-right: var(--biwa-space-xs); }
+.biwa-sheet-fact[data-tone='open'] strong { color: var(--biwa-success); }
+.biwa-sheet-fact[data-tone='closed'] strong { color: var(--biwa-danger); }
+.biwa-sheet-hours { margin: 0; padding: 0; list-style: none; font-size: 0.9rem; }
+.biwa-sheet-hours li { padding: 1px 0; }
+/* Low-priority sheet links (organiser/contact) are plain inline anchors. */
+.biwa-sheet-links { display: flex; flex-wrap: wrap; gap: var(--biwa-space-sm) var(--biwa-space-md); }
+.biwa-sheet-links a { color: var(--biwa-lake-deep); font-size: 0.92rem; }
+
+/* Sticky action footer: Get Directions full width first, then secondary
+   actions that sit two-abreast when they fit and stack otherwise. Kept out
+   of the scroll body so the actions stay reachable at any scroll depth. */
+.biwa-sheet-actions {
+  flex: none;
+  /* A translucent petal band marks the footer where the hairline used to
+     sit — distinct from the paper body, still warm. */
+  background: rgba(238, 215, 197, 0.5);
+  padding: var(--biwa-space-sm) var(--biwa-space-lg)
+           calc(var(--biwa-space-sm) + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: var(--biwa-space-sm);
+}
+.biwa-sheet-action-wide { width: 100%; }
+.biwa-sheet-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--biwa-space-sm);
+}
+/* 12rem basis: long check-in labels stack full-width on phones and sit
+   two-abreast only when they genuinely fit. */
+.biwa-sheet-action-row > * {
+  flex: 1 1 12rem;
+  min-height: var(--biwa-tap);
+  /* Wrapped check-in labels stay centred, not ragged to one side. */
+  text-align: center;
+}
+
+/* ---------- Map page ---------- */
+.biwa-map-page { display: flex; flex-direction: column; gap: var(--biwa-space-sm); }
+.biwa-map-canvas {
+  width: 100%;
+  height: min(62vh, 30rem);
+  border-radius: var(--biwa-radius-md);
+  background: var(--biwa-alabaster);
+  overflow: hidden;
+}
+.biwa-map-canvas svg { display: block; width: 100%; height: 100%; }
+.biwa-map-statusbar { font-size: 0.88rem; color: var(--biwa-ink-soft); min-height: 1.2em; }
+.biwa-map-controls { display: flex; flex-wrap: wrap; gap: var(--biwa-space-md); align-items: flex-start; }
+.biwa-map-filters { display: flex; flex-wrap: wrap; gap: var(--biwa-space-xs); }
+.biwa-filter-chip {
+  font: inherit;
+  font-size: 0.82rem;
+  min-height: 44px;
+  padding: 0 var(--biwa-space-sm);
+  border-radius: 999px;
+  border: 0;
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+  cursor: pointer;
+}
+/* Lake fill marks the active filter — a functional map colour, kept. */
+.biwa-filter-chip[aria-pressed='true'] {
+  background: var(--biwa-lake);
+  color: #fff;
+}
+.biwa-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--biwa-space-xs) var(--biwa-space-md);
+  font-size: 0.82rem;
+  color: var(--biwa-ink-soft);
+  align-items: center;
+}
+.biwa-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.biwa-legend-swatch {
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.biwa-legend-swatch[data-day='day-1'] { background: var(--biwa-day-one); }
+.biwa-legend-swatch[data-day='day-2'] { background: var(--biwa-day-two); }
+.biwa-legend-swatch[data-day='day-3'] { background: var(--biwa-day-three); }
+.biwa-legend-shape {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--biwa-ink);
+}
+
+.biwa-dayroutes { display: flex; flex-direction: column; gap: var(--biwa-space-xs); }
+.biwa-dayroute-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--biwa-space-xs);
+  font-size: 0.9rem;
+  border-radius: var(--biwa-radius-sm);
+  padding: var(--biwa-space-xs) var(--biwa-space-sm);
+  background: var(--biwa-paper);
+}
+/* Day label, road status and any Retry action share the heading line —
+   the read-only location list sits beneath it. */
+.biwa-dayroute-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px var(--biwa-space-sm);
+}
+.biwa-dayroute-row strong { font-family: var(--biwa-font-heading); }
+.biwa-dayroute-meta { color: var(--biwa-ink-soft); }
+.biwa-dayroute-links { margin-left: auto; display: flex; gap: var(--biwa-space-xs); flex-wrap: wrap; }
+/* Read-only itinerary for the day: plain static rows mirroring the
+   timeline's visited state — no controls, no links. */
+.biwa-dayroute-locations {
+  list-style: none;
+  margin: 0;
+  padding: var(--biwa-space-xs) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.88rem;
+}
+.biwa-dayroute-location {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px var(--biwa-space-sm);
+}
+/* The name gets the flexible width and may wrap; the status keeps its own
+   space at the end instead of squeezing it. */
+.biwa-dayroute-locname { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.biwa-dayroute-location[data-missing='true'] .biwa-dayroute-locname { color: var(--biwa-warning); }
+.biwa-dayroute-locrole { flex: none; color: var(--biwa-ink-soft); font-size: 0.78rem; }
+.biwa-dayroute-status {
+  flex: none;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: var(--biwa-ink-soft);
+  white-space: nowrap;
+}
+.biwa-dayroute-status[data-done='true'] { color: var(--biwa-success); }
+.biwa-dayroute-status-icon { display: inline-flex; line-height: 1; }
+
+.biwa-route-meta {
+  display: flex;
+  gap: var(--biwa-space-lg);
+  flex-wrap: wrap;
+  margin: var(--biwa-space-sm) 0;
+}
+.biwa-route-meta dt { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--biwa-ink-soft); }
+.biwa-route-meta dd { margin: 0; font-family: var(--biwa-font-heading); font-size: 1.15rem; }
+
+.biwa-caveat {
+  font-size: 0.85rem;
+  color: var(--biwa-warning);
+  font-weight: 600;
+  margin: var(--biwa-space-xs) 0;
+}
+
+.biwa-elevation-profile {
+  width: 100%;
+  height: 120px;
+  border-radius: var(--biwa-radius-sm);
+  background: var(--biwa-paper);
+}
+
+/* ---------- Nearby ---------- */
+.biwa-nearby-lead { color: var(--biwa-ink-soft); margin: 0 0 var(--biwa-space-sm); }
+.biwa-nearby-grid {
+  display: grid;
+  gap: var(--biwa-space-sm);
+  grid-template-columns: 1fr 1fr;
+  margin-top: var(--biwa-space-md);
+}
+/* Direct category shortcuts — one labelled button each, no nested cards. */
+.biwa-nearby-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--biwa-space-sm);
+  min-height: var(--biwa-tap);
+  padding: 0 var(--biwa-space-sm);
+  border: 0;
+  border-radius: var(--biwa-radius-sm);
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+  font: inherit;
+  font-size: 0.92rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.biwa-nearby-shortcut:hover { background: var(--biwa-rosy); }
+.biwa-nearby-shortcut.is-disabled { opacity: 0.5; cursor: default; pointer-events: none; }
+/* Filled category glyph beside the label — same ink as the text. */
+.biwa-shortcut-icon { flex: none; display: inline-flex; }
+
+/* ---------- Disclosure ---------- */
+.biwa-disclosure { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
+.biwa-disclosure.is-open { grid-template-rows: 1fr; }
+.biwa-disclosure-inner { min-height: 0; overflow: hidden; opacity: 0; transition: opacity 0.2s; }
+.biwa-disclosure.is-open .biwa-disclosure-inner { opacity: 1; }
+
+/* ---------- Focus & motion ---------- */
+:focus-visible {
+  outline: 2px solid var(--biwa-lake);
+  outline-offset: 2px;
+  box-shadow: var(--biwa-focus);
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .biwa-disclosure, .biwa-disclosure-inner { transition: none; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Empty / loading states ---------- */
+.biwa-empty {
+  text-align: center;
+  color: var(--biwa-ink-soft);
+  padding: var(--biwa-space-xl) var(--biwa-space-md);
+}
+.biwa-skeleton {
+  border-radius: var(--biwa-radius-md);
+  background: linear-gradient(100deg, var(--biwa-alabaster) 40%, var(--biwa-paper) 50%, var(--biwa-alabaster) 60%);
+  background-size: 200% 100%;
+  animation: biwa-shimmer 1.8s infinite;
+  min-height: 72px;
+}
+@keyframes biwa-shimmer { to { background-position: -200% 0; } }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Footer: quiet links back to the rest of the site ----------
+   Borderless and flat — small ink text on the page, links still get the
+   48px tap floor; centred wrapping flex so both links and the credit sit
+   comfortably on any width. The shell's bottom padding already keeps it
+   clear of the fixed mobile nav. */
+.biwa-footer {
+  margin: var(--biwa-space-lg) 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--biwa-ink-soft);
+}
+.biwa-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--biwa-space-lg);
+}
+.biwa-footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--biwa-tap);
+  color: var(--biwa-clay-deep);
+  text-decoration: none;
+  border-radius: var(--biwa-radius-sm);
+  padding: 0 var(--biwa-space-xs);
+}
+.biwa-footer-link:hover { background: var(--biwa-petal); }
+.biwa-footer-credit { margin: var(--biwa-space-sm) 0 0; }
+.biwa-footer-heart { color: var(--biwa-peach); }
+
+/* ---------- Desktop ---------- */
+@media (min-width: 56rem) {
+  .biwa-shell { padding-bottom: var(--biwa-space-xl); }
+
+  .biwa-nav {
+    position: static;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    justify-content: flex-start;
+    gap: var(--biwa-space-sm);
+    padding: 0;
+    margin-top: var(--biwa-space-md);
+    margin-bottom: var(--biwa-space-md);
+  }
+  .biwa-nav-button {
+    flex: none;
+    flex-direction: row;
+    min-height: var(--biwa-tap);
+    padding: 0 var(--biwa-space-lg);
+    border-radius: 999px;
+    background: var(--biwa-paper);
+    gap: var(--biwa-space-xs);
+  }
+  .biwa-nav-button[aria-current='page'] {
+    background: var(--biwa-petal);
+    color: var(--biwa-clay-deep);
+  }
+
+  /* Ample width: the track gets a little more room around the spine. */
+  .biwa-track-row { gap: var(--biwa-space-md); }
+  .biwa-stop-card { padding: var(--biwa-space-sm) var(--biwa-space-md); }
+
+  /* Sheet becomes a right-hand panel rather than a bottom sheet. */
+  .biwa-sheet {
+    left: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(30rem, 92vw);
+    height: auto;
+    max-height: none;   /* the 92dvh cap is a bottom-sheet concern only */
+    border-radius: var(--biwa-radius-lg) 0 0 var(--biwa-radius-lg);
+  }
+  .biwa-sheet-grab { display: none; }
+
+  .biwa-map-canvas { height: min(66vh, 34rem); }
+  .biwa-nearby-grid { grid-template-columns: repeat(3, 1fr); }
+}

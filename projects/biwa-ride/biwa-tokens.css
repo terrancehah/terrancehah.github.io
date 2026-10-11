@@ -1,0 +1,111 @@
+/* biwa-tokens.css — isolated design tokens for the Lake Biwa ride companion.
+ *
+ * Palette from the user's project brief: a compact Japanese autumn ride
+ * journal. The soft hues are surfaces and illustration washes — readable
+ * text always uses the warm ink or lake-blue tokens, never low-contrast
+ * petal tones. Light-first for daytime outdoor use; no dark-mode scope in
+ * this first release.
+ */
+:root {
+  /* Given palette */
+  --biwa-alabaster: #eee2df;
+  --biwa-petal: #eed7c5;
+  --biwa-rosy: #c89f9c;
+  --biwa-peach: #c97c5d;
+  --biwa-clay: #b36a5e;
+
+  /* Derived functional tokens */
+  --biwa-ink: #3a2a26;          /* dark warm ink for readable text */
+  --biwa-ink-soft: #6b544d;     /* secondary text, still AA on alabaster */
+  --biwa-lake: #2f5d6f;         /* restrained lake blue: links, info cues */
+  --biwa-lake-deep: #234655;    /* darker lake for small text on washes */
+  --biwa-paper: #f7f1ec;        /* raised card surface */
+  --biwa-line: #d9c4ba;         /* hairline borders on warm surfaces */
+  --biwa-success: #3f6b4f;      /* visited / checklist done */
+  --biwa-warning: #8a5a19;      /* missing endpoint / unconfirmed name */
+  --biwa-danger: #9b3d30;       /* conflicts and destructive actions */
+
+  /* Interactive depths of clay — the raw palette clay/peach do not reach
+     4.5:1 with white label text, so primary actions use these darker stops. */
+  --biwa-clay-deep: #96543f;    /* primary action surface (AA with white) */
+  --biwa-clay-press: #7d4534;   /* primary hover/active */
+
+  /* Washes (raw channel values so rgba() can compose them in components) */
+  --biwa-ink-rgb: 58, 42, 38;
+  --biwa-peach-wash: rgba(201, 124, 93, 0.12);
+  --biwa-lake-wash: rgba(47, 93, 111, 0.18);
+  --biwa-warning-wash: rgba(138, 90, 25, 0.10);
+  --biwa-danger-wash: rgba(155, 61, 48, 0.08);
+
+  /* Per-day route colours on the map — three clearly distinct lines, each
+     dark enough to read over map tiles. */
+  --biwa-day-one: #c45632;      /* warm terracotta */
+  --biwa-day-two: #168de2;      /* bright blue */
+  --biwa-day-three: #21815e;    /* clear green */
+  --biwa-moss: #4d6136;         /* moss accent for markers/legend */
+
+  /* Official-checkpoint shore areas — marker fills and legend/filter chips
+     so each shore reads as its own colour on the map. */
+  --biwa-area-south: #a75a36;
+  --biwa-area-east: #287485;
+  --biwa-area-north: #60752d;
+  --biwa-area-west: #8a526e;
+
+  /* Marker glyph colours — visited stops paint the rich tone, pending the
+     pale one. Colour carries the state; markers stay fully opaque. */
+  --biwa-rally-marker: #c5473d;
+  --biwa-rally-marker-pale: #d5a6a0;
+  --biwa-area-south-pale: #cbb4a5;
+  --biwa-area-east-pale: #a8c5ca;
+  --biwa-area-north-pale: #bbc4a5;
+  --biwa-area-west-pale: #c6b0bd;
+  --biwa-accommodation-pale: #b7bda4;
+  --biwa-extra-pale: #bdb0a9;
+  --biwa-lake-pale: #a8c5ca;
+  --biwa-waypoint: #8f7f76;     /* neutral tone for hidden route anchors */
+
+  /* Card-type surface washes — full-surface tints (never side stripes) so a
+     stop, sheet or next-card reads its programme family at a glance while
+     badges still spell the same information out in text. */
+  --biwa-wash-accommodation: rgba(77, 97, 54, 0.10);   /* quiet moss/petal */
+  --biwa-wash-official: rgba(47, 93, 111, 0.10);       /* lighter lake wash */
+  --biwa-wash-rally: rgba(201, 124, 93, 0.12);         /* peach */
+  --biwa-wash-shared: rgba(200, 159, 156, 0.24);       /* rosy taupe */
+  --biwa-wash-completed: rgba(63, 107, 79, 0.12);      /* success-tinted */
+  --biwa-wash-extra: var(--biwa-paper);                /* plain stops */
+  /* The day's live target reads through a stronger warm wash — the flat
+     style has no border to carry it, so the tint must do the work alone. */
+  --biwa-wash-current: rgba(201, 124, 93, 0.30);       /* strong peach */
+
+  /* Masthead scene — the supplied-art illustration gets its own bright
+     daytime pair, outside the warm surface palette (art colours, not UI). */
+  --biwa-scene-sky: #d9f1ff;                            /* clear blue */
+  --biwa-scene-lake: #a8d1e1;                           /* deeper lake */
+
+  /* Type */
+  --biwa-font-heading: 'Momo Trust Display', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  --biwa-font-body: 'Quattrocento Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+
+  /* Spacing scale */
+  --biwa-space-xs: 0.25rem;
+  --biwa-space-sm: 0.5rem;
+  --biwa-space-md: 1rem;
+  --biwa-space-lg: 1.5rem;
+  --biwa-space-xl: 2.25rem;
+
+  /* Shape & depth */
+  --biwa-radius-sm: 8px;
+  --biwa-radius-md: 14px;
+  --biwa-radius-lg: 20px;
+  /* Flat depth scale: surfaces sit almost flush with the page — a whisper
+     of ink separates card from alabaster, never a frame. */
+  --biwa-shadow-card: 0 1px 3px rgba(var(--biwa-ink-rgb), 0.07);
+  /* Interactive surfaces lift only a breath above static cards; the
+     pressed state drops to near-flat (depth cue, never scale). */
+  --biwa-shadow-interactive: 0 1px 4px rgba(var(--biwa-ink-rgb), 0.4);
+  --biwa-shadow-pressed: 0 1px 1px rgba(var(--biwa-ink-rgb), 0.06);
+  --biwa-focus: 0 0 0 3px rgba(47, 93, 111, 0.45);
+
+  /* Touch targets */
+  --biwa-tap: 48px;
+}

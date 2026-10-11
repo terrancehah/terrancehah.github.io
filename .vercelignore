@@ -21,6 +21,23 @@ __pycache__/
 .env.local
 *.log
 
+# Secrets & local dev — never uploaded to Vercel builds. .env/.env.* cover
+# any dotenv file at any depth; race sessions are local runtime state;
+# tests stay git-tracked but ship nowhere; biwa-dev.sh and the dev runner
+# are local-only — Vercel loads the api/*.py route modules, never the
+# launcher harness.
+.env
+.env.*
+**/.env
+**/.env.*
+.race_sessions.json
+**/.race_sessions.json
+biwa-dev.sh
+tests/
+lib/biwa/biwa-dev.py
+# Old build/link metadata preserved on disk — never uploaded.
+.vercel.bak/
+
 # Editor configs
 .vscode/
 .idea/

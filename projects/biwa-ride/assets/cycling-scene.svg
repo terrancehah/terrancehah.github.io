@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="scene-title scene-desc">
+  <title id="scene-title">Three friends cycling beside Lake Biwa</title>
+  <desc id="scene-desc">A flat autumn scene: three helmeted riders pedal along a shore road while mountains, trees and a shrine drift past a quiet lake.</desc>
+  <!--
+    Internal animation only — three parallax bands slide at different
+    speeds, riders bob and pedal on their own cycles. The host page adds
+    is-paused to this root to freeze everything; the media query below
+    stops it independently for reduced-motion users.
+  -->
+  <style>
+    @keyframes biwa-slide { to { transform: translateX(-720px); } }
+    .layer-far { animation: biwa-slide 60s linear infinite; }
+    .layer-mid { animation: biwa-slide 24s linear infinite; }
+    .layer-near { animation: biwa-slide 12s linear infinite; }
+    @keyframes biwa-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+    .bob { animation: biwa-bob 2.5s ease-in-out infinite; }
+    @keyframes biwa-spin { to { transform: rotate(360deg); } }
+    .spin { animation: biwa-spin 1.2s linear infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes biwa-leg-f { 0%,100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
+    @keyframes biwa-leg-b { 0%,100% { transform: rotate(10deg); } 50% { transform: rotate(-10deg); } }
+    .leg-f { animation: biwa-leg-f 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 4%; }
+    .leg-b { animation: biwa-leg-b 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 4%; }
+    .r2 .spin, .r2 .leg-f, .r2 .leg-b { animation-delay: -0.45s; }
+    .r3 .spin, .r3 .leg-f, .r3 .leg-b { animation-delay: -0.9s; }
+    .r2 .bob { animation-delay: -0.8s; }
+    .r3 .bob { animation-delay: -1.7s; }
+    .is-paused * { animation-play-state: paused !important; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+
+  <!-- sky + sun -->
+  <rect width="720" height="180" fill="#eed7c5"/>
+  <circle cx="592" cy="30" r="24" fill="#f7f1ec" opacity="0.35"/>
+  <circle cx="592" cy="30" r="15" fill="#f7f1ec"/>
+
+  <!-- far band: clouds + mountain ridges, slowest drift -->
+  <g class="layer-far">
+    <g id="biwa-scene-far">
+      <g fill="#f7f1ec">
+        <ellipse cx="80" cy="28" rx="17" ry="5"/><ellipse cx="70" cy="24" rx="9" ry="5"/><ellipse cx="90" cy="23" rx="10" ry="6"/>
+        <ellipse cx="390" cy="42" rx="15" ry="4.5"/><ellipse cx="382" cy="38" rx="8" ry="4.5"/><ellipse cx="400" cy="37" rx="9" ry="5"/>
+        <ellipse cx="640" cy="18" rx="14" ry="4"/><ellipse cx="633" cy="15" rx="7" ry="4"/><ellipse cx="649" cy="14" rx="8" ry="5"/>
+      </g>
+      <path d="M0 66 L90 48 L170 68 L260 46 L350 70 L450 50 L540 68 L630 50 L720 66 L720 110 L0 110 Z" fill="#d9c4ba"/>
+      <path d="M0 82 L80 64 L160 84 L250 62 L340 86 L430 66 L520 84 L610 64 L720 82 L720 112 L0 112 Z" fill="#c89f9c"/>
+    </g>
+    <use href="#biwa-scene-far" x="720"/>
+  </g>
+
+  <!-- lake band, static horizon with quiet wave marks -->
+  <rect y="88" width="720" height="30" fill="#bddce3"/>
+  <g fill="#f7f1ec" opacity="0.55">
+    <rect x="60" y="95" width="26" height="2" rx="1"/>
+    <rect x="210" y="102" width="34" height="2" rx="1"/>
+    <rect x="360" y="95" width="22" height="2" rx="1"/>
+    <rect x="500" y="108" width="30" height="2" rx="1"/>
+    <rect x="640" y="98" width="24" height="2" rx="1"/>
+  </g>
+
+  <!-- shore strip the trees and shrine stand on, then the road -->
+  <rect y="116" width="720" height="26" fill="rgba(200, 159, 156, 0.35)"/>
+  <rect y="142" width="720" height="38" fill="#d9c4ba"/>
+
+  <!-- mid band: autumn trees, torii and shrine, mid-speed drift -->
+  <g class="layer-mid">
+    <g id="biwa-scene-mid">
+      <rect x="58" y="108" width="5" height="30" rx="2" fill="#6b544d"/>
+      <circle cx="60" cy="100" r="13" fill="#c97c5d"/><circle cx="72" cy="107" r="8" fill="#b36a5e"/><circle cx="50" cy="107" r="8" fill="#eed7c5"/>
+      <rect x="178" y="106" width="5" height="32" rx="2" fill="#6b544d"/>
+      <circle cx="180" cy="98" r="14" fill="#b36a5e"/><circle cx="192" cy="105" r="9" fill="#c97c5d"/><circle cx="168" cy="105" r="8" fill="#c89f9c"/>
+      <ellipse cx="245" cy="132" rx="14" ry="7" fill="#c89f9c"/>
+      <!-- torii gate -->
+      <g fill="#b36a5e">
+        <path d="M322 96 L370 96 L367 90 L325 90 Z"/>
+        <rect x="328" y="101" width="38" height="4" rx="1.5"/>
+        <rect x="343" y="96" width="6" height="9"/>
+        <rect x="330" y="98" width="6" height="40" rx="1.5"/>
+        <rect x="356" y="98" width="6" height="40" rx="1.5"/>
+      </g>
+      <!-- small shrine -->
+      <rect x="482" y="112" width="42" height="26" rx="2" fill="#f7f1ec"/>
+      <path d="M474 114 L534 114 L526 102 L482 102 Z" fill="#b36a5e"/>
+      <rect x="500" y="120" width="10" height="18" fill="#6b544d"/>
+      <rect x="598" y="110" width="5" height="28" rx="2" fill="#6b544d"/>
+      <circle cx="600" cy="102" r="13" fill="#c89f9c"/><circle cx="612" cy="108" r="8" fill="#c97c5d"/><circle cx="588" cy="108" r="8" fill="#b36a5e"/>
+      <rect x="676" y="108" width="5" height="30" rx="2" fill="#6b544d"/>
+      <circle cx="678" cy="100" r="13" fill="#b36a5e"/><circle cx="690" cy="106" r="8" fill="#eed7c5"/><circle cx="666" cy="106" r="8" fill="#c97c5d"/>
+    </g>
+    <use href="#biwa-scene-mid" x="720"/>
+  </g>
+
+  <!-- near band: road paint drifting fastest -->
+  <g class="layer-near">
+    <g id="biwa-scene-near" fill="#f7f1ec">
+      <rect x="40" y="158" width="30" height="3.5" rx="1.75"/>
+      <rect x="170" y="158" width="30" height="3.5" rx="1.75"/>
+      <rect x="300" y="158" width="30" height="3.5" rx="1.75"/>
+      <rect x="430" y="158" width="30" height="3.5" rx="1.75"/>
+      <rect x="560" y="158" width="30" height="3.5" rx="1.75"/>
+      <rect x="690" y="158" width="30" height="3.5" rx="1.75"/>
+    </g>
+    <use href="#biwa-scene-near" x="720"/>
+  </g>
+
+  <!-- shared wheel parts: ink donut ring, spinning quadrilateral spokes, hub -->
+  <defs>
+    <g id="biwa-scene-wheel">
+      <path d="M-14 0a14 14 0 1 0 28 0 14 14 0 1 0-28 0zM-10.5 0a10.5 10.5 0 1 0 21 0 10.5 10.5 0 1 0-21 0z" fill="#3a2a26" fill-rule="evenodd"/>
+      <g class="spin" fill="#3a2a26">
+        <path d="M-9 -1.3h18v2.6h-18z"/>
+        <path d="M-9 -1.3h18v2.6h-18z" transform="rotate(60)"/>
+        <path d="M-9 -1.3h18v2.6h-18z" transform="rotate(120)"/>
+      </g>
+      <circle r="2.2" fill="#3a2a26"/>
+    </g>
+  </defs>
+
+  <!-- rider 1: peach jersey, ink frame -->
+  <g class="r1" transform="translate(100 152)">
+    <g class="bob">
+      <use href="#biwa-scene-wheel" x="0" y="0"/>
+      <use href="#biwa-scene-wheel" x="46" y="0"/>
+      <g fill="#3a2a26">
+        <path d="M15 -34 L17.6 -33 L24.2 -3 L21.6 -4 ZM36.5 -33.6 L39.5 -31.6 L25.4 -2.2 L22.4 -4.2 ZM14.5 -35.6 L38.5 -33.2 L37.8 -30.6 L15.2 -33 ZM15 -34 L17.8 -32.6 L2.6 0 L0 -0.6 ZM-1.2 -0.2 L22.4 -4.6 L23.2 -2 L0.6 1 ZM38 -34.4 L40.8 -33 L47.8 0.2 L45 0.4 ZM35.5 -35.5 L39.5 -36 L41.5 -30.5 L37.5 -30 Z"/>
+        <rect x="14.8" y="-37.5" width="2.4" height="4" rx="0.6"/>
+        <rect x="9" y="-38" width="9" height="2.4" rx="1.2"/>
+        <path d="M37 -36.5 L46 -34.8 L45.7 -33 L36.8 -34.7 ZM45.5 -35 L47.5 -34.5 L48 -31 L46 -31.2 Z"/>
+      </g>
+      <!-- pedalling group: both legs pivot at the hip in opposite phase
+           while the crank turns the same 1.2s cycle -->
+      <g class="leg-b" fill="#6b544d">
+        <path d="M16.5 -39.5 L20.5 -38.8 L13 -25 L17.5 -8.5 L14.5 -7.8 L9.8 -24.5 L14 -37.8 Z"/>
+        <path d="M13.8 -9.5 L19 -8.4 L18.6 -6.4 L13.8 -7.2 Z"/>
+      </g>
+      <g transform="translate(23 -3)">
+        <g class="spin" fill="#3a2a26">
+          <rect x="-1.4" y="-7" width="2.8" height="14" rx="1.4"/>
+          <rect x="-3.5" y="-9.2" width="7" height="2.6" rx="1.3"/>
+          <rect x="-3.5" y="6.6" width="7" height="2.6" rx="1.3"/>
+        </g>
+      </g>
+      <g class="leg-f" fill="#3a2a26">
+        <path d="M18 -39.8 L22.5 -38.8 L28 -21.5 L24.5 -7.5 L21.5 -8.2 L24 -21.5 L16.5 -36.5 Z"/>
+        <path d="M20.8 -9.3 L26 -8.3 L25.6 -6.3 L20.8 -7.1 Z"/>
+      </g>
+      <path d="M16.5 -41 L23 -38 L37.5 -33.5 L34 -37.5 Z" fill="#c97c5d"/>
+      <path d="M32.5 -38.8 L34.8 -37 L42 -35.8 L41.4 -37.6 Z" fill="#b36a5e"/>
+      <path d="M33 -37.5 L36 -35.8 L44.5 -34 L43.8 -36 Z" fill="#c97c5d"/>
+      <circle cx="37" cy="-43" r="4.4" fill="#3a2a26"/>
+      <path d="M32.3 -43.5 a5.1 5.1 0 0 1 10.5 1.3 l-1.7 1 h-7.9 z" fill="#f7f1ec"/>
+    </g>
+  </g>
+
+  <!-- rider 2: clay jersey, lake frame -->
+  <g class="r2" transform="translate(310 152)">
+    <g class="bob">
+      <use href="#biwa-scene-wheel" x="0" y="0"/>
+      <use href="#biwa-scene-wheel" x="46" y="0"/>
+      <g fill="#2f5d6f">
+        <path d="M15 -34 L17.6 -33 L24.2 -3 L21.6 -4 ZM36.5 -33.6 L39.5 -31.6 L25.4 -2.2 L22.4 -4.2 ZM14.5 -35.6 L38.5 -33.2 L37.8 -30.6 L15.2 -33 ZM15 -34 L17.8 -32.6 L2.6 0 L0 -0.6 ZM-1.2 -0.2 L22.4 -4.6 L23.2 -2 L0.6 1 ZM38 -34.4 L40.8 -33 L47.8 0.2 L45 0.4 ZM35.5 -35.5 L39.5 -36 L41.5 -30.5 L37.5 -30 Z"/>
+        <rect x="14.8" y="-37.5" width="2.4" height="4" rx="0.6"/>
+        <rect x="9" y="-38" width="9" height="2.4" rx="1.2"/>
+        <path d="M37 -36.5 L46 -34.8 L45.7 -33 L36.8 -34.7 ZM45.5 -35 L47.5 -34.5 L48 -31 L46 -31.2 Z"/>
+      </g>
+      <g class="leg-b" fill="#6b544d">
+        <path d="M16.5 -39.5 L20.5 -38.8 L13 -25 L17.5 -8.5 L14.5 -7.8 L9.8 -24.5 L14 -37.8 Z"/>
+        <path d="M13.8 -9.5 L19 -8.4 L18.6 -6.4 L13.8 -7.2 Z"/>
+      </g>
+      <g transform="translate(23 -3)">
+        <g class="spin" fill="#3a2a26">
+          <rect x="-1.4" y="-7" width="2.8" height="14" rx="1.4"/>
+          <rect x="-3.5" y="-9.2" width="7" height="2.6" rx="1.3"/>
+          <rect x="-3.5" y="6.6" width="7" height="2.6" rx="1.3"/>
+        </g>
+      </g>
+      <g class="leg-f" fill="#3a2a26">
+        <path d="M18 -39.8 L22.5 -38.8 L28 -21.5 L24.5 -7.5 L21.5 -8.2 L24 -21.5 L16.5 -36.5 Z"/>
+        <path d="M20.8 -9.3 L26 -8.3 L25.6 -6.3 L20.8 -7.1 Z"/>
+      </g>
+      <path d="M16.5 -41 L23 -38 L37.5 -33.5 L34 -37.5 Z" fill="#b36a5e"/>
+      <path d="M32.5 -38.8 L34.8 -37 L42 -35.8 L41.4 -37.6 Z" fill="#96543f"/>
+      <path d="M33 -37.5 L36 -35.8 L44.5 -34 L43.8 -36 Z" fill="#b36a5e"/>
+      <circle cx="37" cy="-43" r="4.4" fill="#3a2a26"/>
+      <path d="M32.3 -43.5 a5.1 5.1 0 0 1 10.5 1.3 l-1.7 1 h-7.9 z" fill="#f7f1ec"/>
+    </g>
+  </g>
+
+  <!-- rider 3: rosy jersey, ink frame -->
+  <g class="r3" transform="translate(490 152)">
+    <g class="bob">
+      <use href="#biwa-scene-wheel" x="0" y="0"/>
+      <use href="#biwa-scene-wheel" x="46" y="0"/>
+      <g fill="#3a2a26">
+        <path d="M15 -34 L17.6 -33 L24.2 -3 L21.6 -4 ZM36.5 -33.6 L39.5 -31.6 L25.4 -2.2 L22.4 -4.2 ZM14.5 -35.6 L38.5 -33.2 L37.8 -30.6 L15.2 -33 ZM15 -34 L17.8 -32.6 L2.6 0 L0 -0.6 ZM-1.2 -0.2 L22.4 -4.6 L23.2 -2 L0.6 1 ZM38 -34.4 L40.8 -33 L47.8 0.2 L45 0.4 ZM35.5 -35.5 L39.5 -36 L41.5 -30.5 L37.5 -30 Z"/>
+        <rect x="14.8" y="-37.5" width="2.4" height="4" rx="0.6"/>
+        <rect x="9" y="-38" width="9" height="2.4" rx="1.2"/>
+        <path d="M37 -36.5 L46 -34.8 L45.7 -33 L36.8 -34.7 ZM45.5 -35 L47.5 -34.5 L48 -31 L46 -31.2 Z"/>
+      </g>
+      <g class="leg-b" fill="#6b544d">
+        <path d="M16.5 -39.5 L20.5 -38.8 L13 -25 L17.5 -8.5 L14.5 -7.8 L9.8 -24.5 L14 -37.8 Z"/>
+        <path d="M13.8 -9.5 L19 -8.4 L18.6 -6.4 L13.8 -7.2 Z"/>
+      </g>
+      <g transform="translate(23 -3)">
+        <g class="spin" fill="#3a2a26">
+          <rect x="-1.4" y="-7" width="2.8" height="14" rx="1.4"/>
+          <rect x="-3.5" y="-9.2" width="7" height="2.6" rx="1.3"/>
+          <rect x="-3.5" y="6.6" width="7" height="2.6" rx="1.3"/>
+        </g>
+      </g>
+      <g class="leg-f" fill="#3a2a26">
+        <path d="M18 -39.8 L22.5 -38.8 L28 -21.5 L24.5 -7.5 L21.5 -8.2 L24 -21.5 L16.5 -36.5 Z"/>
+        <path d="M20.8 -9.3 L26 -8.3 L25.6 -6.3 L20.8 -7.1 Z"/>
+      </g>
+      <path d="M16.5 -41 L23 -38 L37.5 -33.5 L34 -37.5 Z" fill="#c89f9c"/>
+      <path d="M32.5 -38.8 L34.8 -37 L42 -35.8 L41.4 -37.6 Z" fill="#b36a5e"/>
+      <path d="M33 -37.5 L36 -35.8 L44.5 -34 L43.8 -36 Z" fill="#c89f9c"/>
+      <circle cx="37" cy="-43" r="4.4" fill="#3a2a26"/>
+      <path d="M32.3 -43.5 a5.1 5.1 0 0 1 10.5 1.3 l-1.7 1 h-7.9 z" fill="#f7f1ec"/>
+    </g>
+  </g>
+</svg>

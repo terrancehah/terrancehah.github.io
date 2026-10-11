@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 2,
+  "revision": 0,
+  "updatedAt": null,
+  "provenance": [
+    "Anticlockwise three-day plan from the user itinerary blueprint (lead-verified endpoint and stop order).",
+    "Day boundaries are shared overnights: Comfort Hikone joins days 1/2 and 临湖庄 joins days 2/3."
+  ],
+  "places": [],
+  "days": [
+    {
+      "dayId": "day-1",
+      "label": "Day 1",
+      "title": "Otsu to Hikone",
+      "start": {
+        "placeId": "stay-hana"
+      },
+      "end": {
+        "placeId": "stay-comfort"
+      },
+      "stops": [
+        {
+          "occurrenceId": "day1-s1",
+          "placeId": "official-south-otsu"
+        },
+        {
+          "occurrenceId": "day1-s2",
+          "placeId": "rally-rental"
+        },
+        {
+          "occurrenceId": "day1-s3",
+          "placeId": "rally-mizunomori"
+        },
+        {
+          "occurrenceId": "day1-s4",
+          "placeId": "official-south-kusatsu"
+        },
+        {
+          "occurrenceId": "day1-s5",
+          "placeId": "official-south-marriott"
+        },
+        {
+          "occurrenceId": "day1-s6",
+          "placeId": "rally-mentai"
+        },
+        {
+          "occurrenceId": "day1-s7",
+          "placeId": "official-east-chomei"
+        },
+        {
+          "occurrenceId": "day1-s8",
+          "placeId": "extra-chomeiji-183"
+        },
+        {
+          "occurrenceId": "day1-s9",
+          "placeId": "official-east-mitsuya"
+        }
+      ]
+    },
+    {
+      "dayId": "day-2",
+      "label": "Day 2",
+      "title": "Hikone to Takashima",
+      "start": {
+        "placeId": "stay-comfort"
+      },
+      "end": {
+        "placeId": "stay-rinkoso"
+      },
+      "stops": [
+        {
+          "occurrenceId": "day2-s1",
+          "placeId": "rally-castle"
+        },
+        {
+          "occurrenceId": "day2-s2",
+          "placeId": "official-east-hikone"
+        },
+        {
+          "occurrenceId": "day2-s3",
+          "placeId": "rally-dome"
+        },
+        {
+          "occurrenceId": "day2-s4",
+          "placeId": "mizudori-station"
+        },
+        {
+          "occurrenceId": "day2-s5",
+          "placeId": "rally-shiotsu"
+        },
+        {
+          "occurrenceId": "day2-s6",
+          "placeId": "extra-oura"
+        },
+        {
+          "occurrenceId": "day2-s7",
+          "placeId": "official-west-boat"
+        },
+        {
+          "occurrenceId": "day2-s8",
+          "placeId": "official-west-stagex"
+        }
+      ]
+    },
+    {
+      "dayId": "day-3",
+      "label": "Day 3",
+      "title": "Takashima to Otsu",
+      "start": {
+        "placeId": "stay-rinkoso"
+      },
+      "end": {
+        "placeId": "rally-rental"
+      },
+      "stops": [
+        {
+          "occurrenceId": "day3-s1",
+          "placeId": "official-west-information"
+        },
+        {
+          "occurrenceId": "day3-s2",
+          "placeId": "extra-ukawa"
+        },
+        {
+          "occurrenceId": "day3-s3",
+          "placeId": "official-south-otsuka"
+        },
+        {
+          "occurrenceId": "day3-s4",
+          "placeId": "rally-kitahira"
+        },
+        {
+          "occurrenceId": "day3-s5",
+          "placeId": "official-south-shiga"
+        },
+        {
+          "occurrenceId": "day3-s6",
+          "placeId": "rally-ogoto"
+        },
+        {
+          "occurrenceId": "day3-s7",
+          "placeId": "rally-otsukan"
+        },
+        {
+          "occurrenceId": "day3-s8",
+          "placeId": "official-south-otsu"
+        }
+      ]
+    }
+  ],
+  "visitStatus": {},
+  "programmeStatus": {
+    "rally": {},
+    "official": {}
+  }
+}

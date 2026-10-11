@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy — Lake Biwa Ride Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="biwa-tokens.css">
+  <style>
+    body { font-family: var(--biwa-font-body); color: var(--biwa-ink); background: var(--biwa-alabaster); max-width: 42rem; margin: 0 auto; padding: 2rem 1rem; line-height: 1.6; }
+    h1, h2 { font-family: var(--biwa-font-heading); font-weight: 400; }
+    a { color: var(--biwa-lake); }
+  </style>
+</head>
+<body>
+  <h1>Privacy notice</h1>
+  <p>This page describes what the Lake Biwa Ride Companion stores and shares. It is a small private tool for three riders — there are no accounts, no analytics and no advertising.</p>
+
+  <h2>What is stored</h2>
+  <p>The shared trip (itinerary, places, manual checklist ticks and notes) is stored in a dedicated Redis database so all three phones see the same state. It is public shared state for this trip — no accounts and no invite token — served to browsers with private, no-store headers and kept with no expiry.</p>
+
+  <h2>Your location</h2>
+  <p>If you tap “use my location”, your browser takes a position that stays on your device for the rest of the session and centres every Nearby shortcut search you open — the coordinates travel to Google Maps inside those links only. The fix is never sent to our server, never stored beyond the session and never shared with the other riders.</p>
+
+  <h2>Google services</h2>
+  <p>Map previews, road-route geometry, terrain data and place details come from Google Maps Platform. When you view a map or request a route, the stop coordinates are sent to Google to compute the preview. Route, elevation and place details are shown transiently and are not stored with the trip — the only provider data kept server-side is the small set Google's caching rules allow: a resolved Google place ID (no expiry) and place coordinates (30 days at most). Photos, opening hours, ratings and photo links are never stored. Google's own <a href="https://policies.google.com/privacy">privacy policy</a> applies to that traffic.</p>
+
+  <h2>Logs and tokens</h2>
+  <p>There are no accounts and no access tokens. Provider keys live
+    server-side — except the Maps JavaScript key, which is deliberately
+    public but locked by HTTP-referrer restrictions to this site. None are
+    written to logs or sent anywhere but Google's own endpoints. This site's referrer
+    policy is <code>strict-origin-when-cross-origin</code>: third-party sites
+    you open from links (including Google Maps, whose script needs an origin
+    referrer for its restricted key) may see that you came from this site.</p>
+
+  <p><a href="./">Back to the ride</a></p>
+</body>
+</html>

@@ -1,7 +1,9 @@
 // config.js
 const config = {
     // Add your API key directly for local development
-    googleMapsApiKey: 'AIzaSyDvcgBgSprgTRQO_6BWh5EAOPu1vdS6KD4'
+    // Empty: the Biwa companion reads its keys from BIWA_GOOGLE_* env vars
+    // via the server endpoints instead — never commit a key literal here.
+    googleMapsApiKey: ''
 };
 
 export default config;

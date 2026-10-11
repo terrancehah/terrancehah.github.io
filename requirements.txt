@@ -5,3 +5,4 @@ python-dotenv==1.2.1
 python-multipart==0.0.20
 garminconnect==0.3.13
 upstash-redis==1.7.0
+redis==5.2.1
