@@ -39,7 +39,7 @@ body.biwa-page {
   /* Shared ground line: the road band's height. The road, the tree belt
      and the torii all anchor to this var so the shore line (road top)
      stays exact — no gap and no overlap, whatever the band becomes. */
-  --biwa-scene-road-height: 15%;
+  --biwa-scene-road-height: 8%;
 }
 .biwa-masthead-scene {
   position: absolute;
@@ -50,16 +50,35 @@ body.biwa-page {
 /* Self-drawn ridge silhouettes — filled duotone paths stretched to the
    box (preserveAspectRatio="none"), so the ridge always sits inside its
    bounded band (bottom edge on the water line at 46%) instead of scaling
-   by viewport width and towering into the sky. */
+   by viewport width and towering into the sky. The wrapper clips a twin-
+   half belt that slides at ~300s a loop — distant-range parallax, slow
+   enough to stay subliminal. Each half's ridge meets its own edges at
+   equal heights, so the -50% wrap is seamless. */
 .biwa-scene-mountains {
   position: absolute;
   left: -10%;
   bottom: 54%;
   width: 120%;
   height: 60%;
+  overflow: hidden;
+}
+.biwa-scene-mountains-belt {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  animation: biwa-mountains-scroll 300s linear infinite;
+}
+.biwa-scene-mountains-half {
+  flex: 0 0 50%;
+  height: 100%;
+}
+@keyframes biwa-mountains-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 /* Calm lake band running exactly to the road top (46% + road height) —
-   no empty shore gap. Glints are rotated squares, opacity-only. */
+   no empty shore gap. Reflections are long thin oblongs just under the
+   far shore; static marks, opacity tuned per streak in the HTML. */
 .biwa-scene-water {
   position: absolute;
   left: 0;
@@ -68,17 +87,11 @@ body.biwa-page {
   height: calc(100% - 46% - var(--biwa-scene-road-height));
   background: var(--biwa-scene-lake);
 }
-.biwa-scene-sparkle {
+.biwa-scene-reflection {
   position: absolute;
-  width: 5px;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.55);
-  transform: rotate(45deg);
-  animation: biwa-sparkle 3.4s ease-in-out infinite alternate;
-}
-@keyframes biwa-sparkle {
-  from { opacity: 0.15; }
-  to   { opacity: 0.65; }
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.4);
 }
 /* Tree belt: translateX(-50%) loop on a doubled tile — seamless
    right-to-left drift along the far shore. Vector-traced supplied art. */
@@ -117,9 +130,9 @@ body.biwa-page {
   /* Tree height lives in the HTML (editable per img); CSS only clamps the
      permitted band — min/max-height bound even inline styles, no
      !important needed — and 90px is the unstyled fallback. */
-  height: 80px;
-  min-height: 60px;
-  max-height: 100px;
+  height: 90px;
+  min-height: 70px;
+  max-height: 110px;
 }
 @keyframes biwa-belt-scroll {
   from { transform: translateX(0); }
@@ -136,7 +149,7 @@ body.biwa-page {
   height: 150px;
   opacity: 0;
   transform: translate(105vw, 12.5%);
-  animation: biwa-torii-pass 22s linear infinite;
+  animation: biwa-torii-pass 30s linear infinite;
 }
 @keyframes biwa-torii-pass {
   0%   { transform: translate(105vw, 12.5%); opacity: 0; }
@@ -151,34 +164,91 @@ body.biwa-page {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 15%;
+  height: 8%;
   background: #ddbfae;
 }
-/* The three supplied rider GIFs — frames carry 17px left / 13px right /
-   29px top / 18px bottom of transparent padding (measured alpha bbox
-   17,29–243,238 of 256), so the translateY of exactly 18/256 = 7.03125%
-   aligns the lowest visible wheel pixel with the bottom edge. */
+/* The three rider GIFs are cadence variants of one supplied asset —
+   cyclist-01-loop spins slowest (~1.08s/stroke), 02 sits at baseline
+   (~0.77s), 03 quickest (~0.50s) — so each rider visibly pedals at its
+   own tempo. Frames carry 17px left / 13px right / 29px top / 18px
+   bottom of transparent padding (measured alpha bbox 17,29–243,238 of
+   256), so the translateY of exactly 18/256 = 7.03125% aligns the
+   lowest visible wheel pixel with the bottom edge. On top of that base
+   each rider runs its own drift personality in vw units, so the swings
+   scale with the scene — and a small rotate leans the rider forward on
+   surges and sits it up when dropped, since GIF cadence can't change
+   mid-loop. The left rider fades far back, then chases THROUGH the
+   bunch — whenever the weaving middle rider happens to be sitting back,
+   it gets overtaken; the middle rider answers with a late surge of its
+   own, slipping past the right rider while that one is settled into the
+   bunch; the right rider attacks toward the right edge. Every loop
+   returns home, so riders trade position but
+   nobody is lost. Durations/phases stay inline (--drift-dur/--drift-
+   delay, same mechanism as --rider-x) so phases keep shifting and
+   overtakes only happen sometimes, never in lockstep. */
 .biwa-scene-rider {
   position: absolute;
   left: var(--rider-x, 50%);
   bottom: 0;
   width: clamp(67.5px, 10.125vw, 127.5px);
   transform: translate(-50%, 7.03125%);
+  animation-duration: var(--drift-dur, 16s);
+  animation-timing-function: ease-in-out;
+  animation-delay: var(--drift-delay, 0s);
+  animation-iteration-count: infinite;
+}
+/* Riders are the 2nd/3rd/4th img children of the scene (the torii img is
+   first; tree imgs live inside their own belt parent). */
+.biwa-scene-rider:nth-of-type(2) { animation-name: biwa-rider-drift-a; }
+.biwa-scene-rider:nth-of-type(3) { animation-name: biwa-rider-drift-b; }
+.biwa-scene-rider:nth-of-type(4) { animation-name: biwa-rider-drift-c; }
+/* Left rider — the comeback: holds pace, drops ~24vw toward the left
+   edge while sitting up, then chases all the way through to +22vw —
+   past the middle rider whenever the weave has it sitting back. The
+   chase window is short, so the overtake reads as effort, not drift. */
+@keyframes biwa-rider-drift-a {
+  0%, 24%    { transform: translate(calc(-50% + 0vw), 7.03125%) rotate(0deg); }
+  44%, 56%   { transform: translate(calc(-50% - 24vw), 7.03125%) rotate(-1deg); }
+  80%, 88%   { transform: translate(calc(-50% + 22vw), 7.03125%) rotate(1.5deg); }
+  100%       { transform: translate(calc(-50% + 0vw), 7.03125%) rotate(0deg); }
+}
+/* Middle rider — the weaver that bites: a small pull, a ~12vw sit-back
+   that opens the door for the left rider's chase, then a late ~16vw
+   surge of its own — enough to slip past the right rider whenever that
+   one has settled back into the bunch. */
+@keyframes biwa-rider-drift-b {
+  0%, 20%    { transform: translate(calc(-50% + 0vw), 7.03125%) rotate(0deg); }
+  34%        { transform: translate(calc(-50% + 7vw), 7.03125%) rotate(1deg); }
+  50%, 60%   { transform: translate(calc(-50% - 12vw), 7.03125%) rotate(-1deg); }
+  78%, 86%   { transform: translate(calc(-50% + 16vw), 7.03125%) rotate(1.5deg); }
+  100%       { transform: translate(calc(-50% + 0vw), 7.03125%) rotate(0deg); }
+}
+/* Right rider — the attack: settles ~9vw into the bunch first, then
+   surges ~22vw toward the right edge, leaning into it, and drifts back.
+   The settle is also the window the middle rider steals past through. */
+@keyframes biwa-rider-drift-c {
+  0%, 30%    { transform: translate(calc(-50% + 0vw), 7.03125%) rotate(0deg); }
+  42%        { transform: translate(calc(-50% - 9vw), 7.03125%) rotate(-0.5deg); }
+  62%, 76%   { transform: translate(calc(-50% + 22vw), 7.03125%) rotate(1.8deg); }
+  100%       { transform: translate(calc(-50% + 0vw), 7.03125%) rotate(0deg); }
 }
 /* Paused (automatic — reduced motion or offscreen): freeze every CSS-
    driven layer in place; GIFs are swapped to stills by JS. */
 .biwa-masthead-scene.is-paused .biwa-scene-belt,
+.biwa-masthead-scene.is-paused .biwa-scene-mountains-belt,
 .biwa-masthead-scene.is-paused .biwa-scene-torii,
-.biwa-masthead-scene.is-paused .biwa-scene-sparkle {
+.biwa-masthead-scene.is-paused .biwa-scene-rider {
   animation-play-state: paused;
 }
 /* Reduced motion: stills stay (JS never swaps in GIFs), belts freeze at
-   their natural start — all tree clusters visible — and the torii stays
-   at opacity 0. The scene offers no controls, so none needs hiding. */
+   their natural start — all tree clusters visible — the torii stays at
+   opacity 0, and the riders hold their home positions (no drift). The
+   scene offers no controls, so none needs hiding. */
 @media (prefers-reduced-motion: reduce) {
   .biwa-scene-belt,
+  .biwa-scene-mountains-belt,
   .biwa-scene-torii,
-  .biwa-scene-sparkle { animation: none; }
+  .biwa-scene-rider { animation: none; }
 }
 .biwa-masthead-text {
   position: absolute;
@@ -218,6 +288,75 @@ body.biwa-page {
   color: var(--biwa-ink-soft);
 }
 
+/* Language switch: two segments in one recessed track. The raised paper
+   thumb is a ::before that SLIDES sideways between the equal-width
+   segments — its fill and drop shadow read as "lifted", the unselected
+   label sinks into the tinted well. State reads from depth plus
+   aria-pressed, never colour alone. The track sits opaque over the scene
+   art; the shared lake focus ring applies. */
+.biwa-lang-switch {
+  position: absolute;
+  z-index: 3;
+  top: calc(env(safe-area-inset-top, 0px) + var(--biwa-space-lg));
+  right: var(--biwa-space-md);
+  display: flex;
+  padding: 3px;
+  min-height: 36px;
+  border-radius: 999px;
+  background: rgba(58, 42, 38, 0.10);
+  box-shadow: inset 0 1px 3px rgba(58, 42, 38, 0.20);
+}
+/* The bright thumb: covers exactly one half of the track (3px padding
+   each side, no gap), and data-active='zh' translates it by its own
+   width — one segment — to cover the second half. */
+.biwa-lang-switch::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: 999px;
+  background: var(--biwa-paper);
+  box-shadow: 0 1px 4px rgba(58, 42, 38, 0.28);
+}
+.biwa-lang-switch[data-active='zh']::before {
+  transform: translateX(100%);
+}
+/* is-settled arrives one frame after boot — the thumb positions itself
+   silently at load and only slides on real user toggles. */
+.biwa-lang-switch.is-settled::before {
+  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.35, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .biwa-lang-switch.is-settled::before { transition: none; }
+}
+.biwa-lang-option {
+  /* Equal-width segments keep the thumb's translateX(100%) exact;
+     nowrap stops 中文 splitting 中/文 onto two lines in the narrow pill. */
+  flex: 1;
+  min-width: 44px;
+  position: relative;
+  z-index: 1;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 0 var(--biwa-space-sm);
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--biwa-ink-soft);
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+/* The active label brightens as the thumb arrives under it. */
+.biwa-lang-option[aria-pressed='true'] { color: var(--biwa-ink); }
+@media (prefers-reduced-motion: reduce) {
+  .biwa-lang-option { transition: none; }
+}
+
 /* Clear separation between the brand block and the views below it. */
 #biwa-main { margin-top: var(--biwa-space-md); }
 
@@ -242,7 +381,7 @@ body.biwa-page {
 
 .biwa-nav-button {
   flex: 1;
-  min-height: 56px;
+  min-height: 60px;
   border: 0;
   background: none;
   font: inherit;
@@ -252,7 +391,7 @@ body.biwa-page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  /* gap: 1px; */
   cursor: pointer;
 }
 /* The active view is a filled petal wash with deep clay text — colour and
@@ -281,10 +420,10 @@ body.biwa-page {
 }
 .biwa-progress-metric { display: flex; flex-direction: column; gap: 2px; }
 /* Keep the count and its label on one baseline, with the bar below. */
-.biwa-progress-summary { display: flex; align-items: baseline; gap: var(--biwa-space-sm); }
+.biwa-progress-summary { display: flex; align-items: baseline; gap: var(--biwa-space-xs); }
 .biwa-progress-num {
   font-family: var(--biwa-font-heading);
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 400;
   line-height: 1.1;
   color: var(--biwa-lake-deep);
@@ -312,17 +451,18 @@ body.biwa-page {
 /* Filled tabs, no outlines: petal resting, solid clay-deep when selected
    (the deep stop keeps the paper label AA). */
 .biwa-day-tab {
-  flex: 1;
-  min-height: 44px;
-  padding: 0 var(--biwa-space-sm);
-  border-radius: 999px;
-  border: 0;
-  background: var(--biwa-petal);
-  font: inherit;
-  font-size: 0.88rem;
-  color: var(--biwa-ink);
-  cursor: pointer;
-  white-space: nowrap;
+    flex: 1;
+    min-height: 44px;
+    padding: 0 var(--biwa-space-sm);
+    border-radius: 999px;
+    border: 0;
+    background: var(--biwa-petal);
+    font: inherit;
+    font-size: 1rem;
+    align-content: center;  
+    color: var(--biwa-ink);
+    cursor: pointer;
+    white-space: nowrap;
 }
 .biwa-day-tab[aria-pressed='true'] {
   background: var(--biwa-clay-deep);
@@ -796,6 +936,7 @@ body.biwa-page {
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
+  display: none;
 }
 .biwa-stop-unconfirmed { color: var(--biwa-warning); font-weight: 600; }
 
@@ -1279,34 +1420,36 @@ body.biwa-page {
   overflow: hidden;
 }
 .biwa-map-canvas svg { display: block; width: 100%; height: 100%; }
-.biwa-map-statusbar { font-size: 0.88rem; color: var(--biwa-ink-soft); min-height: 1.2em; }
-.biwa-map-controls { display: flex; flex-wrap: wrap; gap: var(--biwa-space-md); align-items: flex-start; }
-.biwa-map-filters { display: flex; flex-wrap: wrap; gap: var(--biwa-space-xs); }
-.biwa-filter-chip {
-  font: inherit;
-  font-size: 0.82rem;
-  min-height: 44px;
-  padding: 0 var(--biwa-space-sm);
-  border-radius: 999px;
-  border: 0;
-  background: var(--biwa-petal);
-  color: var(--biwa-ink);
-  cursor: pointer;
-}
-/* Lake fill marks the active filter — a functional map colour, kept. */
-.biwa-filter-chip[aria-pressed='true'] {
-  background: var(--biwa-lake);
-  color: #fff;
-}
 .biwa-map-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--biwa-space-xs) var(--biwa-space-md);
+  gap: var(--biwa-space-xs);
   font-size: 0.82rem;
-  color: var(--biwa-ink-soft);
+  color: var(--biwa-ink);
   align-items: center;
 }
-.biwa-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+/* Legend entries are the layer toggles themselves: paper fill reads as a
+   control against the alabaster page, and the eye icon plus muted glyph +
+   label make the off state explicit — never colour alone. */
+.biwa-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  color: inherit;
+  min-height: 44px;
+  padding: 0 var(--biwa-space-sm);
+  border: 0;
+  border-radius: var(--biwa-radius-sm);
+  background: var(--biwa-paper);
+  cursor: pointer;
+}
+.biwa-legend-item[aria-pressed='false'] { color: var(--biwa-ink-soft); }
+.biwa-legend-item[aria-pressed='false'] .biwa-legend-swatch,
+.biwa-legend-item[aria-pressed='false'] .biwa-legend-shape { opacity: 0.35; }
+.biwa-legend-label { line-height: 1.2; }
+.biwa-legend-eye { display: inline-flex; color: var(--biwa-ink-soft); }
+.biwa-legend-item[aria-pressed='true'] .biwa-legend-eye { color: var(--biwa-lake); }
 .biwa-legend-swatch {
   width: 18px;
   height: 4px;

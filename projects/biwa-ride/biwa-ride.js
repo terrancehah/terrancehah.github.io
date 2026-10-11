@@ -17,7 +17,25 @@
   var MapLinks = window.BiwaMapLinks;
   var Preview = window.BiwaRoutePreview;
   var Geo = window.BiwaGeoDistance;
+  var I18n = window.BiwaI18n;
   var store = new window.BiwaTripStore();
+
+  // Display-layer helpers with inert fallbacks — the app still renders
+  // English when biwa-i18n.js failed to load.
+  var t = function (key, vars) {
+    var text = I18n ? I18n.t(key, vars) : key;
+    if (!I18n && vars) {
+      text = text.replace(/\{(\w+)\}/g, function (m, n) {
+        return vars[n] !== undefined ? vars[n] : m;
+      });
+    }
+    return text;
+  };
+  var placeName = function (p) { return I18n ? I18n.placeName(p) : (p ? p.label : ''); };
+  var dayLabel = function (d) { return I18n ? I18n.dayLabel(d) : (d ? d.label : ''); };
+  var dayTitle = function (d) { return I18n ? I18n.dayTitle(d) : (d ? d.title : ''); };
+  var badgeText = function (b) { return I18n ? I18n.badge(b) : b; };
+  var areaText = function (a) { return I18n ? I18n.areaLabel(a) : (a ? a.label : ''); };
 
   var OFFICIAL_CHECKIN_URL = 'https://m.biwako1.jp/flow';
   var RALLY_CHECKIN_URL = 'https://platinumaps.jp/d/cyclingrally2026';
@@ -102,14 +120,14 @@
   // --- boot -------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', function () {
     [
-      'biwa-masthead-scene',
+      'biwa-masthead-scene', 'biwa-lang-switch',
       'biwa-progress-strip', 'biwa-day-selector', 'biwa-day-title',
       'biwa-next-stop', 'biwa-next-stop-label', 'biwa-next-stop-name',
       'biwa-next-stop-directions', 'biwa-next-complete', 'biwa-next-credit',
       'biwa-next-checkins',
       'biwa-leaves',
       'biwa-track', 'biwa-add-stop', 'biwa-add-place',
-      'biwa-map-canvas', 'biwa-map-status', 'biwa-map-filters', 'biwa-map-legend',
+      'biwa-map-canvas', 'biwa-map-legend',
       'biwa-map-attribution', 'biwa-day-routes',
       'biwa-nearby-geolocate', 'biwa-nearby-geo-status', 'biwa-nearby-anchor-note',
       'biwa-nearby-grid', 'biwa-parking-card', 'biwa-parking-list',
@@ -122,6 +140,9 @@
       'biwa-conflict-dialog', 'biwa-conflict-keep', 'biwa-conflict-reload'
     ].forEach(function (id) { els[id] = $(id); });
 
+    // Saved language (or browser locale) applies to the static chrome
+    // before any render so no English flashes on load.
+    if (I18n) I18n.setLang(I18n.lang());
     wireNavigation();
     wireStaticControls();
     wireDialogLifecycle();
@@ -185,6 +206,15 @@
       store.resolveConflictReapply();
     });
     els['biwa-nearby-geolocate'].addEventListener('click', updateMyLocation);
+    // Language switch: pick a segment to set the language, then repaint
+    // every dynamic view through the normal render path (static markup
+    // re-applies inside setLang itself).
+    els['biwa-lang-switch'].addEventListener('click', function (ev) {
+      var btn = ev.target.closest('.biwa-lang-option');
+      if (!I18n || !btn) return;
+      I18n.setLang(btn.getAttribute('data-lang'));
+      render(store);
+    });
 
     // Masthead scene — supplied rider/torii GIFs can't be paused by CSS, so
     // motion is gated by swapping each <img> between its animated file
@@ -415,7 +445,7 @@
         class: 'biwa-day-tab', type: 'button',
         'aria-pressed': String(day.dayId === currentDay(trip).dayId),
         'data-focus-key': 'day-' + day.dayId,
-        text: day.label
+        text: dayLabel(day)
       });
       btn.addEventListener('click', function () {
         selectedDayId = day.dayId;
@@ -425,7 +455,7 @@
       host.appendChild(btn);
     });
     var day = currentDay(trip);
-    els['biwa-day-title'].textContent = day.label + (day.title ? ' — ' + day.title : '');
+    els['biwa-day-title'].textContent = dayLabel(day) + (dayTitle(day) ? ' — ' + dayTitle(day) : '');
   }
 
   // --- certificate progress strip ------------------------------------------------
@@ -445,14 +475,14 @@
     var content = host.querySelector('.biwa-progress-content');
     content.innerHTML = '';
     [
-      { label: 'rally stops', done: rally.done, total: rally.total, complete: rally.complete },
-      { label: 'official areas', done: official.coveredCount, total: official.totalAreas, complete: official.complete }
+      { label: t('rally stops'), done: rally.done, total: rally.total, complete: rally.complete },
+      { label: t('official areas'), done: official.coveredCount, total: official.totalAreas, complete: official.complete }
     ].forEach(function (item) {
       var pct = item.total ? Math.round(item.done / item.total * 100) : 0;
       content.appendChild(el('span', { class: 'biwa-progress-metric', dataset: { done: String(item.complete) } }, [
         el('span', { class: 'biwa-progress-summary' }, [
           el('span', { class: 'biwa-progress-num', text: String(item.done) }),
-          el('span', { class: 'biwa-progress-label', text: 'of ' + item.total + ' ' + item.label })
+          el('span', { class: 'biwa-progress-label', text: t('of {total} {label}', { total: item.total, label: item.label }) })
         ]),
         el('span', { class: 'biwa-progress-bar' }, [
           el('span', { style: 'width:' + pct + '%' })
@@ -462,12 +492,12 @@
     // Certificate wording stays honest: the shared checklist completing is
     // not the same as an official certificate being earned.
     if (checklist.complete) {
-      content.appendChild(el('span', { class: 'biwa-progress-complete', text: 'Both certificate checklists completed' }));
+      content.appendChild(el('span', { class: 'biwa-progress-complete', text: t('Both certificate checklists completed') }));
     }
     // Itinerary completion is a separate fact, driven by the arrival ticks
     // on the days themselves — never by the certificate checklist.
     if (tripFinished(trip)) {
-      content.appendChild(el('span', { class: 'biwa-progress-complete', text: 'All three riding days completed' }));
+      content.appendChild(el('span', { class: 'biwa-progress-complete', text: t('All three riding days completed') }));
     }
   }
 
@@ -580,33 +610,33 @@
     // and the name button disables so a completion state opens no sheet.
     var actionsVisible = false;
     if (tripFinished(trip)) {
-      labelEl.textContent = 'Ride Complete';
-      nameEl.textContent = 'Three days around Lake Biwa — every planned stop completed.';
+      labelEl.textContent = t('Ride Complete');
+      nameEl.textContent = t('Three days around Lake Biwa — every planned stop completed.');
       dirEl.removeAttribute('href');
       nextCard.dataset.cardType = 'completed';
     } else if (dayFinished(trip, day)) {
-      labelEl.textContent = day.label + ' Complete';
+      labelEl.textContent = t('{day} Complete', { day: dayLabel(day) });
       nameEl.textContent = day.dayId === 'day-3'
-        ? 'Day 3 complete. You’re back in Otsu.'
-        : 'Every stop visited. Time to rest and recharge.';
+        ? t('Day 3 complete. You’re back in Otsu.')
+        : t('Every stop visited. Time to rest and recharge.');
       dirEl.removeAttribute('href');
       nextCard.dataset.cardType = 'completed';
     } else if (!points.length) {
-      labelEl.textContent = 'Your itinerary';
-      nameEl.textContent = 'No stops planned for this day yet';
+      labelEl.textContent = t('Your itinerary');
+      nameEl.textContent = t('No stops planned for this day yet');
       dirEl.removeAttribute('href');
       nextCard.dataset.cardType = 'extra';
     } else if (!next) {
       // Rows exist and are all ticked, but an endpoint is unset — the day
       // is not finished (dayFinished needs both endpoints) yet has no next
       // stop either. Say so instead of falling through to next.label.
-      labelEl.textContent = 'Finish your day plan';
-      nameEl.textContent = 'Set the missing start or finish point to complete this day.';
+      labelEl.textContent = t('Finish your day plan');
+      nameEl.textContent = t('Set the missing start or finish point to complete this day.');
       dirEl.removeAttribute('href');
       nextCard.dataset.cardType = 'extra';
     } else {
-      labelEl.textContent = 'Up Next';
-      nameEl.textContent = next.label;
+      labelEl.textContent = t('Up Next');
+      nameEl.textContent = placeName(next);
       dirEl.href = MapLinks.directionsUrl(next);
       actionsVisible = true;
       nextCard.dataset.cardType = placeCardType(next.place);
@@ -678,7 +708,9 @@
       (details.photos[0].authorAttributions || []).forEach(function (a) {
         if (a.displayName && names.indexOf(a.displayName) === -1) names.push(a.displayName);
       });
-      var text = 'Photo © ' + (names.length ? names.join(', ') + ' via ' : 'Google contributors via ');
+      var text = t('Photo © {names} via ', {
+        names: names.length ? names.join(', ') : t('Google contributors')
+      });
       creditEl.title = text + 'Google Maps';
       creditEl.appendChild(document.createTextNode(text));
       creditEl.appendChild(el('a', {
@@ -702,14 +734,14 @@
       host.appendChild(el('a', {
         class: 'biwa-btn biwa-btn-secondary biwa-next-checkin', href: OFFICIAL_CHECKIN_URL,
         target: '_blank', rel: 'noopener noreferrer',
-        text: dual ? 'Official Certificate Check-In' : 'Check In on Official Site'
+        text: dual ? t('Official Certificate Check-In') : t('Check In on Official Site')
       }));
     }
     if (rally) {
       host.appendChild(el('a', {
         class: 'biwa-btn biwa-btn-secondary biwa-next-checkin', href: RALLY_CHECKIN_URL,
         target: '_blank', rel: 'noopener noreferrer',
-        text: dual ? 'Rally Check-In' : 'Check In on Rally Site'
+        text: dual ? t('Rally Check-In') : t('Check In on Rally Site')
       }));
     }
     if (!official && !rally) {
@@ -757,13 +789,13 @@
     var note = el('li', { class: 'biwa-track-row biwa-track-note' });
     note.appendChild(el('div', { class: 'biwa-track-marker', 'aria-hidden': 'true' }));
     var noteText = el('span', { class: 'biwa-track-note-text' });
-    noteText.appendChild(document.createTextNode('Road distances are a preview from '));
+    noteText.appendChild(document.createTextNode(t('Road distances are a preview from ')));
     noteText.appendChild(el('a', {
       class: 'biwa-track-note-attr', href: GOOGLE_TERMS_URL,
       target: '_blank', rel: 'noopener noreferrer', text: 'Google Maps'
     }));
-    noteText.appendChild(document.createTextNode(
-      ' — not cycling guidance. Times estimate 15 km/h riding, breaks excluded.'));
+    noteText.appendChild(document.createTextNode(t(
+      ' — not cycling guidance. Times estimate 15 km/h riding, breaks excluded.')));
     note.appendChild(noteText);
     list.appendChild(note);
 
@@ -784,7 +816,7 @@
     if (!stops.length) {
       var empty = el('li', { class: 'biwa-track-row' });
       empty.appendChild(el('div', { class: 'biwa-track-marker' }));
-      empty.appendChild(el('div', { class: 'biwa-empty', text: 'No stops yet — add one below.' }));
+      empty.appendChild(el('div', { class: 'biwa-empty', text: t('No stops yet — add one below.') }));
       items.push({ occId: null, node: empty });
     }
     stops.forEach(function (stop, index) {
@@ -833,7 +865,7 @@
     text.appendChild(el('span', {
       class: 'biwa-track-gap-duration',
       dataset: { gapMinutes: destOccurrenceId },
-      title: 'Estimated at 15 km/h, excluding breaks.',
+      title: t('Estimated at 15 km/h, excluding breaks.'),
       text: gapDurationLabel(destOccurrenceId, legMeters)
     }));
     row.appendChild(text);
@@ -844,13 +876,13 @@
     var meters = legMeters[occurrenceId];
     if (typeof meters === 'number') {
       return meters < 100
-        ? Math.round(meters) + ' m road'
-        : (meters / 1000).toFixed(1) + ' km road';
+        ? t('{n} m road', { n: Math.round(meters) })
+        : t('{n} km road', { n: (meters / 1000).toFixed(1) });
     }
     if (routeState && routeState.status === 'pending') {
-      return 'Calculating road distance…';
+      return t('Calculating road distance…');
     }
-    return 'Road distance unavailable';
+    return t('Road distance unavailable');
   }
 
   // Rider-facing leg time beside the distance — the frozen 15 km/h helper,
@@ -861,12 +893,12 @@
       ? BiwaStopDistances.estimatedCyclingMinutes(legMeters[occurrenceId])
       : null;
     if (minutes === null || minutes === undefined) return '';
-    if (minutes < 60) return '≈ ' + minutes + ' min cycling';
+    if (minutes < 60) return t('≈ {n} min cycling', { n: minutes });
     var hours = Math.floor(minutes / 60);
     var rest = minutes % 60;
     return rest
-      ? '≈ ' + hours + ' h ' + rest + ' min cycling'
-      : '≈ ' + hours + ' h cycling';
+      ? t('≈ {h} h {m} min cycling', { h: hours, m: rest })
+      : t('≈ {h} h cycling', { h: hours });
   }
 
   // A route answer rewrites ONLY the gap texts — never re-renders the
@@ -903,9 +935,9 @@
       class: 'biwa-track-row',
       dataset: { kind: which, occ: occurrenceId }
     });
-    row.appendChild(markerDot(which === 'start' ? 'S' : 'E'));
+    row.appendChild(markerDot(which === 'start' ? t('S') : t('E')));
 
-    var label = place ? place.label : pin ? (pin.label || 'Pinned point') : null;
+    var label = place ? placeName(place) : pin ? (pin.label || t('Pinned point')) : null;
     if (!label) {
       // Missing endpoint: honest state, not a phantom row. The Set action
       // lives inside the card body so the grid columns line up with the
@@ -914,11 +946,11 @@
                                 dataset: { interactive: 'true' } });
       var missingBody = el('div', { class: 'biwa-card-body' }, [
         el('div', { class: 'biwa-card-name' }, [
-          el('span', { class: 'biwa-stop-unconfirmed', text: (which === 'start' ? 'Start' : 'Overnight') + ' point not set' })
+          el('span', { class: 'biwa-stop-unconfirmed', text: t(which === 'start' ? 'Start point not set' : 'Overnight point not set') })
         ])
       ]);
       var setBtn = el('button', {
-        class: 'biwa-btn-inline', type: 'button', text: 'Set',
+        class: 'biwa-btn-inline', type: 'button', text: t('Set'),
         'data-focus-key': 'endpoint-' + day.dayId + '-' + which
       });
       setBtn.addEventListener('click', function (ev) {
@@ -947,13 +979,13 @@
 
     var body = el('button', {
       class: 'biwa-card-body', type: 'button',
-      'aria-label': label + ' — details',
+      'aria-label': t('{name} — details', { name: label }),
       'data-focus-key': 'card-' + occurrenceId
     });
     body.appendChild(el('div', { class: 'biwa-card-name' }, [document.createTextNode(label + ' ')].concat(placeBadgesNodes(place))));
     var role = which === 'start'
-      ? (day.dayId === 'day-1' ? 'Start here' : 'Leave after the night')
-      : (day.dayId === 'day-3' ? 'Finish — return the bikes' : 'Overnight stay');
+      ? (day.dayId === 'day-1' ? t('Start here') : t('Leave after the night'))
+      : (day.dayId === 'day-3' ? t('Finish — return the bikes') : t('Overnight stay'));
     body.appendChild(el('div', { class: 'biwa-card-meta' }, [
       document.createTextNode(role),
       place && place.address ? el('span', { class: 'biwa-card-address', text: ' · ' + place.address }) : document.createTextNode('')
@@ -974,17 +1006,17 @@
     var badges = el('span', { class: 'biwa-badges' });
     Rules.placeBadges(place).forEach(function (b) {
       badges.appendChild(el('span', {
-        class: 'biwa-badge', text: b,
+        class: 'biwa-badge', text: badgeText(b),
         dataset: { programme: b === 'Rally' ? 'rally' : 'official' }
       }));
     });
     // Plain custom extras are attractions, not certificate stops — say so
     // instead of showing no badge at all.
     if (place.category === 'custom') {
-      badges.appendChild(el('span', { class: 'biwa-badge', text: 'Additional attraction' }));
+      badges.appendChild(el('span', { class: 'biwa-badge', text: t('Additional attraction') }));
     }
     if (place.nameConfirmed === false) {
-      badges.appendChild(el('span', { class: 'biwa-stop-unconfirmed', text: ' (name unconfirmed)' }));
+      badges.appendChild(el('span', { class: 'biwa-stop-unconfirmed', text: ' ' + t('(name unconfirmed)') }));
     }
     if (badges.children.length) nodes.push(badges);
     return nodes;
@@ -1266,7 +1298,7 @@
       class: 'biwa-card-photo-credit',
       href: details.mapsUrl || 'https://www.google.com/maps',
       target: '_blank', rel: 'noopener noreferrer',
-      text: 'Photo © ' + (names.length ? names.join(', ') : 'Google')
+      text: t('Photo © {names}', { names: names.length ? names.join(', ') : 'Google' })
     });
     cardPhotoDom[occKey] = { placeId: place.placeId, nodes: [img, veil, credit] };
     card.insertBefore(img, card.firstChild);
@@ -1280,7 +1312,7 @@
     var btn = el('button', {
       class: 'biwa-arrival-check', type: 'button',
       'aria-pressed': String(visited),
-      'aria-label': (visited ? 'Mark not visited: ' : 'Mark visited: ') + label,
+      'aria-label': t(visited ? 'Mark not visited: {name}' : 'Mark visited: {name}', { name: label }),
       'data-focus-key': 'visit-' + occurrenceId
     });
     btn.appendChild(el('span', { class: 'biwa-arrival-box', 'aria-hidden': 'true', text: '✓' }));
@@ -1317,14 +1349,14 @@
                            dataset: { occ: stop.occurrenceId,
                                       cardType: placeCardType(place),
                                       interactive: 'true' } });
-    card.appendChild(arrivalCheck(trip, stop.occurrenceId, place, place.label, visited));
+    card.appendChild(arrivalCheck(trip, stop.occurrenceId, place, placeName(place), visited));
 
     var body = el('button', {
       class: 'biwa-card-body', type: 'button',
-      'aria-label': place.label + ' — details. Press Alt+Up or Alt+Down to reorder.',
+      'aria-label': t('{name} — details. Press Alt+Up or Alt+Down to reorder.', { name: placeName(place) }),
       'data-focus-key': 'card-' + stop.occurrenceId
     });
-    body.appendChild(el('div', { class: 'biwa-card-name' }, [document.createTextNode(place.label + ' ')].concat(placeBadgesNodes(place))));
+    body.appendChild(el('div', { class: 'biwa-card-name' }, [document.createTextNode(placeName(place) + ' ')].concat(placeBadgesNodes(place))));
     var metaParts = [];
     if (place.address) metaParts.push(place.address);
     if (place.notes) metaParts.push(place.notes);
@@ -1418,7 +1450,7 @@
   function dragHandle(day, stop, place) {
     var handle = el('button', {
       class: 'biwa-drag-handle', type: 'button',
-      'aria-label': 'Reorder ' + place.label + ' by dragging',
+      'aria-label': t('Reorder {name} by dragging', { name: placeName(place) }),
       'data-focus-key': 'handle-' + stop.occurrenceId
     });
     handle.innerHTML = ICONS.grip;
@@ -1885,25 +1917,25 @@
     var body = els['biwa-sheet-body'];
     body.innerHTML = '';
     body.appendChild(el('h2', { id: 'biwa-sheet-title' }, [
-      document.createTextNode(place.label || 'Pinned point')
+      document.createTextNode(place.label ? placeName(place) : t('Pinned point'))
     ]));
 
     var badges = el('div', { class: 'biwa-badges' });
     Rules.placeBadges(place).forEach(function (b) {
       badges.appendChild(el('span', {
-        class: 'biwa-badge', text: b,
+        class: 'biwa-badge', text: badgeText(b),
         dataset: { programme: b === 'Rally' ? 'rally' : 'official',
                    checked: String(Rules.placeProgrammeChecked(store.trip, place) &&
                      Rules.programmeFamilies(place.programmes).indexOf(
                        b === 'Rally' ? 'rally' : 'official') !== -1) }
       }));
     });
-    if (place.category === 'accommodation') badges.appendChild(el('span', { class: 'biwa-badge', text: 'Stay' }));
-    if (place.category === 'parking') badges.appendChild(el('span', { class: 'biwa-badge', text: 'Bike-friendly parking — group curated' }));
+    if (place.category === 'accommodation') badges.appendChild(el('span', { class: 'biwa-badge', text: t('Stay') }));
+    if (place.category === 'parking') badges.appendChild(el('span', { class: 'biwa-badge', text: t('Bike-friendly parking — group curated') }));
     // Custom extras are honest about what they are — a side trip, never a
     // certificate checkpoint.
-    if (place.category === 'custom') badges.appendChild(el('span', { class: 'biwa-badge', text: 'Additional attraction' }));
-    if (place.nameConfirmed === false) badges.appendChild(el('span', { class: 'biwa-stop-unconfirmed', text: 'name unconfirmed' }));
+    if (place.category === 'custom') badges.appendChild(el('span', { class: 'biwa-badge', text: t('Additional attraction') }));
+    if (place.nameConfirmed === false) badges.appendChild(el('span', { class: 'biwa-stop-unconfirmed', text: t('name unconfirmed') }));
     if (badges.children.length) body.appendChild(badges);
 
     // For a catalogue/map context (no occurrence) note where the place is
@@ -1911,12 +1943,12 @@
     if (ctx.kind === 'catalogue' || ctx.kind === 'map') {
       var onPlan = Rules.occurrencesOf(store.trip, place.placeId).map(function (o) {
         var d = (store.trip.days || []).filter(function (x) { return x.dayId === o.dayId; })[0];
-        return (d ? d.label : o.dayId);
+        return (d ? dayLabel(d) : o.dayId);
       });
       if (onPlan.length) {
         body.appendChild(el('p', {
           class: 'biwa-field-hint',
-          text: 'On the plan: ' + onPlan.join(', ')
+          text: t('On the plan: {list}', { list: onPlan.join(I18n && I18n.lang() === 'zh' ? '、' : ', ') })
         }));
       }
     }
@@ -1945,7 +1977,7 @@
     host.appendChild(el('a', {
       class: 'biwa-btn biwa-btn-primary biwa-sheet-action-wide',
       href: MapLinks.directionsUrl(place),
-      target: '_blank', rel: 'noopener noreferrer', text: 'Get Directions'
+      target: '_blank', rel: 'noopener noreferrer', text: t('Get Directions')
     }));
 
     var row = el('div', { class: 'biwa-sheet-action-row' });
@@ -1960,14 +1992,16 @@
       row.appendChild(el('a', {
         class: 'biwa-btn biwa-btn-secondary', href: OFFICIAL_CHECKIN_URL,
         target: '_blank', rel: 'noopener noreferrer',
-        text: isRally ? 'Official Certificate Check-In' : 'Check In on Official Site'
+        text: isRally ? t('Official Certificate Check-In') : t('Check In on Official Site')
       }));
     }
     if (isRally) {
       row.appendChild(el('a', {
         class: 'biwa-btn biwa-btn-secondary', href: RALLY_CHECKIN_URL,
         target: '_blank', rel: 'noopener noreferrer',
-        text: isOfficial ? 'Rally Check-In' : 'Check In on Official Site'
+        // A rally-only stop's link goes to the RALLY site — matching the
+        // next-card copy (was 'Check In on Official Site', which lied).
+        text: isOfficial ? t('Rally Check-In') : t('Check In on Rally Site')
       }));
     }
 
@@ -1983,7 +2017,7 @@
       'data-focus-key': 'sheet-tick'
     }, [
       el('span', { class: 'biwa-stamp-box', 'aria-hidden': 'true', text: '✓' }),
-      document.createTextNode(' ' + (checked ? 'Completed' : 'Mark as Completed'))
+      document.createTextNode(' ' + t(checked ? 'Completed' : 'Mark as Completed'))
     ]);
     if (checked) tick.dataset.tone = 'visited';
     tick.addEventListener('click', function () {
@@ -2075,16 +2109,18 @@
       var segs = [];
       if (d.type) segs.push(document.createTextNode(d.type));
       if (typeof d.rating === 'number') {
+        // Singular/plural keys collapse to the same Chinese string — the
+        // branch survives for English grammar only.
         var ratingText = d.rating.toFixed(1) + ' / 5' +
           (typeof d.userRatingCount === 'number'
-            ? ' · ' + d.userRatingCount + (d.userRatingCount === 1 ? ' review' : ' reviews')
+            ? t(d.userRatingCount === 1 ? ' · {n} review' : ' · {n} reviews', { n: d.userRatingCount })
             : '');
         var star = el('span', { class: 'biwa-sheet-star', 'aria-hidden': 'true' });
         star.innerHTML = ICONS.star;
-        segs.push(el('span', { class: 'biwa-sheet-rating', 'aria-label': 'Rating ' + ratingText },
+        segs.push(el('span', { class: 'biwa-sheet-rating', 'aria-label': t('Rating {r}', { r: ratingText }) },
           [star, document.createTextNode(' ' + ratingText)]));
       } else {
-        segs.push(document.createTextNode('Rating not provided'));
+        segs.push(document.createTextNode(t('Rating not provided')));
       }
       segs.forEach(function (node, i) {
         if (i) facts.appendChild(document.createTextNode(' · '));
@@ -2102,19 +2138,19 @@
       var gallery = el('div', { class: 'biwa-sheet-gallery-wrap biwa-sheet-section' });
       var grid = el('div', {
         class: 'biwa-sheet-gallery',
-        role: 'group', 'aria-label': 'Photos of ' + place.label,
+        role: 'group', 'aria-label': t('Photos of {name}', { name: placeName(place) }),
         tabindex: '0'   // ←/→ step through the photos for keyboard users
       });
       photos.forEach(function (photo) {
         var img = el('img', {
           src: store.photoUrl(place.placeId, photo.index, 800),
-          alt: 'Photo of ' + place.label,
+          alt: t('Photo of {name}', { name: placeName(place) }),
           loading: 'lazy'
         });
         // A failed photo must not leave a broken-image glyph: swap in an
         // honest note instead.
         img.addEventListener('error', function () {
-          img.replaceWith(el('p', { class: 'biwa-field-hint', text: 'Photo unavailable.' }));
+          img.replaceWith(el('p', { class: 'biwa-field-hint', text: t('Photo unavailable.') }));
         });
         grid.appendChild(img);
       });
@@ -2126,7 +2162,7 @@
       // instead of leaving a silent gap where the gallery would be.
       slot.appendChild(el('p', {
         class: 'biwa-field-hint',
-        text: 'No photos provided for this place.'
+        text: t('No photos provided for this place.')
       }));
     }
 
@@ -2142,9 +2178,11 @@
           });
         });
         credit.appendChild(document.createTextNode(
-          'Photos © ' + (credits.length ? credits.join(', ') + ' via ' : 'Google contributors via ')));
+          t('Photos © {names} via ', {
+            names: credits.length ? credits.join(', ') : t('Google contributors')
+          })));
       } else {
-        credit.appendChild(document.createTextNode('Details via '));
+        credit.appendChild(document.createTextNode(t('Details via ')));
       }
       credit.appendChild(el('a', {
         href: d.mapsUrl || 'https://www.google.com/maps', target: '_blank',
@@ -2158,7 +2196,7 @@
     var address = (d && d.address) || place.address;
     if (address) {
       slot.appendChild(el('p', { class: 'biwa-sheet-fact' }, [
-        el('strong', { text: 'Address' }),
+        el('strong', { text: t('Address') }),
         document.createTextNode(' ' + address)
       ]));
     }
@@ -2167,13 +2205,13 @@
     if (!d) {
       var note;
       if (!(store.capabilities && store.capabilities.places)) {
-        note = 'Opening hours and photos are not configured on this app — ' +
-               'Get Directions opens Google Maps with the latest details.';
+        note = t('Opening hours and photos are not configured on this app — ' +
+               'Get Directions opens Google Maps with the latest details.');
       } else if (cached === 'loading' || cached === undefined) {
-        note = 'Loading details…';
+        note = t('Loading details…');
       } else {
-        note = 'Details unavailable for this place — Get Directions opens ' +
-               'Google Maps with the latest info.';
+        note = t('Details unavailable for this place — Get Directions opens ' +
+               'Google Maps with the latest info.');
       }
       slot.appendChild(el('p', { class: 'biwa-field-hint', text: note }));
     }
@@ -2186,12 +2224,12 @@
           class: 'biwa-sheet-fact',
           dataset: { tone: openNow ? 'open' : 'closed' }
         }, [
-          el('strong', { text: openNow ? 'Open now' : 'Closed now' })
+          el('strong', { text: t(openNow ? 'Open now' : 'Closed now') })
         ]));
       }
       if (d.hours.weekdayDescriptions && d.hours.weekdayDescriptions.length) {
         var hours = el('div', { class: 'biwa-sheet-section' });
-        hours.appendChild(el('h3', { text: 'Opening hours' }));
+        hours.appendChild(el('h3', { text: t('Opening hours') }));
         var ul = el('ul', { class: 'biwa-sheet-hours' });
         d.hours.weekdayDescriptions.forEach(function (line) {
           ul.appendChild(el('li', { text: line }));
@@ -2204,7 +2242,7 @@
       // silently omitting the section or sending the user off-app.
       slot.appendChild(el('p', {
         class: 'biwa-field-hint',
-        text: 'Opening hours not provided for this place.'
+        text: t('Opening hours not provided for this place.')
       }));
     }
 
@@ -2215,7 +2253,7 @@
       if (d.website) {
         contacts.appendChild(el('a', {
           href: d.website, target: '_blank', rel: 'noopener noreferrer',
-          text: 'Website'
+          text: t('Website')
         }));
       }
       if (d.phone) {
@@ -2230,7 +2268,7 @@
     if (d && d.attributions && d.attributions.length) {
       var attr = el('p', { class: 'biwa-sheet-credit' });
       d.attributions.forEach(function (a) {
-        attr.appendChild(document.createTextNode((attr.childNodes.length ? ' · ' : '') + (a.displayName || 'Third-party provider')));
+        attr.appendChild(document.createTextNode((attr.childNodes.length ? ' · ' : '') + (a.displayName || t('Third-party provider'))));
       });
       slot.appendChild(attr);
     }
@@ -2243,12 +2281,12 @@
     var nav = el('div', { class: 'biwa-sheet-gallery-nav' });
     var prev = el('button', {
       class: 'biwa-gallery-btn', type: 'button',
-      'aria-label': 'Previous photo', text: '‹'
+      'aria-label': t('Previous photo'), text: '‹'
     });
     var counter = el('span', { class: 'biwa-gallery-count' });
     var next = el('button', {
       class: 'biwa-gallery-btn', type: 'button',
-      'aria-label': 'Next photo', text: '›'
+      'aria-label': t('Next photo'), text: '›'
     });
     var reduced = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2296,11 +2334,11 @@
   // Add a stop: pick any catalogue place (incl. all official alternatives).
   function openAddStopDialog() {
     var day = currentDay(store.trip);
-    els['biwa-stop-dialog-title'].textContent = 'Add stop to ' + day.label;
+    els['biwa-stop-dialog-title'].textContent = t('Add stop to {day}', { day: dayLabel(day) });
     var body = els['biwa-stop-dialog-body'];
     body.innerHTML = '';
     var field = el('div', { class: 'biwa-field' });
-    field.appendChild(el('label', { for: 'biwa-stop-place', text: 'Place' }));
+    field.appendChild(el('label', { for: 'biwa-stop-place', text: t('Place') }));
     var sel = el('select', { id: 'biwa-stop-place' });
     var catalogue = Rules.placesById(store.trip);
     (store.trip.places || []).slice().filter(function (p) {
@@ -2311,14 +2349,14 @@
       return !(p.placeId === 'extra-takashima-station' &&
                catalogue['official-west-information']);
     }).sort(function (a, b) {
-      return a.label.localeCompare(b.label);
+      return placeName(a).localeCompare(placeName(b));
     }).forEach(function (p) {
-      sel.appendChild(el('option', { value: p.placeId, text: p.label }));
+      sel.appendChild(el('option', { value: p.placeId, text: placeName(p) }));
     });
     field.appendChild(sel);
     field.appendChild(el('p', {
       class: 'biwa-field-hint',
-      text: 'The full catalogue is listed — official checkpoints you add appear in the itinerary without affecting stamp progress until ticked.'
+      text: t('The full catalogue is listed — official checkpoints you add appear in the itinerary without affecting stamp progress until ticked.')
     }));
     body.appendChild(field);
     els['biwa-stop-dialog-save'].onclick = function () {
@@ -2348,12 +2386,14 @@
   function openPlaceDialog(place) {
     var isNew = !place;
     var isUserPlace = isNew || place.category === 'custom' || place.category === 'parking' || place.category === 'accommodation';
-    els['biwa-stop-dialog-title'].textContent = isNew ? 'New custom place' : 'Edit ' + place.label;
+    els['biwa-stop-dialog-title'].textContent = isNew
+      ? t('New custom place')
+      : t('Edit {name}', { name: placeName(place) });
     var body = els['biwa-stop-dialog-body'];
     body.innerHTML = '';
 
     var labelField = el('div', { class: 'biwa-field' });
-    labelField.appendChild(el('label', { for: 'biwa-place-label', text: 'Name' }));
+    labelField.appendChild(el('label', { for: 'biwa-place-label', text: t('Name') }));
     var labelInput = el('input', {
       id: 'biwa-place-label', type: 'text',
       value: isNew ? '' : place.label, maxlength: '200'
@@ -2364,18 +2404,18 @@
     var catSel = null;
     if (isNew) {
       var catField = el('div', { class: 'biwa-field' });
-      catField.appendChild(el('label', { for: 'biwa-place-category', text: 'Kind' }));
+      catField.appendChild(el('label', { for: 'biwa-place-category', text: t('Kind') }));
       catSel = el('select', { id: 'biwa-place-category' });
-      catSel.appendChild(el('option', { value: 'custom', text: 'Custom stop' }));
-      catSel.appendChild(el('option', { value: 'accommodation', text: 'Accommodation' }));
+      catSel.appendChild(el('option', { value: 'custom', text: t('Custom stop') }));
+      catSel.appendChild(el('option', { value: 'accommodation', text: t('Accommodation') }));
       catSel.appendChild(el('option', {
         value: 'parking',
-        text: 'Bike-friendly parking (confirmed by the group)'
+        text: t('Bike-friendly parking (confirmed by the group)')
       }));
       catField.appendChild(catSel);
       catField.appendChild(el('p', {
         class: 'biwa-field-hint',
-        text: 'Only choose parking for spots the group has actually confirmed — that label is what marks it bike-friendly.'
+        text: t('Only choose parking for spots the group has actually confirmed — that label is what marks it bike-friendly.')
       }));
       body.appendChild(catField);
     }
@@ -2384,14 +2424,14 @@
     if (isUserPlace) {
       var row = el('div', { class: 'biwa-field-row' });
       var latField = el('div', { class: 'biwa-field' });
-      latField.appendChild(el('label', { for: 'biwa-place-lat', text: 'Latitude' }));
+      latField.appendChild(el('label', { for: 'biwa-place-lat', text: t('Latitude') }));
       latInput = el('input', {
         id: 'biwa-place-lat', type: 'number', step: 'any',
         value: isNew || place.lat == null ? '' : place.lat
       });
       latField.appendChild(latInput);
       var lngField = el('div', { class: 'biwa-field' });
-      lngField.appendChild(el('label', { for: 'biwa-place-lng', text: 'Longitude' }));
+      lngField.appendChild(el('label', { for: 'biwa-place-lng', text: t('Longitude') }));
       lngInput = el('input', {
         id: 'biwa-place-lng', type: 'number', step: 'any',
         value: isNew || place.lng == null ? '' : place.lng
@@ -2400,7 +2440,7 @@
       row.appendChild(latField); row.appendChild(lngField);
       body.appendChild(row);
       var gidField = el('div', { class: 'biwa-field' });
-      gidField.appendChild(el('label', { for: 'biwa-place-gid', text: 'Google place id (optional)' }));
+      gidField.appendChild(el('label', { for: 'biwa-place-gid', text: t('Google place id (optional)') }));
       gidInput = el('input', {
         id: 'biwa-place-gid', type: 'text',
         placeholder: 'ChIJ…',
@@ -2409,7 +2449,7 @@
       gidField.appendChild(gidInput);
       body.appendChild(gidField);
       var addressField = el('div', { class: 'biwa-field' });
-      addressField.appendChild(el('label', { for: 'biwa-place-address', text: 'Address (optional)' }));
+      addressField.appendChild(el('label', { for: 'biwa-place-address', text: t('Address (optional)') }));
       addressInput = el('input', {
         id: 'biwa-place-address', type: 'text', maxlength: '300',
         value: isNew || !place.address ? '' : place.address
@@ -2418,17 +2458,17 @@
       body.appendChild(addressField);
       body.appendChild(el('p', {
         class: 'biwa-field-hint',
-        text: 'Enter coordinates or a Google place id or an address — at least one is needed so the place can be found.'
+        text: t('Enter coordinates or a Google place id or an address — at least one is needed so the place can be found.')
       }));
     } else {
       body.appendChild(el('p', {
         class: 'biwa-field-hint',
-        text: 'Certificate checkpoint coordinates and Google ids are fixed; only the name and notes can be edited.'
+        text: t('Certificate checkpoint coordinates and Google ids are fixed; only the name and notes can be edited.')
       }));
     }
 
     var notesField = el('div', { class: 'biwa-field' });
-    notesField.appendChild(el('label', { for: 'biwa-place-notes', text: 'Notes' }));
+    notesField.appendChild(el('label', { for: 'biwa-place-notes', text: t('Notes') }));
     var notesInput = el('textarea', { id: 'biwa-place-notes', rows: '3' });
     notesInput.value = isNew ? '' : (place.notes || '');
     notesField.appendChild(notesInput);
@@ -2485,14 +2525,14 @@
   function openEndpointDialog(day, which) {
     var current = day[which];
     els['biwa-endpoint-dialog-title'].textContent =
-      (which === 'start' ? 'Start point' : 'Overnight point') + ' — ' + day.label;
+      t(which === 'start' ? 'Start point' : 'Overnight point') + ' — ' + dayLabel(day);
     var body = els['biwa-endpoint-dialog-body'];
     body.innerHTML = '';
 
     var field = el('div', { class: 'biwa-field' });
-    field.appendChild(el('label', { for: 'biwa-endpoint-place', text: 'Choose an existing place' }));
+    field.appendChild(el('label', { for: 'biwa-endpoint-place', text: t('Choose an existing place') }));
     var sel = el('select', { id: 'biwa-endpoint-place' });
-    sel.appendChild(el('option', { value: '', text: '— or enter coordinates below —' }));
+    sel.appendChild(el('option', { value: '', text: t('— or enter coordinates below —') }));
     var endpointCatalogue = Rules.placesById(store.trip);
     (store.trip.places || []).slice().filter(function (p) {
       // Route anchors and the hidden legacy station record are never
@@ -2501,33 +2541,33 @@
       return !(p.placeId === 'extra-takashima-station' &&
                endpointCatalogue['official-west-information']);
     }).sort(function (a, b) {
-      return a.label.localeCompare(b.label);
+      return placeName(a).localeCompare(placeName(b));
     }).forEach(function (p) {
-      sel.appendChild(el('option', { value: p.placeId, text: p.label }));
+      sel.appendChild(el('option', { value: p.placeId, text: placeName(p) }));
     });
     if (current && current.placeId) sel.value = current.placeId;
     field.appendChild(sel);
     body.appendChild(field);
 
     var pinLabelField = el('div', { class: 'biwa-field' });
-    pinLabelField.appendChild(el('label', { for: 'biwa-endpoint-pinlabel', text: 'Point label' }));
+    pinLabelField.appendChild(el('label', { for: 'biwa-endpoint-pinlabel', text: t('Point label') }));
     var pinLabel = el('input', {
       id: 'biwa-endpoint-pinlabel', type: 'text',
-      placeholder: 'e.g. Hotel in Hikone',
+      placeholder: t('e.g. Hotel in Hikone'),
       value: current && current.pin ? (current.pin.label || '') : ''
     });
     pinLabelField.appendChild(pinLabel);
     body.appendChild(pinLabelField);
     var row2 = el('div', { class: 'biwa-field-row' });
     var latField = el('div', { class: 'biwa-field' });
-    latField.appendChild(el('label', { for: 'biwa-endpoint-lat', text: 'Latitude' }));
+    latField.appendChild(el('label', { for: 'biwa-endpoint-lat', text: t('Latitude') }));
     var latInput = el('input', {
       id: 'biwa-endpoint-lat', type: 'number', step: 'any',
       value: current && current.pin ? current.pin.lat : ''
     });
     latField.appendChild(latInput);
     var lngField = el('div', { class: 'biwa-field' });
-    lngField.appendChild(el('label', { for: 'biwa-endpoint-lng', text: 'Longitude' }));
+    lngField.appendChild(el('label', { for: 'biwa-endpoint-lng', text: t('Longitude') }));
     var lngInput = el('input', {
       id: 'biwa-endpoint-lng', type: 'number', step: 'any',
       value: current && current.pin ? current.pin.lng : ''
@@ -2538,12 +2578,12 @@
     if (which === 'end') {
       body.appendChild(el('p', {
         class: 'biwa-field-hint',
-        text: 'This also becomes the next day’s start — the group sleeps where the day ended.'
+        text: t('This also becomes the next day’s start — the group sleeps where the day ended.')
       }));
     }
 
     var clearBtn = el('button', {
-      class: 'biwa-btn-inline', type: 'button', text: 'Clear endpoint',
+      class: 'biwa-btn-inline', type: 'button', text: t('Clear endpoint'),
       dataset: { tone: 'danger' }
     });
     clearBtn.addEventListener('click', function () {
@@ -2597,13 +2637,16 @@
   // provider key comes from the public trip GET (browser config is not tied
   // to the shared-state backend being up).
   function initMapPage() {
-    renderMapFilters();
     renderMapLegend();
     renderDayRoutesPanel();
     var key = store.browserMapsKey || null;
     // A key arriving after a keyless first visit must retry the loader —
     // but only once per key value, so a failed attempt never re-spends.
     if (mapInitialised && (!key || key === mapsKeyAttempted)) {
+      // The schematic + its caveat painted once on the failure path — a
+      // language switch lands here via render(), so repaint it in the
+      // active language (renderSchematic replaces the whole canvas).
+      if (!mapPage && schematicNote) paintMapSchematic(t(schematicNote));
       refreshMapContent();
       return;
     }
@@ -2611,7 +2654,8 @@
     var canvas = els['biwa-map-canvas'];
     if (!key) {
       mapsNs = null;
-      paintMapSchematic('Live map needs a configured Google Maps key — the stop schematic below is drawn from your own list.');
+      schematicNote = 'Live map needs a configured Google Maps key — the stop schematic below is drawn from your own list.';
+      paintMapSchematic(t(schematicNote));
       markAllDaysBlocked('map key not configured');
       return;
     }
@@ -2619,16 +2663,19 @@
     Preview.loadMaps(key).then(function (ns) {
       mapsNs = ns;
       if (!ns) {
-        paintMapSchematic('Live map unavailable — showing your stop order only.');
+        schematicNote = 'Live map unavailable — showing your stop order only.';
+        paintMapSchematic(t(schematicNote));
         markAllDaysBlocked('map unavailable');
         return;
       }
       mapPage = Preview.createMapPage(canvas, ns);
       if (!mapPage) {
-        paintMapSchematic('Live map unavailable — showing your stop order only.');
+        schematicNote = 'Live map unavailable — showing your stop order only.';
+        paintMapSchematic(t(schematicNote));
         markAllDaysBlocked('map unavailable');
         return;
       }
+      schematicNote = null;
       els['biwa-map-attribution'].hidden = false;
       refreshMapContent();
     });
@@ -2665,6 +2712,10 @@
   // Marker positions signature — fitBounds only re-runs when the plotted
   // set actually changes, so poll re-renders never steal the user's pan.
   var mapMarkersSig = null;
+
+  // The English reason the stop schematic is showing (map key/loader
+  // failure) — kept so a language toggle can repaint it translated.
+  var schematicNote = null;
 
   // Programme memberships → the filter keys that govern a marker plus the
   // official shore area that recolours it. A place with no programme falls
@@ -2716,7 +2767,7 @@
         key: p.placeId + '|' + markerFilterKeys(p).join('+'),
         lat: loc ? loc.lat : null,
         lng: loc ? loc.lng : null,
-        label: p.category === 'route-waypoint' ? p.label + ' (route point)' : p.label,
+        label: p.category === 'route-waypoint' ? placeName(p) + ' ' + t('(route point)') : placeName(p),
         shape: Preview.markerShape(p),
         area: markerArea(p),
         visited: markerVisited(store.trip, p),
@@ -2780,8 +2831,17 @@
       // changes the signature, which re-evaluates this path).
       state.signature = signature;
       state.status = 'unroutable';
-      state.error = 'road preview waiting for coordinates — unroutable: ' +
-        routed.unroutable.join(', ');
+      // Unroutable entries are label strings — resolve them back to their
+      // place so Chinese swaps catalogue names while user-authored pin
+      // labels keep their own text.
+      var unroutablePlaces = Rules.placesById(store.trip);
+      state.error = t('road preview waiting for coordinates — unroutable: ') +
+        routed.unroutable.map(function (n) {
+          var match = Object.keys(unroutablePlaces).filter(function (id) {
+            return unroutablePlaces[id].label === n;
+          })[0];
+          return match ? placeName(unroutablePlaces[match]) : t(n);
+        }).join(', ');
       state.path = null;
       renderDayRoutesPanel();
       refreshTrackGaps();
@@ -2883,77 +2943,87 @@
     else canvas.innerHTML = '';
     els['biwa-map-attribution'].hidden = true;
     canvas.appendChild(el('p', { class: 'biwa-caveat', text: note }));
-    els['biwa-map-status'].textContent = '';
   }
 
-  function renderMapFilters() {
-    var host = els['biwa-map-filters'];
-    host.innerHTML = '';
-    Rules.OFFICIAL_AREAS.map(function (a) {
-      return { key: a.programme, label: a.label };
-    }).concat([
-      { key: 'rally', label: 'Rally stops' },
-      { key: 'accommodation', label: 'Stays' },
-      { key: 'extra', label: 'Other stops / route points' }
-    ]).forEach(function (f) {
-      var chip = el('button', {
-        class: 'biwa-filter-chip', type: 'button',
-        'aria-pressed': String(mapFilters[f.key]),
-        'data-focus-key': 'filter-' + f.key,
-        text: f.label
-      });
-      chip.addEventListener('click', function () {
-        mapFilters[f.key] = !mapFilters[f.key];
-        chip.setAttribute('aria-pressed', String(mapFilters[f.key]));
-        refreshMapMarkers();
-      });
-      host.appendChild(chip);
+  // --- interactive legend -----------------------------------------------------
+  // The legend doubles as the layer control: each entry carries the marker
+  // glyph or day-line swatch, its label and an eye state icon, so show/hide
+  // never rides on colour alone. Both eyes are flat single-colour fills like
+  // every other icon — the pupil ring is punched out of the almond with
+  // fill-rule="evenodd" and refilled as a smaller disc.
+  var EYE_ON_SVG = '<svg viewBox="0 0 22 22" width="16" height="16" aria-hidden="true">' +
+    '<g fill="currentColor">' +
+    '<path fill-rule="evenodd" d="M11 5.4C6.4 5.4 3.1 8.4 1.9 10.9c1.2 2.5 4.5 5.5 9.1 5.5s7.9-3 9.1-5.5c-1.2-2.5-4.5-5.5-9.1-5.5zm0 8.7a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6z"/>' +
+    '<circle cx="11" cy="10.8" r="1.5"/>' +
+    '</g></svg>';
+  var EYE_OFF_SVG = '<svg viewBox="0 0 22 22" width="16" height="16" aria-hidden="true">' +
+    '<g fill="currentColor">' +
+    '<path fill-rule="evenodd" d="M11 5.4C6.4 5.4 3.1 8.4 1.9 10.9c1.2 2.5 4.5 5.5 9.1 5.5s7.9-3 9.1-5.5c-1.2-2.5-4.5-5.5-9.1-5.5zm0 8.7a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6z"/>' +
+    '<rect x="-1.5" y="9.95" width="25" height="1.9" rx="0.95" transform="rotate(-35 11 11)"/>' +
+    '</g></svg>';
+
+  // One legend toggle: visual (swatch or glyph) + label + eye icon.
+  // onToggle flips the shared state and returns the new visibility; the
+  // button's own aria/icon are then updated in place so a tap never rebuilds
+  // the row under the user's finger.
+  function legendToggle(visual, label, pressed, focusKey, onToggle) {
+    var item = el('button', {
+      class: 'biwa-legend-item', type: 'button',
+      'aria-pressed': String(pressed),
+      'data-focus-key': focusKey
     });
-    (store.trip ? store.trip.days : []).forEach(function (day) {
-      var chip = el('button', {
-        class: 'biwa-filter-chip', type: 'button',
-        'aria-pressed': String(dayLineVisible[day.dayId] !== false),
-        'data-focus-key': 'dayline-' + day.dayId,
-        text: day.label + ' route'
-      });
-      chip.addEventListener('click', function () {
-        dayLineVisible[day.dayId] = dayLineVisible[day.dayId] === false ? true : false;
-        chip.setAttribute('aria-pressed', String(dayLineVisible[day.dayId]));
-        paintPolylines();
-      });
-      host.appendChild(chip);
+    item.appendChild(visual);
+    item.appendChild(el('span', { class: 'biwa-legend-label', text: label }));
+    var eye = el('span', {
+      class: 'biwa-legend-eye', 'aria-hidden': 'true',
+      html: pressed ? EYE_ON_SVG : EYE_OFF_SVG
     });
+    item.appendChild(eye);
+    item.addEventListener('click', function () {
+      var now = onToggle();
+      item.setAttribute('aria-pressed', String(now));
+      eye.innerHTML = now ? EYE_ON_SVG : EYE_OFF_SVG;
+    });
+    return item;
   }
 
+  // Day route lines first (their swatch is the line colour), then the marker
+  // categories — official shore circles in area colours, then the other
+  // kinds. Toggling a day repaints polylines; toggling a category repaints
+  // markers.
   function renderMapLegend() {
     var host = els['biwa-map-legend'];
     host.innerHTML = '';
     (store.trip ? store.trip.days : []).forEach(function (day) {
-      host.appendChild(el('span', { class: 'biwa-legend-item' }, [
-        el('span', { class: 'biwa-legend-swatch', dataset: { day: day.dayId } }),
-        document.createTextNode(day.label + ' road preview')
-      ]));
+      var dayId = day.dayId;
+      var swatch = el('span', {
+        class: 'biwa-legend-swatch', 'aria-hidden': 'true',
+        dataset: { day: dayId }
+      });
+      host.appendChild(legendToggle(swatch, t('{day} route', { day: dayLabel(day) }),
+        dayLineVisible[dayId] !== false, 'dayline-' + dayId,
+        function () {
+          dayLineVisible[dayId] = dayLineVisible[dayId] === false ? true : false;
+          paintPolylines();
+          return dayLineVisible[dayId];
+        }));
     });
-    // Shore circles in their area colours, then the non-official kinds.
-    Rules.OFFICIAL_AREAS.forEach(function (a) {
-      var item = el('span', { class: 'biwa-legend-item' });
+    Rules.OFFICIAL_AREAS.map(function (a) {
+      return { key: a.programme, label: areaText(a), shape: 'official', shapeKey: a.key };
+    }).concat([
+      { key: 'rally', label: t('Rally stops'), shape: 'rally' },
+      { key: 'accommodation', label: t('Stays'), shape: 'accommodation' },
+      { key: 'extra', label: t('Other stops / route points'), shape: 'extra' }
+    ]).forEach(function (f) {
       var shape = el('span', { class: 'biwa-legend-shape', 'aria-hidden': 'true' });
-      shape.innerHTML = Preview.legendShapeSvg('official', a.key);
-      item.appendChild(shape);
-      item.appendChild(document.createTextNode(a.label));
-      host.appendChild(item);
-    });
-    [
-      ['rally', 'Rally stop'],
-      ['accommodation', 'Stay'],
-      ['extra', 'Other stop']
-    ].forEach(function (pair) {
-      var item = el('span', { class: 'biwa-legend-item' });
-      var shape = el('span', { class: 'biwa-legend-shape', 'aria-hidden': 'true' });
-      shape.innerHTML = Preview.legendShapeSvg(pair[0]);
-      item.appendChild(shape);
-      item.appendChild(document.createTextNode(pair[1]));
-      host.appendChild(item);
+      shape.innerHTML = Preview.legendShapeSvg(f.shape, f.shapeKey);
+      host.appendChild(legendToggle(shape, f.label,
+        !!mapFilters[f.key], 'filter-' + f.key,
+        function () {
+          mapFilters[f.key] = !mapFilters[f.key];
+          refreshMapMarkers();
+          return mapFilters[f.key];
+        }));
     });
   }
 
@@ -2990,7 +3060,7 @@
         class: 'biwa-dayroute-status-icon', 'aria-hidden': 'true',
         html: visited ? DAYLOC_CHECK_SVG : DAYLOC_EMPTY_SVG
       }),
-      el('span', { text: visited ? 'Completed' : 'Pending' })
+      el('span', { text: t(visited ? 'Completed' : 'Pending') })
     ]));
     return li;
   }
@@ -3004,19 +3074,19 @@
     var ol = el('ol', { class: 'biwa-dayroute-locations' });
     if (!points.length) {
       ol.appendChild(el('li', { class: 'biwa-dayroute-location' }, [
-        el('span', { class: 'biwa-dayroute-locname', text: 'No locations planned' })
+        el('span', { class: 'biwa-dayroute-locname', text: t('No locations planned') })
       ]));
       return ol;
     }
     if (points[0].kind !== 'start') {
-      ol.appendChild(dayRouteLocationItem('Start point not set', null, false, true));
+      ol.appendChild(dayRouteLocationItem(t('Start point not set'), null, false, true));
     }
     points.forEach(function (p) {
-      var role = p.kind === 'start' ? 'Start' : p.kind === 'end' ? 'Finish' : null;
-      ol.appendChild(dayRouteLocationItem(p.label, role, p.visited, false));
+      var role = p.kind === 'start' ? t('Start') : p.kind === 'end' ? t('Finish') : null;
+      ol.appendChild(dayRouteLocationItem(placeName(p), role, p.visited, false));
     });
     if (points[points.length - 1].kind !== 'end') {
-      ol.appendChild(dayRouteLocationItem('Finish point not set', null, false, true));
+      ol.appendChild(dayRouteLocationItem(t('Finish point not set'), null, false, true));
     }
     return ol;
   }
@@ -3029,29 +3099,29 @@
       var state = dayRoutes[day.dayId] || {};
       var row = el('div', { class: 'biwa-dayroute-row', dataset: { day: day.dayId } });
       var heading = el('div', { class: 'biwa-dayroute-heading' });
-      heading.appendChild(el('strong', { text: day.label }));
+      heading.appendChild(el('strong', { text: dayLabel(day) }));
       var meta = '';
-      if (state.status === 'pending') meta = 'requesting road preview…';
+      if (state.status === 'pending') meta = t('requesting road preview…');
       else if (state.status === 'ok') {
-        meta = (state.distanceMeters != null ? (state.distanceMeters / 1000).toFixed(1) + ' km road' : 'road distance unavailable');
+        meta = (state.distanceMeters != null ? t('{n} km road', { n: (state.distanceMeters / 1000).toFixed(1) }) : t('road distance unavailable'));
       } else if (state.status === 'blocked' || state.error === 'blocked') {
-        meta = 'road preview blocked — enable the Routes API for the Google key';
+        meta = t('road preview blocked — enable the Routes API for the Google key');
       } else if (state.status === 'missing') {
-        meta = 'set the ' + state.error + ' to unlock the road preview';
+        meta = t('set the {err} to unlock the road preview', { err: t(state.error) });
       } else if (state.status === 'unroutable') {
         // Named data state, not a provider failure — no Retry button.
         meta = state.error;
       } else if (state.status === 'error') {
-        meta = 'road preview unavailable';
+        meta = t('road preview unavailable');
       } else {
-        meta = 'road preview not requested';
+        meta = t('road preview not requested');
       }
       heading.appendChild(el('span', { class: 'biwa-dayroute-meta', text: meta }));
 
       var links = el('span', { class: 'biwa-dayroute-links' });
       if (state.status === 'error' || state.status === 'blocked' || state.error === 'blocked') {
         var retry = el('button', {
-          class: 'biwa-btn-inline', type: 'button', text: 'Retry',
+          class: 'biwa-btn-inline', type: 'button', text: t('Retry'),
           'data-focus-key': 'retry-route-' + day.dayId
         });
         retry.addEventListener('click', function () { retryDayRoute(day.dayId); });
@@ -3062,7 +3132,6 @@
       row.appendChild(dayRouteLocationList(store.trip, day));
       host.appendChild(row);
     });
-    els['biwa-map-status'].textContent = '';
   }
 
   // --- nearby view --------------------------------------------------------------------
@@ -3192,14 +3261,14 @@
     if (geoPoint) {
       var nearest = nearestPlanPoint(geoPoint);
       note.textContent = nearest
-        ? 'Near ' + nearest.point.label + ' · ' + nearest.day.label
-        : 'Near your location';
+        ? t('Near {name} · {day}', { name: placeName(nearest.point), day: dayLabel(nearest.day) })
+        : t('Near your location');
       return;
     }
     var plan = nearbyPlanAnchor();
     note.textContent = plan
-      ? 'Search area: ' + plan.point.label + ' · based on completed stops'
-      : 'Update your location to search nearby';
+      ? t('Search area: {name} · based on completed stops', { name: placeName(plan.point) })
+      : t('Update your location to search nearby');
   }
 
   // Six direct shortcut buttons: plain Google Maps category searches
@@ -3218,7 +3287,7 @@
         var toList = el('button', {
           class: 'biwa-nearby-shortcut', type: 'button'
         });
-        appendShortcutContent(toList, cat, cat.label + ' — group’s list');
+        appendShortcutContent(toList, cat, t('{cat} — group’s list', { cat: t(cat.label) }));
         toList.addEventListener('click', function () {
           els['biwa-parking-card'].scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
@@ -3229,7 +3298,7 @@
         class: 'biwa-nearby-shortcut',
         target: '_blank', rel: 'noopener noreferrer'
       });
-      appendShortcutContent(link, cat, cat.label);
+      appendShortcutContent(link, cat, t(cat.label));
       if (anchor) {
         link.href = MapLinks.nearbySearchUrl(cat.query, anchor);
       } else {
@@ -3251,10 +3320,10 @@
       var item = el('li', { class: 'biwa-stamp-item' });
       var name = el('button', {
         class: 'biwa-stamp-name biwa-card-body', type: 'button',
-        'aria-label': p.label + ' — details'
+        'aria-label': t('{name} — details', { name: placeName(p) })
       });
-      name.appendChild(document.createTextNode(p.label + ' '));
-      name.appendChild(el('span', { class: 'biwa-badge', text: 'Bike-friendly — group curated' }));
+      name.appendChild(document.createTextNode(placeName(p) + ' '));
+      name.appendChild(el('span', { class: 'biwa-badge', text: t('Bike-friendly — group curated') }));
       name.addEventListener('click', function () {
         openSheet({ place: p, occurrenceId: null, day: null, kind: 'catalogue' });
       });
@@ -3262,7 +3331,7 @@
       item.appendChild(el('span', { class: 'biwa-stamp-actions' }, [
         el('a', {
           class: 'biwa-btn-inline', href: MapLinks.pinUrl(p),
-          target: '_blank', rel: 'noopener noreferrer', text: 'Open in Maps'
+          target: '_blank', rel: 'noopener noreferrer', text: t('Open in Maps')
         })
       ]));
       list.appendChild(item);
@@ -3275,21 +3344,22 @@
   function updateMyLocation() {
     var status = els['biwa-nearby-geo-status'];
     if (!navigator.geolocation) {
-      status.textContent = 'Geolocation is not available in this browser.';
+      status.textContent = t('Geolocation is not available in this browser.');
       return;
     }
-    status.textContent = 'Requesting location…';
+    status.textContent = t('Requesting location…');
     navigator.geolocation.getCurrentPosition(function (pos) {
       geoPoint = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-      status.textContent = 'Location updated (accuracy ±' +
-        Math.round(pos.coords.accuracy) + ' m).';
+      status.textContent = t('Location updated (accuracy ±{n} m).', {
+        n: Math.round(pos.coords.accuracy)
+      });
       renderNearbyExtras();
     }, function () {
       // A denial keeps any earlier good fix — it must not silently drop the
       // anchor the rider already granted this session.
       status.textContent = geoPoint
-        ? 'Could not refresh your location — keeping the last fix. Check the browser permission.'
-        : 'Location unavailable — searches use the plan anchor below. Check the browser permission and try again.';
+        ? t('Could not refresh your location — keeping the last fix. Check the browser permission.')
+        : t('Location unavailable — searches use the plan anchor below. Check the browser permission and try again.');
       renderNearbyExtras();
     }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
   }

@@ -21,6 +21,12 @@
 
   var RoutePreview = {};
 
+  // Display-layer strings route through BiwaI18n when present — this module
+  // loads before it and must still work standalone.
+  function t(key) {
+    return global.BiwaI18n ? global.BiwaI18n.t(key) : key;
+  }
+
   var MAPS_LOAD_TIMEOUT_MS = 10000;
 
   RoutePreview._mapPromise = null;
@@ -214,7 +220,8 @@
     var spanLng = Math.max(b.maxLng - b.minLng, 0.001);
     function x(p) { return pad + (p.lng - b.minLng) / spanLng * (W - 2 * pad); }
     function y(p) { return H - pad - (p.lat - b.minLat) / spanLat * (H - 2 * pad); }
-    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Stop order schematic, not a road route">';
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' +
+      t('Stop order schematic, not a road route') + '">';
     svg += '<rect width="' + W + '" height="' + H + '" fill="' + c.surface + '"/>';
     if (points.length >= 2) {
       var d = points.map(function (p, i) {
@@ -229,7 +236,7 @@
         '" font-size="11" text-anchor="middle" fill="' + c.ink + '">' + (i + 1) + '</text>';
     });
     svg += '<text x="' + (W / 2) + '" y="' + (H - 8) + '" font-size="12" text-anchor="middle" fill="' +
-      c.inkSoft + '">Stop schematic — not a road route</text>';
+      c.inkSoft + '">' + t('Stop schematic — not a road route') + '</text>';
     svg += '</svg>';
     container.innerHTML = svg;
   };
@@ -407,7 +414,7 @@
     if (!elevation || elevation.status !== 'ok' || !elevation.samples || !elevation.samples.length) {
       svgEl.innerHTML =
         '<text x="50%" y="55%" text-anchor="middle" font-size="13" fill="' + c.inkSoft + '">' +
-        'Elevation profile unavailable</text>';
+        t('Elevation profile unavailable') + '</text>';
       return;
     }
     var W = 640, H = 120, pad = 8;

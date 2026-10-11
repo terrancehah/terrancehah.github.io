@@ -31,16 +31,33 @@
        motion is allowed, so reduced-motion visitors never download a GIF. -->
   <header class="biwa-masthead">
     <div class="biwa-masthead-scene" id="biwa-masthead-scene" aria-hidden="true">
-      <svg class="biwa-scene-mountains" viewBox="0 0 720 140" preserveAspectRatio="none">
-        <path fill="#d9c4ba" d="M0 140L60 88L120 116L200 58L280 110L360 72L440 116L520 68L600 112L680 82L720 106L720 140Z"/>
-        <path fill="#c89f9c" opacity="0.85" d="M0 140L80 102L160 126L240 90L320 124L420 94L500 128L580 98L660 124L720 108L720 140Z"/>
-      </svg>
+      <!-- Twin-halved ridge belt: both halves are the same tile whose
+           ridge heights match at x=0 and x=720, so the translateX(-50%)
+           loop wraps seamlessly while the range creeps almost
+           imperceptibly. Ridge endpoints are authored equal on purpose —
+           change a peak and keep the first/last vertex pairs in sync. -->
+      <div class="biwa-scene-mountains">
+        <div class="biwa-scene-mountains-belt">
+          <svg class="biwa-scene-mountains-half" viewBox="0 0 720 140" preserveAspectRatio="none">
+            <path fill="#aac39b" d="M0 96L60 74L120 104L200 62L280 108L360 78L440 110L520 66L600 104L660 84L720 96L720 140L0 140Z"/>
+            <path fill="#7f9f6e" opacity="0.85" d="M0 118L80 96L160 122L240 92L320 120L420 96L500 124L580 100L660 122L720 118L720 140L0 140Z"/>
+          </svg>
+          <svg class="biwa-scene-mountains-half" viewBox="0 0 720 140" preserveAspectRatio="none">
+            <path fill="#aac39b" d="M0 96L60 74L120 104L200 62L280 108L360 78L440 110L520 66L600 104L660 84L720 96L720 140L0 140Z"/>
+            <path fill="#7f9f6e" opacity="0.85" d="M0 118L80 96L160 122L240 92L320 120L420 96L500 124L580 100L660 122L720 118L720 140L0 140Z"/>
+          </svg>
+        </div>
+      </div>
       <div class="biwa-scene-water">
-        <span class="biwa-scene-sparkle" style="left:18%;top:35%;animation-delay:0s"></span>
-        <span class="biwa-scene-sparkle" style="left:34%;top:62%;animation-delay:-1.1s"></span>
-        <span class="biwa-scene-sparkle" style="left:52%;top:28%;animation-delay:-2.3s"></span>
-        <span class="biwa-scene-sparkle" style="left:71%;top:55%;animation-delay:-0.6s"></span>
-        <span class="biwa-scene-sparkle" style="left:87%;top:38%;animation-delay:-1.7s"></span>
+        <!-- Flat calm-lake reflections — long thin oblongs of varying
+             length hugging the far shore line, static by design. -->
+        <span class="biwa-scene-reflection" style="left:6%;top:9%;width:17%"></span>
+        <span class="biwa-scene-reflection" style="left:29%;top:5%;width:8%;opacity:0.28"></span>
+        <span class="biwa-scene-reflection" style="left:44%;top:15%;width:13%"></span>
+        <span class="biwa-scene-reflection" style="left:63%;top:8%;width:20%;opacity:0.5"></span>
+        <span class="biwa-scene-reflection" style="left:88%;top:13%;width:9%"></span>
+        <span class="biwa-scene-reflection" style="left:15%;top:21%;width:6%;opacity:0.24"></span>
+        <span class="biwa-scene-reflection" style="left:72%;top:23%;width:12%;opacity:0.3"></span>
       </div>
       <div class="biwa-scene-trees">
         <div class="biwa-scene-belt">
@@ -102,22 +119,30 @@
            data-animated="assets/wired-flat-1984-torii-in-reveal.gif"
            data-still="assets/torii-still.png" alt="">
       <div class="biwa-scene-road"></div>
-      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:30%"
+      <!-- Each rider runs a cadence-variant GIF: the fade spins slowest,
+           the weaver sits at baseline, the attacker spins quickest. -->
+      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:30%;--drift-dur:23s;--drift-delay:-4s"
            src="assets/cyclist-01-still.png"
-           data-animated="assets/wired-flat-667-person-cycling-loop-cycle.gif"
+           data-animated="assets/cyclist-01-loop.gif"
            data-still="assets/cyclist-01-still.png" alt="">
-      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:50%"
+      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:50%;--drift-dur:18s;--drift-delay:-11s"
            src="assets/cyclist-02-still.png"
-           data-animated="assets/wired-flat-667-person-cycling-loop-cycle%20(1).gif"
+           data-animated="assets/cyclist-02-loop.gif"
            data-still="assets/cyclist-02-still.png" alt="">
-      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:70%"
+      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:70%;--drift-dur:14s;--drift-delay:-7s"
            src="assets/cyclist-03-still.png"
-           data-animated="assets/wired-flat-667-person-cycling-loop-cycle%20(2).gif"
+           data-animated="assets/cyclist-03-loop.gif"
            data-still="assets/cyclist-03-still.png" alt="">
     </div>
     <div class="biwa-masthead-text">
-      <h1>Lake Biwa Ride</h1>
-      <p class="biwa-masthead-sub">Otsu - Hikone - Takashima - Otsu</p>
+      <h1 data-i18n="Lake Biwa Ride">Lake Biwa Ride</h1>
+      <p class="biwa-masthead-sub" data-i18n="Otsu - Hikone - Takashima - Otsu">Otsu - Hikone - Takashima - Otsu</p>
+    </div>
+    <!-- Language switch: two segments in one track — the active language
+         rides raised, the other sits sunken (aria-pressed carries state). -->
+    <div class="biwa-lang-switch" id="biwa-lang-switch" role="group" aria-label="Language / 语言" data-active="en">
+      <button class="biwa-lang-option" type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button class="biwa-lang-option" type="button" data-lang="zh" aria-pressed="false">中文</button>
     </div>
   </header>
   <div class="biwa-shell">
@@ -125,15 +150,15 @@
     <!-- No connection indicator or banners by design — a healthy app stays
          quiet; the only state surface is the explicit conflict dialog. -->
 
-    <nav class="biwa-nav" aria-label="Views">
+    <nav class="biwa-nav" aria-label="Views" data-i18n-aria-label="Views">
       <button class="biwa-nav-button" id="nav-timeline" data-view="timeline" aria-current="page">
-        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><g fill="currentColor"><circle cx="6.5" cy="6" r="2.6"/><rect x="11" y="4.7" width="9" height="2.6" rx="1.3"/><circle cx="6.5" cy="12" r="2.6"/><rect x="11" y="10.7" width="9" height="2.6" rx="1.3"/><circle cx="6.5" cy="18" r="2.6"/><rect x="11" y="16.7" width="9" height="2.6" rx="1.3"/></g></svg></span>Timeline
+        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><g fill="currentColor"><circle cx="6.5" cy="6" r="2.6"/><rect x="11" y="4.7" width="9" height="2.6" rx="1.3"/><circle cx="6.5" cy="12" r="2.6"/><rect x="11" y="10.7" width="9" height="2.6" rx="1.3"/><circle cx="6.5" cy="18" r="2.6"/><rect x="11" y="16.7" width="9" height="2.6" rx="1.3"/></g></svg></span><span data-i18n="Timeline">Timeline</span>
       </button>
       <button class="biwa-nav-button" id="nav-map" data-view="map" aria-current="false">
-        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><g fill="currentColor"><path d="M3.5 6.1l5-1.6v13.5l-5 1.7z"/><path d="M9.5 4.4l5 1.6v13.6l-5-1.6z"/><path d="M15.5 5.9l5-1.5v13.5l-5 1.6z"/></g></svg></span>Map
+        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><g fill="currentColor"><path d="M3.5 6.1l5-1.6v13.5l-5 1.7z"/><path d="M9.5 4.4l5 1.6v13.6l-5-1.6z"/><path d="M15.5 5.9l5-1.5v13.5l-5 1.6z"/></g></svg></span><span data-i18n="Map">Map</span>
       </button>
       <button class="biwa-nav-button" id="nav-nearby" data-view="nearby" aria-current="false">
-        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s-6-5.4-6-10a6 6 0 1 1 12 0c0 4.6-6 10-6 10zm0-7.8a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" fill-rule="evenodd"/></svg></span>Nearby
+        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 21s-6-5.4-6-10a6 6 0 1 1 12 0c0 4.6-6 10-6 10zm0-7.8a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" fill-rule="evenodd"/></svg></span><span data-i18n="Nearby">Nearby</span>
       </button>
     </nav>
 
@@ -143,7 +168,7 @@
         <!-- Compact certificate progress heading (the stamp view merged in) -->
         <div class="biwa-progress-strip" id="biwa-progress-strip"></div>
 
-        <div class="biwa-day-tabs" id="biwa-day-selector" role="group" aria-label="Choose riding day"></div>
+        <div class="biwa-day-tabs" id="biwa-day-selector" role="group" aria-label="Choose riding day" data-i18n-aria-label="Choose riding day"></div>
         <h2 class="biwa-day-title" id="biwa-day-title"></h2>
 
         <div class="biwa-card biwa-next-stop" id="biwa-next-stop" hidden>
@@ -151,7 +176,7 @@
                Every slot is permanent and height-reserved so async photos,
                credits and completion copy never shift the card's size. -->
           <div class="biwa-next-content">
-            <p class="biwa-next-stop-label" id="biwa-next-stop-label">Up Next</p>
+            <p class="biwa-next-stop-label" id="biwa-next-stop-label" data-i18n="Up Next">Up Next</p>
             <!-- The name is a real button: keyboard users get Enter/Space
                  natively; it is styled to read as plain text and disabled
                  in completion states so no sheet can open there. -->
@@ -160,8 +185,8 @@
                  visibility (never display) so the card keeps its size in
                  finished and empty states. -->
             <div class="biwa-next-actions">
-              <a class="biwa-btn biwa-btn-primary" id="biwa-next-stop-directions" target="_blank" rel="noopener noreferrer">Directions</a>
-              <button class="biwa-btn biwa-btn-secondary" id="biwa-next-complete" type="button">Mark as Completed</button>
+              <a class="biwa-btn biwa-btn-primary" id="biwa-next-stop-directions" target="_blank" rel="noopener noreferrer" data-i18n="Directions">Directions</a>
+              <button class="biwa-btn biwa-btn-secondary" id="biwa-next-complete" type="button" data-i18n="Mark as Completed">Mark as Completed</button>
             </div>
             <!-- Programme check-in links for the CURRENT next stop only —
                  a permanently reserved row: inapplicable states hide the
@@ -176,8 +201,8 @@
         <ol class="biwa-track" id="biwa-track"></ol>
 
         <div class="biwa-timeline-actions">
-          <button class="biwa-btn biwa-btn-secondary" id="biwa-add-stop">+ Add stop</button>
-          <button class="biwa-btn biwa-btn-secondary" id="biwa-add-place">+ New custom place</button>
+          <button class="biwa-btn biwa-btn-secondary" id="biwa-add-stop" data-i18n="+ Add stop">+ Add stop</button>
+          <button class="biwa-btn biwa-btn-secondary" id="biwa-add-place" data-i18n="+ New custom place">+ New custom place</button>
         </div>
 
         <!-- Decorative leaf-burst layer for manual completion ticks. It lives
@@ -190,33 +215,31 @@
       <section class="biwa-view" id="view-map" aria-labelledby="nav-map">
         <div class="biwa-map-page">
           <div class="biwa-map-canvas" id="biwa-map-canvas"></div>
-          <div class="biwa-map-statusbar" id="biwa-map-status" role="status"></div>
-          <div class="biwa-map-controls">
-            <div class="biwa-map-filters" id="biwa-map-filters" role="group" aria-label="Marker filters"></div>
-            <div class="biwa-map-legend" id="biwa-map-legend"></div>
-          </div>
+          <!-- The legend doubles as the layer control — every entry is a
+               show/hide toggle for its markers or day route line. -->
+          <div class="biwa-map-legend" id="biwa-map-legend" role="group" aria-label="Map layers" data-i18n-aria-label="Map layers"></div>
           <!-- Provider content (route lines, distances) only appears
                alongside this Google attribution. -->
           <p class="biwa-map-attribution" id="biwa-map-attribution" hidden>
-            Map data © <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">Google</a>
-            · <a href="https://maps.google.com/help/terms_maps/" target="_blank" rel="noopener noreferrer">Google Maps terms</a>
-            · <a href="terms">Our terms</a> · <a href="privacy">Privacy</a>
+            <span data-i18n="Map data ©">Map data ©</span> <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">Google</a>
+            · <a href="https://maps.google.com/help/terms_maps/" target="_blank" rel="noopener noreferrer" data-i18n="Google Maps terms">Google Maps terms</a>
+            · <a href="terms" data-i18n="Our terms">Our terms</a> · <a href="privacy" data-i18n="Privacy">Privacy</a>
           </p>
           <div class="biwa-dayroutes" id="biwa-day-routes"></div>
-          <p class="biwa-caveat">Road preview, not cycling guidance. Avoidance is a preference, not a guarantee — the line may still include restricted road features.</p>
+          <p class="biwa-caveat" data-i18n="Road preview, not cycling guidance. Avoidance is a preference, not a guarantee — the line may still include restricted road features.">Road preview, not cycling guidance. Avoidance is a preference, not a guarantee — the line may still include restricted road features.</p>
         </div>
       </section>
 
       <!-- ============ NEARBY VIEW ============ -->
       <section class="biwa-view" id="view-nearby" aria-labelledby="nav-nearby">
         <div class="biwa-card">
-          <h2>Find nearby</h2>
-          <p class="biwa-nearby-lead">Shortcut searches open in Google Maps around
+          <h2 data-i18n="Find nearby">Find nearby</h2>
+          <p class="biwa-nearby-lead" data-i18n="Shortcut searches open in Google Maps around the anchor below — ordinary map listings, never labelled bike-friendly.">Shortcut searches open in Google Maps around
             the anchor below — ordinary map listings, never labelled
             bike-friendly.</p>
           <!-- GPS only fires on this button — never automatically, and the
                point is used for searches only, never stored or shared. -->
-          <button class="biwa-btn biwa-btn-primary" id="biwa-nearby-geolocate" type="button">Update my location</button>
+          <button class="biwa-btn biwa-btn-primary" id="biwa-nearby-geolocate" type="button" data-i18n="Update my location">Update my location</button>
           <p class="biwa-field-hint" id="biwa-nearby-geo-status" role="status"></p>
           <p class="biwa-field-hint" id="biwa-nearby-anchor-note"></p>
           <div class="biwa-nearby-grid" id="biwa-nearby-grid"></div>
@@ -225,7 +248,7 @@
         <!-- Collapses entirely when the group has no curated spots yet — a
              big empty card is worse than no card. -->
         <div class="biwa-card" id="biwa-parking-card" hidden>
-          <h2>Bike-friendly parking</h2>
+          <h2 data-i18n="Bike-friendly parking">Bike-friendly parking</h2>
           <ul class="biwa-stamp-list" id="biwa-parking-list"></ul>
         </div>
       </section>
@@ -235,11 +258,11 @@
          portfolio, no framing; the shell's bottom padding already lifts
          it clear of the fixed mobile nav. -->
     <footer class="biwa-footer">
-      <nav class="biwa-footer-nav" aria-label="Footer">
-        <a class="biwa-footer-link" href="/projects.html">Projects</a>
+      <nav class="biwa-footer-nav" aria-label="Footer" data-i18n-aria-label="Footer">
+        <a class="biwa-footer-link" href="/projects.html" data-i18n="Projects">Projects</a>
         <a class="biwa-footer-link" href="/">terrancehah.com</a>
       </nav>
-      <p class="biwa-footer-credit">Made with <span class="biwa-footer-heart" aria-hidden="true">♥</span> by Terrance</p>
+      <p class="biwa-footer-credit"><span data-i18n="Made with">Made with</span> <span class="biwa-footer-heart" aria-hidden="true">♥</span><span data-i18n=" by Terrance"> by Terrance</span></p>
     </footer>
   </div>
 
@@ -249,7 +272,7 @@
            aria-labelledby="biwa-sheet-title" hidden>
     <div class="biwa-sheet-grab" aria-hidden="true"></div>
     <button class="biwa-sheet-close" id="biwa-sheet-close" type="button"
-            aria-label="Close place details">✕</button>
+            aria-label="Close place details" data-i18n-aria-label="Close place details">✕</button>
     <div class="biwa-sheet-body" id="biwa-sheet-body"></div>
     <!-- Sticky action footer: rendered per place, outside the scroll body
          so directions/check-in stay reachable at any scroll depth. -->
@@ -258,32 +281,32 @@
 
   <!-- Editor dialog (place fields / add stop) — opened from rows and the sheet -->
   <dialog class="biwa-dialog" id="biwa-stop-dialog" aria-labelledby="biwa-stop-dialog-title">
-    <h2 id="biwa-stop-dialog-title">Stop</h2>
+    <h2 id="biwa-stop-dialog-title" data-i18n="Stop">Stop</h2>
     <div id="biwa-stop-dialog-body"></div>
     <div class="biwa-dialog-actions">
-      <button class="biwa-btn biwa-btn-secondary" id="biwa-stop-dialog-cancel" type="button">Cancel</button>
-      <button class="biwa-btn biwa-btn-primary" id="biwa-stop-dialog-save" type="button">Save</button>
+      <button class="biwa-btn biwa-btn-secondary" id="biwa-stop-dialog-cancel" type="button" data-i18n="Cancel">Cancel</button>
+      <button class="biwa-btn biwa-btn-primary" id="biwa-stop-dialog-save" type="button" data-i18n="Save">Save</button>
     </div>
   </dialog>
 
   <dialog class="biwa-dialog" id="biwa-endpoint-dialog" aria-labelledby="biwa-endpoint-dialog-title">
-    <h2 id="biwa-endpoint-dialog-title">Overnight point</h2>
+    <h2 id="biwa-endpoint-dialog-title" data-i18n="Overnight point">Overnight point</h2>
     <div id="biwa-endpoint-dialog-body"></div>
     <div class="biwa-dialog-actions">
-      <button class="biwa-btn biwa-btn-secondary" id="biwa-endpoint-dialog-cancel" type="button">Cancel</button>
-      <button class="biwa-btn biwa-btn-primary" id="biwa-endpoint-dialog-save" type="button">Save</button>
+      <button class="biwa-btn biwa-btn-secondary" id="biwa-endpoint-dialog-cancel" type="button" data-i18n="Cancel">Cancel</button>
+      <button class="biwa-btn biwa-btn-primary" id="biwa-endpoint-dialog-save" type="button" data-i18n="Save">Save</button>
     </div>
   </dialog>
 
   <dialog class="biwa-dialog" id="biwa-conflict-dialog" aria-labelledby="biwa-conflict-title">
-    <h2 id="biwa-conflict-title">Someone else saved first</h2>
-    <p>Another phone updated the trip while you were editing. Your unsaved draft
+    <h2 id="biwa-conflict-title" data-i18n="Someone else saved first">Someone else saved first</h2>
+    <p data-i18n="Another phone updated the trip while you were editing. Your unsaved draft is still on this phone — you can load the shared version, or explicitly replace the whole shared trip with your snapshot (their edits would be overwritten).">Another phone updated the trip while you were editing. Your unsaved draft
       is still on this phone — you can load the shared version, or explicitly
       replace the whole shared trip with your snapshot (their edits would be
       overwritten).</p>
     <div class="biwa-dialog-actions">
-      <button class="biwa-btn biwa-btn-secondary" id="biwa-conflict-keep" type="button">Replace shared trip with mine</button>
-      <button class="biwa-btn biwa-btn-primary" id="biwa-conflict-reload" type="button">Load shared version</button>
+      <button class="biwa-btn biwa-btn-secondary" id="biwa-conflict-keep" type="button" data-i18n="Replace shared trip with mine">Replace shared trip with mine</button>
+      <button class="biwa-btn biwa-btn-primary" id="biwa-conflict-reload" type="button" data-i18n="Load shared version">Load shared version</button>
     </div>
   </dialog>
 
@@ -293,6 +316,7 @@
   <script src="trip-store.js" defer></script>
   <script src="route-preview.js" defer></script>
   <script src="stop-distances.js" defer></script>
+  <script src="biwa-i18n.js" defer></script>
   <script src="biwa-ride.js" defer></script>
 </body>
 </html>

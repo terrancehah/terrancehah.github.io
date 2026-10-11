@@ -80,11 +80,11 @@
   /* Masthead scene — the supplied-art illustration gets its own bright
      daytime pair, outside the warm surface palette (art colours, not UI). */
   --biwa-scene-sky: #d9f1ff;                            /* clear blue */
-  --biwa-scene-lake: #a8d1e1;                           /* deeper lake */
+  --biwa-scene-lake: #2f78ac;                           /* deeper lake */
 
   /* Type */
-  --biwa-font-heading: 'Momo Trust Display', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
-  --biwa-font-body: 'Quattrocento Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  --biwa-font-heading: 'Momo Trust Display', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  --biwa-font-body: 'Quattrocento Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
 
   /* Spacing scale */
   --biwa-space-xs: 0.25rem;
