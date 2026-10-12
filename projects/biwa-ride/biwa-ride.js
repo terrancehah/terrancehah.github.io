@@ -362,10 +362,15 @@
 
     // Figure GIF keep-alive — rooted on the scene so entries fire only
     // when a figure actually crosses into the visible masthead (the
-    // 100px margin pre-wakes decode just before it appears). Re-setting
-    // the same src is the reliable way to restart a suspended GIF.
-    // Cloned belt imgs are re-observed after each re-arrangement, and
-    // a per-img cooldown stops clip-boundary flicker from re-triggering.
+    // 100px margin pre-wakes decode just before it appears). WebKit
+    // suspends GIF decode for never-painted images and only re-checks
+    // on scroll/repaint — the belt's transform drifts walkers in with
+    // neither — so a src self-assign is useless (the in-memory cache
+    // returns the same suspended animation). A display flick forces the
+    // renderer to detach and rebuild while in view, which runs the
+    // real resume path. Cloned belt imgs are re-observed after each
+    // re-arrangement; a per-img cooldown stops clip-boundary flicker
+    // from re-triggering.
     var sceneFigureIO = null;
     function observeSceneFigures() {
       if (!('IntersectionObserver' in window) || !els['biwa-masthead-scene']) return;
@@ -373,12 +378,13 @@
         sceneFigureIO = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             var img = entry.target;
-            var src = img.getAttribute('src');
-            if (!entry.isIntersecting || !src) return;
+            if (!entry.isIntersecting) return;
             var now = Date.now();
             if (now - (img._biwaGifNudge || 0) < 1500) return;
             img._biwaGifNudge = now;
-            img.setAttribute('src', src);
+            img.style.display = 'none';
+            void img.offsetHeight;   // force the detach+rebuild while visible
+            img.style.display = '';
           });
         }, { root: els['biwa-masthead-scene'], rootMargin: '100px' });
       }
