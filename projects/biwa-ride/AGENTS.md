@@ -64,6 +64,7 @@ Open `http://localhost:3000/projects/biwa-ride/` — plain URL, no invite. The p
 
 ## Sync & safety invariants
 
+- **Check-in progress is per-device, never shared.** `visitStatus`/`programmeStatus` live in localStorage (`biwa:v2:local-progress`), written via `TripStore.applyLocalProgress` and overlaid onto `store.trip` at emit — every `Rules.*` read sees the device's own checklist. `_put` strips both fields so the shared doc carries the plan only; the one-time seed copies any legacy shared progress into local storage first. `navigator.storage.persist()` is requested at boot (best-effort — Safari's eviction window is not page-configurable). The CAS intent-rebase machinery is retained but no longer carries ticks.
 - CAS writes (`expectedRevision`, Redis Lua); 409 carries the latest trip and is consumed. Drafts are never discarded — recoverable `pendingDraft`, explicit conflict UI ("Replace shared trip with mine" = whole-snapshot overwrite).
 - Only idempotent checkbox intents rebase (one retry, after a successful refresh, dropped cleanly if the target was deleted). Reads can't adopt over an open editor or in-flight write (read-generation bump).
 - 503 ⇒ temporary `unavailable`, keeps polling; edits hold as pendingDraft and retry on recovery. A guard response (401/403) ⇒ local seed/draft only — cached shared state is never shown.

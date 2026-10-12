@@ -323,6 +323,19 @@
     <div class="biwa-sheet-actions" id="biwa-sheet-actions"></div>
   </section>
 
+  <!-- Pill toast: transient confirmation that a check-in write landed.
+       A polite live region so screen readers announce each tick without
+       stealing focus; visibility is class-driven (never `hidden`) so the
+       fade/slide transition can actually run. -->
+  <div class="biwa-toast" id="biwa-toast" role="status" aria-live="polite">
+    <svg class="biwa-toast-icon" viewBox="0 0 16 16" width="14" height="14"
+         aria-hidden="true" focusable="false">
+      <path d="M3 8.6l3.1 3.1L13 5" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="biwa-toast-text" id="biwa-toast-text"></span>
+  </div>
+
   <!-- Editor dialog (place fields / add stop) — opened from rows and the sheet -->
   <dialog class="biwa-dialog" id="biwa-stop-dialog" aria-labelledby="biwa-stop-dialog-title">
     <h2 id="biwa-stop-dialog-title" data-i18n="Stop">Stop</h2>

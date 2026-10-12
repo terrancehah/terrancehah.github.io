@@ -17,6 +17,12 @@
  *  - A 503 (sharing not configured/unavailable) is a temporary 'unavailable'
  *    state, not a permanent local-only mode: polling keeps trying and an
  *    unsent draft retries once the service returns.
+ *  - Check-in progress (visitStatus/programmeStatus) is PER-DEVICE: it
+ *    lives in localStorage, never enters the shared document and is
+ *    overlaid onto this.trip at emit time so every Rules read sees the
+ *    device's own checklist. Outgoing writes strip both fields, so the
+ *    shared document carries the plan only. The one-time seed copies any
+ *    legacy shared progress into the local store before it is ignored.
  *  - Local drafts/caches live under v2 storage keys so the retired v1 data
  *    is never touched.
  */
@@ -26,6 +32,7 @@
   var POLL_MS = 15000;
   var LOCAL_LAST_KNOWN_KEY = 'biwa:v2:last-known-trip';
   var LOCAL_DRAFT_KEY = 'biwa:v2:local-draft';
+  var LOCAL_PROGRESS_KEY = 'biwa:v2:local-progress';
 
   // Catalogue records whose classification was corrected after shared
   // snapshots already carried the old metadata. Only these ids get their
@@ -86,6 +93,11 @@
     this.latestServer = null;       // last authoritative server snapshot seen
     this.editorActive = false;      // UI sets while a dialog is open
     this._saving = false;
+    // Per-device check-in state — overlaid onto this.trip, never shared.
+    // Seeded once from whatever doc first carries the legacy shared fields
+    // so progress made under the old shared model is not lost.
+    this.localProgress = { visitStatus: {}, programmeStatus: {} };
+    this._progressLoaded = false;
     this._listeners = [];
     this._writeQueue = Promise.resolve();
     this._readSeq = 0;              // bumped on saves/editor entry: kills stale reads
@@ -112,7 +124,64 @@
       this._normalizeTrip(this.conflict.draft);
       this._normalizeTrip(this.conflict.server);
     }
+    // Progress is resolved lazily on the first emit with a doc available:
+    // stored progress wins; otherwise the legacy shared fields seed it.
+    if (!this._progressLoaded) {
+      this._loadProgress(this.trip || this.pendingDraft || this.latestServer);
+    }
+    // The UI reads progress through this.trip only — raw docs keep their
+    // own fields for CAS bases and conflict sides, never the view.
+    this._overlayProgress(this.trip);
     this._listeners.forEach(function (fn) { fn(self); });
+  };
+
+  // One-time local progress resolution. A stored snapshot always wins;
+  // otherwise the first doc still carrying the legacy shared fields
+  // (server trip, unsent draft or last-known cache — old drafts double as
+  // a backup here) seeds the local copy, which is then persisted so the
+  // seed can never re-run. Called with a null doc when nothing has loaded
+  // yet — it simply stays unloaded for the next emit.
+  TripStore.prototype._loadProgress = function (doc) {
+    var stored = null;
+    try { stored = JSON.parse(global.localStorage.getItem(LOCAL_PROGRESS_KEY) || 'null'); } catch (e) {}
+    if (stored && typeof stored === 'object') {
+      this.localProgress = {
+        visitStatus: stored.visitStatus || {},
+        programmeStatus: stored.programmeStatus || {}
+      };
+      this._progressLoaded = true;
+      return;
+    }
+    if (!doc) return;
+    this.localProgress = {
+      visitStatus: JSON.parse(JSON.stringify(doc.visitStatus || {})),
+      programmeStatus: JSON.parse(JSON.stringify(doc.programmeStatus || {}))
+    };
+    this._progressLoaded = true;
+    try { global.localStorage.setItem(LOCAL_PROGRESS_KEY, JSON.stringify(this.localProgress)); } catch (e) {}
+  };
+
+  // Replace a doc's progress fields with deep copies of the local state.
+  // Copies (not references) keep _normalizeTrip's legacy-id transfer and
+  // any future mutator from writing straight into the local store.
+  TripStore.prototype._overlayProgress = function (doc) {
+    if (!doc) return doc;
+    doc.visitStatus = JSON.parse(JSON.stringify(this.localProgress.visitStatus));
+    doc.programmeStatus = JSON.parse(JSON.stringify(this.localProgress.programmeStatus));
+    return doc;
+  };
+
+  // Per-device check-in write: mutate a draft of the local progress doc
+  // through the same Rules helpers the shared model used, persist it,
+  // then refresh the overlay and emit. Synchronous — 'local' mirrors the
+  // save() vocabulary so success handlers treat it like a landed write.
+  TripStore.prototype.applyLocalProgress = function (mutator) {
+    var draft = JSON.parse(JSON.stringify(this.localProgress));
+    try { mutator(draft); } catch (e) { return 'error'; }
+    this.localProgress = draft;
+    try { global.localStorage.setItem(LOCAL_PROGRESS_KEY, JSON.stringify(draft)); } catch (e) {}
+    this._emit();
+    return 'local';
   };
 
   // Non-destructive migration for pre-correction snapshots. Two fixes on an
@@ -215,6 +284,13 @@
 
   TripStore.prototype.init = function () {
     var self = this;
+    // Ask for durable storage so local check-in progress survives long
+    // idle stretches — browsers may evict non-persistent site data, and
+    // there is no way for a page to set an expiry itself. Best-effort:
+    // an unsupported API or a denied grant quietly does nothing.
+    if (global.navigator && navigator.storage && navigator.storage.persist) {
+      navigator.storage.persist().catch(function () {});
+    }
     return Promise.all([
       fetch('data/checkpoints.json').then(function (r) { return r.json(); }),
       fetch('data/trip-seed.json').then(function (r) { return r.json(); })
@@ -389,7 +465,8 @@
   // Queue a mutation. `mutator` edits a draft copy; the whole snapshot is then
   // written via CAS. options.intent marks simple idempotent checkbox intents
   // eligible for one bounded rebase retry: {kind:'visit'|'programme',
-  // key, programme?, value:true}.
+  // key, programme?, value:true}. Retained for compatibility — check-in
+  // progress is per-device now and bypasses save() via applyLocalProgress.
   TripStore.prototype.save = function (mutator, options) {
     var self = this;
     // A throwing mutator must not poison the queue for later writes.
@@ -455,6 +532,10 @@
     // catalogue correction reaches the server with current metadata, so
     // the immutable-manifest check can never reject it.
     this._normalizeTrip(trip);
+    // Check-in progress is per-device — a draft copied from the overlaid
+    // view would otherwise leak this device's ticks into the shared doc.
+    delete trip.visitStatus;
+    delete trip.programmeStatus;
     return fetch(this.apiBase + 'biwa-trip', {
       method: 'PUT',
       headers: this._headers(),

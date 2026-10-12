@@ -133,6 +133,7 @@
       'biwa-nearby-grid', 'biwa-parking-card', 'biwa-parking-list',
       'biwa-sheet', 'biwa-sheet-body', 'biwa-sheet-close', 'biwa-sheet-backdrop',
       'biwa-sheet-actions',
+      'biwa-toast', 'biwa-toast-text',
       'biwa-stop-dialog', 'biwa-stop-dialog-title', 'biwa-stop-dialog-body',
       'biwa-stop-dialog-save', 'biwa-stop-dialog-cancel',
       'biwa-endpoint-dialog', 'biwa-endpoint-dialog-title', 'biwa-endpoint-dialog-body',
@@ -328,12 +329,17 @@
       if (!next) return;
       var occurrenceId = next.occurrenceId;
       var placeId = next.placeId;
-      store.save(function (draft) {
+      // Per-device progress — the write is synchronous localStorage, so
+      // the result is known immediately and the shared doc is untouched.
+      var result = store.applyLocalProgress(function (draft) {
         var p = placeId
-          ? (draft.places || []).filter(function (x) { return x.placeId === placeId; })[0] || next.place
+          ? (store.trip.places || []).filter(function (x) { return x.placeId === placeId; })[0] || next.place
           : null;
         Rules.applyArrival(draft, occurrenceId, p, true);
-      }, { intent: { kind: 'arrival', occurrenceId: occurrenceId, placeId: placeId || null, value: true } });
+      });
+      // The pill confirms only a durable tick — a failed local write
+      // stays silent rather than flashing success.
+      checkinSaved(result, next.place ? placeName(next.place) : null);
       // Same celebration gate as the row/sheet ticks: once, only while the
       // timeline view (which owns the leaf layer) is active.
       if (document.getElementById('view-timeline').classList.contains('is-active')) {
@@ -1105,6 +1111,32 @@
     }, 12000);
   }
 
+  // --- check-in toast -----------------------------------------------------------
+  // Small pill confirmation shown once a tick has actually landed — the
+  // store resolves 'saved' on a committed write and 'local' when running
+  // off the seed without a backend; conflicts/failures keep their own UI
+  // and never flash success. One shared element means rapid successive
+  // ticks simply replace the text and restart the fade instead of
+  // stacking pills. It is a live region, so each update announces itself.
+  var checkinToastTimer = null;
+  function showCheckinToast(name) {
+    var toast = els['biwa-toast'];
+    if (!toast) return;
+    els['biwa-toast-text'].textContent = name
+      ? t('Checked in — {name}', { name: name })
+      : t('Checked in');
+    toast.classList.add('is-visible');
+    clearTimeout(checkinToastTimer);
+    checkinToastTimer = setTimeout(function () {
+      toast.classList.remove('is-visible');
+    }, 2600);
+  }
+  // Toast gate for save() results — the only two states that mean the
+  // tick is now durable.
+  function checkinSaved(result, name) {
+    if (result === 'saved' || result === 'local') showCheckinToast(name);
+  }
+
   // --- timeline card photos ---------------------------------------------------
   // Lazy first-photo backdrops on every rendered stop/endpoint card, in the
   // same visual language as the up-next card (absolute image, 1px blur,
@@ -1324,12 +1356,17 @@
       ev.stopPropagation();
       if (store._saving) return; // no double-fire while a write is in flight
       var target = !visited;
-      store.save(function (draft) {
+      // Per-device progress — synchronous localStorage write; the shared
+      // doc is untouched. Places resolve from the live view, not a draft.
+      var result = store.applyLocalProgress(function (draft) {
         var p = place && place.placeId
-          ? (draft.places || []).filter(function (x) { return x.placeId === place.placeId; })[0] || place
+          ? (store.trip.places || []).filter(function (x) { return x.placeId === place.placeId; })[0] || place
           : null;
         Rules.applyArrival(draft, occurrenceId, p, target);
-      }, { intent: { kind: 'arrival', occurrenceId: occurrenceId, placeId: place ? place.placeId : null, value: target } });
+      });
+      // Toast only once the tick is durable — a failed local write stays
+      // silent, and unchecking never confirms.
+      if (target) checkinSaved(result, label);
       // Celebrate a fresh manual tick — outside the save mutator so CAS
       // retries/reapplies can never double-fire the burst, and only on a
       // false→true flip (unchecking, polls and re-renders stay quiet).
@@ -2029,12 +2066,17 @@
       var target = !checked;
       var occurrenceId = occ;
       var placeId = place.placeId;
-      store.save(function (draft) {
+      // Per-device progress — synchronous localStorage write, so the
+      // result is known immediately and the shared doc is untouched.
+      var result = store.applyLocalProgress(function (draft) {
         var p = placeId
-          ? (draft.places || []).filter(function (x) { return x.placeId === placeId; })[0]
+          ? (store.trip.places || []).filter(function (x) { return x.placeId === placeId; })[0]
           : null;
         Rules.applyArrival(draft, occurrenceId, p || place, target);
-      }, { intent: { kind: 'arrival', occurrenceId: occurrenceId, placeId: placeId || null, value: target } });
+      });
+      // The sheet may sit over map/nearby where the leaf layer is
+      // hidden — the pill is view-independent and always reachable.
+      if (target) checkinSaved(result, placeName(place));
       // The sheet body re-renders from the store change — keep context.
       // Celebrate a fresh tick only while the timeline view is active —
       // the leaf layer lives there and stays hidden on map/nearby.
@@ -2628,12 +2670,16 @@
       if (which === 'start' && draft.days[dayIndex - 1]) {
         draft.days[dayIndex - 1].end = endpoint;
       }
-      // Clearing an endpoint drops its manual visit flag — the row no
-      // longer exists so a dangling visit key would fail validation.
-      if (endpoint === null && draft.visitStatus) {
-        delete draft.visitStatus[day.dayId + '-' + which];
-      }
     });
+    // Clearing an endpoint drops its manual visit flag — the cleanup lands
+    // on the per-device progress doc (the shared draft's progress fields
+    // are stripped before the wire anyway). Without it a later different
+    // endpoint would revive the stale day-N-which tick.
+    if (endpoint === null) {
+      store.applyLocalProgress(function (progress) {
+        if (progress.visitStatus) delete progress.visitStatus[day.dayId + '-' + which];
+      });
+    }
   }
 
   // --- map view -------------------------------------------------------------------

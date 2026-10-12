@@ -93,6 +93,8 @@
     '{name} — details': '{name}——详情',
     '{name} — details. Press Alt+Up or Alt+Down to reorder.': '{name}——详情。按 Alt+↑ 或 Alt+↓ 可调整顺序。',
     'Reorder {name} by dragging': '拖动以调整{name}的顺序',
+    'Checked in': '已打卡',
+    'Checked in — {name}': '已打卡——{name}',
     'Stay': '住宿',
     'Bike-friendly parking — group curated': '自行车友好停车点——小队精选',
     'Bike-friendly — group curated': '自行车友好——小队精选',

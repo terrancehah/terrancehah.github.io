@@ -359,18 +359,77 @@ test('409 over an accumulated draft surfaces whole-draft conflict, not partial r
   const remote = tripWithRev(2); remote.days[1].label = 'remote edit';
   server.trip = remote; server.rev = 2;
 
-  // A checkbox tick builds on the pending draft → 409. A single-intent
-  // rebase would drop the label edit — the whole draft must conflict instead.
-  const r = await store.save(
-    d => { d.visitStatus[occ] = true; },
-    { intent: { kind: 'visit', key: occ, value: true } });
+  // A second plan edit builds on the pending draft → 409. A single-intent
+  // rebase would drop the first edit — the whole draft must conflict
+  // instead. (Progress writes no longer travel save() at all — see the
+  // per-device progress tests below.)
+  const r = await store.save(d => { d.days[0].stops[0].flag = 'second edit'; });
   assert.equal(r, 'conflict');
   assert.ok(store.conflict, 'explicit conflict, no silent rebase');
   assert.equal(store.trip.days[0].label, 'offline label', 'earlier edit preserved');
-  assert.equal(store.trip.visitStatus[occ], true, 'the tick is preserved too');
+  assert.equal(store.trip.days[0].stops[0].flag, 'second edit', 'newer edit preserved too');
   assert.equal(server.trip.days[1].label, 'remote edit', 'remote untouched');
   assert.notEqual(server.trip.days[0].label, 'offline label', 'remote not overwritten');
-  assert.ok(!(server.trip.visitStatus || {})[occ], 'tick not smuggled onto remote');
+});
+
+// --- per-device check-in progress ------------------------------------------------
+// visitStatus/programmeStatus live in localStorage and overlay the view;
+// the shared document carries the plan only.
+
+test('a check-in writes local progress, overlays the view, and never hits the wire', async () => {
+  const server = makeServer();
+  server.trip = tripWithRev(1); server.rev = 1;
+  const store = await makeStore(server);
+  const occ = store.trip.days[0].stops[0].occurrenceId;
+  const puts = () => store.fetchImpl.calls.filter(c => c.method === 'PUT');
+  const before = puts().length;
+
+  const r = store.applyLocalProgress(d => { d.visitStatus[occ] = true; });
+  assert.equal(r, 'local');
+  assert.equal(store.trip.visitStatus[occ], true, 'view shows the local tick');
+  assert.equal(puts().length, before, 'a tick never touches the shared doc');
+  const stored = JSON.parse(globalThis.localStorage.getItem('biwa:v2:local-progress'));
+  assert.equal(stored.visitStatus[occ], true, 'tick persisted to localStorage');
+});
+
+test('a plan save afterwards does not leak local progress into the shared doc', async () => {
+  const server = makeServer();
+  server.trip = tripWithRev(1); server.rev = 1;
+  const store = await makeStore(server);
+  const occ = store.trip.days[0].stops[0].occurrenceId;
+  store.applyLocalProgress(d => { d.visitStatus[occ] = true; });
+
+  await store.save(d => { d.days[0].label = 'plan edit'; });
+  assert.ok(!(server.trip.visitStatus || {})[occ], 'shared doc stays progress-free');
+  assert.ok(!('visitStatus' in server.trip), 'field absent on the wire, not just empty');
+  assert.equal(store.trip.visitStatus[occ], true, 'local tick still overlaid');
+});
+
+test('legacy shared progress seeds the local store once, then storage wins', async () => {
+  const server = makeServer();
+  const legacy = tripWithRev(1);
+  const occ = legacy.days[0].stops[0].occurrenceId;
+  legacy.visitStatus = { [occ]: true };
+  server.trip = legacy; server.rev = 1;
+  const store = await makeStore(server);
+  assert.equal(store.trip.visitStatus[occ], true, 'legacy shared tick seeds the view');
+  const stored = JSON.parse(globalThis.localStorage.getItem('biwa:v2:local-progress'));
+  assert.equal(stored.visitStatus[occ], true, 'seed persisted to localStorage');
+});
+
+test('stored local progress wins over the shared doc fields', async () => {
+  const server = makeServer();
+  const remote = tripWithRev(1);
+  const occ = remote.days[0].stops[0].occurrenceId;
+  remote.visitStatus = { [occ]: true };          // someone else's shared-era tick
+  server.trip = remote; server.rev = 1;
+  stubGlobals(makeFetch(server));
+  globalThis.localStorage.setItem('biwa:v2:local-progress',
+    JSON.stringify({ visitStatus: { 'my-own-occ': true }, programmeStatus: {} }));
+  const store = new TripStore();
+  await store.init();
+  assert.equal(store.trip.visitStatus['my-own-occ'], true, 'stored progress overlays the view');
+  assert.ok(!store.trip.visitStatus[occ], 'remote progress never surfaces locally');
 });
 
 test('idempotent checkbox intent rebases once and drops cleanly when target deleted', async () => {

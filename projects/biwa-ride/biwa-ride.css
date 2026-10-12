@@ -1476,6 +1476,54 @@ body.biwa-page {
   text-align: center;
 }
 
+/* ---------- Check-in toast ----------
+   Small ink pill confirming a tick has landed. Fixed above the mobile
+   bottom nav (the same centre-bottom spot works on desktop — the nav is
+   a left sidebar there). z-index 50 keeps it readable while the place
+   sheet (41) is open, since the sheet's tick is a common trigger. */
+.biwa-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(60px + env(safe-area-inset-bottom) + var(--biwa-space-sm));
+  transform: translate(-50%, 10px);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--biwa-space-xs);
+  max-width: min(320px, calc(100vw - 48px));
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--biwa-ink);
+  color: var(--biwa-alabaster);
+  font-size: 0.85rem;
+  line-height: 1.3;
+  box-shadow: 0 8px 20px rgba(var(--biwa-ink-rgb), 0.25);
+  opacity: 0;
+  visibility: hidden;
+  /* The delayed visibility flip keeps the pill out of the tab order and
+     pointer path as soon as the fade ends, while letting the fade run. */
+  transition: opacity 0.18s ease, transform 0.18s ease,
+              visibility 0s linear 0.18s;
+}
+.biwa-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  visibility: visible;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.biwa-toast-icon { flex: none; }
+/* Long place names truncate instead of stretching the pill wide. */
+.biwa-toast-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* No slide or fade — the pill still appears/hides instantly so the
+     confirmation itself is never lost to the motion floor. */
+  .biwa-toast, .biwa-toast.is-visible { transition: none; }
+}
+
 /* ---------- Map page ---------- */
 .biwa-map-page { display: flex; flex-direction: column; gap: var(--biwa-space-sm); }
 .biwa-map-canvas {
