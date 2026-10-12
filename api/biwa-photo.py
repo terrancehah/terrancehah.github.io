@@ -1,10 +1,13 @@
 """GET /api/biwa-photo?placeId=<internal>&index=<n>&width=<px> — photo proxy.
 
 Serves one Google Places photo by internal place id and bounded index. The
-flow is: current photo metadata for the place → photo media endpoint with
-skipHttpRedirect → the returned photoUri is fetched ONLY when its host is a
-Google photo domain over HTTPS (no API key is forwarded there) → bytes are
-returned with a hard 4 MB cap and no-store headers. The client can never
+flow is: cached image bytes (30-day window, no Google call at all) → else
+cached photo names (one media call only) → else a live details resolve
+(the searchText/id chain shared with /biwa-place) whose photo names are
+then cached → the photo media endpoint with skipHttpRedirect → the
+returned photoUri is fetched ONLY when its host is a Google photo domain
+over HTTPS (no API key is forwarded there) → bytes are capped at 4 MB,
+stored for 30 days, and sent privately cacheable. The client can never
 supply a photo resource name or arbitrary URL.
 """
 
@@ -41,9 +44,13 @@ MAX_INDEX = 9          # photo summaries are capped at 10 per place
 MIN_WIDTH, MAX_WIDTH = 64, 1600
 
 
-def _no_store_image(content, media_type):
+def _image_response(content, media_type):
+    """Private browser cache for a day — the bytes are already stored
+    server-side, so letting the browser reuse them costs nothing extra
+    and kills repeat downloads on reload. `private` keeps shared caches
+    out of it."""
     return Response(content=content, media_type=media_type,
-                    headers={"Cache-Control": "private, no-store"})
+                    headers={"Cache-Control": "private, max-age=86400"})
 
 
 @app.get("/")
@@ -84,26 +91,41 @@ async def get_photo(request: Request):
     if place is None:
         return biwa_store.json_error(404, "unknown_place", "No such place.")
 
-    # Same resolution chain as /biwa-place: checkpoints without a stored
-    # Google id still resolve through the vicinity-checked searchText path,
-    # so their provider photos are servable too — and the policy-limited
-    # cache can shortcut that search exactly as on /biwa-place.
-    cached_id = biwa_google_cache.cached_google_id(store, place)
-    details, _resolved_by = biwa_places.resolve_place_details(
-        place, biwa_store.GOOGLE_PLACES_KEY, cached_id=cached_id)
-    if details is None:
-        return biwa_store.json_error(404, "no_photos",
-                                     "This place has no Google photos.")
-    # The resolve may have surfaced a search-discovered id/coordinates —
-    # persist only what the policy allows (id + lat/lng); photo metadata and
-    # bytes are never cached.
-    biwa_google_cache.save_resolution(
-        store, place, biwa_places.normalize_details(details))
-    photos = details.get("photos") or []
-    if index >= len(photos):
+    # Cached image bytes answer with no provider call at all — repeat
+    # views inside the 30-day window are free.
+    hit = biwa_google_cache.cached_photo(store, place, index, width)
+    if hit is not None:
+        return _image_response(hit[0], hit[1])
+
+    # Cached photo names skip the details resolve entirely — the next
+    # billable step is then only the media call. An empty list is a
+    # legitimate cached negative: the provider had no photos.
+    names = biwa_google_cache.cached_photo_names(store, place)
+    if names is None:
+        # Same resolution chain as /biwa-place: checkpoints without a
+        # stored Google id still resolve through the vicinity-checked
+        # searchText path, and the cached id can shortcut that search.
+        cached_id = biwa_google_cache.cached_google_id(store, place)
+        details, _resolved_by = biwa_places.resolve_place_details(
+            place, biwa_store.GOOGLE_PLACES_KEY, cached_id=cached_id)
+        if details is None:
+            return biwa_store.json_error(404, "no_photos",
+                                         "This place has no Google photos.")
+        # Persist the resolution so /biwa-place and later photo requests
+        # hit cache: id (indefinite), coords/details/photo names (30 days).
+        normalized = biwa_places.normalize_details(details)
+        biwa_google_cache.save_resolution(store, place, normalized)
+        biwa_google_cache.save_details(store, place, normalized)
+        biwa_google_cache.save_photo_names(store, place, details)
+        names = [
+            p.get("name")
+            for p in (details.get("photos") or [])[:biwa_google_cache.MAX_PHOTO_NAMES]
+            if isinstance(p, dict)
+        ]
+    if index >= len(names):
         return biwa_store.json_error(404, "no_photos",
                                      "No photo at this index.")
-    photo_name = photos[index].get("name")
+    photo_name = names[index]
     if not isinstance(photo_name, str) or not photo_name.startswith("places/"):
         return biwa_store.json_error(502, "provider_error",
                                      "Photo metadata was unusable.")
@@ -131,4 +153,7 @@ async def get_photo(request: Request):
     if img_status != 200 or len(data) > biwa_places.MAX_IMAGE_BYTES:
         return biwa_store.json_error(502, "provider_error",
                                      "Photo download failed.")
-    return _no_store_image(data, content_type)
+    # Store the bytes for 30 days — every later request for this image
+    # answers from Redis with no Google call.
+    biwa_google_cache.save_photo(store, place, index, width, data, content_type)
+    return _image_response(data, content_type)

@@ -6,8 +6,9 @@ place ids are never accepted from the client, so this is not an open proxy.
 Checkpoints without a verified Google id fall back to an on-demand
 searchText lookup whose candidate must sit within 2 km of the source
 coordinates; otherwise the answer is an honest 'unavailable' with the
-place's own source info. Provider data is transient — returned no-store and
-never persisted.
+place's own source info. Provider data is cached server-side for at most
+30 days (see biwa-google-cache) — repeat views of a place cost no billed
+Google call; the response itself still goes out no-store.
 """
 
 import importlib.util
@@ -78,11 +79,21 @@ async def get_place(request: Request):
         "resolvedBy": None,
     }
 
+    # A provider answer within its 30-day window skips Google entirely —
+    # a repeat view of the same place costs no billed call.
+    cached = biwa_google_cache.cached_details(store, place)
+    if cached is not None:
+        source_info["resolvedBy"] = "cache"
+        return biwa_store.json_ok({
+            "ok": True,
+            "details": cached,
+            "source": source_info,
+        })
+
     # Resolution lives in biwa-places so /biwa-photo resolves searchText
     # candidates identically — a place without a stored Google id can still
-    # serve its provider photos. The policy-limited cache (Google id +
-    # lat/lng only, see biwa-google-cache) can shortcut the search step and
-    # is always tried BEFORE falling back to a fresh lookup.
+    # serve its provider photos. The cached Google id can shortcut the
+    # search step and is always tried BEFORE falling back to a fresh lookup.
     cached_id = biwa_google_cache.cached_google_id(store, place)
     body, resolved_by = biwa_places.resolve_place_details(
         place, biwa_store.GOOGLE_PLACES_KEY, cached_id=cached_id)
@@ -101,9 +112,11 @@ async def get_place(request: Request):
         })
 
     details = biwa_places.normalize_details(body)
-    # Successful live resolve — persist only the id/coordinates the Google
-    # caching policy allows; every other detail field stays transient.
+    # Successful live resolve — persist the id (indefinite), coordinates,
+    # normalized details and photo names, all inside the 30-day window.
     biwa_google_cache.save_resolution(store, place, details)
+    biwa_google_cache.save_details(store, place, details)
+    biwa_google_cache.save_photo_names(store, place, body)
 
     return biwa_store.json_ok({
         "ok": True,
