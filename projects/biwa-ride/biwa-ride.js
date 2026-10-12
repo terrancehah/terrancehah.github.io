@@ -220,10 +220,15 @@
     // Masthead scene — the figure GIFs (riders, walkers, passers) are
     // always animated by request; CSS can't pause a GIF's frames so the
     // figure imgs are simply hidden under prefers-reduced-motion. What
-    // JS does here is purely CSS-layer gating: .is-paused freezes every
+    // JS does here is purely CSS-layer gating (.is-paused freezes every
     // animated belt/landmark/drift transform while the header is
-    // scrolled offscreen or reduced motion is requested. There is no
-    // user control — it is automatic only.
+    // scrolled offscreen or reduced motion is requested) plus a keep-
+    // alive nudge for the GIFs themselves — browsers suspend decoding of
+    // animated images they consider invisible, and walkers clipped deep
+    // inside the transformed belt can come back frozen while their
+    // compositor-driven drift keeps moving them. A per-figure
+    // IntersectionObserver re-assigns src on each real entry, forcing
+    // the GIF to re-decode; the stride restart is invisible at ~50px.
     var sceneMotionQuery = window.matchMedia
       ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     var sceneVisible = true;
@@ -328,6 +333,7 @@
         if (Math.abs(width - sceneTreeHalfWidth) < 60) return;
         sceneTreeHalfWidth = width;
         arrangeSceneTrees();
+        observeSceneFigures();
         applySceneMotion();
       }, 200);
     });
@@ -353,6 +359,35 @@
       }).observe(els['biwa-masthead-scene']);
     }
     applySceneMotion();
+
+    // Figure GIF keep-alive — rooted on the scene so entries fire only
+    // when a figure actually crosses into the visible masthead (the
+    // 100px margin pre-wakes decode just before it appears). Re-setting
+    // the same src is the reliable way to restart a suspended GIF.
+    // Cloned belt imgs are re-observed after each re-arrangement, and
+    // a per-img cooldown stops clip-boundary flicker from re-triggering.
+    var sceneFigureIO = null;
+    function observeSceneFigures() {
+      if (!('IntersectionObserver' in window) || !els['biwa-masthead-scene']) return;
+      if (!sceneFigureIO) {
+        sceneFigureIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var img = entry.target;
+            var src = img.getAttribute('src');
+            if (!entry.isIntersecting || !src) return;
+            var now = Date.now();
+            if (now - (img._biwaGifNudge || 0) < 1500) return;
+            img._biwaGifNudge = now;
+            img.setAttribute('src', src);
+          });
+        }, { root: els['biwa-masthead-scene'], rootMargin: '100px' });
+      }
+      Array.prototype.slice.call(
+        els['biwa-masthead-scene'].querySelectorAll(
+          '.biwa-scene-walker, .biwa-scene-passer, .biwa-scene-rider'))
+        .forEach(function (img) { sceneFigureIO.observe(img); });
+    }
+    observeSceneFigures();
 
     // Up-next card: the whole card opens the CURRENT next point's sheet,
     // except its interactive children (name button, directions link,
