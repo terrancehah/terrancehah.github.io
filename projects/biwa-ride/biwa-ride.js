@@ -216,19 +216,18 @@
       render(store);
     });
 
-    // Masthead scene — supplied rider/torii GIFs can't be paused by CSS, so
-    // motion is gated by swapping each <img> between its animated file
-    // (data-animated) and a mid-frame still (data-still). The stills are the
-    // initial src, so reduced-motion visitors never download a GIF at all.
+    // Masthead scene — supplied rider GIFs can't be paused by CSS, so
+    // motion is gated by swapping each .biwa-scene-anim <img> between its
+    // animated file (data-animated) and a mid-frame still (data-still).
+    // The stills are the initial src, so reduced-motion visitors never
+    // download a GIF at all. The torii is a static SVG and takes no part.
     // There is no user control: motion stops only automatically — under
     // prefers-reduced-motion or while the header is scrolled offscreen —
     // where the still stands in for the moving GIF and CSS layers freeze
     // via .is-paused.
     var sceneMotionQuery = window.matchMedia
       ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    var sceneAnimEls = els['biwa-masthead-scene']
-      ? Array.prototype.slice.call(els['biwa-masthead-scene'].querySelectorAll('.biwa-scene-anim'))
-      : [];
+    var sceneAnimEls = [];   // filled after the belt clone — see below
     var sceneVisible = true;
 
     // One-time tree arrangement: the six traced assets (3 copies each =
@@ -279,6 +278,11 @@
       halves[1].innerHTML = halves[0].innerHTML;
     }
     arrangeSceneTrees();
+    // Queried AFTER arrangeSceneTrees(): the belt clone copies walker imgs
+    // into the second half, and those clones must join the swap list too.
+    sceneAnimEls = els['biwa-masthead-scene']
+      ? Array.prototype.slice.call(els['biwa-masthead-scene'].querySelectorAll('.biwa-scene-anim'))
+      : [];
 
     function sceneMotionAllowed() {
       return sceneVisible && !(sceneMotionQuery && sceneMotionQuery.matches);

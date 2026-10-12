@@ -51,7 +51,7 @@ body.biwa-page {
    box (preserveAspectRatio="none"), so the ridge always sits inside its
    bounded band (bottom edge on the water line at 46%) instead of scaling
    by viewport width and towering into the sky. The wrapper clips a twin-
-   half belt that slides at ~300s a loop — distant-range parallax, slow
+   half belt that slides at ~240s a loop — distant-range parallax, slow
    enough to stay subliminal. Each half's ridge meets its own edges at
    equal heights, so the -50% wrap is seamless. */
 .biwa-scene-mountains {
@@ -66,7 +66,7 @@ body.biwa-page {
   display: flex;
   width: 200%;
   height: 100%;
-  animation: biwa-mountains-scroll 300s linear infinite;
+  animation: biwa-mountains-scroll 240s linear infinite;
 }
 .biwa-scene-mountains-half {
   flex: 0 0 50%;
@@ -78,7 +78,8 @@ body.biwa-page {
 }
 /* Calm lake band running exactly to the road top (46% + road height) —
    no empty shore gap. Reflections are long thin oblongs just under the
-   far shore; static marks, opacity tuned per streak in the HTML. */
+   far shore on a twin-half belt — same -50% wrap as trees/mountains at
+   ~120s, a middle parallax pace between the two. */
 .biwa-scene-water {
   position: absolute;
   left: 0;
@@ -86,6 +87,21 @@ body.biwa-page {
   top: 46%;
   height: calc(100% - 46% - var(--biwa-scene-road-height));
   background: var(--biwa-scene-lake);
+  overflow: hidden;
+}
+.biwa-scene-reflection-belt {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  animation: biwa-reflection-scroll 120s linear infinite;
+}
+.biwa-scene-reflection-half {
+  flex: 0 0 50%;
+  position: relative;
+}
+@keyframes biwa-reflection-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 .biwa-scene-reflection {
   position: absolute;
@@ -138,25 +154,69 @@ body.biwa-page {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-/* The supplied torii gets its own long pass: it drifts in from off-screen
-   right, crosses the shore, and is opacity-0 outside that window — an
-   occasional landmark, never parked mid-scene. The translateY grounds the
-   GIF's visible base (its frames carry ~12% empty padding at the bottom). */
+/* Roadside walkers — two families sharing the trees' horizon (belt
+   bottom = road top). Belt walkers live INSIDE the tree tile, so their
+   base pace is exactly tree speed; --walker-flip faces them with the
+   scroll and a slow meander (slightly biased ahead) gives the small
+   slower/faster drift around it. --walker-dur/--walker-delay de-sync
+   each walker's wander. GIF frames pad 17/256 at the bottom —
+   translateY(6.64%) grounds the feet. Heights sit below the trees'
+   70–110px band. */
+.biwa-scene-walker {
+  position: absolute;
+  left: var(--walker-x, 50%);
+  bottom: 0;
+  height: 52px;
+  min-height: 40px;
+  max-height: 60px;
+  width: auto;
+  transform: translate(-50%, 6.64%) scaleX(var(--walker-flip, 1));
+  animation: biwa-walker-wander var(--walker-dur, 20s) ease-in-out
+    var(--walker-delay, 0s) infinite;
+}
+@keyframes biwa-walker-wander {
+  0%, 100% { transform: translate(calc(-50% + 0vw), 6.64%) scaleX(var(--walker-flip, 1)); }
+  35%      { transform: translate(calc(-50% - 3.5vw), 6.64%) scaleX(var(--walker-flip, 1)); }
+  70%      { transform: translate(calc(-50% + 1.5vw), 6.64%) scaleX(var(--walker-flip, 1)); }
+}
+/* Straggler strollers — they enter just off the right edge and drift
+   left slower than the tree scroll while facing RIGHT: a deliberate
+   moonwalk, as if the riders have already swept past and dropped them.
+   They exit off the left edge and re-enter at the right — the wrap
+   happens fully offscreen, same convention as the torii pass. */
+.biwa-scene-passer {
+  position: absolute;
+  left: 0;
+  bottom: var(--biwa-scene-road-height);
+  height: 52px;
+  min-height: 40px;
+  max-height: 60px;
+  width: auto;
+  transform: translate(105vw, 6.64%) scaleX(var(--walker-flip, 1));
+  animation: biwa-walker-pass var(--walker-dur, 26s) linear
+    var(--walker-delay, 0s) infinite;
+}
+@keyframes biwa-walker-pass {
+  from { transform: translate(105vw, 6.64%) scaleX(var(--walker-flip, 1)); }
+  to   { transform: translate(-15vw, 6.64%) scaleX(var(--walker-flip, 1)); }
+}
+/* The supplied torii SVG gets its own long pass: one continuous drift
+   from off-screen right to well off-screen left. There is no fade — the
+   loop wraps only once it is fully out of frame, so the jump back to
+   the right never shows. -160vw clears the ~150px image even on the
+   narrowest phones. The translateY grounds the artwork's visible base
+   (its 430 viewBox pads ~13.1% below the torii's feet). */
 .biwa-scene-torii {
   position: absolute;
   left: 0;
   bottom: var(--biwa-scene-road-height);
   height: 150px;
-  opacity: 0;
-  transform: translate(105vw, 12.5%);
+  transform: translate(105vw, 13.1%);
   animation: biwa-torii-pass 30s linear infinite;
 }
 @keyframes biwa-torii-pass {
-  0%   { transform: translate(105vw, 12.5%); opacity: 0; }
-  4%   { opacity: 1; }
-  52%  { transform: translate(-16vw, 12.5%); opacity: 1; }
-  56%  { opacity: 0; }
-  100% { transform: translate(-16vw, 12.5%); opacity: 0; }
+  from { transform: translate(105vw, 13.1%); }
+  to   { transform: translate(-160vw, 13.1%); }
 }
 /* Lakeside road — one continuous flat warm band, no markings. */
 .biwa-scene-road {
@@ -236,7 +296,10 @@ body.biwa-page {
    driven layer in place; GIFs are swapped to stills by JS. */
 .biwa-masthead-scene.is-paused .biwa-scene-belt,
 .biwa-masthead-scene.is-paused .biwa-scene-mountains-belt,
+.biwa-masthead-scene.is-paused .biwa-scene-reflection-belt,
 .biwa-masthead-scene.is-paused .biwa-scene-torii,
+.biwa-masthead-scene.is-paused .biwa-scene-walker,
+.biwa-masthead-scene.is-paused .biwa-scene-passer,
 .biwa-masthead-scene.is-paused .biwa-scene-rider {
   animation-play-state: paused;
 }
@@ -247,7 +310,10 @@ body.biwa-page {
 @media (prefers-reduced-motion: reduce) {
   .biwa-scene-belt,
   .biwa-scene-mountains-belt,
+  .biwa-scene-reflection-belt,
   .biwa-scene-torii,
+  .biwa-scene-walker,
+  .biwa-scene-passer,
   .biwa-scene-rider { animation: none; }
 }
 .biwa-masthead-text {

@@ -50,14 +50,29 @@
       </div>
       <div class="biwa-scene-water">
         <!-- Flat calm-lake reflections — long thin oblongs of varying
-             length hugging the far shore line, static by design. -->
-        <span class="biwa-scene-reflection" style="left:6%;top:9%;width:17%"></span>
-        <span class="biwa-scene-reflection" style="left:29%;top:5%;width:8%;opacity:0.28"></span>
-        <span class="biwa-scene-reflection" style="left:44%;top:15%;width:13%"></span>
-        <span class="biwa-scene-reflection" style="left:63%;top:8%;width:20%;opacity:0.5"></span>
-        <span class="biwa-scene-reflection" style="left:88%;top:13%;width:9%"></span>
-        <span class="biwa-scene-reflection" style="left:15%;top:21%;width:6%;opacity:0.24"></span>
-        <span class="biwa-scene-reflection" style="left:72%;top:23%;width:12%;opacity:0.3"></span>
+             length hugging the far shore line, on a doubled belt so the
+             -50% wrap slides them endlessly along the shore, slower than
+             the trees and faster than the mountains (far-water parallax). -->
+        <div class="biwa-scene-reflection-belt">
+          <div class="biwa-scene-reflection-half">
+            <span class="biwa-scene-reflection" style="left:6%;top:9%;width:17%"></span>
+            <span class="biwa-scene-reflection" style="left:29%;top:5%;width:8%;opacity:0.28"></span>
+            <span class="biwa-scene-reflection" style="left:44%;top:15%;width:13%"></span>
+            <span class="biwa-scene-reflection" style="left:63%;top:8%;width:20%;opacity:0.5"></span>
+            <span class="biwa-scene-reflection" style="left:88%;top:13%;width:9%"></span>
+            <span class="biwa-scene-reflection" style="left:15%;top:21%;width:6%;opacity:0.24"></span>
+            <span class="biwa-scene-reflection" style="left:72%;top:23%;width:12%;opacity:0.3"></span>
+          </div>
+          <div class="biwa-scene-reflection-half">
+            <span class="biwa-scene-reflection" style="left:6%;top:9%;width:17%"></span>
+            <span class="biwa-scene-reflection" style="left:29%;top:5%;width:8%;opacity:0.28"></span>
+            <span class="biwa-scene-reflection" style="left:44%;top:15%;width:13%"></span>
+            <span class="biwa-scene-reflection" style="left:63%;top:8%;width:20%;opacity:0.5"></span>
+            <span class="biwa-scene-reflection" style="left:88%;top:13%;width:9%"></span>
+            <span class="biwa-scene-reflection" style="left:15%;top:21%;width:6%;opacity:0.24"></span>
+            <span class="biwa-scene-reflection" style="left:72%;top:23%;width:12%;opacity:0.3"></span>
+          </div>
+        </div>
       </div>
       <div class="biwa-scene-trees">
         <div class="biwa-scene-belt">
@@ -89,6 +104,17 @@
             <img class="biwa-scene-tree" style="--tree-x:85%;height:64px" src="assets/tree-05.svg" alt="">
             <img class="biwa-scene-tree" style="--tree-x:90.4%;height:82px" src="assets/tree-02.svg" alt="">
             <img class="biwa-scene-tree" style="--tree-x:95.8%;height:82px" src="assets/tree-03.svg" alt="">
+            <!-- Roadside strollers riding the belt — their base pace IS
+                 tree speed; --walker-flip faces them with the scroll and
+                 --walker-dur/--walker-delay de-sync the small meander. -->
+            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:17%;--walker-flip:-1;--walker-dur:21s;--walker-delay:-6s;height:52px"
+                 src="assets/walker-01-still.png" data-animated="assets/walker-01-loop.gif" data-still="assets/walker-01-still.png" alt="">
+            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:60%;--walker-flip:-1;--walker-dur:19s;--walker-delay:-2s;height:50px"
+                 src="assets/walker-02-still.png" data-animated="assets/walker-02-loop.gif" data-still="assets/walker-02-still.png" alt="">
+            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:63.4%;--walker-flip:-1;--walker-dur:17s;--walker-delay:-9s;height:55px"
+                 src="assets/walker-03-still.png" data-animated="assets/walker-03-loop.gif" data-still="assets/walker-03-still.png" alt="">
+            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:66.6%;--walker-flip:-1;--walker-dur:23s;--walker-delay:-14s;height:48px"
+                 src="assets/walker-04-still.png" data-animated="assets/walker-04-loop.gif" data-still="assets/walker-04-still.png" alt="">
           </div>
           <div class="biwa-scene-belt-half">
             <img class="biwa-scene-tree" style="--tree-x:4%;height:68px" src="assets/tree-02.svg" alt="">
@@ -112,12 +138,30 @@
             <img class="biwa-scene-tree" style="--tree-x:85%;height:64px" src="assets/tree-05.svg" alt="">
             <img class="biwa-scene-tree" style="--tree-x:90.4%;height:82px" src="assets/tree-02.svg" alt="">
             <img class="biwa-scene-tree" style="--tree-x:95.8%;height:82px" src="assets/tree-03.svg" alt="">
+            <!-- Same walkers as the first half — the no-JS fallback tile;
+                 JS re-clones half one over this anyway. -->
+            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:17%;--walker-flip:-1;--walker-dur:21s;--walker-delay:-6s;height:52px"
+                 src="assets/walker-01-still.png" data-animated="assets/walker-01-loop.gif" data-still="assets/walker-01-still.png" alt="">
+            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:60%;--walker-flip:-1;--walker-dur:19s;--walker-delay:-2s;height:50px"
+                 src="assets/walker-02-still.png" data-animated="assets/walker-02-loop.gif" data-still="assets/walker-02-still.png" alt="">
+            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:63.4%;--walker-flip:-1;--walker-dur:17s;--walker-delay:-9s;height:55px"
+                 src="assets/walker-03-still.png" data-animated="assets/walker-03-loop.gif" data-still="assets/walker-03-still.png" alt="">
+            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:66.6%;--walker-flip:-1;--walker-dur:23s;--walker-delay:-14s;height:48px"
+                 src="assets/walker-04-still.png" data-animated="assets/walker-04-loop.gif" data-still="assets/walker-04-still.png" alt="">
           </div>
         </div>
       </div>
-      <img class="biwa-scene-torii biwa-scene-anim" src="assets/torii-still.png"
-           data-animated="assets/wired-flat-1984-torii-in-reveal.gif"
-           data-still="assets/torii-still.png" alt="">
+      <!-- Straggler strollers — they enter at the right edge and drift
+           left across the whole shore while facing right, moonwalking as
+           the riders drop them; the wrap re-enters fully offscreen. The
+           second's margin keeps it in step just behind. -->
+      <img class="biwa-scene-passer biwa-scene-anim" style="--walker-dur:20s;--walker-delay:0s;height:54px"
+           src="assets/walker-05-still.png" data-animated="assets/walker-05-loop.gif" data-still="assets/walker-05-still.png" alt="">
+      <img class="biwa-scene-passer biwa-scene-anim" style="--walker-dur:15s;--walker-delay:0s;height:50px;margin-left:48px"
+           src="assets/walker-01-still.png" data-animated="assets/walker-01-loop.gif" data-still="assets/walker-01-still.png" alt="">
+      <!-- Static supplied SVG — no GIF-swap needed; the drift is pure
+           CSS so .is-paused and prefers-reduced-motion handle it. -->
+      <img class="biwa-scene-torii" src="assets/wired-flat-1984-torii.svg" alt="">
       <div class="biwa-scene-road"></div>
       <!-- Each rider runs a cadence-variant GIF: the fade spins slowest,
            the weaver sits at baseline, the attacker spins quickest. -->
