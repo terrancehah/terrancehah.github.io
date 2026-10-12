@@ -23,8 +23,9 @@
   <!-- Full-width masthead banner: the supplied-art scene. Layers paint
        back-to-front — sky gradient, self-drawn mountains + water band with
        slow sparkles, vector-traced autumn trees drifting right-to-left on a
-       seamless doubled belt, the supplied torii passing occasionally, the
-       lakeside road, then the three supplied rider GIFs in the foreground.
+       seamless doubled belt, the supplied torii and pagoda passing
+       occasionally, the lakeside road, then the three supplied rider GIFs
+       in the foreground.
        aria-hidden and purely decorative — motion is gated automatically
        (reduced motion / offscreen), there is no user control. GIF <img>s
        ship their still PNG src — JS swaps in the animated file only when
@@ -159,21 +160,29 @@
            src="assets/walker-05-still.png" data-animated="assets/walker-05-loop.gif" data-still="assets/walker-05-still.png" alt="">
       <img class="biwa-scene-passer biwa-scene-anim" style="--walker-dur:15s;--walker-delay:0s;height:50px;margin-left:48px"
            src="assets/walker-01-still.png" data-animated="assets/walker-01-loop.gif" data-still="assets/walker-01-still.png" alt="">
-      <!-- Static supplied SVG — no GIF-swap needed; the drift is pure
-           CSS so .is-paused and prefers-reduced-motion handle it. -->
+      <!-- Static supplied landmark art — no GIF-swap needed; the drifts
+           are pure CSS so .is-paused and prefers-reduced-motion handle
+           them. All four share the 45s pass quarter-spaced in phase
+           (0s / -11.25s / -22.5s / -33.75s): neighbours stay ~100vw
+           apart on the extended 400vw track. -->
       <img class="biwa-scene-torii" src="assets/wired-flat-1984-torii.svg" alt="">
+      <img class="biwa-scene-shrine" style="--shrine-h:112px;--ground-y:2.15%;--pass-delay:-11.25s"
+           src="assets/shrine-01.png" alt="">
+      <img class="biwa-scene-pagoda" src="assets/wired-flat-1940-pagoda.svg" alt="">
+      <img class="biwa-scene-shrine" style="--shrine-h:118px;--ground-y:2.93%;--pass-delay:-33.75s"
+           src="assets/shrine-02.png" alt="">
       <div class="biwa-scene-road"></div>
       <!-- Each rider runs a cadence-variant GIF: the fade spins slowest,
            the weaver sits at baseline, the attacker spins quickest. -->
-      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:30%;--drift-dur:23s;--drift-delay:-4s"
+      <img class="biwa-scene-rider biwa-scene-rider-a biwa-scene-anim" style="--rider-x:30%;--drift-dur:23s;--drift-delay:-4s"
            src="assets/cyclist-01-still.png"
            data-animated="assets/cyclist-01-loop.gif"
            data-still="assets/cyclist-01-still.png" alt="">
-      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:50%;--drift-dur:18s;--drift-delay:-11s"
+      <img class="biwa-scene-rider biwa-scene-rider-b biwa-scene-anim" style="--rider-x:50%;--drift-dur:18s;--drift-delay:-11s"
            src="assets/cyclist-02-still.png"
            data-animated="assets/cyclist-02-loop.gif"
            data-still="assets/cyclist-02-still.png" alt="">
-      <img class="biwa-scene-rider biwa-scene-anim" style="--rider-x:70%;--drift-dur:14s;--drift-delay:-7s"
+      <img class="biwa-scene-rider biwa-scene-rider-c biwa-scene-anim" style="--rider-x:70%;--drift-dur:14s;--drift-delay:-7s"
            src="assets/cyclist-03-still.png"
            data-animated="assets/cyclist-03-loop.gif"
            data-still="assets/cyclist-03-still.png" alt="">

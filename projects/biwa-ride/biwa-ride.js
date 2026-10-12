@@ -237,53 +237,114 @@
     // bases at ~j/12 of the half plus 2-4% jitter (clamped inside the
     // edges), members spread 24-35px around the base. The computed tile is
     // cloned verbatim into the second half so the -50% wrap is seamless.
-    // Runs once at boot — trip polls never touch the masthead.
-    // Heights are NOT owned here — each img keeps its HTML inline height
-    // (CSS clamps the range 80-100px); JS only assigns which asset fills
-    // each slot. Blueprint slots beyond the 18 leave the user's extra
-    // imgs exactly as authored.
+    // Runs at boot and again when the viewport width drifts — trip polls
+    // never touch the masthead. Heights are NOT owned here — each img
+    // keeps its HTML inline height (CSS clamps the range); JS only assigns
+    // which asset fills each slot and how many slots the half needs.
     var SCENE_TREE_ASSETS = [
       'assets/tree-01.svg', 'assets/tree-02.svg', 'assets/tree-03.svg',
       'assets/tree-04.svg', 'assets/tree-05.svg', 'assets/tree-06.svg'
     ];
-    var SCENE_TREE_GROUPS = [1, 2, 1, 1, 3, 1, 2, 1, 2, 1, 2, 1];
+    // Target spacing between tree centres. Each belt half is
+    // max(viewport, 900px) wide and positions are percentages, so a fixed
+    // tree count would crowd together as the screen narrows — ~76px is
+    // the original wide-desktop density (≈21 trees per 1600px) and
+    // narrower halves simply get proportionally fewer trees to hold it.
+    var SCENE_TREE_TARGET_GAP = 76;
     function arrangeSceneTrees() {
       var halves = els['biwa-masthead-scene']
         ? els['biwa-masthead-scene'].querySelectorAll('.biwa-scene-belt-half')
         : [];
       if (halves.length < 2) return;
+      var half = halves[0];
+      var halfWidth = half.getBoundingClientRect().width || 900;
+      // Floor of 10 keeps even the narrowest half from going bare —
+      // above that the count purely tracks width against the target gap.
+      var treeCount = Math.max(10, Math.round(halfWidth / SCENE_TREE_TARGET_GAP));
+      var imgs = half.querySelectorAll('.biwa-scene-tree');
+      // Grow the img pool to the target count — clones inherit the class
+      // and an authored src/height baseline; the layout below overwrites
+      // position and src anyway, and generated heights randomise inside
+      // the CSS-clamped band so they blend with the authored trees.
+      var template = imgs[0];
+      while (template && half.querySelectorAll('.biwa-scene-tree').length < treeCount) {
+        var clone = template.cloneNode(false);
+        clone.style.height = (70 + Math.round(Math.random() * 40)) + 'px';
+        half.appendChild(clone);
+      }
+      imgs = half.querySelectorAll('.biwa-scene-tree');
       var assets = [];
-      SCENE_TREE_ASSETS.forEach(function (asset) {
-        for (var i = 0; i < 3; i++) assets.push(asset);
-      });
-      for (var i = assets.length - 1; i > 0; i--) {
+      for (var i = 0; i < treeCount; i++) {
+        assets.push(SCENE_TREE_ASSETS[i % SCENE_TREE_ASSETS.length]);
+      }
+      for (i = assets.length - 1; i > 0; i--) {
         var swap = Math.floor(Math.random() * (i + 1));
         var tmp = assets[i];
         assets[i] = assets[swap];
         assets[swap] = tmp;
       }
-      var imgs = halves[0].querySelectorAll('.biwa-scene-tree');
+      // Grove sizes follow the authored mix — mostly singles and pairs
+      // with the occasional trio — stretched to whatever count the half
+      // needs. Bases spread evenly over 2–97% of the half's width.
+      var groups = [];
+      for (var remaining = treeCount; remaining > 0;) {
+        var roll = Math.random();
+        var g = remaining >= 3 ? (roll < 0.4 ? 1 : roll < 0.85 ? 2 : 3)
+            : remaining === 2 ? (roll < 0.5 ? 1 : 2) : 1;
+        groups.push(g);
+        remaining -= g;
+      }
       var cursor = 0;
-      SCENE_TREE_GROUPS.forEach(function (count, gi) {
+      groups.forEach(function (count, gi) {
         var base = Math.min(97, Math.max(2,
-          (gi / 12) * 100 + 2 + Math.random() * 2));
+          (gi / groups.length) * 95 + 2 + Math.random() * 2));
         var spread = 24 + Math.random() * 11;
-        for (var k = 0; k < count && cursor < imgs.length; k++, cursor++) {
+        for (var k = 0; k < count && cursor < treeCount; k++, cursor++) {
           var img = imgs[cursor];
           img.setAttribute('src', assets[cursor]);
           img.style.setProperty('--tree-x', base + '%');
           var offset = count > 1 ? (k - (count - 1) / 2) * spread : 0;
           img.style.setProperty('--tree-offset', offset.toFixed(1) + 'px');
+          img.style.display = '';
         }
       });
-      halves[1].innerHTML = halves[0].innerHTML;
+      // Authored imgs beyond the needed count hide rather than being
+      // deleted — a later narrower arrangement can re-show them.
+      for (var x = cursor; x < imgs.length; x++) imgs[x].style.display = 'none';
+      halves[1].innerHTML = half.innerHTML;
     }
     arrangeSceneTrees();
+    // The half width is viewport-derived — a rotation or window resize
+    // changes the needed tree count, so re-arrange once it drifts. The
+    // belt clone is rebuilt inside arrangeSceneTrees() and the anim img
+    // list is refreshed below so GIF swaps still reach the new clones.
+    var sceneTreeHalf = els['biwa-masthead-scene'] &&
+      els['biwa-masthead-scene'].querySelector('.biwa-scene-belt-half');
+    var sceneTreeHalfWidth = sceneTreeHalf ? sceneTreeHalf.getBoundingClientRect().width : 0;
+    var sceneTreeResizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(sceneTreeResizeTimer);
+      sceneTreeResizeTimer = setTimeout(function () {
+        var half = els['biwa-masthead-scene'] &&
+          els['biwa-masthead-scene'].querySelector('.biwa-scene-belt-half');
+        if (!half) return;
+        var width = half.getBoundingClientRect().width;
+        if (Math.abs(width - sceneTreeHalfWidth) < 60) return;
+        sceneTreeHalfWidth = width;
+        arrangeSceneTrees();
+        refreshSceneAnimEls();
+        applySceneMotion();
+      }, 200);
+    });
     // Queried AFTER arrangeSceneTrees(): the belt clone copies walker imgs
     // into the second half, and those clones must join the swap list too.
-    sceneAnimEls = els['biwa-masthead-scene']
-      ? Array.prototype.slice.call(els['biwa-masthead-scene'].querySelectorAll('.biwa-scene-anim'))
-      : [];
+    // Re-run after every re-arrangement so resized-belt clones stay covered.
+    function refreshSceneAnimEls() {
+      sceneAnimEls = els['biwa-masthead-scene']
+        ? Array.prototype.slice.call(els['biwa-masthead-scene'].querySelectorAll('.biwa-scene-anim'))
+        : [];
+    }
+    refreshSceneAnimEls();
 
     function sceneMotionAllowed() {
       return sceneVisible && !(sceneMotionQuery && sceneMotionQuery.matches);

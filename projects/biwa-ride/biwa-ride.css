@@ -118,10 +118,12 @@ body.biwa-page {
   bottom: var(--biwa-scene-road-height);
   height: 100px;
 }
-/* Belt is at least 1800px so each 50% half tiles ~900px minimum — the 18
-   trees spread as scattered groves instead of a dense row on phones. The
-   second half is a DOM clone of the first, so the wrap is seamless even
-   where edge groups spill past the tile boundary. */
+/* Belt is at least 1800px so each 50% half tiles ~900px minimum. Tree
+   count is proportional to the half's pixel width (JS targets ~76px
+   spacing, the original wide-desktop look), so density stays constant
+   from phones to wide desktops — narrower halves just get fewer trees.
+   The second half is a DOM clone of the first, so the wrap is seamless
+   even where edge groups spill past the tile boundary. */
 .biwa-scene-belt {
   display: flex;
   width: max(200%, 1800px);
@@ -201,22 +203,57 @@ body.biwa-page {
   to   { transform: translate(-15vw, 6.64%) scaleX(var(--walker-flip, 1)); }
 }
 /* The supplied torii SVG gets its own long pass: one continuous drift
-   from off-screen right to well off-screen left. There is no fade — the
+   from off-screen right to far off-screen left. There is no fade — the
    loop wraps only once it is fully out of frame, so the jump back to
-   the right never shows. -160vw clears the ~150px image even on the
-   narrowest phones. The translateY grounds the artwork's visible base
-   (its 430 viewBox pads ~13.1% below the torii's feet). */
+   the right never shows. The track runs to -295vw (400vw of travel in
+   45s ≈ the original ~8.9vw/s drift) so four landmarks quarter-spaced
+   in phase stay ~100vw apart. The translateY grounds the artwork's
+   visible base (its 430 viewBox pads ~13.1% below the torii's feet). */
 .biwa-scene-torii {
   position: absolute;
   left: 0;
   bottom: var(--biwa-scene-road-height);
   height: 150px;
   transform: translate(105vw, 13.1%);
-  animation: biwa-torii-pass 30s linear infinite;
+  animation: biwa-torii-pass 45s linear infinite;
 }
 @keyframes biwa-torii-pass {
   from { transform: translate(105vw, 13.1%); }
-  to   { transform: translate(-160vw, 13.1%); }
+  to   { transform: translate(-295vw, 13.1%); }
+}
+/* The supplied pagoda SVG rides the shared 45s landmark track — same
+   ~8.9vw/s drift, wrap fully offscreen — quarter-spaced in phase
+   (-22.5s) so consecutive landmarks hold ~100vw of track between them.
+   Its 430 viewBox pads ~10.9% below the pagoda's feet. */
+.biwa-scene-pagoda {
+  position: absolute;
+  left: 0;
+  bottom: var(--biwa-scene-road-height);
+  height: 168px;
+  transform: translate(105vw, 10.94%);
+  animation: biwa-pagoda-pass 45s linear -22.5s infinite;
+}
+@keyframes biwa-pagoda-pass {
+  from { transform: translate(105vw, 10.94%); }
+  to   { transform: translate(-295vw, 10.94%); }
+}
+/* The two supplied shrine PNGs share the 45s landmark track — custom
+   properties in the keyframes resolve per element, so one rule covers
+   both: --pass-delay quarter-spaces the four landmarks (11.25s steps ≈
+   100vw gaps — neighbours still can't crowd each other) and --ground-y
+   plants each PNG's feet on the road line (512px frames pad ~2-3%
+   below the art). */
+.biwa-scene-shrine {
+  position: absolute;
+  left: 0;
+  bottom: var(--biwa-scene-road-height);
+  height: var(--shrine-h, 140px);
+  transform: translate(105vw, var(--ground-y, 0%));
+  animation: biwa-shrine-pass 45s linear var(--pass-delay, 0s) infinite;
+}
+@keyframes biwa-shrine-pass {
+  from { transform: translate(105vw, var(--ground-y, 0%)); }
+  to   { transform: translate(-295vw, var(--ground-y, 0%)); }
 }
 /* Lakeside road — one continuous flat warm band, no markings. */
 .biwa-scene-road {
@@ -257,11 +294,12 @@ body.biwa-page {
   animation-delay: var(--drift-delay, 0s);
   animation-iteration-count: infinite;
 }
-/* Riders are the 2nd/3rd/4th img children of the scene (the torii img is
-   first; tree imgs live inside their own belt parent). */
-.biwa-scene-rider:nth-of-type(2) { animation-name: biwa-rider-drift-a; }
-.biwa-scene-rider:nth-of-type(3) { animation-name: biwa-rider-drift-b; }
-.biwa-scene-rider:nth-of-type(4) { animation-name: biwa-rider-drift-c; }
+/* Drift personalities are assigned by explicit classes — positional
+   selectors (nth-of-type) silently shifted every time a new img layer
+   joined the scene. */
+.biwa-scene-rider-a { animation-name: biwa-rider-drift-a; }
+.biwa-scene-rider-b { animation-name: biwa-rider-drift-b; }
+.biwa-scene-rider-c { animation-name: biwa-rider-drift-c; }
 /* Left rider — the comeback: holds pace, drops ~24vw toward the left
    edge while sitting up, then chases all the way through to +22vw —
    past the middle rider whenever the weave has it sitting back. The
@@ -298,20 +336,25 @@ body.biwa-page {
 .biwa-masthead-scene.is-paused .biwa-scene-mountains-belt,
 .biwa-masthead-scene.is-paused .biwa-scene-reflection-belt,
 .biwa-masthead-scene.is-paused .biwa-scene-torii,
+.biwa-masthead-scene.is-paused .biwa-scene-pagoda,
+.biwa-masthead-scene.is-paused .biwa-scene-shrine,
 .biwa-masthead-scene.is-paused .biwa-scene-walker,
 .biwa-masthead-scene.is-paused .biwa-scene-passer,
 .biwa-masthead-scene.is-paused .biwa-scene-rider {
   animation-play-state: paused;
 }
 /* Reduced motion: stills stay (JS never swaps in GIFs), belts freeze at
-   their natural start — all tree clusters visible — the torii stays at
-   opacity 0, and the riders hold their home positions (no drift). The
-   scene offers no controls, so none needs hiding. */
+   their natural start — all tree clusters visible — the landmarks park
+   offscreen at their base transforms, and the riders hold their home
+   positions (no drift). The scene offers no controls, so none needs
+   hiding. */
 @media (prefers-reduced-motion: reduce) {
   .biwa-scene-belt,
   .biwa-scene-mountains-belt,
   .biwa-scene-reflection-belt,
   .biwa-scene-torii,
+  .biwa-scene-pagoda,
+  .biwa-scene-shrine,
   .biwa-scene-walker,
   .biwa-scene-passer,
   .biwa-scene-rider { animation: none; }
