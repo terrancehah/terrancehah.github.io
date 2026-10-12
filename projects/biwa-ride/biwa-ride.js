@@ -217,18 +217,15 @@
       render(store);
     });
 
-    // Masthead scene — supplied rider GIFs can't be paused by CSS, so
-    // motion is gated by swapping each .biwa-scene-anim <img> between its
-    // animated file (data-animated) and a mid-frame still (data-still).
-    // The stills are the initial src, so reduced-motion visitors never
-    // download a GIF at all. The torii is a static SVG and takes no part.
-    // There is no user control: motion stops only automatically — under
-    // prefers-reduced-motion or while the header is scrolled offscreen —
-    // where the still stands in for the moving GIF and CSS layers freeze
-    // via .is-paused.
+    // Masthead scene — the figure GIFs (riders, walkers, passers) are
+    // always animated by request; CSS can't pause a GIF's frames so the
+    // figure imgs are simply hidden under prefers-reduced-motion. What
+    // JS does here is purely CSS-layer gating: .is-paused freezes every
+    // animated belt/landmark/drift transform while the header is
+    // scrolled offscreen or reduced motion is requested. There is no
+    // user control — it is automatic only.
     var sceneMotionQuery = window.matchMedia
       ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    var sceneAnimEls = [];   // filled after the belt clone — see below
     var sceneVisible = true;
 
     // One-time tree arrangement: the six traced assets (3 copies each =
@@ -316,8 +313,7 @@
     arrangeSceneTrees();
     // The half width is viewport-derived — a rotation or window resize
     // changes the needed tree count, so re-arrange once it drifts. The
-    // belt clone is rebuilt inside arrangeSceneTrees() and the anim img
-    // list is refreshed below so GIF swaps still reach the new clones.
+    // belt clone (walkers included) is rebuilt inside arrangeSceneTrees().
     var sceneTreeHalf = els['biwa-masthead-scene'] &&
       els['biwa-masthead-scene'].querySelector('.biwa-scene-belt-half');
     var sceneTreeHalfWidth = sceneTreeHalf ? sceneTreeHalf.getBoundingClientRect().width : 0;
@@ -332,40 +328,25 @@
         if (Math.abs(width - sceneTreeHalfWidth) < 60) return;
         sceneTreeHalfWidth = width;
         arrangeSceneTrees();
-        refreshSceneAnimEls();
         applySceneMotion();
       }, 200);
     });
-    // Queried AFTER arrangeSceneTrees(): the belt clone copies walker imgs
-    // into the second half, and those clones must join the swap list too.
-    // Re-run after every re-arrangement so resized-belt clones stay covered.
-    function refreshSceneAnimEls() {
-      sceneAnimEls = els['biwa-masthead-scene']
-        ? Array.prototype.slice.call(els['biwa-masthead-scene'].querySelectorAll('.biwa-scene-anim'))
-        : [];
-    }
-    refreshSceneAnimEls();
 
     function sceneMotionAllowed() {
       return sceneVisible && !(sceneMotionQuery && sceneMotionQuery.matches);
     }
     function applySceneMotion() {
       if (!els['biwa-masthead-scene']) return;
-      var animate = sceneMotionAllowed();
-      els['biwa-masthead-scene'].classList.toggle('is-paused', !animate);
-      sceneAnimEls.forEach(function (img) {
-        var target = animate ? img.getAttribute('data-animated') : img.getAttribute('data-still');
-        if (target && img.getAttribute('src') !== target) img.setAttribute('src', target);
-      });
+      els['biwa-masthead-scene'].classList.toggle('is-paused', !sceneMotionAllowed());
     }
     if (sceneMotionQuery && sceneMotionQuery.addEventListener) {
-      // A system-level change to reduced motion re-applies instantly — the
-      // imgs fall back to stills.
+      // A system-level change to reduced motion re-applies instantly.
       sceneMotionQuery.addEventListener('change', applySceneMotion);
     }
     if (els['biwa-masthead-scene'] && 'IntersectionObserver' in window) {
-      // Offscreen: freeze the belts and swap GIFs for stills so a scrolled-
-      // past header costs no animation or GIF decode work.
+      // Offscreen: freeze the CSS layers so a scrolled-past header costs
+      // no animation work. The figure GIFs keep decoding — frames can't
+      // be paused — but they stay clipped out of frame.
       new IntersectionObserver(function (entries) {
         sceneVisible = entries[0].isIntersecting;
         applySceneMotion();

@@ -27,9 +27,9 @@
        occasionally, the lakeside road, then the three supplied rider GIFs
        in the foreground.
        aria-hidden and purely decorative — motion is gated automatically
-       (reduced motion / offscreen), there is no user control. GIF <img>s
-       ship their still PNG src — JS swaps in the animated file only when
-       motion is allowed, so reduced-motion visitors never download a GIF. -->
+       (reduced motion / offscreen), there is no user control. The figure
+       GIFs are always animated; under prefers-reduced-motion they hide
+       outright since CSS cannot freeze a GIF's frames. -->
   <header class="biwa-masthead">
     <div class="biwa-masthead-scene" id="biwa-masthead-scene" aria-hidden="true">
       <!-- Twin-halved ridge belt: both halves are the same tile whose
@@ -108,14 +108,14 @@
             <!-- Roadside strollers riding the belt — their base pace IS
                  tree speed; --walker-flip faces them with the scroll and
                  --walker-dur/--walker-delay de-sync the small meander. -->
-            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:17%;--walker-flip:-1;--walker-dur:21s;--walker-delay:-6s;height:52px"
-                 src="assets/walker-01-still.png" data-animated="assets/walker-01-loop.gif" data-still="assets/walker-01-still.png" alt="">
-            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:60%;--walker-flip:-1;--walker-dur:19s;--walker-delay:-2s;height:50px"
-                 src="assets/walker-02-still.png" data-animated="assets/walker-02-loop.gif" data-still="assets/walker-02-still.png" alt="">
-            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:63.4%;--walker-flip:-1;--walker-dur:17s;--walker-delay:-9s;height:55px"
-                 src="assets/walker-03-still.png" data-animated="assets/walker-03-loop.gif" data-still="assets/walker-03-still.png" alt="">
-            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:66.6%;--walker-flip:-1;--walker-dur:23s;--walker-delay:-14s;height:48px"
-                 src="assets/walker-04-still.png" data-animated="assets/walker-04-loop.gif" data-still="assets/walker-04-still.png" alt="">
+            <img class="biwa-scene-walker" style="--walker-x:17%;--walker-flip:-1;--walker-dur:21s;--walker-delay:-6s;height:52px"
+                 src="assets/walker-01-loop.gif" alt="">
+            <img class="biwa-scene-walker" style="--walker-x:60%;--walker-flip:-1;--walker-dur:19s;--walker-delay:-2s;height:50px"
+                 src="assets/walker-02-loop.gif" alt="">
+            <img class="biwa-scene-walker" style="--walker-x:63.4%;--walker-flip:-1;--walker-dur:17s;--walker-delay:-9s;height:55px"
+                 src="assets/walker-03-loop.gif" alt="">
+            <img class="biwa-scene-walker" style="--walker-x:66.6%;--walker-flip:-1;--walker-dur:23s;--walker-delay:-14s;height:48px"
+                 src="assets/walker-04-loop.gif" alt="">
           </div>
           <div class="biwa-scene-belt-half">
             <img class="biwa-scene-tree" style="--tree-x:4%;height:68px" src="assets/tree-02.svg" alt="">
@@ -141,14 +141,14 @@
             <img class="biwa-scene-tree" style="--tree-x:95.8%;height:82px" src="assets/tree-03.svg" alt="">
             <!-- Same walkers as the first half — the no-JS fallback tile;
                  JS re-clones half one over this anyway. -->
-            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:17%;--walker-flip:-1;--walker-dur:21s;--walker-delay:-6s;height:52px"
-                 src="assets/walker-01-still.png" data-animated="assets/walker-01-loop.gif" data-still="assets/walker-01-still.png" alt="">
-            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:60%;--walker-flip:-1;--walker-dur:19s;--walker-delay:-2s;height:50px"
-                 src="assets/walker-02-still.png" data-animated="assets/walker-02-loop.gif" data-still="assets/walker-02-still.png" alt="">
-            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:63.4%;--walker-flip:-1;--walker-dur:17s;--walker-delay:-9s;height:55px"
-                 src="assets/walker-03-still.png" data-animated="assets/walker-03-loop.gif" data-still="assets/walker-03-still.png" alt="">
-            <img class="biwa-scene-walker biwa-scene-anim" style="--walker-x:66.6%;--walker-flip:-1;--walker-dur:23s;--walker-delay:-14s;height:48px"
-                 src="assets/walker-04-still.png" data-animated="assets/walker-04-loop.gif" data-still="assets/walker-04-still.png" alt="">
+            <img class="biwa-scene-walker" style="--walker-x:17%;--walker-flip:-1;--walker-dur:21s;--walker-delay:-6s;height:52px"
+                 src="assets/walker-01-loop.gif" alt="">
+            <img class="biwa-scene-walker" style="--walker-x:60%;--walker-flip:-1;--walker-dur:19s;--walker-delay:-2s;height:50px"
+                 src="assets/walker-02-loop.gif" alt="">
+            <img class="biwa-scene-walker" style="--walker-x:63.4%;--walker-flip:-1;--walker-dur:17s;--walker-delay:-9s;height:55px"
+                 src="assets/walker-03-loop.gif" alt="">
+            <img class="biwa-scene-walker" style="--walker-x:66.6%;--walker-flip:-1;--walker-dur:23s;--walker-delay:-14s;height:48px"
+                 src="assets/walker-04-loop.gif" alt="">
           </div>
         </div>
       </div>
@@ -156,10 +156,10 @@
            left across the whole shore while facing right, moonwalking as
            the riders drop them; the wrap re-enters fully offscreen. The
            second's margin keeps it in step just behind. -->
-      <img class="biwa-scene-passer biwa-scene-anim" style="--walker-dur:20s;--walker-delay:0s;height:54px"
-           src="assets/walker-05-still.png" data-animated="assets/walker-05-loop.gif" data-still="assets/walker-05-still.png" alt="">
-      <img class="biwa-scene-passer biwa-scene-anim" style="--walker-dur:15s;--walker-delay:0s;height:50px;margin-left:48px"
-           src="assets/walker-01-still.png" data-animated="assets/walker-01-loop.gif" data-still="assets/walker-01-still.png" alt="">
+      <img class="biwa-scene-passer" style="--walker-dur:20s;--walker-delay:0s;height:54px"
+           src="assets/walker-05-loop.gif" alt="">
+      <img class="biwa-scene-passer" style="--walker-dur:15s;--walker-delay:0s;height:50px;margin-left:48px"
+           src="assets/walker-01-loop.gif" alt="">
       <!-- Static supplied landmark art — no GIF-swap needed; the drifts
            are pure CSS so .is-paused and prefers-reduced-motion handle
            them. All four share the 45s pass quarter-spaced in phase
@@ -174,18 +174,12 @@
       <div class="biwa-scene-road"></div>
       <!-- Each rider runs a cadence-variant GIF: the fade spins slowest,
            the weaver sits at baseline, the attacker spins quickest. -->
-      <img class="biwa-scene-rider biwa-scene-rider-a biwa-scene-anim" style="--rider-x:30%;--drift-dur:23s;--drift-delay:-4s"
-           src="assets/cyclist-01-still.png"
-           data-animated="assets/cyclist-01-loop.gif"
-           data-still="assets/cyclist-01-still.png" alt="">
-      <img class="biwa-scene-rider biwa-scene-rider-b biwa-scene-anim" style="--rider-x:50%;--drift-dur:18s;--drift-delay:-11s"
-           src="assets/cyclist-02-still.png"
-           data-animated="assets/cyclist-02-loop.gif"
-           data-still="assets/cyclist-02-still.png" alt="">
-      <img class="biwa-scene-rider biwa-scene-rider-c biwa-scene-anim" style="--rider-x:70%;--drift-dur:14s;--drift-delay:-7s"
-           src="assets/cyclist-03-still.png"
-           data-animated="assets/cyclist-03-loop.gif"
-           data-still="assets/cyclist-03-still.png" alt="">
+      <img class="biwa-scene-rider biwa-scene-rider-a" style="--rider-x:30%;--drift-dur:23s;--drift-delay:-4s"
+           src="assets/cyclist-01-loop.gif" alt="">
+      <img class="biwa-scene-rider biwa-scene-rider-b" style="--rider-x:50%;--drift-dur:18s;--drift-delay:-11s"
+           src="assets/cyclist-02-loop.gif" alt="">
+      <img class="biwa-scene-rider biwa-scene-rider-c" style="--rider-x:70%;--drift-dur:14s;--drift-delay:-7s"
+           src="assets/cyclist-03-loop.gif" alt="">
     </div>
     <div class="biwa-masthead-text">
       <h1 data-i18n="Lake Biwa Ride">Lake Biwa Ride</h1>

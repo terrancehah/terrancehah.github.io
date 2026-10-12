@@ -331,7 +331,8 @@ body.biwa-page {
   100%       { transform: translate(calc(-50% + 0vw), 7.03125%) rotate(0deg); }
 }
 /* Paused (automatic — reduced motion or offscreen): freeze every CSS-
-   driven layer in place; GIFs are swapped to stills by JS. */
+   driven layer in place. The figure GIFs keep decoding while clipped —
+   their frames cannot be paused — but nothing they do is visible. */
 .biwa-masthead-scene.is-paused .biwa-scene-belt,
 .biwa-masthead-scene.is-paused .biwa-scene-mountains-belt,
 .biwa-masthead-scene.is-paused .biwa-scene-reflection-belt,
@@ -343,11 +344,12 @@ body.biwa-page {
 .biwa-masthead-scene.is-paused .biwa-scene-rider {
   animation-play-state: paused;
 }
-/* Reduced motion: stills stay (JS never swaps in GIFs), belts freeze at
-   their natural start — all tree clusters visible — the landmarks park
-   offscreen at their base transforms, and the riders hold their home
-   positions (no drift). The scene offers no controls, so none needs
-   hiding. */
+/* Reduced motion: belts freeze at their natural start — all tree
+   clusters visible — and the landmarks park offscreen at their base
+   transforms. The figure imgs (walkers, passers, riders) are GIFs whose
+   frames CSS cannot freeze, so they are hidden outright rather than
+   left stepping in place. The scene offers no controls, so nothing
+   needs a hidden state announced. */
 @media (prefers-reduced-motion: reduce) {
   .biwa-scene-belt,
   .biwa-scene-mountains-belt,
@@ -358,6 +360,9 @@ body.biwa-page {
   .biwa-scene-walker,
   .biwa-scene-passer,
   .biwa-scene-rider { animation: none; }
+  .biwa-scene-walker,
+  .biwa-scene-passer,
+  .biwa-scene-rider { display: none; }
 }
 .biwa-masthead-text {
   position: absolute;
