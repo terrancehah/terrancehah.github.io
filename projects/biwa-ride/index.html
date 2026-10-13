@@ -313,6 +313,26 @@
     </footer>
   </div>
 
+  <!-- Mini next-stop bar — a persistent "now playing"-style strip pinned
+       just above the bottom nav on phones: small square photo, place
+       name and badges, plus the two field actions (directions, tick).
+       The left zone is one big tap target opening the same sheet as the
+       Up Next card. Hidden on ≥56rem — the sidebar layout keeps the
+       full card in reach already. Rendered by renderNextCard. -->
+  <div class="biwa-mini-bar" id="biwa-mini-bar" hidden>
+    <button class="biwa-mini-open" id="biwa-mini-open" type="button">
+      <span class="biwa-mini-photo-slot" aria-hidden="true"><img class="biwa-mini-photo" id="biwa-mini-photo" alt="" hidden></span>
+      <span class="biwa-mini-text">
+        <span class="biwa-mini-name" id="biwa-mini-name"></span>
+        <span class="biwa-mini-tags" id="biwa-mini-tags"></span>
+      </span>
+    </button>
+    <a class="biwa-btn biwa-btn-secondary biwa-mini-directions" id="biwa-mini-directions"
+       target="_blank" rel="noopener noreferrer" data-i18n="Directions">Directions</a>
+    <button class="biwa-btn biwa-btn-primary biwa-mini-complete" id="biwa-mini-complete"
+            type="button" data-i18n="Done">Done</button>
+  </div>
+
   <!-- ============ Destination bottom sheet ============ -->
   <div class="biwa-sheet-backdrop" id="biwa-sheet-backdrop" hidden></div>
   <section class="biwa-sheet" id="biwa-sheet" role="dialog" aria-modal="true"

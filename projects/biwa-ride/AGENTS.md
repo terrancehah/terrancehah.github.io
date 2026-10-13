@@ -62,6 +62,11 @@ node proxy-server.js
 
 Open `http://localhost:3000/projects/biwa-ride/` — plain URL, no invite. The proxy forwards only `/projects/biwa-ride/api/biwa-*`. The legacy `api.index` target in `start-dev.sh`/`package.json` is broken and intentionally untouched.
 
+## UX conventions
+
+- `#biwa-mini-bar` is a persistent mini-player-style strip (mobile only, `display:none` ≥56rem): photo slot (petal-tinted fallback, never resizes), place name + badges, Directions + Done. Rendered at the END of `renderNextCard` from the same resolved `next`/`photo`/`dirEl.href` — never re-derive its state. Its tick calls the shared `completeNextStop()` (live-resolved, `applyLocalProgress`, toast + leaves); its body opens `openNextStopSheet()`. Shown ONLY while a live next stop exists — finished/empty states hide it. While live it sets `body.biwa-mini-live`, which grows the shell's bottom padding and lifts the toast above the bar (`--biwa-mini-bar-h` keeps all three heights in sync). z-index 32: over nav (30), under sheet (40) and toast (50).
+- Row affordances: stop cards read left→right as drag grip → tick → body → chevron (`chevronHint()` — aria-hidden, INSIDE `.biwa-card-body` so the right edge stays in the tap target); endpoint rows drop the grip. `.biwa-card-text` wraps name+meta inside the flex body.
+
 ## Sync & safety invariants
 
 - **Check-in progress is per-device, never shared.** `visitStatus`/`programmeStatus` live in localStorage (`biwa:v2:local-progress`), written via `TripStore.applyLocalProgress` and overlaid onto `store.trip` at emit — every `Rules.*` read sees the device's own checklist. `_put` strips both fields so the shared doc carries the plan only; the one-time seed copies any legacy shared progress into local storage first. `navigator.storage.persist()` is requested at boot (best-effort — Safari's eviction window is not page-configurable). The CAS intent-rebase machinery is retained but no longer carries ticks.

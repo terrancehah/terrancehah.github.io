@@ -108,4 +108,8 @@
 
   /* Touch targets */
   --biwa-tap: 48px;
+
+  /* Mini next-stop bar — its height is shared by the shell's bottom
+     padding and the toast's lift so all three stay in sync. */
+  --biwa-mini-bar-h: 64px;
 }

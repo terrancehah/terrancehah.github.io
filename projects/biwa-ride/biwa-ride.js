@@ -34,7 +34,12 @@
   var placeName = function (p) { return I18n ? I18n.placeName(p) : (p ? p.label : ''); };
   var dayLabel = function (d) { return I18n ? I18n.dayLabel(d) : (d ? d.label : ''); };
   var dayTitle = function (d) { return I18n ? I18n.dayTitle(d) : (d ? d.title : ''); };
-  var badgeText = function (b) { return I18n ? I18n.badge(b) : b; };
+  // Chips per badge string — 'Official · South' yields programme + shore
+  // parts; the no-i18n fallback keeps the combined label on one chip.
+  var badgeParts = function (b) {
+    return (I18n && I18n.badgeParts) ? I18n.badgeParts(b)
+      : [{ text: b, programme: b === 'Rally' ? 'rally' : 'official' }];
+  };
   var areaText = function (a) { return I18n ? I18n.areaLabel(a) : (a ? a.label : ''); };
 
   var OFFICIAL_CHECKIN_URL = 'https://m.biwako1.jp/flow';
@@ -113,6 +118,7 @@
     // fill-rule="evenodd", so the hole shows whatever surface is beneath.
     warn: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3 22 20H2zM11.1 9.6h1.8v4.6h-1.8zM11.1 15.6h1.8v1.8h-1.8z" fill="currentColor" fill-rule="evenodd"/></svg>',
     grip: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="9" cy="6" r="1.6" fill="currentColor"/><circle cx="15" cy="6" r="1.6" fill="currentColor"/><circle cx="9" cy="12" r="1.6" fill="currentColor"/><circle cx="15" cy="12" r="1.6" fill="currentColor"/><circle cx="9" cy="18" r="1.6" fill="currentColor"/><circle cx="15" cy="18" r="1.6" fill="currentColor"/></svg>',
+    chev: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5-2-2L12 12 7.5 7.5z" fill="currentColor"/></svg>',
     stay: '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 11 12 4l8 7v8h-5v-5h-6v5H4z" fill="currentColor"/></svg>',
     star: '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.5l-5.8 3 1.1-6.5-4.7-4.6 6.5-.9z" fill="currentColor"/></svg>'
   };
@@ -125,6 +131,8 @@
       'biwa-next-stop', 'biwa-next-stop-label', 'biwa-next-stop-name',
       'biwa-next-stop-directions', 'biwa-next-complete', 'biwa-next-credit',
       'biwa-next-checkins',
+      'biwa-mini-bar', 'biwa-mini-open', 'biwa-mini-photo', 'biwa-mini-name',
+      'biwa-mini-tags', 'biwa-mini-directions', 'biwa-mini-complete',
       'biwa-leaves',
       'biwa-track', 'biwa-add-stop', 'biwa-add-place',
       'biwa-map-canvas', 'biwa-map-legend',
@@ -403,32 +411,44 @@
       openNextStopSheet();
     });
     els['biwa-next-stop-name'].addEventListener('click', openNextStopSheet);
-    els['biwa-next-complete'].addEventListener('click', function () {
-      if (store._saving) return;
-      // Resolve live — a poll may have advanced the trip since the card
-      // last painted, and the tick must land on the actual next row.
-      var day = currentDay(store.trip);
-      var next = day && Rules.nextUnvisitedStop(store.trip, day);
-      if (!next) return;
-      var occurrenceId = next.occurrenceId;
-      var placeId = next.placeId;
-      // Per-device progress — the write is synchronous localStorage, so
-      // the result is known immediately and the shared doc is untouched.
-      var result = store.applyLocalProgress(function (draft) {
-        var p = placeId
-          ? (store.trip.places || []).filter(function (x) { return x.placeId === placeId; })[0] || next.place
-          : null;
-        Rules.applyArrival(draft, occurrenceId, p, true);
-      });
-      // The pill confirms only a durable tick — a failed local write
-      // stays silent rather than flashing success.
-      checkinSaved(result, next.place ? placeName(next.place) : null);
-      // Same celebration gate as the row/sheet ticks: once, only while the
-      // timeline view (which owns the leaf layer) is active.
-      if (document.getElementById('view-timeline').classList.contains('is-active')) {
-        burstLeaves();
-      }
+    els['biwa-next-complete'].addEventListener('click', completeNextStop);
+    // The mini bar reuses the exact same actions — its body opens the
+    // sheet, its tick completes the same live-resolved next stop.
+    els['biwa-mini-open'].addEventListener('click', openNextStopSheet);
+    els['biwa-mini-complete'].addEventListener('click', completeNextStop);
+    // A failed thumbnail collapses back to the tinted slot — the bar
+    // keeps its height and never flashes a broken image.
+    els['biwa-mini-photo'].addEventListener('error', function () {
+      els['biwa-mini-photo'].hidden = true;
     });
+  }
+
+  // Tick the CURRENT next stop — resolved live at click time so a poll
+  // that advanced the trip since the last paint still lands correctly.
+  // Shared by the Up Next card and the mini bar.
+  function completeNextStop() {
+    if (store._saving) return;
+    var day = currentDay(store.trip);
+    var next = day && Rules.nextUnvisitedStop(store.trip, day);
+    if (!next) return;
+    var occurrenceId = next.occurrenceId;
+    var placeId = next.placeId;
+    // Per-device progress — the write is synchronous localStorage, so
+    // the result is known immediately and the shared doc is untouched.
+    var result = store.applyLocalProgress(function (draft) {
+      var p = placeId
+        ? (store.trip.places || []).filter(function (x) { return x.placeId === placeId; })[0] || next.place
+        : null;
+      Rules.applyArrival(draft, occurrenceId, p, true);
+    });
+    // The pill confirms only a durable tick — a failed local write
+    // stays silent rather than flashing success.
+    checkinSaved(result, next.place ? placeName(next.place) : null);
+    // Same celebration gate as the row/sheet ticks: once, only while the
+    // timeline view (which owns the leaf layer) is active.
+    if (document.getElementById('view-timeline').classList.contains('is-active')) {
+      burstLeaves();
+    }
   }
 
   // Open the sheet for whatever is next right now. Pin endpoints have no
@@ -811,6 +831,39 @@
         target: '_blank', rel: 'noopener noreferrer', text: 'Google Maps'
       }));
     }
+
+    // Mini bar mirror — the same live next stop, painted from the same
+    // resolved values (never re-derived, so card and bar can't disagree).
+    // It only exists while a real stop is up next; every finished/empty
+    // state hides it rather than showing a dead strip.
+    var mini = els['biwa-mini-bar'];
+    if (mini) {
+      var miniLive = !!(actionsVisible && next);
+      mini.hidden = !miniLive;
+      // The live flag lets CSS lift the shell's bottom padding and the
+      // toast above the bar only while it is actually on screen.
+      document.body.classList.toggle('biwa-mini-live', miniLive);
+      if (miniLive) {
+        els['biwa-mini-name'].textContent = placeName(next);
+        els['biwa-mini-open'].setAttribute('aria-label',
+          t('{name} — details', { name: placeName(next) }));
+        els['biwa-mini-directions'].href = dirEl.href;
+        var miniTags = els['biwa-mini-tags'];
+        miniTags.innerHTML = '';
+        placeBadgesNodes(next.place).forEach(function (n) { miniTags.appendChild(n); });
+        // Small-square thumbnail from the same first photo the card
+        // backdrop uses; the slot keeps its petal tint when no photo
+        // exists or the request fails, so the bar never resizes.
+        var miniImg = els['biwa-mini-photo'];
+        if (photo) {
+          miniImg.src = store.photoUrl(nextChosenId, photo.index, 128);
+          miniImg.hidden = false;
+        } else {
+          miniImg.hidden = true;
+          miniImg.removeAttribute('src');
+        }
+      }
+    }
   }
 
   // Programme check-in links ride the CURRENT next stop only — a stop can
@@ -1075,14 +1128,18 @@
       'aria-label': t('{name} — details', { name: label }),
       'data-focus-key': 'card-' + occurrenceId
     });
-    body.appendChild(el('div', { class: 'biwa-card-name' }, [document.createTextNode(label + ' ')].concat(placeBadgesNodes(place))));
+    var bodyText = el('div', { class: 'biwa-card-text' }, [
+      el('div', { class: 'biwa-card-name' }, [document.createTextNode(label + ' ')].concat(placeBadgesNodes(place)))
+    ]);
     var role = which === 'start'
       ? (day.dayId === 'day-1' ? t('Start here') : t('Leave after the night'))
       : (day.dayId === 'day-3' ? t('Finish — return the bikes') : t('Overnight stay'));
-    body.appendChild(el('div', { class: 'biwa-card-meta' }, [
+    bodyText.appendChild(el('div', { class: 'biwa-card-meta' }, [
       document.createTextNode(role),
       place && place.address ? el('span', { class: 'biwa-card-address', text: ' · ' + place.address }) : document.createTextNode('')
     ]));
+    body.appendChild(bodyText);
+    body.appendChild(chevronHint());
     body.addEventListener('click', function () {
       if (Date.now() < suppressClickUntil) return;
       openSheet({ place: displayPlace, occurrenceId: occurrenceId, day: day, kind: which });
@@ -1098,10 +1155,15 @@
     if (!place) return nodes;
     var badges = el('span', { class: 'biwa-badges' });
     Rules.placeBadges(place).forEach(function (b) {
-      badges.appendChild(el('span', {
-        class: 'biwa-badge', text: badgeText(b),
-        dataset: { programme: b === 'Rally' ? 'rally' : 'official' }
-      }));
+      // 'Official · South' splits into two chips — programme (官方) plus a
+      // shore chip whose data-area takes that shore's map-marker colour.
+      badgeParts(b).forEach(function (part) {
+        badges.appendChild(el('span', {
+          class: 'biwa-badge', text: part.text,
+          dataset: part.area ? { programme: part.programme, area: part.area }
+                             : { programme: part.programme }
+        }));
+      });
     });
     // Plain custom extras are attractions, not certificate stops — say so
     // instead of showing no badge at all.
@@ -1473,6 +1535,9 @@
                            dataset: { occ: stop.occurrenceId,
                                       cardType: placeCardType(place),
                                       interactive: 'true' } });
+    // Affordance order: drag grip on the LEFT, tick, body, chevron on the
+    // right — grip-left reads as "reorderable", chevron-right as "opens".
+    card.appendChild(dragHandle(day, stop, place));
     card.appendChild(arrivalCheck(trip, stop.occurrenceId, place, placeName(place), visited));
 
     var body = el('button', {
@@ -1480,15 +1545,21 @@
       'aria-label': t('{name} — details. Press Alt+Up or Alt+Down to reorder.', { name: placeName(place) }),
       'data-focus-key': 'card-' + stop.occurrenceId
     });
-    body.appendChild(el('div', { class: 'biwa-card-name' }, [document.createTextNode(placeName(place) + ' ')].concat(placeBadgesNodes(place))));
+    var bodyText = el('div', { class: 'biwa-card-text' }, [
+      el('div', { class: 'biwa-card-name' }, [document.createTextNode(placeName(place) + ' ')].concat(placeBadgesNodes(place)))
+    ]);
     var metaParts = [];
     if (place.address) metaParts.push(place.address);
     if (place.notes) metaParts.push(place.notes);
     if (metaParts.length) {
-      body.appendChild(el('div', { class: 'biwa-card-meta' }, [
+      bodyText.appendChild(el('div', { class: 'biwa-card-meta' }, [
         el('span', { class: 'biwa-card-address', text: metaParts.join(' · ') })
       ]));
     }
+    body.appendChild(bodyText);
+    // The chevron sits INSIDE the body button — it is part of the tap
+    // target, not a decorative dead strip beside it.
+    body.appendChild(chevronHint());
     body.addEventListener('click', function () {
       if (Date.now() < suppressClickUntil) return;
       openSheet({ place: place, occurrenceId: stop.occurrenceId, day: day, kind: 'stop' });
@@ -1500,11 +1571,18 @@
       if (ev.key === 'ArrowDown') { ev.preventDefault(); moveStopWithinDay(day, index, index + 1); }
     });
     card.appendChild(body);
-
-    card.appendChild(dragHandle(day, stop, place));
     decorateStopCardPhoto(card, place, stop.occurrenceId);
     row.appendChild(card);
     return row;
+  }
+
+  // A static right-edge chevron marking the card as a sheet opener —
+  // decorative (the real affordance is the body button) so it never
+  // intercepts taps or reads aloud.
+  function chevronHint() {
+    var span = el('span', { class: 'biwa-card-chevron', 'aria-hidden': 'true' });
+    span.innerHTML = ICONS.chev;
+    return span;
   }
 
   // --- card press feedback -----------------------------------------------------
@@ -2046,13 +2124,20 @@
 
     var badges = el('div', { class: 'biwa-badges' });
     Rules.placeBadges(place).forEach(function (b) {
-      badges.appendChild(el('span', {
-        class: 'biwa-badge', text: badgeText(b),
-        dataset: { programme: b === 'Rally' ? 'rally' : 'official',
-                   checked: String(Rules.placeProgrammeChecked(store.trip, place) &&
-                     Rules.programmeFamilies(place.programmes).indexOf(
-                       b === 'Rally' ? 'rally' : 'official') !== -1) }
-      }));
+      // Same two-chip split as the row badges — data-area drives the map
+      // marker colour per shore; data-checked still overrides to green on
+      // both chips of the split pair.
+      badgeParts(b).forEach(function (part) {
+        badges.appendChild(el('span', {
+          class: 'biwa-badge', text: part.text,
+          dataset: {
+            programme: part.programme,
+            area: part.area || '',
+            checked: String(Rules.placeProgrammeChecked(store.trip, place) &&
+              Rules.programmeFamilies(place.programmes).indexOf(
+                part.programme) !== -1) }
+        }));
+      });
     });
     if (place.category === 'accommodation') badges.appendChild(el('span', { class: 'biwa-badge', text: t('Stay') }));
     if (place.category === 'parking') badges.appendChild(el('span', { class: 'biwa-badge', text: t('Bike-friendly parking — group curated') }));

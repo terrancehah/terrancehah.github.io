@@ -49,14 +49,15 @@
     'Set the missing start or finish point to complete this day.': '请补上缺少的起点或终点，以完成当日计划。',
     'Directions': '导航',
     'Mark as Completed': '标记为已完成',
+    'Done': '完成',
     'Completed': '已完成',
     'Official Certificate Check-In': '官方证书打卡',
     'Check In on Official Site': '前往官网打卡',
-    'Rally Check-In': '拉力赛打卡',
-    'Check In on Rally Site': '前往拉力赛官网打卡',
+    'Rally Check-In': '集章打卡',
+    'Check In on Rally Site': '前往集章官网打卡',
 
     // Certificate progress strip
-    'rally stops': '拉力站点',
+    'rally stops': '集章站点',
     'official areas': '官方区域',
     'of {total} {label}': '/ {total} {label}',
     'Both certificate checklists completed': '两份证书打卡清单已全部完成',
@@ -178,7 +179,7 @@
     'road preview not requested': '道路预览未请求',
     'Retry': '重试',
     '{day} route': '{day}路线',
-    'Rally stops': '拉力站点',
+    'Rally stops': '集章站点',
     'Stays': '住宿',
     'Other stops / route points': '其他站点/途经点',
     'Pending': '待完成',
@@ -321,10 +322,30 @@
   // Programme badge text from Rules.placeBadges ('Rally', 'Official · South').
   I18n.badge = function (badge) {
     if (lang !== 'zh') return badge;
-    if (badge === 'Rally') return '拉力赛';
+    // The rally is a limited-time stamp rally, not a motorsport rally.
+    if (badge === 'Rally') return '限时集章';
     var m = /^Official · (.+)$/.exec(badge);
     if (m) return '官方 · ' + (AREA_ZH[m[1].toLowerCase()] || m[1]);
     return badge;
+  };
+
+  // One placeBadges string can carry two facts — 'Official · South' renders
+  // as two chips: a programme chip (官方) plus a shore chip (南岸) whose
+  // data-area drives the map-marker colour. Non-official badges stay a
+  // single chip. Each part is { text, programme, area? }.
+  I18n.badgeParts = function (badge) {
+    var m = /^Official · (.+)$/.exec(badge);
+    if (!m) {
+      return [{ text: I18n.badge(badge),
+                programme: badge === 'Rally' ? 'rally' : 'official' }];
+    }
+    var key = m[1].toLowerCase();
+    var programmeText = lang === 'zh' ? '官方' : 'Official';
+    var shoreText = lang === 'zh' ? (AREA_ZH[key] || m[1]) : m[1];
+    return [
+      { text: programmeText, programme: 'official' },
+      { text: shoreText, programme: 'official', area: key }
+    ];
   };
 
   I18n.lang = function () { return lang; };

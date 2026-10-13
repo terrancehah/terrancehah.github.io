@@ -908,7 +908,7 @@ body.biwa-page {
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: var(--biwa-space-xs);
+  /* gap: var(--biwa-space-xs); */
   background: var(--biwa-paper);
   border-radius: var(--biwa-radius-md);
   box-shadow: var(--biwa-shadow-card);
@@ -1030,6 +1030,24 @@ body.biwa-page {
   padding: var(--biwa-space-xs) 0;
   cursor: pointer;
   color: inherit;
+  /* Text block + right chevron share one row — the chevron stays inside
+     the button so the whole right edge is part of the tap target. */
+  display: flex;
+  align-items: center;
+  gap: var(--biwa-space-xs);
+}
+.biwa-card-text {
+  flex: 1;
+  min-width: 0;
+}
+/* Right-edge signifier that the row opens details — pure affordance,
+   aria-hidden, never its own control. */
+.biwa-card-chevron {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  color: var(--biwa-ink-soft);
+  opacity: 0.6;
 }
 .biwa-card-name {
   font-weight: 600;
@@ -1057,7 +1075,7 @@ body.biwa-page {
 /* 48px checkbox hitbox, 26px inner visual — the same contract as stamps. */
 .biwa-arrival-check {
   flex: none;
-  width: var(--biwa-tap);
+  width: calc(var(--biwa-tap) - 8px);
   height: var(--biwa-tap);
   background: none;
   border: 0;
@@ -1074,6 +1092,9 @@ body.biwa-page {
   height: 26px;
   border-radius: 8px;
   background: var(--biwa-alabaster);
+  /* Recessed stamp well: a top-biased inset shadow makes the pending box
+     read as pressed into the card, waiting to be stamped. */
+  box-shadow: inset 0 1.5px 3px rgba(var(--biwa-ink-rgb), 0.2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1082,14 +1103,18 @@ body.biwa-page {
 }
 .biwa-arrival-check[aria-pressed='true'] .biwa-arrival-box {
   background: var(--biwa-success);
+  /* Once stamped the well fills — swap the recess for a faint inner top
+     highlight so the filled face reads raised, not hollow. */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
   color: #fff;
 }
 
 /* Drag handle — a real 44px target, and it never opens the sheet. */
 .biwa-drag-handle {
   flex: none;
-  width: 44px;
+  /* width: 44px; */
   height: 44px;
+  padding: 0;
   background: none;
   border: 0;
   color: var(--biwa-ink-soft);
@@ -1144,6 +1169,109 @@ body.biwa-page {
   flex-wrap: wrap;
   gap: var(--biwa-space-sm);
   margin-bottom: var(--biwa-space-md);
+}
+
+/* ---------- Mini next-stop bar ----------
+   Spotify-style persistent strip pinned just above the bottom nav —
+   phone only: the ≥56rem sidebar layout already keeps the full Up Next
+   card within reach. z-index 32 sits it over the nav (30) but under the
+   sheet (40) and toast (50). The [hidden] guard is explicit because the
+   class display would otherwise beat the attribute's UA rule. */
+.biwa-mini-bar {
+  position: fixed;
+  left: var(--biwa-space-sm);
+  right: var(--biwa-space-sm);
+  bottom: calc(60px + env(safe-area-inset-bottom) + var(--biwa-space-sm));
+  z-index: 32;
+  display: flex;
+  align-items: center;
+  gap: var(--biwa-space-xs);
+  height: var(--biwa-mini-bar-h);
+  padding: 0 var(--biwa-space-sm);
+  background: var(--biwa-paper);
+  border-radius: var(--biwa-radius-md);
+  box-shadow: var(--biwa-shadow-interactive);
+}
+.biwa-mini-bar[hidden] { display: none; }
+/* While the bar is live, the page bottom and the toast both move up so
+   nothing scrolls behind or overlaps it. */
+.biwa-mini-live .biwa-shell {
+  padding-bottom: calc(var(--biwa-tap) + var(--biwa-mini-bar-h) +
+    var(--biwa-space-xl) + var(--biwa-space-sm) + env(safe-area-inset-bottom));
+}
+.biwa-mini-live .biwa-toast {
+  bottom: calc(60px + var(--biwa-mini-bar-h) + env(safe-area-inset-bottom) +
+    var(--biwa-space-lg));
+}
+@media (min-width: 56rem) {
+  .biwa-mini-bar { display: none; }
+}
+/* The left zone is one big tap target opening the sheet — photo slot,
+   name and badges on one baseline column. */
+.biwa-mini-open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--biwa-space-sm);
+  min-height: var(--biwa-tap);
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  border-radius: var(--biwa-radius-sm);
+}
+/* Fixed-size square so an arriving/missing photo never resizes the bar —
+   the petal tint is the no-photo state. */
+.biwa-mini-photo-slot {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--biwa-radius-sm);
+  background: var(--biwa-petal);
+  overflow: hidden;
+}
+.biwa-mini-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.biwa-mini-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.biwa-mini-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.biwa-mini-tags {
+  display: flex;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--biwa-ink-soft);
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* Compact 44px actions — the primary tick is the thumb's main job. */
+.biwa-mini-directions,
+.biwa-mini-complete {
+  flex: none;
+  min-height: 44px;
+  padding: 0 var(--biwa-space-sm);
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ---------- Checklist rows (the nearby parking list) ---------- */
@@ -1225,6 +1353,15 @@ body.biwa-page {
   color: var(--biwa-lake-deep);
   background: var(--biwa-lake-wash);
 }
+/* Official shore badges wear their map-marker colour as a solid chip — the
+   same --biwa-area-* tokens that fill the pins, so a row's tag reads as the
+   same colour the rider sees on the map. All four are deep enough for white
+   text at AA. Kept before the checked rule so a stamped badge still flips
+   green (equal specificity, later rule wins). */
+.biwa-badge[data-area='south'] { background: var(--biwa-area-south); color: #fff; }
+.biwa-badge[data-area='east'] { background: var(--biwa-area-east); color: #fff; }
+.biwa-badge[data-area='north'] { background: var(--biwa-area-north); color: #fff; }
+.biwa-badge[data-area='west'] { background: var(--biwa-area-west); color: #fff; }
 .biwa-badge[data-checked='true'] {
   background: var(--biwa-success);
   color: #fff;
