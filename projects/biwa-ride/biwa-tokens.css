@@ -27,7 +27,10 @@
 
   /* Interactive depths of clay — the raw palette clay/peach do not reach
      4.5:1 with white label text, so primary actions use these darker stops. */
-  --biwa-clay-deep: #96543f;    /* primary action surface (AA with white) */
+  /* #8a4a36 also stays AA as *text* on petal (4.87:1) — the previous
+     #96543f only reached 4.2:1 and failed on the footer-link hover and
+     the current-nav tint. */
+  --biwa-clay-deep: #8a4a36;    /* primary action surface (AA with white) */
   --biwa-clay-press: #7d4534;   /* primary hover/active */
 
   /* Washes (raw channel values so rgba() can compose them in components) */

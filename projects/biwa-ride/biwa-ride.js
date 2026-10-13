@@ -1190,7 +1190,7 @@
   // a .biwa-leaf-sway wrapper drifts sideways, and .biwa-leaf-art carries
   // the masked shape and the tumble — separate layers so the transforms
   // never conflict, all compositor work (no rAF, no layout).
-  var LEAF_COLORS = ['#c97c5d', '#b36a5e', '#c89f9c', '#eed7c5', '#96543f'];
+  var LEAF_COLORS = ['#c97c5d', '#b36a5e', '#c89f9c', '#eed7c5', '#8a4a36'];
   var leafSeq = 0;
 
   function burstLeaves() {
@@ -3369,12 +3369,13 @@
     sights: '<path d="M6 8.5h2.2l.7-1.2h4.2l.7 1.2H16c.55 0 1 .45 1 1V14c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1zm5 5.7a2.3 2.3 0 1 0 0-4.6 2.3 2.3 0 0 0 0 4.6z"/>',
     food: '<path d="M7 3h1.1v4.6h1.3V3h1.3v4.6h1.3V3h1.1v5.4c0 1.5-1.1 2.7-2.6 2.8V19H9v-7.8C7.8 11.1 7 9.9 7 8.4z"/>' +
       '<path d="M17 3c-1.8 0-3 1.7-3 3.9 0 1.9 1 3.4 2.4 3.9V19h1.4v-8.2c1.4-.5 2.4-2 2.4-3.9C20.2 4.7 18.8 3 17 3z"/>',
-    stores: '<path d="M6 7h10l1 11a1.5 1.5 0 0 1-1.5 1.7H6.5A1.5 1.5 0 0 1 5 18zM9 7a2 2 0 0 1 4 0h-1.2a.8.8 0 0 0-1.6 0z"/>',
+    // The bag's ink ran y5–y19.7 (centre ~12.4 in the 22-unit box) — shifted
+    // up 1.4 so the glyph's own centre lands on 11 like its neighbours.
+    stores: '<path d="M6 5.6h10l1 11a1.5 1.5 0 0 1-1.5 1.7H6.5A1.5 1.5 0 0 1 5 16.6zM9 5.6a2 2 0 0 1 4 0h-1.2a.8.8 0 0 0-1.6 0z"/>',
     laundry: '<path d="M5.5 3h11A1.5 1.5 0 0 1 18 4.5v13A1.5 1.5 0 0 1 16.5 19h-11A1.5 1.5 0 0 1 4 17.5v-13A1.5 1.5 0 0 1 5.5 3zM11 7.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6.6 4.7a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8zM9.6 4.7a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z" fill-rule="evenodd"/>',
-    // The spanner path runs a touch wide on its native grid — a nested
-    // scale/translate group fits it inside the shared 22-unit box without
-    // redrawing the shape.
-    repair: '<g transform="translate(1 1) scale(0.75)"><path d="M19.5 16.5l-7.3-7.3c.7-1.8.3-4-1.2-5.5-1.6-1.6-4-1.9-5.9-1l3.5 3.5-2.4 2.4L8.7 5.1c-1 1.9-.7 4.3 1 5.9 1.5 1.5 3.7 1.9 5.5 1.2l7.3 7.3c.3.3.8.3 1.1 0l1.9-1.9c.4-.3.4-.8 0-1.1z"/></g>',
+    // The bicycle glyph is drawn on a 24-unit grid — a nested scale group
+    // fits it inside the shared 22-unit box without redrawing the shape.
+    repair: '<g transform="scale(0.9167)"><path d="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L9.4 6.6c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 12v5h2v-6.5zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/></g>',
     parking: '<path d="M5 3h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 7v9h1.8v-3.2h2.6a3 3 0 0 0 0-5.8zM10.8 8.6h2.4a1.4 1.4 0 0 1 0 2.8h-2.4z" fill-rule="evenodd"/>'
   };
 
@@ -3385,7 +3386,7 @@
     icon.innerHTML = '<svg viewBox="0 0 22 22" width="19" height="19">' +
       '<g fill="currentColor">' + (NEARBY_ICONS[cat.key] || '') + '</g></svg>';
     shortcut.appendChild(icon);
-    shortcut.appendChild(el('span', { text: labelText }));
+    shortcut.appendChild(el('span', { class: 'biwa-shortcut-label', text: labelText }));
   }
 
   // Coordinates for a point/place: source coords first, then the transient

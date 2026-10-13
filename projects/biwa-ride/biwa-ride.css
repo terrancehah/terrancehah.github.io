@@ -1877,6 +1877,20 @@ body.biwa-page {
 .biwa-nearby-shortcut.is-disabled { opacity: 0.5; cursor: default; pointer-events: none; }
 /* Filled category glyph beside the label — same ink as the text. */
 .biwa-shortcut-icon { flex: none; display: inline-flex; }
+/* Tight line box: CJK fallback fonts carry a much taller `normal` line
+   height than Quattrocento Sans, which pushed Chinese labels a few px high
+   inside the centred flex row — line-height:1 makes the box hug the glyphs
+   so both scripts centre on the icon. */
+.biwa-shortcut-label { line-height: 1; }
+/* CJK ink sits ~1–2px high in the em square on PingFang/Hiragino/Yu Gothic
+   (measured on the live page — the em box reserves room below the baseline
+   for descenders/ruby). text-box-trim is a dead end here: the ideographic
+   edge keywords aren't implemented in Chrome/Safari, and where they are,
+   they read the FIRST font's metrics — ours is Latin (Quattrocento Sans),
+   so the trim can't describe CJK ink anyway (csswg-drafts #10928). A small
+   translateY on zh labels is the reliable correction — applied
+   unconditionally, not inside @supports, so modern browsers get it too. */
+.biwa-shortcut-label:lang(zh) { transform: translateY(0.1em); }
 
 /* ---------- Disclosure ---------- */
 .biwa-disclosure { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
