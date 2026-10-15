@@ -162,6 +162,22 @@
     'Another phone updated the trip while you were editing. Your unsaved draft is still on this phone — you can load the shared version, or explicitly replace the whole shared trip with your snapshot (their edits would be overwritten).': '你编辑期间，另一台手机更新了行程。你未保存的草稿仍在本机——可以加载共享版本，或明确用你的快照覆盖整个共享行程（对方的修改将被覆盖）。',
     'Replace shared trip with mine': '用我的版本覆盖共享行程',
     'Load shared version': '加载共享版本',
+    'Close': '关闭',
+
+    // Device pairing — personal trips claimed across your own devices
+    'Pair devices': '配对设备',
+    'Your trip and check-ins are personal to each device. To see the same trip on another of your devices, show a code here and enter it there.': '你的行程和打卡记录是各设备独立的。要在你的另一台设备上看到相同的行程，请在此处生成配对码，并在那台设备上输入。',
+    'Send this trip to another device': '将此行程发送到另一台设备',
+    'Show a code': '显示配对码',
+    'Valid for 10 minutes — enter it on the other device to claim this trip.': '有效期 10 分钟——在另一台设备上输入即可获取此行程。',
+    'This device is new': '这是新设备',
+    '6-letter code': '6 位配对码',
+    'Claim trip': '获取行程',
+    'Requesting code…': '正在生成配对码…',
+    'Could not create a code — try again.': '无法生成配对码——请重试。',
+    'Claiming…': '正在获取…',
+    'That code is invalid or expired — check it and try again.': '配对码无效或已过期——请核对后重试。',
+    'Trip claimed — reloading…': '已获取行程——正在重新加载…',
 
     // Map view
     'Live map needs a configured Google Maps key — the stop schematic below is drawn from your own list.': '实时地图需要配置 Google 地图密钥——下方示意图由你的站点列表绘制。',

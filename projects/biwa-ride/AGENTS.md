@@ -1,6 +1,6 @@
 # AGENTS.md — Lake Biwa Ride Companion
 
-Mobile-first companion for three friends riding Otsu → Hikone → Takashima → Otsu. Public static app at `/projects/biwa-ride/` (linked from the Biwa card in `projects.html`, still `noindex`) backed by isolated Vercel functions `api/biwa-{trip,route,place,photo}.py` with helpers under `lib/biwa/biwa-*.py` (outside `api/` so Vercel's function discovery never builds them). The shared trip is public — no invite token anywhere. This file is the persistent project doc for the app — do not add README/design docs.
+Mobile-first companion for three friends riding Otsu → Hikone → Takashima → Otsu. Public static app at `/projects/biwa-ride/` (linked from the Biwa card in `projects.html`, still `noindex`) backed by isolated Vercel functions `api/biwa-{trip,pair,route,place,photo}.py` with helpers under `lib/biwa/biwa-*.py` (outside `api/` so Vercel's function discovery never builds them). The trip is PERSONAL — every request carries `X-Biwa-Owner` (`dev:<uuid>` minted client-side once); each owner has its own durable Redis doc (`biwa:v2:owner:<id>:trip`, no TTL) holding plan AND check-in progress together. `api/biwa-pair.py` mints 10-minute six-character codes so a second of the owner's devices can claim the same id. This file is the persistent project doc for the app — do not add README/design docs.
 
 ## Design context
 
@@ -35,7 +35,7 @@ Rally window announced 2026-09-01 → 2026-12-31.
 | `BIWA_GOOGLE_BROWSER_KEY` | Maps JS, referrer-restricted; returned to every visitor on the public GET |
 | `BIWA_DEV_ALLOW_MEMORY` | `=1` opts into the in-memory backend for local dev only |
 
-There is **no `BIWA_TRIP_TOKEN`** — GET/PUT are public shared state; the only guards are same-origin mutation checks, rate limits and body caps. Missing Redis vars → `sharingAvailable: false` on GET (the trip still renders from the seed and provider/browser config stays live; writes fail closed). The `BIWA_DEV_ALLOW_MEMORY=1` in-memory backend is ignored on Vercel (`VERCEL` env present) and is shared across all endpoint stores in one process. Referrer policy is `strict-origin-when-cross-origin` (Google's key needs the origin).
+There is **no `BIWA_TRIP_TOKEN`** — identity is the `X-Biwa-Owner` header only (unguessable UUID, self-minted); the only guards are same-origin mutation checks, rate limits and body caps. Missing Redis vars → `sharingAvailable: false` on GET (the trip still renders from the seed and provider/browser config stays live; writes fail closed). The `BIWA_DEV_ALLOW_MEMORY=1` in-memory backend is ignored on Vercel (`VERCEL` env present) and is shared across all endpoint stores in one process. Referrer policy is `strict-origin-when-cross-origin` (Google's key needs the origin). The retired shared doc (`biwa:v2:trip:state`) is left in Redis untouched; new traffic never reads it.
 
 `BIWA_REDIS_URL` may be parked in `.env.local` for local use — a value in that file does NOT mean the deployed site has it configured; the Vercel/dashboard env setup is user-owned. The `redis` Python package (requirements.txt) must be installed before the direct-URI backend works; the launcher env does not vendor it. All four endpoint modules share whichever backend resolves, so trip state and rate limits live in one Biwa-namespaced database (durable `TRIP_KEY`, no TTL — the shared trip never expires).
 
@@ -43,7 +43,7 @@ Provider status (as configured): Places (New), Routes and Elevation all work on 
 
 ## Local development
 
-One-shot launcher for both servers (loads `.env.local`, memory store): `./biwa-dev.sh` at the repo root. Or manually:
+One-shot launcher for both servers (loads `.env.local`): `./biwa-dev.sh` at the repo root. When `BIWA_REDIS_URL` is set it takes precedence over `BIWA_DEV_ALLOW_MEMORY=1`, so the Google cache (details/photo names/image bytes, 30-day TTL) survives API restarts — the memory backend is only the fallback when no Redis var is configured. To iterate on UI with **zero provider spend**, open `http://localhost:3000/projects/biwa-ride/?noroute` — `maybeRequestDayRoute` leaves every day 'idle' ("road preview not requested") since route geometry can never be cached and is the one guaranteed billed call per refresh. Or manually:
 
 ```bash
 # terminal 1 — isolated Biwa API (in-memory store; loads .env.local for the
@@ -69,7 +69,8 @@ Open `http://localhost:3000/projects/biwa-ride/` — plain URL, no invite. The p
 
 ## Sync & safety invariants
 
-- **Check-in progress is per-device, never shared.** `visitStatus`/`programmeStatus` live in localStorage (`biwa:v2:local-progress`), written via `TripStore.applyLocalProgress` and overlaid onto `store.trip` at emit — every `Rules.*` read sees the device's own checklist. `_put` strips both fields so the shared doc carries the plan only; the one-time seed copies any legacy shared progress into local storage first. `navigator.storage.persist()` is requested at boot (best-effort — Safari's eviction window is not page-configurable). The CAS intent-rebase machinery is retained but no longer carries ticks.
+- **Check-in progress lives in the personal doc.** `visitStatus`/`programmeStatus` travel inside the owner's doc; `TripStore.applyLocalProgress` writes the localStorage mirror (`biwa:v2:local-progress`) first for instant ticks and offline buffering, then persists the whole snapshot through `save()`. Adoption mirrors doc progress back into the local copy (paired same-owner devices' ticks arrive through it) — skipped while a `pendingDraft` holds newer local work. `navigator.storage.persist()` is still requested at boot for the mirror. The CAS intent-rebase machinery is retained — a personal doc can still be edited from two same-owner devices/tabs.
+- Owner identity: `biwa:v2:owner-id` in localStorage, sent as `X-Biwa-Owner`. Missing/invalid → 401 `owner_required`, which the client treats as the guard path (local seed/draft only). `TripStore.createPairCode`/`claimPairCode` drive `api/biwa-pair.py`; `adoptOwner` wipes the old identity's local state before a reload. The retired shared doc key (`biwa:v2:trip:state`) is never read by new code.
 - CAS writes (`expectedRevision`, Redis Lua); 409 carries the latest trip and is consumed. Drafts are never discarded — recoverable `pendingDraft`, explicit conflict UI ("Replace shared trip with mine" = whole-snapshot overwrite).
 - Only idempotent checkbox intents rebase (one retry, after a successful refresh, dropped cleanly if the target was deleted). Reads can't adopt over an open editor or in-flight write (read-generation bump).
 - 503 ⇒ temporary `unavailable`, keeps polling; edits hold as pendingDraft and retry on recovery. A guard response (401/403) ⇒ local seed/draft only — cached shared state is never shown.

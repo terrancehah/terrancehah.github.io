@@ -46,6 +46,13 @@
   var RALLY_CHECKIN_URL = 'https://platinumaps.jp/d/cyclingrally2026';
   var GOOGLE_TERMS_URL = 'https://maps.google.com/help/terms_maps/';
   var ROUTE_DEBOUNCE_MS = 800;
+  // Dev escape hatch: '?noroute' in the page URL suppresses every Routes
+  // request. Road previews can never be cached anywhere (Google terms), so
+  // they are the one guaranteed billed call per refresh while iterating
+  // locally — '?noroute' makes a reload cost zero provider calls. Days
+  // report 'idle', which already renders the honest 'road preview not
+  // requested' state.
+  var DEV_NO_ROUTES = /[?&]noroute\b/.test(location.search);
   var TOUCH_DRAG_HOLD_MS = 300;   // press-and-hold before a touch drag begins
   var TOUCH_DRAG_TOLERANCE_PX = 8; // movement allowed during the hold
   var CLICK_SUPPRESS_MS = 350;    // the tap that ends a drag must not open the sheet
@@ -146,7 +153,10 @@
       'biwa-stop-dialog-save', 'biwa-stop-dialog-cancel',
       'biwa-endpoint-dialog', 'biwa-endpoint-dialog-title', 'biwa-endpoint-dialog-body',
       'biwa-endpoint-dialog-save', 'biwa-endpoint-dialog-cancel',
-      'biwa-conflict-dialog', 'biwa-conflict-keep', 'biwa-conflict-reload'
+      'biwa-conflict-dialog', 'biwa-conflict-keep', 'biwa-conflict-reload',
+      'biwa-pair-open', 'biwa-pair-dialog', 'biwa-pair-show',
+      'biwa-pair-code', 'biwa-pair-code-note', 'biwa-pair-input',
+      'biwa-pair-claim', 'biwa-pair-status', 'biwa-pair-close'
     ].forEach(function (id) { els[id] = $(id); });
 
     // Saved language (or browser locale) applies to the static chrome
@@ -213,6 +223,56 @@
       els['biwa-conflict-keep'].disabled = true;
       els['biwa-conflict-dialog'].close();
       store.resolveConflictReapply();
+    });
+
+    // Device pairing — personal trips mean two of the owner's devices only
+    // share a trip by claiming the same identity. 'Send' mints a code on
+    // this device; 'receive' claims one shown elsewhere and reloads under
+    // the adopted id so every module reboots cleanly.
+    els['biwa-pair-open'].addEventListener('click', function () {
+      els['biwa-pair-status'].textContent = '';
+      els['biwa-pair-dialog'].showModal();
+    });
+    els['biwa-pair-close'].addEventListener('click', function () {
+      els['biwa-pair-dialog'].close();
+    });
+    els['biwa-pair-show'].addEventListener('click', function () {
+      var btn = els['biwa-pair-show'];
+      btn.disabled = true;
+      els['biwa-pair-status'].textContent = t('Requesting code…');
+      store.createPairCode().then(function (body) {
+        btn.disabled = false;
+        if (!body || !body.ok || !body.code) {
+          els['biwa-pair-status'].textContent = t('Could not create a code — try again.');
+          return;
+        }
+        els['biwa-pair-status'].textContent = '';
+        // Characters get individual spans so letter-spacing can be wide
+        // without the trailing space inflating the visual center.
+        els['biwa-pair-code'].textContent = body.code.split('').join(' ');
+        els['biwa-pair-code'].hidden = false;
+        els['biwa-pair-code-note'].hidden = false;
+      });
+    });
+    els['biwa-pair-claim'].addEventListener('click', function () {
+      var code = (els['biwa-pair-input'].value || '').trim().toUpperCase();
+      if (code.length !== 6) {
+        els['biwa-pair-status'].textContent = t('That code is invalid or expired — check it and try again.');
+        return;
+      }
+      els['biwa-pair-claim'].disabled = true;
+      els['biwa-pair-status'].textContent = t('Claiming…');
+      store.claimPairCode(code).then(function (body) {
+        els['biwa-pair-claim'].disabled = false;
+        if (body && body.ok && body.ownerId && store.adoptOwner(body.ownerId)) {
+          els['biwa-pair-status'].textContent = t('Trip claimed — reloading…');
+          // A reload reboots every module under the adopted identity —
+          // cleaner than patching live state mid-flight.
+          location.reload();
+          return;
+        }
+        els['biwa-pair-status'].textContent = t('That code is invalid or expired — check it and try again.');
+      });
     });
     els['biwa-nearby-geolocate'].addEventListener('click', updateMyLocation);
     // Language switch: pick a segment to set the language, then repaint
@@ -433,9 +493,10 @@
     if (!next) return;
     var occurrenceId = next.occurrenceId;
     var placeId = next.placeId;
-    // Per-device progress — the write is synchronous localStorage, so
-    // the result is known immediately and the shared doc is untouched.
-    var result = store.applyLocalProgress(function (draft) {
+    // Progress write — the local mirror updates instantly; the result
+    // resolves once the personal doc write lands (or 'local' when the
+    // backend is down).
+    var resultP = store.applyLocalProgress(function (draft) {
       var p = placeId
         ? (store.trip.places || []).filter(function (x) { return x.placeId === placeId; })[0] || next.place
         : null;
@@ -443,7 +504,9 @@
     });
     // The pill confirms only a durable tick — a failed local write
     // stays silent rather than flashing success.
-    checkinSaved(result, next.place ? placeName(next.place) : null);
+    resultP.then(function (result) {
+      checkinSaved(result, next.place ? placeName(next.place) : null);
+    });
     // Same celebration gate as the row/sheet ticks: once, only while the
     // timeline view (which owns the leaf layer) is active.
     if (document.getElementById('view-timeline').classList.contains('is-active')) {
@@ -851,12 +914,13 @@
         var miniTags = els['biwa-mini-tags'];
         miniTags.innerHTML = '';
         placeBadgesNodes(next.place).forEach(function (n) { miniTags.appendChild(n); });
-        // Small-square thumbnail from the same first photo the card
-        // backdrop uses; the slot keeps its petal tint when no photo
-        // exists or the request fails, so the bar never resizes.
+        // Small-square thumbnail — requests the SAME 800px asset the card
+        // backdrop already fetched, so the bar adds no second billed photo
+        // call (each width is a separate media request upstream; the
+        // browser and server caches both key on it).
         var miniImg = els['biwa-mini-photo'];
         if (photo) {
-          miniImg.src = store.photoUrl(nextChosenId, photo.index, 128);
+          miniImg.src = store.photoUrl(nextChosenId, photo.index, 800);
           miniImg.hidden = false;
         } else {
           miniImg.hidden = true;
@@ -1501,9 +1565,9 @@
       ev.stopPropagation();
       if (store._saving) return; // no double-fire while a write is in flight
       var target = !visited;
-      // Per-device progress — synchronous localStorage write; the shared
-      // doc is untouched. Places resolve from the live view, not a draft.
-      var result = store.applyLocalProgress(function (draft) {
+      // Progress write — local mirror is instant, doc write lands async.
+      // Places resolve from the live view, not a draft.
+      var resultP = store.applyLocalProgress(function (draft) {
         var p = place && place.placeId
           ? (store.trip.places || []).filter(function (x) { return x.placeId === place.placeId; })[0] || place
           : null;
@@ -1511,7 +1575,7 @@
       });
       // Toast only once the tick is durable — a failed local write stays
       // silent, and unchecking never confirms.
-      if (target) checkinSaved(result, label);
+      if (target) resultP.then(function (result) { checkinSaved(result, label); });
       // Celebrate a fresh manual tick — outside the save mutator so CAS
       // retries/reapplies can never double-fire the burst, and only on a
       // false→true flip (unchecking, polls and re-renders stay quiet).
@@ -2234,9 +2298,8 @@
       var target = !checked;
       var occurrenceId = occ;
       var placeId = place.placeId;
-      // Per-device progress — synchronous localStorage write, so the
-      // result is known immediately and the shared doc is untouched.
-      var result = store.applyLocalProgress(function (draft) {
+      // Progress write — local mirror is instant, doc write lands async.
+      var resultP = store.applyLocalProgress(function (draft) {
         var p = placeId
           ? (store.trip.places || []).filter(function (x) { return x.placeId === placeId; })[0]
           : null;
@@ -2244,7 +2307,7 @@
       });
       // The sheet may sit over map/nearby where the leaf layer is
       // hidden — the pill is view-independent and always reachable.
-      if (target) checkinSaved(result, placeName(place));
+      if (target) resultP.then(function (result) { checkinSaved(result, placeName(place)); });
       // The sheet body re-renders from the store change — keep context.
       // Celebrate a fresh tick only while the timeline view is active —
       // the leaf layer lives there and stays hidden on map/nearby.
@@ -3033,6 +3096,12 @@
   function maybeRequestDayRoute(day) {
     var routed = Rules.routePoints(store.trip, day);
     var state = dayRoutes[day.dayId] || (dayRoutes[day.dayId] = { status: 'idle' });
+    if (DEV_NO_ROUTES) {
+      state.status = 'idle';   // never request — renders 'not requested'
+      renderDayRoutesPanel();
+      refreshTrackGaps();
+      return;
+    }
     if (!day.start || !day.end) {
       // Missing endpoints are an explicit configuration state, not a
       // silently partial route.

@@ -1482,6 +1482,49 @@ body.biwa-page {
 .biwa-dialog h2 { font-family: var(--biwa-font-heading); margin-top: 0; }
 .biwa-dialog-actions { display: flex; gap: var(--biwa-space-sm); justify-content: flex-end; flex-wrap: wrap; }
 
+/* ---------- Pair devices dialog ---------- */
+.biwa-pair-section { margin-top: var(--biwa-space-md); }
+.biwa-pair-section h3 {
+  font-family: var(--biwa-font-heading);
+  font-weight: 400;
+  font-size: 1.05rem;
+  margin: 0 0 var(--biwa-space-xs);
+}
+/* The displayed code: large, tracked-out, centered — read aloud across a
+   table or typed off a tiny screen. */
+.biwa-pair-code {
+  font-family: var(--biwa-font-mono, monospace);
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-align: center;
+  margin: var(--biwa-space-sm) 0 0;
+  color: var(--biwa-clay-deep);
+}
+.biwa-pair-claim-row { display: flex; gap: var(--biwa-space-sm); align-items: center; }
+.biwa-pair-input {
+  font: inherit;
+  font-size: 16px; /* prevent iOS zoom */
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: var(--biwa-radius-sm);
+  background: var(--biwa-petal);
+  color: var(--biwa-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+/* A <button> restyled as a footer link — strip the UA button chrome so it
+   sits beside the <a> links as a peer. */
+.biwa-footer-link.biwa-pair-open {
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
 /* ---------- Destination bottom sheet ----------
    85dvh slide-up on phones, a right-hand panel on desktop. A div (not
    <dialog>) so it can ride over the open-editor flag the same way dialogs

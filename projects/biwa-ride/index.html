@@ -308,6 +308,10 @@
       <nav class="biwa-footer-nav" aria-label="Footer" data-i18n-aria-label="Footer">
         <a class="biwa-footer-link" href="/projects.html" data-i18n="Projects">Projects</a>
         <a class="biwa-footer-link" href="/">terrancehah.com</a>
+        <!-- Device pairing entry — the trip is personal (per-owner Redis
+             doc), so this is how a second device claims the same identity. -->
+        <button class="biwa-footer-link biwa-pair-open" id="biwa-pair-open"
+                type="button" data-i18n="Pair devices">Pair devices</button>
       </nav>
       <p class="biwa-footer-credit"><span data-i18n="Made with">Made with</span> <span class="biwa-footer-heart" aria-hidden="true">♥</span><span data-i18n=" by Terrance"> by Terrance</span></p>
     </footer>
@@ -387,6 +391,43 @@
     <div class="biwa-dialog-actions">
       <button class="biwa-btn biwa-btn-secondary" id="biwa-conflict-keep" type="button" data-i18n="Replace shared trip with mine">Replace shared trip with mine</button>
       <button class="biwa-btn biwa-btn-primary" id="biwa-conflict-reload" type="button" data-i18n="Load shared version">Load shared version</button>
+    </div>
+  </dialog>
+
+  <!-- Device pairing: trips are personal per-owner docs, so pairing is how
+       two of YOUR devices share one identity. 'Send' mints a 10-minute
+       code on this device; 'receive' claims one shown on another. -->
+  <dialog class="biwa-dialog" id="biwa-pair-dialog" aria-labelledby="biwa-pair-title">
+    <h2 id="biwa-pair-title" data-i18n="Pair devices">Pair devices</h2>
+    <p data-i18n="Your trip and check-ins are personal to each device. To see the same trip on another of your devices, show a code here and enter it there.">Your trip and check-ins are personal to each device. To see the same
+      trip on another of your devices, show a code here and enter it
+      there.</p>
+
+    <div class="biwa-pair-section">
+      <h3 data-i18n="Send this trip to another device">Send this trip to another device</h3>
+      <button class="biwa-btn biwa-btn-secondary" id="biwa-pair-show" type="button"
+              data-i18n="Show a code">Show a code</button>
+      <p class="biwa-pair-code" id="biwa-pair-code" hidden aria-live="polite"></p>
+      <p class="biwa-field-hint" id="biwa-pair-code-note" hidden
+         data-i18n="Valid for 10 minutes — enter it on the other device to claim this trip.">Valid for 10 minutes — enter it on the other device to claim this trip.</p>
+    </div>
+
+    <div class="biwa-pair-section">
+      <h3 data-i18n="This device is new">This device is new</h3>
+      <div class="biwa-pair-claim-row">
+        <input class="biwa-input biwa-pair-input" id="biwa-pair-input" type="text"
+               inputmode="text" autocomplete="off" autocapitalize="characters"
+               maxlength="6" data-i18n-placeholder="6-letter code"
+               placeholder="6-letter code">
+        <button class="biwa-btn biwa-btn-primary" id="biwa-pair-claim" type="button"
+                data-i18n="Claim trip">Claim trip</button>
+      </div>
+      <p class="biwa-field-hint" id="biwa-pair-status" role="status"></p>
+    </div>
+
+    <div class="biwa-dialog-actions">
+      <button class="biwa-btn biwa-btn-secondary" id="biwa-pair-close" type="button"
+              data-i18n="Close">Close</button>
     </div>
   </dialog>
 

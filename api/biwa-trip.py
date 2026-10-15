@@ -1,12 +1,14 @@
-"""GET/PUT /api/biwa-trip — public shared trip state.
+"""GET/PUT /api/biwa-trip — personal per-owner trip state.
 
-The trip is publicly readable: GET returns the snapshot (or null when nobody
-has saved yet, in which case the client seeds from its static
-trip-seed.json) plus capability flags and the referrer-restricted browser
-Maps key — no invite token exists in v2. PUT accepts {expectedRevision,
-trip} and applies it only through the store's atomic compare-and-set: a
-stale writer gets 409 plus the latest state, never a silent last-write-wins.
-Mutations are origin-guarded and rate-limited per IP.
+The trip is personal: every request carries X-Biwa-Owner ('dev:<uuid>' —
+minted client-side, later a provider subject once auth lands) and trips
+live at biwa:v2:owner:<id>:trip with no TTL. GET returns that owner's
+snapshot (or null when they have never saved — the client then seeds from
+its static trip-seed.json) plus capability flags and the
+referrer-restricted browser Maps key. PUT accepts {expectedRevision, trip}
+and applies it only through the store's atomic compare-and-set against the
+owner key: a stale writer gets 409 plus the latest state, never a silent
+last-write-wins. Mutations are origin-guarded and rate-limited per IP.
 """
 
 import importlib.util
@@ -43,15 +45,24 @@ store = biwa_store.BiwaStore()
 
 @app.get("/")
 async def get_trip(request: Request):
-    """Return the shared snapshot plus capability flags for the client.
+    """Return the caller's snapshot plus capability flags for the client.
 
-    Public read: capabilities and the browser Maps key are returned even when
-    the state backend is not configured — the app can still load the static
-    seed and the map while writes stay fail-closed.
+    An owner identity is required to read a trip: without one there is no
+    doc to serve — 401 'owner_required' sends the client to its local
+    fallback, matching the existing guard-response path. Capabilities and
+    the browser Maps key are still returned to anyone (they are not trip
+    data) so the static seed and map load even mid-401.
     """
+    owner = biwa_store.owner_from_request(request)
+    if not owner:
+        # No identity header → there is no doc to serve. The client's
+        # existing guard-response path treats 401 as 'local seed/draft
+        # only', which is exactly right for a caller with no identity.
+        return biwa_store.json_error(401, "owner_required",
+                                     "Send X-Biwa-Owner to read a trip.")
     trip = None
     if store.configured:
-        trip, _raw = store.get_trip()
+        trip, _raw = store.get_trip(biwa_store.owner_trip_key(owner))
     response = {
         "ok": True,
         "trip": trip,
@@ -74,10 +85,15 @@ async def get_trip(request: Request):
 
 @app.put("/")
 async def put_trip(request: Request):
-    """Compare-and-set write of a full validated trip snapshot."""
+    """Compare-and-set write of a full validated snapshot for one owner."""
     blocked = biwa_store.guard_mutation(request, store)
     if blocked:
         return blocked
+
+    owner = biwa_store.owner_from_request(request)
+    if not owner:
+        return biwa_store.json_error(401, "owner_required",
+                                     "Send X-Biwa-Owner to write a trip.")
 
     if not store.check_rate_limit(
         "trip-write:" + biwa_store.client_scope(request),
@@ -113,7 +129,8 @@ async def put_trip(request: Request):
     trip["updatedAt"] = datetime.now(timezone.utc).isoformat()
     payload = json.dumps(trip, ensure_ascii=False)
 
-    ok, current_raw = store.cas_trip(expected, payload)
+    ok, current_raw = store.cas_trip(expected, payload,
+                                     key=biwa_store.owner_trip_key(owner))
     if not ok:
         latest = None
         if current_raw:

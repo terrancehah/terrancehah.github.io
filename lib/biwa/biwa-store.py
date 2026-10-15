@@ -27,6 +27,8 @@ import hashlib
 import importlib.util
 import json
 import os
+import re
+import secrets
 import threading
 import time
 import urllib.parse
@@ -74,6 +76,23 @@ DEV_ALLOW_MEMORY = os.getenv("BIWA_DEV_ALLOW_MEMORY") == "1"
 # never touches the retired invite-gated snapshot (biwa:trip:state is left
 # untouched in Redis).
 TRIP_KEY = "biwa:v2:trip:state"
+# Personal trip docs are keyed per owner identity: 'dev:<uuid>' today, a
+# provider subject ('google:<sub>', ...) once real auth lands — the layout
+# never needs to change. TRIP_KEY stays readable for the shared-doc era
+# but new writes always target an owner key.
+OWNER_KEY_PREFIX = "biwa:v2:owner:"
+# Device-pairing grants live briefly under their own prefix — six base32-ish
+# characters resolve to an ownerId the claiming device then adopts.
+PAIR_KEY_PREFIX = "biwa:v2:pair:"
+PAIR_CODE_TTL_S = 600
+# Unambiguous alphabet — no 0/O, 1/I/L — so codes read aloud across a
+# table or typed off a tiny screen never confuse glyphs.
+PAIR_CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"
+PAIR_CODE_LENGTH = 6
+# '<scheme>:<id>' — scheme is a short lowercase word so future auth
+# providers slot in beside 'dev'; the id part allows the common subject
+# shapes (uuid, base64url, apple/google subs).
+OWNER_ID_RE = re.compile(r"^[a-z][a-z0-9]{0,15}:[A-Za-z0-9._~+-]{8,128}$")
 RATE_PREFIX = "biwa:rl:"
 WRITE_RATE_LIMIT = 30          # trip writes per window (per IP)
 ROUTE_RATE_LIMIT = 20          # route provider calls per window (per IP)
@@ -169,13 +188,13 @@ class BiwaStore:
     def configured(self):
         return self._redis is not None or self._memory is not None
 
-    def get_trip(self):
+    def get_trip(self, key=TRIP_KEY):
         """Return (trip dict or None, raw json or None)."""
         raw = None
         if self._redis is not None:
-            raw = self._redis.get(TRIP_KEY)
+            raw = self._redis.get(key)
         elif self._memory is not None:
-            raw = self._memory.get(TRIP_KEY)
+            raw = self._memory.get(key)
         if not raw:
             return None, None
         if isinstance(raw, bytes):
@@ -185,7 +204,7 @@ class BiwaStore:
         except (ValueError, TypeError):
             return None, raw
 
-    def cas_trip(self, expected_revision, payload_json):
+    def cas_trip(self, expected_revision, payload_json, key=TRIP_KEY):
         """Atomically write payload_json iff stored revision == expected.
 
         Returns (ok, current_raw_json_or_none). A False result is a real 409:
@@ -193,7 +212,7 @@ class BiwaStore:
         """
         if self._redis is not None:
             result = self._redis.eval(
-                self._CAS_SCRIPT, [TRIP_KEY], [str(expected_revision), payload_json]
+                self._CAS_SCRIPT, [key], [str(expected_revision), payload_json]
             )
             ok = bool(result[0])
             current = result[1] if len(result) > 1 and result[1] else None
@@ -202,7 +221,7 @@ class BiwaStore:
             return ok, current
         if self._memory is not None:
             with self._lock:
-                current = self._memory.get(TRIP_KEY)
+                current = self._memory.get(key)
                 current_rev = 0
                 if current:
                     try:
@@ -211,7 +230,7 @@ class BiwaStore:
                         current_rev = 0
                 if current_rev != expected_revision:
                     return False, current
-                self._memory[TRIP_KEY] = payload_json
+                self._memory[key] = payload_json
                 return True, None
         raise RuntimeError("Biwa store is not configured")
 
@@ -297,6 +316,49 @@ def client_scope(request):
     """
     host = request.client.host if request.client else "unknown"
     return "ip:" + hashlib.sha256(host.encode()).hexdigest()[:16]
+
+
+def owner_from_request(request):
+    """Read the X-Biwa-Owner identity header, or None when absent/malformed.
+
+    Every personal trip lives behind an owner id; today the only issuer is
+    the client itself ('dev:<uuid>' minted once into localStorage), so the
+    header is trusted as-is — the same trust level the public shared doc
+    had. A future auth layer simply swaps the scheme ('google:<sub>') and
+    verifies the token before this point; the key layout already fits.
+    """
+    owner = (request.headers.get("x-biwa-owner") or "").strip()
+    return owner if OWNER_ID_RE.match(owner) else None
+
+
+def owner_trip_key(owner_id):
+    """Redis key for one owner's personal trip doc — durable, no TTL."""
+    return OWNER_KEY_PREFIX + owner_id + ":trip"
+
+
+def create_pair_code(store, owner_id):
+    """Mint a short-lived code another device can claim this owner with.
+
+    Stored through the small-JSON cache so both backends get the same
+    expiry semantics; the code stays claimable until the TTL lapses so
+    several of the group's devices can pair off one display.
+    """
+    code = "".join(
+        secrets.choice(PAIR_CODE_ALPHABET) for _ in range(PAIR_CODE_LENGTH)
+    )
+    store.set_cached_json(PAIR_KEY_PREFIX + code, {"owner": owner_id},
+                          ex=PAIR_CODE_TTL_S)
+    return code
+
+
+def resolve_pair_code(store, code):
+    """Resolve a pairing code to its owner id, or None when unknown/expired."""
+    data = store.get_cached_json(PAIR_KEY_PREFIX + code)
+    if isinstance(data, dict):
+        owner = data.get("owner")
+        if isinstance(owner, str) and OWNER_ID_RE.match(owner):
+            return owner
+    return None
 
 
 # Origins allowed to mutate/call providers through a browser. Anything not on

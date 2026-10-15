@@ -2,7 +2,8 @@
 # biwa-dev.sh — local development for the Lake Biwa Ride Companion only.
 #
 # Starts the static site + proxy on :3000 and the isolated Biwa API on
-# :8000 (in-memory store — no Redis needed locally). Google keys come from
+# :8000 (uses BIWA_REDIS_URL when .env.local provides it — the persistent
+# Google cache; in-memory store only as fallback). Google keys come from
 # the gitignored .env.local; nothing here touches Pacey's config or its
 # default dev flow. Ctrl-C stops both servers.
 set -euo pipefail

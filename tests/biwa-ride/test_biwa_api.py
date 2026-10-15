@@ -42,6 +42,7 @@ biwa_models = biwa_store.load_biwa_module("biwa-models")
 biwa_places = biwa_store.load_biwa_module("biwa-places")
 biwa_routing = biwa_store.load_biwa_module("biwa-routing")
 biwa_trip = load("biwa_trip_endpoint", os.path.join(API_DIR, "biwa-trip.py"))
+biwa_pair = load("biwa_pair_endpoint", os.path.join(API_DIR, "biwa-pair.py"))
 biwa_route = load("biwa_route_endpoint", os.path.join(API_DIR, "biwa-route.py"))
 biwa_place = load("biwa_place_endpoint", os.path.join(API_DIR, "biwa-place.py"))
 biwa_photo = load("biwa_photo_endpoint", os.path.join(API_DIR, "biwa-photo.py"))
@@ -60,16 +61,43 @@ def seed_trip():
     return trip
 
 
-def fresh_client():
-    """A TestClient with a clean memory store for each test."""
+# A valid '<scheme>:<subject>' owner id for the default test identity.
+TEST_OWNER = "dev:00000000-0000-4000-8000-000000000001"
+
+
+def fresh_client(owner=TEST_OWNER):
+    """A TestClient with a clean memory store and a default owner header.
+
+    The memory backend is class-shared across every endpoint's store, so
+    clearing it through the trip store resets the pair endpoint's too.
+    """
     biwa_trip.store._memory.clear()
-    return TestClient(biwa_trip.app)
+    return owner_client(owner)
 
 
-class PublicAccessTests(unittest.TestCase):
-    """The trip is public shared state — no invite, no Authorization header."""
+def owner_client(owner=TEST_OWNER):
+    """A TestClient on the CURRENT store contents — for second devices and
+    second owners inside a test, where clearing would wipe the fixture."""
+    return TestClient(biwa_trip.app, headers={"X-Biwa-Owner": owner})
 
-    def test_public_get_without_any_auth(self):
+
+class OwnerAccessTests(unittest.TestCase):
+    """Trips are personal per-owner docs — X-Biwa-Owner selects which one.
+    There is no Authorization scheme; the owner header IS the identity."""
+
+    def test_get_without_owner_header_rejected(self):
+        # A bare client (no default headers) has no doc to serve.
+        biwa_trip.store._memory.clear()
+        res = TestClient(biwa_trip.app).get("/")
+        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.json()["error"], "owner_required")
+
+    def test_malformed_owner_header_rejected(self):
+        biwa_trip.store._memory.clear()
+        res = TestClient(biwa_trip.app).get("/", headers={"X-Biwa-Owner": "not-an-owner"})
+        self.assertEqual(res.status_code, 401)
+
+    def test_get_with_owner_header_ok(self):
         client = fresh_client()
         res = client.get("/")
         self.assertEqual(res.status_code, 200)
@@ -100,22 +128,87 @@ class PublicAccessTests(unittest.TestCase):
         # configured — its absence must not break a public GET.
         self.assertIsNone(body.get("browserMapsKey"))
 
-    def test_public_put_without_auth(self):
+    def test_put_without_owner_header_rejected(self):
+        biwa_trip.store._memory.clear()
+        res = TestClient(biwa_trip.app).put(
+            "/", json={"expectedRevision": 0, "trip": seed_trip()})
+        self.assertEqual(res.status_code, 401)
+
+    def test_put_with_owner_header_ok(self):
         client = fresh_client()
         res = client.put("/", json={"expectedRevision": 0, "trip": seed_trip()})
         self.assertEqual(res.status_code, 200, res.text)
 
-    def test_cross_origin_mutation_rejected_public_read_ok(self):
+    def test_owners_are_isolated(self):
+        # Owner A writes; owner B reads — B must see no doc at all.
+        a = fresh_client()
+        self.assertEqual(a.put("/", json={"expectedRevision": 0, "trip": seed_trip()}).status_code, 200)
+        b = owner_client("dev:00000000-0000-4000-8000-0000000000ff")
+        res = b.get("/")
+        self.assertEqual(res.status_code, 200)
+        self.assertIsNone(res.json()["trip"], "another owner's doc must not leak")
+        # And B's own write does not disturb A's.
+        b.put("/", json={"expectedRevision": 0, "trip": seed_trip()})
+        self.assertEqual(a.get("/").json()["trip"]["revision"], 1)
+
+    def test_cross_origin_mutation_rejected_read_ok(self):
         client = fresh_client()
         trip = seed_trip()
         evil = {"Origin": "https://example.evil"}
-        # A foreign Origin may not mutate shared state or call providers.
+        # A foreign Origin may not mutate trip state or call providers.
         res = client.put("/", headers=evil,
                          json={"expectedRevision": 0, "trip": trip})
         self.assertEqual(res.status_code, 403)
         self.assertEqual(res.json()["error"], "forbidden_origin")
-        # Plain reads (no Origin) stay public.
+        # Reads with an owner identity still work.
         self.assertEqual(client.get("/").status_code, 200)
+
+
+class PairTests(unittest.TestCase):
+    """biwa-pair: create mints a 10-minute code, claim resolves it."""
+
+    def pair_client(self, owner=TEST_OWNER):
+        return TestClient(biwa_pair.app, headers={"X-Biwa-Owner": owner})
+
+    def test_create_requires_owner(self):
+        biwa_trip.store._memory.clear()
+        res = TestClient(biwa_pair.app).post("/", json={"op": "create"})
+        self.assertEqual(res.status_code, 401)
+
+    def test_create_then_claim_roundtrip(self):
+        biwa_trip.store._memory.clear()
+        client = self.pair_client()
+        res = client.post("/", json={"op": "create"})
+        self.assertEqual(res.status_code, 200, res.text)
+        code = res.json()["code"]
+        self.assertEqual(len(code), biwa_store.PAIR_CODE_LENGTH)
+        self.assertEqual(res.json()["expiresIn"], biwa_store.PAIR_CODE_TTL_S)
+        # A fresh device (its own owner header) claims the code.
+        claimer = self.pair_client("dev:00000000-0000-4000-8000-0000000000ee")
+        got = claimer.post("/", json={"op": "claim", "code": code.lower()})
+        self.assertEqual(got.status_code, 200)
+        self.assertEqual(got.json()["ownerId"], TEST_OWNER)
+
+    def test_claim_unknown_or_expired_code_404(self):
+        biwa_trip.store._memory.clear()
+        client = self.pair_client()
+        res = client.post("/", json={"op": "claim", "code": "ZZZZZZ"})
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(res.json()["error"], "code_expired")
+
+    def test_claim_malformed_code_400(self):
+        biwa_trip.store._memory.clear()
+        client = self.pair_client()
+        res = client.post("/", json={"op": "claim", "code": "nope"})
+        self.assertEqual(res.status_code, 400)
+
+    def test_claim_rate_limited(self):
+        biwa_trip.store._memory.clear()
+        client = self.pair_client()
+        res = None
+        for _ in range(biwa_pair.PAIR_CLAIM_RATE_LIMIT + 2):
+            res = client.post("/", json={"op": "claim", "code": "ZZZZZZ"})
+        self.assertEqual(res.status_code, 429)
 
 
 class TripWriteTests(unittest.TestCase):
@@ -211,7 +304,7 @@ class CanonicalManifestTests(unittest.TestCase):
     catalogue, and the validator must enforce its immutable fields."""
 
     def test_manifest_matches_client_catalogue(self):
-        with open(os.path.join(API_DIR, "lib", "biwa-checkpoints.json"), encoding="utf-8") as f:
+        with open(os.path.join(ROOT, "lib", "biwa", "biwa-checkpoints.json"), encoding="utf-8") as f:
             manifest = json.load(f)
         with open(CHECKPOINTS_PATH, encoding="utf-8") as f:
             client = json.load(f)

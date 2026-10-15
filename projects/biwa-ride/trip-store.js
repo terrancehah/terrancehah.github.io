@@ -1,38 +1,48 @@
-/* trip-store.js — shared trip state: public reads/writes, polling, conflict
- * handling and honest offline states.
+/* trip-store.js — personal trip state: per-owner reads/writes, polling,
+ * conflict handling and honest offline states.
  *
- * Sync boundaries (schema v2):
- *  - The trip is public: no invite token, no Authorization header. Any
- *    visitor reads and writes the same shared snapshot.
- *  - Writes are compare-and-set: PUT {expectedRevision, trip}. A 409 carries
- *    the server's latest trip, which is consumed and adopted; the local
- *    draft is never thrown away — it stays as a recoverable pendingDraft /
- *    conflict until the user resolves it or a retry succeeds.
+ * Sync boundaries (owner-keyed docs):
+ *  - The trip is PERSONAL: every request carries X-Biwa-Owner and each
+ *    owner's doc lives at biwa:v2:owner:<id>:trip — no TTL, never expires.
+ *    The id is 'dev:<uuid>' minted once into localStorage today; a future
+ *    auth layer swaps the scheme ('google:<sub>') without changing the
+ *    key layout. biwa-pair mints a 10-minute code that lets a second
+ *    device claim the same owner id.
+ *  - Writes are compare-and-set: PUT {expectedRevision, trip}. A 409
+ *    carries the server's latest trip, which is consumed and adopted; the
+ *    local draft is never thrown away — it stays as a recoverable
+ *    pendingDraft / conflict until the user resolves it or a retry
+ *    succeeds. With a personal doc the only real conflict surface is two
+ *    tabs/devices sharing one owner id; the machinery stays regardless.
+ *  - Check-in progress (visitStatus/programmeStatus) now lives INSIDE the
+ *    personal doc — applyLocalProgress still updates the localStorage
+ *    mirror first (instant ticks, offline buffer, and the migration path
+ *    for progress made under the old model) and then persists the whole
+ *    snapshot through the normal save queue.
  *  - Only idempotent checkbox intents (arrival ticks) are rebased, once,
  *    after a successful refresh; an intent whose target stop/place no
  *    longer exists is dropped cleanly rather than re-adding it.
- *  - Polling runs every 15 s while the tab is visible plus on focus. A read
- *    started before an editor opened or a write began is stale and cannot
- *    adopt (read generation is bumped on both events).
- *  - A 503 (sharing not configured/unavailable) is a temporary 'unavailable'
- *    state, not a permanent local-only mode: polling keeps trying and an
- *    unsent draft retries once the service returns.
- *  - Check-in progress (visitStatus/programmeStatus) is PER-DEVICE: it
- *    lives in localStorage, never enters the shared document and is
- *    overlaid onto this.trip at emit time so every Rules read sees the
- *    device's own checklist. Outgoing writes strip both fields, so the
- *    shared document carries the plan only. The one-time seed copies any
- *    legacy shared progress into the local store before it is ignored.
+ *  - Polling runs every 60 s while the tab is visible plus on focus —
+ *    slower than the shared era since foreign writes are impossible;
+ *    paired same-owner devices are the only thing it can ever learn.
+ *    A read started before an editor opened or a write began is stale
+ *    and cannot adopt (read generation is bumped on both events).
+ *  - A 503 (backend not configured/unavailable) is a temporary
+ *    'unavailable' state, not a permanent local-only mode: polling keeps
+ *    trying and an unsent draft retries once the service returns.
  *  - Local drafts/caches live under v2 storage keys so the retired v1 data
  *    is never touched.
  */
 (function (global) {
   'use strict';
 
-  var POLL_MS = 15000;
+  var POLL_MS = 60000;
   var LOCAL_LAST_KNOWN_KEY = 'biwa:v2:last-known-trip';
   var LOCAL_DRAFT_KEY = 'biwa:v2:local-draft';
   var LOCAL_PROGRESS_KEY = 'biwa:v2:local-progress';
+  var LOCAL_OWNER_KEY = 'biwa:v2:owner-id';
+  // Server-side validation of the '<scheme>:<subject>' owner id shape.
+  var OWNER_ID_RE = /^[a-z][a-z0-9]{0,15}:[A-Za-z0-9._~+-]{8,128}$/;
 
   // Catalogue records whose classification was corrected after shared
   // snapshots already carried the old metadata. Only these ids get their
@@ -79,6 +89,9 @@
 
   function TripStore() {
     this.apiBase = 'api/';
+    // Personal identity — 'dev:<uuid>' minted once into localStorage, or an
+    // id adopted through a pairing code. Sent on every request.
+    this.ownerId = loadOwnerId();
     this.trip = null;
     this.places = [];
     this.capabilities = {};
@@ -171,17 +184,28 @@
     return doc;
   };
 
-  // Per-device check-in write: mutate a draft of the local progress doc
-  // through the same Rules helpers the shared model used, persist it,
-  // then refresh the overlay and emit. Synchronous — 'local' mirrors the
-  // save() vocabulary so success handlers treat it like a landed write.
+  // Check-in write: mutate a draft of the local progress copy through the
+  // same Rules helpers the doc model uses, persist the local mirror, emit
+  // instantly, then save the whole trip snapshot — progress now lives
+  // inside the owner's personal doc, so the tick is durable server-side
+  // once the write lands. Resolves like save() ('saved'|'local'|...), so
+  // the UI's durable-write toast gate needs no new vocabulary.
   TripStore.prototype.applyLocalProgress = function (mutator) {
-    var draft = JSON.parse(JSON.stringify(this.localProgress));
-    try { mutator(draft); } catch (e) { return 'error'; }
-    this.localProgress = draft;
-    try { global.localStorage.setItem(LOCAL_PROGRESS_KEY, JSON.stringify(draft)); } catch (e) {}
+    var progressDraft = JSON.parse(JSON.stringify(this.localProgress));
+    try { mutator(progressDraft); } catch (e) { return Promise.resolve('error'); }
+    this.localProgress = progressDraft;
+    try { global.localStorage.setItem(LOCAL_PROGRESS_KEY, JSON.stringify(progressDraft)); } catch (e) {}
     this._emit();
-    return 'local';
+    // No trip doc loaded at all (catalogue fetch failed hard): the local
+    // copy already persisted above — skip the doc write entirely.
+    if (!this.trip && !this.pendingDraft) return Promise.resolve('local');
+    return this.save(function (draft) {
+      // Write the post-mutation snapshot explicitly — the draft already
+      // carries the overlaid copy, but pinning the exact fields keeps the
+      // doc's progress = this tick's result rather than any older overlay.
+      draft.visitStatus = JSON.parse(JSON.stringify(progressDraft.visitStatus));
+      draft.programmeStatus = JSON.parse(JSON.stringify(progressDraft.programmeStatus));
+    });
   };
 
   // Non-destructive migration for pre-correction snapshots. Two fixes on an
@@ -270,8 +294,34 @@
   };
 
   TripStore.prototype._headers = function () {
-    return { 'Content-Type': 'application/json' };
+    // The owner header is how the server knows WHICH personal doc — it is
+    // also sent on provider calls (harmless today, and it lets future
+    // per-user rate limits key off identity rather than IP).
+    return {
+      'Content-Type': 'application/json',
+      'X-Biwa-Owner': this.ownerId
+    };
   };
+
+  // Mint-or-load the device identity. The UUID is random per browser
+  // profile; a pairing claim overwrites the stored id before the app
+  // reloads, so this function only ever mints for genuinely new devices.
+  function loadOwnerId() {
+    var stored = null;
+    try { stored = global.localStorage.getItem(LOCAL_OWNER_KEY); } catch (e) {}
+    if (stored && OWNER_ID_RE.test(stored)) return stored;
+    var uuid = (global.crypto && global.crypto.randomUUID)
+      ? global.crypto.randomUUID()
+      // Hand-rolled v4 for the rare browser lacking crypto.randomUUID —
+      // collisions are still astronomically unlikely at 122 random bits.
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          var r = (Math.random() * 16) | 0;
+          return (c === 'x' ? r : ((r & 0x3) | 0x8)).toString(16);
+        });
+    var id = 'dev:' + uuid;
+    try { global.localStorage.setItem(LOCAL_OWNER_KEY, id); } catch (e) {}
+    return id;
+  }
 
   // The UI flips this when a dialog opens/closes. Opening an editor bumps the
   // read generation so an in-flight GET can no longer adopt over the edit.
@@ -326,9 +376,10 @@
     this._setState(this.localOnly ? 'local' : 'disconnected');
   };
 
-  // GET the shared snapshot. Returns true only when shared state was adopted.
-  // Pure read: it never retries a pending draft (retry has one guarded
-  // caller in the poll tick / UI action, so a refresh can't race a write).
+  // GET this owner's snapshot. Returns true only when server state was
+  // adopted. Pure read: it never retries a pending draft (retry has one
+  // guarded caller in the poll tick / UI action, so a refresh can't race
+  // a write).
   TripStore.prototype.refresh = function () {
     var self = this;
     var seq = ++this._readSeq;
@@ -392,22 +443,22 @@
             if (configChanged && self.trip) self._emit();
             return false;
           }
-          // The server may answer publicly while sharing is unconfigured:
-          // the trip still renders (static seed, local drafts) but writes
-          // stay local until a later poll sees the service come back.
+          // The server may answer while its backend is unconfigured: the
+          // trip still renders (static seed, local drafts) but writes stay
+          // local until a later poll sees the service come back.
           self.localOnly = body.sharingAvailable === false;
           if (body.trip) {
             self._adoptServerTrip(body.trip);
             return true;
           }
           if (self.localOnly) {
-            // Sharing backend absent: seed locally, keep polling.
+            // Backend absent: seed locally, keep polling.
             self._ensureFallbackSnapshot();
             self._setState('unavailable');
             return false;
           }
-          // Nobody has saved yet: this phone seeds the shared store.
-          return self._seedShared().then(function () { return true; });
+          // This owner has never saved: seed their personal doc now.
+          return self._seedOwner().then(function () { return true; });
         });
       })
       .catch(function () {
@@ -439,16 +490,31 @@
       this._emit();   // draft stays visible; no 'saved' label while unsent
       return;
     }
+    // The personal doc owns progress now — a paired same-owner device's
+    // ticks arrive through it. Mirror the adopted fields into the local
+    // copy so the emit overlay and any offline view stay current. Skipped
+    // while a pendingDraft is up: that draft's progress (already mirrored
+    // locally) is the newer work and must not be overwritten in view.
+    if (trip.visitStatus || trip.programmeStatus) {
+      this.localProgress = {
+        visitStatus: JSON.parse(JSON.stringify(trip.visitStatus || {})),
+        programmeStatus: JSON.parse(JSON.stringify(trip.programmeStatus || {}))
+      };
+      this._progressLoaded = true;
+      try { global.localStorage.setItem(LOCAL_PROGRESS_KEY, JSON.stringify(this.localProgress)); } catch (e) {}
+    }
     this.trip = trip;
     this.conflict = null;
     if (this.state !== 'saving') this._setState('saved');
   };
 
-  TripStore.prototype._seedShared = function () {
+  TripStore.prototype._seedOwner = function () {
     var self = this;
     this.trip = this._seed;
     return this._put(this._seed, 0).then(function (result) {
-      if (result === 'conflict') return self.refresh();  // someone seeded first
+      // A 409 here means a paired same-owner device seeded first — just
+      // read back what it wrote.
+      if (result === 'conflict') return self.refresh();
       return result;
     });
   };
@@ -532,10 +598,7 @@
     // catalogue correction reaches the server with current metadata, so
     // the immutable-manifest check can never reject it.
     this._normalizeTrip(trip);
-    // Check-in progress is per-device — a draft copied from the overlaid
-    // view would otherwise leak this device's ticks into the shared doc.
-    delete trip.visitStatus;
-    delete trip.programmeStatus;
+    // Progress fields stay in the payload — the personal doc owns them.
     return fetch(this.apiBase + 'biwa-trip', {
       method: 'PUT',
       headers: this._headers(),
@@ -816,6 +879,43 @@
     if (global.addEventListener) {
       global.addEventListener('focus', tick);
     }
+  };
+
+  // --- pairing (share this device's trip to another of yours) ---------------
+
+  // Mint a short-lived code that resolves to this device's owner id.
+  // Resolves {code, expiresIn} or {error} — never throws.
+  TripStore.prototype.createPairCode = function () {
+    return fetch(this.apiBase + 'biwa-pair', {
+      method: 'POST', headers: this._headers(), body: JSON.stringify({ op: 'create' })
+    }).then(function (res) { return res.json(); })
+      .catch(function () { return { ok: false, error: 'network' }; });
+  };
+
+  // Resolve a code shown on another device to its owner id.
+  // Resolves {ownerId} on success or {error:'code_expired'|...}.
+  TripStore.prototype.claimPairCode = function (code) {
+    return fetch(this.apiBase + 'biwa-pair', {
+      method: 'POST', headers: this._headers(),
+      body: JSON.stringify({ op: 'claim', code: code })
+    }).then(function (res) { return res.json(); })
+      .catch(function () { return { ok: false, error: 'network' }; });
+  };
+
+  // Switch this device to a claimed owner id. The old identity's local
+  // state is wiped — progress, draft and last-known keys would otherwise
+  // leak into the newly adopted doc's overlay. The caller reloads the
+  // page so every module reboots under the new identity.
+  TripStore.prototype.adoptOwner = function (ownerId) {
+    if (!ownerId || !OWNER_ID_RE.test(ownerId)) return false;
+    try {
+      global.localStorage.removeItem(LOCAL_PROGRESS_KEY);
+      global.localStorage.removeItem(LOCAL_DRAFT_KEY);
+      global.localStorage.removeItem(LOCAL_LAST_KNOWN_KEY);
+      global.localStorage.setItem(LOCAL_OWNER_KEY, ownerId);
+    } catch (e) {}
+    this.ownerId = ownerId;
+    return true;
   };
 
   // The programmeStatus families a place's membership maps to — 'rally'
