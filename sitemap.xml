@@ -19,4 +19,61 @@
     <url>
         <loc>https://terrancehah.com/pacey</loc>
     </url>
+    <!-- Public articles and project pages — each carries a matching
+         canonical. Personal projects (anniversary, biwa-ride) and the
+         noindex app/demo/API surfaces stay out by design. -->
+    <url>
+        <loc>https://terrancehah.com/articles/about-writing</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/alter-ego</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/dear-privacy</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/how-to-be-indistractable</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/making-things-look-easy-is-hard</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/metaverse-the-next-big-thing-or-a-gimmick</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/mount-kinabalu</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/my-first-article</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/my-learning-environment</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/my-website-style-guide</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/rethinking-relationship-between-human-and-nature</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/the-art-of-writing</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/articles/tnbyy-my-first-camphike</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/projects/career-plan</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/projects/foodtracker</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/projects/form-a-story</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/projects/running-posture-analyser</loc>
+    </url>
+    <url>
+        <loc>https://terrancehah.com/projects/teaching-syllabus-template</loc>
+    </url>
 </urlset>
