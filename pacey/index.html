@@ -58,9 +58,11 @@
          shell and demo entries carry noindex,follow instead. -->
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="author" content="Terrance Hah">
-    <meta name="description" content="Understand your race readiness with Garmin metrics, course analysis and a training plan through race day. Review your results and explore the demo.">
-    <meta property="og:title" content="Pacey — Race Readiness, Garmin Metrics & Training Plans">
-    <meta property="og:description" content="Understand your race readiness with Garmin metrics, course analysis and a training plan through race day. Review your results and explore the demo.">
+    <meta name="description" content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.">
+    <!-- One marathon-focused title, kept identical across the <title>
+         element, the social meta here and the JSON-LD WebPage name. -->
+    <meta property="og:title" content="Marathon Training Plan for Garmin Runners | Pacey">
+    <meta property="og:description" content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.">
     <meta property="og:image" content="https://terrancehah.com/pacey/assets/pacey-social-preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -72,12 +74,12 @@
     <meta property="og:locale" content="en_US">
     <link rel="canonical" href="https://terrancehah.com/pacey">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Pacey — Race Readiness, Garmin Metrics & Training Plans">
-    <meta name="twitter:description" content="Understand your race readiness with Garmin metrics, course analysis and a training plan through race day. Review your results and explore the demo.">
+    <meta name="twitter:title" content="Marathon Training Plan for Garmin Runners | Pacey">
+    <meta name="twitter:description" content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.">
     <meta name="twitter:image" content="https://terrancehah.com/pacey/assets/pacey-social-preview.png">
     <meta name="twitter:image:alt" content="Pacey race-readiness companion with Garmin metrics, course analysis and training plans.">
 
-    <title>Pacey — Race Readiness, Garmin Metrics & Training Plans</title>
+    <title>Marathon Training Plan for Garmin Runners | Pacey</title>
     <!-- The two handwriting faces the board is set in — Caveat for headings,
          Fuzzy Bubbles for copy. Same faces the app uses; nothing new. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -153,7 +155,7 @@
                 "@id": "https://terrancehah.com/pacey#application",
                 "name": "Pacey",
                 "url": "https://terrancehah.com/pacey",
-                "description": "Pacey is a race-readiness companion that combines Garmin training and recovery data, course analysis, training plans and post-race reviews.",
+                "description": "Pacey is a marathon race-readiness companion that uses Garmin training and recovery data to assess fitness against a chosen goal time and shape a marathon training plan.",
                 "applicationCategory": "HealthApplication",
                 "operatingSystem": "Web",
                 "browserRequirements": "Requires JavaScript.",
@@ -172,8 +174,8 @@
                 "@type": "WebPage",
                 "@id": "https://terrancehah.com/pacey#webpage",
                 "url": "https://terrancehah.com/pacey",
-                "name": "Pacey — Race Readiness, Garmin Metrics & Training Plans",
-                "description": "Understand your race readiness with Garmin metrics, course analysis and a training plan through race day. Review your results and explore the demo.",
+                "name": "Marathon Training Plan for Garmin Runners | Pacey",
+                "description": "Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.",
                 "inLanguage": "en",
                 "isPartOf": { "@id": "https://terrancehah.com/#website" },
                 "mainEntity": { "@id": "https://terrancehah.com/pacey#application" },
@@ -188,7 +190,7 @@
                     {
                         "@type": "Question",
                         "name": "What is Pacey?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Pacey is a race-readiness companion. It brings Garmin training and recovery data, your race goal and the course together to explain what is working, what needs attention and how to prepare." }
+                        "acceptedAnswer": { "@type": "Answer", "text": "Pacey is a race-readiness companion. It brings Garmin training and recovery data, your race goal and the course together to explain what is working, what needs attention and how to prepare for your next race." }
                     },
                     {
                         "@type": "Question",
@@ -198,17 +200,27 @@
                     {
                         "@type": "Question",
                         "name": "How does race readiness relate to my goal time?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Race readiness compares your current fitness with the goal time you set. It highlights your strengths, the areas to develop and what to focus on before race day." }
+                        "acceptedAnswer": { "@type": "Answer", "text": "Race readiness compares your current fitness and recent activities with the goal time you set. It constantly highlights your strengths, the areas to develop and what to focus on before race day." }
                     },
                     {
                         "@type": "Question",
                         "name": "How does the training plan reach Garmin?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Pacey shows a training block of up to 26 weeks. Choose when to sync the current calendar week’s suggested workouts to Garmin, with the weeks ahead available to review." }
+                        "acceptedAnswer": { "@type": "Answer", "text": "Pacey shows a training block of up to 26 weeks. You can review the suggested workouts, then sync the current calendar week’s suggested workouts to your Garmin watch." }
                     },
                     {
                         "@type": "Question",
-                        "name": "Can I upload my race course?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Upload a GPX file to view the route and elevation profile. The coach considers the climbs and where they occur when explaining race preparation." }
+                        "name": "Can I upload my own race course for analysis?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can upload a GPX file to view the route and elevation profile. The Pacey coach will study the route, consider the climbs and where they occur when explaining race preparation." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How is Pacey different from Garmin Training Readiness?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Garmin Training Readiness helps you judge how ready you are to train today. Pacey compares your recent running fitness with the race goal time you choose, highlights areas to develop and uses the biggest gap to shape your training plan. Pacey is an independent product, not an official Garmin service." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Does Pacey predict my marathon finish time?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "No. Pacey assesses your readiness against the goal time you set; it does not predict a finish time or guarantee a race result. Your readiness review explains the training evidence and what to work on before race day." }
                     }
                 ]
             }
@@ -260,12 +272,14 @@
         <div id="pacey-content" class="landing-board">
 
             <!-- ===== Hero: the promise in the app's own words, alone —
-                 the product previews get their own sections below. ===== -->
+                 the product previews get their own sections below.
+                 The training plan leads here — the goal-time readiness
+                 read carries the supporting copy underneath. ===== -->
             <section class="landing-hero" aria-labelledby="landing-hero-title">
                 <div class="landing-hero-copy">
-                    <h1 class="landing-hero-title" id="landing-hero-title">Pacey</h1>
-                    <p class="landing-hero-lede">Your race-readiness companion — can you hit your time, what's the limiter, and what to do until race day.</p>
-                    <p class="landing-hero-sub">Connect your Garmin account to pull in your training data.</p>
+                    <h1 class="landing-hero-title" id="landing-hero-title">Your marathon training plan</h1>
+                    <p class="landing-hero-lede">Work toward your goal time with a plan shaped by your Garmin training and recovery data.</p>
+                    <p class="landing-hero-sub">See how your fitness measures up to your goal, where the biggest gap is, and what to work on before race day.</p>
                     <div class="landing-hero-actions">
                         <a class="landing-btn landing-btn--primary" href="/pacey/app/?entry=login">Open Pacey</a>
                         <a class="landing-btn landing-btn--secondary" href="/pacey/demo/">Try the demo</a>
@@ -605,8 +619,8 @@
             <section class="landing-section" id="plan" aria-labelledby="landing-plan-title">
                 <div class="landing-split">
                     <div class="landing-split-copy">
-                        <h2 class="landing-section-title" id="landing-plan-title">Training Plan</h2>
-                        <p class="landing-section-text">See the weeks ahead, with workouts shaped around your readiness gaps. Review the full block and sync the suggested workout for the week to your Garmin watch.</p>
+                        <h2 class="landing-section-title" id="landing-plan-title">Marathon training</h2>
+                        <p class="landing-section-text">Build toward your marathon goal with a training plan shaped by your recent Garmin training and recovery data. Pacey uses the biggest gap in your readiness assessment to guide what to work on next. Review a block of up to 26 weeks, with only the current calendar week available to sync to Garmin when you choose.</p>
                     </div>
 
                     <figure class="landing-feature-exhibit">
@@ -778,7 +792,11 @@
                  before signing up. The JSON-LD FAQPage in the head mirrors
                  these verbatim. ===== -->
             <section class="landing-section" id="questions" aria-labelledby="landing-questions-title">
-                <h2 class="landing-section-title" id="landing-questions-title" style="    background: var(--pinboard-sketch-underline) bottom left / 25rem 1.4rem no-repeat;">Questions before you start</h2>
+                <!-- The heavier stroke this heading used to carry inline now
+                     lives on .landing-section-title::after, alongside every
+                     other heading's — an inline background on the heading
+                     itself would draw a second line under the first. -->
+                <h2 class="landing-section-title" id="landing-questions-title">Questions before you start</h2>
                 <!-- Each answer is a disclosure panel that starts open in
                      the markup — no-JS visitors and crawlers read every
                      answer. pacey-landing.js then wraps each question in a
@@ -826,13 +844,34 @@
                             </div>
                         </dd>
                     </div>
+                    <!-- These two answer the questions a Garmin runner asks
+                         next: Pacey's readiness is judged against your chosen
+                         goal time, not Garmin's same-day Training Readiness,
+                         and the review assesses the goal — it never predicts
+                         a finish time. -->
+                    <div class="landing-question">
+                        <dt class="landing-question-term" id="landing-q6">How is Pacey different from Garmin Training Readiness?</dt>
+                        <dd class="landing-question-answer is-open" id="landing-q6-answer" aria-labelledby="landing-q6">
+                            <div class="landing-question-answer-inner">
+                                <p class="landing-question-answer-copy">Garmin Training Readiness helps you judge how ready you are to train today. Pacey compares your recent running fitness with the race goal time you choose, highlights areas to develop and uses the biggest gap to shape your training plan. Pacey is an independent product, not an official Garmin service.</p>
+                            </div>
+                        </dd>
+                    </div>
+                    <div class="landing-question">
+                        <dt class="landing-question-term" id="landing-q7">Does Pacey predict my marathon finish time?</dt>
+                        <dd class="landing-question-answer is-open" id="landing-q7-answer" aria-labelledby="landing-q7">
+                            <div class="landing-question-answer-inner">
+                                <p class="landing-question-answer-copy">No. Pacey assesses your readiness against the goal time you set; it does not predict a finish time or guarantee a race result. Your readiness review explains the training evidence and what to work on before race day.</p>
+                            </div>
+                        </dd>
+                    </div>
                 </dl>
             </section>
         </div>
 
         <!-- ===== Final call + the honest footnotes ===== -->
         <section class="landing-final" aria-labelledby="landing-final-title">
-            <h2 class="landing-section-title" id="landing-final-title" style="background: none;">Ready for your next race?</h2>
+            <h2 class="landing-section-title" id="landing-final-title">Ready for your next race?</h2>
             <div class="landing-hero-actions">
                 <a class="landing-btn landing-btn--primary" href="/pacey/app/?entry=login">Open Pacey</a>
                 <a class="landing-btn landing-btn--secondary" href="/pacey/demo/">Try the demo</a>

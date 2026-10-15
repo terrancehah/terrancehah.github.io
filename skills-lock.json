@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "seo-keyword-research": {
+      "source": "thibaultbm/claude-seo-geo",
+      "sourceType": "github",
+      "skillPath": "skills/seo-keyword-research/SKILL.md",
+      "computedHash": "071840fb3a884e1c3190aab6e2cad47dab4b00a4dafc1fe7fea8026b44aa71eb"
+    }
+  }
+}

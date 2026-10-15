@@ -214,7 +214,10 @@
         // Entrance reveals — targets are whole exhibits (the readiness,
         // trends, course, picture, plan and recap figures, so each card
         // arrives together with its phone caption, plus the metrics grid
-        // as one unit), never individual paragraphs or tiles.
+        // as one unit), never individual paragraphs or tiles. The FAQ list
+        // and the closing call to action are the two blocks that used to
+        // appear with no entrance at all; the CTA's own heading still stays
+        // instant, like every other heading here.
         var revealEls = Array.prototype.slice.call(document.querySelectorAll([
             '#features .landing-feature-exhibit',
             '#metrics .pacey-metrics-grid',
@@ -222,7 +225,10 @@
             '#course .landing-feature-exhibit',
             '#picture .landing-feature-exhibit',
             '#plan .landing-feature-exhibit',
-            '#recap .landing-feature-exhibit'
+            '#recap .landing-feature-exhibit',
+            '#questions .landing-questions',
+            '.landing-final .landing-hero-actions',
+            '.landing-final .landing-notes'
         ].join(', ')));
         if (!revealEls.length) return;
         var revealAll = function () {
@@ -231,8 +237,15 @@
             });
         };
 
-        // No observer or motion-averse preference: never hide anything.
+        // No observer or motion-averse preference: never hide anything. The
+        // heading underlines are withheld by a clip on a pseudo-element rather
+        // than by a class, so they have to be drawn in here as well — leaving
+        // this branch without doing so would strip the stroke from every
+        // section heading on the page.
         if (!('IntersectionObserver' in window) || (reduceMotion && reduceMotion.matches)) {
+            document.querySelectorAll('.landing-section-title').forEach(function (title) {
+                title.classList.add('landing-title-drawn');
+            });
             return;
         }
 
@@ -276,6 +289,79 @@
                 });
             }
 
+            // The FAQ list gets the same treatment — a slightly tighter
+            // stagger, since its rows are shorter than calendar days.
+            var faqList = document.querySelector('#questions .landing-questions');
+            if (faqList) {
+                faqList.querySelectorAll('.landing-question').forEach(function (item, i) {
+                    item.style.setProperty('--landing-stagger', Math.min(i * 40, 160) + 'ms');
+                });
+            }
+
+            // The hand-sketched underline under each section heading draws
+            // itself as the section arrives. Separate from the reveal above,
+            // because the heading itself must never fade — only its stroke
+            // is withheld. Headings already on screen at load draw straight
+            // away, which reads as part of the page settling rather than as
+            // something triggered by a scroll that never happened.
+            var drawnTitles = Array.prototype.slice.call(
+                document.querySelectorAll('.landing-section-title')
+            );
+
+            // One stroke per heading, so a run of them never looks stamped.
+            // Three things vary: which of the six shapes is used, how long the
+            // stroke runs against its text, and how far it tilts. The pairings
+            // are a fixed list rather than a fresh roll per visit — the aim is
+            // that no two headings match, not that the page changes under the
+            // runner every time they reload it.
+            var STROKE_VARIATION = [
+                { shape: 3, scale: 1.08, tilt: -1.1 },
+                { shape: 5, scale: 0.93, tilt: 0.9 },
+                { shape: 1, scale: 1.05, tilt: -0.6 },
+                { shape: 6, scale: 0.91, tilt: 1.4 },
+                { shape: 2, scale: 1.09, tilt: -0.8 },
+                { shape: 4, scale: 0.95, tilt: 1.0 },
+                { shape: 5, scale: 1.06, tilt: 0.5 },
+                { shape: 3, scale: 0.94, tilt: -1.3 },
+                { shape: 6, scale: 1.02, tilt: 0.8 },
+                { shape: 2, scale: 0.97, tilt: -0.9 }
+            ];
+            drawnTitles.forEach(function (title, i) {
+                var v = STROKE_VARIATION[i % STROKE_VARIATION.length];
+                title.style.setProperty('--landing-stroke', 'var(--landing-stroke-' + v.shape + ')');
+                title.style.setProperty('--landing-stroke-scale', v.scale);
+                title.style.setProperty('--landing-stroke-tilt', v.tilt + 'deg');
+            });
+
+            if (drawnTitles.length) {
+                var drawObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('landing-title-drawn');
+                            drawObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0, rootMargin: '0px 0px -48px 0px' });
+                drawnTitles.forEach(function (title) {
+                    title.classList.add('landing-title-draw');
+                    var box = title.getBoundingClientRect();
+                    if (box.top < window.innerHeight && box.bottom > 0) {
+                        // Already on screen at load: let the stroke draw as the
+                        // page settles. Two frames, because a class added in
+                        // the same flush as the state it changes produces no
+                        // transition at all — the browser never paints the
+                        // withheld version it would animate away from.
+                        requestAnimationFrame(function () {
+                            requestAnimationFrame(function () {
+                                title.classList.add('landing-title-drawn');
+                            });
+                        });
+                    } else {
+                        drawObserver.observe(title);
+                    }
+                });
+            }
+
             // A mid-visit flip to reduced motion drops the animation and
             // shows everything that was still waiting.
             if (reduceMotion && reduceMotion.addEventListener) {
@@ -283,6 +369,11 @@
                     if (e.matches) {
                         revealObserver.disconnect();
                         revealAll();
+                        // The underline is not a reveal, so it needs its own
+                        // undo — every heading draws in at once instead.
+                        drawnTitles.forEach(function (title) {
+                            title.classList.add('landing-title-drawn');
+                        });
                     }
                 });
             }
