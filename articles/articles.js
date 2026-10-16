@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle hero card click
     if (articleHero) {
         articleHero.addEventListener('click', function(e) {
-            if (e.target.tagName !== 'A') {
+            // Skip clicks that land on a real link/button (e.g. the title
+            // anchor) so the native interaction is preserved.
+            if (!e.target.closest('a, button')) {
                 const url = this.getAttribute('data-url');
                 if (url) {
                     window.location.href = url;
@@ -18,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle grid card clicks
     articleCards.forEach(card => {
         card.addEventListener('click', function(e) {
-            if (e.target.tagName !== 'A') {
+            // Same guard: native anchors inside the card keep working
+            // while clicks elsewhere still trigger the card's data-url.
+            if (!e.target.closest('a, button')) {
                 const url = this.getAttribute('data-url');
                 if (url) {
                     window.location.href = url;

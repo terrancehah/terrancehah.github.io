@@ -43,29 +43,30 @@
                 </div>
 
                 <!-- Middle: Nav buttons -->
-                <nav class="flex flex-wrap justify-center gap-2">
+                <nav class="site-nav flex flex-wrap justify-center gap-2">
                     <a href="/" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Home</a>
-                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue bg-light-blue">Articles</a>
+                    <a href="./articles.html" aria-current="page" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue bg-light-blue">Articles</a>
                     <a href="./projects.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Projects</a>
                     <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Playground</a>
                 </nav>
             
-                <!-- Right side: Social Icons -->
-                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
-                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
-                        <img src="./resources/icons/facebook.png" alt="facebook" class="w-full h-full">
+                <!-- Right side: Social Icons (site-social-* classes give
+                     each icon a >=44px tap target; see styles/style.css) -->
+                <div class="site-social-links flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
+                        <img src="./resources/icons/facebook.png" alt="facebook" class="site-social-icon">
                     </a>
-                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
-                        <img src="./resources/icons/instagram.png" alt="instagram" class="w-full h-full">
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
+                        <img src="./resources/icons/instagram.png" alt="instagram" class="site-social-icon">
                     </a>
-                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
-                        <img src="./resources/icons/x.png" alt="x" class="w-full h-full">
+                    <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
+                        <img src="./resources/icons/x.png" alt="x" class="site-social-icon">
                     </a>
-                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
-                        <img src="./resources/icons/linkedin.png" alt="linkedin" class="w-full h-full">
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
+                        <img src="./resources/icons/linkedin.png" alt="linkedin" class="site-social-icon">
                     </a>
-                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
-                        <img src="./resources/icons/github.png" alt="github" class="w-full h-full">
+                    <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
+                        <img src="./resources/icons/github.png" alt="github" class="site-social-icon">
                     </a>
                 </div>
             </div>
@@ -107,7 +108,7 @@
                         <img src="../resources/articles/tnbyy-my-first-camphike/silhouette.jpg" alt="my silhouette at the peak" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">TNBYY (Tok Nenek – Bubu – Yong Yap) - My First Camphike</h3>
+                        <h3 class="article-card-title"><a href="./articles/tnbyy-my-first-camphike.html">TNBYY (Tok Nenek – Bubu – Yong Yap) - My First Camphike</a></h3>
                         <p class="article-card-description">A beginner's 3D2N camphike through Tok Nenek, Bubu and Yong Yap—nerves, 15kg training, unfiltered river water, and the jungle that felt like home.</p>
                         <p class="article-card-date">written on 11 September 2025</p>
                     </div>
@@ -118,7 +119,7 @@
                         <img src="../resources/articles/rethinking-relationship-between-human-and-nature/trees_leaves.jpeg" alt="crown shyness" loading="lazy" style="object-position: center 80%;">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">Rethinking the Relationship Between Human and Nature</h3>
+                        <h3 class="article-card-title"><a href="/articles/rethinking-relationship-between-human-and-nature">Rethinking the Relationship Between Human and Nature</a></h3>
                         <p class="article-card-description">Jungle trekking makes me question the relationship between human and nature.</p>
                         <p class="article-card-date">written on 1 June 2025</p>
                     </div>
@@ -129,7 +130,7 @@
                         <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=500&fit=crop" alt="Writing" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">About Writing</h3>
+                        <h3 class="article-card-title"><a href="./articles/about-writing.html">About Writing</a></h3>
                         <p class="article-card-description">A reflection on my journey with writing and embracing imperfection.</p>
                         <p class="article-card-date">written on 20 May 2025</p>
                     </div>
@@ -140,7 +141,7 @@
                         <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=500&fit=crop" alt="Design and style" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">My Website Style Guide</h3>
+                        <h3 class="article-card-title"><a href="./articles/my-website-style-guide.html">My Website Style Guide</a></h3>
                         <p class="article-card-description">In this article, I share my website style.</p>
                         <p class="article-card-date">updated on 29 November 2024</p>
                     </div>
@@ -151,7 +152,7 @@
                         <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop" alt="Minimalist design" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">Making Things Look Easy is Hard</h3>
+                        <h3 class="article-card-title"><a href="./articles/making-things-look-easy-is-hard.html">Making Things Look Easy is Hard</a></h3>
                         <p class="article-card-description">In this article, I share my view on why making things look easy is hard.</p>
                         <p class="article-card-date">written on 19 December 2021</p>
                     </div>
@@ -162,7 +163,7 @@
                         <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=500&fit=crop" alt="Digital identity" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">Alter Ego: Are we lost in our digital selves?</h3>
+                        <h3 class="article-card-title"><a href="./articles/alter-ego.html">Alter Ego: Are we lost in our digital selves?</a></h3>
                         <p class="article-card-description">In this article, I share my view on our alter ego.</p>
                         <p class="article-card-date">written on 22 November 2021</p>
                     </div>
@@ -173,7 +174,7 @@
                         <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=500&fit=crop" alt="Learning and studying" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">My Learning Environment</h3>
+                        <h3 class="article-card-title"><a href="./articles/my-learning-environment.html">My Learning Environment</a></h3>
                         <p class="article-card-description">A sharing of how I maintain my motivation to keep learning.</p>
                         <p class="article-card-date">written on 5 November 2021</p>
                     </div>
@@ -184,7 +185,7 @@
                         <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=500&fit=crop" alt="Virtual reality" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">Metaverse: The Next Big Thing or a Gimmick</h3>
+                        <h3 class="article-card-title"><a href="./articles/metaverse-the-next-big-thing-or-a-gimmick.html">Metaverse: The Next Big Thing or a Gimmick</a></h3>
                         <p class="article-card-description">In this article, I share my view on Metaverse.</p>
                         <p class="article-card-date">written on 3 November 2021</p>
                     </div>
@@ -195,7 +196,7 @@
                         <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&fit=crop" alt="Privacy and security" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">Dear Privacy</h3>
+                        <h3 class="article-card-title"><a href="./articles/dear-privacy.html">Dear Privacy</a></h3>
                         <p class="article-card-description">In this article, I share my view on privacy.</p>
                         <p class="article-card-date">written on 11 October 2021</p>
                     </div>
@@ -206,7 +207,7 @@
                         <img src="https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?w=800&h=500&fit=crop" alt="Art of writing" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">The Art of Writing</h3>
+                        <h3 class="article-card-title"><a href="./articles/the-art-of-writing.html">The Art of Writing</a></h3>
                         <p class="article-card-description">In this article, I share the reasons why I insist on writing.</p>
                         <p class="article-card-date">written on 7 July 2021</p>
                     </div>
@@ -217,7 +218,7 @@
                         <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=500&fit=crop" alt="Focus and concentration" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">How to Be Indistractable</h3>
+                        <h3 class="article-card-title"><a href="./articles/how-to-be-indistractable.html">How to Be Indistractable</a></h3>
                         <p class="article-card-description">In this article, I share my view on being indistractable.</p>
                         <p class="article-card-date">written on 23 June 2021</p>
                     </div>
@@ -228,7 +229,7 @@
                         <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=500&fit=crop" alt="First steps" loading="lazy">
                     </div>
                     <div class="article-card-content">
-                        <h3 class="article-card-title">My First Article</h3>
+                        <h3 class="article-card-title"><a href="./articles/my-first-article.html">My First Article</a></h3>
                         <p class="article-card-description">In this article, I share my view on our alter ego.</p>
                         <p class="article-card-date">written on 27 March 2021</p>
                     </div>

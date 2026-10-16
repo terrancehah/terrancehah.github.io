@@ -575,7 +575,8 @@
 }
 
 .article-hero-title {
-    font-family: 'Lato', sans-serif;
+    /* Raleway for hero titles — matches the card titles and nav */
+    font-family: 'Raleway', sans-serif;
     font-weight: 700;
     font-size: clamp(1.5rem, 1.2vw + 0.8rem, 2.25rem);
     color: white;
@@ -672,16 +673,40 @@
     grid-row: span 2;
 }
 
-/* Mobile: All cards span full width */
+/* Mobile: single column with content-driven rows. Same fix as the
+   projects grid — the fixed 180px tracks clipped card text on
+   phones, so below 640px cards stack full-width and size to their
+   own content instead of a row track. */
 @media (max-width: 639px) {
-    .article-card.size-1x1,
-    .article-card.size-1x2,
-    .article-card.size-2x1,
-    .article-card.size-2x2,
-    .article-card.size-2x3,
-    .article-card.size-3x2 {
-        grid-column: span 2;
-        grid-row: span 2;
+    .articles-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+
+    /* All size variants collapse to a plain auto-placed item.
+       Selectors are scoped through .articles-grid so they beat the
+       equal-specificity base rules that sit later in this file. */
+    .articles-grid > .article-card.size-1x1,
+    .articles-grid > .article-card.size-1x2,
+    .articles-grid > .article-card.size-2x1,
+    .articles-grid > .article-card.size-2x2,
+    .articles-grid > .article-card.size-2x3,
+    .articles-grid > .article-card.size-3x2 {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .articles-grid > .article-card {
+        height: auto;
+    }
+
+    /* Fixed 250px image height no longer fits a content-sized card;
+       a modest aspect ratio keeps the photo compact without
+       letting the flex column squash it. */
+    .articles-grid .article-card-image {
+        flex-shrink: 0;
+        height: auto;
+        aspect-ratio: 16 / 10;
     }
 }
 

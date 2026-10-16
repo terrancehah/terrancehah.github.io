@@ -87,10 +87,17 @@ html {
     animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
 }
 
-/* Scroll-triggered fade-in with stagger support */
-.scroll-fade {
+/* Scroll-triggered fade-in with stagger support.
+   The hidden start state only applies once JS has successfully
+   registered its IntersectionObservers and added .reveal-enabled to
+   <html> — fail-open, so content can never stay invisible if the
+   script or the observer API is unavailable. */
+.reveal-enabled .scroll-fade {
     opacity: 0;
     transform: translateY(40px);
+}
+
+.scroll-fade {
     transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
                 transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -105,9 +112,12 @@ html {
    so fade-in timing is tied to when the photo itself
    scrolls into view (not the parent card). */
 
-.photo-fade {
+.reveal-enabled .photo-fade {
     opacity: 0;
     transform: translateY(30px) scale(0.98);
+}
+
+.photo-fade {
     transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
@@ -133,10 +143,13 @@ html {
 
 /* Override default scroll-fade motion for pull-quotes: slide from right */
 .pull-quote.scroll-fade {
-    opacity: 0;
-    transform: translateX(60px);
     transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-enabled .pull-quote.scroll-fade {
+    opacity: 0;
+    transform: translateX(60px);
 }
 
 .pull-quote.scroll-fade.visible {
@@ -206,10 +219,15 @@ html {
     /* Width, top, and left are set dynamically by JavaScript */
     height: auto;
     pointer-events: none;
-    clip-path: inset(0 100% 0 0);
-    opacity: 0;
     /* Invert colors to white and increase boldness */
     filter: invert(1) brightness(1.0) contrast(1.5);
+}
+
+/* Undrawn start state — gated like .scroll-fade so the stroke is
+   simply shown already-drawn when reveal JS never runs. */
+.reveal-enabled .handwriting-crossout {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
 }
 
 /* Animate the handwriting stroke from left to right */
@@ -231,10 +249,15 @@ html {
 /* Replacement word that fades in after cross-out */
 .word-replacement {
     display: inline-block;
-    opacity: 0;
-    transform: translateX(-10px);
     transition: opacity 0.8s cubic-bezier(.34, 1.56, .64, 1) 1.2s,
                 transform 0.8s cubic-bezier(.34, 1.56, .64, 1) 1.2s;
+}
+
+/* Hidden until the card is revealed — gated like .scroll-fade so the
+   word stays visible when reveal JS never runs. */
+.reveal-enabled .word-replacement {
+    opacity: 0;
+    transform: translateX(-10px);
 }
 
 /* Trigger replacement word reveal when card becomes visible */
@@ -243,15 +266,17 @@ html {
     transform: translateX(0);
 }
 
-/* Disable animations for users who prefer reduced motion */
+/* Disable animations for users who prefer reduced motion.
+   Selectors match the .reveal-enabled gated rules above (and sit
+   later in the file) so they still win when reveal JS is active. */
 @media (prefers-reduced-motion: reduce) {
-    .handwriting-crossout {
+    .reveal-enabled .handwriting-crossout {
         animation: none !important;
         clip-path: inset(0 0 0 0);
         opacity: 1;
     }
     
-    .word-replacement {
+    .reveal-enabled .word-replacement {
         transition: none !important;
         opacity: 1;
         transform: translateX(0);
@@ -825,13 +850,22 @@ section {
         transition-duration: 0.01ms !important;
     }
     
-    .scroll-fade {
+    /* Same .reveal-enabled scoping as the hidden rules so this
+       override still wins and reveals instantly under reduced motion */
+    .reveal-enabled .scroll-fade {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* The pull-quote hidden rule is one specificity level higher than
+       .scroll-fade's, so it needs its own override here. */
+    .reveal-enabled .pull-quote.scroll-fade {
         opacity: 1;
         transform: none;
     }
 
     /* Make photos visible immediately for users who prefer reduced motion */
-    .photo-fade {
+    .reveal-enabled .photo-fade {
         opacity: 1;
         transform: none;
     }

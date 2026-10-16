@@ -124,7 +124,8 @@
 }
 
 .project-hero-title {
-    font-family: 'Lato', sans-serif;
+    /* Raleway for hero titles — matches the card titles and nav */
+    font-family: 'Raleway', sans-serif;
     font-weight: 700;
     font-size: clamp(1.5rem, 1.2vw + 0.8rem, 2.25rem);
     color: white;
@@ -216,16 +217,41 @@
     grid-row: span 2;
 }
 
-/* Mobile: All cards span full width */
+/* Mobile: single column with content-driven rows. The desktop
+   fixed-track grid (180px rows + span classes) forced every card into
+   a fixed 360px box that clipped its text on phones, so below 640px
+   the grid becomes one column of auto rows and each card sizes to
+   its own content instead of a row track. */
 @media (max-width: 639px) {
-    .project-card.size-1x1,
-    .project-card.size-1x2,
-    .project-card.size-2x1,
-    .project-card.size-2x2,
-    .project-card.size-2x3,
-    .project-card.size-3x2 {
-        grid-column: span 2;
-        grid-row: span 2;
+    .projects-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+
+    /* All size variants collapse to a plain auto-placed item.
+       Selectors are scoped through .projects-grid so they beat the
+       equal-specificity base rules that sit later in this file. */
+    .projects-grid > .project-card.size-1x1,
+    .projects-grid > .project-card.size-1x2,
+    .projects-grid > .project-card.size-2x1,
+    .projects-grid > .project-card.size-2x2,
+    .projects-grid > .project-card.size-2x3,
+    .projects-grid > .project-card.size-3x2 {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .projects-grid > .project-card {
+        height: auto;
+    }
+
+    /* Fixed 250px image height no longer fits a content-sized card;
+       a modest aspect ratio keeps the photo compact without
+       letting the flex column squash it. */
+    .projects-grid .project-card-image {
+        flex-shrink: 0;
+        height: auto;
+        aspect-ratio: 16 / 10;
     }
 }
 
@@ -314,6 +340,19 @@
 
 .project-card:hover .project-card-title {
     color: #295234;
+}
+
+/* Card titles are real links to the project — keep the card title
+   colour, underline on hover/focus so they still read as links. */
+.project-card-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.project-card-title a:hover,
+.project-card-title a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
 }
 
 .project-card-description {

@@ -45,30 +45,31 @@
             </div>
             
             <!-- Middle: Nav buttons (homepage variant — green theme) -->
-            <nav class="home-nav flex flex-wrap justify-center gap-2">
+            <nav class="site-nav home-nav flex flex-wrap justify-center gap-2">
                 <!-- Active page: Home — solid green pill -->
-                <a href="/" class="nav-link nav-link-active relative p-2 font-raleway font-medium text-lg md:text-xl rounded-md">Home</a>
+                <a href="/" aria-current="page" class="nav-link nav-link-active relative p-2 font-raleway font-medium text-lg md:text-xl rounded-md">Home</a>
                 <a href="./articles.html" class="nav-link relative p-2 font-raleway font-medium text-lg md:text-xl rounded-md">Articles</a>
                 <a href="./projects.html" class="nav-link relative p-2 font-raleway font-medium text-lg md:text-xl rounded-md">Projects</a>
                 <a href="./playground.html" class="nav-link relative p-2 font-raleway font-medium text-lg md:text-xl rounded-md">Playground</a>
             </nav>
             
-            <!-- Right side: Social Icons -->
-            <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
-                <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
-                    <img src="./resources/icons/facebook.png" alt="facebook" class="w-full h-full">
+            <!-- Right side: Social Icons (site-social-* classes give
+                 each icon a >=44px tap target; see styles/style.css) -->
+            <div class="site-social-links flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
+                    <img src="./resources/icons/facebook.png" alt="facebook" class="site-social-icon">
                 </a>
-                <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
-                    <img src="./resources/icons/instagram.png" alt="instagram" class="w-full h-full">
+                <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
+                    <img src="./resources/icons/instagram.png" alt="instagram" class="site-social-icon">
                 </a>
-                <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
-                    <img src="./resources/icons/x.png" alt="x" class="w-full h-full">
+                <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
+                    <img src="./resources/icons/x.png" alt="x" class="site-social-icon">
                 </a>
-                <a href="https://linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
-                    <img src="./resources/icons/linkedin.png" alt="linkedin" class="w-full h-full">
+                <a href="https://linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
+                    <img src="./resources/icons/linkedin.png" alt="linkedin" class="site-social-icon">
                 </a>
-                <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
-                    <img src="./resources/icons/github.png" alt="github" class="w-full h-full">
+                <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
+                    <img src="./resources/icons/github.png" alt="github" class="site-social-icon">
                 </a>
             </div>
         </div>
@@ -370,6 +371,13 @@ More to come.
                 rootMargin: '0px 0px -50px 0px'
             };
 
+            // Scroll reveals are fail-open: the CSS only hides .scroll-fade
+            // and friends once .reveal-enabled lands on <html>, which happens
+            // below — after the observers are registered. If IntersectionObserver
+            // is missing or fails, nothing is ever hidden in the first place.
+            const canObserve = 'IntersectionObserver' in window;
+
+            if (canObserve) {
             // Main observer: toggles scroll-fade class + (re)runs typewriter
             // every time an element enters the viewport, and resets it when
             // it leaves, so the animation plays on every scroll-past.
@@ -404,6 +412,7 @@ More to come.
             fadeElements.forEach(element => {
                 observer.observe(element);
             });
+            }
 
             // Position handwriting crossout based on actual word size
             function positionHandwritingCrossout() {
@@ -429,6 +438,7 @@ More to come.
             positionHandwritingCrossout();
             window.addEventListener('resize', positionHandwritingCrossout);
 
+            if (canObserve) {
             // Separate observer for individual photo-item fade-in with stagger.
             // Also toggles on exit so photos re-fade each time they reappear.
             const photoObserver = new IntersectionObserver(function(entries) {
@@ -457,6 +467,11 @@ More to come.
                     photoObserver.observe(item);
                 });
             });
+
+            // All observers are live — arm the reveal styles. Until this
+            // class lands, .scroll-fade/.photo-fade/etc. stay visible.
+            document.documentElement.classList.add('reveal-enabled');
+            }
 
             // Cancellation tokens per element so fast scroll up/down cannot
             // spawn overlapping typewriter runs on the same paragraph.
