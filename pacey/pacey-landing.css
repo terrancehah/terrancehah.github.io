@@ -29,8 +29,8 @@
     margin: 0;
     min-height: 100vh;
     background-color: var(--pinboard-cork);
-    /* Board-copy, not root --pacey-text — same #1a2e40 in daylight, but it
-       flips to the warm night-cork ink below instead of the cool app gray. */
+    /* Board-copy, not root --pacey-text — the board bridge below points it
+       at the same material inks the app's cork and paper use. */
     color: var(--pacey-board-copy);
     font-family: var(--font-fuzzy);
     font-size: 1.05rem;
@@ -53,10 +53,11 @@
     opacity: 0.45;
 }
 
-/* Night cork: swap every board-copy consumer on the page to the warm
-   cream inks. Scoped to .landing-body so the root --pacey-* palette —
-   which the paper previews draw with — is never touched. */
-[data-theme="dark"] .landing-body {
+/* Cork-side copy uses the board's own ink in both themes: the dark warm
+   brown of the paper sheets in daylight, the warm cream of the app's
+   night board after dark. Scoped to .landing-body so the root --pacey-*
+   palette — which the paper previews draw with — is never touched. */
+.landing-body {
     --pacey-board-copy: var(--pinboard-board-ink);
     --pacey-board-muted: var(--pinboard-board-muted);
 }
@@ -101,7 +102,7 @@
     align-items: center;
     gap: var(--pacey-space-sm);
     min-height: 44px; /* fixed touch target, see .impeccable.md */
-    /* Cork-side link — board-copy is the same ink in daylight. */
+    /* Cork-side link — board ink, the same material brown the app uses. */
     color: var(--pacey-board-copy);
     text-decoration: none;
 }
