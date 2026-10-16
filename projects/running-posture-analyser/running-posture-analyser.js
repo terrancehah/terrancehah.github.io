@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     // Base path for the four gait-phase illustrations (saved by the user).
-    const PHASE_IMG = '../resources/running-posture/';
+    const PHASE_IMG = '../resources/projects/running-posture-analyser/';
 
     const DEFAULT_NOTE = 'This is a layout preview. AI analysis is not connected yet \u2014 the summary and each element below show where the observations will appear.';
     const DEMO_NOTE = 'Sample output to show the intended layout. Observations and measurements are illustrative only \u2014 real AI analysis is not connected yet.';

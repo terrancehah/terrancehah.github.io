@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../dist/output.css" rel="stylesheet">
+        <link href="../styles/style.css" type="text/css" rel="stylesheet">
+        <link href="./articles.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="../resources/icons/TH-logo.png" type="image/x-icon">
+        <!-- HTML Meta Tags -->
+        <title>RPE in Running: What Pace and Heart Rate Don’t Tell You - Terrance's Playground</title>
+        <meta name="description" content="What is RPE in running? How I use perceived exertion alongside pace and heart rate to keep easy runs easy and make training notes more useful.">
+
+        <!-- Facebook Meta Tags -->
+        <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
+        <link rel="canonical" href="https://terrancehah.com/articles/rpe-in-running">
+        <meta property="og:url" content="https://terrancehah.com/articles/rpe-in-running">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="RPE in Running: What Pace and Heart Rate Don’t Tell You - Terrance's Playground">
+        <meta property="og:description" content="What is RPE in running? How I use perceived exertion alongside pace and heart rate to keep easy runs easy and make training notes more useful.">
+        <!-- No og:image — this piece has no hero art of its own. -->
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary">
+        <meta property="twitter:domain" content="terrancehah.com">
+        <meta property="twitter:url" content="https://terrancehah.com/articles/rpe-in-running">
+        <meta name="twitter:title" content="RPE in Running: What Pace and Heart Rate Don’t Tell You - Terrance's Playground">
+        <meta name="twitter:description" content="What is RPE in running? How I use perceived exertion alongside pace and heart rate to keep easy runs easy and make training notes more useful.">
+
+        <!-- BlogPosting — only what the page actually says: headline, author,
+             canonical URL, publish date and description. Nothing else. -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "RPE in Running: What Pace and Heart Rate Don’t Tell You",
+            "description": "What is RPE in running? How I use perceived exertion alongside pace and heart rate to keep easy runs easy and make training notes more useful.",
+            "url": "https://terrancehah.com/articles/rpe-in-running",
+            "datePublished": "2026-10-16",
+            "inLanguage": "en",
+            "author": {
+                "@type": "Person",
+                "name": "Terrance Hah",
+                "url": "https://terrancehah.com/"
+            }
+        }
+        </script>
+
+        <script src="../js/footer.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+        </style>
+            <!-- Vercel Analytics -->
+        <script>
+          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        </script>
+        <script defer src="/_vercel/insights/script.js"></script>
+        <!-- Vercel Speed Insights -->
+        <script>
+          window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+        </script>
+        <script defer src="/_vercel/speed-insights/script.js"></script>
+    </head>
+
+    <body class="m-0 relative h-full bg-white overflow-x-hidden">
+        <header class="w-full inline-block">
+            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+
+                <!-- Left: Logo & Title -->
+                <div class="flex flex-col lg:flex-row items-center w-auto md:w-80 gap-1">
+                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                        Terrance's Playground
+                    </h1>
+                </div>
+
+                <!-- Middle: Nav buttons — clean production URLs -->
+                <nav class="flex flex-wrap justify-center gap-2">
+                    <a href="/" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
+                    <a href="/articles" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Articles</a>
+                    <a href="/projects" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Projects</a>
+                    <a href="/playground" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                </nav>
+
+                <!-- Right side: Social Icons -->
+                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="../resources/icons/facebook.png" alt="facebook" class="w-full h-full">
+                    </a>
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="../resources/icons/instagram.png" alt="instagram" class="w-full h-full">
+                    </a>
+                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
+                        <img src="../resources/icons/x.png" alt="x" class="w-full h-full">
+                    </a>
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
+                        <img src="../resources/icons/linkedin.png" alt="linkedin" class="w-full h-full">
+                    </a>
+                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
+                        <img src="../resources/icons/github.png" alt="github" class="w-full h-full">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="article-container">
+            <article class="article-content">
+                <h1 class="article-title">RPE in Running: What Pace and Heart Rate Don’t Tell You</h1>
+                <p class="article-date">written on 16 October 2026</p>
+
+                <div class="article-body">
+                    <!-- The question the watch never answers. -->
+                    <p class="article-paragraph">Pace and heart rate are probably the first things we look at after a run. 
+                        How fast did we go? Was the heart rate too high? Did we stay in the intended zone?
+                        All useful questions. But there is one more thing worth asking:</p>
+
+                    <p class="article-paragraph">How difficult did the run actually feel?</p>
+
+                    <p class="article-paragraph">That is where RPE comes in.</p>
+
+                    <!-- What the score is — and which scale this piece uses. -->
+                    <h2 class="article-subtitle">What is RPE?</h2>
+                    <p class="article-paragraph">RPE stands for rating of perceived exertion. Simply put, it is your own rating of how hard you are working.</p>
+
+                    <p class="article-paragraph">If you use Garmin or Strava, perhaps you have seen an option to record perceived effort after an activity. 
+                        It is easy to skip. After all, the watch has already recorded so much.</p>
+
+                    <p class="article-paragraph">Yet the watch cannot tell us exactly how the run felt.</p>
+
+                    <p class="article-paragraph">There are different RPE scales. The original Borg scale goes from 6 to 20, while a common modified scale goes from 0 to 10. 
+                        Most running apps nowadays use the 1-to-10 version.</p>
+
+                    <p class="article-paragraph">For this article, I am using the simple 1-to-10 version: a low number means very little effort, while 10 means your maximum effort. The numbers are only useful when we understand what they feel like, and use them consistently.</p>
+
+                    <!-- Why the same pace can read differently day to day. -->
+                    <h2 class="article-subtitle">Same pace, different run</h2>
+                    <p class="article-paragraph">Two runners can run the same route at the same pace, in a similar heart-rate zone, yet feel completely different.</p>
+
+                    <p class="article-paragraph">Even for the same runner, a familiar pace can feel comfortable one day and surprisingly difficult on another.</p>
+
+                    <p class="article-paragraph">Perhaps we did not sleep well. Perhaps our legs are still carrying fatigue from the previous workout. Perhaps it is hotter than usual.</p>
+
+                    <p class="article-paragraph">Terrain, hydration and fueling can affect how the effort feels too.</p>
+
+                    <p class="article-paragraph">RPE gives us a way to record that experience. It does not tell us exactly why a run felt harder, but it gives us a reason to pay attention.</p>
+
+                    <p class="article-paragraph">A higher number is not necessarily a sign that we have lost fitness. Sometimes, the same pace simply asks more of us that day.</p>
+
+                    <!-- Personal usage — a rough reference, not a rulebook. -->
+                    <h2 class="article-subtitle">How I use RPE during a run</h2>
+                    <p class="article-paragraph">I personally find RPE useful for keeping myself from going beyond the intended effort.</p>
+
+                    <p class="article-paragraph">During an easy run, I try to hold it at about 3–4. That is my own rough reference, not a universal rule. What matters more is that I can still speak comfortably in full sentences.</p>
+
+                    <p class="article-paragraph">If I am struggling to hold a conversation, calling it an “easy run” does not magically make it easy.</p>
+
+                    <p class="article-paragraph">During harder speedwork, I sometimes reach an RPE of 8–9. The effort is very hard, but I still want to stay in control rather than empty everything into the first few repetitions.</p>
+
+                    <p class="article-paragraph">I like having something left for the last lap.</p>
+
+                    <p class="article-paragraph">That does not mean every speed session should reach 9, or that every final lap needs to be an all-out effort. Different workouts ask for different things.</p>
+
+                    <p class="article-paragraph">To me, RPE is a reminder to respect the purpose of the run, instead of chasing whatever pace looks impressive on the watch.</p>
+
+                    <!-- Logging it: the mid-run check and the after-run score are
+                         different tools, and the example entries are
+                         hypothetical. -->
+                    <h2 class="article-subtitle">Record the feeling, not just the number</h2>
+                    <p class="article-paragraph">Checking RPE during a run and recording it afterwards serve slightly different purposes.</p>
+
+                    <p class="article-paragraph">During the run, it helps us adjust:
+                        Is this still the effort I intended? Should I ease off?</p>
+
+                    <p class="article-paragraph">Afterwards, we can record how demanding the whole session felt.
+                        For an interval workout, those are not necessarily the same number. 
+                        The hardest repetition might feel like a 9, while the session overall feels less demanding because of the recovery periods.</p>
+
+                    <p class="article-paragraph">A short note helps make the rating clearer.
+                        For example, a hypothetical training entry could read:</p>
+
+                    <blockquote class="article-blockquote">Easy 8 km. RPE 4. Legs felt heavy at the start, but I could speak comfortably throughout.</blockquote>
+
+                    <p class="article-paragraph">Or:</p>
+
+                    <blockquote class="article-blockquote">Intervals. Session RPE 7. Last two repetitions felt closer to 9.</blockquote>
+
+                    <p class="article-paragraph">Nothing complicated. Just enough context to remember what happened.</p>
+
+                    <p class="article-paragraph">If you work with a coach, that context can make the conversation more useful. The same applies when you share your training with an AI assistant—provided you actually include the rating and the note, rather than expect it to know how you felt.</p>
+
+                    <p class="article-paragraph">RPE is not a diagnosis, though. Pain, chest discomfort or unusual dizziness should not be treated as merely a higher effort score to push through.</p>
+
+                    <!-- The thesis: feel and metrics belong together. -->
+                    <h2 class="article-subtitle">Another piece of the picture</h2>
+                    <p class="article-paragraph">I do not think we need to choose between listening to our bodies and looking at our data. 
+                        Pace tells us how fast we moved. Heart rate shows how our heart responded. RPE adds our own account of the effort.
+                        None of them tells the whole story alone.</p>
+
+                    <p class="article-paragraph">We spend so much time learning to read our watches. Perhaps it is worth learning to read ourselves too.</p>
+
+                    <!-- Where the numbers and the scales come from. -->
+                    <h2 class="article-subtitle">Further Reading</h2>
+                    <p class="article-paragraph"><a href="https://my.clevelandclinic.org/health/articles/17450-rated-perceived-exertion-rpe-scale" target="_blank" rel="noopener" class="text-[#457B9D] hover:text-[#1d3557]">Cleveland Clinic: RPE and the different scales</a></p>
+
+                    <p class="article-paragraph"><a href="https://www8.garmin.com/manuals/webhelp/forerunner945/EN-US/GUID-75149D69-850F-4B21-80AF-825BDF3C3E6E.html" target="_blank" rel="noopener" class="text-[#457B9D] hover:text-[#1d3557]">Garmin: Recording perceived effort after an activity</a></p>
+
+                    <!-- Sign-off, then the one product note — kept last so it
+                         reads as a footnote, not the point of the piece. -->
+                    <p class="article-paragraph">I have built <a href="/pacey" class="text-[#457B9D] hover:text-[#1d3557]">Pacey</a>, a tool that helps runners see how their fitness measures up to their marathon goal time and build a training plan around it. Feel free to give it a look if you happen to use a Garmin watch!</p>
+                
+                    <p class="article-paragraph">Peace out.</p>
+
+                </div>
+            </article>
+        </main>
+
+        <footer id="footer"></footer>
+    </body>
+</html>

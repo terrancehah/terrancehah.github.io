@@ -1,3 +1,11 @@
 {
-    "liveServer.settings.port": 5501
+    // Live Server listens on 5501 and forwards everything to the Node dev
+    // server (proxy-server.js on :3000), so clean URLs and /api/* routes keep
+    // working while Go Live still provides the browser reload socket.
+    "liveServer.settings.port": 5501,
+    "liveServer.settings.proxy": {
+        "enable": true,
+        "baseUri": "/",
+        "proxyUri": "http://127.0.0.1:3000"
+    }
 }

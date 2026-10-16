@@ -29,8 +29,8 @@
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono; markerMode: marker; patternRatio: 0.9;'>
         <a-light type="ambient" intensity="1"></a-light>
         <a-light type="directional" position="1 1 1" intensity="2.2"></a-light>
-        <a-marker preset='custom' type='pattern' url='./resources/ar-marker.patt'>
-            <a-entity id="model" gltf-model='./resources/ar-model-test.glb' animation-mixer scale="0.5 0.5 0.5"></a-entity>
+        <a-marker preset='custom' type='pattern' url='../resources/ar/ar-marker.patt'>
+            <a-entity id="model" gltf-model='../resources/ar/ar-model-test.glb' animation-mixer scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>

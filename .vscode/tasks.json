@@ -1,10 +1,24 @@
 {
     "version": "2.0.0",
+    // Runs proxy-server.js — the local dev server that serves the static site
+    // and forwards /api/* to the FastAPI backend on :8000. Replaces the old
+    // uvicorn command, which pointed at a dev_server.py that no longer exists.
     "tasks": [
         {
             "label": "Run Dev Server",
-            "type": "shell",
-            "command": "uvicorn dev_server:app --reload",
+            "type": "process",
+            "command": "node",
+            "args": [
+                "proxy-server.js"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    // Opt-in marker: only when this is set does proxy-server.js
+                    // inject the Live Server reload client into proxied HTML.
+                    "LIVE_SERVER_RELOAD": "1"
+                }
+            },
             "isBackground": true,
             "problemMatcher": [],
             "presentation": {
@@ -13,6 +27,7 @@
                 "focus": false
             },
             "runOptions": {
+                "instanceLimit": 1,
                 "runOn": "folderOpen"
             }
         }

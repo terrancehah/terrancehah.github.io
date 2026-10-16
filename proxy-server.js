@@ -11,6 +11,26 @@ const proxy = httpProxy.createProxyServer({});
 const PORT = 3000;
 const API_PORT = 8000;
 
+// Opt-in reload support for the Live Server workflow — the "Run Dev Server"
+// task sets LIVE_SERVER_RELOAD=1. Even then, only requests that arrive through
+// Live Server's own proxy (which adds a Via header) get the client injected;
+// direct hits on this port and ordinary runs are served untouched.
+const LIVE_RELOAD_ENABLED = process.env.LIVE_SERVER_RELOAD === '1';
+
+// Reloads the page when Live Server's file watcher broadcasts on its /ws
+// endpoint. Local-only helper, never reaches production deploys.
+const LIVE_RELOAD_SNIPPET = [
+  '<script>',
+  '(function () {',
+  '  if (!("WebSocket" in window)) return;',
+  '  var ws = new WebSocket((location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/ws");',
+  '  ws.onmessage = function (e) {',
+  '    if (e.data === "reload" || e.data === "refreshcss") location.reload();',
+  '  };',
+  '})();',
+  '</script>'
+].join('\n');
+
 // MIME types for static files
 const mimeTypes = {
   '.html': 'text/html',
@@ -91,30 +111,41 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Serve static files. The path is percent-decoded so filenames containing
-  // escaped characters resolve — without this, '%20' is treated as literal
-  // text and the request 404s even though the file exists.
-  let reqPath = req.url;
+  // Serve static files. The query string is stripped first (e.g.
+  // ?_cacheOverride=...), so it is never treated as part of the filename, then
+  // the path is percent-decoded so filenames containing escaped characters
+  // resolve — without this, '%20' is treated as literal text and the request
+  // 404s even though the file exists.
+  let reqPath;
   try {
-    reqPath = decodeURIComponent(reqPath);
+    reqPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
   } catch (e) {
-    // Malformed escape sequence — fall back to the raw path.
+    // Malformed URL or escape sequence — fall back to the raw path.
+    reqPath = req.url.split('?')[0];
   }
   let filePath = '.' + reqPath;
   if (filePath === './') {
     filePath = './index.html';
   }
 
-  // A directory serves its index.html (e.g. /pacey -> ./pacey/index.html)
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-    filePath = path.join(filePath, 'index.html');
+  // A directory serves its index.html (e.g. /pacey -> ./pacey/index.html).
+  // A directory without an index.html falls through to the clean-URL check
+  // instead of shadowing a sibling page — /articles resolves to articles.html.
+  const isDirectory = fs.existsSync(filePath) && fs.statSync(filePath).isDirectory();
+  const dirIndex = isDirectory ? path.join(filePath, 'index.html') : null;
+  if (dirIndex && fs.existsSync(dirIndex)) {
+    filePath = dirIndex;
   }
 
   // Handle clean URLs (e.g., /about -> /about.html)
-  if (!path.extname(filePath) && !fs.existsSync(filePath)) {
+  if (!path.extname(filePath) && (!fs.existsSync(filePath) || isDirectory)) {
     const htmlPath = filePath + '.html';
     if (fs.existsSync(htmlPath)) {
       filePath = htmlPath;
+    } else if (isDirectory) {
+      // Directory with neither an index.html nor a .html sibling — keep the
+      // missing-index path so the response stays a 404, not an EISDIR error.
+      filePath = dirIndex;
     }
   }
 
@@ -124,14 +155,25 @@ const server = http.createServer((req, res) => {
   fs.readFile(filePath, (error, content) => {
     if (error) {
       if (error.code === 'ENOENT') {
-        res.writeHead(404, { 'Content-Type': 'text/html' });
+        res.writeHead(404, { 'Content-Type': 'text/html', 'Cache-Control': 'no-store' });
         res.end('<h1>404 Not Found</h1>', 'utf-8');
       } else {
-        res.writeHead(500);
+        res.writeHead(500, { 'Cache-Control': 'no-store' });
         res.end(`Server Error: ${error.code}`, 'utf-8');
       }
     } else {
-      res.writeHead(200, { 'Content-Type': contentType });
+      // Opt-in reload client: requires the env flag AND a Via header, which
+      // Live Server's proxy adds to forwarded requests. Direct hits on this
+      // port get the file exactly as written.
+      if (LIVE_RELOAD_ENABLED && req.headers.via && contentType === 'text/html') {
+        const html = content.toString('utf-8');
+        const bodyEnd = html.toLowerCase().lastIndexOf('</body>');
+        if (bodyEnd !== -1) {
+          content = html.slice(0, bodyEnd) + LIVE_RELOAD_SNIPPET + '\n' + html.slice(bodyEnd);
+        }
+      }
+      // no-store so a reload always re-reads fresh CSS and HTML.
+      res.writeHead(200, { 'Content-Type': contentType, 'Cache-Control': 'no-store' });
       res.end(content, 'utf-8');
     }
   });

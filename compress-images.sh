@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Compress images larger than 4MB in the Kinabalu folder
+# Compress images larger than 4MB in the mount-kinabalu folder
 # Uses sips (macOS built-in) to maintain quality while reducing file size
 
-KINABALU_DIR="/Users/terrancehah/Documents/terrancehah.com/resources/Kinabalu"
-BACKUP_DIR="/Users/terrancehah/Documents/terrancehah.com/resources/Kinabalu/originals"
+KINABALU_DIR="/Users/terrancehah/Documents/terrancehah.com/resources/articles/mount-kinabalu"
+BACKUP_DIR="/Users/terrancehah/Documents/terrancehah.com/resources/articles/mount-kinabalu/originals"
 
 # Create backup directory
 mkdir -p "$BACKUP_DIR"

@@ -322,17 +322,38 @@
 }
 
 /* Article Section Headers */
+/* Vanilla CSS — output.css is pre-generated, so @apply was never processed. */
 .article-section-title {
-    @apply font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-6;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #1d3557;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .article-section-title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
 }
 
 /* Article Lists */
 .article-list {
-    @apply space-y-4 list-disc pl-6;
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+/* space-y-4 equivalent: vertical rhythm between list items only. */
+.article-list > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 1rem;
+    margin-bottom: 0;
 }
 
 .article-list-item {
-    @apply leading-loose font-light;
+    line-height: 2;
+    font-weight: 300;
 }
 
 /* ============================================
@@ -413,7 +434,12 @@
 
 /* Article Code Blocks */
 .article-code {
-    @apply bg-gray-100 p-4 rounded-lg font-mono text-sm;
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
 }
 
 /* Articles List Page Styles */
@@ -548,6 +574,19 @@
     color: white;
     margin-bottom: 1rem;
     line-height: 1.3;
+}
+
+/* Hero title links to the article — keep it white like the card titles,
+   underline on hover/focus so it still reads as a link. */
+.article-hero-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.article-hero-title a:hover,
+.article-hero-title a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
 }
 
 .article-hero-description {
@@ -724,6 +763,19 @@
 
 .article-card:hover .article-card-title {
     color: #1d3557;
+}
+
+/* Card titles may carry a real link — keep the card title colour,
+   underline on hover/focus so it still reads as a link. */
+.article-card-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.article-card-title a:hover,
+.article-card-title a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
 }
 
 .article-card-description {
