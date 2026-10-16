@@ -6,9 +6,10 @@
         <link href="../dist/output.css" rel="stylesheet">
         <link href="../styles/style.css" type="text/css" rel="stylesheet">
         <link href="../articles/articles.css" type="text/css" rel="stylesheet">
+        <link href="../articles/website-style-guide.css" type="text/css" rel="stylesheet">
         <link rel="icon" href="../resources/icons/TH-logo.png" type="image/x-icon">
         <meta property="og:title" content="Website Style Guide - Terrance's Playground">
-        <meta property="og:description" content="The official style guide for Terrance's Playground website.">
+        <meta property="og:description" content="A working guide to the colours, typography, photo layouts and shared navigation behind terrancehah.com — and the room each project gets to keep its own character.">
         <meta property="og:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
         <meta property="og:type" content="article">
         <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
@@ -18,7 +19,7 @@
         <script src="../js/footer.js"></script>
         <title>Website Style Guide - Terrance's Playground</title>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Baskervville:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;500;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Momo+Trust+Display&family=Quattrocento+Sans:wght@400;700&display=swap');
         </style>
             <!-- Vercel Analytics -->
         <script>
@@ -71,262 +72,202 @@
             </div>
         </header>
     
-        <main class="article-container">
+        <main class="article-container" id="style-guide-top">
             <article class="article-content">
                 <h1 class="article-title">My Website Style Guide</h1>
-                <p class="article-date">updated on 29 Nov 2024</p>
+                <p class="article-date">updated on 16 October 2026</p>
                 
-                <div class="article-body">
-                    <!-- Colors Section -->
+                <div class="article-body website-style-guide">
+                    <!-- What this page is: a visual reference, not a rules essay. -->
+                    <p class="style-guide-caption">A specimen sheet for terrancehah.com — the pieces below are drawn from the stylesheets that actually ship the site. It documents this site's habits; each project keeps its own materials.</p>
+
+                    <!-- Colour: swatch grids, one group per palette. -->
                     <section>
-                        <h2 class="article-section-title">Colors</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div class="flex flex-col">
-                                <div class="h-32 bg-[#1d3557] rounded-t-lg"></div>
-                                <div class="bg-gray-100 p-4 rounded-b-lg">
-                                    <p class="font-medium">Primary Blue</p>
-                                    <p class="text-gray-600">#1d3557</p>
-                                </div>
+                        <h2 class="article-subtitle">Colours</h2>
+                        <p class="style-guide-caption">A small palette where each colour has a job — navy carries headings, steel blue carries links, the pale tones sit on surfaces and hovers.</p>
+                        <div class="style-guide-swatch-group">
+                            <h3 class="style-guide-group-label">Site palette</h3>
+                            <div class="style-guide-swatch-grid">
+                                <figure class="style-guide-swatch" style="--swatch-color: #1d3557">
+                                    <span class="style-guide-swatch-block"></span>
+                                    <figcaption>Navy — headings and strong text<span class="style-guide-swatch-hex">#1d3557</span></figcaption>
+                                </figure>
+                                <figure class="style-guide-swatch" style="--swatch-color: #457b9d">
+                                    <span class="style-guide-swatch-block"></span>
+                                    <figcaption>Steel blue — links and accents<span class="style-guide-swatch-hex">#457b9d</span></figcaption>
+                                </figure>
+                                <figure class="style-guide-swatch" style="--swatch-color: #c0e9fc">
+                                    <span class="style-guide-swatch-block"></span>
+                                    <figcaption>Pale sky — hover highlights<span class="style-guide-swatch-hex">#c0e9fc</span></figcaption>
+                                </figure>
                             </div>
-                            
-                            <div class="flex flex-col">
-                                <div class="h-32 bg-[#457B9D] rounded-t-lg"></div>
-                                <div class="bg-gray-100 p-4 rounded-b-lg">
-                                    <p class="font-medium">Secondary Blue</p>
-                                    <p class="text-gray-600">#457B9D</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col">
-                                <div class="h-32 bg-sky-blue rounded-t-lg"></div>
-                                <div class="bg-gray-100 p-4 rounded-b-lg">
-                                    <p class="font-medium">Sky Blue</p>
-                                    <p class="text-gray-600">#4a88c6</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col">
-                                <div class="h-32 bg-[#c0e9fc] rounded-t-lg"></div>
-                                <div class="bg-gray-100 p-4 rounded-b-lg">
-                                    <p class="font-medium">Light Blue</p>
-                                    <p class="text-gray-600">#c0e9fc</p>
-                                </div>
-                            </div>
-
                         </div>
-                    </section>
-
-                    <!-- Typography Section -->
-                    <section>
-                        <h2 class="article-section-title">Typography</h2>
-                        
-                        <div class="space-y-8">
-                            <!-- Lato -->
-                            <div class="space-y-4">
-                                <h3 class="font-lato font-semibold text-xl text-[#1d3557]">Lato</h3>
-                                <div class="space-y-2">
-                                    <p class="font-lato text-base">Regular: The quick brown fox jumps over the lazy dog</p>
-                                    <p class="font-lato font-bold text-base">Bold: The quick brown fox jumps over the lazy dog</p>
-                                    <p class="font-lato italic text-base">Italic: The quick brown fox jumps over the lazy dog</p>
-                                </div>
-                            </div>
-
-                            <!-- Raleway -->
-                            <div class="space-y-4">
-                                <h3 class="font-raleway font-semibold text-xl text-[#1d3557]">Raleway</h3>
-                                <div class="space-y-2">
-                                    <p class="font-raleway text-base">Regular: The quick brown fox jumps over the lazy dog</p>
-                                    <p class="font-raleway font-bold text-base">Bold: The quick brown fox jumps over the lazy dog</p>
-                                    <p class="font-raleway italic text-base">Italic: The quick brown fox jumps over the lazy dog</p>
-                                </div>
-                            </div>
-
-                            <!-- Caveat -->
-                            <div class="space-y-4">
-                                <h3 class="font-caveat font-semibold text-xl text-[#1d3557]">Caveat</h3>
-                                <div class="space-y-2">
-                                    <p class="font-caveat text-2xl">Regular: The quick brown fox jumps over the lazy dog</p>
-                                    <p class="font-caveat font-bold text-2xl">Bold: The quick brown fox jumps over the lazy dog</p>
-                                    <p class="font-caveat italic text-2xl">Italic: The quick brown fox jumps over the lazy dog</p>
-                                </div>
+                        <div class="style-guide-swatch-group">
+                            <h3 class="style-guide-group-label">Homepage chapters</h3>
+                            <div class="style-guide-swatch-grid">
+                                <figure class="style-guide-swatch" style="--swatch-color: #1e4620">
+                                    <span class="style-guide-swatch-block"></span>
+                                    <figcaption>Nature ink — homepage text<span class="style-guide-swatch-hex">#1e4620</span></figcaption>
+                                </figure>
+                                <figure class="style-guide-swatch" style="--swatch-color: #447f46">
+                                    <span class="style-guide-swatch-block"></span>
+                                    <figcaption>Nature accent — homepage buttons<span class="style-guide-swatch-hex">#447f46</span></figcaption>
+                                </figure>
+                                <figure class="style-guide-swatch" style="--swatch-color: #d4edda">
+                                    <span class="style-guide-swatch-block"></span>
+                                    <figcaption>Nature surface — personal sections<span class="style-guide-swatch-hex">#d4edda</span></figcaption>
+                                </figure>
+                                <figure class="style-guide-swatch" style="--swatch-color: #cfe2f3">
+                                    <span class="style-guide-swatch-block"></span>
+                                    <figcaption>Tech surface — work sections<span class="style-guide-swatch-hex">#cfe2f3</span></figcaption>
+                                </figure>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Text Styles Section -->
+                    <!-- Type: each face rendering the kind of text it carries. -->
                     <section>
-                        <h2 class="article-section-title">Text Styles</h2>
-                        
-                        <div class="space-y-8">
-                            <div>
-                                <h1 class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557]">Heading 1</h1>
-                                <p class="text-gray-600 mt-2">
-                                    font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557]
-                                </p>
-                            </div>
-
-                            <div>
-                                <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557]">Heading 2</h2>
-                                <p class="text-gray-600 mt-2">
-                                    font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557]
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3 class="font-lato font-semibold text-xl sm:text-2xl text-[#1d3557]">Heading 3</h3>
-                                <p class="text-gray-600 mt-2">
-                                    font-lato font-semibold text-xl sm:text-2xl text-[#1d3557]
-                                </p>
-                            </div>
-
-                            <div>
-                                <p class="font-lato text-lg sm:text-xl">Body Text</p>
-                                <p class="text-gray-600 mt-2">
-                                    font-lato text-lg sm:text-xl
-                                </p>
-                            </div>
-
-                            <div>
-                                <a href="#" class="font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] p-2">Navigation Link</a>
-                                <p class="text-gray-600 mt-2">
-                                    font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]
-                                </p>
-                            </div>
-
-                            <div>
-                                <blockquote class="font-caveat text-2xl sm:text-3xl md:text-3xl text-center my-12 italic">
-                                    Blockquote Text Style
-                                </blockquote>
-                                <p class="text-gray-600 mt-2">
-                                    font-caveat text-2xl sm:text-3xl md:text-3xl text-center italic
-                                </p>
-                            </div>
+                        <h2 class="article-subtitle">Type</h2>
+                        <p class="style-guide-caption">Four faces, each with one job.</p>
+                        <div class="style-guide-type-grid">
+                            <figure class="style-guide-type">
+                                <figcaption>Lato — site name and headings</figcaption>
+                                <p class="style-guide-sample style-guide-sample-lato">Terrance's Playground</p>
+                            </figure>
+                            <figure class="style-guide-type">
+                                <figcaption>Raleway — navigation and card titles</figcaption>
+                                <p class="style-guide-sample style-guide-sample-raleway">Mount Kinabalu, 30–31 March 2026</p>
+                            </figure>
+                            <figure class="style-guide-type">
+                                <figcaption>Baskervville — article prose and summaries</figcaption>
+                                <p class="style-guide-sample style-guide-sample-baskervville">Jungle trekking makes me question the relationship between human and nature.</p>
+                            </figure>
+                            <figure class="style-guide-type">
+                                <figcaption>Caveat — pull quotes and margin notes</figcaption>
+                                <p class="style-guide-sample style-guide-sample-caveat">“Probably just another ordinary hike.”</p>
+                            </figure>
                         </div>
                     </section>
 
-                    <!-- Spacing Section -->
+                    <!-- Page hierarchy: how the faces compose on an article page. -->
                     <section>
-                        <h2 class="article-section-title">Spacing</h2>
-                        
-                        <div class="space-y-4">
-                            <p class="text-gray-700">Main Content Padding:</p>
-                            <ul class="list-disc list-inside space-y-2 text-gray-600">
-                                <li>Mobile: px-4 (1rem)</li>
-                                <li>Tablet: md:px-8 (2rem)</li>
-                                <li>Desktop: lg:px-16 (4rem)</li>
-                                <li>Large Desktop: xl:px-32 (8rem)</li>
-                            </ul>
-                            
-                            <p class="text-gray-700 mt-6">Vertical Spacing:</p>
-                            <ul class="list-disc list-inside space-y-2 text-gray-600">
-                                <li>Between Sections: space-y-12 (3rem)</li>
-                                <li>Between Elements: space-y-6 (1.5rem)</li>
-                                <li>Small Gaps: space-y-4 (1rem)</li>
-                            </ul>
+                        <h2 class="article-subtitle">Page hierarchy</h2>
+                        <p class="style-guide-caption">How an article page composes the faces — Lato title and subheading, Raleway date, Baskervville prose.</p>
+                        <div class="style-guide-hierarchy">
+                            <p class="style-guide-hier-title">RPE in Running: What Pace and Heart Rate Don’t Tell You</p>
+                            <p class="style-guide-hier-date">written on 16 October 2026</p>
+                            <h3 class="style-guide-hier-sub">Why pace alone lies to you</h3>
+                            <p class="style-guide-hier-body">Heart rate drifts with heat, sleep and caffeine; pace drifts with wind and hills. RPE is the honest signal underneath both — what the effort actually felt like.</p>
                         </div>
                     </section>
 
-                    <!-- Components Section -->
+                    <!-- Navigation: the real header row, the live footer nav markup,
+                         and the back-to-top button as a working anchor. -->
                     <section>
-                        <h2 class="article-section-title">Components</h2>
-                        
-                        <div class="space-y-8">
-                            <!-- Buttons -->
-                            <div>
-                                <h3 class="font-lato font-semibold text-xl text-[#1d3557] mb-4">Buttons</h3>
-                                
-                                <div class="space-y-4">
-                                    <!-- Primary Button -->
-                                    <div>
-                                        <button class="w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1">
-                                            Primary Button
-                                        </button>
-                                        <p class="text-gray-600 mt-2">
-                                            Classes: w-[200px] h-12 rounded-2xl bg-white text-sky-blue font-raleway font-semibold text-lg shadow-lg hover:bg-white hover:text-secondary hover:shadow-lg hover:shadow-slate-500 transition-all duration-300 ease-in-out hover:-translate-y-1
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Navigation -->
-                            <div>
-                                <h3 class="font-lato font-semibold text-xl text-[#1d3557] mb-4">Navigation</h3>
-                                
-                                <div class="bg-white p-4 rounded-lg shadow mb-4">
-                                    <nav class="flex flex-wrap justify-center gap-3">
-                                        <a href="#" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Link 1</a>
-                                        <a href="#" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Active Link</a>
-                                        <a href="#" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Link 3</a>
-                                    </nav>
-                                    <p class="text-gray-600 mt-4">
-                                        Link Classes: relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]<br>
-                                        Active Link Additional Class: bg-[#c0e9fc]
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Card -->
-                            <div>
-                                <h3 class="font-lato font-semibold text-xl text-[#1d3557] mb-4">Cards</h3>
-                                
-                                <div class="mb-4">
-                                    <div class="projects mb-8 p-5 bg-white rounded-lg shadow-lg">
-                                        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold font-raleway text-[#1d3557] hover:text-[#457B9D]">Card Title</h2>
-                                        <p class="text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato">Card description text goes here</p>
-                                        <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway">Additional information</p>
-                                    </div>
-                                    <p class="text-gray-600">
-                                        Container: projects mb-8 p-5 bg-white rounded-lg shadow-lg<br>
-                                        Title: text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold font-raleway text-[#1d3557] hover:text-[#457B9D]<br>
-                                        Description: text-lg sm:text-xl md:text-2xl text-[#457B9D] mt-2 font-normal font-lato<br>
-                                        Info: text-base sm:text-lg md:text-xl text-gray-600 mt-4 font-light font-raleway
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Forms -->
-                            <div>
-                                <h3 class="font-lato font-semibold text-xl text-[#1d3557] mb-4">Form Elements</h3>
-                                
-                                <!-- Text Input -->
-                                <div class="mb-6">
-                                    <label class="text-lg font-raleway font-semibold text-gray-700 text-left block mb-2">Text Input</label>
-                                    <input type="text" placeholder="Placeholder text" class="w-full px-4 py-2 text-md relative cursor-text rounded-md text-gray-700 font-normal font-raleway border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent">
-                                    <p class="text-gray-600 mt-2">
-                                        Label: text-lg font-raleway font-semibold text-gray-700<br>
-                                        Input: w-full px-4 py-2 text-md relative cursor-text rounded-md text-gray-700 font-normal font-raleway border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D]
-                                    </p>
-                                </div>
-
-                                <!-- Select -->
-                                <div class="mb-6">
-                                    <label class="text-lg font-raleway font-semibold text-gray-700 text-left block mb-2">Select Input</label>
-                                    <select class="w-full h-12 outline-none cursor-pointer px-4 py-2 text-lg font-raleway font-light text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#457B9D] focus:border-transparent appearance-none bg-white">
-                                        <option value="" disabled selected>Select an option</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                    </select>
-                                    <p class="text-gray-600 mt-2">
-                                        Classes: w-full h-12 outline-none cursor-pointer px-4 py-2 text-lg font-raleway font-light text-gray-700 rounded-md appearance-none
-                                    </p>
-                                </div>
-
-                                <!-- Checkbox -->
-                                <div class="mb-6">
-                                    <label class="group inline-flex items-center justify-start px-3.5 py-1.5 border border-[#b8b8bb] hover:bg-slate-200 hover:border-secondary hover:border-1 rounded-md cursor-pointer bg-white bg-opacity-40 shadow-md hover:shadow-lg font-light transition-colors duration-200 [&:has(input:checked)]:bg-[#e9edf0] [&:has(input:checked)]:border-secondary [&:has(input:checked)]:border-1">
-                                        <input type="checkbox" class="mr-2 peer appearance-none h-5 w-5 border border-[#b8b8bb] focus:border-secondary focus:shadow-sm hover:border-secondary hover:border-5 focus:border-2 rounded bg-white checked:bg-secondary checked:border-transparent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:text-white checked:after:text-xs checked:after:top-[1px] checked:after:left-[3px]">
-                                        <span class="text-left font-raleway peer-checked:text-secondary peer-checked:font-medium">Checkbox Label</span>
-                                    </label>
-                                    <p class="text-gray-600 mt-2">
-                                        Container: group inline-flex items-center justify-start px-3.5 py-1.5 border...<br>
-                                        Checkbox: mr-2 peer appearance-none h-5 w-5 border...<br>
-                                        Label: text-left font-raleway peer-checked:text-secondary peer-checked:font-medium
-                                    </p>
-                                </div>
-                            </div>
+                        <h2 class="article-subtitle">Navigation and controls</h2>
+                        <p class="style-guide-caption">The main pages and the older articles and projects that share the site footer all carry the same four destinations — header at the top, footer at the bottom, and a small back-to-top button that appears after one viewport of scrolling.</p>
+                        <p class="style-guide-preview-label">Header</p>
+                        <nav class="style-guide-header-nav" aria-label="Header preview">
+                            <a href="/">Home</a>
+                            <a href="../articles.html">Articles</a>
+                            <a href="../projects.html">Projects</a>
+                            <a href="../playground.html">Playground</a>
+                        </nav>
+                        <p class="style-guide-preview-label">Footer — the same markup footer.js injects; quiet text links, hairline separators, 36px targets, no current-page highlight</p>
+                        <div class="style-guide-footer-frame">
+                            <nav class="site-footer-nav" aria-label="Footer preview">
+                                <a href="/">Home</a>
+                                <a href="../articles.html" aria-current="location">Articles</a>
+                                <a href="../projects.html">Projects</a>
+                                <a href="../playground.html">Playground</a>
+                            </nav>
+                        </div>
+                        <div class="style-guide-backtop-row">
+                            <a class="style-guide-back-top" href="#style-guide-top" aria-label="Back to top" title="Back to top">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V7"/><path d="m6 13 6-6 6 6"/><path d="M5 4h14"/></svg>
+                            </a>
+                            <p class="style-guide-backtop-note">Back to top — this one is a real link; try it after scrolling.</p>
                         </div>
                     </section>
 
+                    <!-- Cards: one real card at phone width to show content-driven height. -->
+                    <section>
+                        <h2 class="article-subtitle">Cards on small screens</h2>
+                        <p class="style-guide-caption">Below 640px the listing grids become a single column where each card takes the height its content needs — the full title and date always stay readable, while the summary may clamp to a few lines.</p>
+                        <div class="style-guide-phone">
+                            <article class="style-guide-mini-card">
+                                <img src="../resources/articles/mount-kinabalu/peak-sunrise-og.JPG" alt="Sunrise over Low's Peak, Mount Kinabalu" loading="lazy">
+                                <div class="style-guide-mini-card-content">
+                                    <h3 class="style-guide-mini-card-title"><a href="./mount-kinabalu.html">Mount Kinabalu, 30-31 March 2026</a></h3>
+                                    <p class="style-guide-mini-card-desc">"Mount Kinabalu is probably just another ordinary hike." — me, before the hike. Well, I was wrong.</p>
+                                    <p class="style-guide-mini-card-date">written on 12 April 2026</p>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <!-- Project materials: Pacey's board inks in both themes. -->
+                    <section>
+                        <h2 class="article-subtitle">Project materials</h2>
+                        <p class="style-guide-caption">Each project keeps its own skin — these are only ink and paper samples, not the apps themselves. Pacey's board is cork under handwriting type; in its dark mode the cork-side copy warms to cream while the paper stays light.</p>
+                        <div class="style-guide-materials-grid">
+                            <figure class="style-guide-board style-guide-board-light">
+                                <figcaption class="style-guide-board-name">Pacey — day cork</figcaption>
+                                <p class="style-guide-board-heading">Your marathon plan</p>
+                                <p class="style-guide-board-text">Readiness at a glance.</p>
+                                <span class="style-guide-paper-chip">Paper sheet — dark ink</span>
+                                <span class="style-guide-board-hex">#2b2620 / #5f5546 on #f1e7d2</span>
+                            </figure>
+                            <figure class="style-guide-board style-guide-board-dark">
+                                <figcaption class="style-guide-board-name">Pacey — night cork</figcaption>
+                                <p class="style-guide-board-heading">Your marathon plan</p>
+                                <p class="style-guide-board-text">Readiness at a glance.</p>
+                                <span class="style-guide-paper-chip">Paper sheet — still light</span>
+                                <span class="style-guide-board-hex">#f2e9d7 / #e8dfca on #3a2f26</span>
+                            </figure>
+
+                            <!-- Biwa: quiet autumn journal — flat fills, Momo Trust
+                                 Display heading, Quattrocento Sans body. -->
+                            <figure class="style-guide-board style-guide-biwa">
+                                <figcaption class="style-guide-board-name">Biwa — ride journal</figcaption>
+                                <p class="style-guide-biwa-heading">Lake Biwa ride</p>
+                                <span class="style-guide-biwa-tag">Day 1 · Ōtsu → Hikone</span>
+                                <span class="style-guide-biwa-stop">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    Omi-Hachiman <small>· sample stop</small>
+                                </span>
+                                <a class="style-guide-biwa-link" href="/projects/biwa-ride/">Explore the ride</a>
+                                <span class="style-guide-strip">
+                                    <span class="style-guide-strip-chip" style="--chip: #eee2df"></span>
+                                    <span class="style-guide-strip-chip" style="--chip: #eed7c5"></span>
+                                    <span class="style-guide-strip-chip" style="--chip: #c97c5d"></span>
+                                    <span class="style-guide-strip-chip" style="--chip: #b36a5e"></span>
+                                    <span class="style-guide-strip-chip" style="--chip: #2f5d6f"></span>
+                                </span>
+                                <span class="style-guide-board-hex">Momo Trust Display + Quattrocento Sans · #eee2df #eed7c5 #c97c5d #b36a5e #2f5d6f</span>
+                            </figure>
+
+                            <!-- Travel-Rizz: sampled from styles/travel-rizz.module.css —
+                                 the hosted app is separate and may have moved on. -->
+                            <figure class="style-guide-board style-guide-rizz">
+                                <figcaption class="style-guide-board-name">Travel-Rizz / local planner styles</figcaption>
+                                <p class="style-guide-rizz-heading">Travel-Rizz</p>
+                                <p class="style-guide-rizz-sub">Sketch the trip, share the plan.</p>
+                                <span class="style-guide-rizz-slip">Kyoto · 3 days — sample itinerary</span>
+                                <a class="style-guide-rizz-link" href="https://www.travelrizz.app" target="_blank" rel="noopener">Explore Travel-Rizz</a>
+                                <span class="style-guide-strip">
+                                    <span class="style-guide-strip-chip" style="--chip: #123456"></span>
+                                    <span class="style-guide-strip-chip" style="--chip: #456789"></span>
+                                    <span class="style-guide-strip-chip" style="--chip: #4a88c6"></span>
+                                    <span class="style-guide-strip-chip" style="--chip: #ecf8ff"></span>
+                                </span>
+                                <span class="style-guide-board-hex">Caveat + Raleway · #123456 #456789 #4a88c6 #ecf8ff · sampled from styles/travel-rizz.module.css, not a live guarantee</span>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Where the implementation actually lives. -->
+                    <p class="style-guide-footnote">Source of truth: <code>js/footer.js</code>, <code>styles/site-footer.css</code>, <code>styles/style.css</code>, <code>styles/homepage.css</code>, <code>articles/articles.css</code> and each project's own stylesheet. Older pages add pre-generated utility CSS — there is no live Tailwind build step.</p>
                 </div>
             </article>
         </main>
