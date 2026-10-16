@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 /* Footer + back-to-top styles live in their own sheet so pages that
-   skip this legacy file can still style the injected footer. */
+   skip this legacy file can still style the injected footer; the shared
+   header works the same way (site-header.css itself imports
+   site-navigation.css for the nav rules). */
 @import './site-footer.css';
+@import './site-header.css';
 
 html {
     height: 100%;
@@ -16,7 +19,9 @@ header .active {
     background-color: #c0e9fc;
 }
 
-header img {
+/* Legacy headers only — the shared .site-header header sizes its
+   social icons in site-header.css instead. */
+header:not(.site-header) img {
     width: 2.5vw;
     height: 2.5vw;
 }
@@ -37,48 +42,19 @@ header img {
     font-size: 2.5vw;
 }
 
-/* ============================================
-   SHARED SITE HEADER (index / articles / projects)
-   Semantic hooks for the common header markup.
-   Scoped to .site-* classes so article detail
-   pages, which don't use them, are unaffected.
-   ============================================ */
-
-/* Social icon links get a >=44px tap target around the icon,
-   which itself stays a modest 24-28px as before. */
-.site-social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-}
-
-.site-social-icon {
-    width: 28px;
-    height: 28px;
-}
-
-/* Visible keyboard focus for header links (the homepage paints its
-   own focus pill via a more specific rule, which wins there). */
-.site-social-link:focus-visible,
-.site-nav a:focus-visible {
-    outline: 2px solid #457b9d;
-    outline-offset: 2px;
-    border-radius: 4px;
-}
-
-/* Site footer (only where footer.js adds .site-footer): a
-   constrained inner row with a hairline top separator. Desktop
-   keeps the nav left and the credit lines right; narrow screens
-   stack them left-aligned. Rules live in site-footer.css, imported
-   at the top of this file. */
+/* Shared site header (title, nav, socials) and the injected footer
+   live in styles/site-header.css / styles/site-navigation.css /
+   styles/site-footer.css — all imported at the top of this file so
+   there is a single source for both. */
 
 @media screen and (max-width: 480px) {
     /* header {
         margin-bottom: 0.6vw;
     } */
-    header h1 {
+    /* vw-sized rules below are for the legacy headers (.navbutton /
+       .contacts era); scoped away from the shared .site-header, which
+       owns its own sizing in site-header.css. */
+    header:not(.site-header) h1 {
         width: 100%;
         font-size: 5.5vw;
         text-align: left;
@@ -93,7 +69,7 @@ header img {
         margin: 0 0.5vw;
         top: 0vw;
     }
-    header img {
+    header:not(.site-header) img {
         width: 5.5vw;
         height: 5.5vw;
     }
@@ -104,13 +80,15 @@ header img {
     /* header {
         margin-bottom: 0.6vw;
     } */
-    header h1 {
+    header:not(.site-header) h1 {
         width: 100%;
         font-size: 4.5vw;
         text-align: left;
         padding: 1% 1% 0% 2%;
     }
-    nav {
+    /* Only legacy navs get this gutter — the shared header/footer navs
+       manage their own spacing. */
+    nav:not(.site-nav):not(.site-footer-nav) {
         margin-top: 0.5%;
     }
     .navbutton {
@@ -124,7 +102,7 @@ header img {
         top: 0%;
         margin: 0.4vw 0.6vw;
     }
-    header img {
+    header:not(.site-header) img {
         width: 5vw;
         height: 5vw;
     }

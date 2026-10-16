@@ -168,27 +168,14 @@
    A header-style link row, the real .site-footer-nav markup (its styles
    come from the shared stylesheet this page already loads), and the
    back-to-top button as a working anchor. */
+/* Header specimen: the frame only — the .site-nav inside is styled by
+   the shared styles/site-navigation.css the page already loads. The
+   specimen lives in a <section>, never <header>, so footer.js's
+   header-nav query can't pick it up. */
 .website-style-guide .style-guide-header-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
     padding: 0.5rem;
     border: 1px solid rgba(29, 53, 87, 0.12);
     border-radius: 0.5rem;
-}
-
-.website-style-guide .style-guide-header-nav a {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 500;
-    font-size: 1rem;
-    color: #457b9d;
-    text-decoration: none;
-    padding: 0.5rem 0.625rem;
-    border-radius: 0.375rem;
-}
-
-.website-style-guide .style-guide-header-nav a:hover {
-    background: #c0e9fc;
 }
 
 .website-style-guide .style-guide-preview-label {

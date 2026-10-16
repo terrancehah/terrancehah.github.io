@@ -26,47 +26,42 @@
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
         </script>
         <script defer src="/_vercel/insights/script.js"></script>
-        <!-- Vercel Speed Insights -->
-        <script>
-        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-        </script>
-        <script defer src="/_vercel/speed-insights/script.js"></script>
     </head>
 
     <body class="m-0 relative h-full bg-white overflow-x-hidden">
-        <header class="w-full inline-block">
-            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+        <header class="site-header">
+            <div class="site-header-inner">
                 <!-- Left: Title -->
-                <div class="flex flex-col md:flex-row items-center w-auto md:w-80 gap-1">
-                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                <div class="site-header-brand">
+                    <h1 class="site-header-title">
                         Terrance's Playground
                     </h1>
                 </div>
 
                 <!-- Middle: Nav buttons -->
-                <nav class="flex flex-wrap justify-center gap-2">
-                    <a href="/" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Home</a>
-                    <a href="/articles" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Articles</a>
-                    <a href="/projects" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc] bg-[#c0e9fc]">Projects</a>
-                    <a href="/playground" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-[#457B9D] hover:bg-[#c0e9fc]">Playground</a>
+                <nav class="site-nav">
+                    <a href="/">Home</a>
+                    <a href="/articles">Articles</a>
+                    <a href="/projects" aria-current="location">Projects</a>
+                    <a href="/playground">Playground</a>
                 </nav>
 
                 <!-- Right side: Social Icons -->
-                <div class="flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
-                    <a href="https://facebook.com/terrancehah/" target="_blank" class="w-8 h-8">
-                        <img src="/resources/icons/facebook.png" alt="facebook" class="w-full h-full">
+                <div class="site-social-links">
+                    <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
+                        <img src="/resources/icons/facebook.png" alt="facebook" class="site-social-icon">
                     </a>
-                    <a href="https://instagram.com/terrancehah/" target="_blank" class="w-8 h-8">
-                        <img src="/resources/icons/instagram.png" alt="instagram" class="w-full h-full">
+                    <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
+                        <img src="/resources/icons/instagram.png" alt="instagram" class="site-social-icon">
                     </a>
-                    <a href="https://x.com/terrance_hah" target="_blank" class="w-8 h-8">
-                        <img src="/resources/icons/x.png" alt="x" class="w-full h-full">
+                    <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
+                        <img src="/resources/icons/x.png" alt="x" class="site-social-icon">
                     </a>
-                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="w-8 h-8">
-                        <img src="/resources/icons/linkedin.png" alt="linkedin" class="w-full h-full">
+                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
+                        <img src="/resources/icons/linkedin.png" alt="linkedin" class="site-social-icon">
                     </a>
-                    <a href="https://github.com/terrancehah" target="_blank" class="w-8 h-8">
-                        <img src="/resources/icons/github.png" alt="github" class="w-full h-full">
+                    <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
+                        <img src="/resources/icons/github.png" alt="github" class="site-social-icon">
                     </a>
                 </div>
             </div>

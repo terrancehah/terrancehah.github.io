@@ -5,6 +5,9 @@
     <link href="./login.css" type="text/css" rel="stylesheet">
     <!-- Footer-only stylesheet for the footer.js-injected footer -->
     <link href="/styles/site-footer.css" type="text/css" rel="stylesheet">
+    <!-- Shared header stylesheet (this page doesn't load styles/style.css;
+         site-header.css itself imports the shared nav sheet) -->
+    <link href="/styles/site-header.css" type="text/css" rel="stylesheet">
 
     <title>Terrance's Homepage</title>
       <!-- Vercel Analytics -->
@@ -12,25 +15,28 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <!-- Vercel Speed Insights -->
-    <script>
-      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 
   <body>
 
-    <header>
-      <h1>Terrance's Playground</h1>
-      <a class="navbutton active" href="./index.html">Home</a>
-      <a class="navbutton" href="./articles.html">Articles</a>
-      <a class="navbutton" href="./projects.html">Projects</a>
-      <a class="navbutton" href="./playground.html">Playground</a>
-      <a class="contacts" href="https://facebook.com/terrancehah/" target="_blank"><img src="../resources/icons/facebook.png"></a>
-      <a class="contacts" href="https://instagram.com/terrancehah/" target="_blank"><img src="../resources/icons/instagram.png"></a>
-      <a class="contacts" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="../resources/icons/linkedin.png"></a>
-      <a class="contacts" href="https://github.com/terrancehah" target="_blank"><img src="../resources/icons/github.png"></a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <div class="site-header-brand">
+          <h1 class="site-header-title">Terrance's Playground</h1>
+        </div>
+        <nav class="site-nav">
+          <a href="/">Home</a>
+          <a href="/articles.html">Articles</a>
+          <a href="/projects.html">Projects</a>
+          <a href="/playground.html" aria-current="location">Playground</a>
+        </nav>
+        <div class="site-social-links">
+          <a class="site-social-link" href="https://facebook.com/terrancehah/" target="_blank"><img src="../resources/icons/facebook.png" alt="facebook" class="site-social-icon"></a>
+          <a class="site-social-link" href="https://instagram.com/terrancehah/" target="_blank"><img src="../resources/icons/instagram.png" alt="instagram" class="site-social-icon"></a>
+          <a class="site-social-link" href="https://www.linkedin.com/in/terrancehah/" target="_blank"><img src="../resources/icons/linkedin.png" alt="linkedin" class="site-social-icon"></a>
+          <a class="site-social-link" href="https://github.com/terrancehah" target="_blank"><img src="../resources/icons/github.png" alt="github" class="site-social-icon"></a>
+        </div>
+      </div>
     </header>
     
     <content>

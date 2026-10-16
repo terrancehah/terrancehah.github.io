@@ -1,0 +1,81 @@
+/* ============================================
+   SITE NAVIGATION — shared header nav
+   --------------------------------------------
+   Single source of truth for the four-destination header nav used
+   across the personal site (markup: <nav class="site-nav"> with plain
+   anchors). Imported by styles/style.css for the main pages; older
+   pages that skip the legacy stylesheet link this file directly.
+   The homepage retunes it to the nature palette by overriding the
+   tokens on body.home-page only — no second set of selectors.
+   ============================================ */
+
+/* Shared control tokens — the nav radius is the site's standard
+   rounded-md (0.375rem). back-to-top deliberately keeps its own 8px. */
+:root {
+    --site-control-radius: 0.375rem;
+    --site-nav-ink: #457b9d;          /* steel blue link text */
+    --site-nav-hover: #c0e9fc;        /* pale sky hover/focus wash */
+    --site-nav-active: #c0e9fc;       /* current-destination pill */
+    --site-nav-active-ink: #457b9d;
+    --site-nav-active-hover: #c0e9fc; /* light theme: no extra hover step */
+}
+
+/* Homepage: same structure, nature palette — token overrides only. */
+body.home-page {
+    --site-nav-ink: #1e4620;          /* nature-900 */
+    --site-nav-hover: #a9d3af;        /* nature-400 */
+    --site-nav-active: #447f46;       /* nature-500 */
+    --site-nav-active-ink: #f7fff9;   /* nature-50 */
+    --site-nav-active-hover: #3f7b4f; /* nature-600 — darker on hover */
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.site-nav > a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px; /* tap target */
+    padding: 0 0.5rem;
+    border-radius: var(--site-control-radius);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 1.125rem;
+    color: var(--site-nav-ink);
+    text-decoration: none;
+    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+    .site-nav > a {
+        font-size: 1.25rem;
+    }
+}
+
+.site-nav > a:hover,
+.site-nav > a:focus-visible {
+    background-color: var(--site-nav-hover);
+}
+
+/* Focus is always an outline on the ink colour — never removed. */
+.site-nav > a:focus-visible {
+    outline: 2px solid var(--site-nav-ink);
+    outline-offset: 2px;
+}
+
+/* Current destination ("page") or current section ("location" on
+   detail pages) — one pill treatment for both. */
+.site-nav > a[aria-current] {
+    background-color: var(--site-nav-active);
+    color: var(--site-nav-active-ink);
+}
+
+.site-nav > a[aria-current]:hover,
+.site-nav > a[aria-current]:focus-visible {
+    background-color: var(--site-nav-active-hover);
+}

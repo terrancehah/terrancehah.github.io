@@ -94,7 +94,9 @@ form {
     padding: 4.5vw;
 }
 
-h1 {
+/* Scoped away from the shared header's title — .site-header-title
+   owns its own face/size in site-header.css. */
+h1:not(.site-header-title) {
     font-family: Oswald;
     text-align: center;
     font-size: 3vw;

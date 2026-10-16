@@ -8,8 +8,12 @@
 
 /* Site footer: a constrained inner row with a hairline top
    separator. Desktop keeps the nav left and the credit lines
-   right; narrow screens stack them left-aligned. */
+   right; narrow screens stack them left-aligned. The shell itself
+   adds zero outer spacing — any per-page margin/padding on the
+   footer element must not leak in. */
 .site-footer {
+    margin: 0;
+    padding: 0;
     border-top: 1px solid rgba(29, 53, 87, 0.15); /* faint navy */
 }
 
@@ -142,13 +146,14 @@
     outline-offset: 2px;
 }
 
-/* Homepage: keep the light-blue footer surface (background,
-   border-top and margin still come from homepage.css) but let the
-   new inner padding own the spacing, and retune the accents —
-   green links like the homepage header, navy credit text matching
-   the existing footer copy colour. */
+/* Homepage skin — the only page-specific footer surface: light-blue
+   background, faint navy hairline, no extra spacing. Retuned accents
+   follow: green links like the homepage header, navy credit text
+   matching the old footer copy colour. */
 body.home-page > footer.site-footer {
-    padding: 0; /* spacing now lives on .site-footer-inner */
+    background-color: #cfe2f3;
+    border-top-color: rgba(12, 35, 64, 0.08);
+    margin-top: 0;
 }
 
 body.home-page .site-footer-nav a {

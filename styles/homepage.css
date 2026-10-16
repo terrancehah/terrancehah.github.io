@@ -899,68 +899,23 @@ body.home-page .transition-section {
     overflow-x: clip;
 }
 
-/* Header in light green matching nature section.
-   Extra padding-bottom so the green extends seamlessly into
-   the breathing gap above the hero (no white gutter). */
+/* Header in light green matching nature section — skin only.
+   Layout (inner padding, title size, brand/nav/socials) is shared in
+   site-header.css, which also sets the title ink via the
+   --site-header-ink token override on body.home-page. */
 body.home-page > header {
     background-color: #d4edda;
     border-bottom: 1px solid rgba(30, 70, 32, 0.08);
-    padding-bottom: 1.5rem;
 }
 
-@media (min-width: 768px) {
-    body.home-page > header {
-        padding-bottom: 2.5rem;
-    }
-}
+/* Header nav styling is shared now: styles/site-navigation.css owns
+   .site-nav, and the homepage retunes it by overriding the
+   --site-nav-* tokens on body.home-page (green ink, soft hover wash,
+   solid current-page pill) — no page-specific selectors here. */
 
-/* Logo text in deep green instead of default navy */
-body.home-page .home-logo {
-    color: #1e4620; /* nature-900 */
-}
-
-/* -------- Nav link styling (homepage only) -------- */
-
-/* Default nav link: deep green text on transparent bg */
-body.home-page .home-nav .nav-link {
-    color: #1e4620; /* nature-900 */
-    background-color: transparent;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    text-decoration: none;
-}
-
-/* Hover & focus: soft green pill background */
-body.home-page .home-nav .nav-link:hover,
-body.home-page .home-nav .nav-link:focus-visible {
-    background-color: #a9d3af; /* nature-400 */
-    color: #1e4620; /* stay nature-900 */
-    outline: none;
-}
-
-/* Active page indicator: solid medium green pill with light text */
-body.home-page .home-nav .nav-link-active {
-    background-color: #447f46; /* nature-500 */
-    color: #f7fff9; /* nature-50 */
-}
-
-body.home-page .home-nav .nav-link-active:hover,
-body.home-page .home-nav .nav-link-active:focus-visible {
-    /* Slightly deeper green on hover to signal interactivity */
-    background-color: #3f7b4f; /* nature-600 */
-    color: #f7fff9;
-}
-
-/* Footer in light blue matching tech section */
-body.home-page > footer.footer {
-    background-color: #cfe2f3;
-    border-top: 1px solid rgba(12, 35, 64, 0.08);
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    margin-top: 0;
-}
-
-/* Ensure footer text color reads well on blue bg */
-body.home-page > footer.footer .copyright,
-body.home-page > footer.footer .cookie-notice {
-    color: #0c2340;
-}
+/* Footer skin (light blue background, hairline border) lives in
+   styles/site-footer.css under body.home-page > footer.site-footer —
+   the shared footer stylesheet owns the shell so spacing stays uniform
+   across every page. The obsolete .copyright/.cookie-notice heading
+   selectors were removed with this block; footer.js emits
+   .site-footer-credit/.site-footer-notice paragraphs instead. */

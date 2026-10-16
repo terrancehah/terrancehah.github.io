@@ -24,35 +24,30 @@
           window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
         </script>
         <script defer src="/_vercel/insights/script.js"></script>
-        <!-- Vercel Speed Insights -->
-        <script>
-          window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-        </script>
-        <script defer src="/_vercel/speed-insights/script.js"></script>
     </head>
 
     <body class="m-0 relative h-full bg-white overflow-x-hidden">
-        <header class="w-full inline-block">
-            <div class="flex flex-col lg:flex-row justify-between items-center p-2.5 sm:p-3">
+        <header class="site-header">
+            <div class="site-header-inner">
                 
                 <!-- Left: Title -->
-                <div class="flex flex-col lg:flex-row items-center w-auto md:w-[300px] gap-1">
-                    <h1 class="font-lato font-semibold text-[#1d3557] text-2xl md:text-3xl p-0 text-center sm:text-left sm:w-auto">
+                <div class="site-header-brand">
+                    <h1 class="site-header-title">
                         Terrance's Playground
                     </h1>
                 </div>
 
                 <!-- Middle: Nav buttons -->
-                <nav class="site-nav flex flex-wrap justify-center gap-2">
-                    <a href="/" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Home</a>
-                    <a href="./articles.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Articles</a>
-                    <a href="./projects.html" aria-current="page" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue bg-light-blue">Projects</a>
-                    <a href="./playground.html" class="relative p-2 font-raleway font-medium text-lg md:text-xl text-sky-blue hover:bg-light-blue">Playground</a>
+                <nav class="site-nav">
+                    <a href="/">Home</a>
+                    <a href="./articles.html">Articles</a>
+                    <a href="./projects.html" aria-current="page">Projects</a>
+                    <a href="./playground.html">Playground</a>
                 </nav>
             
                 <!-- Right side: Social Icons (site-social-* classes give
                      each icon a >=44px tap target; see styles/style.css) -->
-                <div class="site-social-links flex items-center gap-4 md:gap-3 mt-2 lg:w-[300px] justify-end lg:mt-0">
+                <div class="site-social-links">
                     <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
                         <img src="./resources/icons/facebook.png" alt="facebook" class="site-social-icon">
                     </a>
