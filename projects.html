@@ -1,193 +1,320 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="./styles/output.css" rel="stylesheet">
-        <link href="./styles/style.css" type="text/css" rel="stylesheet">
-        <link href="./projects/projects.css" type="text/css" rel="stylesheet">
-        <link rel="icon" href="./resources/icons/TH-logo.png" type="image/x-icon">
-        <meta property="og:title" content="Terrance's Projects">
-        <meta property="og:description" content="Terrance's Projects">
-        <meta property="og:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
-        <meta property="og:type" content="article" />
-        <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
-        <link rel="canonical" href="https://terrancehah.com/projects">
-        <meta property="og:url" content="https://terrancehah.com/projects">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="./styles/output.css" rel="stylesheet" />
+		<link href="./styles/style.css" type="text/css" rel="stylesheet" />
+		<link href="./projects/projects.css" type="text/css" rel="stylesheet" />
+		<link
+			rel="icon"
+			href="./resources/icons/TH-logo.png"
+			type="image/x-icon" />
+		<meta property="og:title" content="Terrance's Projects" />
+		<meta property="og:description" content="Terrance's Projects" />
+		<meta
+			property="og:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
+		<meta property="og:type" content="article" />
+		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
+		<link rel="canonical" href="https://terrancehah.com/projects" />
+		<meta property="og:url" content="https://terrancehah.com/projects" />
 
-        <title>Terrance's Projects</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        </style>
-            <!-- Vercel Analytics -->
-        <script>
-          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-        </script>
-        <script defer src="/_vercel/insights/script.js"></script>
-    </head>
+		<title>Terrance's Projects</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+		</style>
+		<!-- Vercel Analytics -->
+		<script>
+			window.va =
+				window.va ||
+				function () {
+					(window.vaq = window.vaq || []).push(arguments);
+				};
+		</script>
+		<script defer src="/_vercel/insights/script.js"></script>
+	</head>
 
-    <body class="m-0 relative h-full bg-white overflow-x-hidden">
-        <header class="site-header">
-            <div class="site-header-inner">
-                
-                <!-- Left: Title -->
-                <div class="site-header-brand">
-                    <h1 class="site-header-title">
-                        Terrance's Playground
-                    </h1>
-                </div>
+	<body class="m-0 relative h-full bg-white overflow-x-hidden">
+		<header class="site-header">
+			<div class="site-header-inner">
+				<!-- Left: Title -->
+				<div class="site-header-brand">
+					<h1 class="site-header-title">Terrance's Playground</h1>
+				</div>
 
-                <!-- Middle: Nav buttons -->
-                <nav class="site-nav">
-                    <a href="/">Home</a>
-                    <a href="./articles.html">Articles</a>
-                    <a href="./projects.html" aria-current="page">Projects</a>
-                    <a href="./playground.html">Playground</a>
-                </nav>
-            
-                <!-- Right side: Social Icons (site-social-* classes give
+				<!-- Middle: Nav buttons -->
+				<nav class="site-nav">
+					<a href="/">Home</a>
+					<a href="./articles.html">Articles</a>
+					<a href="./projects.html" aria-current="page">Projects</a>
+					<a href="./playground.html">Playground</a>
+				</nav>
+
+				<!-- Right side: Social Icons (site-social-* classes give
                      each icon a >=44px tap target; see styles/style.css) -->
-                <div class="site-social-links">
-                    <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/facebook.png" alt="facebook" class="site-social-icon">
-                    </a>
-                    <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/instagram.png" alt="instagram" class="site-social-icon">
-                    </a>
-                    <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/x.png" alt="x" class="site-social-icon">
-                    </a>
-                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/linkedin.png" alt="linkedin" class="site-social-icon">
-                    </a>
-                    <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/github.png" alt="github" class="site-social-icon">
-                    </a>
-                </div>
-            </div>
-        </header>
+				<div class="site-social-links">
+					<a
+						href="https://facebook.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/facebook.png"
+							alt="facebook"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://instagram.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/instagram.png"
+							alt="instagram"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://x.com/terrance_hah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/x.png"
+							alt="x"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://www.linkedin.com/in/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/linkedin.png"
+							alt="linkedin"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://github.com/terrancehah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/github.png"
+							alt="github"
+							class="site-social-icon" />
+					</a>
+				</div>
+			</div>
+		</header>
 
-        <main class="w-full projects-list-container">
-            <!-- Hero Card - Latest Project -->
+		<main class="w-full projects-list-container">
+			<!-- Hero Card - Latest Project -->
 
-            <article class="project-hero" data-url="/pacey/">
-                <div class="project-hero-image">
-                    <!-- Local copy of the runner photo — no third-party
+			<article class="project-hero" data-url="/pacey/">
+				<div class="project-hero-image">
+					<!-- Local copy of the runner photo — no third-party
                          fetch, and the file is served with the site. -->
-                    <img src="/resources/site/mathias-reding-G96xGokbTUM-unsplash.jpg" alt="Runner on a tree-lined path — Pacey's race-readiness companion" loading="lazy">
-                    <div class="project-hero-overlay"></div>
-                </div>
-                <div class="project-hero-content">
-                    <span class="project-badge">Latest</span>
-                    <!-- A real link so keyboard users reach the page too — the
+					<img
+						src="/resources/site/mathias-reding-G96xGokbTUM-unsplash.jpg"
+						alt="Runner on a tree-lined path — Pacey's race-readiness companion"
+						loading="lazy" />
+					<span class="image-credit">Photo by <a href="https://unsplash.com/photos/G96xGokbTUM" target="_blank" rel="noopener">Mathias Reding</a></span>
+					<div class="project-hero-overlay"></div>
+				</div>
+				<div class="project-hero-content">
+					<span class="project-badge">Latest</span>
+					<!-- A real link so keyboard users reach the page too — the
                          card's click handler skips anchor targets, so this
                          and the card land on the same destination. /pacey/ is
                          the landing, and it resolves on plain static servers
                          and Vercel alike. -->
-                    <h3 class="project-hero-title"><a href="/pacey/">Pacey</a></h3>
-                    <p class="project-hero-description">A marathon training plan shaped by your Garmin data and goal-time readiness. See where to focus, review the weeks ahead, and choose when to sync workouts to Garmin.</p>
-                    <p class="project-hero-date">added on 20 August 2026</p>
-                </div>
-            </article>
-            
+					<h3 class="project-hero-title">
+						<a href="/pacey/">Pacey</a>
+					</h3>
+					<p class="project-hero-description">
+						A marathon training plan shaped by your Garmin data and
+						goal-time readiness. See where to focus, review the
+						weeks ahead, and choose when to sync workouts to Garmin.
+					</p>
+					<p class="project-hero-date">added on 20 August 2026</p>
+				</div>
+			</article>
 
-            <!-- Grid Container for Remaining Projects -->
-            <div class="projects-grid">
-
-                <article class="project-card size-2x2" data-url="/projects/biwa-ride">
-                    <div class="project-card-image">
-                        <!-- Local illustration (no third-party fetch) — the
+			<!-- Grid Container for Remaining Projects -->
+			<div class="projects-grid">
+				<article
+					class="project-card size-2x2"
+					data-url="/projects/biwa-ride">
+					<div class="project-card-image">
+						<!-- Local illustration (no third-party fetch) — the
                              same autumn field-journal art the app header uses. -->
-                        <img src="/projects/biwa-ride/assets/brian-kelly-S__DGUzQRqI-unsplash.jpg" alt="Cyclists riding past autumn trees towards Lake Biwa" loading="lazy">
-                    </div>
-                    <div class="project-card-content">
-                        <h3 class="project-card-title"><a href="/projects/biwa-ride">Lake Biwa Ride Companion</a></h3>
-                        <p class="project-card-description">A three-day riding companion for a Biwaichi loop — itinerary, checkpoint stamps and nearby stops.</p>
-                        <p class="project-card-date">added on 11 October 2026</p>
-                    </div>
-                </article>
+						<img
+							src="/projects/biwa-ride/assets/brian-kelly-S__DGUzQRqI-unsplash.jpg"
+							alt="Cyclists riding past autumn trees towards Lake Biwa"
+							loading="lazy" />
+						<span class="image-credit">Photo by <a href="https://unsplash.com/photos/S__DGUzQRqI" target="_blank" rel="noopener">Brian Kelly</a></span>
+					</div>
+					<div class="project-card-content">
+						<h3 class="project-card-title">
+							<a href="/projects/biwa-ride"
+								>Lake Biwa Ride Companion</a
+							>
+						</h3>
+						<p class="project-card-description">
+							A three-day riding companion for a Biwaichi loop —
+							itinerary, checkpoint stamps and nearby stops.
+						</p>
+						<p class="project-card-date">
+							added on 11 October 2026
+						</p>
+					</div>
+				</article>
 
-                <article class="project-card size-2x2" data-url="/projects/running-posture-analyser">
-                    <div class="project-card-image">
-                        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=500&fit=crop" alt="Running Posture Analyser" loading="lazy">
-                    </div>
-                    <div class="project-card-content">
-                        <h3 class="project-card-title"><a href="/projects/running-posture-analyser">Running Posture Analyser</a></h3>
-                        <p class="project-card-description">Upload side-view running photos and get a structured, AI-powered read on your running form.</p>
-                        <p class="project-card-date">added on 26 June 2026</p>
-                    </div>
-                </article>
+				<article
+					class="project-card size-2x2"
+					data-url="/projects/running-posture-analyser">
+					<div class="project-card-image">
+						<img
+							src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=500&fit=crop"
+							alt="Running Posture Analyser"
+							loading="lazy" />
+						<span class="image-credit">Photo by <a href="https://unsplash.com/@bradencollum" target="_blank" rel="noopener">Braden Collum</a></span>
+					</div>
+					<div class="project-card-content">
+						<h3 class="project-card-title">
+							<a href="/projects/running-posture-analyser"
+								>Running Posture Analyser</a
+							>
+						</h3>
+						<p class="project-card-description">
+							Upload side-view running photos and get a
+							structured, AI-powered read on your running form.
+						</p>
+						<p class="project-card-date">added on 26 June 2026</p>
+					</div>
+				</article>
 
-                <article class="project-card size-2x2" data-url="/projects/persona">
-                    <div class="project-card-image">
-                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&h=600&fit=crop" alt="FastAPI Experiment" loading="lazy">
-                    </div>
-                    <div class="project-card-content">
-                        <h3 class="project-card-title"><a href="/projects/persona">FastAPI Experiment</a></h3>
-                        <p class="project-card-description">A FastAPI experiment using LangChain and LangFuse to generate student personas.</p>
-                        <p class="project-card-date">added on 26 November 2025</p>
-                    </div>
-                </article>
+				<article
+					class="project-card size-2x2"
+					data-url="/projects/career-plan">
+					<div class="project-card-image">
+						<img
+							src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop"
+							alt="Career Plan"
+							loading="lazy" />
+						<span class="image-credit">Photo by <a href="https://unsplash.com/@glenncarstenspeters" target="_blank" rel="noopener">Glenn Carstens-Peters</a></span>
+					</div>
+					<div class="project-card-content">
+						<h3 class="project-card-title">
+							<a href="/projects/career-plan">Career Plan</a>
+						</h3>
+						<p class="project-card-description">
+							My plan to transition into web development and
+							machine learning, aiming for a remote job
+							opportunity.
+						</p>
+						<p class="project-card-date">updated on 20 May 2025</p>
+					</div>
+				</article>
 
-                <article class="project-card size-2x2" data-url="/projects/career-plan">
-                    <div class="project-card-image">
-                        <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop" alt="Career Plan" loading="lazy">
-                    </div>
-                    <div class="project-card-content">
-                        <h3 class="project-card-title"><a href="/projects/career-plan">Career Plan</a></h3>
-                        <p class="project-card-description">My plan to transition into web development and machine learning, aiming for a remote job opportunity.</p>
-                        <p class="project-card-date">updated on 20 May 2025</p>
-                    </div>
-                </article>
+				<article
+					class="project-card size-2x2"
+					data-url="https://www.travelrizz.app">
+					<div class="project-card-image">
+						<img
+							src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop"
+							alt="Travel-Rizz"
+							loading="lazy" />
+						<span class="image-credit">Photo by <a href="https://unsplash.com/@anniespratt" target="_blank" rel="noopener">Annie Spratt</a></span>
+					</div>
+					<div class="project-card-content">
+						<h3 class="project-card-title">
+							<a
+								href="https://www.travelrizz.app"
+								target="_blank"
+								rel="noopener"
+								>Travel-Rizz</a
+							>
+						</h3>
+						<p class="project-card-description">
+							Travel-Rizz - Your Friendly AI Travel Assistant.
+						</p>
+						<p class="project-card-date">started in March 2025</p>
+					</div>
+				</article>
 
-                <article class="project-card size-2x2" data-url="https://www.travelrizz.app">
-                    <div class="project-card-image">
-                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop" alt="Travel-Rizz" loading="lazy">
-                    </div>
-                    <div class="project-card-content">
-                        <h3 class="project-card-title"><a href="https://www.travelrizz.app" target="_blank" rel="noopener">Travel-Rizz</a></h3>
-                        <p class="project-card-description">Travel-Rizz - Your Friendly AI Travel Assistant.</p>
-                        <p class="project-card-date">started in March 2025</p>
-                    </div>
-                </article>
+				<article
+					class="project-card size-2x2"
+					data-url="/projects/teaching-syllabus-template">
+					<div class="project-card-image">
+						<img
+							src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop"
+							alt="Notion Syllabus Planner"
+							loading="lazy" />
+						<span class="image-credit">Photo by <a href="https://unsplash.com/@homajob" target="_blank" rel="noopener">Scott Graham</a></span>
+					</div>
+					<div class="project-card-content">
+						<h3 class="project-card-title">
+							<a href="/projects/teaching-syllabus-template"
+								>Notion Syllabus Planner</a
+							>
+						</h3>
+						<p class="project-card-description">
+							Notion Syllabus Planner is a project I currently
+							work on to help empower fellow educators.
+						</p>
+						<p class="project-card-date">
+							updated on 25 November 2024
+						</p>
+					</div>
+				</article>
 
-                <article class="project-card size-2x2" data-url="/projects/teaching-syllabus-template">
-                    <div class="project-card-image">
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop" alt="Notion Syllabus Planner" loading="lazy">
-                    </div>
-                    <div class="project-card-content">
-                        <h3 class="project-card-title"><a href="/projects/teaching-syllabus-template">Notion Syllabus Planner</a></h3>
-                        <p class="project-card-description">Notion Syllabus Planner is a project I currently work on to help empower fellow educators.</p>
-                        <p class="project-card-date">updated on 25 November 2024</p>
-                    </div>
-                </article>
+				<article
+					class="project-card size-2x2"
+					data-url="/projects/form-a-story">
+					<div class="project-card-image">
+						<img
+							src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&h=500&fit=crop"
+							alt="Form A Story"
+							loading="lazy" />
+						<span class="image-credit">Photo by <a href="https://unsplash.com/@cathrynlavery" target="_blank" rel="noopener">Cathryn Lavery</a></span>
+					</div>
+					<div class="project-card-content">
+						<h3 class="project-card-title">
+							<a href="/projects/form-a-story">Form A Story</a>
+						</h3>
+						<p class="project-card-description">
+							Form a Story is a playing project where you can
+							input certain words to form a funny story.
+						</p>
+						<p class="project-card-date">written on 25 May 2021</p>
+					</div>
+				</article>
 
-                <article class="project-card size-2x2" data-url="/projects/form-a-story">
-                    <div class="project-card-image">
-                        <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&h=500&fit=crop" alt="Form A Story" loading="lazy">
-                    </div>
-                    <div class="project-card-content">
-                        <h3 class="project-card-title"><a href="/projects/form-a-story">Form A Story</a></h3>
-                        <p class="project-card-description">Form a Story is a playing project where you can input certain words to form a funny story.</p>
-                        <p class="project-card-date">written on 25 May 2021</p>
-                    </div>
-                </article>
+				<article
+					class="project-card size-2x2"
+					data-url="/projects/foodtracker">
+					<div class="project-card-image">
+						<img
+							src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=500&fit=crop"
+							alt="Food Tracker"
+							loading="lazy" />
+						<span class="image-credit">Photo by <a href="https://unsplash.com/@danielcgold" target="_blank" rel="noopener">Dan Gold</a></span>
+					</div>
+					<div class="project-card-content">
+						<h3 class="project-card-title">
+							<a href="/projects/foodtracker">Food Tracker</a>
+						</h3>
+						<p class="project-card-description">
+							Food Tracker is a project I currently collaborate
+							with my friends in for learning purpose.
+						</p>
+						<p class="project-card-date">
+							written on 21 April 2021
+						</p>
+					</div>
+				</article>
+			</div>
+		</main>
 
-                <article class="project-card size-2x2" data-url="/projects/foodtracker">
-                    <div class="project-card-image">
-                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=500&fit=crop" alt="Food Tracker" loading="lazy">
-                    </div>
-                    <div class="project-card-content">
-                        <h3 class="project-card-title"><a href="/projects/foodtracker">Food Tracker</a></h3>
-                        <p class="project-card-description">Food Tracker is a project I currently collaborate with my friends in for learning purpose.</p>
-                        <p class="project-card-date">written on 21 April 2021</p>
-                    </div>
-                </article>
-            </div>
-        </main>
-
-        <!-- Footer will be inserted by footer.js -->
-        <script src="./js/footer.js"></script>
-        <script src="./projects/projects.js"></script>
-    </body>
+		<!-- Footer will be inserted by footer.js -->
+		<script src="./js/footer.js"></script>
+		<script src="./projects/projects.js"></script>
+	</body>
 </html>

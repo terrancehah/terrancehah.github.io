@@ -1,574 +1,784 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="./styles/style.css" type="text/css" rel="stylesheet">
-    <link href="./styles/output.css" rel="stylesheet">
-    <link href="./styles/homepage.css" type="text/css" rel="stylesheet">
-    <meta property="og:title" content="Terrance's Homepage">
-    <meta property="og:description" content="Terrance's Homepage">
-    <link rel="icon" href="./resources/icons/TH-logo.png" type="image/x-icon">
-    <meta property="og:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
-    <meta property="og:type" content="article" />
-    <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
-    <link rel="canonical" href="https://terrancehah.com/">
-    <meta property="og:url" content="https://terrancehah.com/">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="./styles/style.css" type="text/css" rel="stylesheet" />
+		<link href="./styles/output.css" rel="stylesheet" />
+		<link href="./styles/homepage.css" type="text/css" rel="stylesheet" />
+		<meta property="og:title" content="Terrance's Homepage" />
+		<meta property="og:description" content="Terrance's Homepage" />
+		<link
+			rel="icon"
+			href="./resources/icons/TH-logo.png"
+			type="image/x-icon" />
+		<meta
+			property="og:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
+		<meta property="og:type" content="article" />
+		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
+		<link rel="canonical" href="https://terrancehah.com/" />
+		<meta property="og:url" content="https://terrancehah.com/" />
 
-    <script src="./js/footer.js"></script>
-    <title>Terrance's Homepage</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Baskervville:ital@0;1&display=swap');
-    </style>
-        <!-- Vercel Analytics -->
-        <script>
-          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-        </script>
-        <script defer src="/_vercel/insights/script.js"></script>
-    </head>
+		<script src="./js/footer.js"></script>
+		<title>Terrance's Homepage</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Baskervville:ital@0;1&display=swap");
+		</style>
+		<!-- Vercel Analytics -->
+		<script>
+			window.va =
+				window.va ||
+				function () {
+					(window.vaq = window.vaq || []).push(arguments);
+				};
+		</script>
+		<script defer src="/_vercel/insights/script.js"></script>
+	</head>
 
-<body class="home-page m-0 relative h-full w-full bg-white overflow-x-hidden">
-    
-    <header class="site-header">
-        <div class="site-header-inner">
-            
-            <!-- Left: Logo -->
-            <div class="site-header-brand">
-                <h1 class="site-header-title">
-                    Terrance's Playground
-                </h1>
-            </div>
-            
-            <!-- Middle: Nav buttons (homepage variant — green theme) -->
-            <nav class="site-nav">
-                <!-- Active page: Home — solid green pill -->
-                <a href="/" aria-current="page">Home</a>
-                <a href="./articles.html">Articles</a>
-                <a href="./projects.html">Projects</a>
-                <a href="./playground.html">Playground</a>
-            </nav>
-            
-            <!-- Right side: Social Icons (site-social-* classes give
+	<body
+		class="home-page m-0 relative h-full w-full bg-white overflow-x-hidden">
+		<header class="site-header">
+			<div class="site-header-inner">
+				<!-- Left: Logo -->
+				<div class="site-header-brand">
+					<h1 class="site-header-title">Terrance's Playground</h1>
+				</div>
+
+				<!-- Middle: Nav buttons (homepage variant — green theme) -->
+				<nav class="site-nav">
+					<!-- Active page: Home — solid green pill -->
+					<a href="/" aria-current="page">Home</a>
+					<a href="./articles.html">Articles</a>
+					<a href="./projects.html">Projects</a>
+					<a href="./playground.html">Playground</a>
+				</nav>
+
+				<!-- Right side: Social Icons (site-social-* classes give
                  each icon a >=44px tap target; see styles/site-header.css) -->
-            <div class="site-social-links">
-                <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
-                    <img src="./resources/icons/facebook.png" alt="facebook" class="site-social-icon">
-                </a>
-                <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
-                    <img src="./resources/icons/instagram.png" alt="instagram" class="site-social-icon">
-                </a>
-                <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
-                    <img src="./resources/icons/x.png" alt="x" class="site-social-icon">
-                </a>
-                <a href="https://linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
-                    <img src="./resources/icons/linkedin.png" alt="linkedin" class="site-social-icon">
-                </a>
-                <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
-                    <img src="./resources/icons/github.png" alt="github" class="site-social-icon">
-                </a>
-            </div>
-        </div>
-    </header>
-    
-    <main class="w-full">
-        <!-- ========================================
+				<div class="site-social-links">
+					<a
+						href="https://facebook.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/facebook.png"
+							alt="facebook"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://instagram.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/instagram.png"
+							alt="instagram"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://x.com/terrance_hah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/x.png"
+							alt="x"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://linkedin.com/in/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/linkedin.png"
+							alt="linkedin"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://github.com/terrancehah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/github.png"
+							alt="github"
+							class="site-social-icon" />
+					</a>
+				</div>
+			</div>
+		</header>
+
+		<main class="w-full">
+			<!-- ========================================
              HERO BANNER - Silhouette background image
              ======================================== -->
-        <section id="hero" class="hero-section">
-            <!-- Background image with overlay -->
-            <div class="hero-bg">
-                <img src="./resources/articles/tnbyy-my-first-camphike/silhouette.jpg" alt="Mountain Silhouette" class="hero-image">
-                <div class="hero-overlay"></div>
-            </div>
-            <!-- Hero content -->
-            <div class="hero-content">
-                <h1 class="hero-title fade-in">
-                    Hi, I am Terrance!
-                </h1>
-                <p class="hero-subtitle fade-in-delay">
-                    An Adventurer • A Tutor • A Self-taught Programmer
-                </p>
-            </div>
-        </section>
+			<section id="hero" class="hero-section">
+				<!-- Background image with overlay -->
+				<div class="hero-bg">
+					<img
+						src="./resources/articles/tnbyy-my-first-camphike/silhouette.jpg"
+						alt="Mountain Silhouette"
+						class="hero-image" />
+					<div class="hero-overlay"></div>
+				</div>
+				<!-- Hero content -->
+				<div class="hero-content">
+					<h1 class="hero-title fade-in">Hi, I am Terrance!</h1>
+					<p class="hero-subtitle fade-in-delay">
+						An Adventurer • A Tutor • A Self-taught Programmer
+					</p>
+				</div>
+			</section>
 
-        <!-- ========================================
+			<!-- ========================================
              NATURE / ADVENTURE SECTION
              Light green tinted background
              ======================================== -->
-        <section id="nature-section" class="w-full bg-nature-300">
-            <div class="max-w-6xl mx-auto">
-                
-                <!-- Section Intro -->
-                <div class="section-intro scroll-fade">
-                    <p class="section-intro-text typewriter text-nature-900" data-typewriter>
-                        I believe the world is full of amazing experiences waiting to be discovered.
-                    </p>
-                </div>
+			<section id="nature-section" class="w-full bg-nature-300">
+				<div class="max-w-6xl mx-auto">
+					<!-- Section Intro -->
+					<div class="section-intro scroll-fade">
+						<p
+							class="section-intro-text typewriter text-nature-900"
+							data-typewriter>
+							I believe the world is full of amazing experiences
+							waiting to be discovered.
+						</p>
+					</div>
 
-                <!-- Chapter Card: Mount Kinabalu -->
-                <article class="chapter-card scroll-fade bg-nature-500">
-                    <h2 class="chapter-title text-nature-100 title-correction" style="margin-bottom: 0.3rem">
-                        <span class="word-to-cross">Conquer.</span>
-                        <img src="./resources/site/crossout-handwriting.png" alt="" class="handwriting-crossout" aria-hidden="true">
-                    </h2>
-                    <h2 class="chapter-title text-nature-100 title-correction">
-                        <span class="word-replacement">Connect.</span>
-                    </h2>
+					<!-- Chapter Card: Mount Kinabalu -->
+					<article class="chapter-card scroll-fade bg-nature-500">
+						<h2
+							class="chapter-title text-nature-100 title-correction"
+							style="margin-bottom: 0.3rem">
+							<span class="word-to-cross">Conquer.</span>
+							<img
+								src="./resources/site/crossout-handwriting.png"
+								alt=""
+								class="handwriting-crossout"
+								aria-hidden="true" />
+						</h2>
+						<h2
+							class="chapter-title text-nature-100 title-correction">
+							<span class="word-replacement">Connect.</span>
+						</h2>
 
-                    <p class="chapter-text text-nature-50">
-                        Every mountain we hike, every jungle we trek, they allow us to connect with nature in ways that cities never could.
-                    </p>
+						<p class="chapter-text text-nature-50">
+							Every mountain we hike, every jungle we trek, they
+							allow us to connect with nature in ways that cities
+							never could.
+						</p>
 
-                    <div class="photo-grid chapter-grid chapter-grid--kinabalu">
-                        <div class="photo-item landscape">
-                            <img src="./resources/articles/mount-kinabalu/peak-sunrise-landscape.jpeg" alt="Peak Sunrise">
-                        </div>
-                        <div class="photo-item square">
-                            <img src="./resources/articles/mount-kinabalu/me-at-peak.JPG" alt="Me at Peak">
-                        </div>
-                        <div class="photo-item square blank"></div>
-                        <div class="photo-item square blank"></div>
-                        <div class="photo-item square">
-                            <img src="./resources/articles/mount-kinabalu/lows-peak-under-stars.jpeg" alt="Low's Peak Under Stars">
-                        </div>
-                        <a href="/articles/mount-kinabalu" class="photo-item article-link article-link-short bg-nature-200">
-                            <div class="article-link-inner text-nature-900">
-                                <span class="article-link-label">Read my <br>full story</span>
-                                <span class="article-link-title">Mount Kinabalu</span>
-                                <span class="article-link-arrow">↗</span>
-                            </div>
-                        </a>
-                    </div>
-                </article>
+						<div
+							class="photo-grid chapter-grid chapter-grid--kinabalu">
+							<div class="photo-item landscape">
+								<img
+									src="./resources/articles/mount-kinabalu/peak-sunrise-landscape.jpeg"
+									alt="Peak Sunrise" />
+							</div>
+							<div class="photo-item square">
+								<img
+									src="./resources/articles/mount-kinabalu/me-at-peak.JPG"
+									alt="Me at Peak" />
+							</div>
+							<div class="photo-item square blank"></div>
+							<div class="photo-item square blank"></div>
+							<div class="photo-item square">
+								<img
+									src="./resources/articles/mount-kinabalu/lows-peak-under-stars.jpeg"
+									alt="Low's Peak Under Stars" />
+							</div>
+							<a
+								href="/articles/mount-kinabalu"
+								class="photo-item article-link article-link-short bg-nature-200">
+								<div class="article-link-inner text-nature-900">
+									<span class="article-link-label"
+										>Read my <br />full story</span
+									>
+									<span class="article-link-title"
+										>Mount Kinabalu</span
+									>
+									<span class="article-link-arrow">↗</span>
+								</div>
+							</a>
+						</div>
+					</article>
 
-                <!-- Transitional Pull Quote between Kinabalu & TNBYY -->
-                <blockquote class="pull-quote pull-quote-standalone text-nature-900 border-nature-500 scroll-fade">
-                    <p class="pull-quote-text">It's not the mountain we conquer, but ourselves.</p>
-                    <footer class="pull-quote-cite text-nature-700">— Sir Edmund Hillary</footer>
-                </blockquote>
+					<!-- Transitional Pull Quote between Kinabalu & TNBYY -->
+					<blockquote
+						class="pull-quote pull-quote-standalone text-nature-900 border-nature-500 scroll-fade">
+						<p class="pull-quote-text">
+							It's not the mountain we conquer, but ourselves.
+						</p>
+						<footer class="pull-quote-cite text-nature-700">
+							— Sir Edmund Hillary
+						</footer>
+					</blockquote>
 
-                <!-- Chapter Card: TNBYY -->
-                <article class="chapter-card scroll-fade bg-nature-500">
-                    <h2 class="chapter-title text-nature-100">TNBYY Camphike</h2>
-                    <p class="chapter-text text-nature-50">
-                        Three days, two nights in the jungle. No phone signal, no safety net. 
-                        Just me and the trail.
-                    </p>
+					<!-- Chapter Card: TNBYY -->
+					<article class="chapter-card scroll-fade bg-nature-500">
+						<h2 class="chapter-title text-nature-100">
+							TNBYY Camphike
+						</h2>
+						<p class="chapter-text text-nature-50">
+							Three days, two nights in the jungle. No phone
+							signal, no safety net. Just me and the trail.
+						</p>
 
-                    <!-- Pull Quote from TNBYY article -->
-                    <blockquote class="pull-quote scroll-fade text-nature-50 border-nature-100">
-                        <p class="pull-quote-text">The jungle answered with something better than confidence—honesty.</p>
-                        <footer class="pull-quote-cite text-nature-100">— from my TNBYY journal</footer>
-                    </blockquote>
+						<!-- Pull Quote from TNBYY article -->
+						<blockquote
+							class="pull-quote scroll-fade text-nature-50 border-nature-100">
+							<p class="pull-quote-text">
+								The jungle answered with something better than
+								confidence—honesty.
+							</p>
+							<footer class="pull-quote-cite text-nature-100">
+								— from my TNBYY journal
+							</footer>
+						</blockquote>
 
-                    <div class="photo-grid chapter-grid chapter-grid--tnbyy">
-                        <div class="photo-item landscape">
-                            <img src="./resources/articles/tnbyy-my-first-camphike/merdeka-at-yongyap.jpeg" alt="Merdeka at Yongyap" style="object-position: center 80%;">
-                        </div>
-                        <div class="photo-item square">
-                            <img src="./resources/articles/tnbyy-my-first-camphike/mossy-vibe.jpg" alt="Mossy Vibe">
-                        </div>
-                        <div class="photo-item square blank"></div>
-                        <a href="./articles/tnbyy-my-first-camphike.html" class="photo-item article-link article-link-short bg-nature-200">
-                            <div class="article-link-inner text-nature-900">
-                                <span class="article-link-label">Read my <br>full story</span>
-                                <span class="article-link-title">TNBYY Camphike</span>
-                                <span class="article-link-arrow">↗</span>
-                            </div>
-                        </a>
-                        <div class="photo-item square">
-                            <img src="./resources/articles/tnbyy-my-first-camphike/elephant-moss.jpg" alt="Elephant Moss">
-                        </div>
-                        
-                    </div>
-                </article>
-                <br>
-                <br>
+						<div
+							class="photo-grid chapter-grid chapter-grid--tnbyy">
+							<div class="photo-item landscape">
+								<img
+									src="./resources/articles/tnbyy-my-first-camphike/merdeka-at-yongyap.jpeg"
+									alt="Merdeka at Yongyap"
+									style="object-position: center 80%" />
+							</div>
+							<div class="photo-item square">
+								<img
+									src="./resources/articles/tnbyy-my-first-camphike/mossy-vibe.jpg"
+									alt="Mossy Vibe" />
+							</div>
+							<div class="photo-item square blank"></div>
+							<a
+								href="./articles/tnbyy-my-first-camphike.html"
+								class="photo-item article-link article-link-short bg-nature-200">
+								<div class="article-link-inner text-nature-900">
+									<span class="article-link-label"
+										>Read my <br />full story</span
+									>
+									<span class="article-link-title"
+										>TNBYY Camphike</span
+									>
+									<span class="article-link-arrow">↗</span>
+								</div>
+							</a>
+							<div class="photo-item square">
+								<img
+									src="./resources/articles/tnbyy-my-first-camphike/elephant-moss.jpg"
+									alt="Elephant Moss" />
+							</div>
+						</div>
+					</article>
+					<br />
+					<br />
 
-                <!-- Chapter Card: Reflection about Nature and Human Being -->
-                <article class="chapter-card scroll-fade bg-nature-500">
-                    <h2 class="chapter-title text-nature-100">
-                    Reflections
-                    </h2>
-                    <p class="chapter-text text-nature-50">
-                        Each experience got me into more realisation about myself and the world around me. 
-                        We are all here to experience whatever Earth has to offer.
-                    </p>
+					<!-- Chapter Card: Reflection about Nature and Human Being -->
+					<article class="chapter-card scroll-fade bg-nature-500">
+						<h2 class="chapter-title text-nature-100">
+							Reflections
+						</h2>
+						<p class="chapter-text text-nature-50">
+							Each experience got me into more realisation about
+							myself and the world around me. We are all here to
+							experience whatever Earth has to offer.
+						</p>
 
-                    <div class="photo-grid chapter-grid chapter-grid--kinabalu">
-                        <div class="photo-item landscape">
-                            <img src="./resources/articles/mount-kinabalu/squatting-guide.JPG" alt="Squatting Guide">
-                        </div>
-                        <div class="photo-item square">
-                            <img src="./resources/articles/mount-kinabalu/milky-way.JPG" alt="Milky Way">
-                        </div>
-                        <div class="photo-item square blank"></div>
-                        <div class="photo-item square blank"></div>
-                        <div class="photo-item square" style="object-position: center 30%;">
-                            <img src="./resources/articles/tnbyy-my-first-camphike/from-behind-tok-nenek.JPG" alt="From Behind Tok Nenek">
-                        </div>
-                        <a href="/articles/rethinking-relationship-between-human-and-nature" class="photo-item article-link article-link-short bg-nature-200">
-                            <div class="article-link-inner text-nature-900">
-                                <span class="article-link-label">Read the <br>full article</span>
-                                <span class="article-link-title">Reflections on Human and Nature</span>
-                                <span class="article-link-arrow">↗</span>
-                            </div>
-                        </a>
-                        <div class="photo-item square" style="object-position: center 30%;">
-                            <img src="./resources/articles/mount-kinabalu/surfing-board.JPG" alt="Surfing Board">
-                        </div>
-                    </div>
-                </article>
+						<div
+							class="photo-grid chapter-grid chapter-grid--kinabalu">
+							<div class="photo-item landscape">
+								<img
+									src="./resources/articles/mount-kinabalu/squatting-guide.JPG"
+									alt="Squatting Guide" />
+							</div>
+							<div class="photo-item square">
+								<img
+									src="./resources/articles/mount-kinabalu/milky-way.JPG"
+									alt="Milky Way" />
+							</div>
+							<div class="photo-item square blank"></div>
+							<div class="photo-item square blank"></div>
+							<div
+								class="photo-item square"
+								style="object-position: center 30%">
+								<img
+									src="./resources/articles/tnbyy-my-first-camphike/from-behind-tok-nenek.JPG"
+									alt="From Behind Tok Nenek" />
+							</div>
+							<a
+								href="/articles/rethinking-relationship-between-human-and-nature"
+								class="photo-item article-link article-link-short bg-nature-200">
+								<div class="article-link-inner text-nature-900">
+									<span class="article-link-label"
+										>Read the <br />full article</span
+									>
+									<span class="article-link-title"
+										>Reflections on Human and Nature</span
+									>
+									<span class="article-link-arrow">↗</span>
+								</div>
+							</a>
+							<div
+								class="photo-item square"
+								style="object-position: center 30%">
+								<img
+									src="./resources/articles/mount-kinabalu/surfing-board.JPG"
+									alt="Surfing Board" />
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
 
-            </div>
-        </section>
-
-        <!-- ========================================
+			<!-- ========================================
              TRANSITION SECTION - Gradient bridge
              ======================================== -->
-        <section id="transition" class="transition-section">
-            <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-10">
-                <div class="scroll-fade">
-                    <p class="transition-text">
-                        The same curiosity that drives me into the mountains led me to question our education system and embrace technology.
-                    </p>
-                </div>
-            </div>
-        </section>
+			<section id="transition" class="transition-section">
+				<div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-10">
+					<div class="scroll-fade">
+						<p class="transition-text">
+							The same curiosity that drives me into the mountains
+							led me to question our education system and embrace
+							technology.
+						</p>
+					</div>
+				</div>
+			</section>
 
-        <!-- ========================================
+			<!-- ========================================
              EDUCATION / TECH SECTION
              Light blue tinted background
              ======================================== -->
-        <section id="tech-section" class="w-full bg-tech-200">
-            <div class="max-w-6xl mx-auto">
+			<section id="tech-section" class="w-full bg-tech-200">
+				<div class="max-w-6xl mx-auto">
+					<!-- Chapter Card: Coding & Tech -->
+					<article class="chapter-card scroll-fade bg-tech-900">
+						<h2 class="chapter-title text-tech-100">
+							Coding & Tech
+						</h2>
+						<p class="chapter-text text-tech-200">
+							Started as a gamer kid, I became curious about how
+							tech worked.
+							<br />
+							So I taught myself to code. HTML, CSS, JavaScript,
+							Python, AI.
+							<br />
+							<br />
+							Eventually I started creating some really "dumb"
+							projects".
+						</p>
 
-                <!-- Chapter Card: Coding & Tech -->
-                <article class="chapter-card scroll-fade bg-tech-900">
-                    <h2 class="chapter-title text-tech-100">Coding & Tech</h2>
-                    <p class="chapter-text text-tech-200">
-                        Started as a gamer kid, I became curious about how tech worked.
-                        <br>                     
-                        So I taught myself to code. HTML, CSS, JavaScript, Python, AI.
-                        <br>
-                        <br>
-                        Eventually I started creating some really "dumb" projects".
-                    </p>
+						<!-- Pull Quote from articles -->
+						<blockquote
+							class="pull-quote scroll-fade text-tech-200 border-tech-400">
+							<p class="pull-quote-text">
+								The more I learn, the more I realize how much I
+								don't know.
+							</p>
+							<footer class="pull-quote-cite text-tech-400">
+								— Albert Einstein
+							</footer>
+						</blockquote>
 
-                    <!-- Pull Quote from articles -->
-                    <blockquote class="pull-quote scroll-fade text-tech-200 border-tech-400">
-                        <p class="pull-quote-text">The more I learn, the more I realize how much I don't know.</p>
-                        <footer class="pull-quote-cite text-tech-400">— Albert Einstein</footer>
-                    </blockquote>
+						<div class="photo-grid chapter-grid chapter-grid--tech">
+							<div class="photo-item landscape">
+								<img
+									src="./resources/site/florian-olivo-4hbJ-eymZ1o-unsplash.jpg"
+									alt="HTML code on a screen" />
+								<span class="image-credit"
+									>Photo by
+									<a
+										href="https://unsplash.com/@florianolv"
+										target="_blank"
+										rel="noopener"
+										>Florian Olivo</a
+									></span
+								>
+							</div>
+							<div class="photo-item square-to-landscape">
+								<img
+									src="./resources/projects/teaching-syllabus-template/notion-front-page.png"
+									alt="Notion Front Page" />
+							</div>
+							<a
+								href="/projects/teaching-syllabus-template"
+								class="photo-item article-link article-link-short bg-tech-100">
+								<div class="article-link-inner text-tech-900">
+									<span class="article-link-label"
+										>My Project</span
+									>
+									<span class="article-link-title"
+										>Notion Syllabus Planner</span
+									>
+									<span class="article-link-arrow">↗</span>
+								</div>
+							</a>
+							<a
+								href="/projects/teaching-syllabus-template"
+								class="photo-item article-link article-link-short bg-tech-100">
+								<div class="article-link-inner text-tech-900">
+									<span class="article-link-label"
+										>My AI Travel PLanner</span
+									>
+									<span class="article-link-title"
+										>Travel-Rizz</span
+									>
+									<span class="article-link-arrow">↗</span>
+								</div>
+							</a>
+							<div class="photo-item square blank"></div>
+						</div>
+					</article>
 
-                    <div class="photo-grid chapter-grid chapter-grid--tech">
-                        <div class="photo-item landscape">
-                            <img src="./resources/site/technology.jpg" alt="Technology">
-                        </div>
-                        <div class="photo-item square-to-landscape">
-                            <img src="./resources/projects/teaching-syllabus-template/notion-front-page.png" alt="Notion Front Page">
-                        </div>
-                        <a href="/projects/teaching-syllabus-template" class="photo-item article-link article-link-short bg-tech-100">
-                            <div class="article-link-inner text-tech-900">
-                                <span class="article-link-label">My Project</span>
-                                <span class="article-link-title">Notion Syllabus Planner</span>
-                                <span class="article-link-arrow">↗</span>
-                            </div>
-                        </a>
-                        <a href="/projects/teaching-syllabus-template" class="photo-item article-link article-link-short bg-tech-100">
-                            <div class="article-link-inner text-tech-900">
-                                <span class="article-link-label">My AI Travel PLanner</span>
-                                <span class="article-link-title">Travel-Rizz</span>
-                                <span class="article-link-arrow">↗</span>
-                            </div>
-                        </a>
-                        <div class="photo-item square blank"></div>
-                    </div>
-                </article>
-                
-                <!-- Section Intro -->
-                <div class="section-intro scroll-fade">
-                    <p class="section-intro-text typewriter text-tech-900" data-typewriter>
-                        I entered education with optimism. What I found was a system that fails the students it's meant to serve.
-                    </p>
-                </div>
+					<!-- Section Intro -->
+					<div class="section-intro scroll-fade">
+						<p
+							class="section-intro-text typewriter text-tech-900"
+							data-typewriter>
+							I entered education with optimism. What I found was
+							a system that fails the students it's meant to
+							serve.
+						</p>
+					</div>
 
-                <!-- Chapter Card: Education -->
-                <article class="chapter-card scroll-fade bg-tech-900">
-                    <h2 class="chapter-title text-tech-100">Education</h2>
-                    <p class="chapter-text text-tech-200">
-                        Students memorize, not think. Graded on compliance, not creativity.
-                        Kids glued to screens? Don't ban it—teach them to harness it.
-                    </p>
+					<!-- Chapter Card: Education -->
+					<article class="chapter-card scroll-fade bg-tech-900">
+						<h2 class="chapter-title text-tech-100">Education</h2>
+						<p class="chapter-text text-tech-200">
+							Students memorize, not think. Graded on compliance,
+							not creativity. Kids glued to screens? Don't ban
+							it—teach them to harness it.
+						</p>
 
-                    <div class="photo-grid chapter-grid chapter-grid--edu">
-                        <div class="photo-item landscape">
-                            <img src="./resources/site/education.jpg" alt="Education">
-                        </div>
-                        <div class="photo-item square">
-                            <img src="./resources/articles/how-to-be-indistractable/kids-playing-phone.jpg" alt="Kids with Phones">
-                        </div>
-                        <div class="photo-item square blank"></div>
+						<div class="photo-grid chapter-grid chapter-grid--edu">
+							<div class="photo-item landscape">
+								<img
+									src="./resources/site/element5-digital-OyCl7Y4y0Bk-unsplash.jpg"
+									alt="Apple on a stack of books beside alphabet blocks" />
+								<span class="image-credit"
+									>Photo by
+									<a
+										href="https://unsplash.com/@element5digital"
+										target="_blank"
+										rel="noopener"
+										>Element5 Digital</a
+									></span
+								>
+							</div>
+							<div class="photo-item square">
+								<img
+									src="./resources/site/zachary-kadolph-98fiTKVe9Nw-unsplash.jpg"
+									alt="Young child absorbed in a glowing phone screen" />
+								<span class="image-credit"
+									>Photo by
+									<a
+										href="https://unsplash.com/@zacharykadolph"
+										target="_blank"
+										rel="noopener"
+										>Zachary Kadolph</a
+									></span
+								>
+							</div>
+							<div class="photo-item square blank"></div>
 
-                        <a href="./articles/about-writing.html" class="photo-item article-link article-link-short bg-tech-100">
-                            <div class="article-link-inner text-tech-900">
-                                <span class="article-link-label">Why I write</span>
-                                <span class="article-link-title">About Writing</span>
-                                <span class="article-link-arrow">↗</span>
-                            </div>
-                        </a>
-                        <a href="./articles/how-to-be-indistractable.html" class="photo-item article-link article-link-short bg-tech-100">
-                            <div class="article-link-inner text-tech-900">
-                                <span class="article-link-label">Talking about Focus</span>
-                                <span class="article-link-title">How to be indistractable</span>
-                                <span class="article-link-arrow">↗</span>
-                            </div>
-                        </a>
-                    </div>
-                </article>
+							<a
+								href="./articles/about-writing.html"
+								class="photo-item article-link article-link-short bg-tech-100">
+								<div class="article-link-inner text-tech-900">
+									<span class="article-link-label"
+										>Why I write</span
+									>
+									<span class="article-link-title"
+										>About Writing</span
+									>
+									<span class="article-link-arrow">↗</span>
+								</div>
+							</a>
+							<a
+								href="./articles/how-to-be-indistractable.html"
+								class="photo-item article-link article-link-short bg-tech-100">
+								<div class="article-link-inner text-tech-900">
+									<span class="article-link-label"
+										>Talking about Focus</span
+									>
+									<span class="article-link-title"
+										>How to be indistractable</span
+									>
+									<span class="article-link-arrow">↗</span>
+								</div>
+							</a>
+						</div>
+					</article>
 
-                <!-- Section Intro -->
-                <div class="section-intro scroll-fade">
-                    <div class="section-intro-text typewriter text-tech-900" data-typewriter>
-                        <p>
-                            I am still finding my path along the way. This is a space where I share my thoughts and experiences.
+					<!-- Section Intro -->
+					<div class="section-intro scroll-fade">
+						<div
+							class="section-intro-text typewriter text-tech-900"
+							data-typewriter>
+							<p>
+								I am still finding my path along the way. This
+								is a space where I share my thoughts and
+								experiences. More to come.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
 
-More to come.
-                        </p>
-                    </div>
-                </div>
+		<!-- Scroll Animation Script -->
+		<script>
+			// Intersection Observer for scroll-triggered animations
+			document.addEventListener("DOMContentLoaded", function () {
+				let isScrolling = false;
+				let scrollTimeout;
 
-            </div>
-        </section>
+				// Track when user is actively scrolling
+				window.addEventListener(
+					"scroll",
+					function () {
+						isScrolling = true;
+						clearTimeout(scrollTimeout);
 
-    </main>
-    
-    <!-- Scroll Animation Script -->
-    <script>
-        // Intersection Observer for scroll-triggered animations
-        document.addEventListener('DOMContentLoaded', function() {
-            let isScrolling = false;
-            let scrollTimeout;
-            
-            // Track when user is actively scrolling
-            window.addEventListener('scroll', function() {
-                isScrolling = true;
-                clearTimeout(scrollTimeout);
-                
-                // Mark as not scrolling after 150ms of no scroll events
-                scrollTimeout = setTimeout(function() {
-                    isScrolling = false;
-                }, 150);
-            }, { passive: true });
+						// Mark as not scrolling after 150ms of no scroll events
+						scrollTimeout = setTimeout(function () {
+							isScrolling = false;
+						}, 150);
+					},
+					{ passive: true },
+				);
 
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+				const observerOptions = {
+					threshold: 0.1,
+					rootMargin: "0px 0px -50px 0px",
+				};
 
-            // Scroll reveals are fail-open: the CSS only hides .scroll-fade
-            // and friends once .reveal-enabled lands on <html>, which happens
-            // below — after the observers are registered. If IntersectionObserver
-            // is missing or fails, nothing is ever hidden in the first place.
-            const canObserve = 'IntersectionObserver' in window;
+				// Scroll reveals are fail-open: the CSS only hides .scroll-fade
+				// and friends once .reveal-enabled lands on <html>, which happens
+				// below — after the observers are registered. If IntersectionObserver
+				// is missing or fails, nothing is ever hidden in the first place.
+				const canObserve = "IntersectionObserver" in window;
 
-            if (canObserve) {
-            // Main observer: toggles scroll-fade class + (re)runs typewriter
-            // every time an element enters the viewport, and resets it when
-            // it leaves, so the animation plays on every scroll-past.
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+				if (canObserve) {
+					// Main observer: toggles scroll-fade class + (re)runs typewriter
+					// every time an element enters the viewport, and resets it when
+					// it leaves, so the animation plays on every scroll-past.
+					const observer = new IntersectionObserver(function (
+						entries,
+					) {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add("visible");
 
-                        // Kick off typewriter (or restart it) for intros
-                        const typeTarget = entry.target.querySelector('[data-typewriter]');
-                        if (typeTarget) {
-                            runTypewriter(typeTarget);
-                        }
-                    } else {
-                        // Only remove visibility if user is actively scrolling
-                        // This prevents jiggling when stopped at threshold boundary
-                        if (isScrolling) {
-                            entry.target.classList.remove('visible');
+								// Kick off typewriter (or restart it) for intros
+								const typeTarget =
+									entry.target.querySelector(
+										"[data-typewriter]",
+									);
+								if (typeTarget) {
+									runTypewriter(typeTarget);
+								}
+							} else {
+								// Only remove visibility if user is actively scrolling
+								// This prevents jiggling when stopped at threshold boundary
+								if (isScrolling) {
+									entry.target.classList.remove("visible");
 
-                            // Also reset any typewriter inside so it restarts from blank
-                            const typeTarget = entry.target.querySelector('[data-typewriter]');
-                            if (typeTarget) {
-                                resetTypewriter(typeTarget);
-                            }
-                        }
-                    }
-                });
-            }, observerOptions);
+									// Also reset any typewriter inside so it restarts from blank
+									const typeTarget =
+										entry.target.querySelector(
+											"[data-typewriter]",
+										);
+									if (typeTarget) {
+										resetTypewriter(typeTarget);
+									}
+								}
+							}
+						});
+					}, observerOptions);
 
-            // Observe all scroll-fade elements
-            const fadeElements = document.querySelectorAll('.scroll-fade');
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-            }
+					// Observe all scroll-fade elements
+					const fadeElements =
+						document.querySelectorAll(".scroll-fade");
+					fadeElements.forEach((element) => {
+						observer.observe(element);
+					});
+				}
 
-            // Position handwriting crossout based on actual word size
-            function positionHandwritingCrossout() {
-                const wordToCross = document.querySelector('.word-to-cross');
-                const crossoutImg = document.querySelector('.handwriting-crossout');
-                
-                if (wordToCross && crossoutImg) {
-                    const wordRect = wordToCross.getBoundingClientRect();
-                    const wordWidth = wordRect.width;
-                    const wordHeight = wordRect.height;
-                    
-                    // Make image 25% wider than the word
-                    const imgWidth = wordWidth * 1.40;
-                    
-                    // Position to center over the word
-                    crossoutImg.style.width = `${imgWidth * 0.9}px`;
-                    crossoutImg.style.left = `${-imgWidth * 0.05}px`; // Center it (offset by 12.5% on each side)
-                    crossoutImg.style.top = `${wordHeight * 0.02}px`; // Center vertically
-                }
-            }
-            
-            // Position on load and resize
-            positionHandwritingCrossout();
-            window.addEventListener('resize', positionHandwritingCrossout);
+				// Position handwriting crossout based on actual word size
+				function positionHandwritingCrossout() {
+					const wordToCross =
+						document.querySelector(".word-to-cross");
+					const crossoutImg = document.querySelector(
+						".handwriting-crossout",
+					);
 
-            if (canObserve) {
-            // Separate observer for individual photo-item fade-in with stagger.
-            // Also toggles on exit so photos re-fade each time they reappear.
-            const photoObserver = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const delay = parseInt(entry.target.dataset.photoDelay || '0', 10);
-                        entry.target.style.transitionDelay = `${delay}ms`;
-                        entry.target.classList.add('photo-visible');
-                    } else {
-                        // Only remove visibility if user is actively scrolling
-                        // This prevents jiggling when stopped at threshold boundary
-                        if (isScrolling) {
-                            entry.target.classList.remove('photo-visible');
-                        }
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+					if (wordToCross && crossoutImg) {
+						const wordRect = wordToCross.getBoundingClientRect();
+						const wordWidth = wordRect.width;
+						const wordHeight = wordRect.height;
 
-            // Register each photo-item (skip blanks) with staggered delay per grid
-            document.querySelectorAll('.photo-grid').forEach(grid => {
-                const items = grid.querySelectorAll('.photo-item:not(.blank)');
-                items.forEach((item, i) => {
-                    item.classList.add('photo-fade');
-                    // Stagger: 80ms per item, capped so later items don't wait too long
-                    item.dataset.photoDelay = Math.min(i * 80, 480);
-                    photoObserver.observe(item);
-                });
-            });
+						// Make image 25% wider than the word
+						const imgWidth = wordWidth * 1.4;
 
-            // All observers are live — arm the reveal styles. Until this
-            // class lands, .scroll-fade/.photo-fade/etc. stay visible.
-            document.documentElement.classList.add('reveal-enabled');
-            }
+						// Position to center over the word
+						crossoutImg.style.width = `${imgWidth * 0.9}px`;
+						crossoutImg.style.left = `${-imgWidth * 0.05}px`; // Center it (offset by 12.5% on each side)
+						crossoutImg.style.top = `${wordHeight * 0.02}px`; // Center vertically
+					}
+				}
 
-            // Cancellation tokens per element so fast scroll up/down cannot
-            // spawn overlapping typewriter runs on the same paragraph.
-            const typewriterTokens = new WeakMap();
+				// Position on load and resize
+				positionHandwritingCrossout();
+				window.addEventListener("resize", positionHandwritingCrossout);
 
-            // Typewriter effect: reveals text char-by-char while KEEPING
-            // the container's final size reserved from the start, so the
-            // layout doesn't shift as characters appear.
-            //
-            // Cursor is a real inline element that moves after each visible
-            // character, then stays at the end when typing completes.
-            function runTypewriter(el) {
-                // Cancel any in-flight run on this element
-                const prev = typewriterTokens.get(el);
-                if (prev) prev.cancelled = true;
+				if (canObserve) {
+					// Separate observer for individual photo-item fade-in with stagger.
+					// Also toggles on exit so photos re-fade each time they reappear.
+					const photoObserver = new IntersectionObserver(
+						function (entries) {
+							entries.forEach((entry) => {
+								if (entry.isIntersecting) {
+									const delay = parseInt(
+										entry.target.dataset.photoDelay || "0",
+										10,
+									);
+									entry.target.style.transitionDelay = `${delay}ms`;
+									entry.target.classList.add("photo-visible");
+								} else {
+									// Only remove visibility if user is actively scrolling
+									// This prevents jiggling when stopped at threshold boundary
+									if (isScrolling) {
+										entry.target.classList.remove(
+											"photo-visible",
+										);
+									}
+								}
+							});
+						},
+						{ threshold: 0.15, rootMargin: "0px 0px -30px 0px" },
+					);
 
-                // Cache the original text once so we can always restart cleanly
-                if (!el.dataset.originalText) {
-                    el.dataset.originalText = el.textContent.trim();
-                }
-                const fullText = el.dataset.originalText;
+					// Register each photo-item (skip blanks) with staggered delay per grid
+					document.querySelectorAll(".photo-grid").forEach((grid) => {
+						const items = grid.querySelectorAll(
+							".photo-item:not(.blank)",
+						);
+						items.forEach((item, i) => {
+							item.classList.add("photo-fade");
+							// Stagger: 80ms per item, capped so later items don't wait too long
+							item.dataset.photoDelay = Math.min(i * 80, 480);
+							photoObserver.observe(item);
+						});
+					});
 
-                // Clear current content and rebuild the char-span skeleton
-                el.textContent = '';
-                const spans = [];
-                for (const ch of fullText) {
-                    const span = document.createElement('span');
-                    span.className = 'tw-char';
-                    span.textContent = ch;
-                    el.appendChild(span);
-                    spans.push(span);
-                }
+					// All observers are live — arm the reveal styles. Until this
+					// class lands, .scroll-fade/.photo-fade/etc. stay visible.
+					document.documentElement.classList.add("reveal-enabled");
+				}
 
-                // Insert blinking cursor element at the start
-                const cursor = document.createElement('span');
-                cursor.className = 'tw-cursor';
-                cursor.textContent = '|';
-                el.insertBefore(cursor, spans[0]);
+				// Cancellation tokens per element so fast scroll up/down cannot
+				// spawn overlapping typewriter runs on the same paragraph.
+				const typewriterTokens = new WeakMap();
 
-                const token = { cancelled: false };
-                typewriterTokens.set(el, token);
+				// Typewriter effect: reveals text char-by-char while KEEPING
+				// the container's final size reserved from the start, so the
+				// layout doesn't shift as characters appear.
+				//
+				// Cursor is a real inline element that moves after each visible
+				// character, then stays at the end when typing completes.
+				function runTypewriter(el) {
+					// Cancel any in-flight run on this element
+					const prev = typewriterTokens.get(el);
+					if (prev) prev.cancelled = true;
 
-                const speed = 22; // ms per character
-                let i = 0;
+					// Cache the original text once so we can always restart cleanly
+					if (!el.dataset.originalText) {
+						el.dataset.originalText = el.textContent.trim();
+					}
+					const fullText = el.dataset.originalText;
 
-                function tick() {
-                    if (token.cancelled) return;
-                    if (i < spans.length) {
-                        spans[i].classList.add('tw-visible');
-                        // Move cursor to after the newly visible character
-                        if (i + 1 < spans.length) {
-                            el.insertBefore(cursor, spans[i + 1]);
-                        } else {
-                            // Typing done — cursor stays at the end
-                            el.appendChild(cursor);
-                        }
-                        i++;
-                        setTimeout(tick, speed);
-                    }
-                }
-                tick();
-            }
+					// Clear current content and rebuild the char-span skeleton
+					el.textContent = "";
+					const spans = [];
+					for (const ch of fullText) {
+						const span = document.createElement("span");
+						span.className = "tw-char";
+						span.textContent = ch;
+						el.appendChild(span);
+						spans.push(span);
+					}
 
-            // Reset typewriter element back to an empty, space-reserved state
-            // so it can be replayed next time it enters the viewport.
-            function resetTypewriter(el) {
-                const prev = typewriterTokens.get(el);
-                if (prev) prev.cancelled = true;
+					// Insert blinking cursor element at the start
+					const cursor = document.createElement("span");
+					cursor.className = "tw-cursor";
+					cursor.textContent = "|";
+					el.insertBefore(cursor, spans[0]);
 
-                // Keep the original text cached; just clear rendered content
-                if (!el.dataset.originalText) {
-                    el.dataset.originalText = el.textContent.trim();
-                }
+					const token = { cancelled: false };
+					typewriterTokens.set(el, token);
 
-                // Rebuild invisible char spans so the block keeps its size
-                el.textContent = '';
-                for (const ch of el.dataset.originalText) {
-                    const span = document.createElement('span');
-                    span.className = 'tw-char'; // opacity: 0 by default
-                    span.textContent = ch;
-                    el.appendChild(span);
-                }
+					const speed = 22; // ms per character
+					let i = 0;
 
-                // Cursor is removed automatically by el.textContent = ''
-            }
+					function tick() {
+						if (token.cancelled) return;
+						if (i < spans.length) {
+							spans[i].classList.add("tw-visible");
+							// Move cursor to after the newly visible character
+							if (i + 1 < spans.length) {
+								el.insertBefore(cursor, spans[i + 1]);
+							} else {
+								// Typing done — cursor stays at the end
+								el.appendChild(cursor);
+							}
+							i++;
+							setTimeout(tick, speed);
+						}
+					}
+					tick();
+				}
 
-            // Subtle parallax effect for hero image
-            const heroSection = document.getElementById('hero');
-            const heroImage = heroSection.querySelector('img');
-            
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const heroHeight = heroSection.offsetHeight;
-                
-                if (scrolled < heroHeight) {
-                    const parallaxSpeed = 0.5;
-                    heroImage.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-                }
-            }, { passive: true });
-        });
-    </script>
-    
-</body>
+				// Reset typewriter element back to an empty, space-reserved state
+				// so it can be replayed next time it enters the viewport.
+				function resetTypewriter(el) {
+					const prev = typewriterTokens.get(el);
+					if (prev) prev.cancelled = true;
 
+					// Keep the original text cached; just clear rendered content
+					if (!el.dataset.originalText) {
+						el.dataset.originalText = el.textContent.trim();
+					}
+
+					// Rebuild invisible char spans so the block keeps its size
+					el.textContent = "";
+					for (const ch of el.dataset.originalText) {
+						const span = document.createElement("span");
+						span.className = "tw-char"; // opacity: 0 by default
+						span.textContent = ch;
+						el.appendChild(span);
+					}
+
+					// Cursor is removed automatically by el.textContent = ''
+				}
+
+				// Subtle parallax effect for hero image
+				const heroSection = document.getElementById("hero");
+				const heroImage = heroSection.querySelector("img");
+
+				window.addEventListener(
+					"scroll",
+					function () {
+						const scrolled = window.pageYOffset;
+						const heroHeight = heroSection.offsetHeight;
+
+						if (scrolled < heroHeight) {
+							const parallaxSpeed = 0.5;
+							heroImage.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+						}
+					},
+					{ passive: true },
+				);
+			});
+		</script>
+	</body>
 </html>

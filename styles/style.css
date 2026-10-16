@@ -1,45 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 /* Footer + back-to-top styles live in their own sheet so pages that
    skip this legacy file can still style the injected footer; the shared
    header works the same way (site-header.css itself imports
    site-navigation.css for the nav rules). */
-@import './site-footer.css';
-@import './site-header.css';
+@import "./site-footer.css";
+@import "./site-header.css";
 
 html {
-    height: 100%;
-    width: 100%;
+	height: 100%;
+	width: 100%;
 }
 
 body {
-    overflow-x: hidden;
+	overflow-x: hidden;
 }
 
 header .active {
-    background-color: #c0e9fc;
+	background-color: #c0e9fc;
 }
 
 /* Legacy headers only — the shared .site-header header sizes its
    social icons in site-header.css instead. */
 header:not(.site-header) img {
-    width: 2.5vw;
-    height: 2.5vw;
-}
-    
-.contacts {   
-    float: right;
-    padding: 0%;
-    top: 0.2vw;
-    right: 1vw;
-    position: relative;
-    margin: 0.7vw 0.4vw;
+	width: 2.5vw;
+	height: 2.5vw;
 }
 
+.contacts {
+	float: right;
+	padding: 0%;
+	top: 0.2vw;
+	right: 1vw;
+	position: relative;
+	margin: 0.7vw 0.4vw;
+}
 
 #inwork {
-    text-align: center;
-    margin: 16.7vw 0;
-    font-size: 2.5vw;
+	text-align: center;
+	margin: 16.7vw 0;
+	font-size: 2.5vw;
 }
 
 /* Shared site header (title, nav, socials) and the injected footer
@@ -48,62 +47,90 @@ header:not(.site-header) img {
    there is a single source for both. */
 
 @media screen and (max-width: 480px) {
-    /* header {
+	/* header {
         margin-bottom: 0.6vw;
     } */
-    /* vw-sized rules below are for the legacy headers (.navbutton /
+	/* vw-sized rules below are for the legacy headers (.navbutton /
        .contacts era); scoped away from the shared .site-header, which
        owns its own sizing in site-header.css. */
-    header:not(.site-header) h1 {
-        width: 100%;
-        font-size: 5.5vw;
-        text-align: left;
-    }
-    .navbutton {
-        font-size: 3.5vw;
-        left: 2%;
-        padding: 1% 2%;
-    }
-    .contacts {
-        padding: 0vw 0.6vw;
-        margin: 0 0.5vw;
-        top: 0vw;
-    }
-    header:not(.site-header) img {
-        width: 5.5vw;
-        height: 5.5vw;
-    }
-
+	header:not(.site-header) h1 {
+		width: 100%;
+		font-size: 5.5vw;
+		text-align: left;
+	}
+	.navbutton {
+		font-size: 3.5vw;
+		left: 2%;
+		padding: 1% 2%;
+	}
+	.contacts {
+		padding: 0vw 0.6vw;
+		margin: 0 0.5vw;
+		top: 0vw;
+	}
+	header:not(.site-header) img {
+		width: 5.5vw;
+		height: 5.5vw;
+	}
 }
 
-@media  screen and (min-width: 481px) and (max-width: 1024px) {
-    /* header {
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+	/* header {
         margin-bottom: 0.6vw;
     } */
-    header:not(.site-header) h1 {
-        width: 100%;
-        font-size: 4.5vw;
-        text-align: left;
-        padding: 1% 1% 0% 2%;
-    }
-    /* Only legacy navs get this gutter — the shared header/footer navs
+	header:not(.site-header) h1 {
+		width: 100%;
+		font-size: 4.5vw;
+		text-align: left;
+		padding: 1% 1% 0% 2%;
+	}
+	/* Only legacy navs get this gutter — the shared header/footer navs
        manage their own spacing. */
-    nav:not(.site-nav):not(.site-footer-nav) {
-        margin-top: 0.5%;
-    }
-    .navbutton {
-        font-size: 3vw;
-        left: 2%;
-        margin: 0% 1%;
-        /* padding: 1% 1.5%; */
+	nav:not(.site-nav):not(.site-footer-nav) {
+		margin-top: 0.5%;
+	}
+	.navbutton {
+		font-size: 3vw;
+		left: 2%;
+		margin: 0% 1%;
+		/* padding: 1% 1.5%; */
+	}
+	.contacts {
+		top: 0%;
+		margin: 0.4vw 0.6vw;
+	}
+	header:not(.site-header) img {
+		width: 5vw;
+		height: 5vw;
+	}
+}
+/* Photo credit badge — a small corner overlay shown on card and hero
+   images across the articles, projects and playground listing pages.
+   The name links to the photographer's Unsplash profile (or photo
+   page); the card click handlers skip anchors, so the link stays
+   clickable inside clickable cards. */
+.article-card-image,
+.project-card-image,
+.toy-card-image {
+	position: relative;
+}
 
-    }
-    .contacts {
-        top: 0%;
-        margin: 0.4vw 0.6vw;
-    }
-    header:not(.site-header) img {
-        width: 5vw;
-        height: 5vw;
-    }
+.image-credit {
+	position: absolute;
+	right: 0.65rem;
+	bottom: 0.45rem;
+	z-index: 3; /* stays above the hero overlay gradients */
+	font-family: "Lato", sans-serif;
+	font-size: 0.6875rem;
+	letter-spacing: 0.03em;
+	color: rgba(255, 255, 255, 0.85);
+	/* Text shadow keeps the credit readable over bright image areas
+       without a tinted background pill. */
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}
+
+.image-credit a {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: 2px;
 }

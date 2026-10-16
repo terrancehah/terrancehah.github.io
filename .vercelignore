@@ -81,6 +81,10 @@ proxy-server.js
 # Vercel
 .vercel/
 
+# Local dev monolith — mounts every api/*.py function for uvicorn; on Vercel
+# each function ships on its own, so this file must never upload.
+api/index.py
+
 # Keep these in git for local `uv` workflows, but do not upload them.
 # CLI 59 sees pyproject.toml + fastapi and builds one FastAPI app that
 # bundles resources/ + public/ (~240MB) into the function zip.

@@ -259,6 +259,15 @@ wheels = [
 ]
 
 [[package]]
+name = "click"
+version = "8.5.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c7/0e/7fa0ef50764b67090eca4114772a2abf8b6148198475e54c660b97caeee6/click-8.5.0.tar.gz", hash = "sha256:ba0d2089de75ea0310e2dde03160e6ca10009947fb95a182f9b54021bb272e34", size = 382235, upload-time = "2026-08-26T13:33:14.56Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/58/50/6c0d534c5f134586a8e1ba4e330569e32f057e33372ae556463212fb4cd3/click-8.5.0-py3-none-any.whl", hash = "sha256:255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360", size = 125251, upload-time = "2026-08-26T13:33:12.928Z" },
+]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -325,16 +334,16 @@ wheels = [
 
 [[package]]
 name = "garminconnect"
-version = "0.3.11"
+version = "0.3.13"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "curl-cffi" },
     { name = "requests" },
     { name = "ua-generator" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/87/06/6e5a241cc004fae441b71903de772ecc30424fb3cd88a28fd8a2b7851a20/garminconnect-0.3.11.tar.gz", hash = "sha256:506198a65351df4ae0ce82b8c317eadf012c238c542d6a557387598e4d9a4044", size = 99452, upload-time = "2026-08-19T07:34:00.43Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/24/79/a323c0ed2bef6c028d1ce2b070851cce323c0821e2689fc36e2dc2760843/garminconnect-0.3.13.tar.gz", hash = "sha256:d47fb125cd3bbda70022aa9d576c7f90aaae087c76107edb483e32b3569c1a33", size = 101487, upload-time = "2026-09-09T14:51:15.93Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/41/bd/4a9ae7aa9fd5b8d49385ed3fa8e88c68b3e0a1d25b78c63b08be988829b8/garminconnect-0.3.11-py3-none-any.whl", hash = "sha256:58568f339b00cc47d01b2dee347a82c491a45996bb13757a050df03b7049f945", size = 93608, upload-time = "2026-08-19T07:33:59.097Z" },
+    { url = "https://files.pythonhosted.org/packages/8f/24/9c3fda6db391b834adfc46cfa09af8ccfd0a3fce6ba0b2ea66bdc508b5f0/garminconnect-0.3.13-py3-none-any.whl", hash = "sha256:ce93a3ae28f25fa1d8bfc49fbd1630c80b94035bc753f5f8d0dd84b0ccb111ed", size = 95611, upload-time = "2026-09-09T14:51:14.401Z" },
 ]
 
 [[package]]
@@ -584,6 +593,15 @@ wheels = [
 ]
 
 [[package]]
+name = "redis"
+version = "5.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/47/da/d283a37303a995cd36f8b92db85135153dc4f7a8e4441aa827721b442cfb/redis-5.2.1.tar.gz", hash = "sha256:16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f", size = 4608355, upload-time = "2024-12-06T09:50:41.956Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3c/5f/fa26b9b2672cbe30e07d9a5bdf39cf16e3b80b42916757c5f92bca88e4ba/redis-5.2.1-py3-none-any.whl", hash = "sha256:ee7e1056b9aea0f04c6c2ed59452947f34c4940ee025f5dd83e6a6418b6989e4", size = 261502, upload-time = "2024-12-06T09:50:39.656Z" },
+]
+
+[[package]]
 name = "requests"
 version = "2.34.2"
 source = { registry = "https://pypi.org/simple" }
@@ -631,19 +649,29 @@ dependencies = [
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "python-multipart" },
+    { name = "redis" },
     { name = "upstash-redis" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "uvicorn" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "fastapi", specifier = "==0.121.2" },
-    { name = "garminconnect", specifier = "==0.3.11" },
+    { name = "garminconnect", specifier = "==0.3.13" },
     { name = "openai", specifier = "==2.8.1" },
     { name = "pydantic", specifier = "==2.12.4" },
     { name = "python-dotenv", specifier = "==1.2.1" },
     { name = "python-multipart", specifier = "==0.0.20" },
+    { name = "redis", specifier = "==5.2.1" },
     { name = "upstash-redis", specifier = "==1.7.0" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "uvicorn", specifier = "==0.34.0" }]
 
 [[package]]
 name = "tqdm"
@@ -706,4 +734,17 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz", hash = "sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c", size = 433602, upload-time = "2026-05-07T16:13:18.596Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7f/3e/5db95bcf282c52709639744ca2a8b149baccf648e39c8cc87553df9eae0c/urllib3-2.7.0-py3-none-any.whl", hash = "sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897", size = 131087, upload-time = "2026-05-07T16:13:17.151Z" },
+]
+
+[[package]]
+name = "uvicorn"
+version = "0.34.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+    { name = "h11" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4b/4d/938bd85e5bf2edeec766267a5015ad969730bb91e31b44021dfe8b22df6c/uvicorn-0.34.0.tar.gz", hash = "sha256:404051050cd7e905de2c9a7e61790943440b3416f49cb409f965d9dcd0fa73e9", size = 76568, upload-time = "2024-12-15T13:33:30.42Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/61/14/33a3a1352cfa71812a3a21e8c9bfb83f60b0011f5e36f2b1399d51928209/uvicorn-0.34.0-py3-none-any.whl", hash = "sha256:023dc038422502fa28a09c7a30bf2b6991512da7dcdb8fd35fe57cfc154126f4", size = 62315, upload-time = "2024-12-15T13:33:27.467Z" },
 ]

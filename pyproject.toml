@@ -8,6 +8,14 @@ dependencies = [
     "pydantic==2.12.4",
     "python-dotenv==1.2.1",
     "python-multipart==0.0.20",
-    "garminconnect==0.3.11",
+    "garminconnect==0.3.13",
     "upstash-redis==1.7.0",
+    "redis==5.2.1",
+]
+
+# Local dev only — uvicorn serves api/index:app; Vercel installs from
+# requirements.txt instead and never needs it.
+[dependency-groups]
+dev = [
+    "uvicorn==0.34.0",
 ]

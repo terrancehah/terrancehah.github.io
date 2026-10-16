@@ -23,8 +23,7 @@ PROXY_PID=$!
 echo ""
 echo "✅ Development environment ready:"
 echo "   - Main site: http://localhost:3000"
-echo "   - Persona Generator: http://localhost:3000/projects/persona"
-echo "   - FastAPI direct: http://localhost:8000"
+echo "   - FastAPI direct: http://localhost:8000 (all api/*.py functions mounted)"
 echo ""
 echo "Press Ctrl+C to stop all servers"
 

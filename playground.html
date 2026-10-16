@@ -1,127 +1,243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="./styles/output.css" rel="stylesheet">
-        <link href="./styles/style.css" type="text/css" rel="stylesheet">
-        <link href="./playground/playground.css" type="text/css" rel="stylesheet">
-        <link rel="icon" href="./resources/icons/TH-logo.png" type="image/x-icon">
-        <meta property="og:title" content="Terrance's Playground">
-        <meta property="og:description" content="Terrance's Playground">
-        <meta property="og:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
-        <meta property="og:type" content="article" />
-        <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
-        <link rel="canonical" href="https://terrancehah.com/playground">
-        <meta property="og:url" content="https://terrancehah.com/playground">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="./styles/output.css" rel="stylesheet" />
+		<link href="./styles/style.css" type="text/css" rel="stylesheet" />
+		<link
+			href="./playground/playground.css"
+			type="text/css"
+			rel="stylesheet" />
+		<link
+			rel="icon"
+			href="./resources/icons/TH-logo.png"
+			type="image/x-icon" />
+		<meta property="og:title" content="Terrance's Playground" />
+		<meta property="og:description" content="Terrance's Playground" />
+		<meta
+			property="og:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
+		<meta property="og:type" content="article" />
+		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
+		<link rel="canonical" href="https://terrancehah.com/playground" />
+		<meta property="og:url" content="https://terrancehah.com/playground" />
 
-        <script src="./js/footer.js"></script>
-        <title>Terrance's Playground</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        </style>
-            <!-- Vercel Analytics -->
-        <script>
-          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-        </script>
-        <script defer src="/_vercel/insights/script.js"></script>
-    </head>
+		<script src="./js/footer.js"></script>
+		<title>Terrance's Playground</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+		</style>
+		<!-- Vercel Analytics -->
+		<script>
+			window.va =
+				window.va ||
+				function () {
+					(window.vaq = window.vaq || []).push(arguments);
+				};
+		</script>
+		<script defer src="/_vercel/insights/script.js"></script>
+	</head>
 
-    <body class="m-0 relative h-full bg-white overflow-x-hidden">
-        <header class="site-header">
-            <div class="site-header-inner">
-                
-                <!-- Left: Logo & Title -->
-                <div class="site-header-brand">
-                    <h1 class="site-header-title">
-                        Terrance's Playground
-                    </h1>
-                </div>
+	<body class="m-0 relative h-full bg-white overflow-x-hidden">
+		<header class="site-header">
+			<div class="site-header-inner">
+				<!-- Left: Logo & Title -->
+				<div class="site-header-brand">
+					<h1 class="site-header-title">Terrance's Playground</h1>
+				</div>
 
-                <!-- Middle: Nav buttons -->
-                <nav class="site-nav">
-                    <a href="/">Home</a>
-                    <a href="./articles.html">Articles</a>
-                    <a href="./projects.html">Projects</a>
-                    <a href="./playground.html" aria-current="page">Playground</a>
-                </nav>
-            
-                <!-- Right side: Social Icons -->
-                <div class="site-social-links">
-                    <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/facebook.png" alt="facebook" class="site-social-icon">
-                    </a>
-                    <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/instagram.png" alt="instagram" class="site-social-icon">
-                    </a>
-                    <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/x.png" alt="x" class="site-social-icon">
-                    </a>
-                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/linkedin.png" alt="linkedin" class="site-social-icon">
-                    </a>
-                    <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
-                        <img src="./resources/icons/github.png" alt="github" class="site-social-icon">
-                    </a>
-                </div>
-            </div>
-        </header>
+				<!-- Middle: Nav buttons -->
+				<nav class="site-nav">
+					<a href="/">Home</a>
+					<a href="./articles.html">Articles</a>
+					<a href="./projects.html">Projects</a>
+					<a href="./playground.html" aria-current="page"
+						>Playground</a
+					>
+				</nav>
 
-        <main class="w-full toys-list-container">
-            <!-- Hero Card - Latest Playground Item -->
-            <article class="toy-hero" data-url="./playground/philosophy-sphere.html">
-                <div class="toy-hero-image">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop" alt="Philosophy Sphere" loading="lazy">
-                    <div class="toy-hero-overlay"></div>
-                </div>
-                <div class="toy-hero-content">
-                    <span class="toy-badge">Latest</span>
-                    <h2 class="toy-hero-title">Philosophy Sphere - Interactive Ideology Explorer</h2>
-                    <p class="toy-hero-description">
-                        Explore philosophical ideologies and their relationships in an interactive 3D visualization. Navigate through major philosophical schools like Idealism, Existentialism, and Materialism.
-                    </p>
-                    <p class="toy-hero-date">created on 20 October 2025</p>
-                </div>
-            </article>
+				<!-- Right side: Social Icons -->
+				<div class="site-social-links">
+					<a
+						href="https://facebook.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/facebook.png"
+							alt="facebook"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://instagram.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/instagram.png"
+							alt="instagram"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://x.com/terrance_hah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/x.png"
+							alt="x"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://www.linkedin.com/in/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/linkedin.png"
+							alt="linkedin"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://github.com/terrancehah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="./resources/icons/github.png"
+							alt="github"
+							class="site-social-icon" />
+					</a>
+				</div>
+			</div>
+		</header>
 
-            <!-- Grid Container for Remaining Playground Items -->
-            <div class="toys-grid">
-                <article class="toy-card size-2x2" data-url="./playground/ar-model-test.html">
-                    <div class="toy-card-image">
-                        <img src="./resources/ar/myvi-purple.jpg" alt="Myvi with Marker Test" loading="lazy">
-                    </div>
-                    <div class="toy-card-content">
-                        <h3 class="toy-card-title">Myvi with Marker Test</h3>
-                        <p class="toy-card-description">This is the testing page for my updated Myvi AR. Visit the <a target="_blank" href='./resources/ar/myvi-qr.png' class="toy-inline-link">Myvi Photo</a> on another device to access the photo needed to run the AR Test.</p>
-                        <p class="toy-card-date">written on 16 July 2023</p>
-                    </div>
-                </article>
+		<main class="w-full toys-list-container">
+			<!-- Hero Card - Latest Playground Item -->
+			<article
+				class="toy-hero"
+				data-url="./playground/philosophy-sphere.html">
+				<div class="toy-hero-image">
+					<img
+						src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop"
+						alt="Philosophy Sphere"
+						loading="lazy" />
+					<span class="image-credit"
+						>Photo by
+						<a
+							href="https://unsplash.com/@nasa"
+							target="_blank"
+							rel="noopener"
+							>NASA</a
+						></span
+					>
+					<div class="toy-hero-overlay"></div>
+				</div>
+				<div class="toy-hero-content">
+					<span class="toy-badge">Latest</span>
+					<h2 class="toy-hero-title">
+						Philosophy Sphere - Interactive Ideology Explorer
+					</h2>
+					<p class="toy-hero-description">
+						Explore philosophical ideologies and their relationships
+						in an interactive 3D visualization. Navigate through
+						major philosophical schools like Idealism,
+						Existentialism, and Materialism.
+					</p>
+					<p class="toy-hero-date">created on 20 October 2025</p>
+				</div>
+			</article>
 
-                <article class="toy-card size-2x2" data-url="./playground/car-ar-test.html">
-                    <div class="toy-card-image">
-                        <img src="./resources/ar/myvi-purple.jpg" alt="Myvi Test" loading="lazy">
-                    </div>
-                    <div class="toy-card-content">
-                        <h3 class="toy-card-title">Myvi Test</h3>
-                        <p class="toy-card-description">This is the testing page for my Myvi AR. Visit the <a target="_blank" href='./resources/ar/myvi-purple.jpg' class="toy-inline-link">Myvi Photo</a> on another device to access the photo needed to run the AR Test.</p>
-                        <p class="toy-card-date">written on 11 October 2021</p>
-                    </div>
-                </article>
+			<!-- Grid Container for Remaining Playground Items -->
+			<div class="toys-grid">
+				<article
+					class="toy-card size-2x2"
+					data-url="./playground/ar-model-test.html">
+					<div class="toy-card-image">
+						<img
+							src="./resources/ar/myvi-purple.jpg"
+							alt="Myvi with Marker Test"
+							loading="lazy" />
+					</div>
+					<div class="toy-card-content">
+						<h3 class="toy-card-title">Myvi with Marker Test</h3>
+						<p class="toy-card-description">
+							This is the testing page for my updated Myvi AR.
+							Visit the
+							<a
+								target="_blank"
+								href="./resources/ar/myvi-qr.png"
+								class="toy-inline-link"
+								>Myvi Photo</a
+							>
+							on another device to access the photo needed to run
+							the AR Test.
+						</p>
+						<p class="toy-card-date">written on 16 July 2023</p>
+					</div>
+				</article>
 
-                <article class="toy-card size-2x2" data-url="./playground/dino-ar-test.html">
-                    <div class="toy-card-image">
-                        <img src="https://images.unsplash.com/photo-1548192746-dd526f154ed9?w=800&h=500&fit=crop" alt="T-Rex Test" loading="lazy">
-                    </div>
-                    <div class="toy-card-content">
-                        <h3 class="toy-card-title">T-Rex Test</h3>
-                        <p class="toy-card-description">This is the playground for testing AR features. Visit the <a target="_blank" href='https://raw.githubusercontent.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex-image-big.jpeg' class="toy-inline-link">T-Rex Photo</a> on another device to access the photo needed to run the AR Test.</p>
-                        <p class="toy-card-date">written on 7 June 2021</p>
-                    </div>
-                </article>
-            </div>
-        </main>
+				<article
+					class="toy-card size-2x2"
+					data-url="./playground/car-ar-test.html">
+					<div class="toy-card-image">
+						<img
+							src="./resources/ar/myvi-purple.jpg"
+							alt="Myvi Test"
+							loading="lazy" />
+					</div>
+					<div class="toy-card-content">
+						<h3 class="toy-card-title">Myvi Test</h3>
+						<p class="toy-card-description">
+							This is the testing page for my Myvi AR. Visit the
+							<a
+								target="_blank"
+								href="./resources/ar/myvi-purple.jpg"
+								class="toy-inline-link"
+								>Myvi Photo</a
+							>
+							on another device to access the photo needed to run
+							the AR Test.
+						</p>
+						<p class="toy-card-date">written on 11 October 2021</p>
+					</div>
+				</article>
 
-        <!-- Footer will be inserted by footer.js -->
-        <script src="./playground/playground.js"></script>
-    </body>
+				<article
+					class="toy-card size-2x2"
+					data-url="./playground/dino-ar-test.html">
+					<div class="toy-card-image">
+						<img
+							src="https://images.unsplash.com/photo-1647962309326-b77f9732860e?w=800&h=500&fit=crop"
+							alt="T-Rex skeleton towering inside a museum hall"
+							loading="lazy" />
+						<span class="image-credit"
+							>Photo by
+							<a
+								href="https://unsplash.com/@willianjusten"
+								target="_blank"
+								rel="noopener"
+								>Willian Justen de Vasconcellos</a
+							></span
+						>
+					</div>
+					<div class="toy-card-content">
+						<h3 class="toy-card-title">T-Rex Test</h3>
+						<p class="toy-card-description">
+							This is the playground for testing AR features.
+							Visit the
+							<a
+								target="_blank"
+								href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex-image-big.jpeg"
+								class="toy-inline-link"
+								>T-Rex Photo</a
+							>
+							on another device to access the photo needed to run
+							the AR Test.
+						</p>
+						<p class="toy-card-date">written on 7 June 2021</p>
+					</div>
+				</article>
+			</div>
+		</main>
+
+		<!-- Footer will be inserted by footer.js -->
+		<script src="./playground/playground.js"></script>
+	</body>
 </html>

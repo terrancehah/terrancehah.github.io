@@ -8,7 +8,7 @@ This is a static HTML/CSS/vanilla JS personal website (terrancehah.com), deploye
 
 - Static HTML pages (`index.html`, `articles.html`, `projects.html`, `playground.html`)
 - Vanilla CSS in `styles/` (no Tailwind build pipeline — `output.css` is pre-generated)
-- Vanilla JavaScript in `js/` (classic scripts, not ES modules except `config.js`)
+- Vanilla JavaScript in `js/` (classic scripts, not ES modules)
 - Python API in `api/` (Vercel serverless functions)
 - No npm build step (`package.json` build script is `echo No build step`)
 
