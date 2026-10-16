@@ -29,7 +29,9 @@
     margin: 0;
     min-height: 100vh;
     background-color: var(--pinboard-cork);
-    color: var(--pacey-text);
+    /* Board-copy, not root --pacey-text — same #1a2e40 in daylight, but it
+       flips to the warm night-cork ink below instead of the cool app gray. */
+    color: var(--pacey-board-copy);
     font-family: var(--font-fuzzy);
     font-size: 1.05rem;
     line-height: 1.6;
@@ -49,6 +51,22 @@
     background-image: var(--pinboard-cork-fine), var(--pinboard-cork-noise);
     background-size: 80px 80px, 220px 220px;
     opacity: 0.45;
+}
+
+/* Night cork: swap every board-copy consumer on the page to the warm
+   cream inks. Scoped to .landing-body so the root --pacey-* palette —
+   which the paper previews draw with — is never touched. */
+[data-theme="dark"] .landing-body {
+    --pacey-board-copy: var(--pinboard-board-ink);
+    --pacey-board-muted: var(--pinboard-board-muted);
+}
+
+/* Headings outside #pacey-content read root --pacey-navy, which flips to
+   a pale blue on the night board. Dark-only so the light page keeps its
+   navy; inside the board the remap already handles this. */
+[data-theme="dark"] .landing-body .landing-brand-name,
+[data-theme="dark"] .landing-body .landing-final .landing-section-title {
+    color: var(--pacey-board-copy);
 }
 
 /* Shared measure for the board column and the closing block — editorial
@@ -83,7 +101,8 @@
     align-items: center;
     gap: var(--pacey-space-sm);
     min-height: 44px; /* fixed touch target, see .impeccable.md */
-    color: var(--pacey-text);
+    /* Cork-side link — board-copy is the same ink in daylight. */
+    color: var(--pacey-board-copy);
     text-decoration: none;
 }
 
@@ -1020,6 +1039,15 @@
     color: var(--pacey-blue);
 }
 
+/* The FAQ lives inside #pacey-content, where --pacey-blue remaps to the
+   paper accent — dark ink on the night cork. Hover and focus there lift
+   to the warm board ink; the label span and chevron inherit both. Light
+   mode keeps the blue hover above. */
+[data-theme="dark"] .landing-body .landing-question-toggle:hover,
+[data-theme="dark"] .landing-body .landing-question-toggle:focus-visible {
+    color: var(--pacey-board-copy);
+}
+
 /* Hand-drawn chevron — points down at rest (tap to reveal), rotates to
    face up while the answer is open. */
 .landing-question-chevron {
@@ -1147,6 +1175,14 @@
     color: var(--pacey-blue);
     text-decoration: underline;
     text-underline-offset: 0.2em;
+}
+
+/* The footer sits outside the board remap, so the hover reads the app's
+   cool blue — off-palette on the night cork. Dark-only warm lift, same
+   as the FAQ toggles; light keeps the blue. */
+[data-theme="dark"] .landing-body .landing-footer-link:hover,
+[data-theme="dark"] .landing-body .landing-footer-link:focus-visible {
+    color: var(--pacey-board-copy);
 }
 
 .landing-footer-credit {

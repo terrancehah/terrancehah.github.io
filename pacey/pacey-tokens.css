@@ -160,6 +160,12 @@
         --pinboard-line: #ddd0b6;
         --pinboard-ink: #2b2620;
         --pinboard-muted: #5f5546;
+        /* Copy colours for text that sits on the cork itself (outside the
+           paper sheets). In daylight they match the paper pair above; on
+           the night board they flip to warm cream, since the paper ink
+           stays dark for the light sheets. */
+        --pinboard-board-ink: #2b2620;
+        --pinboard-board-muted: #5f5546;
         --pinboard-note-blue: #cfe3f1;
         --pinboard-note-blue-2: #bcd8ec;
         --pinboard-note-yellow: #f6e6a4;
@@ -193,6 +199,10 @@
         --pinboard-line: #a89d88;
         --pinboard-ink: #241f19;
         --pinboard-muted: #4a4438;
+        /* Night-cork copy — the warm creams the app's own night board
+           headings use (pinboard-theme.css), not the cool app blue-grays. */
+        --pinboard-board-ink: #f2e9d7;
+        --pinboard-board-muted: #e8dfca;
         --pinboard-note-blue: #d6e4ee;
         --pinboard-note-blue-2: #c9dce9;
         --pinboard-note-yellow: #e8db9e;
