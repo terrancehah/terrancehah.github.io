@@ -31,6 +31,14 @@
     ],
     "rewrites": [
         {
+            "source": "/api/biwa-pair",
+            "destination": "/api/biwa-trip/pair"
+        },
+        {
+            "source": "/projects/biwa-ride/api/biwa-pair",
+            "destination": "/api/biwa-trip/pair"
+        },
+        {
             "source": "/projects/running-posture-analyser/analyse",
             "destination": "/api/analyse"
         },

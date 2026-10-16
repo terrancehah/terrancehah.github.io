@@ -56,7 +56,6 @@ def _load(module_key, path):
 # directly avoids the mount-level trailing-slash redirect a nested ASGI app
 # would produce for /api/biwa-trip.
 biwa_trip = _load("biwa_trip_endpoint", os.path.join(_API_DIR, "biwa-trip.py"))
-biwa_pair = _load("biwa_pair_endpoint", os.path.join(_API_DIR, "biwa-pair.py"))
 biwa_route = _load("biwa_route_endpoint", os.path.join(_API_DIR, "biwa-route.py"))
 biwa_place = _load("biwa_place_endpoint", os.path.join(_API_DIR, "biwa-place.py"))
 biwa_photo = _load("biwa_photo_endpoint", os.path.join(_API_DIR, "biwa-photo.py"))
@@ -64,7 +63,10 @@ biwa_photo = _load("biwa_photo_endpoint", os.path.join(_API_DIR, "biwa-photo.py"
 app = FastAPI(title="biwa-dev")
 app.add_api_route("/api/biwa-trip", biwa_trip.get_trip, methods=["GET"])
 app.add_api_route("/api/biwa-trip", biwa_trip.put_trip, methods=["PUT"])
-app.add_api_route("/api/biwa-pair", biwa_pair.pair, methods=["POST"])
+# Pairing is folded into biwa-trip (it was the 13th function — over the Hobby
+# cap), but the dev runner keeps serving the client's original URL so the
+# proxy keeps forwarding /projects/biwa-ride/api/biwa-pair unchanged.
+app.add_api_route("/api/biwa-pair", biwa_trip.pair, methods=["POST"])
 app.add_api_route("/api/biwa-route", biwa_route.post_route, methods=["POST"])
 app.add_api_route("/api/biwa-place", biwa_place.get_place, methods=["GET"])
 app.add_api_route("/api/biwa-photo", biwa_photo.get_photo, methods=["GET"])

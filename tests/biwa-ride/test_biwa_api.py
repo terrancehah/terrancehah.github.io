@@ -42,7 +42,9 @@ biwa_models = biwa_store.load_biwa_module("biwa-models")
 biwa_places = biwa_store.load_biwa_module("biwa-places")
 biwa_routing = biwa_store.load_biwa_module("biwa-routing")
 biwa_trip = load("biwa_trip_endpoint", os.path.join(API_DIR, "biwa-trip.py"))
-biwa_pair = load("biwa_pair_endpoint", os.path.join(API_DIR, "biwa-pair.py"))
+# Pairing moved out of api/ (13th function — over the 12-function cap): it is
+# now a lib/ helper mounted on the biwa-trip app at /api/biwa-trip/pair.
+biwa_pair = biwa_trip.biwa_pair
 biwa_route = load("biwa_route_endpoint", os.path.join(API_DIR, "biwa-route.py"))
 biwa_place = load("biwa_place_endpoint", os.path.join(API_DIR, "biwa-place.py"))
 biwa_photo = load("biwa_photo_endpoint", os.path.join(API_DIR, "biwa-photo.py"))
@@ -167,39 +169,51 @@ class OwnerAccessTests(unittest.TestCase):
 class PairTests(unittest.TestCase):
     """biwa-pair: create mints a 10-minute code, claim resolves it."""
 
+    # The folded handler answers on the rewritten destination, both original
+    # public URLs (the runtime may forward the un-rewritten path) and the bare
+    # stripped path — all registered on the biwa-trip app.
+    PAIR_PATHS = (
+        "/api/biwa-trip/pair",
+        "/api/biwa-pair",
+        "/projects/biwa-ride/api/biwa-pair",
+        "/pair",
+    )
+
     def pair_client(self, owner=TEST_OWNER):
-        return TestClient(biwa_pair.app, headers={"X-Biwa-Owner": owner})
+        return TestClient(biwa_trip.app, headers={"X-Biwa-Owner": owner})
 
     def test_create_requires_owner(self):
         biwa_trip.store._memory.clear()
-        res = TestClient(biwa_pair.app).post("/", json={"op": "create"})
+        res = TestClient(biwa_trip.app).post("/api/biwa-trip/pair", json={"op": "create"})
         self.assertEqual(res.status_code, 401)
 
     def test_create_then_claim_roundtrip(self):
-        biwa_trip.store._memory.clear()
-        client = self.pair_client()
-        res = client.post("/", json={"op": "create"})
-        self.assertEqual(res.status_code, 200, res.text)
-        code = res.json()["code"]
-        self.assertEqual(len(code), biwa_store.PAIR_CODE_LENGTH)
-        self.assertEqual(res.json()["expiresIn"], biwa_store.PAIR_CODE_TTL_S)
-        # A fresh device (its own owner header) claims the code.
-        claimer = self.pair_client("dev:00000000-0000-4000-8000-0000000000ee")
-        got = claimer.post("/", json={"op": "claim", "code": code.lower()})
-        self.assertEqual(got.status_code, 200)
-        self.assertEqual(got.json()["ownerId"], TEST_OWNER)
+        for path in self.PAIR_PATHS:
+            with self.subTest(path=path):
+                biwa_trip.store._memory.clear()
+                client = self.pair_client()
+                res = client.post(path, json={"op": "create"})
+                self.assertEqual(res.status_code, 200, res.text)
+                code = res.json()["code"]
+                self.assertEqual(len(code), biwa_store.PAIR_CODE_LENGTH)
+                self.assertEqual(res.json()["expiresIn"], biwa_store.PAIR_CODE_TTL_S)
+                # A fresh device (its own owner header) claims the code.
+                claimer = self.pair_client("dev:00000000-0000-4000-8000-0000000000ee")
+                got = claimer.post(path, json={"op": "claim", "code": code.lower()})
+                self.assertEqual(got.status_code, 200)
+                self.assertEqual(got.json()["ownerId"], TEST_OWNER)
 
     def test_claim_unknown_or_expired_code_404(self):
         biwa_trip.store._memory.clear()
         client = self.pair_client()
-        res = client.post("/", json={"op": "claim", "code": "ZZZZZZ"})
+        res = client.post("/api/biwa-trip/pair", json={"op": "claim", "code": "ZZZZZZ"})
         self.assertEqual(res.status_code, 404)
         self.assertEqual(res.json()["error"], "code_expired")
 
     def test_claim_malformed_code_400(self):
         biwa_trip.store._memory.clear()
         client = self.pair_client()
-        res = client.post("/", json={"op": "claim", "code": "nope"})
+        res = client.post("/api/biwa-trip/pair", json={"op": "claim", "code": "nope"})
         self.assertEqual(res.status_code, 400)
 
     def test_claim_rate_limited(self):
@@ -207,7 +221,7 @@ class PairTests(unittest.TestCase):
         client = self.pair_client()
         res = None
         for _ in range(biwa_pair.PAIR_CLAIM_RATE_LIMIT + 2):
-            res = client.post("/", json={"op": "claim", "code": "ZZZZZZ"})
+            res = client.post("/api/biwa-trip/pair", json={"op": "claim", "code": "ZZZZZZ"})
         self.assertEqual(res.status_code, 429)
 
 

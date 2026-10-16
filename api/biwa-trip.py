@@ -38,6 +38,9 @@ def _load(module_key, path):
 
 biwa_store = _load("biwa_store", os.path.join(os.path.dirname(_HERE), "lib", "biwa", "biwa-store.py"))
 biwa_models = biwa_store.load_biwa_module("biwa-models")
+# The pairing handler lives in lib/ (it is not a function of its own) and is
+# mounted below — see the @app.post("/api/biwa-trip/pair") route.
+biwa_pair = biwa_store.load_biwa_module("biwa-pair")
 
 app = biwa_store.create_biwa_app("biwa-trip")
 store = biwa_store.BiwaStore()
@@ -144,3 +147,20 @@ async def put_trip(request: Request):
                             content=content)
 
     return biwa_store.json_ok({"ok": True, "revision": trip["revision"], "updatedAt": trip["updatedAt"]})
+
+
+# Pairing was a standalone function (api/biwa-pair.py) until it pushed the
+# deploy past the 12-function cap; it is now a lib/ helper mounted here.
+# vercel.json rewrites the public POST /api/biwa-pair URL — and its
+# /projects/biwa-ride/api/biwa-pair alias — to /api/biwa-trip/pair. The
+# prefix-strip middleware only collapses a path ENDING in /biwa-trip, so
+# sub-paths arrive intact; and because the runtime may hand the function the
+# ORIGINAL request path rather than the rewritten destination, the same
+# handler is registered on every path it could plausibly see.
+@app.post("/api/biwa-trip/pair")
+@app.post("/api/biwa-pair")
+@app.post("/projects/biwa-ride/api/biwa-pair")
+@app.post("/pair")
+async def pair(request: Request):
+    """Pairing-code lifecycle: 'create' mints, 'claim' resolves."""
+    return await biwa_pair.pair(request, store)
