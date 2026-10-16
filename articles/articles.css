@@ -88,7 +88,7 @@
     text-align: center;
     margin: 2.5rem auto;
     padding: 0 1rem;
-    font-style: italic;
+    /* font-style: italic; */
     line-height: 1.5;
     max-width: 90%;
 }
@@ -136,6 +136,13 @@
         width: 55%;
         min-height: 4rem;
     }
+}
+
+/* Captions under a side-by-side pair fill their column — the fractional
+   widths above are meant for full-width images. */
+.image-pair .image-caption {
+    width: 100%;
+    min-height: 0;
 }
 
 /* Article Components */
