@@ -21,7 +21,9 @@
 		<link href="../styles/site-motion.css" rel="stylesheet" />
 		<link href="../styles/site-header.css" rel="stylesheet" />
 		<!-- Page-specific showcase fonts (style guide). -->
-		<link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Momo+Trust+Display&family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Momo+Trust+Display&family=Quattrocento+Sans:wght@400;700&display=swap"
+			rel="stylesheet" />
 		<link href="../styles/output.css" rel="stylesheet" />
 		<link href="../styles/style.css" type="text/css" rel="stylesheet" />
 		<link
@@ -93,7 +95,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/facebook-png-128.webp"
+							src="/resources/optimized/icons/facebook-png-128.webp"
 							alt="facebook"
 							class="site-social-icon" />
 					</a>
@@ -102,7 +104,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/instagram-png-128.webp"
+							src="/resources/optimized/icons/instagram-png-128.webp"
 							alt="instagram"
 							class="site-social-icon" />
 					</a>
@@ -111,7 +113,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/x-png-128.webp"
+							src="/resources/optimized/icons/x-png-128.webp"
 							alt="x"
 							class="site-social-icon" />
 					</a>
@@ -120,7 +122,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/linkedin-png-128.webp"
+							src="/resources/optimized/icons/linkedin-png-128.webp"
 							alt="linkedin"
 							class="site-social-icon" />
 					</a>
@@ -129,7 +131,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/github-png-128.webp"
+							src="/resources/optimized/icons/github-png-128.webp"
 							alt="github"
 							class="site-social-icon" />
 					</a>
@@ -344,7 +346,8 @@
 							that share the site footer all carry the same four
 							destinations — header at the top, footer at the
 							bottom, and a small back-to-top button that appears
-							after one viewport of scrolling.
+							after one viewport of scrolling. Nav links use the
+							shared 16px Raleway size at every viewport.
 						</p>
 						<p class="style-guide-preview-label">
 							Header — the same .site-nav markup every main page
@@ -425,7 +428,10 @@
 								<img
 									src="../resources/articles/mount-kinabalu/peak-sunrise-og.JPG"
 									alt="Sunrise over Low's Peak, Mount Kinabalu"
-									loading="lazy" decoding="async" width="1200" height="675" />
+									loading="lazy"
+									decoding="async"
+									width="1200"
+									height="675" />
 								<div class="style-guide-mini-card-content">
 									<h3 class="style-guide-mini-card-title">
 										<a href="./mount-kinabalu.html"
@@ -442,6 +448,55 @@
 									</p>
 								</div>
 							</article>
+						</div>
+					</section>
+
+					<!-- Motion and loading: illustrative specimens for shipped behavior. -->
+					<section>
+						<h2 class="article-subtitle">Motion and loading</h2>
+						<p class="style-guide-caption">
+							Article pages show a thin reading-progress fill that
+							tracks the article itself, and same-origin page
+							navigations get a gentle 120/180ms crossfade —
+							disabled under reduced motion. The four main pages
+							keep their leading hero image eager; article photos
+							load lazily.
+						</p>
+						<div class="style-guide-type-grid">
+							<figure class="style-guide-type">
+								<figcaption>
+									Reading progress — the real bar is a 3px
+									steel-blue fill fixed atop article pages;
+									this native widget only sketches its
+									position, not the shipped style
+								</figcaption>
+								<progress
+									value="60"
+									max="100"
+									aria-label="Reading progress example">
+									60%
+								</progress>
+							</figure>
+							<figure class="style-guide-type">
+								<figcaption>
+									Photos — the leading hero on the four main
+									pages uses
+									<code>loading="eager"</code>, article and
+									below-fold photos use
+									<code>loading="lazy"</code>; responsive
+									<code>srcset</code> serves webp variants
+									from <code>resources/optimized/</code>
+								</figcaption>
+								<p class="style-guide-sample">
+									<code
+										>loading="eager"
+										fetchpriority="high"</code
+									>
+									→ leading hero<br />
+									<code>loading="lazy" decoding="async"</code>
+									→ below the fold
+								</p>
+							</figure>
 						</div>
 					</section>
 
@@ -601,13 +656,19 @@
 					<!-- Where the implementation actually lives. -->
 					<p class="style-guide-footnote">
 						Source of truth: <code>js/footer.js</code>,
+						<code>js/article-reading.js</code>,
 						<code>styles/site-footer.css</code>,
 						<code>styles/site-typography.css</code>,
+						<code>styles/site-motion.css</code>,
+						<code>styles/site-header.css</code>,
 						<code>styles/style.css</code>,
 						<code>styles/homepage.css</code>,
-						<code>articles/articles.css</code> and each project's
-						own stylesheet. Older pages add pre-generated utility
-						CSS — there is no live Tailwind build step.
+						<code>articles/articles.css</code>,
+						<code>scripts/optimize-site-images.py</code> and each
+						project's own stylesheet. Older pages add pre-generated
+						utility CSS — there is no live Tailwind build step. The
+						implementation map lives in
+						<code>docs/site-design.md</code>.
 					</p>
 				</div>
 			</article>

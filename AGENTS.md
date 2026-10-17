@@ -26,7 +26,20 @@ Consensus: marathon pre-race companion. Diagnosis is six-area fitness vs the typ
 
 ## Design
 
-**Read `.impeccable.md` (repo root) before any UI change.** It is the design context: users, brand personality, aesthetic direction, design principles, colour system, dark mode, motion, spacing, accessibility, loading and empty states.
+**Read `.impeccable.md` and `docs/site-design.md` before any UI change.** The former separates the personal-site context from running-product conventions; the latter maps current implementation owners and verification commands. Do not treat Pacey's users, colours or dark theme as the whole site's design.
+
+### Personal Site Shared Components
+
+- `styles/site-typography.css` owns role-based type sizes; header and footer navigation use the same token.
+- `styles/site-header.css` owns header layout, title and social controls; `styles/site-navigation.css` owns navigation interactions and radius. All standard headers use the semantic `.site-header*`, `.site-nav` and `.site-social-*` hooks, not copied breakpoint utilities.
+- `js/footer.js` generates the footer and SVG back-to-top control; `styles/site-footer.css` owns their presentation. No page stylesheet may add competing footer spacing.
+- `styles/site-motion.css` owns shared touch feedback and native page transitions. `js/article-reading.js` drives article-only reading progress; its presentation is in `articles/articles.css`.
+- Keep head-linked fonts/shared sheets aligned with their fallback imports. Preserve eager root heroes, native below-fold lazy loading, intrinsic image dimensions and photographer credits.
+- Use `scripts/optimize-site-images.py --write` for responsive derivatives and `--check` to validate them. Preserve originals, manifest mappings and gallery `data-full-src`; do not recompress sources in place or delete assets automatically.
+- The public style-guide article is a visual specimen sheet. Reuse real shared component rules in previews; do not replace the showcase with long-form prose.
+- Run the relevant offline checks listed in `docs/site-design.md`. Do not start a localhost server, install dependencies or access the network without the user's permission. Static tests do not establish rendered layout, Core Web Vitals or real-device behaviour.
+
+### Project-Specific Design
 
 Pacey's UI also follows the CSS design system already in place, which is the practical expression of that context:
 

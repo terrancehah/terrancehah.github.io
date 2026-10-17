@@ -31,22 +31,41 @@ This site is built with:
 
 - HTML, CSS, JavaScript
 - Python and FastAPI for backend experiments
-- Tailwind CSS for styling
+- Hand-written CSS plus a pre-generated utility stylesheet (no live Tailwind build step)
 - Hosted on Vercel
+
+## Design and UI
+
+The site's design context lives in [`.impeccable.md`](./.impeccable.md),
+the implementation map in [`docs/site-design.md`](./docs/site-design.md),
+and there's a public visual guide at
+[my-website-style-guide](https://terrancehah.com/articles/my-website-style-guide)
+([source](./articles/my-website-style-guide.html)).
+
+Static regression checks (no server needed) live in `tests/` — see the
+"Verification" section of `docs/site-design.md` for the commands.
 
 ## Local Development
 
-To run the site locally with the persona generator:
+There is no build step — the main site is static; serve the folder over
+HTTP with any static file server (pages reference root-absolute assets,
+so opening files directly won't work).
+
+A legacy `npm run dev` launcher exists for the persona generator
+experiment; it is intended to expose:
+
+- Static site on `http://localhost:3000`
+- Persona generator at `http://localhost:3000/projects/persona`
+
+It may require the Python API setup below and isn't needed for the main
+site — verify API setup first, and don't launch it automatically.
 
 ```bash
 npm run dev
 ```
 
-This starts:
-- Static site on `http://localhost:3000`
-- Persona generator at `http://localhost:3000/projects/persona`
-
 First time setup:
+
 ```bash
 # Install Node dependencies
 npm install
@@ -79,4 +98,4 @@ If you're reading this, thank you for being part of the journey.
 
 ---
 
-**Last updated: November 2025**
+**Last updated: October 2026**
