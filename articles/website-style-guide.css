@@ -10,7 +10,7 @@
 .website-style-guide .style-guide-caption {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: var(--site-text-summary);
     color: #4b5563;
     margin: 0 0 1.25rem;
 }
@@ -133,7 +133,7 @@
 .website-style-guide .style-guide-hier-title {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: var(--site-text-page-title);
     color: #1d3557;
     text-align: center;
     line-height: 1.2;
@@ -143,7 +143,7 @@
 .website-style-guide .style-guide-hier-date {
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
-    font-size: 0.95rem;
+    font-size: var(--site-text-caption);
     color: #4b5563;
     text-align: center;
     margin: 0 0 1.5rem;
@@ -152,15 +152,16 @@
 .website-style-guide .style-guide-hier-sub {
     font-family: 'Lato', sans-serif;
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: var(--site-text-section-title);
+    line-height: var(--site-leading-heading);
     color: #1d3557;
     margin: 0 0 0.75rem;
 }
 
 .website-style-guide .style-guide-hier-body {
     font-family: 'Baskervville', 'Baskerville', serif;
-    font-size: 1.125rem;
-    line-height: 1.7;
+    font-size: var(--site-text-body);
+    line-height: var(--site-leading-body);
     margin: 0;
 }
 
@@ -259,7 +260,7 @@
 .website-style-guide .style-guide-mini-card-title {
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
-    font-size: 1.125rem;
+    font-size: var(--site-text-card-title);
     color: #457b9d;
     line-height: 1.4;
     margin: 0 0 0.5rem;
@@ -278,7 +279,7 @@
 
 .website-style-guide .style-guide-mini-card-desc {
     font-family: 'Baskervville', 'Baskerville', serif;
-    font-size: 1rem;
+    font-size: var(--site-text-summary);
     color: #234960;
     line-height: 1.5;
     margin: 0 0 0.5rem;
@@ -293,7 +294,7 @@
 .website-style-guide .style-guide-mini-card-date {
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
-    font-size: 0.85rem;
+    font-size: var(--site-text-caption);
     color: #4b5563;
     margin: 0;
 }

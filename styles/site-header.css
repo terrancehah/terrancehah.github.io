@@ -13,118 +13,117 @@
 
 /* The shared nav rules and tokens live in their own sheet so pages
    could link either; the header is the standard consumer. */
-@import './site-navigation.css';
+@import "./site-navigation.css";
+
+/* Shared motion primitives (touch press feedback) — tokens/rules that
+   must reach every page, same delivery path as the nav. */
+@import "./site-motion.css";
 
 /* Brand ink token — navy everywhere except the homepage's nature green. */
 :root {
-    --site-header-ink: #1d3557;
+	--site-header-ink: #1d3557;
 }
 
 body.home-page {
-    --site-header-ink: #1e4620; /* nature-900 */
+	--site-header-ink: #1e4620; /* nature-900 */
 }
 
 .site-header {
-    display: block;
-    width: 100%;
+	display: block;
+	width: 100%;
 }
 
 /* Three rows stacked on phones; on desktop a three-column grid keeps
    brand left, nav centered, socials right without fixed widths. */
 .site-header-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.625rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	padding: 0.625rem;
 }
 
 @media (min-width: 640px) {
-    .site-header-inner {
-        padding: 0.75rem;
-    }
+	.site-header-inner {
+		padding: 0.75rem;
+	}
 }
 
 @media (min-width: 1024px) {
-    .site-header-inner {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-        gap: 1rem;
-    }
+	.site-header-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+		gap: 1rem;
+	}
 
-    /* Grid placement: brand hugs the left edge, nav stays centered,
+	/* Grid placement: brand hugs the left edge, nav stays centered,
        socials hug the right edge. */
-    .site-header-inner > .site-header-brand {
-        justify-self: start;
-    }
-    .site-header-inner > .site-social-links {
-        justify-self: end;
-    }
+	.site-header-inner > .site-header-brand {
+		justify-self: start;
+	}
+	.site-header-inner > .site-social-links {
+		justify-self: end;
+	}
 }
 
 .site-header-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 0;
 }
 
 .site-header-title {
-    font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    font-size: 1.5rem;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
-    color: var(--site-header-ink);
-    text-align: center;
-}
-
-@media (min-width: 768px) {
-    .site-header-title {
-        font-size: 1.875rem;
-    }
+	font-family: "Lato", sans-serif;
+	font-weight: 600;
+	/* Fluid brand size — one clamp covers mobile and desktop. */
+	font-size: var(--site-text-brand);
+	line-height: 1.2;
+	margin: 0;
+	padding: 0;
+	color: var(--site-header-ink);
+	text-align: center;
 }
 
 @media (min-width: 1024px) {
-    .site-header-title {
-        text-align: left;
-    }
+	.site-header-title {
+		text-align: left;
+	}
 }
 
 /* Social icons: row of >=44px tap targets around modest 28px icons. */
 .site-social-links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	margin: 0;
 }
 
 @media (min-width: 1024px) {
-    .site-social-links {
-        justify-content: flex-end;
-        gap: 0.3rem;
-    }
+	.site-social-links {
+		justify-content: flex-end;
+		gap: 0.3rem;
+	}
 }
 
 .site-social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-    flex: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	flex: none;
 }
 
 .site-social-icon {
-    width: 28px;
-    height: 28px;
+	width: 28px;
+	height: 28px;
 }
 
 .site-social-link:focus-visible {
-    outline: 2px solid #457b9d;
-    outline-offset: 2px;
-    border-radius: 4px;
+	outline: 2px solid #457b9d;
+	outline-offset: 2px;
+	border-radius: 4px;
 }

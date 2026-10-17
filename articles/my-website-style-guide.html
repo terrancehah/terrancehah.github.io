@@ -1,274 +1,602 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../styles/output.css" rel="stylesheet">
-        <link href="../styles/style.css" type="text/css" rel="stylesheet">
-        <link href="../articles/articles.css" type="text/css" rel="stylesheet">
-        <link href="../articles/website-style-guide.css" type="text/css" rel="stylesheet">
-        <link rel="icon" href="../resources/icons/TH-logo.png" type="image/x-icon">
-        <meta property="og:title" content="Website Style Guide - Terrance's Playground">
-        <meta property="og:description" content="A working guide to the colours, typography, photo layouts and shared navigation behind terrancehah.com — and the room each project gets to keep its own character.">
-        <meta property="og:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
-        <meta property="og:type" content="article">
-        <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
-        <link rel="canonical" href="https://terrancehah.com/articles/my-website-style-guide">
-        <meta property="og:url" content="https://terrancehah.com/articles/my-website-style-guide">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="../styles/output.css" rel="stylesheet" />
+		<link href="../styles/style.css" type="text/css" rel="stylesheet" />
+		<link
+			href="../articles/articles.css"
+			type="text/css"
+			rel="stylesheet" />
+		<link
+			href="../articles/website-style-guide.css"
+			type="text/css"
+			rel="stylesheet" />
+		<link
+			rel="icon"
+			href="../resources/icons/TH-logo.png"
+			type="image/x-icon" />
+		<meta
+			property="og:title"
+			content="Website Style Guide - Terrance's Playground" />
+		<meta
+			property="og:description"
+			content="A working guide to the colours, typography, photo layouts and shared navigation behind terrancehah.com — and the room each project gets to keep its own character." />
+		<meta
+			property="og:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
+		<meta property="og:type" content="article" />
+		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
+		<link
+			rel="canonical"
+			href="https://terrancehah.com/articles/my-website-style-guide" />
+		<meta
+			property="og:url"
+			content="https://terrancehah.com/articles/my-website-style-guide" />
 
-        <script src="../js/footer.js"></script>
-        <title>Website Style Guide - Terrance's Playground</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Baskervville:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;500;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Momo+Trust+Display&family=Quattrocento+Sans:wght@400;700&display=swap');
-        </style>
-            <!-- Vercel Analytics -->
-        <script>
-          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-        </script>
-        <script defer src="/_vercel/insights/script.js"></script>
-    </head>
+		<script src="../js/footer.js"></script>
+		<title>Website Style Guide - Terrance's Playground</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Baskervville:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;500;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Momo+Trust+Display&family=Quattrocento+Sans:wght@400;700&display=swap");
+		</style>
+		<!-- Vercel Analytics -->
+		<script>
+			window.va =
+				window.va ||
+				function () {
+					(window.vaq = window.vaq || []).push(arguments);
+				};
+		</script>
+		<script defer src="/_vercel/insights/script.js"></script>
+		<script defer src="/js/article-reading.js"></script>
+	</head>
 
-    <body class="m-0 relative h-full bg-white overflow-x-hidden">
-        <header class="site-header">
-            <div class="site-header-inner">
-                <!-- Left: Logo & Title -->
-                <div class="site-header-brand">
-                    <h1 class="site-header-title">
-                        Terrance's Playground
-                    </h1>
-                </div>
+	<body class="m-0 relative h-full bg-white overflow-x-hidden">
+		<header class="site-header">
+			<div class="site-header-inner">
+				<!-- Left: Logo & Title -->
+				<div class="site-header-brand">
+					<h1 class="site-header-title">Terrance's Playground</h1>
+				</div>
 
-                <!-- Middle: Nav buttons -->
-                <nav class="site-nav">
-                    <a href="/">Home</a>
-                    <a href="../articles.html" aria-current="location">Articles</a>
-                    <a href="../projects.html">Projects</a>
-                    <a href="../playground.html">Playground</a>
-                </nav>
-            
-                <!-- Right side: Social Icons -->
-                <div class="site-social-links">
-                    <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="../resources/icons/facebook.png" alt="facebook" class="site-social-icon">
-                    </a>
-                    <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="../resources/icons/instagram.png" alt="instagram" class="site-social-icon">
-                    </a>
-                    <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
-                        <img src="../resources/icons/x.png" alt="x" class="site-social-icon">
-                    </a>
-                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="../resources/icons/linkedin.png" alt="linkedin" class="site-social-icon">
-                    </a>
-                    <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
-                        <img src="../resources/icons/github.png" alt="github" class="site-social-icon">
-                    </a>
-                </div>
-            </div>
-        </header>
-    
-        <main class="article-container" id="style-guide-top">
-            <article class="article-content">
-                <h1 class="article-title">My Website Style Guide</h1>
-                <p class="article-date">updated on 16 October 2026</p>
-                
-                <div class="article-body website-style-guide">
-                    <!-- What this page is: a visual reference, not a rules essay. -->
-                    <p class="style-guide-caption">A specimen sheet for terrancehah.com — the pieces below are drawn from the stylesheets that actually ship the site. It documents this site's habits; each project keeps its own materials.</p>
+				<!-- Middle: Nav buttons -->
+				<nav class="site-nav">
+					<a href="/">Home</a>
+					<a href="../articles.html" aria-current="location"
+						>Articles</a
+					>
+					<a href="../projects.html">Projects</a>
+					<a href="../playground.html">Playground</a>
+				</nav>
 
-                    <!-- Colour: swatch grids, one group per palette. -->
-                    <section>
-                        <h2 class="article-subtitle">Colours</h2>
-                        <p class="style-guide-caption">A small palette where each colour has a job — navy carries headings, steel blue carries links, the pale tones sit on surfaces and hovers.</p>
-                        <div class="style-guide-swatch-group">
-                            <h3 class="style-guide-group-label">Site palette</h3>
-                            <div class="style-guide-swatch-grid">
-                                <figure class="style-guide-swatch" style="--swatch-color: #1d3557">
-                                    <span class="style-guide-swatch-block"></span>
-                                    <figcaption>Navy — headings and strong text<span class="style-guide-swatch-hex">#1d3557</span></figcaption>
-                                </figure>
-                                <figure class="style-guide-swatch" style="--swatch-color: #457b9d">
-                                    <span class="style-guide-swatch-block"></span>
-                                    <figcaption>Steel blue — links and accents<span class="style-guide-swatch-hex">#457b9d</span></figcaption>
-                                </figure>
-                                <figure class="style-guide-swatch" style="--swatch-color: #c0e9fc">
-                                    <span class="style-guide-swatch-block"></span>
-                                    <figcaption>Pale sky — hover highlights<span class="style-guide-swatch-hex">#c0e9fc</span></figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="style-guide-swatch-group">
-                            <h3 class="style-guide-group-label">Homepage chapters</h3>
-                            <div class="style-guide-swatch-grid">
-                                <figure class="style-guide-swatch" style="--swatch-color: #1e4620">
-                                    <span class="style-guide-swatch-block"></span>
-                                    <figcaption>Nature ink — homepage text<span class="style-guide-swatch-hex">#1e4620</span></figcaption>
-                                </figure>
-                                <figure class="style-guide-swatch" style="--swatch-color: #447f46">
-                                    <span class="style-guide-swatch-block"></span>
-                                    <figcaption>Nature accent — homepage buttons<span class="style-guide-swatch-hex">#447f46</span></figcaption>
-                                </figure>
-                                <figure class="style-guide-swatch" style="--swatch-color: #d4edda">
-                                    <span class="style-guide-swatch-block"></span>
-                                    <figcaption>Nature surface — personal sections<span class="style-guide-swatch-hex">#d4edda</span></figcaption>
-                                </figure>
-                                <figure class="style-guide-swatch" style="--swatch-color: #cfe2f3">
-                                    <span class="style-guide-swatch-block"></span>
-                                    <figcaption>Tech surface — work sections<span class="style-guide-swatch-hex">#cfe2f3</span></figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                    </section>
+				<!-- Right side: Social Icons -->
+				<div class="site-social-links">
+					<a
+						href="https://facebook.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="../resources/icons/facebook.png"
+							alt="facebook"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://instagram.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="../resources/icons/instagram.png"
+							alt="instagram"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://x.com/terrance_hah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="../resources/icons/x.png"
+							alt="x"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://www.linkedin.com/in/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="../resources/icons/linkedin.png"
+							alt="linkedin"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://github.com/terrancehah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="../resources/icons/github.png"
+							alt="github"
+							class="site-social-icon" />
+					</a>
+				</div>
+			</div>
+		</header>
 
-                    <!-- Type: each face rendering the kind of text it carries. -->
-                    <section>
-                        <h2 class="article-subtitle">Type</h2>
-                        <p class="style-guide-caption">Four faces, each with one job.</p>
-                        <div class="style-guide-type-grid">
-                            <figure class="style-guide-type">
-                                <figcaption>Lato — site name and headings</figcaption>
-                                <p class="style-guide-sample style-guide-sample-lato">Terrance's Playground</p>
-                            </figure>
-                            <figure class="style-guide-type">
-                                <figcaption>Raleway — navigation and card titles</figcaption>
-                                <p class="style-guide-sample style-guide-sample-raleway">Mount Kinabalu, 30–31 March 2026</p>
-                            </figure>
-                            <figure class="style-guide-type">
-                                <figcaption>Baskervville — article prose and summaries</figcaption>
-                                <p class="style-guide-sample style-guide-sample-baskervville">Jungle trekking makes me question the relationship between human and nature.</p>
-                            </figure>
-                            <figure class="style-guide-type">
-                                <figcaption>Caveat — pull quotes and margin notes</figcaption>
-                                <p class="style-guide-sample style-guide-sample-caveat">“Probably just another ordinary hike.”</p>
-                            </figure>
-                        </div>
-                    </section>
+		<main class="article-container" id="style-guide-top">
+			<article class="article-content">
+				<h1 class="article-title">My Website Style Guide</h1>
+				<p class="article-date">updated on 16 October 2026</p>
 
-                    <!-- Page hierarchy: how the faces compose on an article page. -->
-                    <section>
-                        <h2 class="article-subtitle">Page hierarchy</h2>
-                        <p class="style-guide-caption">How an article page composes the faces — Lato title and subheading, Raleway date, Baskervville prose.</p>
-                        <div class="style-guide-hierarchy">
-                            <p class="style-guide-hier-title">RPE in Running: What Pace and Heart Rate Don’t Tell You</p>
-                            <p class="style-guide-hier-date">written on 16 October 2026</p>
-                            <h3 class="style-guide-hier-sub">Why pace alone lies to you</h3>
-                            <p class="style-guide-hier-body">Heart rate drifts with heat, sleep and caffeine; pace drifts with wind and hills. RPE is the honest signal underneath both — what the effort actually felt like.</p>
-                        </div>
-                    </section>
+				<div class="article-body website-style-guide">
+					<!-- What this page is: a visual reference, not a rules essay. -->
+					<p class="style-guide-caption">
+						A specimen sheet for terrancehah.com — the pieces below
+						are drawn from the stylesheets that actually ship the
+						site. It documents this site's habits; each project
+						keeps its own materials.
+					</p>
 
-                    <!-- Navigation: the real header row, the live footer nav markup,
+					<!-- Colour: swatch grids, one group per palette. -->
+					<section>
+						<h2 class="article-subtitle">Colours</h2>
+						<p class="style-guide-caption">
+							A small palette where each colour has a job — navy
+							carries headings, steel blue carries links, the pale
+							tones sit on surfaces and hovers.
+						</p>
+						<div class="style-guide-swatch-group">
+							<h3 class="style-guide-group-label">
+								Site palette
+							</h3>
+							<div class="style-guide-swatch-grid">
+								<figure
+									class="style-guide-swatch"
+									style="--swatch-color: #1d3557">
+									<span
+										class="style-guide-swatch-block"></span>
+									<figcaption>
+										Navy — headings and strong text<span
+											class="style-guide-swatch-hex"
+											>#1d3557</span
+										>
+									</figcaption>
+								</figure>
+								<figure
+									class="style-guide-swatch"
+									style="--swatch-color: #457b9d">
+									<span
+										class="style-guide-swatch-block"></span>
+									<figcaption>
+										Steel blue — links and accents<span
+											class="style-guide-swatch-hex"
+											>#457b9d</span
+										>
+									</figcaption>
+								</figure>
+								<figure
+									class="style-guide-swatch"
+									style="--swatch-color: #c0e9fc">
+									<span
+										class="style-guide-swatch-block"></span>
+									<figcaption>
+										Pale sky — hover highlights<span
+											class="style-guide-swatch-hex"
+											>#c0e9fc</span
+										>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
+						<div class="style-guide-swatch-group">
+							<h3 class="style-guide-group-label">
+								Homepage chapters
+							</h3>
+							<div class="style-guide-swatch-grid">
+								<figure
+									class="style-guide-swatch"
+									style="--swatch-color: #1e4620">
+									<span
+										class="style-guide-swatch-block"></span>
+									<figcaption>
+										Nature ink — homepage text<span
+											class="style-guide-swatch-hex"
+											>#1e4620</span
+										>
+									</figcaption>
+								</figure>
+								<figure
+									class="style-guide-swatch"
+									style="--swatch-color: #447f46">
+									<span
+										class="style-guide-swatch-block"></span>
+									<figcaption>
+										Nature accent — homepage buttons<span
+											class="style-guide-swatch-hex"
+											>#447f46</span
+										>
+									</figcaption>
+								</figure>
+								<figure
+									class="style-guide-swatch"
+									style="--swatch-color: #d4edda">
+									<span
+										class="style-guide-swatch-block"></span>
+									<figcaption>
+										Nature surface — personal sections<span
+											class="style-guide-swatch-hex"
+											>#d4edda</span
+										>
+									</figcaption>
+								</figure>
+								<figure
+									class="style-guide-swatch"
+									style="--swatch-color: #cfe2f3">
+									<span
+										class="style-guide-swatch-block"></span>
+									<figcaption>
+										Tech surface — work sections<span
+											class="style-guide-swatch-hex"
+											>#cfe2f3</span
+										>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
+					</section>
+
+					<!-- Type: each face rendering the kind of text it carries. -->
+					<section>
+						<h2 class="article-subtitle">Type</h2>
+						<p class="style-guide-caption">
+							Four faces, each with one job.
+						</p>
+						<div class="style-guide-type-grid">
+							<figure class="style-guide-type">
+								<figcaption>
+									Lato — site name and headings
+								</figcaption>
+								<p
+									class="style-guide-sample style-guide-sample-lato">
+									Terrance's Playground
+								</p>
+							</figure>
+							<figure class="style-guide-type">
+								<figcaption>
+									Raleway — navigation and card titles
+								</figcaption>
+								<p
+									class="style-guide-sample style-guide-sample-raleway">
+									Mount Kinabalu, 30–31 March 2026
+								</p>
+							</figure>
+							<figure class="style-guide-type">
+								<figcaption>
+									Baskervville — article prose and summaries
+								</figcaption>
+								<p
+									class="style-guide-sample style-guide-sample-baskervville">
+									Jungle trekking makes me question the
+									relationship between human and nature.
+								</p>
+							</figure>
+							<figure class="style-guide-type">
+								<figcaption>
+									Caveat — pull quotes and margin notes
+								</figcaption>
+								<p
+									class="style-guide-sample style-guide-sample-caveat">
+									“Probably just another ordinary hike.”
+								</p>
+							</figure>
+						</div>
+					</section>
+
+					<!-- Page hierarchy: how the faces compose on an article page. -->
+					<section>
+						<h2 class="article-subtitle">Page hierarchy</h2>
+						<p class="style-guide-caption">
+							How an article page composes the faces — Lato title
+							and subheading, Raleway date, Baskervville prose.
+						</p>
+						<div class="style-guide-hierarchy">
+							<p class="style-guide-hier-title">
+								RPE in Running: What Pace and Heart Rate Don’t
+								Tell You
+							</p>
+							<p class="style-guide-hier-date">
+								written on 16 October 2026
+							</p>
+							<h3 class="style-guide-hier-sub">
+								Why pace alone lies to you
+							</h3>
+							<p class="style-guide-hier-body">
+								Heart rate drifts with heat, sleep and caffeine;
+								pace drifts with wind and hills. RPE is the
+								honest signal underneath both — what the effort
+								actually felt like.
+							</p>
+						</div>
+					</section>
+
+					<!-- Navigation: the real header row, the live footer nav markup,
                          and the back-to-top button as a working anchor. -->
-                    <section>
-                        <h2 class="article-subtitle">Navigation and controls</h2>
-                        <p class="style-guide-caption">The main pages and the older articles and projects that share the site footer all carry the same four destinations — header at the top, footer at the bottom, and a small back-to-top button that appears after one viewport of scrolling.</p>
-                        <p class="style-guide-preview-label">Header — the same .site-nav markup every main page carries; Articles marks "location" here because this page is an article</p>
-                        <div class="style-guide-header-nav">
-                            <nav class="site-nav" aria-label="Header preview">
-                                <a href="/">Home</a>
-                                <a href="../articles.html" aria-current="location">Articles</a>
-                                <a href="../projects.html">Projects</a>
-                                <a href="../playground.html">Playground</a>
-                            </nav>
-                        </div>
-                        <p class="style-guide-preview-label">Footer — the same markup footer.js injects; quiet text links, hairline separators, 36px targets, no current-page highlight</p>
-                        <div class="style-guide-footer-frame">
-                            <nav class="site-footer-nav" aria-label="Footer preview">
-                                <a href="/">Home</a>
-                                <a href="../articles.html" aria-current="location">Articles</a>
-                                <a href="../projects.html">Projects</a>
-                                <a href="../playground.html">Playground</a>
-                            </nav>
-                        </div>
-                        <div class="style-guide-backtop-row">
-                            <a class="style-guide-back-top" href="#style-guide-top" aria-label="Back to top" title="Back to top">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V7"/><path d="m6 13 6-6 6 6"/><path d="M5 4h14"/></svg>
-                            </a>
-                            <p class="style-guide-backtop-note">Back to top — this one is a real link; try it after scrolling.</p>
-                        </div>
-                    </section>
+					<section>
+						<h2 class="article-subtitle">
+							Navigation and controls
+						</h2>
+						<p class="style-guide-caption">
+							The main pages and the older articles and projects
+							that share the site footer all carry the same four
+							destinations — header at the top, footer at the
+							bottom, and a small back-to-top button that appears
+							after one viewport of scrolling.
+						</p>
+						<p class="style-guide-preview-label">
+							Header — the same .site-nav markup every main page
+							carries; Articles marks "location" here because this
+							page is an article
+						</p>
+						<div class="style-guide-header-nav">
+							<nav class="site-nav" aria-label="Header preview">
+								<a href="/">Home</a>
+								<a
+									href="../articles.html"
+									aria-current="location"
+									>Articles</a
+								>
+								<a href="../projects.html">Projects</a>
+								<a href="../playground.html">Playground</a>
+							</nav>
+						</div>
+						<p class="style-guide-preview-label">
+							Footer — the same markup footer.js injects; quiet
+							text links, hairline separators, 36px targets, no
+							current-page highlight
+						</p>
+						<div class="style-guide-footer-frame">
+							<nav
+								class="site-footer-nav"
+								aria-label="Footer preview">
+								<a href="/">Home</a>
+								<a
+									href="../articles.html"
+									aria-current="location"
+									>Articles</a
+								>
+								<a href="../projects.html">Projects</a>
+								<a href="../playground.html">Playground</a>
+							</nav>
+						</div>
+						<div class="style-guide-backtop-row">
+							<a
+								class="style-guide-back-top"
+								href="#style-guide-top"
+								aria-label="Back to top"
+								title="Back to top">
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.75"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+									focusable="false">
+									<path d="M12 19V7" />
+									<path d="m6 13 6-6 6 6" />
+									<path d="M5 4h14" />
+								</svg>
+							</a>
+							<p class="style-guide-backtop-note">
+								Back to top — this one is a real link; try it
+								after scrolling.
+							</p>
+						</div>
+					</section>
 
-                    <!-- Cards: one real card at phone width to show content-driven height. -->
-                    <section>
-                        <h2 class="article-subtitle">Cards on small screens</h2>
-                        <p class="style-guide-caption">Below 640px the listing grids become a single column where each card takes the height its content needs — the full title and date always stay readable, while the summary may clamp to a few lines.</p>
-                        <div class="style-guide-phone">
-                            <article class="style-guide-mini-card">
-                                <img src="../resources/articles/mount-kinabalu/peak-sunrise-og.JPG" alt="Sunrise over Low's Peak, Mount Kinabalu" loading="lazy">
-                                <div class="style-guide-mini-card-content">
-                                    <h3 class="style-guide-mini-card-title"><a href="./mount-kinabalu.html">Mount Kinabalu, 30-31 March 2026</a></h3>
-                                    <p class="style-guide-mini-card-desc">"Mount Kinabalu is probably just another ordinary hike." — me, before the hike. Well, I was wrong.</p>
-                                    <p class="style-guide-mini-card-date">written on 12 April 2026</p>
-                                </div>
-                            </article>
-                        </div>
-                    </section>
+					<!-- Cards: one real card at phone width to show content-driven height. -->
+					<section>
+						<h2 class="article-subtitle">Cards on small screens</h2>
+						<p class="style-guide-caption">
+							Below 640px the listing grids become a single column
+							where each card takes the height its content needs —
+							the full title and date always stay readable, while
+							the summary may clamp to a few lines.
+						</p>
+						<div class="style-guide-phone">
+							<article class="style-guide-mini-card">
+								<img
+									src="../resources/articles/mount-kinabalu/peak-sunrise-og.JPG"
+									alt="Sunrise over Low's Peak, Mount Kinabalu"
+									loading="lazy" />
+								<div class="style-guide-mini-card-content">
+									<h3 class="style-guide-mini-card-title">
+										<a href="./mount-kinabalu.html"
+											>Mount Kinabalu, 30-31 March 2026</a
+										>
+									</h3>
+									<p class="style-guide-mini-card-desc">
+										"Mount Kinabalu is probably just another
+										ordinary hike." — me, before the hike.
+										Well, I was wrong.
+									</p>
+									<p class="style-guide-mini-card-date">
+										written on 12 April 2026
+									</p>
+								</div>
+							</article>
+						</div>
+					</section>
 
-                    <!-- Project materials: Pacey's board inks in both themes. -->
-                    <section>
-                        <h2 class="article-subtitle">Project materials</h2>
-                        <p class="style-guide-caption">Each project keeps its own skin — these are only ink and paper samples, not the apps themselves. Pacey's board is cork under handwriting type; in its dark mode the cork-side copy warms to cream while the paper stays light.</p>
-                        <div class="style-guide-materials-grid">
-                            <figure class="style-guide-board style-guide-board-light">
-                                <figcaption class="style-guide-board-name">Pacey — day cork</figcaption>
-                                <p class="style-guide-board-heading">Your marathon plan</p>
-                                <p class="style-guide-board-text">Readiness at a glance.</p>
-                                <span class="style-guide-paper-chip">Paper sheet — dark ink</span>
-                                <span class="style-guide-board-hex">#2b2620 / #5f5546 on #f1e7d2</span>
-                            </figure>
-                            <figure class="style-guide-board style-guide-board-dark">
-                                <figcaption class="style-guide-board-name">Pacey — night cork</figcaption>
-                                <p class="style-guide-board-heading">Your marathon plan</p>
-                                <p class="style-guide-board-text">Readiness at a glance.</p>
-                                <span class="style-guide-paper-chip">Paper sheet — still light</span>
-                                <span class="style-guide-board-hex">#f2e9d7 / #e8dfca on #3a2f26</span>
-                            </figure>
+					<!-- Project materials: Pacey's board inks in both themes. -->
+					<section>
+						<h2 class="article-subtitle">Project materials</h2>
+						<p class="style-guide-caption">
+							Each project keeps its own skin — these are only ink
+							and paper samples, not the apps themselves. Pacey's
+							board is cork under handwriting type; in its dark
+							mode the cork-side copy warms to cream while the
+							paper stays light.
+						</p>
+						<div class="style-guide-materials-grid">
+							<figure
+								class="style-guide-board style-guide-board-light">
+								<figcaption class="style-guide-board-name">
+									Pacey — day cork
+								</figcaption>
+								<p class="style-guide-board-heading">
+									Your marathon plan
+								</p>
+								<p class="style-guide-board-text">
+									Readiness at a glance.
+								</p>
+								<span class="style-guide-paper-chip"
+									>Paper sheet — dark ink</span
+								>
+								<span class="style-guide-board-hex"
+									>#2b2620 / #5f5546 on #f1e7d2</span
+								>
+							</figure>
+							<figure
+								class="style-guide-board style-guide-board-dark">
+								<figcaption class="style-guide-board-name">
+									Pacey — night cork
+								</figcaption>
+								<p class="style-guide-board-heading">
+									Your marathon plan
+								</p>
+								<p class="style-guide-board-text">
+									Readiness at a glance.
+								</p>
+								<span class="style-guide-paper-chip"
+									>Paper sheet — still light</span
+								>
+								<span class="style-guide-board-hex"
+									>#f2e9d7 / #e8dfca on #3a2f26</span
+								>
+							</figure>
 
-                            <!-- Biwa: quiet autumn journal — flat fills, Momo Trust
+							<!-- Biwa: quiet autumn journal — flat fills, Momo Trust
                                  Display heading, Quattrocento Sans body. -->
-                            <figure class="style-guide-board style-guide-biwa">
-                                <figcaption class="style-guide-board-name">Biwa — ride journal</figcaption>
-                                <p class="style-guide-biwa-heading">Lake Biwa ride</p>
-                                <span class="style-guide-biwa-tag">Day 1 · Ōtsu → Hikone</span>
-                                <span class="style-guide-biwa-stop">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                                    Omi-Hachiman <small>· sample stop</small>
-                                </span>
-                                <a class="style-guide-biwa-link" href="/projects/biwa-ride/">Explore the ride</a>
-                                <span class="style-guide-strip">
-                                    <span class="style-guide-strip-chip" style="--chip: #eee2df"></span>
-                                    <span class="style-guide-strip-chip" style="--chip: #eed7c5"></span>
-                                    <span class="style-guide-strip-chip" style="--chip: #c97c5d"></span>
-                                    <span class="style-guide-strip-chip" style="--chip: #b36a5e"></span>
-                                    <span class="style-guide-strip-chip" style="--chip: #2f5d6f"></span>
-                                </span>
-                                <span class="style-guide-board-hex">Momo Trust Display + Quattrocento Sans · #eee2df #eed7c5 #c97c5d #b36a5e #2f5d6f</span>
-                            </figure>
+							<figure class="style-guide-board style-guide-biwa">
+								<figcaption class="style-guide-board-name">
+									Biwa — ride journal
+								</figcaption>
+								<p class="style-guide-biwa-heading">
+									Lake Biwa ride
+								</p>
+								<span class="style-guide-biwa-tag"
+									>Day 1 · Ōtsu → Hikone</span
+								>
+								<span class="style-guide-biwa-stop">
+									<svg
+										width="14"
+										height="14"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+										focusable="false">
+										<path
+											d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+										<circle cx="12" cy="10" r="3" />
+									</svg>
+									Omi-Hachiman <small>· sample stop</small>
+								</span>
+								<a
+									class="style-guide-biwa-link"
+									href="/projects/biwa-ride/"
+									>Explore the ride</a
+								>
+								<span class="style-guide-strip">
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #eee2df"></span>
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #eed7c5"></span>
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #c97c5d"></span>
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #b36a5e"></span>
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #2f5d6f"></span>
+								</span>
+								<span class="style-guide-board-hex"
+									>Momo Trust Display + Quattrocento Sans ·
+									#eee2df #eed7c5 #c97c5d #b36a5e
+									#2f5d6f</span
+								>
+							</figure>
 
-                            <!-- Travel-Rizz: sampled from styles/travel-rizz.module.css —
+							<!-- Travel-Rizz: sampled from styles/travel-rizz.module.css —
                                  the hosted app is separate and may have moved on. -->
-                            <figure class="style-guide-board style-guide-rizz">
-                                <figcaption class="style-guide-board-name">Travel-Rizz / local planner styles</figcaption>
-                                <p class="style-guide-rizz-heading">Travel-Rizz</p>
-                                <p class="style-guide-rizz-sub">Sketch the trip, share the plan.</p>
-                                <span class="style-guide-rizz-slip">Kyoto · 3 days — sample itinerary</span>
-                                <a class="style-guide-rizz-link" href="https://www.travelrizz.app" target="_blank" rel="noopener">Explore Travel-Rizz</a>
-                                <span class="style-guide-strip">
-                                    <span class="style-guide-strip-chip" style="--chip: #123456"></span>
-                                    <span class="style-guide-strip-chip" style="--chip: #456789"></span>
-                                    <span class="style-guide-strip-chip" style="--chip: #4a88c6"></span>
-                                    <span class="style-guide-strip-chip" style="--chip: #ecf8ff"></span>
-                                </span>
-                                <span class="style-guide-board-hex">Caveat + Raleway · #123456 #456789 #4a88c6 #ecf8ff · sampled from styles/travel-rizz.module.css, not a live guarantee</span>
-                            </figure>
-                        </div>
-                    </section>
+							<figure class="style-guide-board style-guide-rizz">
+								<figcaption class="style-guide-board-name">
+									Travel-Rizz / local planner styles
+								</figcaption>
+								<p class="style-guide-rizz-heading">
+									Travel-Rizz
+								</p>
+								<p class="style-guide-rizz-sub">
+									Sketch the trip, share the plan.
+								</p>
+								<span class="style-guide-rizz-slip"
+									>Kyoto · 3 days — sample itinerary</span
+								>
+								<a
+									class="style-guide-rizz-link"
+									href="https://www.travelrizz.app"
+									target="_blank"
+									rel="noopener"
+									>Explore Travel-Rizz</a
+								>
+								<span class="style-guide-strip">
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #123456"></span>
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #456789"></span>
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #4a88c6"></span>
+									<span
+										class="style-guide-strip-chip"
+										style="--chip: #ecf8ff"></span>
+								</span>
+								<span class="style-guide-board-hex"
+									>Caveat + Raleway · #123456 #456789 #4a88c6
+									#ecf8ff · sampled from
+									styles/travel-rizz.module.css, not a live
+									guarantee</span
+								>
+							</figure>
+						</div>
+					</section>
 
-                    <!-- Where the implementation actually lives. -->
-                    <p class="style-guide-footnote">Source of truth: <code>js/footer.js</code>, <code>styles/site-footer.css</code>, <code>styles/style.css</code>, <code>styles/homepage.css</code>, <code>articles/articles.css</code> and each project's own stylesheet. Older pages add pre-generated utility CSS — there is no live Tailwind build step.</p>
-                </div>
-            </article>
-        </main>
+					<!-- Where the implementation actually lives. -->
+					<p class="style-guide-footnote">
+						Source of truth: <code>js/footer.js</code>,
+						<code>styles/site-footer.css</code>,
+						<code>styles/site-typography.css</code>,
+						<code>styles/style.css</code>,
+						<code>styles/homepage.css</code>,
+						<code>articles/articles.css</code> and each project's
+						own stylesheet. Older pages add pre-generated utility
+						CSS — there is no live Tailwind build step.
+					</p>
+				</div>
+			</article>
+		</main>
 
-        <!-- Footer will be inserted by footer.js -->
-    </body>
+		<!-- Footer will be inserted by footer.js -->
+	</body>
 </html>

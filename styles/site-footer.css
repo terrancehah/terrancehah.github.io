@@ -6,102 +6,116 @@
    style.css also @imports it so the main pages need no extra link.
    ============================================ */
 
+/* Shared type scale — site-typography.css is tokens-only, so this
+   import can never restyle a page by itself. */
+@import "./site-typography.css";
+
 /* Site footer: a constrained inner row with a hairline top
    separator. Desktop keeps the nav left and the credit lines
    right; narrow screens stack them left-aligned. The shell itself
    adds zero outer spacing — any per-page margin/padding on the
    footer element must not leak in. */
 .site-footer {
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid rgba(29, 53, 87, 0.15); /* faint navy */
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid rgba(29, 53, 87, 0.15); /* faint navy */
 }
 
 .site-footer-inner {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: clamp(1rem, 3vw, 2rem);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 1.5rem;
+	max-width: 80rem;
+	margin: 0 auto;
+	padding: clamp(1rem, 3vw, 2rem);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem 1.5rem;
 }
 
 /* Footer nav: a single quiet horizontal row. Links never wrap;
    adjacent links share a 1px separator instead of visible divider
    characters. Sized so the four labels fit a 320px viewport. */
 .site-footer-nav {
-    display: flex;
-    flex-wrap: nowrap;
+	display: flex;
+	flex-wrap: nowrap;
 }
 
 .site-footer-nav a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 36px; /* tap target */
-    padding: 0 0.5rem;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 1;
-    white-space: nowrap;
-    color: #457b9d; /* tech-500 steel blue — same as header links */
-    text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 36px; /* tap target */
+	padding: 0 0.5rem;
+	font-family: var(--site-font-nav);
+	font-weight: 500;
+	/* Footer wayfinding shares the header's navigation size. */
+	font-size: var(--site-text-navigation);
+	line-height: var(--site-leading-nav);
+	white-space: nowrap;
+	color: #457b9d; /* tech-500 steel blue — same as header links */
+	text-decoration: none;
 }
 
 /* 1px separators only between adjacent links */
 .site-footer-nav a + a {
-    border-left: 1px solid rgba(29, 53, 87, 0.2);
+	border-left: 1px solid rgba(29, 53, 87, 0.2);
 }
 
 .site-footer-nav a:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
+	text-decoration: underline;
+	text-underline-offset: 0.25em;
 }
 
 /* aria-current stays in the markup for assistive tech but carries
    no bold/underline styling — the nav stays visually quiet */
 .site-footer-nav a:focus-visible {
-    outline: 2px solid #457b9d;
-    outline-offset: 2px;
+	outline: 2px solid #457b9d;
+	outline-offset: 2px;
 }
 
 /* Credit lines: small plain paragraphs — the cookie notice sits
    below the copyright at a slightly smaller, more muted size. */
 .site-footer-meta {
-    text-align: right;
+	text-align: right;
 }
 
 .site-footer-credit,
 .site-footer-notice {
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: #1d3557; /* navy */
+	margin: 0;
+	font-family: "Lato", sans-serif;
+	font-weight: 400;
+	font-size: var(--site-text-caption);
+	line-height: 1.5;
+	color: #1d3557; /* navy */
 }
 
 .site-footer-notice {
-    font-size: 0.8125rem;
-    color: rgba(29, 53, 87, 0.7); /* muted navy — subordinate */
-    margin-top: 0.25rem;
+	font-size: var(--site-text-small);
+	color: rgba(29, 53, 87, 0.7); /* muted navy — subordinate */
+	margin-top: 0.25rem;
+}
+
+/* Narrowest phones: at the shared 16px navigation size the four links
+   with their default padding overflow a 320px row — halve the inline
+   padding so the single row still fits. */
+@media (max-width: 400px) {
+	.site-footer-nav a {
+		padding-inline: 0.25rem;
+	}
 }
 
 /* Phones: stack nav above the credits, everything left-aligned */
 @media (max-width: 640px) {
-    .site-footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-top: 0;
-    }
+	.site-footer-inner {
+		flex-direction: column;
+		align-items: flex-start;
+		padding-top: 0;
+	}
 
-    .site-footer-meta {
-        text-align: left;
-        margin-left: 0.5rem;
-    }
+	.site-footer-meta {
+		text-align: left;
+		margin-left: 0.5rem;
+	}
 }
 
 /* Back-to-top: small fixed 44px button in the bottom-right corner.
@@ -109,41 +123,41 @@
    mobile, and offset by the device's safe-area insets where
    present. */
 .back-to-top {
-    position: fixed;
-    right: max(1rem, env(safe-area-inset-right));
-    bottom: max(1rem, env(safe-area-inset-bottom));
-    z-index: 50;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: none;
-    border-radius: 8px;
-    background-color: #1d3557; /* navy — site primary */
-    color: #ffffff;
-    font-family: 'Raleway', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+	position: fixed;
+	right: max(1rem, env(safe-area-inset-right));
+	bottom: max(1rem, env(safe-area-inset-bottom));
+	z-index: 50;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border: none;
+	border-radius: 8px;
+	background-color: #1d3557; /* navy — site primary */
+	color: #ffffff;
+	font-family: "Raleway", sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1;
+	cursor: pointer;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 /* inline-flex above would beat the UA's [hidden] rule, so the
    hidden state is restated here at higher specificity */
 .back-to-top[hidden] {
-    display: none;
+	display: none;
 }
 
 .back-to-top:hover {
-    background-color: #457b9d; /* steel blue */
+	background-color: #457b9d; /* steel blue */
 }
 
 .back-to-top:focus-visible {
-    outline: 2px solid #457b9d;
-    outline-offset: 2px;
+	outline: 2px solid #457b9d;
+	outline-offset: 2px;
 }
 
 /* Homepage skin — the only page-specific footer surface: light-blue
@@ -151,46 +165,46 @@
    follow: green links like the homepage header, navy credit text
    matching the old footer copy colour. */
 body.home-page > footer.site-footer {
-    background-color: #cfe2f3;
-    border-top-color: rgba(12, 35, 64, 0.08);
-    margin-top: 0;
+	background-color: #cfe2f3;
+	border-top-color: rgba(12, 35, 64, 0.08);
+	margin-top: 0;
 }
 
 body.home-page .site-footer-nav a {
-    color: #1e4620; /* nature-900 */
+	color: #1e4620; /* nature-900 */
 }
 
 body.home-page .site-footer-nav a + a {
-    border-color: rgba(30, 70, 32, 0.25); /* faint green separator */
+	border-color: rgba(30, 70, 32, 0.25); /* faint green separator */
 }
 
 body.home-page .site-footer-nav a:focus-visible {
-    outline-color: #447f46; /* nature-500 */
+	outline-color: #447f46; /* nature-500 */
 }
 
 body.home-page .site-footer-credit {
-    color: #0c2340; /* tech-900 — same navy as the old copyright */
+	color: #0c2340; /* tech-900 — same navy as the old copyright */
 }
 
 body.home-page .site-footer-notice {
-    color: rgba(12, 35, 64, 0.7);
+	color: rgba(12, 35, 64, 0.7);
 }
 
 body.home-page .back-to-top {
-    background-color: #447f46; /* nature-500 */
+	background-color: #447f46; /* nature-500 */
 }
 
 body.home-page .back-to-top:hover {
-    background-color: #3f7b4f; /* nature-600 */
+	background-color: #3f7b4f; /* nature-600 */
 }
 
 body.home-page .back-to-top:focus-visible {
-    outline-color: #447f46;
+	outline-color: #447f46;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    /* Instant show/hide; the JS also uses a non-smooth scrollTo */
-    .back-to-top {
-        transition: none;
-    }
+	/* Instant show/hide; the JS also uses a non-smooth scrollTo */
+	.back-to-top {
+		transition: none;
+	}
 }

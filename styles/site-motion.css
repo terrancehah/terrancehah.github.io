@@ -1,0 +1,45 @@
+/* ============================================
+   SITE MOTION — shared interaction feedback
+   --------------------------------------------
+   Small shared motion primitives. The rules here today are touch
+   press feedback and reduced-motion guards.
+
+   Markup hook: add .site-pressable to a card/link element — every
+   consumer today is an <article> card or an <a> tile, so the
+   selector is :is(article, a).site-pressable. Specificity is the
+   reason for the element in :is(): (0,2,1) outranks the page-level
+   .card:active (0,2,0) and the homepage's .photo-fade.photo-visible
+   (0,2,0) even though the page sheets load after this one — a bare
+   .site-pressable:active would tie (0,2,0) and lose the cascade.
+   ============================================ */
+
+/* Coarse pointers get no hover lift, so a gentle inward scale while
+   pressed gives tappable cards a physical response instead. The
+   :hover rules themselves are gated to (hover: hover) in the page
+   sheets, so nothing sticky conflicts with this. */
+@media (hover: none), (pointer: coarse) {
+	:is(article, a).site-pressable:active {
+		transform: scale(0.985);
+		transition: transform 120ms ease-out;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	/* No press scale at all for reduced-motion users. */
+	:is(article, a).site-pressable:active {
+		transform: none;
+		transition: none;
+	}
+
+	/* The desktop hover lift/zoom is not otherwise reduced — suppress
+	   it here too so motion-sensitive users get a static page. */
+	:is(article, a).site-pressable:hover {
+		transform: none;
+		transition: none;
+	}
+
+	:is(article, a).site-pressable img {
+		transform: none;
+		transition: none;
+	}
+}

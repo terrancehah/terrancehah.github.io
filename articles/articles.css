@@ -1,3 +1,6 @@
+/* Shared type scale — tokens only, see styles/site-typography.css. */
+@import '../styles/site-typography.css';
+
 /* Individual Article Content Styles */
 
 /* Article Layout */
@@ -35,7 +38,7 @@
 .article-title {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.875rem, 1.5vw + 1.5rem, 2.5rem);
+    font-size: var(--site-text-page-title);
     color: #1d3557;
     text-align: center;
     line-height: 1.2;
@@ -45,7 +48,7 @@
 .article-date {
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
-    font-size: clamp(0.9375rem, 0.5vw + 0.875rem, 1.125rem);
+    font-size: var(--site-text-caption);
     color: #4b5563;
     text-align: center;
     margin-bottom: 3rem;
@@ -54,37 +57,31 @@
 
 .article-body {
     font-family: 'Baskervville', 'Baskerville', serif;
-    font-size: clamp(1.125rem, 0.8vw + 1rem, 1.375rem);
+    font-size: var(--site-text-body);
     margin-top: 2rem;
 }
 
 .article-subtitle {
     font-family: 'Lato', sans-serif;
     font-weight: 600;
-    font-size: clamp(1.5rem, 1.2vw + 1.25rem, 2rem);
+    font-size: var(--site-text-section-title);
     color: #1d3557;
     margin-top: 3rem;
     margin-bottom: 1.25rem;
-    line-height: 1.3;
+    line-height: var(--site-leading-heading);
 }
 
 
 .article-paragraph {
-    line-height: 1.7;
+    line-height: var(--site-leading-body);
     font-weight: 500;
     font-family: 'Baskervville', 'Baskerville', serif;
     margin-bottom: 1.5rem;
 }
 
-@media (min-width: 768px) {
-    .article-paragraph {
-        line-height: 1.75;
-    }
-}
-
 .article-blockquote {
     font-family: 'Caveat', cursive;
-    font-size: clamp(1.375rem, 1vw + 1.125rem, 1.875rem);
+    font-size: var(--site-text-quote);
     text-align: center;
     margin: 2.5rem auto;
     padding: 0 1rem;
@@ -116,7 +113,7 @@
     width: 90%;
     margin: 0.75rem auto 0;
     font-weight: 300;
-    font-size: clamp(0.9375rem, 0.4vw + 0.875rem, 1.0625rem);
+    font-size: var(--site-text-caption);
     color: #4b5563;
     text-align: center;
     line-height: 1.5;
@@ -186,7 +183,7 @@
 .hero-image-vertical figcaption {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    font-size: clamp(0.9375rem, 0.4vw + 0.875rem, 1.0625rem);
+    font-size: var(--site-text-caption);
     color: #4b5563;
     text-align: center;
     line-height: 1.5;
@@ -289,8 +286,12 @@
     }
 }
 
-.masonry-item:hover .image-container {
-    transform: translateY(-4px);
+/* Pointer-only: hover lift/zoom needs a real hover
+   capable device — coarse pointers get .site-pressable. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .masonry-item:hover .image-container {
+        transform: translateY(-4px);
+    }
 }
 
 /* Images inside masonry container */
@@ -305,7 +306,7 @@
 .masonry-item figcaption {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    font-size: clamp(0.875rem, 0.3vw + 0.8rem, 1rem);
+    font-size: var(--site-text-caption);
     color: #4b5563;
     text-align: center;
     line-height: 1.5;
@@ -333,17 +334,10 @@
 .article-section-title {
     font-family: 'Lato', sans-serif;
     font-weight: 600;
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: var(--site-text-section-title);
+    line-height: var(--site-leading-heading);
     color: #1d3557;
     margin-bottom: 1.5rem;
-}
-
-@media (min-width: 640px) {
-    .article-section-title {
-        font-size: 1.875rem;
-        line-height: 2.25rem;
-    }
 }
 
 /* Article Lists */
@@ -359,7 +353,7 @@
 }
 
 .article-list-item {
-    line-height: 2;
+    line-height: var(--site-leading-body);
     font-weight: 300;
 }
 
@@ -430,7 +424,7 @@
 .journey-grid-item figcaption {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    font-size: clamp(0.9375rem, 0.4vw + 0.875rem, 1.0625rem);
+    font-size: var(--site-text-caption);
     color: #4b5563;
     text-align: center;
     line-height: 1.5;
@@ -498,13 +492,21 @@
     }
 }
 
-.article-hero:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.2), 0 10px 15px -6px rgba(0, 0, 0, 0.15);
+/* Pointer-only: hover lift/zoom needs a real hover
+   capable device — coarse pointers get .site-pressable. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .article-hero:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.2), 0 10px 15px -6px rgba(0, 0, 0, 0.15);
+    }
 }
 
-.article-hero:hover .article-hero-image img {
-    transform: scale(1.05);
+/* Pointer-only: hover lift/zoom needs a real hover
+   capable device — coarse pointers get .site-pressable. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .article-hero:hover .article-hero-image img {
+        transform: scale(1.05);
+    }
 }
 
 .article-hero:active {
@@ -567,7 +569,7 @@
     color: white;
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: var(--site-text-caption);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border-radius: 0.5rem;
@@ -578,7 +580,7 @@
     /* Raleway for hero titles — matches the card titles and nav */
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.5rem, 1.2vw + 0.8rem, 2.25rem);
+    font-size: var(--site-text-feature-title);
     color: white;
     margin-bottom: 1rem;
     line-height: 1.3;
@@ -600,7 +602,7 @@
 .article-hero-description {
     font-family: 'Baskervville', 'Baskerville', serif;
     font-weight: 400;
-    font-size: clamp(1.0625rem, 0.6vw + 0.75rem, 1.375rem);
+    font-size: var(--site-text-body);
     color: rgba(255, 255, 255, 0.95);
     margin-bottom: 1rem;
     line-height: 1.6;
@@ -610,7 +612,7 @@
 .article-hero-date {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    font-size: clamp(0.875rem, 0.3vw + 0.75rem, 1rem);
+    font-size: var(--site-text-caption);
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -732,9 +734,13 @@
     height: 100%;
 }
 
-.article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15), 0 6px 10px -3px rgba(0, 0, 0, 0.1);
+/* Pointer-only: hover lift/zoom needs a real hover
+   capable device — coarse pointers get .site-pressable. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .article-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15), 0 6px 10px -3px rgba(0, 0, 0, 0.1);
+    }
 }
 
 .article-card:active {
@@ -755,8 +761,12 @@
     transition: transform 0.3s ease;
 }
 
-.article-card:hover .article-card-image img {
-    transform: scale(1.08);
+/* Pointer-only: hover lift/zoom needs a real hover
+   capable device — coarse pointers get .site-pressable. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .article-card:hover .article-card-image img {
+        transform: scale(1.08);
+    }
 }
 
 .article-card-content {
@@ -775,22 +785,10 @@
 .article-card-title {
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
-    font-size: clamp(1.125rem, 1vw + 0.5rem, 1.5rem);
+    font-size: var(--site-text-card-title);
     color: #457B9D;
     line-height: 1.4;
     margin: 0;
-}
-
-@media (min-width: 1280px) {
-    .article-card-title {
-        font-size: clamp(1.25rem, 0.8vw + 0.7rem, 1.625rem);
-    }
-}
-
-@media (min-width: 1536px) {
-    .article-card-title {
-        font-size: clamp(1.375rem, 0.6vw + 0.9rem, 1.75rem);
-    }
 }
 
 .article-card:hover .article-card-title {
@@ -813,7 +811,7 @@
 .article-card-description {
     font-family: 'Baskervville', 'Baskerville', serif;
     font-weight: 400;
-    font-size: clamp(1rem, 0.5vw + 0.75rem, 1.25rem);
+    font-size: var(--site-text-summary);
     color: #234960;
     line-height: 1.5;
     overflow: hidden;
@@ -825,18 +823,6 @@
     flex-grow: 1;
 }
 
-@media (min-width: 1280px) {
-    .article-card-description {
-        font-size: clamp(1.125rem, 0.4vw + 0.85rem, 1.375rem);
-    }
-}
-
-@media (min-width: 1536px) {
-    .article-card-description {
-        font-size: clamp(1.1875rem, 0.3vw + 0.95rem, 1.5rem);
-    }
-}
-
 .article-card:hover .article-card-description {
     color: #234960;
 }
@@ -844,8 +830,33 @@
 .article-card-date {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    font-size: clamp(0.875rem, 0.3vw + 0.75rem, 1.125rem);
+    font-size: var(--site-text-caption);
     color: #4b5563;
     margin-top: auto;
 }
 
+
+/* ============================================
+   READING PROGRESS BAR
+   Fixed 3px fill driven by js/article-reading.js — a bare scaleX
+   transform with no transition, so it tracks the scroll exactly.
+   Decorative only (aria-hidden in the markup it injects).
+   ============================================ */
+.article-reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 60; /* above content, below nothing functional */
+    pointer-events: none;
+    background: transparent;
+}
+
+.article-reading-progress-fill {
+    display: block;
+    height: 100%;
+    transform-origin: left center;
+    transform: scaleX(0);
+    background: var(--article-reading-progress-color, #457b9d);
+}

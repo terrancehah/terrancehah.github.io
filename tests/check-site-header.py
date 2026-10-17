@@ -24,6 +24,57 @@ Exits non-zero on any failure.
 import os
 import re
 import sys
+from html.parser import HTMLParser
+
+
+class HeaderParser(HTMLParser):
+    """Extract nav anchors and social links from a <header> fragment.
+    Tolerates multi-line tags — formatters may split attributes and
+    the close of a tag across lines."""
+
+    def __init__(self):
+        super().__init__()
+        self.stack = []            # open tags with their classes
+        self.nav_anchors = []      # [(attrs_dict, text)]
+        self.social_links = []     # [attrs_dict]
+        self.social_imgs = []      # [attrs_dict]
+        self._cur_a = None         # anchor being accumulated
+        self._in_nav = False
+        self._in_socials = False
+
+    @staticmethod
+    def _cls(attrs):
+        return dict(attrs).get("class", "")
+
+    def handle_starttag(self, tag, attrs):
+        cls = self._cls(attrs)
+        if tag == "nav" and "site-nav" in cls:
+            self._in_nav = True
+        if "site-social-links" in cls:
+            self._in_socials = True
+        self.stack.append(cls)
+        if tag == "a" and (self._in_nav or self._in_socials):
+            self._cur_a = [dict(attrs), ""]
+        if tag == "img" and self._in_socials:
+            self.social_imgs.append(dict(attrs))
+
+    def handle_data(self, data):
+        if self._cur_a is not None and self._in_nav:
+            self._cur_a[1] += data
+
+    def handle_endtag(self, tag):
+        if tag == "a" and self._cur_a is not None:
+            if self._in_nav:
+                self.nav_anchors.append((self._cur_a[0],
+                                         self._cur_a[1].strip()))
+            else:
+                self.social_links.append(self._cur_a[0])
+            self._cur_a = None
+        cls = self.stack.pop() if self.stack else ""
+        if tag == "nav" and "site-nav" in cls:
+            self._in_nav = False
+        if "site-social-links" in cls:
+            self._in_socials = False
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(REPO)
@@ -97,37 +148,33 @@ for p in sorted(consumers()):
     for bad in re.findall(r'class="[^"]*(?:md:|lg:|w-\[|w-8|navbutton|contacts)[^"]*"', h):
         FAILS.append(f"{p}: leftover utility/legacy class {bad[:70]}")
 
-    nav = re.search(r'<nav\b[^>]*class="[^"]*site-nav[^"]*"[^>]*>(.*?)</nav>', h, re.S)
-    if not nav:
-        FAILS.append(f"{p}: no .site-nav")
+    hp = HeaderParser()
+    hp.feed(h)
+    if not hp.nav_anchors:
+        FAILS.append(f"{p}: no .site-nav anchors")
     else:
-        anchors = re.findall(r'<a\b([^>]*)>([^<]*)</a>', nav.group(1))
-        labels = [t.strip() for _, t in anchors]
+        labels = [t for _, t in hp.nav_anchors]
         if labels != ["Home", "Articles", "Projects", "Playground"]:
             FAILS.append(f"{p}: nav labels {labels}")
-        for attrs, text in anchors:
-            if "class=" in attrs:
-                FAILS.append(f"{p}: nav anchor {text.strip()!r} still has class")
+        for attrs, text in hp.nav_anchors:
+            if attrs.get("class"):
+                FAILS.append(f"{p}: nav anchor {text!r} still has class")
         exp = expect_current(p)
         if exp:
             label, val = exp
-            mm = re.search(rf'<a\b([^>]*)>\s*{label}\s*</a>', nav.group(1))
-            if not mm or f'aria-current="{val}"' not in mm.group(1):
+            hit = [a for a, t in hp.nav_anchors if t == label]
+            if not hit or hit[0].get("aria-current") != val:
                 FAILS.append(f"{p}: {label} missing aria-current={val}")
 
     # socials: every link a .site-social-link with a .site-social-icon img
-    soc = re.search(r'class="site-social-links"[^>]*>(.*?)</div>', h, re.S)
-    if soc:
-        links = re.findall(r'<a\b[^>]*>', soc.group(1))
-        imgs = re.findall(r'<img\b[^>]*>', soc.group(1))
-        for a in links:
-            if "site-social-link" not in a:
-                FAILS.append(f"{p}: social link without .site-social-link")
-        for i in imgs:
-            if "site-social-icon" not in i:
-                FAILS.append(f"{p}: social img without .site-social-icon")
-        if not links:
-            FAILS.append(f"{p}: empty .site-social-links")
+    if not hp.social_links:
+        FAILS.append(f"{p}: empty .site-social-links")
+    for a in hp.social_links:
+        if "site-social-link" not in a.get("class", ""):
+            FAILS.append(f"{p}: social link without .site-social-link")
+    for i in hp.social_imgs:
+        if "site-social-icon" not in i.get("class", ""):
+            FAILS.append(f"{p}: social img without .site-social-icon")
 
     # stylesheet coverage: direct link, or styles/style.css (imports it)
     direct = "/styles/site-header.css" in s
@@ -142,7 +189,8 @@ for css in ("styles/site-header.css", "styles/site-navigation.css",
 # SSOT assertions on the sheets themselves
 nav_css = open("styles/site-navigation.css").read()
 hdr_css = open("styles/site-header.css").read()
-if "@import './site-navigation.css'" not in hdr_css:
+# quote-tolerant: the file may use single or double quotes
+if not re.search(r"@import\s+['\"]\./site-navigation\.css['\"]", hdr_css):
     FAILS.append("site-header.css does not import site-navigation.css")
 if "grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr)" not in hdr_css:
     FAILS.append("site-header.css missing desktop grid")

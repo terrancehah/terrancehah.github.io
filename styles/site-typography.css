@@ -1,0 +1,57 @@
+/* ============================================
+   SITE TYPOGRAPHY — shared type scale (tokens only)
+   --------------------------------------------
+   Single source of truth for the personal site's text roles.
+   Tokens only — no element or class selectors — so nothing here can
+   restyle a page on its own; components opt in by referencing a
+   --site-text-* / --site-leading-* / --site-font-* custom property.
+
+   Imported by styles/site-navigation.css and styles/site-footer.css
+   (so the five legacy pages that link those sheets directly still get
+   the tokens), and by each page stylesheet that needs them. Repeated
+   imports are harmless: the values are identical and the cascade
+   simply re-declares the same root customs.
+
+   Sizes are rem/clamp-based against the browser default — no root
+   font-size override, so browser zoom keeps working.
+   ============================================ */
+
+/* Centralised font request — the families the shared type scale uses.
+   Several listing pages didn't load Baskervville even though their
+   cards specify it; one request here covers every consumer.
+   Existing page font requests remain for compatibility; this request
+   ensures the shared faces are available. */
+@import url("https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:wght@400;700&family=Raleway:wght@400;500;600;700&display=swap");
+
+:root {
+	/* Families */
+	--site-font-nav: "Raleway", sans-serif;
+
+	/* Type scale — one size per role, shared across every viewport.
+       Fluid roles use clamp() so a single value covers phone→desktop
+       without per-breakpoint overrides. */
+	--site-text-navigation: 1rem; /* header nav + footer nav links */
+	--site-text-caption: 0.875rem; /* dates, captions, badges, cites */
+	--site-text-small: 0.8125rem; /* legal/credits only */
+	--site-text-body: 1.125rem; /* prose, hero + chapter body copy */
+	--site-text-summary: 1rem; /* card descriptions, guide captions */
+	--site-text-card-title: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+	--site-text-feature-title: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+	--site-text-page-title: clamp(1.875rem, 1.5rem + 1.5vw, 2.5rem);
+	--site-text-section-title: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+	--site-text-brand: clamp(1.5rem, 1.25rem + 0.5vw, 1.875rem);
+	--site-text-display: clamp(2.5rem, 1.75rem + 3vw, 4.5rem);
+	--site-text-quote: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);
+
+	/* Homepage-only expressive roles — the chapter collage keeps its
+       oversized titles and the intro/transition copy sits between
+       body and section-title. */
+	--site-text-chapter-title: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+	--site-text-lede: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+	--site-text-tile-title: 1.125rem; /* small photo-tile link titles */
+
+	/* Line heights */
+	--site-leading-body: 1.7;
+	--site-leading-heading: 1.25;
+	--site-leading-nav: 1.5;
+}
