@@ -22,20 +22,20 @@
 .landing-body *,
 .landing-body *::before,
 .landing-body *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .landing-body {
-    margin: 0;
-    min-height: 100vh;
-    background-color: var(--pinboard-cork);
-    /* Board-copy, not root --pacey-text — the board bridge below points it
+	margin: 0;
+	min-height: 100vh;
+	background-color: var(--pinboard-cork);
+	/* Board-copy, not root --pacey-text — the board bridge below points it
        at the same material inks the app's cork and paper use. */
-    color: var(--pacey-board-copy);
-    font-family: var(--font-fuzzy);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+	color: var(--pacey-board-copy);
+	font-family: var(--font-fuzzy);
+	font-size: 1.05rem;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
 }
 
 /* The cork grain sits on its own fixed layer at reduced opacity — same
@@ -43,14 +43,16 @@
    edge instead of fighting the speckle. The colour stays on the body and
    propagates to the canvas; the texture floats over it, behind content. */
 .landing-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image: var(--pinboard-cork-fine), var(--pinboard-cork-noise);
-    background-size: 80px 80px, 220px 220px;
-    opacity: 0.45;
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background-image: var(--pinboard-cork-fine), var(--pinboard-cork-noise);
+	background-size:
+		80px 80px,
+		220px 220px;
+	opacity: 0.45;
 }
 
 /* Cork-side copy uses the board's own ink in both themes: the dark warm
@@ -58,8 +60,8 @@
    night board after dark. Scoped to .landing-body so the root --pacey-*
    palette — which the paper previews draw with — is never touched. */
 .landing-body {
-    --pacey-board-copy: var(--pinboard-board-ink);
-    --pacey-board-muted: var(--pinboard-board-muted);
+	--pacey-board-copy: var(--pinboard-board-ink);
+	--pacey-board-muted: var(--pinboard-board-muted);
 }
 
 /* Headings outside #pacey-content read root --pacey-navy, which flips to
@@ -67,16 +69,16 @@
    navy; inside the board the remap already handles this. */
 [data-theme="dark"] .landing-body .landing-brand-name,
 [data-theme="dark"] .landing-body .landing-final .landing-section-title {
-    color: var(--pacey-board-copy);
+	color: var(--pacey-board-copy);
 }
 
 /* Shared measure for the board column and the closing block — editorial
    width, generous air. */
 .landing-board,
 .landing-final {
-    max-width: 80rem;
-    margin-inline: auto;
-    padding-inline: var(--pacey-content-padding);
+	max-width: 80rem;
+	margin-inline: auto;
+	padding-inline: var(--pacey-content-padding);
 }
 
 /* Grid items default to min-width:auto — long headings and chart
@@ -84,50 +86,50 @@
 .landing-hero-copy,
 .landing-section,
 .landing-split > * {
-    min-width: 0;
+	min-width: 0;
 }
 
 /* --- Header ------------------------------------------------------------ */
 .landing-header {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    max-width: 80rem;
-    margin-inline: auto;
-    padding: var(--pacey-space-md) var(--pacey-content-padding);
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	max-width: 80rem;
+	margin-inline: auto;
+	padding: var(--pacey-space-md) var(--pacey-content-padding);
 }
 
 .landing-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    min-height: 44px; /* fixed touch target, see .impeccable.md */
-    /* Cork-side link — board ink, the same material brown the app uses. */
-    color: var(--pacey-board-copy);
-    text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	min-height: 44px; /* fixed touch target, see pacey/.impeccable.md */
+	/* Cork-side link — board ink, the same material brown the app uses. */
+	color: var(--pacey-board-copy);
+	text-decoration: none;
 }
 
 .landing-brand-mark {
-    border-radius: var(--pacey-radius-sm);
-    display: block;
+	border-radius: var(--pacey-radius-sm);
+	display: block;
 }
 
 .landing-brand-name {
-    font-family: var(--font-caveat);
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--pacey-navy);
-    line-height: 1;
+	font-family: var(--font-caveat);
+	font-size: 1.9rem;
+	font-weight: 700;
+	color: var(--pacey-navy);
+	line-height: 1;
 }
 
 /* Theme toggle — the shared .pacey-theme-toggle chip from
    pinboard-theme.css; the landing only sizes it for the header row.
    With the nav gone the row is brand-left / toggle-right everywhere. */
 .landing-theme-toggle {
-    display: inline-flex;
-    width: 44px;
-    height: 44px;
-    margin-inline-start: auto;
+	display: inline-flex;
+	width: 44px;
+	height: 44px;
+	margin-inline-start: auto;
 }
 
 /* Same status semantics as the app's toggles: the glyph is the mode
@@ -135,116 +137,125 @@
    action. */
 .landing-theme-icon--moon,
 [data-theme="dark"] .landing-theme-icon--sun {
-    display: none;
+	display: none;
 }
 
 [data-theme="dark"] .landing-theme-icon--moon {
-    display: block;
+	display: block;
 }
 
 /* --- Hero -------------------------------------------------------------
    Just the promise and the doors — the previews open underneath in the
    first feature section, so the intro stands alone, centred. */
 .landing-hero {
-    padding-block: clamp(var(--pacey-space-xl), 6vw, 4rem);
-    /* The one entrance the page allows itself — a slow rise as the board
+	padding-block: clamp(var(--pacey-space-xl), 6vw, 4rem);
+	/* The one entrance the page allows itself — a slow rise as the board
        settles. Killed entirely under prefers-reduced-motion below. */
-    animation: landing-hero-settle 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
-    /* Separates the hero from the first feature section, same dash the
+	animation: landing-hero-settle 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+	/* Separates the hero from the first feature section, same dash the
        sections use between themselves. */
-    border-bottom: 1px dashed var(--pacey-border);
+	border-bottom: 1px dashed var(--pacey-border);
 }
 
 .landing-hero-copy {
-    text-align: center;
+	text-align: center;
 }
 
 .landing-hero-copy .landing-hero-lede,
 .landing-hero-copy .landing-hero-sub,
 .landing-hero-copy .landing-hero-note {
-    margin-inline: auto;
+	margin-inline: auto;
 }
 
 .landing-hero-copy .landing-hero-actions {
-    justify-content: center;
+	justify-content: center;
 }
 
 @keyframes landing-hero-settle {
-    from { opacity: 0; transform: translateY(0.75rem); }
-    to { opacity: 1; transform: none; }
+	from {
+		opacity: 0;
+		transform: translateY(0.75rem);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
 }
 
 .landing-hero-title {
-    font-family: var(--font-caveat);
-    font-size: clamp(2.6rem, 7vw, 4.25rem);
-    font-weight: 700;
-    line-height: 1.05;
-    color: var(--pacey-navy);
-    margin: 0 0 var(--pacey-space-sm);
+	font-family: var(--font-caveat);
+	font-size: clamp(2.6rem, 7vw, 4.25rem);
+	font-weight: 700;
+	line-height: 1.05;
+	color: var(--pacey-navy);
+	margin: 0 0 var(--pacey-space-sm);
 }
 
 .landing-hero-lede {
-    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
-    color: var(--pacey-text);
-    margin: 0 0 var(--pacey-space-md);
-    max-width: 40rem;
+	font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+	color: var(--pacey-text);
+	margin: 0 0 var(--pacey-space-md);
+	max-width: 40rem;
 }
 
 /* One short line under the lede naming what the previews are. */
 .landing-hero-sub {
-    color: var(--pacey-muted);
-    margin: 0 0 var(--pacey-space-lg);
-    max-width: 40rem;
+	color: var(--pacey-muted);
+	margin: 0 0 var(--pacey-space-lg);
+	max-width: 40rem;
 }
 
 .landing-hero-actions {
-    display: flex;
-    gap: var(--pacey-space-md);
-    flex-wrap: wrap;
-    margin-bottom: var(--pacey-space-lg);
+	display: flex;
+	gap: var(--pacey-space-md);
+	flex-wrap: wrap;
+	margin-bottom: var(--pacey-space-lg);
 }
 
 .landing-hero-note {
-    color: var(--pacey-muted);
-    font-size: 0.85rem;
-    margin: 0;
-    max-width: 34rem;
+	color: var(--pacey-muted);
+	font-size: 0.85rem;
+	margin: 0;
+	max-width: 34rem;
 }
 
 /* --- Buttons — paper-board anchors, not the app's pill system ---------- */
 .landing-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    padding: var(--pacey-space-sm) var(--pacey-space-xl);
-    border-radius: var(--pacey-radius-sm);
-    font-family: var(--font-fuzzy);
-    font-size: 1.05rem;
-    text-decoration: none;
-    transition: background-color var(--pacey-transition), border-color var(--pacey-transition), color var(--pacey-transition);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: var(--pacey-space-sm) var(--pacey-space-xl);
+	border-radius: var(--pacey-radius-sm);
+	font-family: var(--font-fuzzy);
+	font-size: 1.05rem;
+	text-decoration: none;
+	transition:
+		background-color var(--pacey-transition),
+		border-color var(--pacey-transition),
+		color var(--pacey-transition);
 }
 
 .landing-btn--primary {
-    background: var(--pacey-navy);
-    color: var(--pacey-btn-primary-text);
-    border: 2px solid var(--pacey-navy);
+	background: var(--pacey-navy);
+	color: var(--pacey-btn-primary-text);
+	border: 2px solid var(--pacey-navy);
 }
 
 .landing-btn--primary:hover {
-    background: var(--pacey-btn-primary-hover);
-    border-color: var(--pacey-btn-primary-hover);
+	background: var(--pacey-btn-primary-hover);
+	border-color: var(--pacey-btn-primary-hover);
 }
 
 .landing-btn--secondary {
-    background: transparent;
-    color: var(--pacey-text);
-    border: 2px solid var(--pacey-blue);
+	background: transparent;
+	color: var(--pacey-text);
+	border: 2px solid var(--pacey-blue);
 }
 
 .landing-btn--secondary:hover {
-    border-color: var(--pacey-navy);
-    color: var(--pacey-navy);
+	border-color: var(--pacey-navy);
+	color: var(--pacey-navy);
 }
 
 /* --- The board wrapper --------------------------------------------------
@@ -254,17 +265,17 @@
    board fonts from these vars, the same way the app's chart code resolves
    them. */
 .landing-board {
-    --pacey-chart-heading-font: 'Fuzzy Bubbles', 'Caveat', cursive;
-    --pacey-chart-body-font: 'Fuzzy Bubbles', 'Caveat', cursive;
-    padding-block: var(--pacey-space-lg);
+	--pacey-chart-heading-font: "Fuzzy Bubbles", "Caveat", cursive;
+	--pacey-chart-body-font: "Fuzzy Bubbles", "Caveat", cursive;
+	padding-block: var(--pacey-space-lg);
 }
 
 .landing-section {
-    padding-block: clamp(2rem, 6vw, 3.5rem);
+	padding-block: clamp(2rem, 6vw, 3.5rem);
 }
 
 .landing-section + .landing-section {
-    border-top: 1px dashed var(--pacey-border);
+	border-top: 1px dashed var(--pacey-border);
 }
 
 /* #pacey-content remaps --pacey-text/--pacey-navy/--pacey-muted to paper
@@ -276,27 +287,31 @@
 .landing-board .landing-hero-lede,
 .landing-board .landing-section-title,
 .landing-board .pacey-cal-week-title {
-    color: var(--pacey-board-copy);
+	color: var(--pacey-board-copy);
 }
 
 .landing-board .landing-hero-sub,
 .landing-board .landing-hero-note,
 .landing-board .landing-section-text,
 .landing-board .pacey-cal-date-dow {
-    color: var(--pacey-board-muted);
+	color: var(--pacey-board-muted);
 }
 
 /* The rest-day label sits on cork (the rest card itself is transparent),
    but pinboard-plan.css pins it to paper ink at id specificity — on the
    night board that vanishes. Match the board-muted cork copy instead. */
 #pacey-content.landing-board .pacey-cal-rest-label {
-    color: var(--pacey-board-muted);
+	color: var(--pacey-board-muted);
 }
 
 /* The day-row separators remap to paper line — too dark to read as a
    divider on the night board. Mix the board-muted token instead. */
 .landing-board .pacey-cal-row {
-    border-bottom-color: color-mix(in srgb, var(--pacey-board-muted) 30%, transparent);
+	border-bottom-color: color-mix(
+		in srgb,
+		var(--pacey-board-muted) 30%,
+		transparent
+	);
 }
 
 /* The hero CTAs live inside the remapped board, where --pacey-navy
@@ -305,24 +320,24 @@
    the cork itself is the ink on it. The closing CTA sits outside the
    wrapper and keeps the root palette. */
 #pacey-content.landing-board .landing-btn--primary {
-    background: var(--pacey-board-copy);
-    border-color: var(--pacey-board-copy);
-    color: var(--pinboard-cork);
+	background: var(--pacey-board-copy);
+	border-color: var(--pacey-board-copy);
+	color: var(--pinboard-cork);
 }
 #pacey-content.landing-board .landing-btn--primary:hover {
-    background: var(--pacey-board-muted);
-    border-color: var(--pacey-board-muted);
+	background: var(--pacey-board-muted);
+	border-color: var(--pacey-board-muted);
 }
 #pacey-content.landing-board .landing-btn--secondary {
-    color: var(--pacey-board-copy);
-    border-color: var(--pacey-board-muted);
+	color: var(--pacey-board-copy);
+	border-color: var(--pacey-board-muted);
 }
 #pacey-content.landing-board .landing-btn--secondary:hover {
-    border-color: var(--pacey-board-copy);
-    color: var(--pacey-board-copy);
+	border-color: var(--pacey-board-copy);
+	color: var(--pacey-board-copy);
 }
 #pacey-content.landing-board :focus-visible {
-    outline-color: var(--pacey-board-copy);
+	outline-color: var(--pacey-board-copy);
 }
 
 /* Six hand-sketched strokes for the landing headings, so no two arrive from
@@ -333,31 +348,31 @@
    flips with the theme. That keeps the artwork in one place instead of needing
    a light and a dark copy of every variant. */
 .landing-body {
-    --landing-stroke-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M5 8 C 70 5.5, 150 9.5, 235 7' fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
-    --landing-stroke-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M4 7.2 C 62 9.6, 148 4.6, 236 8.4' fill='none' stroke='%23000' stroke-width='4.2' stroke-linecap='round'/%3E%3C/svg%3E");
-    --landing-stroke-3: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M6 8.6 C 80 6.2, 158 10.4, 234 6.4' fill='none' stroke='%23000' stroke-width='4.7' stroke-linecap='round'/%3E%3C/svg%3E");
-    --landing-stroke-4: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M5 7.6 C 66 9.2, 142 5.2, 236 7.9' fill='none' stroke='%23000' stroke-width='4.3' stroke-linecap='round'/%3E%3C/svg%3E");
-    --landing-stroke-5: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M4 8.2 C 74 5.2, 154 9.8, 235 6.6' fill='none' stroke='%23000' stroke-width='4.6' stroke-linecap='round'/%3E%3C/svg%3E");
-    --landing-stroke-6: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M6 7 C 68 9.9, 150 5, 234 8.2' fill='none' stroke='%23000' stroke-width='4.4' stroke-linecap='round'/%3E%3C/svg%3E");
+	--landing-stroke-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M5 8 C 70 5.5, 150 9.5, 235 7' fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
+	--landing-stroke-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M4 7.2 C 62 9.6, 148 4.6, 236 8.4' fill='none' stroke='%23000' stroke-width='4.2' stroke-linecap='round'/%3E%3C/svg%3E");
+	--landing-stroke-3: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M6 8.6 C 80 6.2, 158 10.4, 234 6.4' fill='none' stroke='%23000' stroke-width='4.7' stroke-linecap='round'/%3E%3C/svg%3E");
+	--landing-stroke-4: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M5 7.6 C 66 9.2, 142 5.2, 236 7.9' fill='none' stroke='%23000' stroke-width='4.3' stroke-linecap='round'/%3E%3C/svg%3E");
+	--landing-stroke-5: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M4 8.2 C 74 5.2, 154 9.8, 235 6.6' fill='none' stroke='%23000' stroke-width='4.6' stroke-linecap='round'/%3E%3C/svg%3E");
+	--landing-stroke-6: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M6 7 C 68 9.9, 150 5, 234 8.2' fill='none' stroke='%23000' stroke-width='4.4' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 .landing-section-title {
-    font-family: var(--font-caveat);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--pacey-navy);
-    margin: 0 0 var(--pacey-space-md);
-    text-wrap: balance;
-    /* The hand-sketched underline the board uses for its own titles. */
-    padding-bottom: var(--pacey-space-md);
-    position: relative;
-    /* Hug the text, so the stroke underneath is as long as the words above it.
+	font-family: var(--font-caveat);
+	font-size: clamp(2rem, 5vw, 3rem);
+	font-weight: 700;
+	line-height: 1.1;
+	color: var(--pacey-navy);
+	margin: 0 0 var(--pacey-space-md);
+	text-wrap: balance;
+	/* The hand-sketched underline the board uses for its own titles. */
+	padding-bottom: var(--pacey-space-md);
+	position: relative;
+	/* Hug the text, so the stroke underneath is as long as the words above it.
        Headings here run from "Race Course" to "The evidence behind your
        readiness", and a fixed-length stroke was either overhanging the short
        ones or stopping short of the long ones. */
-    width: fit-content;
-    max-width: 100%;
+	width: fit-content;
+	max-width: 100%;
 }
 
 /* The board's hand-sketched underline, on its own layer rather than as the
@@ -371,24 +386,25 @@
    stroke itself, which reads as a wipe. Clipping keeps the stroke's own
    shape and uncovers it left to right, which is what a pen does. */
 .landing-section-title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 0.9rem;
-    /* The fallback shape: the board's own stroke, which every browser can
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 0.9rem;
+	/* The fallback shape: the board's own stroke, which every browser can
        draw. The per-heading shapes below replace it where a mask is
        available. */
-    background: var(--pinboard-sketch-underline) no-repeat left bottom;
-    background-size: 100% 100%;
-    pointer-events: none;
-    /* Length and tilt. Scaling from the left keeps the stroke's start on the
+	background: var(--pinboard-sketch-underline) no-repeat left bottom;
+	background-size: 100% 100%;
+	pointer-events: none;
+	/* Length and tilt. Scaling from the left keeps the stroke's start on the
        first letter while its tail runs a little long or short, which is what
        stops a set of headings reading as machine-set. */
-    transform-origin: left center;
-    transform: scaleX(var(--landing-stroke-scale, 1)) rotate(var(--landing-stroke-tilt, 0deg));
-    transition: clip-path 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+	transform-origin: left center;
+	transform: scaleX(var(--landing-stroke-scale, 1))
+		rotate(var(--landing-stroke-tilt, 0deg));
+	transition: clip-path 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Where a mask can carry the shape, the stroke is painted with the shared
@@ -397,28 +413,28 @@
    board's own stroke — just without the per-heading shape. Without this
    guard, an unsupported browser would paint the colour as a solid bar. */
 @supports (mask-image: none) or (-webkit-mask-image: none) {
-    .landing-section-title::after {
-        background-image: none;
-        background-color: var(--pinboard-underline);
-        -webkit-mask-image: var(--landing-stroke, var(--landing-stroke-1));
-        mask-image: var(--landing-stroke, var(--landing-stroke-1));
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-position: left bottom;
-        mask-position: left bottom;
-        -webkit-mask-size: 100% 100%;
-        mask-size: 100% 100%;
-    }
+	.landing-section-title::after {
+		background-image: none;
+		background-color: var(--pinboard-underline);
+		-webkit-mask-image: var(--landing-stroke, var(--landing-stroke-1));
+		mask-image: var(--landing-stroke, var(--landing-stroke-1));
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-position: left bottom;
+		mask-position: left bottom;
+		-webkit-mask-size: 100% 100%;
+		mask-size: 100% 100%;
+	}
 }
 
 /* Withheld — JS stamps this on every heading before it starts watching. */
 .landing-section-title.landing-title-draw::after {
-    clip-path: inset(0 100% 0 0);
+	clip-path: inset(0 100% 0 0);
 }
 
 /* Drawn — stamped as the heading's section comes into view. */
 .landing-section-title.landing-title-draw.landing-title-drawn::after {
-    clip-path: inset(0 0 0 0);
+	clip-path: inset(0 0 0 0);
 }
 
 /* The FAQ heading carried a heavier stroke than the rest as an inline
@@ -426,26 +442,26 @@
    pseudo-element. Only the weight is kept — the length now follows the text
    like every other heading. */
 #landing-questions-title::after {
-    height: 1.4rem;
+	height: 1.4rem;
 }
 
 /* The closing heading opts out of the underline entirely — that was an inline
    `background: none` on the heading, and it has to be stated again here now
    that the underline no longer lives on the heading itself. */
 #landing-final-title::after {
-    content: none;
+	content: none;
 }
 
 .landing-section-text {
-    color: var(--pacey-text);
-    margin: 0 0 var(--pacey-space-lg);
-    max-width: 56rem;
+	color: var(--pacey-text);
+	margin: 0 0 var(--pacey-space-lg);
+	max-width: 56rem;
 }
 
 /* Deep links land on any section — the offset keeps the target clear of
    the sticky rail's edge and gives the heading room to breathe. */
 .landing-section {
-    scroll-margin-top: 2rem;
+	scroll-margin-top: 2rem;
 }
 
 /* --- Evidence chapter ----------------------------------------------------
@@ -454,39 +470,39 @@
    The sections inside keep their own IDs, markup and spacing — only the
    framing changes. */
 .landing-evidence {
-    padding-block: clamp(2rem, 6vw, 3.5rem);
-    scroll-margin-top: 2rem;
+	padding-block: clamp(2rem, 6vw, 3.5rem);
+	scroll-margin-top: 2rem;
 }
 
 /* The chapter inherits the same dashed chapter-divider rhythm the
    flat sections used. */
 .landing-section + .landing-evidence {
-    border-top: 1px dashed var(--pacey-border);
+	border-top: 1px dashed var(--pacey-border);
 }
 
 .landing-evidence + .landing-section {
-    border-top: 1px dashed var(--pacey-border);
+	border-top: 1px dashed var(--pacey-border);
 }
 
 .landing-evidence-rail .landing-section-title {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
+	font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 .landing-evidence-rail .landing-section-text {
-    margin-bottom: 0;
-    font-size: 0.95rem;
+	margin-bottom: 0;
+	font-size: 0.95rem;
 }
 
 /* The rail's contents sit above the stream until there is room to put
    them side by side. */
 .landing-evidence-rail {
-    margin-bottom: var(--pacey-space-lg);
+	margin-bottom: var(--pacey-space-lg);
 }
 
 .landing-evidence-nav {
-    display: grid;
-    gap: var(--pacey-space-xs);
-    margin-top: var(--pacey-space-md);
+	display: grid;
+	gap: var(--pacey-space-xs);
+	margin-top: var(--pacey-space-md);
 }
 
 /* The link keeps identical padding in every state — the selected marker
@@ -494,57 +510,57 @@
    when it appears. isolation keeps the swipe under the link's own
    content (and out of the way of its focus outline). */
 .landing-evidence-link {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    min-height: 44px;
-    padding: var(--pacey-space-xs) var(--pacey-space-sm);
-    color: var(--pacey-board-muted);
-    text-decoration: none;
-    font-size: 0.95rem;
-    position: relative;
-    isolation: isolate;
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	min-height: 44px;
+	padding: var(--pacey-space-xs) var(--pacey-space-sm);
+	color: var(--pacey-board-muted);
+	text-decoration: none;
+	font-size: 0.95rem;
+	position: relative;
+	isolation: isolate;
 }
 
 .landing-evidence-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: none;
-    width: 2rem;
-    min-height: 2rem;
-    font-family: var(--font-caveat);
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--pacey-board-muted);
-    /* Own stacking context for the sketched ring the active state draws. */
-    position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+	width: 2rem;
+	min-height: 2rem;
+	font-family: var(--font-caveat);
+	font-size: 1.15rem;
+	font-weight: 700;
+	color: var(--pacey-board-muted);
+	/* Own stacking context for the sketched ring the active state draws. */
+	position: relative;
 }
 
 /* The ring is a real scribble path, not a border — it fills the 2rem cell
    absolutely so the digit layout never changes. */
 .landing-evidence-sketch {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: visible;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	overflow: visible;
 }
 
 .landing-evidence-sketch-path {
-    fill: none;
-    stroke: var(--pinboard-underline);
-    stroke-width: 5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    /* pathLength="100" normalises the dash to the app's ring trick. */
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
+	fill: none;
+	stroke: var(--pinboard-underline);
+	stroke-width: 5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	/* pathLength="100" normalises the dash to the app's ring trick. */
+	stroke-dasharray: 100;
+	stroke-dashoffset: 100;
 }
 
 .landing-evidence-link:hover {
-    color: var(--pacey-board-copy);
+	color: var(--pacey-board-copy);
 }
 
 /* The section crossing the upper-third band is "current" — a rough
@@ -552,45 +568,70 @@
    two-pass edges and the slight lean read as a dragged marker, not a
    UI chip; paper noise keeps the flat fill in the board's material. */
 .landing-evidence-link[aria-current="location"] {
-    color: var(--pinboard-ink);
-    font-weight: 700;
+	color: var(--pinboard-ink);
+	font-weight: 700;
 }
 
 .landing-evidence-link[aria-current="location"]::before {
-    content: "";
-    position: absolute;
-    inset: 4px 0;
-    z-index: -1;
-    background-color: var(--pinboard-note-yellow);
-    background-image: var(--pinboard-paper-noise);
-    clip-path: polygon(0% 14%, 7% 4%, 24% 10%, 40% 2%, 57% 9%, 73% 3%, 91% 11%, 100% 24%,
-                       98% 66%, 100% 86%, 89% 97%, 71% 91%, 53% 98%, 35% 91%, 17% 97%, 4% 87%, 1% 54%);
-    /* The swipe paints left-to-right once when the row becomes current —
+	content: "";
+	position: absolute;
+	inset: 4px 0;
+	z-index: -1;
+	background-color: var(--pinboard-note-yellow);
+	background-image: var(--pinboard-paper-noise);
+	clip-path: polygon(
+		0% 14%,
+		7% 4%,
+		24% 10%,
+		40% 2%,
+		57% 9%,
+		73% 3%,
+		91% 11%,
+		100% 24%,
+		98% 66%,
+		100% 86%,
+		89% 97%,
+		71% 91%,
+		53% 98%,
+		35% 91%,
+		17% 97%,
+		4% 87%,
+		1% 54%
+	);
+	/* The swipe paints left-to-right once when the row becomes current —
        quick enough that the ink text on top never waits for contrast. */
-    transform-origin: left center;
-    animation: landing-evidence-mark 0.32s ease-out forwards;
-    pointer-events: none;
+	transform-origin: left center;
+	animation: landing-evidence-mark 0.32s ease-out forwards;
+	pointer-events: none;
 }
 
 @keyframes landing-evidence-mark {
-    from { transform: scaleX(0) rotate(-1deg); }
-    to { transform: scaleX(1) rotate(-1deg); }
+	from {
+		transform: scaleX(0) rotate(-1deg);
+	}
+	to {
+		transform: scaleX(1) rotate(-1deg);
+	}
 }
 
 /* The number's active mark draws itself on after the swipe lands — the
    keyframe sits on the active rule, so re-marking replays it while a
    resize (which never re-adds aria-current) stays still. */
 .landing-evidence-link[aria-current="location"] .landing-evidence-num {
-    color: var(--pinboard-ink);
+	color: var(--pinboard-ink);
 }
 
 .landing-evidence-link[aria-current="location"] .landing-evidence-sketch-path {
-    animation: landing-evidence-sketch-draw 0.45s ease-out 80ms forwards;
+	animation: landing-evidence-sketch-draw 0.45s ease-out 80ms forwards;
 }
 
 @keyframes landing-evidence-sketch-draw {
-    from { stroke-dashoffset: 100; }
-    to { stroke-dashoffset: 0; }
+	from {
+		stroke-dashoffset: 100;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
 }
 
 /* --- Scroll reveal -------------------------------------------------------
@@ -599,14 +640,16 @@
    property (not transform) keeps each card's paper rotation intact, and
    without JS nothing is ever hidden — the classes are the whole trick. */
 .landing-reveal {
-    opacity: 0;
-    translate: 0 12px;
-    transition: opacity 0.4s ease-out, translate 0.4s ease-out;
+	opacity: 0;
+	translate: 0 12px;
+	transition:
+		opacity 0.4s ease-out,
+		translate 0.4s ease-out;
 }
 
 .landing-reveal.landing-reveal-ready {
-    opacity: 1;
-    translate: 0 0;
+	opacity: 1;
+	translate: 0 0;
 }
 
 /* Plan rows stagger behind their week block: each row lifts on the
@@ -614,30 +657,34 @@
    180ms), so the column reads top-to-bottom once instead of blinking in
    as seven separate pieces. */
 .landing-feature-exhibit.landing-reveal .pacey-cal-row {
-    opacity: 0;
-    translate: 0 8px;
-    transition: opacity 0.25s ease-out, translate 0.25s ease-out;
-    transition-delay: var(--landing-stagger, 0ms);
+	opacity: 0;
+	translate: 0 8px;
+	transition:
+		opacity 0.25s ease-out,
+		translate 0.25s ease-out;
+	transition-delay: var(--landing-stagger, 0ms);
 }
 
 .landing-feature-exhibit.landing-reveal-ready .pacey-cal-row {
-    opacity: 1;
-    translate: 0 0;
+	opacity: 1;
+	translate: 0 0;
 }
 
 /* The FAQ is a list, so its rows cascade behind the block the same way the
    plan rows do — the list reveals, the questions follow it down. Same capped
    --landing-stagger the plan rows use, set by JS. */
 .landing-questions.landing-reveal .landing-question {
-    opacity: 0;
-    translate: 0 8px;
-    transition: opacity 0.25s ease-out, translate 0.25s ease-out;
-    transition-delay: var(--landing-stagger, 0ms);
+	opacity: 0;
+	translate: 0 8px;
+	transition:
+		opacity 0.25s ease-out,
+		translate 0.25s ease-out;
+	transition-delay: var(--landing-stagger, 0ms);
 }
 
 .landing-questions.landing-reveal-ready .landing-question {
-    opacity: 1;
-    translate: 0 0;
+	opacity: 1;
+	translate: 0 0;
 }
 
 /* The closing call to action arrives in two beats — the doors, then the small
@@ -646,19 +693,21 @@
    JS to remove it again. */
 .landing-final .landing-hero-actions.landing-reveal,
 .landing-final .landing-notes.landing-reveal {
-    opacity: 0;
-    translate: 0 10px;
-    transition: opacity 0.4s ease-out, translate 0.4s ease-out;
+	opacity: 0;
+	translate: 0 10px;
+	transition:
+		opacity 0.4s ease-out,
+		translate 0.4s ease-out;
 }
 
 .landing-final .landing-notes.landing-reveal {
-    transition-delay: 120ms;
+	transition-delay: 120ms;
 }
 
 .landing-final .landing-hero-actions.landing-reveal-ready,
 .landing-final .landing-notes.landing-reveal-ready {
-    opacity: 1;
-    translate: 0 0;
+	opacity: 1;
+	translate: 0 0;
 }
 
 /* --- Feature exhibits ----------------------------------------------------
@@ -667,8 +716,8 @@
    spacing — it simply stands in for the block it wraps, so the same
    grids, reveals and gaps apply. */
 .landing-feature-exhibit {
-    margin: 0;
-    min-width: 0;
+	margin: 0;
+	min-width: 0;
 }
 
 /* Rail + stream share a row on wide screens: a slim sticky guide on the
@@ -676,52 +725,55 @@
    within the chapter only — nothing pins longer than the content it
    describes, so the tall course card never dangles over empty space. */
 @media (min-width: 64rem) {
-    .landing-evidence {
-        display: grid;
-        grid-template-columns: 15rem minmax(0, 1fr);
-        gap: var(--pacey-space-lg);
-        align-items: start;
-    }
+	.landing-evidence {
+		display: grid;
+		grid-template-columns: 15rem minmax(0, 1fr);
+		gap: var(--pacey-space-lg);
+		align-items: start;
+	}
 
-    .landing-evidence-rail {
-        position: sticky;
-        top: 2rem;
-        margin-bottom: 0;
-    }
+	.landing-evidence-rail {
+		position: sticky;
+		top: 2rem;
+		margin-bottom: 0;
+	}
 
-    /* A hairline column rule the full height of the chapter — it separates
+	/* A hairline column rule the full height of the chapter — it separates
        the sticky guide from the stream it narrates, so it takes the quiet
        board-muted mix rather than an accent stripe. Only exists while the
        rail actually sits beside the stream. */
-    .landing-evidence-stream {
-        border-inline-start: 1px solid color-mix(in srgb, var(--pacey-board-muted) 40%, transparent);
-        padding-inline-start: var(--pacey-space-2xl);
-    }
+	.landing-evidence-stream {
+		border-inline-start: 1px solid
+			color-mix(in srgb, var(--pacey-board-muted) 40%, transparent);
+		padding-inline-start: var(--pacey-space-2xl);
+	}
 
-    /* The narrower stream would squeeze the app's side-by-side course
+	/* The narrower stream would squeeze the app's side-by-side course
        visual, so inside the chapter the route stacks over the profile
        with deliberate heights — the axis labels stay legible at 140px. */
-    .landing-evidence-stream .pacey-course-visual {
-        grid-template-columns: minmax(0, 1fr);
-        height: auto;
-    }
+	.landing-evidence-stream .pacey-course-visual {
+		grid-template-columns: minmax(0, 1fr);
+		height: auto;
+	}
 
-    #pacey-content.landing-board .landing-evidence-stream .pacey-course-route {
-        height: 210px;
-    }
+	#pacey-content.landing-board .landing-evidence-stream .pacey-course-route {
+		height: 210px;
+	}
 
-    #pacey-content.landing-board .landing-evidence-stream .pacey-course-elevation {
-        height: 140px;
-    }
+	#pacey-content.landing-board
+		.landing-evidence-stream
+		.pacey-course-elevation {
+		height: 140px;
+	}
 
-    /* The vitals grid gets a deliberate three-column mix in the stream:
+	/* The vitals grid gets a deliberate three-column mix in the stream:
        Readiness leads spanning two tracks, the other eight fill in. The
        source order never changes — only the desktop arrangement. */
-    #pacey-content.landing-board .landing-evidence-stream .pacey-metrics-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+	#pacey-content.landing-board .landing-evidence-stream .pacey-metrics-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
 
-    /* #pacey-content.landing-board .landing-evidence-stream .pacey-metric-tile[data-metric-label="Readiness"] {
+	/* #pacey-content.landing-board .landing-evidence-stream .pacey-metric-tile[data-metric-label="Readiness"] {
         grid-column: span 2;
     } */
 }
@@ -729,9 +781,9 @@
 /* The rail's numbered links duplicate what the stream already shows —
    on narrower widths they are noise, so only the chapter intro keeps. */
 @media (max-width: 60rem) {
-    .landing-evidence-nav {
-        display: none;
-    }
+	.landing-evidence-nav {
+		display: none;
+	}
 }
 
 /* --- Hero readiness card -------------------------------------------------
@@ -740,54 +792,54 @@
    which this page does not load, so it is supplied here — same clamp the
    app uses. */
 .landing-radar-card {
-    display: flex;
-    flex-direction: column;
-    padding: clamp(1rem, 1.8vw, 1.35rem);
-    width: max-content;
-    height: max-content;
-    margin: auto;
+	display: flex;
+	flex-direction: column;
+	padding: clamp(1rem, 1.8vw, 1.35rem);
+	width: max-content;
+	height: max-content;
+	margin: auto;
 }
 
 /* The card heading is a <p> in app markup; give it a clean margin and
    keep it clear of the centred pushpin. */
 .landing-radar-card .pacey-readiness-card-title {
-    margin: 0.15rem 0 0;
+	margin: 0.15rem 0 0;
 }
 
 .landing-radar-goal {
-    margin: 0 0 var(--pacey-space-sm);
-    font-size: 0.9rem;
-    color: var(--pinboard-muted);
+	margin: 0 0 var(--pacey-space-sm);
+	font-size: 0.9rem;
+	color: var(--pinboard-muted);
 }
 
 .landing-radar-card .pacey-radar-wrap {
-    /* Square plot, capped so the sheet doesn't run taller than the card
+	/* Square plot, capped so the sheet doesn't run taller than the card
        needs — the app wraps the same element the same way. */
-    max-width: 25rem;
-    width: 100%;
+	max-width: 25rem;
+	width: 100%;
 }
 
 /* The printed scores — visible until JS draws the chart, and the whole
    truth if it never does. Positioned over the wrap so it trades places
    with the canvas rather than duplicating below it. */
 .landing-radar-fallback {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    padding: var(--pacey-space-md);
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--pacey-space-xs);
-    font-size: 0.95rem;
-    color: var(--pinboard-ink);
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	padding: var(--pacey-space-md);
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--pacey-space-xs);
+	font-size: 0.95rem;
+	color: var(--pinboard-ink);
 }
 
 /* display:flex above beats the UA [hidden] rule, so redeclare the hidden
    state — once the chart draws, the printed scores must actually go away. */
 .landing-radar-fallback[hidden] {
-    display: none;
+	display: none;
 }
 
 /* --- Training Trends ------------------------------------------------------
@@ -796,59 +848,59 @@
    and chart-wrap sizing), so the layout is declared here — the paper skin,
    tape, tilts, handwriting and row gap still come from pinboard-theme.css. */
 .landing-trends-charts {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
 }
 
 /* Card padding the app's pacey.css rule would have supplied. */
 #pacey-content.landing-board .landing-trends-charts .pacey-chart-card {
-    padding: clamp(1rem, 2vw, 1.5rem);
+	padding: clamp(1rem, 2vw, 1.5rem);
 }
 
 .landing-trends-charts .pacey-card-title {
-    margin: 0 0 0.4rem;
+	margin: 0 0 0.4rem;
 }
 
 .landing-trends-charts .pacey-card-sub {
-    margin: 0 0 0.75rem;
-    color: var(--pacey-muted);
+	margin: 0 0 0.75rem;
+	color: var(--pacey-muted);
 }
 
 /* Fixed-height plot (~240px — concise on phones): Chart.js fills the wrap
    (maintainAspectRatio: false) and the printed figures trade places over
    the same box, exactly like the radar fallback. */
 .landing-trend-wrap {
-    position: relative;
-    width: 100%;
-    height: 15rem;
+	position: relative;
+	width: 100%;
+	height: 15rem;
 }
 
 .landing-chart-fallback {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    padding: var(--pacey-space-sm);
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--pacey-space-xs);
-    font-size: 0.95rem;
-    color: var(--pinboard-ink);
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	padding: var(--pacey-space-sm);
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--pacey-space-xs);
+	font-size: 0.95rem;
+	color: var(--pinboard-ink);
 }
 
 /* display:flex above beats the UA [hidden] rule — redeclare so the printed
    figures really leave once their chart draws. */
 .landing-chart-fallback[hidden] {
-    display: none;
+	display: none;
 }
 
 /* Two columns only where the stream is wide enough for both charts to
    stay readable (~1100px and up); narrower widths stack full-width. */
 @media (min-width: 68.75rem) {
-    .landing-trends-charts {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+	.landing-trends-charts {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
 }
 
 /* --- Split sections ------------------------------------------------------
@@ -859,21 +911,21 @@
    card runs the board's full measure beneath the intro so the route has
    room to breathe. */
 .landing-readiness {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: clamp(var(--pacey-space-xl), 4vw, var(--pacey-space-2xl));
-    align-items: center;
+	display: grid;
+	grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+	gap: clamp(var(--pacey-space-xl), 4vw, var(--pacey-space-2xl));
+	align-items: center;
 }
 
 .landing-readiness-copy {
-    min-width: 0;
+	min-width: 0;
 }
 
 .landing-split {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: clamp(var(--pacey-space-lg), 4vw, var(--pacey-space-2xl));
-    align-items: center;
+	display: grid;
+	grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+	gap: clamp(var(--pacey-space-lg), 4vw, var(--pacey-space-2xl));
+	align-items: center;
 }
 
 /* --- Course preview ------------------------------------------------------
@@ -882,17 +934,17 @@
    landing adds live here: the pending note the static page shows before
    the snapshot draws, and the SVG the fetch builds. */
 .landing-course-pending {
-    margin: 0;
-    align-self: center;
-    font-size: 0.8rem;
-    color: var(--pacey-course-chart-text);
-    opacity: 0.65;
+	margin: 0;
+	align-self: center;
+	font-size: 0.8rem;
+	color: var(--pacey-course-chart-text);
+	opacity: 0.65;
 }
 
 .landing-course-chart {
-    display: block;
-    width: 100%;
-    height: 100%;
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 /* The MapLibre box is absolute over the wrap; while tiles load the drawn
@@ -900,33 +952,33 @@
    otherwise cover the fallback it is standing in for. JS removes the SVG
    (hidden) only once the route layer is on the loaded map. */
 #pacey-content.landing-board .pacey-course-route-svg {
-    position: relative;
-    z-index: 1;
+	position: relative;
+	z-index: 1;
 }
 
 .landing-course-chart-grid {
-    stroke: var(--pacey-course-chart-grid);
-    stroke-width: 1;
-    vector-effect: non-scaling-stroke;
+	stroke: var(--pacey-course-chart-grid);
+	stroke-width: 1;
+	vector-effect: non-scaling-stroke;
 }
 
 .landing-course-chart-area {
-    fill: var(--pacey-course-chart-fill);
+	fill: var(--pacey-course-chart-fill);
 }
 
 .landing-course-chart-line {
-    fill: none;
-    stroke: var(--pacey-course-chart-line);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
+	fill: none;
+	stroke: var(--pacey-course-chart-line);
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	vector-effect: non-scaling-stroke;
 }
 
 .landing-course-chart-tick {
-    fill: var(--pacey-course-chart-text);
-    font-family: var(--font-fuzzy);
-    font-size: 11px;
+	fill: var(--pacey-course-chart-text);
+	font-family: var(--font-fuzzy);
+	font-size: 11px;
 }
 
 /* --- The week agenda ------------------------------------------------------
@@ -936,21 +988,21 @@
    week header's own chrome lives in pinboard-overlays.css, which this
    page does not load, so that row's layout is supplied here. */
 .landing-board .pacey-cal-week-head {
-    display: flex;
-    align-items: baseline;
-    padding: 0.15rem 0.1rem 0.5rem;
+	display: flex;
+	align-items: baseline;
+	padding: 0.15rem 0.1rem 0.5rem;
 }
 
 .landing-board .pacey-cal-week-block {
-    border-bottom: none;
-    padding-bottom: 0;
+	border-bottom: none;
+	padding-bottom: 0;
 }
 
 /* Rest days read as the breathing space between sessions — the row
    rhythm opens up a touch and the dashed day borders stay visible, so
    the week scans as work and recovery, not a sparse list. */
 #pacey-content.landing-board .pacey-cal-row {
-    padding: var(--pacey-space-md) 0;
+	padding: var(--pacey-space-md) 0;
 }
 
 /* --- Passive previews ---------------------------------------------------
@@ -962,31 +1014,38 @@
 #pacey-content.landing-board .pacey-cal-card,
 #pacey-content.landing-board .pacey-metric-tile,
 #pacey-content.landing-board .pacey-course-map {
-    cursor: default;
+	cursor: default;
 }
 
 #pacey-content.landing-board .pacey-cal-card {
-    box-shadow: var(--pinboard-shadow-static), 0 1px 0 rgba(255, 255, 255, 0.45) inset;
+	box-shadow:
+		var(--pinboard-shadow-static),
+		0 1px 0 rgba(255, 255, 255, 0.45) inset;
 }
 
 #pacey-content.landing-board .pacey-cal-card:hover {
-    transform: none;
-    box-shadow: var(--pinboard-shadow-static), 0 1px 0 rgba(255, 255, 255, 0.45) inset;
-    z-index: auto;
+	transform: none;
+	box-shadow:
+		var(--pinboard-shadow-static),
+		0 1px 0 rgba(255, 255, 255, 0.45) inset;
+	z-index: auto;
 }
 
 /* Vitals tiles keep their own post-it resting shadow and tilt on hover —
    the lift and the click cues are the only things suppressed. */
 #pacey-content.landing-board .pacey-metric-tile:hover {
-    transform: rotate(var(--tilt, 0deg));
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14), 0 0.5rem 0.75rem rgba(0, 0, 0, 0.22), inset 0 -1.4rem 1.4rem -1.4rem rgba(0, 0, 0, 0.14);
-    z-index: auto;
+	transform: rotate(var(--tilt, 0deg));
+	box-shadow:
+		0 1px 1px rgba(0, 0, 0, 0.14),
+		0 0.5rem 0.75rem rgba(0, 0, 0, 0.22),
+		inset 0 -1.4rem 1.4rem -1.4rem rgba(0, 0, 0, 0.14);
+	z-index: auto;
 }
 
 /* The card body leaves room for a drag handle that the landing never
    renders — pull the padding back so the slip's text sits symmetric. */
 #pacey-content.landing-board .pacey-cal-card-body {
-    padding-right: 0;
+	padding-right: 0;
 }
 
 /* --- Final call + honest notes ----------------------------------------- */
@@ -995,49 +1054,49 @@
    Without JavaScript every answer stays visible. Board tokens keep the
    copy readable on both the paper-lit and the night cork. */
 .landing-questions {
-    margin: 0;
-    max-width: 68rem;
-    display: grid;
-    /* gap: var(--pacey-space-lg); */
+	margin: 0;
+	max-width: 68rem;
+	display: grid;
+	/* gap: var(--pacey-space-lg); */
 }
 
 .landing-question {
-    border-bottom: 2px solid var(--pacey-border);
-    padding: var(--pacey-space-sm) 0;
+	border-bottom: 2px solid var(--pacey-border);
+	padding: var(--pacey-space-sm) 0;
 }
 
 .landing-question-term {
-    font-family: var(--font-caveat);
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--pacey-board-copy);
+	font-family: var(--font-caveat);
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	color: var(--pacey-board-copy);
 }
 
 /* The question toggle — built by JS around the dt's own text (the dt keeps
    the plain question for no-JS, so nothing is ever a dead button). The
    full row is the tap target; the question keeps the Caveat heading look. */
 .landing-question-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--pacey-space-md);
-    width: 100%;
-    min-height: 44px;
-    padding: var(--pacey-space-xs) 0;
-    border: 0;
-    background: none;
-    font-family: var(--font-caveat);
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    text-align: left;
-    color: var(--pacey-board-copy);
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--pacey-space-md);
+	width: 100%;
+	min-height: 44px;
+	padding: var(--pacey-space-xs) 0;
+	border: 0;
+	background: none;
+	font-family: var(--font-caveat);
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	text-align: left;
+	color: var(--pacey-board-copy);
+	cursor: pointer;
 }
 
 .landing-question-toggle:hover {
-    color: var(--pacey-blue);
+	color: var(--pacey-blue);
 }
 
 /* The FAQ lives inside #pacey-content, where --pacey-blue remaps to the
@@ -1046,21 +1105,21 @@
    mode keeps the blue hover above. */
 [data-theme="dark"] .landing-body .landing-question-toggle:hover,
 [data-theme="dark"] .landing-body .landing-question-toggle:focus-visible {
-    color: var(--pacey-board-copy);
+	color: var(--pacey-board-copy);
 }
 
 /* Hand-drawn chevron — points down at rest (tap to reveal), rotates to
    face up while the answer is open. */
 .landing-question-chevron {
-    flex: none;
-    width: 1.1rem;
-    height: 1.1rem;
-    transform: rotate(0deg);
-    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+	flex: none;
+	width: 1.1rem;
+	height: 1.1rem;
+	transform: rotate(0deg);
+	transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .landing-question-toggle[aria-expanded="true"] .landing-question-chevron {
-    transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 /* The answer is a grid-rows drawer: 0fr collapsed, 1fr open — the inner
@@ -1068,54 +1127,54 @@
    needed. Markup ships is-open so the answer renders for no-JS; JS
    collapses after the toggle exists. */
 .landing-question-answer {
-    margin: 0;
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+	margin: 0;
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .landing-question-answer.is-open {
-    grid-template-rows: 1fr;
+	grid-template-rows: 1fr;
 }
 
 /* The clipping child — no padding here, so the drawer closes fully. */
 .landing-question-answer-inner {
-    min-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.2s ease;
+	min-height: 0;
+	overflow: hidden;
+	opacity: 0;
+	transition: opacity 0.2s ease;
 }
 
 .landing-question-answer.is-open .landing-question-answer-inner {
-    opacity: 1;
+	opacity: 1;
 }
 
 .landing-question-answer-copy {
-    margin: var(--pacey-space-xs) 0;
-    color: var(--pacey-board-muted);
-    max-width: 56rem;
+	margin: var(--pacey-space-xs) 0;
+	color: var(--pacey-board-muted);
+	max-width: 56rem;
 }
 
 .landing-final {
-    padding-block: clamp(2.5rem, 7vw, 5rem);
+	padding-block: clamp(2.5rem, 7vw, 5rem);
 }
 
 .landing-final .landing-hero-actions {
-    margin-bottom: var(--pacey-space-xl);
+	margin-bottom: var(--pacey-space-xl);
 }
 
 .landing-notes {
-    max-width: 56rem;
-    display: grid;
-    gap: var(--pacey-space-sm);
+	max-width: 56rem;
+	display: grid;
+	gap: var(--pacey-space-sm);
 }
 
 .landing-note {
-    margin: 0;
-    font-size: 0.85rem;
-    /* Cork-side copy — board-muted passes through the board remap
+	margin: 0;
+	font-size: 0.85rem;
+	/* Cork-side copy — board-muted passes through the board remap
        untouched and is the lighter muted the night cork needs. */
-    color: var(--pacey-board-muted);
+	color: var(--pacey-board-muted);
 }
 
 /* Real links inside the closing notes and the FAQ answers read as links:
@@ -1125,11 +1184,11 @@
    shared :focus-visible outline. */
 .landing-note a,
 .landing-question-answer-copy a {
-    color: var(--pacey-board-copy);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
-    padding-block: 0.9rem;
+	color: var(--pacey-board-copy);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+	padding-block: 0.9rem;
 }
 
 /* --- Footer --------------------------------------------------------------
@@ -1138,44 +1197,46 @@
    group. The divider uses the board-muted mix rather than the root
    border, which was tuned for paper and washes out on the night cork. */
 .landing-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--pacey-space-md);
-    flex-wrap: wrap;
-    max-width: 80rem;
-    margin-inline: auto;
-    padding: var(--pacey-space-lg) var(--pacey-content-padding);
-    border-top: 1px solid color-mix(in srgb, var(--pacey-board-muted) 40%, transparent);
-    font-size: 0.9rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--pacey-space-md);
+	flex-wrap: wrap;
+	max-width: 80rem;
+	margin-inline: auto;
+	padding: var(--pacey-space-lg) var(--pacey-content-padding);
+	border-top: 1px solid
+		color-mix(in srgb, var(--pacey-board-muted) 40%, transparent);
+	font-size: 0.9rem;
 }
 
 .landing-footer-links {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-md);
-    flex-wrap: nowrap;
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-md);
+	flex-wrap: nowrap;
 }
 
 .landing-footer-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    color: var(--pacey-board-muted);
-    text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	color: var(--pacey-board-muted);
+	text-decoration: none;
 }
 
 /* A hairline rule between the two destinations — drawn with a border so
    there is no separator character for a screen reader to announce. */
 .landing-footer-link + .landing-footer-link {
-    border-left: 1px solid color-mix(in srgb, var(--pacey-board-muted) 35%, transparent);
-    padding-left: var(--pacey-space-md);
+	border-left: 1px solid
+		color-mix(in srgb, var(--pacey-board-muted) 35%, transparent);
+	padding-left: var(--pacey-space-md);
 }
 
 .landing-footer-link:hover {
-    color: var(--pacey-blue);
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
+	color: var(--pacey-blue);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
 }
 
 /* The footer sits outside the board remap, so the hover reads the app's
@@ -1183,68 +1244,69 @@
    as the FAQ toggles; light keeps the blue. */
 [data-theme="dark"] .landing-body .landing-footer-link:hover,
 [data-theme="dark"] .landing-body .landing-footer-link:focus-visible {
-    color: var(--pacey-board-copy);
+	color: var(--pacey-board-copy);
 }
 
 .landing-footer-credit {
-    margin: 0;
-    color: var(--pacey-board-muted);
+	margin: 0;
+	color: var(--pacey-board-muted);
 }
 
 /* --- Accessibility ----------------------------------------------------- */
 /* Focus is always visible and always the app's blue — never removed. */
 .landing-body :focus-visible {
-    outline: 0.125rem solid var(--pacey-blue);
-    outline-offset: 0.1875rem;
-    border-radius: var(--pacey-radius-sm);
+	outline: 0.125rem solid var(--pacey-blue);
+	outline-offset: 0.1875rem;
+	border-radius: var(--pacey-radius-sm);
 }
 
 /* Reduced motion: the hero lands instantly and every transition drops.
    A quality-floor requirement, same as the app. */
 @media (prefers-reduced-motion: reduce) {
-    .landing-hero {
-        animation: none;
-    }
-    .landing-theme-toggle,
-    .landing-btn,
-    .landing-footer-link {
-        transition: none;
-    }
-    /* The FAQ drawer opens instantly — no height travel, no chevron spin,
+	.landing-hero {
+		animation: none;
+	}
+	.landing-theme-toggle,
+	.landing-btn,
+	.landing-footer-link {
+		transition: none;
+	}
+	/* The FAQ drawer opens instantly — no height travel, no chevron spin,
        no fade. */
-    .landing-question-answer,
-    .landing-question-answer-inner,
-    .landing-question-chevron {
-        transition: none;
-    }
-    /* Entrance reveals never play — anything still waiting is simply
+	.landing-question-answer,
+	.landing-question-answer-inner,
+	.landing-question-chevron {
+		transition: none;
+	}
+	/* Entrance reveals never play — anything still waiting is simply
        shown. (JS also skips stamping .landing-reveal at all when the
        preference is already set, so this covers the mid-visit flip.) */
-    .landing-reveal,
-    .landing-reveal .pacey-cal-row,
-    .landing-questions.landing-reveal .landing-question,
-    .landing-final .landing-hero-actions.landing-reveal,
-    .landing-final .landing-notes.landing-reveal {
-        opacity: 1;
-        translate: none;
-        transition: none;
-    }
-    /* The heading underline is drawn rather than revealed, so it needs its
+	.landing-reveal,
+	.landing-reveal .pacey-cal-row,
+	.landing-questions.landing-reveal .landing-question,
+	.landing-final .landing-hero-actions.landing-reveal,
+	.landing-final .landing-notes.landing-reveal {
+		opacity: 1;
+		translate: none;
+		transition: none;
+	}
+	/* The heading underline is drawn rather than revealed, so it needs its
        own override: it arrives complete, with no clip travel. */
-    .landing-section-title::after {
-        transition: none;
-        clip-path: inset(0 0 0 0);
-    }
-    /* The evidence marker appears finished, instantly — full swipe, ring
+	.landing-section-title::after {
+		transition: none;
+		clip-path: inset(0 0 0 0);
+	}
+	/* The evidence marker appears finished, instantly — full swipe, ring
        already drawn. */
-    .landing-evidence-link[aria-current="location"]::before {
-        animation: none;
-        transform: rotate(-1deg);
-    }
-    .landing-evidence-link[aria-current="location"] .landing-evidence-sketch-path {
-        animation: none;
-        stroke-dashoffset: 0;
-    }
+	.landing-evidence-link[aria-current="location"]::before {
+		animation: none;
+		transform: rotate(-1deg);
+	}
+	.landing-evidence-link[aria-current="location"]
+		.landing-evidence-sketch-path {
+		animation: none;
+		stroke-dashoffset: 0;
+	}
 }
 
 /* --- Small screens ----------------------------------------------------- */
@@ -1252,150 +1314,150 @@
    carousel below 48rem — a scroll widget is the wrong signal for a
    static preview, so the landing's tiles wrap in place instead. */
 @media (max-width: 48rem) {
-    #pacey-content.landing-board .pacey-metrics-grid {
-        grid-auto-flow: row;
-        grid-template-rows: none;
-        grid-auto-columns: auto;
-        grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
-        overflow-x: visible;
-        scroll-snap-type: none;
-        padding: 0;
-    }
-    #pacey-content.landing-board .pacey-metric-tile {
-        scroll-snap-align: none;
-    }
+	#pacey-content.landing-board .pacey-metrics-grid {
+		grid-auto-flow: row;
+		grid-template-rows: none;
+		grid-auto-columns: auto;
+		grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+		overflow-x: visible;
+		scroll-snap-type: none;
+		padding: 0;
+	}
+	#pacey-content.landing-board .pacey-metric-tile {
+		scroll-snap-align: none;
+	}
 }
 
 /* Mobile-only content — hidden on desktop, restored inside the ≤46rem
    block (where .landing-desktop-only does the reverse). */
 .landing-mobile-only {
-    display: none;
+	display: none;
 }
 
 /* Below tablet width the header keeps the same simple flex row — brand
    left, toggle right — just with a wider gutter for thumbs. */
 @media (max-width: 46rem) {
-    .landing-header {
-        padding-inline: var(--pacey-space-lg);
-    }
+	.landing-header {
+		padding-inline: var(--pacey-space-lg);
+	}
 
-    /* --- Mobile showcase — the same app components, sized and trimmed
+	/* --- Mobile showcase — the same app components, sized and trimmed
        for one hand. Desktop keeps the full presentation. --- */
-    .landing-desktop-only {
-        display: none;
-    }
+	.landing-desktop-only {
+		display: none;
+	}
 
-    .landing-mobile-only {
-        /* revert restores each element's own display — block for the
+	.landing-mobile-only {
+		/* revert restores each element's own display — block for the
            summary/read paragraphs, inline for the week title span. */
-        display: revert;
-    }
+		display: revert;
+	}
 
-    /* Readiness: explanation leads, the chart follows, and the radar
+	/* Readiness: explanation leads, the chart follows, and the radar
        plot caps at ~18rem centred — Chart.js redraws to the smaller
        wrap, so every axis label survives without transform shrink. */
-    .landing-readiness {
-        grid-template-columns: minmax(0, 1fr);
-    }
+	.landing-readiness {
+		grid-template-columns: minmax(0, 1fr);
+	}
 
-    .landing-readiness-copy {
-        order: -1;
-    }
+	.landing-readiness-copy {
+		order: -1;
+	}
 
-    .landing-radar-card .pacey-radar-wrap {
-        max-width: 18rem;
-        margin-inline: auto;
-    }
+	.landing-radar-card .pacey-radar-wrap {
+		max-width: 18rem;
+		margin-inline: auto;
+	}
 
-    /* Exhibit captions sit on the cork beneath the paper — Caveat, board
+	/* Exhibit captions sit on the cork beneath the paper — Caveat, board
        ink — so the note reads as the exhibit's label, not a card footer.
        The readiness and course notes open with a tiny hand-drawn arrow
        pointing back up at the exhibit; decorative, never announced. */
-    .landing-feature-caption {
-        margin-top: var(--pacey-space-md);
-        font-family: var(--font-caveat);
-        font-size: 1.25rem;
-        line-height: 1.3;
-        color: var(--pacey-board-copy);
-        text-align: center;
-    }
+	.landing-feature-caption {
+		margin-top: var(--pacey-space-md);
+		font-family: var(--font-caveat);
+		font-size: 1.25rem;
+		line-height: 1.3;
+		color: var(--pacey-board-copy);
+		text-align: center;
+	}
 
-    .landing-caption-arrow {
-        display: inline-block;
-        width: 2rem;
-        height: auto;
-        margin-right: var(--pacey-space-xs);
-        vertical-align: -0.4em;
-        pointer-events: none;
-        stroke: currentColor;
-        stroke-width: 2.2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        fill: none;
-        transform: rotate(-6deg);
-    }
+	.landing-caption-arrow {
+		display: inline-block;
+		width: 2rem;
+		height: auto;
+		margin-right: var(--pacey-space-xs);
+		vertical-align: -0.4em;
+		pointer-events: none;
+		stroke: currentColor;
+		stroke-width: 2.2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+		transform: rotate(-6deg);
+	}
 
-    /* Words already said: the section heading names the readiness card
+	/* Words already said: the section heading names the readiness card
        above it, and the section intro plus caption carry what the chart
        sub-lines repeat. Titles, axes, units and every bar stay. */
-    .landing-radar-card .pacey-readiness-card-title,
-    .landing-trends-charts .pacey-card-sub {
-        display: none;
-    }
+	.landing-radar-card .pacey-readiness-card-title,
+	.landing-trends-charts .pacey-card-sub {
+		display: none;
+	}
 
-    /* The radar card keeps its desktop width: max-content — clamp each
+	/* The radar card keeps its desktop width: max-content — clamp each
        exhibit's contents to the column so a 320px measure can't spill. */
-    .landing-feature-exhibit > * {
-        max-width: 100%;
-    }
+	.landing-feature-exhibit > * {
+		max-width: 100%;
+	}
 
-    /* Plan collapses to copy-then-agenda. The week shows a deliberate
+	/* Plan collapses to copy-then-agenda. The week shows a deliberate
        three-day slice — Tue/Wed/Thu rows stay visible, the rest hide
        (markup untouched; the desktop week is complete). */
-    .landing-split {
-        grid-template-columns: minmax(0, 1fr);
-    }
+	.landing-split {
+		grid-template-columns: minmax(0, 1fr);
+	}
 
-    #pacey-content.landing-board .pacey-cal-row[data-sample-day="0"],
-    #pacey-content.landing-board .pacey-cal-row[data-sample-day="4"],
-    #pacey-content.landing-board .pacey-cal-row[data-sample-day="5"],
-    #pacey-content.landing-board .pacey-cal-row[data-sample-day="6"] {
-        display: none;
-    }
+	#pacey-content.landing-board .pacey-cal-row[data-sample-day="0"],
+	#pacey-content.landing-board .pacey-cal-row[data-sample-day="4"],
+	#pacey-content.landing-board .pacey-cal-row[data-sample-day="5"],
+	#pacey-content.landing-board .pacey-cal-row[data-sample-day="6"] {
+		display: none;
+	}
 
-    /* Course: tighter heights for the two-note stack — a readable map
+	/* Course: tighter heights for the two-note stack — a readable map
        with its attribution, and an elevation trace still tall enough for
        its axis labels to stay legible (90px squashed them to slivers).
        The loss stat is redundant next to gain on a phone-width row. */
-    #pacey-content.landing-board .pacey-course-route {
-        height: 180px;
-    }
+	#pacey-content.landing-board .pacey-course-route {
+		height: 180px;
+	}
 
-    #pacey-content.landing-board .pacey-course-elevation {
-        height: 140px;
-    }
+	#pacey-content.landing-board .pacey-course-elevation {
+		height: 140px;
+	}
 
-    #pacey-content.landing-board .pacey-course-stat:last-child {
-        display: none;
-    }
+	#pacey-content.landing-board .pacey-course-stat:last-child {
+		display: none;
+	}
 
-    /* Footer stacks on phones: links stay on their own row, the credit
+	/* Footer stacks on phones: links stay on their own row, the credit
        drops to its own line — the two jobs never merge into one group. */
-    .landing-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--pacey-space-sm);
-    }
+	.landing-footer {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--pacey-space-sm);
+	}
 
-    .landing-footer-links {
-        gap: var(--pacey-space-lg);
-    }
+	.landing-footer-links {
+		gap: var(--pacey-space-lg);
+	}
 }
 
 /* 320px floor — body copy shrinks a touch; the nav's sizing now lives in
    the 46rem block so there is no abrupt style change mid-phone range. */
 @media (max-width: 26rem) {
-    .landing-body {
-        font-size: 0.98rem;
-    }
+	.landing-body {
+		font-size: 0.98rem;
+	}
 }

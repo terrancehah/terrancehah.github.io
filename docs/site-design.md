@@ -3,7 +3,8 @@
 Factual map of the personal site's shared UI systems as of
 **16 October 2026**. Design intent lives in [`.impeccable.md`](../.impeccable.md);
 this file records where each behavior is implemented and how to verify it.
-For product-specific rules see [Pacey](../pacey/PRODUCT.md) and
+For product-specific rules see [Pacey](../pacey/PRODUCT.md) +
+[`pacey/.impeccable.md`](../pacey/.impeccable.md) and
 [Biwa](../projects/biwa-ride/AGENTS.md) — those are separate products with
 their own design systems and are out of scope here.
 
@@ -45,8 +46,8 @@ is not universal either:
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
-  rel="stylesheet" />
+	href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+	rel="stylesheet" />
 <link href="./styles/site-typography.css" rel="stylesheet" />
 <link href="./styles/site-footer.css" rel="stylesheet" />
 <link href="./styles/site-navigation.css" rel="stylesheet" />
@@ -101,13 +102,13 @@ All 25 pages share one structure:
 
 ```html
 <header class="site-header">
-  <div class="site-header-inner">
-    <div class="site-header-brand">
-      <h1 class="site-header-title">…</h1>
-    </div>
-    <nav class="site-nav" …>…</nav>
-    <div class="site-social-links">…</div>
-  </div>
+	<div class="site-header-inner">
+		<div class="site-header-brand">
+			<h1 class="site-header-title">…</h1>
+		</div>
+		<nav class="site-nav" …>…</nav>
+		<div class="site-social-links">…</div>
+	</div>
 </header>
 ```
 

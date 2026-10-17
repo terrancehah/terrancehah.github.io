@@ -12,7 +12,6 @@
    files. Nothing in this file should know about a particular page.
    ===================================================================== */
 
-
 /* ========== HAND-DRAWN ICONS ==========
    Every sketch icon is a <symbol> in the sprite at the top of the page, pulled
    in with <use>. CSS cannot select inside a <use> shadow tree, so the symbols
@@ -44,7 +43,7 @@
    rule further down picks the lighter value up too. */
 .pacey-tab-item .pacey-icon--stroke,
 .pacey-nav-item .pacey-icon--stroke {
-    --pacey-icon-stroke: 1.4;
+	--pacey-icon-stroke: 1.4;
 }
 
 /* The metric-row icon weight rule moved to pinboard-theme.css with the tile
@@ -52,27 +51,41 @@
 
 /* ========== LAYOUT SHELL ========== */
 /* Smooth color transition when switching themes */
-.pacey-main, .pacey-sidebar, .pacey-content, .pacey-readiness-card, .pacey-metric-tile,
-.pacey-chart-card, .pacey-activity-item, .pacey-auth-card, .pacey-onboard-card,
-.pacey-demo-banner, .pacey-countdown-highlight, .pacey-tabbar {
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+.pacey-main,
+.pacey-sidebar,
+.pacey-content,
+.pacey-readiness-card,
+.pacey-metric-tile,
+.pacey-chart-card,
+.pacey-activity-item,
+.pacey-auth-card,
+.pacey-onboard-card,
+.pacey-demo-banner,
+.pacey-countdown-highlight,
+.pacey-tabbar {
+	transition:
+		background-color 0.3s ease,
+		border-color 0.3s ease,
+		color 0.3s ease;
 }
 
 .pacey-main {
-    width: 100%;
-    display: flex;
-    background: var(--pacey-bg);
-    min-height: 100dvh;
+	width: 100%;
+	display: flex;
+	background: var(--pacey-bg);
+	min-height: 100dvh;
 }
 
 .pacey-screen {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.pacey-screen[hidden] { display: none; }
+.pacey-screen[hidden] {
+	display: none;
+}
 
 /* Global guard for the hidden attribute.
    `[hidden]` only sets display:none through the browser's own stylesheet, so
@@ -81,61 +94,67 @@
    the login modal, which was visible from the start because .pacey-field is
    display:flex. The per-component overrides further down this file predate this
    rule and are now redundant, but harmless. */
-[hidden] { display: none !important; }
+[hidden] {
+	display: none !important;
+}
 
 /* ========== FORMS ========== */
 .pacey-auth-form,
 .pacey-onboard-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
 }
 
 .pacey-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	flex: 1;
 }
 
 .pacey-field-row {
-    display: flex;
-    gap: var(--pacey-space-lg);
+	display: flex;
+	gap: var(--pacey-space-lg);
 }
 
 @media (max-width: 30rem) {
-    .pacey-field-row { flex-direction: column; }
+	.pacey-field-row {
+		flex-direction: column;
+	}
 }
 
 .pacey-label {
-    font-weight: 600;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-navy);
-    letter-spacing: 0.02em;
+	font-weight: 600;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-navy);
+	letter-spacing: 0.02em;
 }
 
 .pacey-input {
-    font-family: 'Raleway', sans-serif;
-    font-size: var(--pacey-text-body);
-    padding: 0.7em 0.85em;
-    border: 0.09375rem solid var(--pacey-border);
-    border-radius: var(--pacey-radius-sm);
-    background: var(--pacey-bg);
-    color: var(--pacey-text);
-    transition: border-color var(--pacey-transition), box-shadow var(--pacey-transition);
-    outline: none;
-    width: 100%;
-    box-sizing: border-box;
-    /* Some engines (Firefox/Safari) give input[type=date] a large intrinsic
+	font-family: "Raleway", sans-serif;
+	font-size: var(--pacey-text-body);
+	padding: 0.7em 0.85em;
+	border: 0.09375rem solid var(--pacey-border);
+	border-radius: var(--pacey-radius-sm);
+	background: var(--pacey-bg);
+	color: var(--pacey-text);
+	transition:
+		border-color var(--pacey-transition),
+		box-shadow var(--pacey-transition);
+	outline: none;
+	width: 100%;
+	box-sizing: border-box;
+	/* Some engines (Firefox/Safari) give input[type=date] a large intrinsic
        min-width; min-width:0 + max-width:100% stops it ever exceeding the
        field/container it sits in. */
-    min-width: 0;
-    max-width: 100%;
+	min-width: 0;
+	max-width: 100%;
 }
 
 .pacey-input:focus {
-    border-color: var(--pacey-blue);
-    box-shadow: 0 0 0 0.1875rem rgba(69, 123, 157, 0.15);
+	border-color: var(--pacey-blue);
+	box-shadow: 0 0 0 0.1875rem rgba(69, 123, 157, 0.15);
 }
 
 /* Placeholder uses the muted text token at reduced opacity for visual
@@ -143,147 +162,180 @@
    The muted token (#5a7184 light / #8ba5be dark) passes contrast at
    full opacity; 0.85 opacity keeps it visually secondary without
    dropping below the 4.5:1 threshold in either theme. */
-.pacey-input::placeholder { color: var(--pacey-muted); opacity: 0.85; }
+.pacey-input::placeholder {
+	color: var(--pacey-muted);
+	opacity: 0.85;
+}
 
 /* Validation */
 .pacey-input.error {
-    border-color: var(--pacey-accent-red);
-    box-shadow: 0 0 0 0.1875rem rgba(196, 75, 75, 0.1);
+	border-color: var(--pacey-accent-red);
+	box-shadow: 0 0 0 0.1875rem rgba(196, 75, 75, 0.1);
 }
 
 .pacey-field-error {
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-accent-red);
-    margin-top: 0.25rem;
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-accent-red);
+	margin-top: 0.25rem;
 }
 
-.pacey-required { color: var(--pacey-accent-red); font-weight: 400; }
-.pacey-optional { color: var(--pacey-muted); font-weight: 400; font-size: var(--pacey-text-caption); }
+.pacey-required {
+	color: var(--pacey-accent-red);
+	font-weight: 400;
+}
+.pacey-optional {
+	color: var(--pacey-muted);
+	font-weight: 400;
+	font-size: var(--pacey-text-caption);
+}
 
 /* Duration picker */
 .pacey-duration-picker {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
 }
 
 .pacey-duration-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.15rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.15rem;
 }
 
 .pacey-duration-input {
-    width: clamp(3rem, 10vw, 4rem);
-    text-align: center;
-    padding: 0.7em 0.4em;
-    font-size: var(--pacey-text-subheading);
-    font-weight: 600;
-    font-family: 'Lato', sans-serif;
+	width: clamp(3rem, 10vw, 4rem);
+	text-align: center;
+	padding: 0.7em 0.4em;
+	font-size: var(--pacey-text-subheading);
+	font-weight: 600;
+	font-family: "Lato", sans-serif;
 }
 
 .pacey-duration-input::-webkit-inner-spin-button,
 .pacey-duration-input::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    /* Standard counterpart — the prefixed rule alone no longer covers
+	-webkit-appearance: none;
+	/* Standard counterpart — the prefixed rule alone no longer covers
        browsers that have dropped the webkit alias. */
-    appearance: none;
-    margin: 0;
+	appearance: none;
+	margin: 0;
 }
-.pacey-duration-input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+.pacey-duration-input[type="number"] {
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
 
 .pacey-duration-sep {
-    font-family: 'Lato', sans-serif;
-    font-size: var(--pacey-text-heading);
-    font-weight: 700;
-    color: var(--pacey-navy);
-    padding-top: 0.5rem;
+	font-family: "Lato", sans-serif;
+	font-size: var(--pacey-text-heading);
+	font-weight: 700;
+	color: var(--pacey-navy);
+	padding-top: 0.5rem;
 }
 
 .pacey-duration-label {
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-caption);
-    font-weight: 400;
-    color: var(--pacey-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-caption);
+	font-weight: 400;
+	color: var(--pacey-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
 }
 
 /* Mileage row */
-.pacey-mileage-row { display: flex; gap: var(--pacey-space-sm); align-items: flex-start; }
-.pacey-mileage-input { flex: 1; }
+.pacey-mileage-row {
+	display: flex;
+	gap: var(--pacey-space-sm);
+	align-items: flex-start;
+}
+.pacey-mileage-input {
+	flex: 1;
+}
 
 .pacey-unit-select {
-    width: clamp(4rem, 10vw, 5rem);
-    flex-shrink: 0;
-    background-position: right 0.5rem center;
-    padding-right: 1.8rem;
+	width: clamp(4rem, 10vw, 5rem);
+	flex-shrink: 0;
+	background-position: right 0.5rem center;
+	padding-right: 1.8rem;
 }
 
 .pacey-select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23457b9d' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.85rem center;
-    padding-right: 2.5rem;
+	cursor: pointer;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23457b9d' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 0.85rem center;
+	padding-right: 2.5rem;
 }
 
 /* ========== BUTTONS ========== */
 .pacey-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--pacey-space-sm);
-    font-family: var(--font-fuzzy);
-    font-weight: 400;
-    font-size: var(--pacey-text-body);
-    padding: 0.75em 1.5em;
-    border-radius: var(--pacey-radius-sm);
-    border: none;
-    cursor: pointer;
-    transition: all var(--pacey-transition);
-    width: 100%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--pacey-space-sm);
+	font-family: var(--font-fuzzy);
+	font-weight: 400;
+	font-size: var(--pacey-text-body);
+	padding: 0.75em 1.5em;
+	border-radius: var(--pacey-radius-sm);
+	border: none;
+	cursor: pointer;
+	transition: all var(--pacey-transition);
+	width: 100%;
 }
 
 /* Ensure the HTML hidden attribute actually hides buttons — .pacey-btn sets
    display:inline-flex which overrides the default [hidden] { display:none }
    from the UA stylesheet, so without this rule hidden buttons stay visible. */
-.pacey-btn[hidden] { display: none !important; }
+.pacey-btn[hidden] {
+	display: none !important;
+}
 
-.pacey-btn-primary { background: var(--pacey-navy); color: var(--pacey-btn-primary-text); }
-.pacey-btn-primary:hover { background: var(--pacey-btn-primary-hover); }
-.pacey-btn-primary:active { transform: translateY(0); }
+.pacey-btn-primary {
+	background: var(--pacey-navy);
+	color: var(--pacey-btn-primary-text);
+}
+.pacey-btn-primary:hover {
+	background: var(--pacey-btn-primary-hover);
+}
+.pacey-btn-primary:active {
+	transform: translateY(0);
+}
 
 .pacey-btn-secondary {
-    background: var(--pacey-light);
-    color: var(--pacey-navy);
-    border: 0.0625rem solid var(--pacey-border);
+	background: var(--pacey-light);
+	color: var(--pacey-navy);
+	border: 0.0625rem solid var(--pacey-border);
 }
-.pacey-btn-secondary:hover { background: var(--pacey-sky); }
+.pacey-btn-secondary:hover {
+	background: var(--pacey-sky);
+}
 
 .pacey-btn-ghost {
-    background: transparent;
-    color: var(--pacey-muted);
-    font-size: var(--pacey-text-label);
-    padding: var(--pacey-space-sm);
-    margin: auto;
-    width: auto;
-    align-items: center;
+	background: transparent;
+	color: var(--pacey-muted);
+	font-size: var(--pacey-text-label);
+	padding: var(--pacey-space-sm);
+	margin: auto;
+	width: auto;
+	align-items: center;
 }
-.pacey-btn-ghost:hover { color: var(--pacey-accent-red); background: color-mix(in srgb, var(--pacey-accent-red) 6%, transparent); }
+.pacey-btn-ghost:hover {
+	color: var(--pacey-accent-red);
+	background: color-mix(in srgb, var(--pacey-accent-red) 6%, transparent);
+}
 
 /* Compact contextual action — the opt-out from .pacey-btn's width:100% for
    buttons that act on a card, row or note rather than submit a form: they
    hug their label, wrap onto a new line if the container narrows, and sit
-   left-aligned in flex contexts. See .impeccable.md "Button Width". */
+   left-aligned in flex contexts. See pacey/.impeccable.md "Button Width". */
 .pacey-btn-inline {
-    width: auto;
-    max-width: 100%;
-    flex: 0 1 auto;
-    align-self: flex-start;
+	width: auto;
+	max-width: 100%;
+	flex: 0 1 auto;
+	align-self: flex-start;
 }
 
 /* Running without a goal is an ordinary preference, not a destructive
@@ -291,21 +343,37 @@
    border, no shadow, no raised background and no lift on hover or focus.
    The keyboard outline stays — quiet must not mean unreachable — and red
    remains reserved for the save error these buttons can surface. */
-.pacey-btn:is(#pacey-onboard-nogoal, #pacey-settings-nogoal-btn, #pacey-edit-goal-nogoal, #pacey-goal-reminder-nogoal, [data-recap-action="no-goal"]) {
-    color: var(--pacey-muted);
-    background: none;
-    border: none;
-    box-shadow: none;
+.pacey-btn:is(
+	#pacey-onboard-nogoal,
+	#pacey-settings-nogoal-btn,
+	#pacey-edit-goal-nogoal,
+	#pacey-goal-reminder-nogoal,
+	[data-recap-action="no-goal"]
+) {
+	color: var(--pacey-muted);
+	background: none;
+	border: none;
+	box-shadow: none;
 }
-.pacey-btn:is(#pacey-onboard-nogoal, #pacey-settings-nogoal-btn, #pacey-edit-goal-nogoal, #pacey-goal-reminder-nogoal, [data-recap-action="no-goal"]):is(:hover, :focus) {
-    color: var(--pacey-navy);
-    background: none;
-    border: none;
-    box-shadow: none;
-    transform: none;
+.pacey-btn:is(
+		#pacey-onboard-nogoal,
+		#pacey-settings-nogoal-btn,
+		#pacey-edit-goal-nogoal,
+		#pacey-goal-reminder-nogoal,
+		[data-recap-action="no-goal"]
+	):is(:hover, :focus) {
+	color: var(--pacey-navy);
+	background: none;
+	border: none;
+	box-shadow: none;
+	transform: none;
 }
 
-.pacey-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.pacey-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none;
+}
 
 /* ---- Shared disclosure shell ----
    One expanding/collapsing panel pattern for every drawer, detail and sheet
@@ -319,31 +387,37 @@
    the logical state; JS pairs it with inert + aria-hidden (and never the
    [hidden] attribute — display:none would kill the transition). */
 .pacey-disclosure {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.pacey-disclosure.is-open { grid-template-rows: 1fr; }
+.pacey-disclosure.is-open {
+	grid-template-rows: 1fr;
+}
 .pacey-disclosure-inner {
-    min-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.2s ease;
+	min-height: 0;
+	overflow: hidden;
+	opacity: 0;
+	transition: opacity 0.2s ease;
 }
-.pacey-disclosure.is-open > .pacey-disclosure-inner { opacity: 1; }
+.pacey-disclosure.is-open > .pacey-disclosure-inner {
+	opacity: 1;
+}
 
 @media (prefers-reduced-motion: reduce) {
-    /* Instant state change — the open/closed layout still applies, only the
+	/* Instant state change — the open/closed layout still applies, only the
        transition and the rotating disclosure chevrons stop. !important keeps
        the preference ahead of later sheet order and ID-scoped chevron rules. */
-    .pacey-disclosure,
-    .pacey-disclosure-inner,
-    .pacey-metrics-extra,
-    .pacey-metrics-extra-inner,
-    .pacey-goal-suggestion-chevron,
-    .pacey-activity-chevron,
-    .pacey-plan-fitness-chevron,
-    .pacey-vitals-toggle-chevron { transition: none !important; }
+	.pacey-disclosure,
+	.pacey-disclosure-inner,
+	.pacey-metrics-extra,
+	.pacey-metrics-extra-inner,
+	.pacey-goal-suggestion-chevron,
+	.pacey-activity-chevron,
+	.pacey-plan-fitness-chevron,
+	.pacey-vitals-toggle-chevron {
+		transition: none !important;
+	}
 }
 
 /* Global keyboard focus indicator — visible outline on all interactive
@@ -362,202 +436,241 @@
 .pacey-settings-popup-close:focus-visible,
 .pacey-modal-close:focus-visible,
 .pacey-goal-suggestions-close:focus-visible {
-    outline: 0.125rem solid var(--pacey-blue);
-    outline-offset: 0.125rem;
-    border-radius: var(--pacey-radius-sm);
+	outline: 0.125rem solid var(--pacey-blue);
+	outline-offset: 0.125rem;
+	border-radius: var(--pacey-radius-sm);
 }
 
 /* Spinner */
 .pacey-btn-spinner {
-    width: 1.125rem;
-    height: 1.125rem;
-    border: 0.125rem solid rgba(255,255,255,0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: pacey-spin 0.6s linear infinite;
+	width: 1.125rem;
+	height: 1.125rem;
+	border: 0.125rem solid rgba(255, 255, 255, 0.3);
+	border-top-color: white;
+	border-radius: 50%;
+	animation: pacey-spin 0.6s linear infinite;
 }
 
-@keyframes pacey-spin { to { transform: rotate(360deg); } }
+@keyframes pacey-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
 
 /* Auth error */
 .pacey-auth-error {
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-accent-red);
-    background: rgba(196, 75, 75, 0.06);
-    padding: 0.65rem 0.85rem;
-    border-radius: var(--pacey-radius-sm);
-    border-left: 0.1875rem solid var(--pacey-accent-red);
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-accent-red);
+	background: rgba(196, 75, 75, 0.06);
+	padding: 0.65rem 0.85rem;
+	border-radius: var(--pacey-radius-sm);
+	border-left: 0.1875rem solid var(--pacey-accent-red);
 }
 
 /* Demo section */
 .pacey-demo-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    padding: 1rem 0 0;
-    border-top: 0.0625rem solid var(--pacey-border);
-    margin-top: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	padding: 1rem 0 0;
+	border-top: 0.0625rem solid var(--pacey-border);
+	margin-top: 0.5rem;
 }
 
-.pacey-demo-section .pacey-btn { width: auto; padding: 0.6rem 1.75rem; }
+.pacey-demo-section .pacey-btn {
+	width: auto;
+	padding: 0.6rem 1.75rem;
+}
 
 .pacey-demo-hint {
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    margin: 0;
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	margin: 0;
 }
 
 /* Auth footer */
 .pacey-auth-footer {
-    text-align: center;
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    margin: 1.5rem 0 0;
-    line-height: 1.5;
+	text-align: center;
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	margin: 1.5rem 0 0;
+	line-height: 1.5;
 }
 
-.pacey-auth-footer a { color: var(--pacey-blue); text-decoration: underline; text-underline-offset: 0.125rem; }
+.pacey-auth-footer a {
+	color: var(--pacey-blue);
+	text-decoration: underline;
+	text-underline-offset: 0.125rem;
+}
 
 /* ========== DASHBOARD LAYOUT ========== */
 /* Header offset — matches the fixed sidebar width so header isn't hidden under it */
 header.pacey-header-offset {
-    padding-left: var(--pacey-sidebar-w);
-    transition: padding-left 0.25s ease, background-color 0.3s ease, color 0.3s ease;
-    box-sizing: border-box;
+	padding-left: var(--pacey-sidebar-w);
+	transition:
+		padding-left 0.25s ease,
+		background-color 0.3s ease,
+		color 0.3s ease;
+	box-sizing: border-box;
 }
 
 /* When sidebar is collapsed, reduce the header offset */
 header.pacey-header-offset.pacey-header-collapsed {
-    padding-left: var(--pacey-sidebar-collapsed);
+	padding-left: var(--pacey-sidebar-collapsed);
 }
 
 /* On mobile, sidebar is display:none so remove the offset entirely */
 @media (max-width: 48rem) {
-    header.pacey-header-offset { padding-left: 0; }
+	header.pacey-header-offset {
+		padding-left: 0;
+	}
 }
 
 /* Header colour scheme — uses the design system tokens so the header
    transitions correctly when switching between light and dark themes. */
-.pacey-header-title { color: var(--pacey-navy); transition: color 0.3s ease; }
-.pacey-header-link { color: var(--pacey-blue); transition: color 0.3s ease, background-color 0.3s ease; }
+.pacey-header-title {
+	color: var(--pacey-navy);
+	transition: color 0.3s ease;
+}
+.pacey-header-link {
+	color: var(--pacey-blue);
+	transition:
+		color 0.3s ease,
+		background-color 0.3s ease;
+}
 
 /* Header dark mode overrides — values come from the theme tokens so a
    palette change stays in one place. */
-[data-theme="dark"] .pacey-header-title { color: var(--pacey-navy); }
-[data-theme="dark"] .pacey-header-link { color: var(--pacey-muted); }
-[data-theme="dark"] .pacey-header-link:hover { background: var(--pacey-light); }
-[data-theme="dark"] header.pacey-header-offset { background: var(--pacey-surface); border-bottom: 0.0625rem solid var(--pacey-border); }
+[data-theme="dark"] .pacey-header-title {
+	color: var(--pacey-navy);
+}
+[data-theme="dark"] .pacey-header-link {
+	color: var(--pacey-muted);
+}
+[data-theme="dark"] .pacey-header-link:hover {
+	background: var(--pacey-light);
+}
+[data-theme="dark"] header.pacey-header-offset {
+	background: var(--pacey-surface);
+	border-bottom: 0.0625rem solid var(--pacey-border);
+}
 
 /* Invert social media icons in dark mode — PNGs are dark-on-transparent, */
 /* so invert+brightness makes them light-on-transparent for visibility */
 [data-theme="dark"] .pacey-social-icon {
-    filter: invert(1) brightness(1.8);
-    transition: filter 0.3s ease;
+	filter: invert(1) brightness(1.8);
+	transition: filter 0.3s ease;
 }
 
 /* Smooth filter transition when switching to light mode too */
-.pacey-social-icon { transition: filter 0.3s ease; }
+.pacey-social-icon {
+	transition: filter 0.3s ease;
+}
 
 /* Projects button — currently highlighted with light blue bg-[#c0e9fc] */
 /* In dark mode, use a darker secondary blue for the highlight */
 [data-theme="dark"] .pacey-header-link--active {
-    background: var(--pacey-sky) !important;
+	background: var(--pacey-sky) !important;
 }
 
 .pacey-dashboard-layout {
-    display: flex;
-    width: 100%;
-    /* No min-height — let the page flow naturally with the header above */
-    padding-left: var(--pacey-sidebar-w);
-    transition: padding-left 0.25s ease;
+	display: flex;
+	width: 100%;
+	/* No min-height — let the page flow naturally with the header above */
+	padding-left: var(--pacey-sidebar-w);
+	transition: padding-left 0.25s ease;
 }
 
 /* When sidebar is collapsed, reduce the content offset */
 .pacey-dashboard-layout.sidebar-collapsed {
-    padding-left: var(--pacey-sidebar-collapsed);
+	padding-left: var(--pacey-sidebar-collapsed);
 }
 
 /* ---- Mobile Bottom Tab Bar (hidden on desktop) ---- */
 .pacey-tabbar {
-    display: none; /* hidden by default, shown via media query */
-    position: fixed;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    right: 1.5rem;
-    height: 3.5rem;
-    /* iOS 27 "liquid glass" look: a highly translucent tint + strong blur +
+	display: none; /* hidden by default, shown via media query */
+	position: fixed;
+	bottom: 1.5rem;
+	left: 1.5rem;
+	right: 1.5rem;
+	height: 3.5rem;
+	/* iOS 27 "liquid glass" look: a highly translucent tint + strong blur +
        brightness lift so content scrolling beneath reads as frosted, lit
        glass. The refractive rim (inset highlights) and the diagonal sheen
        pseudo-element give the curved-glass edge instead of a flat blur. */
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
-    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
-    border: 0.0625rem solid rgba(255, 255, 255, 0.25);
-    border-radius: 0.5rem;
-    box-shadow:
-        0 0.5rem 2rem rgba(29, 53, 87, 0.18),
-        /* Refractive rim: strong top highlight, softer on the other edges */
-        inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.6),
-        inset 0 -0.0625rem 0.0625rem rgba(255, 255, 255, 0.35),
-        inset 0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.25),
-        inset -0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.25);
-    align-items: center;
-    justify-content: space-between;
-    /* Isolate so the sheen (z-index: -1 below) stays inside the bar's own
+	background: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+	-webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+	border: 0.0625rem solid rgba(255, 255, 255, 0.25);
+	border-radius: 0.5rem;
+	box-shadow:
+		0 0.5rem 2rem rgba(29, 53, 87, 0.18),
+		/* Refractive rim: strong top highlight, softer on the other edges */
+		inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.6),
+		inset 0 -0.0625rem 0.0625rem rgba(255, 255, 255, 0.35),
+		inset 0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.25),
+		inset -0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.25);
+	align-items: center;
+	justify-content: space-between;
+	/* Isolate so the sheen (z-index: -1 below) stays inside the bar's own
        stacking context instead of slipping behind the page content */
-    isolation: isolate;
-    z-index: 50;
-    padding-left: 0.7rem;
-    padding-right: 0.7rem;
-    padding-bottom: 0;
-    /* Slide animation: the bar translates down below the bottom edge when
+	isolation: isolate;
+	z-index: 50;
+	padding-left: 0.7rem;
+	padding-right: 0.7rem;
+	padding-bottom: 0;
+	/* Slide animation: the bar translates down below the bottom edge when
        the user scrolls down (toggled via the .pacey-tabbar--hidden class
        added by the scroll-direction handler in pacey.js) and slides
        back up when the user scrolls up. */
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Hidden state — translated fully below the viewport (height + bottom
    offset + safe-area inset so it clears the screen edge on notched
    devices). Toggled by the scroll-direction handler. */
 .pacey-tabbar.pacey-tabbar--hidden {
-    transform: translateY(calc(100% + 1.5rem + env(safe-area-inset-bottom, 0)));
+	transform: translateY(calc(100% + 1.5rem + env(safe-area-inset-bottom, 0)));
 }
 
 /* Glossy diagonal sheen — a light gradient that catches across the glass
    like a reflection. Blends with the blurred backdrop via screen blending. */
 .pacey-tabbar::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    z-index: -1;
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0.08) 30%,
-        transparent 60%);
-    mix-blend-mode: screen;
-    pointer-events: none;
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	z-index: -1;
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.5),
+		rgba(255, 255, 255, 0.08) 30%,
+		transparent 60%
+	);
+	mix-blend-mode: screen;
+	pointer-events: none;
 }
 
 /* Each tab item is an icon-only button */
 .pacey-tab-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    color: var(--pacey-muted);
-    text-decoration: none;
-    border-radius: 1rem;
-    transition: color 0.2s ease, transform 0.15s ease;
-    /* Sit above the sliding indicator so icon stays clickable */
-    position: relative;
-    z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--pacey-muted);
+	text-decoration: none;
+	border-radius: 1rem;
+	transition:
+		color 0.2s ease,
+		transform 0.15s ease;
+	/* Sit above the sliding indicator so icon stays clickable */
+	position: relative;
+	z-index: 1;
 }
 
 /* Sliding indicator for the mobile tab bar — a frosted pill that
@@ -565,31 +678,32 @@ header.pacey-header-offset.pacey-header-collapsed {
    No transition on first render; the .pacey-indicator-ready class is
    added after the first positioning to enable smooth sliding. */
 .pacey-tab-indicator {
-    position: absolute;
-    border-radius: 1rem;
-    pointer-events: none;
-    z-index: 0;
-    /* Same frosted pill styling as the old static active background */
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow:
-        inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.5),
-        0 0.125rem 0.375rem rgba(29, 53, 87, 0.12);
-    transition: none;
+	position: absolute;
+	border-radius: 1rem;
+	pointer-events: none;
+	z-index: 0;
+	/* Same frosted pill styling as the old static active background */
+	background: rgba(255, 255, 255, 0.35);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	box-shadow:
+		inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.5),
+		0 0.125rem 0.375rem rgba(29, 53, 87, 0.12);
+	transition: none;
 }
 .pacey-tab-indicator.pacey-indicator-ready {
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition:
+		left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .pacey-tab-item.active {
-    color: var(--pacey-navy);
-    /* Background is now handled by the sliding indicator */
-    background: transparent;
-    box-shadow: none;
+	color: var(--pacey-navy);
+	/* Background is now handled by the sliding indicator */
+	background: transparent;
+	box-shadow: none;
 }
 
 /* Active tab — the icon is redrawn with a little more ink, so the selection
@@ -598,515 +712,598 @@ header.pacey-header-offset.pacey-header-collapsed {
    colour; a stroked glyph just takes a heavier stroke, and the multiplier is
    what keeps the two hands gaining the same visual weight from one rule. */
 .pacey-tab-item.active .pacey-icon {
-    stroke: currentColor;
-    stroke-width: var(--pacey-tab-icon-ink, 5);
+	stroke: currentColor;
+	stroke-width: var(--pacey-tab-icon-ink, 5);
 }
 .pacey-tab-item.active .pacey-icon--stroke {
-    stroke-width: calc(var(--pacey-icon-stroke, 2) * 1.5);
+	stroke-width: calc(var(--pacey-icon-stroke, 2) * 1.5);
 }
 
-.pacey-tab-item:hover { color: var(--pacey-navy); }
-.pacey-tab-item:active { transform: scale(0.92); }
+.pacey-tab-item:hover {
+	color: var(--pacey-navy);
+}
+.pacey-tab-item:active {
+	transform: scale(0.92);
+}
 
 /* Dark mode overrides for the mobile tab bar — darker tint, same liquid
    glass treatment (translucent, rim highlights, subtle sheen) */
 [data-theme="dark"] .pacey-tabbar {
-    background: rgba(18, 28, 42, 0.28);
-    border: 0.0625rem solid rgba(255, 255, 255, 0.14);
-    box-shadow:
-        0 0.5rem 2rem rgba(0, 0, 0, 0.45),
-        inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.18),
-        inset 0 -0.0625rem 0.0625rem rgba(255, 255, 255, 0.1),
-        inset 0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.08),
-        inset -0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.08);
+	background: rgba(18, 28, 42, 0.28);
+	border: 0.0625rem solid rgba(255, 255, 255, 0.14);
+	box-shadow:
+		0 0.5rem 2rem rgba(0, 0, 0, 0.45),
+		inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.18),
+		inset 0 -0.0625rem 0.0625rem rgba(255, 255, 255, 0.1),
+		inset 0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.08),
+		inset -0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.08);
 }
 
 /* Dark mode sheen — quieter reflection so the glass stays legible on dark */
 [data-theme="dark"] .pacey-tabbar::before {
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.22),
-        rgba(255, 255, 255, 0.05) 30%,
-        transparent 60%);
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.22),
+		rgba(255, 255, 255, 0.05) 30%,
+		transparent 60%
+	);
 }
 
 [data-theme="dark"] .pacey-tab-indicator {
-    background: rgba(255, 255, 255, 0.12);
-    box-shadow:
-        inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.18),
-        0 0.125rem 0.375rem rgba(0, 0, 0, 0.25);
+	background: rgba(255, 255, 255, 0.12);
+	box-shadow:
+		inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.18),
+		0 0.125rem 0.375rem rgba(0, 0, 0, 0.25);
 }
 
 /* Mobile theme toggle — the shared .pacey-theme-toggle chip (presentation
    lives in pinboard-theme.css) floated above the tab bar on phones. This
    rule is only placement and visibility. */
 .pacey-theme-toggle-mobile {
-    display: none; /* hidden on desktop, shown via media query */
-    position: fixed;
-    top: 6rem; /* sits above the tab bar (bottom 1.5rem + height 3.5rem + 2rem gap) */
-    right: 1.5rem;
-    z-index: 30;
-    width: 2.5rem;
-    height: 2.5rem;
+	display: none; /* hidden on desktop, shown via media query */
+	position: fixed;
+	top: 6rem; /* sits above the tab bar (bottom 1.5rem + height 3.5rem + 2rem gap) */
+	right: 1.5rem;
+	z-index: 30;
+	width: 2.5rem;
+	height: 2.5rem;
 }
 
 /* Hidden on desktop — only shown on mobile via media query override */
 @media (min-width: 48.0625rem) {
-    .pacey-theme-toggle-mobile { display: none !important; }
+	.pacey-theme-toggle-mobile {
+		display: none !important;
+	}
 }
 
 @media (max-width: 48rem) {
-    .pacey-theme-toggle-mobile { display: flex; }
+	.pacey-theme-toggle-mobile {
+		display: flex;
+	}
 }
 
 /* Show the current theme's icon: sun in light mode, moon in dark mode.
    This matches the sidebar theme toggle behaviour — the button shows
    what you're currently in, not what you'll switch to. */
-[data-theme="dark"] .pacey-theme-toggle-mobile-sun { display: none; }
-[data-theme="dark"] .pacey-theme-toggle-mobile-moon { display: block; }
-[data-theme="light"] .pacey-theme-toggle-mobile-sun { display: block; }
-[data-theme="light"] .pacey-theme-toggle-mobile-moon { display: none; }
+[data-theme="dark"] .pacey-theme-toggle-mobile-sun {
+	display: none;
+}
+[data-theme="dark"] .pacey-theme-toggle-mobile-moon {
+	display: block;
+}
+[data-theme="light"] .pacey-theme-toggle-mobile-sun {
+	display: block;
+}
+[data-theme="light"] .pacey-theme-toggle-mobile-moon {
+	display: none;
+}
 
 /* ---- Sidebar ---- */
 .pacey-sidebar {
-    width: var(--pacey-sidebar-w);
-    min-width: var(--pacey-sidebar-w);
-    background: var(--pacey-surface);
-    border-right: 0.0625rem solid var(--pacey-border);
-    /* Fixed position so sidebar stays pinned regardless of page scroll */
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100dvh;
-    transition: width 0.25s ease, min-width 0.25s ease, transform 0.25s ease;
-    overflow: hidden;
-    z-index: 20;
+	width: var(--pacey-sidebar-w);
+	min-width: var(--pacey-sidebar-w);
+	background: var(--pacey-surface);
+	border-right: 0.0625rem solid var(--pacey-border);
+	/* Fixed position so sidebar stays pinned regardless of page scroll */
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100dvh;
+	transition:
+		width 0.25s ease,
+		min-width 0.25s ease,
+		transform 0.25s ease;
+	overflow: hidden;
+	z-index: 20;
 }
 
 .pacey-sidebar.collapsed {
-    width: var(--pacey-sidebar-collapsed);
-    min-width: var(--pacey-sidebar-collapsed);
+	width: var(--pacey-sidebar-collapsed);
+	min-width: var(--pacey-sidebar-collapsed);
 }
 
 .pacey-sidebar-inner {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 1.25rem 0.75rem;
-    gap: var(--pacey-space-md);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 1.25rem 0.75rem;
+	gap: var(--pacey-space-md);
 }
 
 .pacey-sidebar-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--pacey-space-sm);
-    border-bottom: 0.0625rem solid var(--pacey-border);
-    white-space: nowrap;
+	display: flex;
+	flex-direction: column;
+	gap: var(--pacey-space-sm);
+	border-bottom: 0.0625rem solid var(--pacey-border);
+	white-space: nowrap;
 }
 
 .pacey-sidebar.collapsed .pacey-sidebar-header {
-    opacity: 0;
-    pointer-events: none;
-    border-bottom: none;
-    padding-bottom: 0;
+	opacity: 0;
+	pointer-events: none;
+	border-bottom: none;
+	padding-bottom: 0;
 }
 
 /* Profile area — avatar + display name in a row */
 .pacey-sidebar-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.6rem;
 }
 
 /* Avatar circle — generic runner icon placeholder */
 .pacey-sidebar-avatar {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background: var(--pacey-light);
-    border: 0.0625rem solid var(--pacey-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--pacey-blue);
-    flex-shrink: 0;
-    overflow: hidden; /* clip profile image to circle */
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+	background: var(--pacey-light);
+	border: 0.0625rem solid var(--pacey-border);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--pacey-blue);
+	flex-shrink: 0;
+	overflow: hidden; /* clip profile image to circle */
 }
 
 .pacey-sidebar-avatar svg {
-    width: 1.25rem;
-    height: 1.25rem;
+	width: 1.25rem;
+	height: 1.25rem;
 }
 
 /* Profile image fills the circular avatar container */
 .pacey-sidebar-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 /* Initials fallback when no profile image is available */
 .pacey-sidebar-avatar .pacey-avatar-initials {
-    font-family: var(--font-fuzzy);
-    font-weight: 400;
-    font-size: 0.85rem;
-    color: var(--pacey-blue);
+	font-family: var(--font-fuzzy);
+	font-weight: 400;
+	font-size: 0.85rem;
+	color: var(--pacey-blue);
 }
 
 .pacey-sidebar-greeting {
-    font-weight: 700;
-    font-size: var(--pacey-text-subheading);
-    color: var(--pacey-navy);
+	font-weight: 700;
+	font-size: var(--pacey-text-subheading);
+	color: var(--pacey-navy);
 }
 
-.pacey-sidebar-goal-row { 
-    display: flex; 
-    align-items: center; 
-    gap: 0.25rem; 
-    padding-bottom: 0.75rem;
-    justify-content: center;
+.pacey-sidebar-goal-row {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	padding-bottom: 0.75rem;
+	justify-content: center;
 }
 
 .pacey-sidebar-goal {
-    font-size: var(--pacey-text-label);
-    /* A text token, not --pacey-btn-primary-hover: that one is a button
+	font-size: var(--pacey-text-label);
+	/* A text token, not --pacey-btn-primary-hover: that one is a button
        background, so the goal was inheriting a colour meant for button fills
        and stayed cool blue on the warm board. */
-    color: var(--pacey-muted);
-    font-weight: 500;
-    /* Content-sized — the box is exactly as wide as the goal text. */
-    flex: 0 1 auto;
-    text-align: center;
+	color: var(--pacey-muted);
+	font-weight: 500;
+	/* Content-sized — the box is exactly as wide as the goal text. */
+	flex: 0 1 auto;
+	text-align: center;
 }
 
 .pacey-reset-goal-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: var(--pacey-muted);
-    cursor: pointer;
-    padding: 0.125rem;
-    border-radius: 0.25rem;
-    /* Always visible — no longer hidden until hover */
-    opacity: 0.5;
-    transition: opacity 0.15s ease, color 0.15s ease;
-    flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	border: none;
+	color: var(--pacey-muted);
+	cursor: pointer;
+	padding: 0.125rem;
+	border-radius: 0.25rem;
+	/* Always visible — no longer hidden until hover */
+	opacity: 0.5;
+	transition:
+		opacity 0.15s ease,
+		color 0.15s ease;
+	flex-shrink: 0;
 }
 
 /* Brighten on hover using the project's blue accent — no red */
-.pacey-sidebar-goal-row:hover .pacey-reset-goal-icon { opacity: 0.8; }
-.pacey-reset-goal-icon:hover { opacity: 1 !important; color: var(--pacey-blue); }
+.pacey-sidebar-goal-row:hover .pacey-reset-goal-icon {
+	opacity: 0.8;
+}
+.pacey-reset-goal-icon:hover {
+	opacity: 1 !important;
+	color: var(--pacey-blue);
+}
 
 /* Sidebar nav */
 .pacey-sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    flex: 1;
-    /* Needed for the absolutely-positioned sliding indicator */
-    position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	flex: 1;
+	/* Needed for the absolutely-positioned sliding indicator */
+	position: relative;
 }
 /* Collapsed sidebar: fade out text labels via opacity, keep icons in fixed position */
-.pacey-sidebar.collapsed .pacey-sidebar-nav { opacity: 1; pointer-events: auto; }
+.pacey-sidebar.collapsed .pacey-sidebar-nav {
+	opacity: 1;
+	pointer-events: auto;
+}
 .pacey-sidebar.collapsed .pacey-nav-label {
-    opacity: 0;
-    pointer-events: none;
-    /* Prevent label from taking layout space when collapsed */
-    width: 0;
-    overflow: hidden;
+	opacity: 0;
+	pointer-events: none;
+	/* Prevent label from taking layout space when collapsed */
+	width: 0;
+	overflow: hidden;
 }
 /* Keep icon centered when collapsed — don't change padding, let label collapse naturally */
-.pacey-sidebar.collapsed .pacey-nav-item { justify-content: flex-start; padding: 0.45rem 0.55rem; }
-
-.pacey-nav-item {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    font-family: var(--font-fuzzy);
-    font-weight: 500;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    text-decoration: none;
-    background: transparent;
-    border: none;
-    padding: 0.45rem 0.55rem;
-    border-radius: var(--pacey-radius-sm);
-    cursor: pointer;
-    transition: color var(--pacey-transition);
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-    /* Sit above the sliding indicator so label/icon stay clickable */
-    position: relative;
-    z-index: 1;
+.pacey-sidebar.collapsed .pacey-nav-item {
+	justify-content: flex-start;
+	padding: 0.45rem 0.55rem;
 }
 
-.pacey-nav-item:hover { color: var(--pacey-navy); }
-.pacey-nav-item.active { color: var(--pacey-navy); font-weight: 600; }
-.pacey-nav-icon { flex-shrink: 0; opacity: 0.7; }
-.pacey-nav-item.active .pacey-nav-icon { opacity: 1; color: var(--pacey-blue); }
+.pacey-nav-item {
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	font-family: var(--font-fuzzy);
+	font-weight: 500;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	text-decoration: none;
+	background: transparent;
+	border: none;
+	padding: 0.45rem 0.55rem;
+	border-radius: var(--pacey-radius-sm);
+	cursor: pointer;
+	transition: color var(--pacey-transition);
+	width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+	/* Sit above the sliding indicator so label/icon stay clickable */
+	position: relative;
+	z-index: 1;
+}
+
+.pacey-nav-item:hover {
+	color: var(--pacey-navy);
+}
+.pacey-nav-item.active {
+	color: var(--pacey-navy);
+	font-weight: 600;
+}
+.pacey-nav-icon {
+	flex-shrink: 0;
+	opacity: 0.7;
+}
+.pacey-nav-item.active .pacey-nav-icon {
+	opacity: 1;
+	color: var(--pacey-blue);
+}
 
 /* Sliding indicator for the sidebar nav — a tinted background that
    animates between nav items. Positioned via JS (top/left/width/height).
    No transition on first render; the .pacey-indicator-ready class is
    added after the first positioning to enable smooth sliding. */
 .pacey-nav-indicator {
-    position: absolute;
-    background: var(--pacey-light);
-    border-radius: var(--pacey-radius-sm);
-    pointer-events: none;
-    z-index: 0;
-    transition: none;
+	position: absolute;
+	background: var(--pacey-light);
+	border-radius: var(--pacey-radius-sm);
+	pointer-events: none;
+	z-index: 0;
+	transition: none;
 }
 .pacey-nav-indicator.pacey-indicator-ready {
-    transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition:
+		top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Nav label — fades out smoothly when sidebar collapses */
 .pacey-nav-label {
-    transition: opacity 0.2s ease;
-    white-space: nowrap;
+	transition: opacity 0.2s ease;
+	white-space: nowrap;
 }
 
 /* Sidebar toggle — at the top of the sidebar */
 .pacey-sidebar-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: var(--pacey-muted);
-    cursor: pointer;
-    padding: 0.45rem 0.55rem;
-    border-radius: var(--pacey-radius-sm);
-    transition: color var(--pacey-transition), background var(--pacey-transition);
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 0.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	border: none;
+	color: var(--pacey-muted);
+	cursor: pointer;
+	padding: 0.45rem 0.55rem;
+	border-radius: var(--pacey-radius-sm);
+	transition:
+		color var(--pacey-transition),
+		background var(--pacey-transition);
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 0.25rem;
 }
 
 /* Prevent SVG from shrinking inside the flex button */
-.pacey-sidebar-toggle svg { flex-shrink: 0; }
+.pacey-sidebar-toggle svg {
+	flex-shrink: 0;
+}
 
-.pacey-sidebar-toggle:hover { color: var(--pacey-navy); background: var(--pacey-light); }
+.pacey-sidebar-toggle:hover {
+	color: var(--pacey-navy);
+	background: var(--pacey-light);
+}
 
 /* Toggle icon visibility — controlled purely by CSS classes, no inline styles */
 /* Default (expanded): show collapse icon, hide expand icon */
-.pacey-sidebar-toggle-icon--collapse { display: block; }
-.pacey-sidebar-toggle-icon--expand { display: none; }
+.pacey-sidebar-toggle-icon--collapse {
+	display: block;
+}
+.pacey-sidebar-toggle-icon--expand {
+	display: none;
+}
 
 /* Collapsed: show expand icon, hide collapse icon */
-.pacey-sidebar.collapsed .pacey-sidebar-toggle-icon--collapse { display: none; }
-.pacey-sidebar.collapsed .pacey-sidebar-toggle-icon--expand { display: block; }
+.pacey-sidebar.collapsed .pacey-sidebar-toggle-icon--collapse {
+	display: none;
+}
+.pacey-sidebar.collapsed .pacey-sidebar-toggle-icon--expand {
+	display: block;
+}
 
 /* Theme toggle (light/dark) — above settings button, same row style as nav items */
 .pacey-sidebar-theme-toggle {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    font-family: var(--font-fuzzy);
-    font-weight: 500;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    background: transparent;
-    border: none;
-    padding: 0.45rem 0.55rem;
-    border-radius: var(--pacey-radius-sm);
-    cursor: pointer;
-    transition: all var(--pacey-transition);
-    width: 100%;
-    box-sizing: border-box;
-    /* Relative positioning anchors the absolutely-positioned moon icon */
-    position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	font-family: var(--font-fuzzy);
+	font-weight: 500;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	background: transparent;
+	border: none;
+	padding: 0.45rem 0.55rem;
+	border-radius: var(--pacey-radius-sm);
+	cursor: pointer;
+	transition: all var(--pacey-transition);
+	width: 100%;
+	box-sizing: border-box;
+	/* Relative positioning anchors the absolutely-positioned moon icon */
+	position: relative;
 }
 
-.pacey-sidebar-theme-toggle:hover { background: var(--pacey-light); color: var(--pacey-navy); }
+.pacey-sidebar-theme-toggle:hover {
+	background: var(--pacey-light);
+	color: var(--pacey-navy);
+}
 
 /* Theme label — fades out smoothly when sidebar collapses */
 .pacey-sidebar-theme-label {
-    transition: opacity 0.2s ease;
-    white-space: nowrap;
+	transition: opacity 0.2s ease;
+	white-space: nowrap;
 }
 
 /* Hide label when sidebar is collapsed — fade out, don't change padding */
 .pacey-sidebar.collapsed .pacey-sidebar-theme-label {
-    opacity: 0;
-    pointer-events: none;
-    width: 0;
-    overflow: hidden;
+	opacity: 0;
+	pointer-events: none;
+	width: 0;
+	overflow: hidden;
 }
 /* Keep padding consistent so icon doesn't shift */
-.pacey-sidebar.collapsed .pacey-sidebar-theme-toggle { padding: 0.45rem 0.55rem; }
+.pacey-sidebar.collapsed .pacey-sidebar-theme-toggle {
+	padding: 0.45rem 0.55rem;
+}
 
 /* Sun/Moon icon transitions — rotate + scale, matching travelrizz approach */
 /* Both icons occupy the same space via a relative wrapper; one rotates in while the other rotates out */
 .pacey-theme-icon-sun,
 .pacey-theme-icon-moon {
-    flex-shrink: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform-origin: center;
+	flex-shrink: 0;
+	transition:
+		transform 0.3s ease,
+		opacity 0.3s ease;
+	transform-origin: center;
 }
 
 /* Light mode (default): sun visible, moon hidden */
 .pacey-theme-icon-sun {
-    transform: rotate(0deg) scale(1);
-    opacity: 1;
+	transform: rotate(0deg) scale(1);
+	opacity: 1;
 }
 /* Moon is absolutely positioned overlapping the sun so both share the same center point */
 .pacey-theme-icon-moon {
-    opacity: 0;
-    position: absolute;
-    /* Align with the sun icon — matches the button's left padding */
-    left: 0.55rem;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg) scale(0);
+	opacity: 0;
+	position: absolute;
+	/* Align with the sun icon — matches the button's left padding */
+	left: 0.55rem;
+	top: 50%;
+	transform: translateY(-50%) rotate(90deg) scale(0);
 }
 
 /* Dark mode: sun rotates out, moon rotates in */
 [data-theme="dark"] .pacey-theme-icon-sun {
-    transform: rotate(90deg) scale(0);
-    opacity: 0;
+	transform: rotate(90deg) scale(0);
+	opacity: 0;
 }
 [data-theme="dark"] .pacey-theme-icon-moon {
-    transform: translateY(-50%) rotate(0deg) scale(1);
-    opacity: 1;
+	transform: translateY(-50%) rotate(0deg) scale(1);
+	opacity: 1;
 }
 
 /* Settings button at the bottom of the sidebar */
 .pacey-sidebar-settings {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    font-family: var(--font-fuzzy);
-    font-weight: 500;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    background: transparent;
-    border: none;
-    padding: 0.45rem 0.55rem;
-    border-radius: var(--pacey-radius-sm);
-    cursor: pointer;
-    transition: all var(--pacey-transition);
-    width: 100%;
-    box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	font-family: var(--font-fuzzy);
+	font-weight: 500;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	background: transparent;
+	border: none;
+	padding: 0.45rem 0.55rem;
+	border-radius: var(--pacey-radius-sm);
+	cursor: pointer;
+	transition: all var(--pacey-transition);
+	width: 100%;
+	box-sizing: border-box;
 }
 
-.pacey-sidebar-settings:hover { background: var(--pacey-light); color: var(--pacey-navy); }
+.pacey-sidebar-settings:hover {
+	background: var(--pacey-light);
+	color: var(--pacey-navy);
+}
 
 /* Prevent SVG from shrinking inside the flex button */
-.pacey-sidebar-settings svg { flex-shrink: 0; }
+.pacey-sidebar-settings svg {
+	flex-shrink: 0;
+}
 
 /* Settings label — fades out smoothly when sidebar collapses */
 .pacey-sidebar-settings-label {
-    transition: opacity 0.2s ease;
-    white-space: nowrap;
+	transition: opacity 0.2s ease;
+	white-space: nowrap;
 }
 
 /* Hide settings label when sidebar is collapsed — fade out, keep padding */
 .pacey-sidebar.collapsed .pacey-sidebar-settings-label {
-    opacity: 0;
-    pointer-events: none;
-    width: 0;
-    overflow: hidden;
+	opacity: 0;
+	pointer-events: none;
+	width: 0;
+	overflow: hidden;
 }
 /* Keep padding consistent so icon doesn't shift */
-.pacey-sidebar.collapsed .pacey-sidebar-settings { padding: 0.45rem 0.55rem; }
+.pacey-sidebar.collapsed .pacey-sidebar-settings {
+	padding: 0.45rem 0.55rem;
+}
 
 /* ---- Content ---- */
 .pacey-content {
-    flex: 1;
-    padding: var(--pacey-content-padding);
-    /* No internal scroll — let the entire page scroll naturally so the
+	flex: 1;
+	padding: var(--pacey-content-padding);
+	/* No internal scroll — let the entire page scroll naturally so the
        header scrolls away instead of sticking at the top. Using overflow:clip
        instead of overflow-x:hidden because the latter computes overflow-y to
        auto, which creates a scroll context that breaks position:sticky on
        child elements like the demo banner */
-    overflow: clip;
+	overflow: clip;
 }
 
 /* Content header — project title + intro (overview page only) */
 .pacey-content-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--pacey-space-sm);
-    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+	display: flex;
+	flex-direction: column;
+	gap: var(--pacey-space-sm);
+	margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
 .pacey-project-title {
-    font-weight: 900;
-    font-size: var(--pacey-text-display);
-    color: var(--pacey-navy);
-    margin: 0;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+	font-weight: 900;
+	font-size: var(--pacey-text-display);
+	color: var(--pacey-navy);
+	margin: 0;
+	line-height: 1.1;
+	letter-spacing: -0.01em;
 }
 
 /* Introductory statement under the project title */
 .pacey-project-intro {
-    font-size: var(--pacey-text-body);
-    color: var(--pacey-muted);
-    margin: 0;
-    line-height: 1.5;
-    /* max-width: 40rem; */
+	font-size: var(--pacey-text-body);
+	color: var(--pacey-muted);
+	margin: 0;
+	line-height: 1.5;
+	/* max-width: 40rem; */
 }
 
 /* Demo mode info bar — subtle light-blue bar with info icon */
 .pacey-demo-banner {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    background: var(--pacey-light);
-    border: 0.0625rem solid var(--pacey-border);
-    border-radius: var(--pacey-radius-sm);
-    padding: 0.5rem 0.75rem;
-    margin-bottom: clamp(1rem, 2vw, 1.5rem);
-    /* margin-top: clamp(1rem, 2vw, 1.5rem); */
-    /* Stick to the top of the content area when the user scrolls past it,
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	background: var(--pacey-light);
+	border: 0.0625rem solid var(--pacey-border);
+	border-radius: var(--pacey-radius-sm);
+	padding: 0.5rem 0.75rem;
+	margin-bottom: clamp(1rem, 2vw, 1.5rem);
+	/* margin-top: clamp(1rem, 2vw, 1.5rem); */
+	/* Stick to the top of the content area when the user scrolls past it,
        so the demo mode reminder + Connect Garmin CTA are always visible */
-    position: sticky;
-    /* Match the margin-top value so the sticky offset preserves the same
+	position: sticky;
+	/* Match the margin-top value so the sticky offset preserves the same
        overhead gap when the banner sticks to the top during scrolling */
-    top: clamp(1rem, 2vw, 1.5rem);
-    z-index: 100;
+	top: clamp(1rem, 2vw, 1.5rem);
+	z-index: 100;
 }
 
-.pacey-demo-banner[hidden] { display: none; }
+.pacey-demo-banner[hidden] {
+	display: none;
+}
 
 .pacey-demo-banner-icon {
-    color: var(--pacey-blue);
-    flex-shrink: 0;
+	color: var(--pacey-blue);
+	flex-shrink: 0;
 }
 
 .pacey-demo-banner-text {
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    flex: 1;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	flex: 1;
 }
 
 /* "Connect Garmin" button inside the demo banner — uses the blue
    accent (not the navy primary) to distinguish it as a demo-mode
    conversion CTA rather than a standard form action. */
 .pacey-demo-banner-cta {
-    font-weight: 600;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-btn-primary-text);
-    background: var(--pacey-blue);
-    border: none;
-    border-radius: var(--pacey-radius-sm);
-    padding: 0.35rem 0.85rem;
-    cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
+	font-weight: 600;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-btn-primary-text);
+	background: var(--pacey-blue);
+	border: none;
+	border-radius: var(--pacey-radius-sm);
+	padding: 0.35rem 0.85rem;
+	cursor: pointer;
+	transition:
+		background 0.15s ease,
+		transform 0.1s ease;
+	white-space: nowrap;
+	flex-shrink: 0;
 }
 
-.pacey-demo-banner-cta:hover { background: var(--pacey-btn-primary-hover); }
-.pacey-demo-banner-cta:active { transform: scale(0.96); }
+.pacey-demo-banner-cta:hover {
+	background: var(--pacey-btn-primary-hover);
+}
+.pacey-demo-banner-cta:active {
+	transform: scale(0.96);
+}
 
 /* ---- Demo banner slim pill ----
    When the user scrolls down far enough that the sticky banner reaches
@@ -1118,171 +1315,192 @@ header.pacey-header-offset.pacey-header-collapsed {
    is absolutely positioned and centered so the container can animate
    its max-width from 100% to a narrow pill smoothly. */
 .pacey-demo-banner {
-    /* transition the animatable properties for shrink/expand.
+	/* transition the animatable properties for shrink/expand.
        Slowed down slightly (0.4s) so the shrink to pill and expand back
        to full banner feels deliberate rather than snappy. Height and
        padding are animated together so the pill is visibly shorter than
        the full banner, not just narrower. */
-    transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 100%;
-    /* max-height must be large enough for the full banner content;
+	transition:
+		max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+		max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+		border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+		padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	max-width: 100%;
+	/* max-height must be large enough for the full banner content;
        the slim state shrinks it to the pill height. */
-    max-height: 5rem;
+	max-height: 5rem;
 }
 
 .pacey-demo-banner-full {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
-    width: 100%;
-    /* Cross-fade timing slowed to match the container shrink/expand */
-    transition: opacity 0.3s ease;
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
+	width: 100%;
+	/* Cross-fade timing slowed to match the container shrink/expand */
+	transition: opacity 0.3s ease;
 }
 
 .pacey-demo-banner-slim {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: end;
-    margin-bottom: 0.5rem;
-    justify-content: center;
-    gap: 0.3rem;
-    font-weight: 600;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: end;
+	margin-bottom: 0.5rem;
+	justify-content: center;
+	gap: 0.3rem;
+	font-weight: 600;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
 }
 
 /* "Connect" inside the slim pill — clickable link that opens the login
    modal, matching the full banner's Connect Garmin CTA behaviour. */
 .pacey-demo-banner-slim-cta {
-    font-family: var(--font-fuzzy);
-    font-weight: 400;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-blue);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+	font-family: var(--font-fuzzy);
+	font-weight: 400;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-blue);
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
 }
-.pacey-demo-banner-slim-cta:hover { text-decoration: underline; }
+.pacey-demo-banner-slim-cta:hover {
+	text-decoration: underline;
+}
 
 /* Slim state — shrink the container to a tight centered pill via
    max-width and max-height (both interpolable), round the border-radius,
    reduce padding for a slimmer pill, and cross-fade the inner content. */
 .pacey-demo-banner--slim {
-    max-width: 11rem;
-    padding-top: 0.7rem;
-    max-height: 2.7rem;
-    border-radius: 999px;
-    padding: 0.25rem 0.9rem;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: end;
+	max-width: 11rem;
+	padding-top: 0.7rem;
+	max-height: 2.7rem;
+	border-radius: 999px;
+	padding: 0.25rem 0.9rem;
+	margin-left: auto;
+	margin-right: auto;
+	align-items: end;
 }
 .pacey-demo-banner--slim .pacey-demo-banner-full {
-    opacity: 0;
-    pointer-events: none;
+	opacity: 0;
+	pointer-events: none;
 }
 .pacey-demo-banner--slim .pacey-demo-banner-slim {
-    opacity: 1;
-    pointer-events: auto;
+	opacity: 1;
+	pointer-events: auto;
 }
 
 /* Bottom-of-page demo CTA — shown on every page in demo mode */
 .pacey-demo-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--pacey-space-md);
-    text-align: center;
-    /* Compact spacing so the banner doesn't add a big empty band below the
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--pacey-space-md);
+	text-align: center;
+	/* Compact spacing so the banner doesn't add a big empty band below the
        page content (visible during loading states) */
-    padding: clamp(1rem, 2vw, 1.5rem) 1rem;
-    margin-top: clamp(0.75rem, 1.5vw, 1rem);
-    border-top: 0.0625rem solid var(--pacey-border);
+	padding: clamp(1rem, 2vw, 1.5rem) 1rem;
+	margin-top: clamp(0.75rem, 1.5vw, 1rem);
+	border-top: 0.0625rem solid var(--pacey-border);
 }
 
-.pacey-demo-cta[hidden] { display: none; }
+.pacey-demo-cta[hidden] {
+	display: none;
+}
 
 .pacey-demo-cta-text {
-    font-size: var(--pacey-text-body);
-    color: var(--pacey-muted);
-    max-width: 28rem;
-    margin: 0;
-    line-height: 1.5;
+	font-size: var(--pacey-text-body);
+	color: var(--pacey-muted);
+	max-width: 28rem;
+	margin: 0;
+	line-height: 1.5;
 }
 
 /* Footer demo CTA button — matches the demo banner CTA's blue accent
    so both "Connect Garmin" buttons look identical across the site. */
 .pacey-demo-cta-btn {
-    padding: 0.6rem 1.5rem;
-    width: 100%;
-    max-width: 15rem;
-    background: var(--pacey-blue);
+	padding: 0.6rem 1.5rem;
+	width: 100%;
+	max-width: 15rem;
+	background: var(--pacey-blue);
 }
 
-.pacey-demo-cta-btn:hover { background: var(--pacey-btn-primary-hover); }
+.pacey-demo-cta-btn:hover {
+	background: var(--pacey-btn-primary-hover);
+}
 
 /* Page-level gap is set to the tight value; sections that mark a topic
    shift get extra top margin via .pacey-section--spaced. This produces a
    two-tier rhythm: related sections sit close, topic changes pull apart. */
-.pacey-page { display: flex; flex-direction: column; gap: var(--pacey-space-md); }
-.pacey-page[hidden] { display: none; }
+.pacey-page {
+	display: flex;
+	flex-direction: column;
+	gap: var(--pacey-space-md);
+}
+.pacey-page[hidden] {
+	display: none;
+}
 
 /* ---- Sections ---- */
 /* Sections use a two-tier spacing rhythm: the default gap is loose (topic
    shift), and --tight reduces it for closely related sections. This creates
    visual grouping — related sections sit closer, unrelated ones pull apart. */
-.pacey-section { display: flex; flex-direction: column; gap: var(--pacey-space-lg); }
-.pacey-section--tight { gap: var(--pacey-space-md); }
+.pacey-section {
+	display: flex;
+	flex-direction: column;
+	gap: var(--pacey-space-lg);
+}
+.pacey-section--tight {
+	gap: var(--pacey-space-md);
+}
 
 /* Extra top margin for sections that mark a topic shift. Combined with the
    page's reduced base gap, this creates the two-tier rhythm: tight default
    spacing with deliberate wider breaks between unrelated topics. */
-.pacey-section--spaced { margin-top: var(--pacey-space-xl); }
+.pacey-section--spaced {
+	margin-top: var(--pacey-space-xl);
+}
 
 .pacey-section-title {
-    font-weight: 700;
-    font-size: var(--pacey-text-heading);
-    color: var(--pacey-navy);
-    margin: 0;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
+	font-weight: 700;
+	font-size: var(--pacey-text-heading);
+	color: var(--pacey-navy);
+	margin: 0;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
 }
 
 /* "Last updated" date label shown inline with the Training Vitals
    section title, pushed to the far right of the row */
 .pacey-metrics-date {
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-label);
-    font-weight: 400;
-    color: var(--pacey-muted);
-    margin-left: auto;
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-label);
+	font-weight: 400;
+	color: var(--pacey-muted);
+	margin-left: auto;
 }
 
 /* "Last updated" label for the Race Readiness title row, pushed to the far
    right like the Training Vitals date above */
 .pacey-readiness-updated {
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-label);
-    font-weight: 400;
-    color: var(--pacey-muted);
-    margin-left: auto;
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-label);
+	font-weight: 400;
+	color: var(--pacey-muted);
+	margin-left: auto;
 }
 
 .pacey-section-sub {
-    font-size: var(--pacey-text-body);
-    color: var(--pacey-muted);
-    margin: -0.5rem 0 0;
+	font-size: var(--pacey-text-body);
+	color: var(--pacey-muted);
+	margin: -0.5rem 0 0;
 }
 
 /* (Block meta line removed — folded into the race status card.) */
@@ -1290,34 +1508,34 @@ header.pacey-header-offset.pacey-header-collapsed {
 /* Small "?" dot next to field labels — native title tooltip on hover/focus.
    Gives the race-date field a one-line explainer without extra UI. */
 .pacey-info-dot {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.05rem;
-    height: 1.05rem;
-    border-radius: 50%;
-    border: 1px solid var(--pacey-muted);
-    color: var(--pacey-muted);
-    font-size: 0.7rem;
-    line-height: 1;
-    cursor: help;
-    margin-left: 0.35rem;
-    vertical-align: middle;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.05rem;
+	height: 1.05rem;
+	border-radius: 50%;
+	border: 1px solid var(--pacey-muted);
+	color: var(--pacey-muted);
+	font-size: 0.7rem;
+	line-height: 1;
+	cursor: help;
+	margin-left: 0.35rem;
+	vertical-align: middle;
 }
 
 .pacey-info-dot:hover,
 .pacey-info-dot:focus {
-    border-color: var(--pacey-blue);
-    color: var(--pacey-blue);
-    outline: none;
+	border-color: var(--pacey-blue);
+	color: var(--pacey-blue);
+	outline: none;
 }
 
 /* Hint line under an input — muted caption for guidance like the
    "12+ weeks" training-block note on the race-date field. */
 .pacey-hint {
-    font-size: var(--pacey-text-caption);
-    color: var(--pacey-muted);
-    margin: 0.3rem 0 0;
+	font-size: var(--pacey-text-caption);
+	color: var(--pacey-muted);
+	margin: 0.3rem 0 0;
 }
 
 /* Info button next to section titles — opens the scoring guide modal.
@@ -1325,48 +1543,51 @@ header.pacey-header-offset.pacey-header-collapsed {
    title's baseline so it reads as part of the heading row. */
 .pacey-score-info-btn,
 .pacey-dimension-info-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.375rem;
-    height: 1.375rem;
-    padding: 0;
-    border: 0.0625rem solid var(--pacey-border);
-    border-radius: 50%;
-    background: var(--pacey-surface);
-    color: var(--pacey-muted);
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-    align-self: center;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.375rem;
+	height: 1.375rem;
+	padding: 0;
+	border: 0.0625rem solid var(--pacey-border);
+	border-radius: 50%;
+	background: var(--pacey-surface);
+	color: var(--pacey-muted);
+	cursor: pointer;
+	flex-shrink: 0;
+	transition:
+		color 0.15s ease,
+		border-color 0.15s ease,
+		background 0.15s ease;
+	align-self: center;
 }
 
 .pacey-score-info-btn:hover,
 .pacey-dimension-info-btn:hover {
-    color: var(--pacey-blue);
-    border-color: var(--pacey-blue);
-    background: var(--pacey-light);
+	color: var(--pacey-blue);
+	border-color: var(--pacey-blue);
+	background: var(--pacey-light);
 }
 
 .pacey-score-info-btn:focus-visible,
 .pacey-dimension-info-btn:focus-visible {
-    outline: 0.125rem solid var(--pacey-blue);
-    outline-offset: 0.125rem;
+	outline: 0.125rem solid var(--pacey-blue);
+	outline-offset: 0.125rem;
 }
 
 /* Dimensions explainer modal — single-column list reusing the radar
    dimension colors. Mirrors the scoring guide modal shell so both info
    modals look and behave the same. */
 .pacey-dimension-modal-card {
-    width: min(100%, 30rem);
-    max-height: 85dvh;
-    overflow-y: auto;
+	width: min(100%, 30rem);
+	max-height: 85dvh;
+	overflow-y: auto;
 }
 
 .pacey-dimension-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
 }
 
 /* ---- Metrics tiles ---- */
@@ -1377,29 +1598,35 @@ header.pacey-header-offset.pacey-header-collapsed {
 /* Vitals disclosure toggle — hidden on desktop where all tiles are visible.
    Shown only inside the max-width: 30rem media query below. On mobile it
    appears as a subtle chevron-based toggle below the metrics grid. */
-.pacey-vitals-toggle { display: none; }
+.pacey-vitals-toggle {
+	display: none;
+}
 
 /* Extra vitals wrapper — on desktop, display:contents makes both wrappers
    transparent so the extra tiles participate in the parent grid as if the
    wrappers didn't exist. On mobile, the outer wrapper becomes a collapsible
    container (see the max-width: 30rem media query below). */
-.pacey-metrics-extra { display: contents; }
-.pacey-metrics-extra-inner { display: contents; }
+.pacey-metrics-extra {
+	display: contents;
+}
+.pacey-metrics-extra-inner {
+	display: contents;
+}
 
 /* ---- Charts row ---- */
 .pacey-charts-row {
-    display: grid;
-    /* 50/50 split — equal width for mileage chart and calendar on large screens */
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(0.75rem, 1.5vw, 1rem);
+	display: grid;
+	/* 50/50 split — equal width for mileage chart and calendar on large screens */
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(0.75rem, 1.5vw, 1rem);
 }
 
 /* ---- Readiness row: goal specifics + radar side by side ---- */
 .pacey-readiness-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(0.75rem, 1.5vw, 1rem);
-    align-items: stretch;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(0.75rem, 1.5vw, 1rem);
+	align-items: stretch;
 }
 
 /* Grid tracks default to minmax(auto, 1fr) — a column cannot shrink below
@@ -1408,85 +1635,88 @@ header.pacey-header-offset.pacey-header-collapsed {
    hold their true 50/50 split (each = 50% of the content width, i.e. the
    viewport minus the sidebar). */
 .pacey-readiness-row > * {
-    min-width: 0;
+	min-width: 0;
 }
 
 /* Shared card styling for both goal specifics and radar — standardized container */
 .pacey-readiness-card {
-    background: var(--pacey-surface);
-    border: 0.0625rem solid var(--pacey-border);
-    border-radius: var(--pacey-radius);
-    padding: clamp(1rem, 1.8vw, 1.35rem);
-    display: flex;
-    flex-direction: column;
-    position: relative; /* anchor for countdown highlight */
+	background: var(--pacey-surface);
+	border: 0.0625rem solid var(--pacey-border);
+	border-radius: var(--pacey-radius);
+	padding: clamp(1rem, 1.8vw, 1.35rem);
+	display: flex;
+	flex-direction: column;
+	position: relative; /* anchor for countdown highlight */
 }
 
 /* Countdown highlight — positioned top-right corner of the goal specifics card */
 /* Made larger and more prominent as the visual focal point of the panel */
 .pacey-countdown-highlight {
-    position: absolute;
-    top: clamp(0.75rem, 1.5vw, 1rem);
-    right: clamp(0.75rem, 1.5vw, 1rem);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.15rem;
-    /* Use the blue accent as background for strong visual prominence */
-    background: var(--pacey-blue);
-    border: none;
-    border-radius: var(--pacey-radius-sm);
-    padding: clamp(0.75rem, 2.5vw, 2rem);
-    box-shadow: 0 0.125rem 0.5rem rgba(69, 123, 157, 0.25);
-    padding-top: clamp(1.25rem, 3.5vw, 2.75rem);
+	position: absolute;
+	top: clamp(0.75rem, 1.5vw, 1rem);
+	right: clamp(0.75rem, 1.5vw, 1rem);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.15rem;
+	/* Use the blue accent as background for strong visual prominence */
+	background: var(--pacey-blue);
+	border: none;
+	border-radius: var(--pacey-radius-sm);
+	padding: clamp(0.75rem, 2.5vw, 2rem);
+	box-shadow: 0 0.125rem 0.5rem rgba(69, 123, 157, 0.25);
+	padding-top: clamp(1.25rem, 3.5vw, 2.75rem);
 }
 
 .pacey-countdown-value {
-    font-weight: 900;
-    /* Bigger — display size for strong visual impact. Scales with the
+	font-weight: 900;
+	/* Bigger — display size for strong visual impact. Scales with the
        viewport so it grows on both phone and laptop widths while staying
        within the countdown card. */
-    font-size: clamp(2.15rem, 4.2vw, 2.6rem);
-    /* Use the button primary text token so the countdown text flips to
+	font-size: clamp(2.15rem, 4.2vw, 2.6rem);
+	/* Use the button primary text token so the countdown text flips to
        dark in dark mode (where --pacey-blue lightens to #6ba3d0 and white
        text would fail contrast at ~2.8:1). Matches the primary button
        text pattern for consistency. */
-    color: var(--pacey-btn-primary-text);
-    line-height: 1;
+	color: var(--pacey-btn-primary-text);
+	line-height: 1;
 }
 
 .pacey-countdown-label {
-    font-size: var(--pacey-text-subheading);
-    color: rgba(255, 255, 255, 0.85);
-    text-transform: lowercase;
-    font-weight: 500;
+	font-size: var(--pacey-text-subheading);
+	color: rgba(255, 255, 255, 0.85);
+	text-transform: lowercase;
+	font-weight: 500;
 }
 
 /* Card title — same treatment on both sides for visual symmetry */
 .pacey-readiness-card-title {
-    font-weight: 700;
-    font-size: var(--pacey-text-subheading);
-    color: var(--pacey-navy);
-    margin: 0 0 0.4rem;
+	font-weight: 700;
+	font-size: var(--pacey-text-subheading);
+	color: var(--pacey-navy);
+	margin: 0 0 0.4rem;
 }
 
 .pacey-readiness-card-link {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s ease;
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.2s ease;
 }
 
-.pacey-readiness-card-link:hover { color: var(--pacey-blue); text-decoration: underline; }
+.pacey-readiness-card-link:hover {
+	color: var(--pacey-blue);
+	text-decoration: underline;
+}
 
 .pacey-readiness-card-sub {
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    margin: 0 0 0.75rem;
-    line-height: 1.4;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	margin: 0 0 0.75rem;
+	line-height: 1.4;
 }
 
 .w-0-7 {
-    width: 70%;
+	width: 70%;
 }
 
 /* ---- Shared chart tooltip (DOM) ----
@@ -1495,17 +1725,17 @@ header.pacey-header-offset.pacey-header-collapsed {
    distribution) are standardized via the theme-aware tooltip config
    applied in JS so they share the same surface/border/font treatment. */
 .pacey-chart-tooltip {
-    position: absolute;
-    background: var(--pacey-surface);
-    border: 0.0625rem solid var(--pacey-border);
-    border-radius: var(--pacey-radius);
-    padding: 0.5rem 0.75rem;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.12);
-    opacity: 0;
-    transition: opacity 0.15s ease-out;
-    pointer-events: auto;
-    z-index: 1000;
-    white-space: nowrap;
+	position: absolute;
+	background: var(--pacey-surface);
+	border: 0.0625rem solid var(--pacey-border);
+	border-radius: var(--pacey-radius);
+	padding: 0.5rem 0.75rem;
+	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.12);
+	opacity: 0;
+	transition: opacity 0.15s ease-out;
+	pointer-events: auto;
+	z-index: 1000;
+	white-space: nowrap;
 }
 
 /* ---- Calendar day tooltip ----
@@ -1513,119 +1743,129 @@ header.pacey-header-offset.pacey-header-collapsed {
    (display-only — no navigation, so no clickable indicator per the
    standardized tooltip spec). Uses the shared .pacey-chart-tooltip base. */
 .pacey-calendar-tooltip {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    max-width: 16rem;
-    white-space: normal;
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+	max-width: 16rem;
+	white-space: normal;
 }
 
 .pacey-calendar-tooltip-date {
-    font-weight: 700;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-navy);
-    border-bottom: 0.0625rem solid var(--pacey-border);
-    padding-bottom: 0.25rem;
-    margin-bottom: 0.1rem;
+	font-weight: 700;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-navy);
+	border-bottom: 0.0625rem solid var(--pacey-border);
+	padding-bottom: 0.25rem;
+	margin-bottom: 0.1rem;
 }
 
 .pacey-calendar-tooltip-run {
-    display: flex;
-    /* Marker sits on the name's line rather than centred between two */
-    align-items: flex-start;
-    gap: 0.4rem;
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-text);
+	display: flex;
+	/* Marker sits on the name's line rather than centred between two */
+	align-items: flex-start;
+	gap: 0.4rem;
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-text);
 }
 
 /* Run name and its detail stack, so a long name never shoves the detail
    off to one side. */
 .pacey-calendar-tooltip-run-text {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
 }
 
 .pacey-calendar-tooltip-run-dot {
-    width: 0.55rem;
-    height: 0.55rem;
-    border-radius: 50%;
-    flex-shrink: 0;
-    /* Drop it level with the name's cap height */
-    margin-top: 0.3rem;
+	width: 0.55rem;
+	height: 0.55rem;
+	border-radius: 50%;
+	flex-shrink: 0;
+	/* Drop it level with the name's cap height */
+	margin-top: 0.3rem;
 }
 
 .pacey-calendar-tooltip-run-name {
-    font-weight: 600;
+	font-weight: 600;
 }
 
 .pacey-calendar-tooltip-run-meta {
-    color: var(--pacey-muted);
+	color: var(--pacey-muted);
 }
 
 /* Brief highlight pulse when a pillar is scrolled into view from the
    radar tooltip link click — draws the user's eye to the right card */
 @keyframes pacey-pillar-highlight-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(69, 123, 157, 0.4); }
-    50% { box-shadow: 0 0 0 0.375rem rgba(69, 123, 157, 0.25); }
-    100% { box-shadow: 0 0 0 0 rgba(69, 123, 157, 0); }
+	0% {
+		box-shadow: 0 0 0 0 rgba(69, 123, 157, 0.4);
+	}
+	50% {
+		box-shadow: 0 0 0 0.375rem rgba(69, 123, 157, 0.25);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(69, 123, 157, 0);
+	}
 }
 
 .pacey-pillar-highlight {
-    animation: pacey-pillar-highlight-pulse 1s ease-out 2;
+	animation: pacey-pillar-highlight-pulse 1s ease-out 2;
 }
 
 /* Stack vertically on tablet/mobile: goal specifics on top, radar below */
 @media (max-width: 48rem) {
-    .pacey-readiness-row {
-        grid-template-columns: 1fr;
-    }
+	.pacey-readiness-row {
+		grid-template-columns: 1fr;
+	}
 
-    /* On mobile, give the radar a fixed compact height */
-    .pacey-radar-wrap {
-        height: 18rem;
-    }
+	/* On mobile, give the radar a fixed compact height */
+	.pacey-radar-wrap {
+		height: 18rem;
+	}
 }
 
 @media (max-width: 48rem) {
-    .pacey-charts-row { grid-template-columns: 1fr; }
+	.pacey-charts-row {
+		grid-template-columns: 1fr;
+	}
 }
 
 .pacey-chart-card {
-    position: relative;
-    background: var(--pacey-surface);
-    border: 0.0625rem solid var(--pacey-border);
-    border-radius: var(--pacey-radius);
-    padding: clamp(1rem, 2vw, 1.5rem);
-    /* Prevent grid overflow — allows content to shrink within its grid cell */
-    min-width: 0;
+	position: relative;
+	background: var(--pacey-surface);
+	border: 0.0625rem solid var(--pacey-border);
+	border-radius: var(--pacey-radius);
+	padding: clamp(1rem, 2vw, 1.5rem);
+	/* Prevent grid overflow — allows content to shrink within its grid cell */
+	min-width: 0;
 }
 
-.pacey-chart-card--large { padding: clamp(1rem, 2.5vw, 1.75rem); }
+.pacey-chart-card--large {
+	padding: clamp(1rem, 2.5vw, 1.75rem);
+}
 
 .pacey-card-title {
-    font-weight: 700;
-    font-size: var(--pacey-text-subheading);
-    color: var(--pacey-navy);
-    margin: 0 0 0.4rem;
+	font-weight: 700;
+	font-size: var(--pacey-text-subheading);
+	color: var(--pacey-navy);
+	margin: 0 0 0.4rem;
 }
 
 /* Card title row that contains an inline action button (e.g. "Show more"
    inside the Last 5 Activities heading). Makes the h3 a flex row so the
    button pushes to the far right, matching the section-title pattern. */
 .pacey-card-title--with-action {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-sm);
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-sm);
 }
 
 /* Subtitle / explanation text inside a chart card */
 .pacey-card-sub {
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    margin: 0 0 0.75rem;
-    line-height: 1.4;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	margin: 0 0 0.75rem;
+	line-height: 1.4;
 }
 
 /* Equal-height chart cards — grid's default `align-items: stretch` already
@@ -1634,109 +1874,147 @@ header.pacey-header-offset.pacey-header-collapsed {
    keeps the global 20rem max-height cap (set on .pacey-chart-canvas below) to
    avoid a circular height dependency that caused infinite growth. */
 .pacey-chart-card--equal {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
-.pacey-chart-wrap { position: relative; width: 100%; height: clamp(10rem, 20vw, 14rem); }
+.pacey-chart-wrap {
+	position: relative;
+	width: 100%;
+	height: clamp(10rem, 20vw, 14rem);
+}
 
 /* Generic chart canvas for standalone charts (pace distribution, time-in-zone) */
-.pacey-chart-canvas { width: 100%; max-height: 20rem; }
-.pacey-chart-wrap--large { max-width: 100%; margin: 0 auto; }
+.pacey-chart-canvas {
+	width: 100%;
+	max-height: 20rem;
+}
+.pacey-chart-wrap--large {
+	max-width: 100%;
+	margin: 0 auto;
+}
 /* Constrain the mileage chart so bars don't over-stretch on wide tablet screens */
-#pacey-mileage-chart { max-width: 100%; }
+#pacey-mileage-chart {
+	max-width: 100%;
+}
 
 .pacey-chart-card--calendar {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .pacey-chart-card--calendar .pacey-calendar {
-    flex: 1;
-    justify-content: space-between;
+	flex: 1;
+	justify-content: space-between;
 }
 
 /* ---- Activity Calendar (Strava-style dots) ---- */
-.pacey-calendar { display: flex; flex-direction: column; }
+.pacey-calendar {
+	display: flex;
+	flex-direction: column;
+}
 
 .pacey-calendar-header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    margin-bottom: 0.4rem;
-    /* Match the grid's gap so columns align exactly */
-    gap: clamp(0.4rem, 1.2vw, 0.65rem);
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	margin-bottom: 0.4rem;
+	/* Match the grid's gap so columns align exactly */
+	gap: clamp(0.4rem, 1.2vw, 0.65rem);
 }
 
 .pacey-calendar-header span {
-    text-align: center;
-    font-family: var(--font-fuzzy);
-    font-size: var(--pacey-text-label);
-    font-weight: 400;
-    color: var(--pacey-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    /* Ensure each header cell is the same height as a dot row for alignment */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	text-align: center;
+	font-family: var(--font-fuzzy);
+	font-size: var(--pacey-text-label);
+	font-weight: 400;
+	color: var(--pacey-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	/* Ensure each header cell is the same height as a dot row for alignment */
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .pacey-calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: clamp(0.4rem, 1.2vw, 0.65rem);
-    justify-items: center;
-    align-content: space-between;
-    flex: 1;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: clamp(0.4rem, 1.2vw, 0.65rem);
+	justify-items: center;
+	align-content: space-between;
+	flex: 1;
 }
 
 .pacey-calendar-dot {
-    /* Bigger dots that fill more of each grid cell */
-    width: clamp(0.95rem, 2.2vw, 1.3rem);
-    height: clamp(0.95rem, 2.2vw, 1.3rem);
-    border-radius: 50%;
-    background: var(--pacey-border);
-    transition: transform 0.12s ease;
-    flex-shrink: 0;
+	/* Bigger dots that fill more of each grid cell */
+	width: clamp(0.95rem, 2.2vw, 1.3rem);
+	height: clamp(0.95rem, 2.2vw, 1.3rem);
+	border-radius: 50%;
+	background: var(--pacey-border);
+	transition: transform 0.12s ease;
+	flex-shrink: 0;
 }
 
-.pacey-calendar-dot:hover { transform: scale(1.25); }
-.pacey-calendar-dot.empty { background: transparent; pointer-events: none; }
+.pacey-calendar-dot:hover {
+	transform: scale(1.25);
+}
+.pacey-calendar-dot.empty {
+	background: transparent;
+	pointer-events: none;
+}
 /* Dots with activity data are clickable (open the day tooltip). The marker
    itself is an inline SVG drawn by renderCalendar() — a sketched circle
    hatched in the day's run-type colour, or two halves when two different
    run types occurred — so the flat background is cleared to let it show.
    Run-free days get the same drawn circle, just as an empty ring. */
-.pacey-calendar-dot.has-runs { cursor: pointer; }
-.pacey-calendar-dot.has-sketch { background: none; }
+.pacey-calendar-dot.has-runs {
+	cursor: pointer;
+}
+.pacey-calendar-dot.has-sketch {
+	background: none;
+}
 
-.pacey-calendar-dot-svg { display: block; width: 100%; height: 100%; }
+.pacey-calendar-dot-svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
 
 /* Ring for a day with no run. Set here rather than in the SVG so it can use
    a theme token — presentation attributes can't hold var(). */
-.pacey-calendar-dot-stroke { stroke: var(--pacey-border); }
+.pacey-calendar-dot-stroke {
+	stroke: var(--pacey-border);
+}
 
 .pacey-calendar-dot.today {
-    box-shadow: 0 0 0 0.125rem var(--pacey-surface), 0 0 0 0.1875rem var(--pacey-blue);
+	box-shadow:
+		0 0 0 0.125rem var(--pacey-surface),
+		0 0 0 0.1875rem var(--pacey-blue);
 }
 
 /* Calendar legend (hidden by default) */
-.pacey-calendar-legend { display: none; }
+.pacey-calendar-legend {
+	display: none;
+}
 
 /* ---- 6-Pillar Grid ---- */
 .pacey-pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1rem, 1vw, 0.75rem);
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: clamp(1rem, 1vw, 0.75rem);
 }
 
 @media (max-width: 56rem) {
-    .pacey-pillars-grid { grid-template-columns: repeat(2, 1fr); }
+	.pacey-pillars-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media (max-width: 37.5rem) {
-    .pacey-pillars-grid { grid-template-columns: 1fr; }
+	.pacey-pillars-grid {
+		grid-template-columns: 1fr;
+	}
 }
 
 /* ---- Phone: the six pillars become a swipeable deck ----
@@ -1748,76 +2026,85 @@ header.pacey-header-offset.pacey-header-collapsed {
    dots below carry the position for anyone who missed the peek. Both matter:
    a lone card with no peek and no dots reads as the whole section. */
 @media (max-width: 37.5rem) {
-    .pacey-pillars-grid {
-        display: flex;
-        grid-template-columns: none;
-        gap: var(--pacey-space-md);
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        /* The cards are the swipe surface; a scrollbar under them is noise. */
-        scrollbar-width: none;
-        /* Equal heights, so the deck does not look ragged as you swipe. */
-        align-items: stretch;
-        /* Room for the card shadow, which the scroller's own overflow would
+	.pacey-pillars-grid {
+		display: flex;
+		grid-template-columns: none;
+		gap: var(--pacey-space-md);
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		/* The cards are the swipe surface; a scrollbar under them is noise. */
+		scrollbar-width: none;
+		/* Equal heights, so the deck does not look ragged as you swipe. */
+		align-items: stretch;
+		/* Room for the card shadow, which the scroller's own overflow would
            otherwise cut off on the leading edge. The pinboard shadow's widest
            layer blurs 1.8rem, so it reaches roughly 1.15rem past the card. */
-        padding: 0.15rem 0.7rem 1rem;
-    }
-    .pacey-pillars-grid::-webkit-scrollbar { display: none; }
-    .pacey-pillars-grid > .pacey-pillar-card {
-        flex: 0 0 88%;
-        scroll-snap-align: center;
-    }
+		padding: 0.15rem 0.7rem 1rem;
+	}
+	.pacey-pillars-grid::-webkit-scrollbar {
+		display: none;
+	}
+	.pacey-pillars-grid > .pacey-pillar-card {
+		flex: 0 0 88%;
+		scroll-snap-align: center;
+	}
 }
 
 /* Position dots — the deck's indicator. Hidden wherever the deck is not in
    play, so the desktop grid is untouched. */
-.pacey-pillar-dots { display: none; }
+.pacey-pillar-dots {
+	display: none;
+}
 
 @media (max-width: 37.5rem) {
-    .pacey-pillar-dots {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.1rem;
-        margin-top: 0.65rem;
-    }
-    /* The button is a 24px touch target; the dot inside it is 8px, drawn as a
+	.pacey-pillar-dots {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.1rem;
+		margin-top: 0.65rem;
+	}
+	/* The button is a 24px touch target; the dot inside it is 8px, drawn as a
        pseudo-element so the tappable area is not the size of the mark. */
-    .pacey-pillar-dot-btn {
-        position: relative;
-        width: 1.5rem;
-        height: 1.5rem;
-        padding: 0;
-        border: none;
-        background: none;
-        cursor: pointer;
-    }
-    .pacey-pillar-dot-btn::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0.5rem;
-        height: 0.5rem;
-        margin: -0.25rem 0 0 -0.25rem;
-        border-radius: 50%;
-        background: var(--pacey-muted);
-        opacity: 0.35;
-        transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
-    }
-    .pacey-pillar-dot-btn:hover::before { opacity: 0.7; }
-    .pacey-pillar-dot-btn.is-active::before {
-        background: var(--pacey-navy);
-        opacity: 1;
-        transform: scale(1.4);
-    }
-    .pacey-pillar-dot-btn:focus-visible {
-        outline: 0.125rem solid var(--pacey-blue);
-        outline-offset: -0.1rem;
-        border-radius: 50%;
-    }
+	.pacey-pillar-dot-btn {
+		position: relative;
+		width: 1.5rem;
+		height: 1.5rem;
+		padding: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+	}
+	.pacey-pillar-dot-btn::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 0.5rem;
+		height: 0.5rem;
+		margin: -0.25rem 0 0 -0.25rem;
+		border-radius: 50%;
+		background: var(--pacey-muted);
+		opacity: 0.35;
+		transition:
+			opacity 0.2s ease,
+			transform 0.2s ease,
+			background 0.2s ease;
+	}
+	.pacey-pillar-dot-btn:hover::before {
+		opacity: 0.7;
+	}
+	.pacey-pillar-dot-btn.is-active::before {
+		background: var(--pacey-navy);
+		opacity: 1;
+		transform: scale(1.4);
+	}
+	.pacey-pillar-dot-btn:focus-visible {
+		outline: 0.125rem solid var(--pacey-blue);
+		outline-offset: -0.1rem;
+		border-radius: 50%;
+	}
 }
 
 /* Pillar-card base presentation moved to pinboard-readiness.css — it is
@@ -1832,532 +2119,629 @@ header.pacey-header-offset.pacey-header-collapsed {
    glowing band. currentColor resolves per element, so each context gets its
    own tint from one definition. */
 :root {
-    --pacey-skeleton-tint: color-mix(in srgb, currentColor 8%, transparent);
-    --pacey-skeleton-tint-hi: color-mix(in srgb, currentColor 17%, transparent);
-    --pacey-skeleton-gradient: linear-gradient(90deg,
-        var(--pacey-skeleton-tint) 25%,
-        var(--pacey-skeleton-tint-hi) 50%,
-        var(--pacey-skeleton-tint) 75%);
+	--pacey-skeleton-tint: color-mix(in srgb, currentColor 8%, transparent);
+	--pacey-skeleton-tint-hi: color-mix(in srgb, currentColor 17%, transparent);
+	--pacey-skeleton-gradient: linear-gradient(
+		90deg,
+		var(--pacey-skeleton-tint) 25%,
+		var(--pacey-skeleton-tint-hi) 50%,
+		var(--pacey-skeleton-tint) 75%
+	);
 }
 
 @keyframes pacey-skeleton-shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
 }
 
 .pacey-skeleton-text {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1rem;
-    border-radius: 0.25rem;
-    background: var(--pacey-skeleton-gradient);
-    background-size: 200% 100%;
-    animation: pacey-skeleton-shimmer 1.5s infinite;
+	display: inline-block;
+	width: 1.5rem;
+	height: 1rem;
+	border-radius: 0.25rem;
+	background: var(--pacey-skeleton-gradient);
+	background-size: 200% 100%;
+	animation: pacey-skeleton-shimmer 1.5s infinite;
 }
 
 .pacey-skeleton-lines {
-    display: flex;
-    flex-direction: column;
-    gap: var(--pacey-space-sm);
-    margin-top: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: var(--pacey-space-sm);
+	margin-top: 0.5rem;
 }
 
 .pacey-skeleton-line {
-    /* Block so the same class works on <span> too (skeleton markup sometimes
+	/* Block so the same class works on <span> too (skeleton markup sometimes
        has to sit inside a <p>, where a <div> would be invalid) */
-    display: block;
-    height: 0.6rem;
-    border-radius: 0.25rem;
-    background: var(--pacey-skeleton-gradient);
-    background-size: 200% 100%;
-    animation: pacey-skeleton-shimmer 1.5s infinite;
+	display: block;
+	height: 0.6rem;
+	border-radius: 0.25rem;
+	background: var(--pacey-skeleton-gradient);
+	background-size: 200% 100%;
+	animation: pacey-skeleton-shimmer 1.5s infinite;
 }
 
 /* AI-written insight placeholders share a quiet spectrum sweep so generation
    reads differently from ordinary data loading without overpowering the copy. */
 .pacey-ai-insight-loading .pacey-skeleton-line {
-    background: var(--pacey-ai-shimmer-gradient);
-    /* A broad colour field and constant pace prevent visible acceleration or
+	background: var(--pacey-ai-shimmer-gradient);
+	/* A broad colour field and constant pace prevent visible acceleration or
        sharp resets as the low-saturation spectrum passes through each line. */
-    background-size: 400% 100%;
-    animation-duration: 3.5s;
-    animation-timing-function: linear;
+	background-size: 400% 100%;
+	animation-duration: 3.5s;
+	animation-timing-function: linear;
 }
 
-.pacey-skeleton-line--short { width: 60%; }
+.pacey-skeleton-line--short {
+	width: 60%;
+}
 
 /* Placeholder for the overview card's "View details →" affordance */
-.pacey-skeleton-line--link { width: 38%; height: 0.5rem; margin-top: 0.15rem; }
+.pacey-skeleton-line--link {
+	width: 38%;
+	height: 0.5rem;
+	margin-top: 0.15rem;
+}
 
 /* Sizes for the overall-insight skeleton. These were inline on the markup;
    naming them here keeps the placeholder's shape next to the component it
    stands in for, and keeps the HTML free of styling. */
-.pacey-skeleton-line--headline { width: 40%; height: 1rem; }
-.pacey-skeleton-line--score { width: 2.5rem; height: 1.25rem; }
-.pacey-skeleton-line--label { width: 30%; height: 0.5rem; }
-.pacey-skeleton-line--value { width: 50%; height: 0.75rem; }
-.pacey-skeleton-line--focus { width: 45%; height: 0.5rem; }
+.pacey-skeleton-line--headline {
+	width: 40%;
+	height: 1rem;
+}
+.pacey-skeleton-line--score {
+	width: 2.5rem;
+	height: 1.25rem;
+}
+.pacey-skeleton-line--label {
+	width: 30%;
+	height: 0.5rem;
+}
+.pacey-skeleton-line--value {
+	width: 50%;
+	height: 0.75rem;
+}
+.pacey-skeleton-line--focus {
+	width: 45%;
+	height: 0.5rem;
+}
 
 /* Shimmer text label shown above the pillars skeleton cards — makes the
    loading state obvious with the same animated gradient sweep as other
    loading placeholders across the site. */
 /* ---- Activities list ---- */
-.pacey-activities-list { display: flex; flex-direction: column; gap: 0.4rem; }
+.pacey-activities-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
 
 /* "Show more" button — inline with the section title, pushed to the right.
    Sits inside the flex title row so margin-left: auto aligns it to the end. */
 .pacey-show-more-btn {
-    margin-left: auto;
-    padding: 0.3rem 0.75rem;
-    font-size: var(--pacey-text-label);
-    width: auto;
-    min-width: auto;
+	margin-left: auto;
+	padding: 0.3rem 0.75rem;
+	font-size: var(--pacey-text-label);
+	width: auto;
+	min-width: auto;
 }
 
 /* Plan page "Show more" — sits above the calendar as a standalone
    load-more control (not inside a title), so centre it and add space
    below before the calendar rows. */
 .pacey-plan-show-more {
-    margin: 0 auto 1rem;
-    display: block;
+	margin: 0 auto 1rem;
+	display: block;
 }
 
 /* Month separator header — divides activities by month for easier scanning */
 .pacey-activity-month-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0 0.25rem;
-    margin-top: 0.5rem;
-    /* border-bottom: 0.0625rem solid var(--pacey-border); */
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem 0 0.25rem;
+	margin-top: 0.5rem;
+	/* border-bottom: 0.0625rem solid var(--pacey-border); */
 }
 
 /* First month header in a list should not have extra top margin */
-.pacey-activity-month-header:first-child { margin-top: 0; }
+.pacey-activity-month-header:first-child {
+	margin-top: 0;
+}
 
 .pacey-activity-month-name {
-    font-weight: 700;
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-navy);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+	font-weight: 700;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-navy);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
 }
 
 .pacey-activity-month-total {
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
 }
 
 .pacey-activity-item {
-    background: var(--pacey-surface);
-    border: 0.0625rem solid var(--pacey-border);
-    border-radius: var(--pacey-radius);
-    overflow: hidden;
-    transition: box-shadow var(--pacey-transition);
+	background: var(--pacey-surface);
+	border: 0.0625rem solid var(--pacey-border);
+	border-radius: var(--pacey-radius);
+	overflow: hidden;
+	transition: box-shadow var(--pacey-transition);
 }
 
-.pacey-activity-item:hover { box-shadow: var(--pacey-shadow-md); }
+.pacey-activity-item:hover {
+	box-shadow: var(--pacey-shadow-md);
+}
 
 .pacey-activity-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem clamp(0.75rem, 1.5vw, 1rem);
-    cursor: pointer;
-    user-select: none;
-    gap: var(--pacey-space-md);
-    transition: background 0.15s ease;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.75rem clamp(0.75rem, 1.5vw, 1rem);
+	cursor: pointer;
+	user-select: none;
+	gap: var(--pacey-space-md);
+	transition: background 0.15s ease;
 }
 
 /* Hover signal on activity headers — subtle background tint indicates
    the row is clickable and expands to show details */
 .pacey-activity-header:hover {
-    background: var(--pacey-light);
+	background: var(--pacey-light);
 }
 
 /* Activity name turns blue on hover to reinforce clickability */
 .pacey-activity-header:hover .pacey-activity-name {
-    color: var(--pacey-blue);
+	color: var(--pacey-blue);
 }
 
 /* Keyboard focus indicator for activity headers — visible outline
    when navigating with Tab, matching the metric tile focus style */
 .pacey-activity-header:focus-visible {
-    outline: 0.125rem solid var(--pacey-blue);
-    outline-offset: -0.125rem;
+	outline: 0.125rem solid var(--pacey-blue);
+	outline-offset: -0.125rem;
 }
 
 .pacey-activity-summary {
-    display: flex;
-    align-items: center;
-    gap: var(--pacey-space-md);
-    flex: 1;
-    min-width: 0;
+	display: flex;
+	align-items: center;
+	gap: var(--pacey-space-md);
+	flex: 1;
+	min-width: 0;
 }
 
 .pacey-activity-icon {
-    width: clamp(1.75rem, 3vw, 2rem);
-    height: clamp(1.75rem, 3vw, 2rem);
-    border-radius: 50%;
-    background: var(--pacey-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    color: var(--pacey-blue);
+	width: clamp(1.75rem, 3vw, 2rem);
+	height: clamp(1.75rem, 3vw, 2rem);
+	border-radius: 50%;
+	background: var(--pacey-light);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	color: var(--pacey-blue);
 }
 
 /* SVG inside activity icon fills the circle */
 .pacey-activity-icon svg {
-    width: 60%;
-    height: 60%;
+	width: 60%;
+	height: 60%;
 }
 
 .pacey-activity-name {
-    font-weight: 600;
-    font-size: var(--pacey-text-body);
-    color: var(--pacey-navy);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	font-weight: 600;
+	font-size: var(--pacey-text-body);
+	color: var(--pacey-navy);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* Date shown inline after the activity name */
 .pacey-activity-date {
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
-    white-space: nowrap;
-    flex-shrink: 0;
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
+	white-space: nowrap;
+	flex-shrink: 0;
 }
 
 /* Run-tag styles live in pinboard-theme.css — they are board materials
    shared by the app and the landing's sample previews. */
 
 .pacey-activity-meta {
-    display: flex;
-    align-items: center;
-    gap: clamp(1rem, 3vw, 3rem);
-    flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	gap: clamp(1rem, 3vw, 3rem);
+	flex-shrink: 0;
 }
 
 /* Each stat is a small column — value on top, label below */
 .pacey-activity-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.1rem;
-    text-align: center;
-    white-space: nowrap;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.1rem;
+	text-align: center;
+	white-space: nowrap;
 }
 
 .pacey-activity-stat-value {
-    font-weight: 600;
-    font-size: var(--pacey-text-body);
-    color: var(--pacey-navy);
+	font-weight: 600;
+	font-size: var(--pacey-text-body);
+	color: var(--pacey-navy);
 }
 
 .pacey-activity-stat-label {
-    font-size: var(--pacey-text-label);
-    color: var(--pacey-muted);
+	font-size: var(--pacey-text-label);
+	color: var(--pacey-muted);
 }
 
 .pacey-activity-chevron {
-    width: clamp(1rem, 1.5vw, 1.125rem);
-    height: clamp(1rem, 1.5vw, 1.125rem);
-    color: var(--pacey-muted);
-    transition: transform var(--pacey-transition);
-    flex-shrink: 0;
+	width: clamp(1rem, 1.5vw, 1.125rem);
+	height: clamp(1rem, 1.5vw, 1.125rem);
+	color: var(--pacey-muted);
+	transition: transform var(--pacey-transition);
+	flex-shrink: 0;
 }
 
-.pacey-activity-item.open .pacey-activity-chevron { transform: rotate(180deg); }
+.pacey-activity-item.open .pacey-activity-chevron {
+	transform: rotate(180deg);
+}
 
 /* The detail is a shared .pacey-disclosure — the collapse grid animates it
    open instead of display toggling. Padding and the top rule move to the
    clipped inner so a closed panel leaves no gap or stray border line. */
 .pacey-activity-detail-inner {
-    padding: 0 clamp(0.75rem, 1.5vw, 1rem) 0.75rem;
-    border-top: 0.0625rem solid var(--pacey-border);
+	padding: 0 clamp(0.75rem, 1.5vw, 1rem) 0.75rem;
+	border-top: 0.0625rem solid var(--pacey-border);
 }
 
 .pacey-activity-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(6rem, 12vw, 8rem), 1fr));
-    gap: var(--pacey-space-sm);
-    padding-top: 0.75rem;
+	display: grid;
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax(clamp(6rem, 12vw, 8rem), 1fr)
+	);
+	gap: var(--pacey-space-sm);
+	padding-top: 0.75rem;
 }
 
-.pacey-activity-detail-item { display: flex; flex-direction: column; gap: 0.1rem; }
+.pacey-activity-detail-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.1rem;
+}
 
 .pacey-activity-detail-label {
-    font-size: var(--pacey-text-caption);
-    font-weight: 600;
-    color: var(--pacey-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+	font-size: var(--pacey-text-caption);
+	font-weight: 600;
+	color: var(--pacey-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
 }
 
 .pacey-activity-detail-value {
-    font-size: var(--pacey-text-label);
-    font-weight: 600;
-    color: var(--pacey-navy);
+	font-size: var(--pacey-text-label);
+	font-weight: 600;
+	color: var(--pacey-navy);
 }
 
 /* ---- Skeleton loading ---- */
-.pacey-skeleton-block { display: flex; flex-direction: column; gap: var(--pacey-space-md); padding: 1rem 0; }
-
-.pacey-skeleton {
-    background: var(--pacey-skeleton-gradient);
-    background-size: 200% 100%;
-    animation: pacey-skeleton-shimmer 1.5s infinite;
-    border-radius: 0.25rem;
+.pacey-skeleton-block {
+	display: flex;
+	flex-direction: column;
+	gap: var(--pacey-space-md);
+	padding: 1rem 0;
 }
 
-.pacey-skeleton--line { height: 0.875rem; width: 100%; }
-.pacey-skeleton--line.w-90 { width: 90%; }
-.pacey-skeleton--line.w-70 { width: 70%; }
-.pacey-skeleton--line.w-60 { width: 60%; }
-.pacey-skeleton--line.w-50 { width: 50%; }
-.pacey-skeleton--line.w-40 { width: 40%; }
+.pacey-skeleton {
+	background: var(--pacey-skeleton-gradient);
+	background-size: 200% 100%;
+	animation: pacey-skeleton-shimmer 1.5s infinite;
+	border-radius: 0.25rem;
+}
+
+.pacey-skeleton--line {
+	height: 0.875rem;
+	width: 100%;
+}
+.pacey-skeleton--line.w-90 {
+	width: 90%;
+}
+.pacey-skeleton--line.w-70 {
+	width: 70%;
+}
+.pacey-skeleton--line.w-60 {
+	width: 60%;
+}
+.pacey-skeleton--line.w-50 {
+	width: 50%;
+}
+.pacey-skeleton--line.w-40 {
+	width: 40%;
+}
 
 /* ========== RESPONSIVE BREAKPOINTS ========== */
 
 /* Tablet/mobile: hide sidebar, show bottom tab bar, content stacks */
 @media (max-width: 48rem) {
-    .pacey-dashboard-layout {
-        flex-direction: column;
-        /* Sidebar is display:none on mobile — remove the left offset */
-        padding-left: 0;
-    }
+	.pacey-dashboard-layout {
+		flex-direction: column;
+		/* Sidebar is display:none on mobile — remove the left offset */
+		padding-left: 0;
+	}
 
-    /* Hide the sidebar entirely on tablet/mobile — replaced by bottom tab bar */
-    .pacey-sidebar { display: none; }
+	/* Hide the sidebar entirely on tablet/mobile — replaced by bottom tab bar */
+	.pacey-sidebar {
+		display: none;
+	}
 
-    /* Show the profile section in the settings popup on mobile — the
+	/* Show the profile section in the settings popup on mobile — the
        sidebar (which normally holds the profile) is hidden on mobile,
        so the profile, goal, and edit button move into the account panel */
-    .pacey-settings-profile { display: flex !important; }
+	.pacey-settings-profile {
+		display: flex !important;
+	}
 
-    /* Show the bottom tab bar */
-    .pacey-tabbar { display: flex; }
+	/* Show the bottom tab bar */
+	.pacey-tabbar {
+		display: flex;
+	}
 
-    /* Add bottom padding so content isn't hidden behind the floating tab bar */
-    .pacey-content {
-        padding: clamp(1.5rem, 2vw, 1.5rem);
-        /* Extra bottom margin to comfortably clear the floating tab bar
+	/* Add bottom padding so content isn't hidden behind the floating tab bar */
+	.pacey-content {
+		padding: clamp(1.5rem, 2vw, 1.5rem);
+		/* Extra bottom margin to comfortably clear the floating tab bar
            (tab bar: bottom 1.5rem + height 3.5rem = 5rem, plus 2rem breathing room) */
-        padding-bottom: calc(7rem + env(safe-area-inset-bottom, 0));
-    }
+		padding-bottom: calc(7rem + env(safe-area-inset-bottom, 0));
+	}
 
-    .pacey-nav-item { width: auto; white-space: nowrap; }
+	.pacey-nav-item {
+		width: auto;
+		white-space: nowrap;
+	}
 
-    /* ---- Mobile interactive signals ---- */
-    /* Tappable cards: subtle shadow + left accent border to indicate
+	/* ---- Mobile interactive signals ---- */
+	/* Tappable cards: subtle shadow + left accent border to indicate
        they're interactive. On touch devices there's no hover, so a
        persistent visual cue is needed to signal clickability. */
-    .pacey-metric-tile {
-        box-shadow: 0 0.0625rem 0.25rem rgba(29, 53, 87, 0.1);
-        border-color: var(--pacey-blue);
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-    }
+	.pacey-metric-tile {
+		box-shadow: 0 0.0625rem 0.25rem rgba(29, 53, 87, 0.1);
+		border-color: var(--pacey-blue);
+		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
+	}
 
-    .pacey-metric-tile:active {
-        transform: scale(0.97);
-        box-shadow: 0 0.0625rem 0.125rem rgba(29, 53, 87, 0.08);
-    }
+	.pacey-metric-tile:active {
+		transform: scale(0.97);
+		box-shadow: 0 0.0625rem 0.125rem rgba(29, 53, 87, 0.08);
+	}
 
-    /* Readiness cards: elevation on mobile */
-    .pacey-readiness-card {
-        box-shadow: 0 0.0625rem 0.375rem rgba(29, 53, 87, 0.08);
-    }
+	/* Readiness cards: elevation on mobile */
+	.pacey-readiness-card {
+		box-shadow: 0 0.0625rem 0.375rem rgba(29, 53, 87, 0.08);
+	}
 
-    /* Activity items: enhanced chevron for expandability */
-    .pacey-activity-header {
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-    }
+	/* Activity items: enhanced chevron for expandability */
+	.pacey-activity-header {
+		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
+	}
 
-    .pacey-activity-header:active {
-        background: var(--pacey-light);
-    }
+	.pacey-activity-header:active {
+		background: var(--pacey-light);
+	}
 
-    /* Chevron is the primary expandability indicator on mobile —
+	/* Chevron is the primary expandability indicator on mobile —
        make it more visible than the desktop default so users know
        the row is tappable and will expand to show details */
-    .pacey-activity-chevron {
-        width: 1.25rem;
-        height: 1.25rem;
-        opacity: 0.7;
-        color: var(--pacey-blue);
-        transition: transform 0.2s ease, opacity 0.2s ease;
-    }
+	.pacey-activity-chevron {
+		width: 1.25rem;
+		height: 1.25rem;
+		opacity: 0.7;
+		color: var(--pacey-blue);
+		transition:
+			transform 0.2s ease,
+			opacity 0.2s ease;
+	}
 
-    .pacey-activity-item.open .pacey-activity-chevron {
-        transform: rotate(180deg);
-        opacity: 0.8;
-    }
+	.pacey-activity-item.open .pacey-activity-chevron {
+		transform: rotate(180deg);
+		opacity: 0.8;
+	}
 
-    /* Tab bar items: enhanced active feedback */
-    .pacey-tab-item:active {
-        transform: scale(0.88);
-        transition: transform 0.1s ease;
-    }
+	/* Tab bar items: enhanced active feedback */
+	.pacey-tab-item:active {
+		transform: scale(0.88);
+		transition: transform 0.1s ease;
+	}
 
-    /* Pillar cards: subtle elevation for scrollable content */
-    .pacey-pillar-card {
-        box-shadow: 0 0.0625rem 0.25rem rgba(29, 53, 87, 0.06);
-    }
+	/* Pillar cards: subtle elevation for scrollable content */
+	.pacey-pillar-card {
+		box-shadow: 0 0.0625rem 0.25rem rgba(29, 53, 87, 0.06);
+	}
 
-    /* Tap hint — shown on touch devices with enhanced styling */
-    .pacey-tap-hint {
-        display: inline;
-        color: var(--pacey-blue);
-        font-weight: 600;
-    }
+	/* Tap hint — shown on touch devices with enhanced styling */
+	.pacey-tap-hint {
+		display: inline;
+		color: var(--pacey-blue);
+		font-weight: 600;
+	}
 }
 
 /* Tap hints are also visible on desktop — device-neutral "Select" wording
    works for both mouse and touch. No need to hide on hover-capable devices. */
 .pacey-tap-hint {
-    display: inline;
-    color: var(--pacey-blue);
-    font-weight: 600;
+	display: inline;
+	color: var(--pacey-blue);
+	font-weight: 600;
 }
 
 /* Phone: single column, compact */
 @media (max-width: 30rem) {
-    :root {
-        /* 1.15rem rather than the old 0.5rem. Measured off a rendered tile, the
+	:root {
+		/* 1.15rem rather than the old 0.5rem. Measured off a rendered tile, the
            shadow reaches about 1rem to the left of the card, so the old 0.5rem
            gutter cut it off for any card spanning the full width — the metrics
            tiles especially. The gutter has to be at least as wide as the shadow
            reaches, plus a hair so the last antialiased pixel is not on the clip
            edge. */
-        --pacey-content-padding: 1.15rem;
-    }
+		--pacey-content-padding: 1.15rem;
+	}
 
-    /* The two-column phone grid and compact tile sizing moved to
+	/* The two-column phone grid and compact tile sizing moved to
        pinboard-theme.css with the shared tile presentation. */
 
-    /* Mobile vitals drawer — extra tiles are wrapped in a collapsible
+	/* Mobile vitals drawer — extra tiles are wrapped in a collapsible
        container that animates open/closed using the grid-template-rows
        0fr→1fr technique. This animates height from 0 to auto smoothly
        without needing a fixed max-height guess. The outer wrapper is a
        single-row grid that collapses; the inner wrapper has overflow
        hidden and holds the actual tiles in a 2-column sub-grid. */
-    .pacey-metrics-extra {
-        display: grid;
-        grid-column: 1 / -1;
-        grid-template-rows: 0fr;
-        transition: grid-template-rows 0.3s ease;
-    }
+	.pacey-metrics-extra {
+		display: grid;
+		grid-column: 1 / -1;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 0.3s ease;
+	}
 
-    .pacey-metrics-grid--expanded .pacey-metrics-extra {
-        grid-template-rows: 1fr;
-    }
+	.pacey-metrics-grid--expanded .pacey-metrics-extra {
+		grid-template-rows: 1fr;
+	}
 
-    .pacey-metrics-extra-inner {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.6rem;
-        /* min-height:0 lets the 0fr row actually fold shut — grid children
+	.pacey-metrics-extra-inner {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.6rem;
+		/* min-height:0 lets the 0fr row actually fold shut — grid children
            otherwise keep a min-content floor. */
-        min-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: opacity 0.25s ease;
-        /* The collapse needs overflow:hidden, which cuts the tiles' shadows at
+		min-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: opacity 0.25s ease;
+		/* The collapse needs overflow:hidden, which cuts the tiles' shadows at
            the wrapper's own edge. Horizontal room only, matched to the grid's
            gutter so the drawer's tiles stay aligned with the primary ones: the
            padding gives the shadow somewhere to land and the negative margin
            leaves the tiles exactly where they were. Vertical padding would show
            as a gap while collapsed, and neither touches the collapse. */
-        padding-inline: 0.7rem;
-        margin-inline: -0.7rem;
-    }
+		padding-inline: 0.7rem;
+		margin-inline: -0.7rem;
+	}
 
-    .pacey-metrics-grid--expanded .pacey-metrics-extra-inner {
-        opacity: 1;
-    }
+	.pacey-metrics-grid--expanded .pacey-metrics-extra-inner {
+		opacity: 1;
+	}
 
-    /* Chevron disclosure toggle — subtle inline button centered below
+	/* Chevron disclosure toggle — subtle inline button centered below
        the grid. Uses a small label + rotating chevron icon rather than
        a full secondary button to keep the visual weight minimal. */
-    .pacey-vitals-toggle {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        margin: 0 auto;
-        padding: 0.3rem 0.75rem;
-        background: none;
-        border: none;
-        font-family: var(--font-fuzzy);
-        font-size: var(--pacey-text-label);
-        font-weight: 500;
-        color: var(--pacey-muted);
-        cursor: pointer;
-        border-radius: var(--pacey-radius-sm);
-        transition: color var(--pacey-transition);
-    }
+	.pacey-vitals-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		margin: 0 auto;
+		padding: 0.3rem 0.75rem;
+		background: none;
+		border: none;
+		font-family: var(--font-fuzzy);
+		font-size: var(--pacey-text-label);
+		font-weight: 500;
+		color: var(--pacey-muted);
+		cursor: pointer;
+		border-radius: var(--pacey-radius-sm);
+		transition: color var(--pacey-transition);
+	}
 
-    .pacey-vitals-toggle:hover { color: var(--pacey-blue); }
+	.pacey-vitals-toggle:hover {
+		color: var(--pacey-blue);
+	}
 
-    .pacey-vitals-toggle:focus-visible {
-        outline: 0.125rem solid var(--pacey-blue);
-        outline-offset: 0.125rem;
-    }
+	.pacey-vitals-toggle:focus-visible {
+		outline: 0.125rem solid var(--pacey-blue);
+		outline-offset: 0.125rem;
+	}
 
-    /* Chevron rotates 180deg when expanded — the rotation is the
+	/* Chevron rotates 180deg when expanded — the rotation is the
        primary visual indicator of the toggle state */
-    .pacey-vitals-toggle-chevron {
-        transition: transform 0.2s ease;
-    }
+	.pacey-vitals-toggle-chevron {
+		transition: transform 0.2s ease;
+	}
 
-    .pacey-vitals-toggle[aria-expanded="true"] .pacey-vitals-toggle-chevron {
-        transform: rotate(180deg);
-    }
+	.pacey-vitals-toggle[aria-expanded="true"] .pacey-vitals-toggle-chevron {
+		transform: rotate(180deg);
+	}
 
-    /* On mobile, stack the metrics below the activity name/date row
+	/* On mobile, stack the metrics below the activity name/date row
        instead of hiding them. The chevron is absolutely positioned so
        it centers vertically across both lines, not aligned to either. */
-    .pacey-activity-header { flex-wrap: wrap; position: relative; padding-right: 1.5rem; }
-    .pacey-activity-chevron {
-        position: absolute;
-        top: 50%;
-        right: 1rem;
-        transform: translateY(-50%);
-    }
-    .pacey-activity-item.open .pacey-activity-chevron { transform: translateY(-50%) rotate(180deg); }
-    .pacey-activity-meta {
-        order: 1;
-        width: 100%;
-        justify-content: left;
-        padding-left: 0.5rem;
-        gap: var(--pacey-space-xl);
-    }
+	.pacey-activity-header {
+		flex-wrap: wrap;
+		position: relative;
+		padding-right: 1.5rem;
+	}
+	.pacey-activity-chevron {
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+		transform: translateY(-50%);
+	}
+	.pacey-activity-item.open .pacey-activity-chevron {
+		transform: translateY(-50%) rotate(180deg);
+	}
+	.pacey-activity-meta {
+		order: 1;
+		width: 100%;
+		justify-content: left;
+		padding-left: 0.5rem;
+		gap: var(--pacey-space-xl);
+	}
 
-    .pacey-activity-detail-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+	.pacey-activity-detail-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
 
-    .pacey-dimension-legend { grid-template-columns: 1fr; }
+	.pacey-dimension-legend {
+		grid-template-columns: 1fr;
+	}
 
-    .pacey-calendar-dot {
-        width: clamp(0.8rem, 4.4vw, 1rem);
-        height: clamp(0.8rem, 4.4vw, 1rem);
-    }
+	.pacey-calendar-dot {
+		width: clamp(0.8rem, 4.4vw, 1rem);
+		height: clamp(0.8rem, 4.4vw, 1rem);
+	}
 
-    /* Keep calendar labels readable on phone — use label size, not caption */
-    .pacey-calendar-header span { font-size: var(--pacey-text-label); }
-    .pacey-calendar-grid { gap: clamp(0.3rem, 1.5vw, 0.45rem); }
-    .pacey-calendar-header { gap: clamp(0.3rem, 1.5vw, 0.45rem); }
+	/* Keep calendar labels readable on phone — use label size, not caption */
+	.pacey-calendar-header span {
+		font-size: var(--pacey-text-label);
+	}
+	.pacey-calendar-grid {
+		gap: clamp(0.3rem, 1.5vw, 0.45rem);
+	}
+	.pacey-calendar-header {
+		gap: clamp(0.3rem, 1.5vw, 0.45rem);
+	}
 
-    .pacey-chart-card { padding: var(--pacey-space-md); }
-    .pacey-chart-card--large { padding: var(--pacey-space-md); }
+	.pacey-chart-card {
+		padding: var(--pacey-space-md);
+	}
+	.pacey-chart-card--large {
+		padding: var(--pacey-space-md);
+	}
 
-    .pacey-section-title { font-size: var(--pacey-text-subheading); }
+	.pacey-section-title {
+		font-size: var(--pacey-text-subheading);
+	}
 
-    .pacey-pillars-grid { grid-template-columns: 1fr; }
+	.pacey-pillars-grid {
+		grid-template-columns: 1fr;
+	}
 }
 
 /* Wide screen: constrain max width

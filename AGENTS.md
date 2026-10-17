@@ -20,13 +20,15 @@ Pacey lives in `pacey/` (served at `/pacey`; the old `/projects/pacey` path 301s
 
 **Voice:** `pacey/pacey-writing-style.md`
 
+**Design conventions:** `pacey/.impeccable.md`
+
 Consensus: marathon pre-race companion. Diagnosis is six-area fitness vs the typed goal time. Plan is the full remaining block to race day (not one week). No in-run coaching. Do not treat unofficial Garmin email+password as the long-term auth path.
 
 **"Last Garmin sync" means the watch, not us.** On the Today's Metrics card, that label is when the **watch last uploaded to Garmin** (from `get_device_last_used` → `lastUsedDeviceUploadTime`, surfaced as `synced_at`), never when Pacey fetched the data. Pacey's own fetch time (`fetched_at`) says nothing to the runner — if the watch has not synced, checking again returns the same numbers. Do not show `fetched_at` in the UI.
 
 ## Design
 
-**Read `.impeccable.md` and `docs/site-design.md` before any UI change.** The former separates the personal-site context from running-product conventions; the latter maps current implementation owners and verification commands. Do not treat Pacey's users, colours or dark theme as the whole site's design.
+**Read `.impeccable.md` and `docs/site-design.md` before any UI change.** The former is the personal site's design context (Pacey's running-product conventions now live in `pacey/.impeccable.md`); the latter maps current implementation owners and verification commands. Do not treat Pacey's users, colours or dark theme as the whole site's design.
 
 ### Personal Site Shared Components
 
