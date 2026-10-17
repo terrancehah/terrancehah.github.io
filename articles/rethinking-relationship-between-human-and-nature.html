@@ -3,6 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Fonts: one consolidated request listing only the weights the
+		     site uses. preconnect warms the gstatic origin so the font
+		     files start as soon as the CSS arrives. -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+			rel="stylesheet" />
+		<!-- Shared sheets linked directly so they download in parallel
+		     rather than queueing behind style.css's nested @imports.
+		     Order mirrors the old depth-first import order; the @imports
+		     stay in the sheets and identical URLs are deduped. -->
+		<link href="../styles/site-typography.css" rel="stylesheet" />
+		<link href="../styles/site-footer.css" rel="stylesheet" />
+		<link href="../styles/site-navigation.css" rel="stylesheet" />
+		<link href="../styles/site-motion.css" rel="stylesheet" />
+		<link href="../styles/site-header.css" rel="stylesheet" />
         <link href="../styles/output.css" rel="stylesheet">
         <link href="../styles/style.css" type="text/css" rel="stylesheet">
         <link href="./articles.css" type="text/css" rel="stylesheet">
@@ -28,10 +45,7 @@
         <meta name="twitter:description" content="Jungle trekking makes me question the relationship between human and nature.">
         <meta name="twitter:image" content="https://terrancehah.com/resources/articles/rethinking-relationship-between-human-and-nature/rethinking-relationship-between-human-and-nature-og.jpeg">
 
-        <script src="../js/footer.js"></script>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@400;500;600;700&display=swap');
-        </style>
+        <script src="../js/footer.js" defer></script>
         <!-- Vercel Analytics -->
         <script>
             window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
