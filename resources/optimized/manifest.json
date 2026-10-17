@@ -179,6 +179,11 @@
   "resources/optimized/articles/tnbyy-my-first-camphike/yongyap-summit-sign-jpeg-1280.webp": "resources/articles/tnbyy-my-first-camphike/yongyap-summit-sign.jpeg",
   "resources/optimized/articles/tnbyy-my-first-camphike/yongyap-summit-sign-jpeg-1920.webp": "resources/articles/tnbyy-my-first-camphike/yongyap-summit-sign.jpeg",
   "resources/optimized/articles/tnbyy-my-first-camphike/yongyap-summit-sign-jpeg-640.webp": "resources/articles/tnbyy-my-first-camphike/yongyap-summit-sign.jpeg",
+  "resources/optimized/icons/facebook-png-128.webp": "resources/icons/facebook.png",
+  "resources/optimized/icons/github-png-128.webp": "resources/icons/github.png",
+  "resources/optimized/icons/instagram-png-128.webp": "resources/icons/instagram.png",
+  "resources/optimized/icons/linkedin-png-128.webp": "resources/icons/linkedin.png",
+  "resources/optimized/icons/x-png-128.webp": "resources/icons/x.png",
   "resources/optimized/projects/biwa-ride/assets/brian-kelly-s-dguzqrqi-unsplash-jpg-554.webp": "projects/biwa-ride/assets/brian-kelly-S__DGUzQRqI-unsplash.jpg",
   "resources/optimized/projects/foodtracker/anmour-jpg-1280.webp": "resources/projects/foodtracker/anmour.jpg",
   "resources/optimized/projects/foodtracker/anmour-jpg-1920.webp": "resources/projects/foodtracker/anmour.jpg",
@@ -214,6 +219,7 @@
   "resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1280.webp": "resources/projects/teaching-syllabus-template/notion-sharing.png",
   "resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1920.webp": "resources/projects/teaching-syllabus-template/notion-sharing.png",
   "resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-640.webp": "resources/projects/teaching-syllabus-template/notion-sharing.png",
+  "resources/optimized/site/crossout-handwriting-png-640.webp": "resources/site/crossout-handwriting.png",
   "resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1280.webp": "resources/site/felix-yu-ZlwCocz11D8-unsplash.jpg",
   "resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp": "resources/site/felix-yu-ZlwCocz11D8-unsplash.jpg",
   "resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-640.webp": "resources/site/felix-yu-ZlwCocz11D8-unsplash.jpg",
@@ -238,15 +244,15 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "PNG",
-    "version": 2
+    "version": 3
    },
    "sha256": "6c42ccd1010ae38de7e0570d94fbeaff1fbff9a843d31f4dff5c4b61abb26885",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 61206,
+     "bytes": 46194,
      "edge": 554,
      "height": 304,
      "path": "resources/optimized/projects/biwa-ride/assets/brian-kelly-s-dguzqrqi-unsplash-jpg-554.webp",
@@ -267,29 +273,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "e62fa2342d874709c6063b2432331dae6d9785b3a7615393cdf0583cc56f9a50",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 32682,
+     "bytes": 25818,
      "edge": 640,
      "height": 361,
      "path": "resources/optimized/articles/how-to-be-indistractable/apple-screen-time-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 88834,
+     "bytes": 69672,
      "edge": 1280,
      "height": 722,
      "path": "resources/optimized/articles/how-to-be-indistractable/apple-screen-time-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 117924,
+     "bytes": 92486,
      "edge": 1560,
      "height": 880,
      "path": "resources/optimized/articles/how-to-be-indistractable/apple-screen-time-jpg-1560.webp",
@@ -310,29 +316,29 @@
      1920
     ],
     "method": 6,
-    "quality": 90,
+    "quality": 85,
     "source_format": "PNG",
-    "version": 2
+    "version": 3
    },
    "sha256": "1fdee17512b013297f0253fd2aa9e8c101e8557a7341435af5f74610f804e018",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 32408,
+     "bytes": 24842,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/metaverse-the-next-big-thing-or-a-gimmick/hand-gesture-png-640.webp",
      "width": 640
     },
     {
-     "bytes": 70180,
+     "bytes": 54102,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/metaverse-the-next-big-thing-or-a-gimmick/hand-gesture-png-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 76360,
+     "bytes": 58280,
      "edge": 1366,
      "height": 768,
      "path": "resources/optimized/articles/metaverse-the-next-big-thing-or-a-gimmick/hand-gesture-png-1366.webp",
@@ -353,29 +359,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "0dc2f713fb405cdcee2b6665942f883c98454d8d33e63897ef99a6811d14dc56",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 29476,
+     "bytes": 21152,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/metaverse-the-next-big-thing-or-a-gimmick/tiger-jpg-640.webp",
      "width": 387
     },
     {
-     "bytes": 74220,
+     "bytes": 52554,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/metaverse-the-next-big-thing-or-a-gimmick/tiger-jpg-1280.webp",
      "width": 774
     },
     {
-     "bytes": 129398,
+     "bytes": 90782,
      "edge": 1917,
      "height": 1917,
      "path": "resources/optimized/articles/metaverse-the-next-big-thing-or-a-gimmick/tiger-jpg-1917.webp",
@@ -396,29 +402,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "2c440e8294189e6466f61af3f34222b8f814c067140fdbfe9a12937f361f86e0",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 20158,
+     "bytes": 12284,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/6kg-plus-9kg-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 119002,
+     "bytes": 72752,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/6kg-plus-9kg-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 293930,
+     "bytes": 188802,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/6kg-plus-9kg-jpg-1920.webp",
@@ -439,22 +445,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "648af0a7b5c1acb0b126fb5b60baa58217c51298706eae1ea474c3364c3aff0a",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 33506,
+     "bytes": 24708,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/capsule-view-jpeg-640.webp",
      "width": 361
     },
     {
-     "bytes": 99246,
+     "bytes": 72656,
      "edge": 1182,
      "height": 1182,
      "path": "resources/optimized/articles/mount-kinabalu/capsule-view-jpeg-1182.webp",
@@ -475,29 +481,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "0b60a5ea37a2ea0efd20b3421342eedfcd02d3f2837b32a4feba0c5997d55a12",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 50484,
+     "bytes": 35526,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/carrying-two-bags-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 233842,
+     "bytes": 166760,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/carrying-two-bags-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 567596,
+     "bytes": 412602,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/carrying-two-bags-jpg-1920.webp",
@@ -518,29 +524,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "ed440ac2dbfe68696f930995bf10fff595e6feef101e8f6056b90d33a8eba41d",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 63108,
+     "bytes": 46916,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/climbathon-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 229312,
+     "bytes": 170666,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/climbathon-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 488312,
+     "bytes": 356590,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/climbathon-jpg-1920.webp",
@@ -561,29 +567,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "a62d82c239be79d305100b9a40baae989f2f3f832ac420fa6c4fa3619d5d3210",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 30446,
+     "bytes": 22378,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/dji-nano-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 122250,
+     "bytes": 78676,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/dji-nano-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 292980,
+     "bytes": 190114,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/dji-nano-jpg-1920.webp",
@@ -604,22 +610,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "e2f26e61a286ca7ce789b2a65ef26a772563fd74df4c26f9e12b0edbb9fa9e7b",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 56128,
+     "bytes": 40728,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/group-photo-jpeg-640.webp",
      "width": 480
     },
     {
-     "bytes": 136192,
+     "bytes": 98480,
      "edge": 1024,
      "height": 1024,
      "path": "resources/optimized/articles/mount-kinabalu/group-photo-jpeg-1024.webp",
@@ -640,29 +646,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "7a91fbca786c0a3fa5163c9ab7347a33c43f3a27eb94aa8428ba76d4cf36cede",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 31864,
+     "bytes": 22708,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/homy-seafront-hostel-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 117032,
+     "bytes": 82738,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/homy-seafront-hostel-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 244720,
+     "bytes": 172716,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/homy-seafront-hostel-jpeg-1920.webp",
@@ -683,22 +689,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "676b57d1206e8aebb2a4260bb1f3fc4e84544a639012c82877c0732902490e7f",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 14212,
+     "bytes": 7988,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/lows-peak-under-stars-jpeg-640.webp",
      "width": 361
     },
     {
-     "bytes": 98570,
+     "bytes": 54730,
      "edge": 1182,
      "height": 1182,
      "path": "resources/optimized/articles/mount-kinabalu/lows-peak-under-stars-jpeg-1182.webp",
@@ -719,29 +725,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "8e105cf5eb3b21aac7e1e4294bb1b086121398f20c861f90fd4026bef30efe04",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 47814,
+     "bytes": 35914,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/me-at-peak-jpg-640.webp",
      "width": 480
     },
     {
-     "bytes": 180710,
+     "bytes": 137236,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/me-at-peak-jpg-1280.webp",
      "width": 960
     },
     {
-     "bytes": 346820,
+     "bytes": 258402,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/me-at-peak-jpg-1920.webp",
@@ -762,29 +768,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "04b47674834ac7db0a2489613a49093a525c76284c26dafbd25e321bee1f6bc8",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 50704,
+     "bytes": 38758,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/mount-kinabalu/me-pointing-at-peak-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 164302,
+     "bytes": 123590,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/mount-kinabalu/me-pointing-at-peak-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 311828,
+     "bytes": 228480,
      "edge": 1920,
      "height": 1080,
      "path": "resources/optimized/articles/mount-kinabalu/me-pointing-at-peak-jpg-1920.webp",
@@ -805,29 +811,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "b4a1647ff99f9df48ec92703b7a1020edc9b417edc34114c6d7684dcd5669676",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 23896,
+     "bytes": 12944,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/milky-way-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 166674,
+     "bytes": 103390,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/milky-way-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 438940,
+     "bytes": 282440,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/milky-way-jpg-1920.webp",
@@ -848,29 +854,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "3ce8ba698353a2b0772acd6302a89ef882ace1cd764f75474398273362b7de49",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 29250,
+     "bytes": 21154,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/noodles-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 73406,
+     "bytes": 52260,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/noodles-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 125392,
+     "bytes": 90044,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/noodles-jpg-1920.webp",
@@ -891,22 +897,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "b4488fa554789fde969ba25ef8c19140f1666315a03ad4b0c2a5672277d2b95c",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 65930,
+     "bytes": 51396,
      "edge": 640,
      "height": 361,
      "path": "resources/optimized/articles/mount-kinabalu/padang-merdeka-vans-jpeg-640.webp",
      "width": 640
     },
     {
-     "bytes": 199516,
+     "bytes": 154540,
      "edge": 1182,
      "height": 666,
      "path": "resources/optimized/articles/mount-kinabalu/padang-merdeka-vans-jpeg-1182.webp",
@@ -927,29 +933,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "d14b8479eb07c50833451cfe5b0e7c2f256d77e6f815dc5138b964b582cd64ec",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 32456,
+     "bytes": 24092,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/panalaban-balcony-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 98180,
+     "bytes": 71134,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/panalaban-balcony-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 185126,
+     "bytes": 133844,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/panalaban-balcony-jpg-1920.webp",
@@ -970,29 +976,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "f8855520516b9a70c4e1be70cc130642064bdbab9e64a85d1e45be817ce6f142",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 14862,
+     "bytes": 10178,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/panalaban-sunset-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 44154,
+     "bytes": 30174,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/panalaban-sunset-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 90304,
+     "bytes": 57408,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/panalaban-sunset-jpg-1920.webp",
@@ -1013,22 +1019,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "4f65d0045d3df7ce2425b078bbf6ecd561836182b91be52999bd106a127155f8",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 55690,
+     "bytes": 40322,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/panalaban-jpeg-640.webp",
      "width": 480
     },
     {
-     "bytes": 149124,
+     "bytes": 109728,
      "edge": 1024,
      "height": 1024,
      "path": "resources/optimized/articles/mount-kinabalu/panalaban-jpeg-1024.webp",
@@ -1049,29 +1055,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "09df2c5e4e4d00f413fa0e5b719009e2ca42818a5e754ebb34d334e06faa0ff7",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 57076,
+     "bytes": 42144,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/park-gate-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 217058,
+     "bytes": 160260,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/park-gate-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 448742,
+     "bytes": 331954,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/park-gate-jpeg-1920.webp",
@@ -1092,22 +1098,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "d79dffe6ced5729ca2fbf2b03c4ceea3a031d3389a55fa2be10a5345b7d08447",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 75606,
+     "bytes": 59578,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/park-sign-jpeg-640.webp",
      "width": 361
     },
     {
-     "bytes": 263170,
+     "bytes": 207316,
      "edge": 1182,
      "height": 1182,
      "path": "resources/optimized/articles/mount-kinabalu/park-sign-jpeg-1182.webp",
@@ -1128,29 +1134,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "59da0aff20b0400067642b059884d661a875c62bd112341df1d6627a6af9c191",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 8302,
+     "bytes": 6086,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/mount-kinabalu/peak-sunrise-landscape-jpeg-640.webp",
      "width": 640
     },
     {
-     "bytes": 20110,
+     "bytes": 14400,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/mount-kinabalu/peak-sunrise-landscape-jpeg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 34814,
+     "bytes": 24770,
      "edge": 1920,
      "height": 1080,
      "path": "resources/optimized/articles/mount-kinabalu/peak-sunrise-landscape-jpeg-1920.webp",
@@ -1171,29 +1177,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "918db02225985938167dfb14c80fdc4afaca714c253d69eda43c9da7a9c59e1c",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 5836,
+     "bytes": 4388,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/peak-sunrise-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 14800,
+     "bytes": 10598,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/peak-sunrise-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 28546,
+     "bytes": 19132,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/peak-sunrise-jpg-1920.webp",
@@ -1214,29 +1220,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "79e3d6f7fb8fb38346e106e519b66723d62707d5e63732de962eb0824f02e939",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 93830,
+     "bytes": 74184,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/pitcher-plant-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 289894,
+     "bytes": 224078,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/pitcher-plant-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 538402,
+     "bytes": 401684,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/pitcher-plant-jpeg-1920.webp",
@@ -1257,29 +1263,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "25861bf74955c937b67812da9e2984fc219e9e05df96355d725c21fb0ee8b242",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 16102,
+     "bytes": 11982,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/plane-on-cotton-candy-jpg-640.webp",
      "width": 434
     },
     {
-     "bytes": 37002,
+     "bytes": 26570,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/plane-on-cotton-candy-jpg-1280.webp",
      "width": 869
     },
     {
-     "bytes": 60022,
+     "bytes": 43642,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/plane-on-cotton-candy-jpg-1920.webp",
@@ -1300,29 +1306,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "024884af66238498aa31b0df965d504994fc6f7beca41417b4a83bd0ba650852",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 50948,
+     "bytes": 37852,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/postbox-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 175968,
+     "bytes": 130350,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/postbox-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 337100,
+     "bytes": 247136,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/postbox-jpeg-1920.webp",
@@ -1343,29 +1349,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "4b8ab5a080c816b1a774ccc4f5dc771d3f9abf552c0580293c4053df632fa926",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 32230,
+     "bytes": 22954,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/mount-kinabalu/postcards-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 107670,
+     "bytes": 73626,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/mount-kinabalu/postcards-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 220708,
+     "bytes": 145182,
      "edge": 1920,
      "height": 1080,
      "path": "resources/optimized/articles/mount-kinabalu/postcards-jpg-1920.webp",
@@ -1386,22 +1392,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "e69ba292649d392e27c5a86c0d4edbebd7e14e602311b83a25487c37dd585747",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 44622,
+     "bytes": 34516,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/random-trees-jpeg-640.webp",
      "width": 361
     },
     {
-     "bytes": 137386,
+     "bytes": 107026,
      "edge": 1182,
      "height": 1182,
      "path": "resources/optimized/articles/mount-kinabalu/random-trees-jpeg-1182.webp",
@@ -1422,29 +1428,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "55a8ef47bf30dd93bee64902828751e56c0b6fe8de75937db80a2a357f90d4a5",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 18808,
+     "bytes": 13524,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/rm100-notes-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 53644,
+     "bytes": 39254,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/rm100-notes-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 102076,
+     "bytes": 72552,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/rm100-notes-jpeg-1920.webp",
@@ -1465,29 +1471,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "7e58bd2cca5f6e94c8323ea9c7662eb4b9bab03cb4796a8780952057966d5f68",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 12862,
+     "bytes": 9438,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/sayat-sayat-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 32374,
+     "bytes": 22866,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/sayat-sayat-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 55452,
+     "bytes": 39114,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/sayat-sayat-jpg-1920.webp",
@@ -1508,22 +1514,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "5e68070c620839178fea56750dd237a1205fb7cb6d24825c9bad52f65a6937c8",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 39046,
+     "bytes": 29150,
      "edge": 640,
      "height": 361,
      "path": "resources/optimized/articles/mount-kinabalu/space-capsule-jpeg-640.webp",
      "width": 640
     },
     {
-     "bytes": 101030,
+     "bytes": 74544,
      "edge": 1182,
      "height": 666,
      "path": "resources/optimized/articles/mount-kinabalu/space-capsule-jpeg-1182.webp",
@@ -1544,29 +1550,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "4993e7ca24234afe42f481973815f90522c96300049e61ed0545d7c80857f333",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 26954,
+     "bytes": 20246,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/mount-kinabalu/squatting-guide-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 99064,
+     "bytes": 75820,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/mount-kinabalu/squatting-guide-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 210428,
+     "bytes": 159830,
      "edge": 1920,
      "height": 1080,
      "path": "resources/optimized/articles/mount-kinabalu/squatting-guide-jpg-1920.webp",
@@ -1587,29 +1593,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "519b100839186eb194378f610241668639b3c97ec23a8f7f028fefd354112cc6",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 34724,
+     "bytes": 24370,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/surfing-board-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 120306,
+     "bytes": 80700,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/surfing-board-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 249944,
+     "bytes": 170142,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/surfing-board-jpg-1920.webp",
@@ -1630,29 +1636,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "9684769a728be2a49032d57ed13ac74835364aaebb0951e22e7e8dfe743ddf94",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 36560,
+     "bytes": 25136,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/surfing-jpg-640.webp",
      "width": 480
     },
     {
-     "bytes": 113594,
+     "bytes": 78082,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/surfing-jpg-1280.webp",
      "width": 960
     },
     {
-     "bytes": 213724,
+     "bytes": 149028,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/surfing-jpg-1920.webp",
@@ -1673,29 +1679,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "a0fbcf24ba4c4b8b488f5f5c1255a0a318b4d6421ffd12ea52038a08df61a270",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 15342,
+     "bytes": 10856,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/tanjung-aru-sunset-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 42198,
+     "bytes": 28630,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/tanjung-aru-sunset-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 88532,
+     "bytes": 53680,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/tanjung-aru-sunset-jpg-1920.webp",
@@ -1716,29 +1722,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "25073df6e295a8eec6a631cafcbde7cfc7fc88ce9567e5ac083f4ae18d7710c0",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 58700,
+     "bytes": 43654,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/tea-jpg-640.webp",
      "width": 379
     },
     {
-     "bytes": 192522,
+     "bytes": 143100,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/tea-jpg-1280.webp",
      "width": 758
     },
     {
-     "bytes": 343698,
+     "bytes": 252512,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/tea-jpg-1920.webp",
@@ -1759,29 +1765,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "858ff6cc8f1a3e09d162515fd4d86761bde576e52076161171fb9c91a4a0dcd8",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 29640,
+     "bytes": 20052,
      "edge": 640,
      "height": 451,
      "path": "resources/optimized/articles/mount-kinabalu/uncle-on-slope-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 92200,
+     "bytes": 61640,
      "edge": 1280,
      "height": 902,
      "path": "resources/optimized/articles/mount-kinabalu/uncle-on-slope-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 163156,
+     "bytes": 111980,
      "edge": 1920,
      "height": 1354,
      "path": "resources/optimized/articles/mount-kinabalu/uncle-on-slope-jpg-1920.webp",
@@ -1802,29 +1808,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "272da9cddb65dc34644c8c73c4ec0bcc7ecb903b4374cc2bf75a241b6f33b980",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 45636,
+     "bytes": 34524,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/mount-kinabalu/white-flowers-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 105140,
+     "bytes": 78418,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/mount-kinabalu/white-flowers-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 175772,
+     "bytes": 131026,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/mount-kinabalu/white-flowers-jpeg-1920.webp",
@@ -1845,22 +1851,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "0983b9110bd002eb750767c26e7c96b04c9b23a47b75f3a368e9ec5f524eafd8",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 126528,
+     "bytes": 101404,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/half-trunk-jpeg-640.webp",
      "width": 480
     },
     {
-     "bytes": 283454,
+     "bytes": 222606,
      "edge": 1024,
      "height": 1024,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/half-trunk-jpeg-1024.webp",
@@ -1881,22 +1887,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "0123ce9fc3c8a3a48a7b8c5fdabffb18c30c93d11fd0fcfa647bd74f07d23949",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 114306,
+     "bytes": 89758,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/tree-sign-jpeg-640.webp",
      "width": 480
     },
     {
-     "bytes": 247768,
+     "bytes": 194202,
      "edge": 1024,
      "height": 1024,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/tree-sign-jpeg-1024.webp",
@@ -1917,29 +1923,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "bbc892f60edd1bbe23ec3e39b9b8493bfb8eead1f3817f17e6ebd953e37d6894",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 47892,
+     "bytes": 38332,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-640.webp",
      "width": 480
     },
     {
-     "bytes": 188746,
+     "bytes": 153860,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1280.webp",
      "width": 960
     },
     {
-     "bytes": 375456,
+     "bytes": 305104,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp",
@@ -1960,29 +1966,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "835e5770caa2e2d69b142c170fb2eb43c1bda386708a94eb0e0a6c9e53f7a09e",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 97178,
+     "bytes": 73572,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/white-browed-monkey-jpeg-640.webp",
      "width": 480
     },
     {
-     "bytes": 278176,
+     "bytes": 202886,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/white-browed-monkey-jpeg-1280.webp",
      "width": 960
     },
     {
-     "bytes": 443492,
+     "bytes": 325818,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/rethinking-relationship-between-human-and-nature/white-browed-monkey-jpeg-1920.webp",
@@ -2003,29 +2009,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "7971978badec4ee81320299d460e4ce9c8f53ab9d8cd8ad7fb3887d8507c2abe",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 23434,
+     "bytes": 19948,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/2-aug-lagong-jpg-640.webp",
      "width": 393
     },
     {
-     "bytes": 50562,
+     "bytes": 42108,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/2-aug-lagong-jpg-1280.webp",
      "width": 786
     },
     {
-     "bytes": 77778,
+     "bytes": 64632,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/2-aug-lagong-jpg-1920.webp",
@@ -2046,29 +2052,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "b4e9fb2fa49835eab3b4b3425b7d0ac5dc1751da8fda3871366aca0f9b661776",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 106600,
+     "bytes": 86784,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/backpack-and-hiking-poles-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 401378,
+     "bytes": 326746,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/backpack-and-hiking-poles-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 833548,
+     "bytes": 676384,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/backpack-and-hiking-poles-jpeg-1920.webp",
@@ -2089,29 +2095,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "8fd2c9e0d78840ad3030fe231341efb102f00103c1b802a9ccba2a3578ddbee5",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 28670,
+     "bytes": 20872,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/bags-on-4wd-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 89092,
+     "bytes": 63640,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/bags-on-4wd-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 171296,
+     "bytes": 121746,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/bags-on-4wd-jpeg-1920.webp",
@@ -2132,29 +2138,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "df6ffaad580841ce912dba9276808d65b0c985057e563923e92c5fe876175d1c",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 96668,
+     "bytes": 77354,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/bubu-sign-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 331200,
+     "bytes": 258816,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/bubu-sign-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 614786,
+     "bytes": 476244,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/bubu-sign-jpeg-1920.webp",
@@ -2175,29 +2181,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "8056cb09529630abc69008598cf7b2ed7e05d5620ee87fb825c4f7c6e4e0f30a",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 113514,
+     "bytes": 93970,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/elephant-moss-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 380818,
+     "bytes": 305744,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/elephant-moss-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 679712,
+     "bytes": 528078,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/elephant-moss-jpg-1920.webp",
@@ -2218,29 +2224,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "0e888aca73dab81ab39eaedd6004373b24d5a1a58b6b6dca697966e4af08ccaf",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 123034,
+     "bytes": 96040,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/from-behind-at-trailhead-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 479006,
+     "bytes": 382024,
      "edge": 1280,
      "height": 960,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/from-behind-at-trailhead-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 997096,
+     "bytes": 794232,
      "edge": 1920,
      "height": 1440,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/from-behind-at-trailhead-jpg-1920.webp",
@@ -2261,29 +2267,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "e149bb7732f367130cd91338f1043cf1af522923c13b7bda27fffe14acb71d0e",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 43358,
+     "bytes": 31860,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/from-behind-tok-nenek-jpg-640.webp",
      "width": 480
     },
     {
-     "bytes": 130104,
+     "bytes": 93836,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/from-behind-tok-nenek-jpg-1280.webp",
      "width": 960
     },
     {
-     "bytes": 226362,
+     "bytes": 161236,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/from-behind-tok-nenek-jpg-1920.webp",
@@ -2304,29 +2310,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "cc909cf079e323975c98835874a0dc2a97e3b491e02411b9a05b64684389117a",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 76252,
+     "bytes": 58644,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/group-photo-at-tok-nenek-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 251782,
+     "bytes": 191724,
      "edge": 1280,
      "height": 960,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/group-photo-at-tok-nenek-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 471506,
+     "bytes": 357230,
      "edge": 1920,
      "height": 1440,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/group-photo-at-tok-nenek-jpg-1920.webp",
@@ -2347,29 +2353,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "60ae3e4a2bcfe702e35f5e3e1602a5f2776eac150b4249bfc4552c5cd8a90841",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 79672,
+     "bytes": 58040,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/hidden-waterfall-jpg-640.webp",
      "width": 480
     },
     {
-     "bytes": 238886,
+     "bytes": 173372,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/hidden-waterfall-jpg-1280.webp",
      "width": 960
     },
     {
-     "bytes": 411438,
+     "bytes": 295472,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/hidden-waterfall-jpg-1920.webp",
@@ -2390,29 +2396,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "411b5a967448bfa117dee08929bdf2b07df62e712709c0a7eb4cab194425de64",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 146402,
+     "bytes": 119048,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/kem-berlumut-camps-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 573802,
+     "bytes": 467590,
      "edge": 1280,
      "height": 961,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/kem-berlumut-camps-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 1167646,
+     "bytes": 952044,
      "edge": 1920,
      "height": 1441,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/kem-berlumut-camps-jpg-1920.webp",
@@ -2433,29 +2439,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "4d070a8e76c043eae8760b21c24d95a15c51c2e9a9536036e16a14191f0167b1",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 73266,
+     "bytes": 54500,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/kem-sungai-jeruk-jpg-640.webp",
      "width": 480
     },
     {
-     "bytes": 202546,
+     "bytes": 151988,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/kem-sungai-jeruk-jpg-1280.webp",
      "width": 960
     },
     {
-     "bytes": 366986,
+     "bytes": 264194,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/kem-sungai-jeruk-jpg-1920.webp",
@@ -2476,29 +2482,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "a734aeb136bc25d8bfa79e042d0579bbe7473e5925de684823724d541a6c6d52",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 75628,
+     "bytes": 59192,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/merdeka-at-yongyap-jpeg-640.webp",
      "width": 640
     },
     {
-     "bytes": 276394,
+     "bytes": 212830,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/merdeka-at-yongyap-jpeg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 552488,
+     "bytes": 423164,
      "edge": 1920,
      "height": 1080,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/merdeka-at-yongyap-jpeg-1920.webp",
@@ -2519,29 +2525,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "cdd684663aab8593ac97919581d17421ac5fc3b33031098a082af7addd7a134d",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 83808,
+     "bytes": 60798,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/mossy-vibe-jpg-640.webp",
      "width": 480
     },
     {
-     "bytes": 255294,
+     "bytes": 183460,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/mossy-vibe-jpg-1280.webp",
      "width": 960
     },
     {
-     "bytes": 451778,
+     "bytes": 321208,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/mossy-vibe-jpg-1920.webp",
@@ -2562,29 +2568,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "3564047bde37dbecaa6cb84606fd425e4d09346b570fb4b41fcea87d5bf8b727",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 101860,
+     "bytes": 82088,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/national-flag-on-tree-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 383128,
+     "bytes": 310192,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/national-flag-on-tree-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 785188,
+     "bytes": 619392,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/national-flag-on-tree-jpeg-1920.webp",
@@ -2605,29 +2611,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "d8de4da101293ac799ba9eb7a364fea44473beec602aa5015b51b4c28105a499",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 97720,
+     "bytes": 79432,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/otw-to-yongyap-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 359178,
+     "bytes": 286278,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/otw-to-yongyap-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 699944,
+     "bytes": 559252,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/otw-to-yongyap-jpeg-1920.webp",
@@ -2648,29 +2654,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "f4bdd19942d27747ccaf675d67cedfdc23d27316da51135f4bcb0f82ed4de000",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 104416,
+     "bytes": 83194,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/shadow-on-moss-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 374242,
+     "bytes": 297566,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/shadow-on-moss-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 743410,
+     "bytes": 577994,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/shadow-on-moss-jpeg-1920.webp",
@@ -2691,29 +2697,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "c0eb4e16de086af22a1f986fb93ca8a2cbbd2e99f3be23841840e33a641cea58",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 15210,
+     "bytes": 10636,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 44096,
+     "bytes": 31238,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 83560,
+     "bytes": 57472,
      "edge": 1920,
      "height": 1080,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp",
@@ -2734,29 +2740,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "df0d3e822d5da2da9d3eb0bc33103bb07b6f4fc93ad6ab9f06a43930294e51ce",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 4018,
+     "bytes": 3056,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/starry-night-sky-jpeg-640.webp",
      "width": 640
     },
     {
-     "bytes": 10332,
+     "bytes": 7312,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/starry-night-sky-jpeg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 23878,
+     "bytes": 14084,
      "edge": 1920,
      "height": 1080,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/starry-night-sky-jpeg-1920.webp",
@@ -2777,29 +2783,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "6aa9cd98273f7430c21579354a942fee4a6911ac9ee11d2f2b5fc0a8a5a9ed53",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 27502,
+     "bytes": 18648,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/summit-portrait-jpg-640.webp",
      "width": 442
     },
     {
-     "bytes": 121446,
+     "bytes": 65300,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/summit-portrait-jpg-1280.webp",
      "width": 884
     },
     {
-     "bytes": 305548,
+     "bytes": 170300,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/summit-portrait-jpg-1920.webp",
@@ -2820,29 +2826,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "862efb64cb9eebad07f3aa8bf9dde87d1b1e3fea4fc87c8edad0967ef1ad6869",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 11164,
+     "bytes": 8164,
      "edge": 640,
      "height": 360,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/tok-nenek-summit-view-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 28058,
+     "bytes": 20286,
      "edge": 1280,
      "height": 720,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/tok-nenek-summit-view-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 52054,
+     "bytes": 35166,
      "edge": 1920,
      "height": 1080,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/tok-nenek-summit-view-jpg-1920.webp",
@@ -2863,33 +2869,168 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "MPO",
-    "version": 2
+    "version": 3
    },
    "sha256": "02f0d53435d8b1a63d3188594a996d105a4a353dca7f5dfd2dc85563dc37c8d9",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 72814,
+     "bytes": 56420,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/yongyap-summit-sign-jpeg-640.webp",
      "width": 360
     },
     {
-     "bytes": 277258,
+     "bytes": 219788,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/yongyap-summit-sign-jpeg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 569974,
+     "bytes": 452594,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/articles/tnbyy-my-first-camphike/yongyap-summit-sign-jpeg-1920.webp",
      "width": 1080
+    }
+   ]
+  },
+  "resources/icons/facebook.png": {
+   "bytes": 11949,
+   "orig_height": 240,
+   "orig_width": 240,
+   "recipe": {
+    "format": "webp",
+    "frame": null,
+    "ladder": [
+     128
+    ],
+    "method": 6,
+    "quality": 85,
+    "source_format": "PNG",
+    "version": 3
+   },
+   "sha256": "c7b428127e263f9378de4bbf502f30827aa5661305652dd9d4874e3730397ee8",
+   "skipped_variants": [],
+   "variants": [
+    {
+     "bytes": 4916,
+     "edge": 128,
+     "height": 128,
+     "path": "resources/optimized/icons/facebook-png-128.webp",
+     "width": 128
+    }
+   ]
+  },
+  "resources/icons/github.png": {
+   "bytes": 16757,
+   "orig_height": 240,
+   "orig_width": 240,
+   "recipe": {
+    "format": "webp",
+    "frame": null,
+    "ladder": [
+     128
+    ],
+    "method": 6,
+    "quality": 85,
+    "source_format": "PNG",
+    "version": 3
+   },
+   "sha256": "91eb2020d742e4c2c063423148e7ca38813c0d8411692d4735e48020ee1d8ea1",
+   "skipped_variants": [],
+   "variants": [
+    {
+     "bytes": 6470,
+     "edge": 128,
+     "height": 128,
+     "path": "resources/optimized/icons/github-png-128.webp",
+     "width": 128
+    }
+   ]
+  },
+  "resources/icons/instagram.png": {
+   "bytes": 18138,
+   "orig_height": 240,
+   "orig_width": 240,
+   "recipe": {
+    "format": "webp",
+    "frame": null,
+    "ladder": [
+     128
+    ],
+    "method": 6,
+    "quality": 85,
+    "source_format": "PNG",
+    "version": 3
+   },
+   "sha256": "e8581c329ced4a808e63a98db745c1ee53b3d0ba0e56d876801dc28017fe0188",
+   "skipped_variants": [],
+   "variants": [
+    {
+     "bytes": 6960,
+     "edge": 128,
+     "height": 128,
+     "path": "resources/optimized/icons/instagram-png-128.webp",
+     "width": 128
+    }
+   ]
+  },
+  "resources/icons/linkedin.png": {
+   "bytes": 12963,
+   "orig_height": 240,
+   "orig_width": 240,
+   "recipe": {
+    "format": "webp",
+    "frame": null,
+    "ladder": [
+     128
+    ],
+    "method": 6,
+    "quality": 85,
+    "source_format": "PNG",
+    "version": 3
+   },
+   "sha256": "270b14918dbf2af8525cb3049303a968812866a46ac497ae59b7c2e87f36b2f5",
+   "skipped_variants": [],
+   "variants": [
+    {
+     "bytes": 5174,
+     "edge": 128,
+     "height": 128,
+     "path": "resources/optimized/icons/linkedin-png-128.webp",
+     "width": 128
+    }
+   ]
+  },
+  "resources/icons/x.png": {
+   "bytes": 32791,
+   "orig_height": 312,
+   "orig_width": 313,
+   "recipe": {
+    "format": "webp",
+    "frame": null,
+    "ladder": [
+     128
+    ],
+    "method": 6,
+    "quality": 85,
+    "source_format": "PNG",
+    "version": 3
+   },
+   "sha256": "e270a8aec0f5d7d4362fdc724ffde6aee3cc3a637a4fac26782feefa745264c4",
+   "skipped_variants": [],
+   "variants": [
+    {
+     "bytes": 6262,
+     "edge": 128,
+     "height": 128,
+     "path": "resources/optimized/icons/x-png-128.webp",
+     "width": 128
     }
    ]
   },
@@ -2906,29 +3047,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "85001479bd74e2e4f47c64bbec03f98992a1aaeae3a7156eedd270c878d6f5f9",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 35164,
+     "bytes": 26016,
      "edge": 640,
      "height": 427,
      "path": "resources/optimized/projects/foodtracker/anmour-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 87992,
+     "bytes": 63698,
      "edge": 1280,
      "height": 854,
      "path": "resources/optimized/projects/foodtracker/anmour-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 164236,
+     "bytes": 109938,
      "edge": 1920,
      "height": 1282,
      "path": "resources/optimized/projects/foodtracker/anmour-jpg-1920.webp",
@@ -2949,29 +3090,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "2fd3141f41362e102cc6d94bc1f52679846c37a99424741c8e52ae637b402070",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 48016,
+     "bytes": 35586,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/projects/foodtracker/fam-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 124004,
+     "bytes": 89458,
      "edge": 1280,
      "height": 960,
      "path": "resources/optimized/projects/foodtracker/fam-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 224958,
+     "bytes": 154630,
      "edge": 1920,
      "height": 1440,
      "path": "resources/optimized/projects/foodtracker/fam-jpg-1920.webp",
@@ -2992,29 +3133,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "14f6d4671037a63ccd79f18ece02996f2187f602cc932b716de56769e8cadbbd",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 36184,
+     "bytes": 26538,
      "edge": 640,
      "height": 427,
      "path": "resources/optimized/projects/foodtracker/koreanbbq-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 88734,
+     "bytes": 64242,
      "edge": 1280,
      "height": 853,
      "path": "resources/optimized/projects/foodtracker/koreanbbq-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 174012,
+     "bytes": 113202,
      "edge": 1920,
      "height": 1280,
      "path": "resources/optimized/projects/foodtracker/koreanbbq-jpg-1920.webp",
@@ -3035,22 +3176,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "837ad3db8d678504a90533ec57f768229352e1f662848d0380d38a32e3752ebe",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 53862,
+     "bytes": 38910,
      "edge": 640,
      "height": 604,
      "path": "resources/optimized/projects/foodtracker/palsaik2-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 110106,
+     "bytes": 78782,
      "edge": 1074,
      "height": 1014,
      "path": "resources/optimized/projects/foodtracker/palsaik2-jpg-1074.webp",
@@ -3071,22 +3212,22 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "e5bb15099abac7a0b145e6a5c57a2928ef108278255ab515d7e32ce8f485219d",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 49544,
+     "bytes": 35130,
      "edge": 640,
      "height": 599,
      "path": "resources/optimized/projects/foodtracker/palsaik3-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 100070,
+     "bytes": 71076,
      "edge": 1080,
      "height": 1011,
      "path": "resources/optimized/projects/foodtracker/palsaik3-jpg-1080.webp",
@@ -3107,29 +3248,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "e70e56f48e6935ddf3681b4e76da8750b5628fbe5769dcb9ec7bdd2a898c9141",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 39186,
+     "bytes": 29254,
      "edge": 640,
      "height": 408,
      "path": "resources/optimized/projects/foodtracker/tanba-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 106062,
+     "bytes": 75932,
      "edge": 1280,
      "height": 817,
      "path": "resources/optimized/projects/foodtracker/tanba-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 188224,
+     "bytes": 129898,
      "edge": 1920,
      "height": 1225,
      "path": "resources/optimized/projects/foodtracker/tanba-jpg-1920.webp",
@@ -3150,29 +3291,29 @@
      1920
     ],
     "method": 6,
-    "quality": 90,
+    "quality": 85,
     "source_format": "PNG",
-    "version": 2
+    "version": 3
    },
    "sha256": "725a144b5d9b14f77a4e78e1635be4d9127cf7e533d2268c0d9eb896c7926d38",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 52632,
+     "bytes": 40598,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-640.webp",
      "width": 640
     },
     {
-     "bytes": 124286,
+     "bytes": 95266,
      "edge": 1280,
      "height": 960,
      "path": "resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 194402,
+     "bytes": 144278,
      "edge": 1920,
      "height": 1440,
      "path": "resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-1920.webp",
@@ -3193,29 +3334,29 @@
      1920
     ],
     "method": 6,
-    "quality": 90,
+    "quality": 85,
     "source_format": "PNG",
-    "version": 2
+    "version": 3
    },
    "sha256": "22188a9d838d2b701e9d4b8defeb783cd6126aeec075cd340990504b1d92357c",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 25814,
+     "bytes": 20186,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-640.webp",
      "width": 640
     },
     {
-     "bytes": 63420,
+     "bytes": 50884,
      "edge": 1280,
      "height": 960,
      "path": "resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 100748,
+     "bytes": 81234,
      "edge": 1920,
      "height": 1440,
      "path": "resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-1920.webp",
@@ -3236,29 +3377,29 @@
      1920
     ],
     "method": 6,
-    "quality": 90,
+    "quality": 85,
     "source_format": "PNG",
-    "version": 2
+    "version": 3
    },
    "sha256": "7d743f941a0968acd826b35bee7296da278ae01e8d9befb500a222de105fc916",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 20014,
+     "bytes": 16650,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-640.webp",
      "width": 640
     },
     {
-     "bytes": 51166,
+     "bytes": 43400,
      "edge": 1280,
      "height": 960,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 86008,
+     "bytes": 74292,
      "edge": 1920,
      "height": 1440,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-1920.webp",
@@ -3279,29 +3420,29 @@
      1920
     ],
     "method": 6,
-    "quality": 90,
+    "quality": 85,
     "source_format": "PNG",
-    "version": 2
+    "version": 3
    },
    "sha256": "5c4ecf50d018a547c5e439b83f700315c3e04bccce6b3491889a94de71ca8914",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 30858,
+     "bytes": 24914,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-640.webp",
      "width": 640
     },
     {
-     "bytes": 76364,
+     "bytes": 63506,
      "edge": 1280,
      "height": 960,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 126530,
+     "bytes": 105312,
      "edge": 1920,
      "height": 1440,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-1920.webp",
@@ -3322,29 +3463,29 @@
      1920
     ],
     "method": 6,
-    "quality": 90,
+    "quality": 85,
     "source_format": "PNG",
-    "version": 2
+    "version": 3
    },
    "sha256": "bf317de39f914a3b881832b6f339ce9e28f0f85b6e3ba12555ac8607fa25c8e8",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 29024,
+     "bytes": 23818,
      "edge": 640,
      "height": 427,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-640.webp",
      "width": 640
     },
     {
-     "bytes": 69816,
+     "bytes": 56472,
      "edge": 1280,
      "height": 853,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 112558,
+     "bytes": 89530,
      "edge": 1920,
      "height": 1280,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-1920.webp",
@@ -3365,33 +3506,60 @@
      1920
     ],
     "method": 6,
-    "quality": 90,
+    "quality": 85,
     "source_format": "PNG",
-    "version": 2
+    "version": 3
    },
    "sha256": "0469776da753d29b5c32848efa2dccaa0b8ad2f0c05a347e42d7a24b9a1e250b",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 17232,
+     "bytes": 14920,
      "edge": 640,
      "height": 480,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-640.webp",
      "width": 640
     },
     {
-     "bytes": 37704,
+     "bytes": 31636,
      "edge": 1280,
      "height": 960,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 57560,
+     "bytes": 47632,
      "edge": 1920,
      "height": 1440,
      "path": "resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1920.webp",
      "width": 1920
+    }
+   ]
+  },
+  "resources/site/crossout-handwriting.png": {
+   "bytes": 52024,
+   "orig_height": 142,
+   "orig_width": 640,
+   "recipe": {
+    "format": "webp",
+    "frame": null,
+    "ladder": [
+     640
+    ],
+    "method": 6,
+    "quality": 85,
+    "source_format": "PNG",
+    "version": 3
+   },
+   "sha256": "3a2a07072bd93cfdfa26ab653b9c3e9f214c04e9ca9337c22e833385f8967e8a",
+   "skipped_variants": [],
+   "variants": [
+    {
+     "bytes": 21908,
+     "edge": 640,
+     "height": 142,
+     "path": "resources/optimized/site/crossout-handwriting-png-640.webp",
+     "width": 640
     }
    ]
   },
@@ -3408,29 +3576,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "4c2748215c608b425ca20f2d5561a92a402da6336c381a38e6cb270e96be13cf",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 31872,
+     "bytes": 18940,
      "edge": 640,
      "height": 427,
      "path": "resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 191704,
+     "bytes": 119912,
      "edge": 1280,
      "height": 853,
      "path": "resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 508924,
+     "bytes": 341818,
      "edge": 1920,
      "height": 1280,
      "path": "resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp",
@@ -3451,29 +3619,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "ccba92a3c2d7301b4973886a4875b6b7e531cfc65d26bdac431db3682f8176b4",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 16116,
+     "bytes": 8794,
      "edge": 640,
      "height": 427,
      "path": "resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-640.webp",
      "width": 640
     },
     {
-     "bytes": 113010,
+     "bytes": 57008,
      "edge": 1280,
      "height": 853,
      "path": "resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-1280.webp",
      "width": 1280
     },
     {
-     "bytes": 263388,
+     "bytes": 150528,
      "edge": 1920,
      "height": 1280,
      "path": "resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-1920.webp",
@@ -3494,29 +3662,29 @@
      1920
     ],
     "method": 6,
-    "quality": 82,
+    "quality": 72,
     "source_format": "JPEG",
-    "version": 2
+    "version": 3
    },
    "sha256": "961ae4fd6ff4cb9d8a6a85fc2e63e9f6411739bba3400574af0b9748872d5733",
    "skipped_variants": [],
    "variants": [
     {
-     "bytes": 8358,
+     "bytes": 6182,
      "edge": 640,
      "height": 640,
      "path": "resources/optimized/site/zachary-kadolph-98fitkve9nw-unsplash-jpg-640.webp",
      "width": 360
     },
     {
-     "bytes": 22788,
+     "bytes": 15538,
      "edge": 1280,
      "height": 1280,
      "path": "resources/optimized/site/zachary-kadolph-98fitkve9nw-unsplash-jpg-1280.webp",
      "width": 720
     },
     {
-     "bytes": 44556,
+     "bytes": 29304,
      "edge": 1920,
      "height": 1920,
      "path": "resources/optimized/site/zachary-kadolph-98fitkve9nw-unsplash-jpg-1920.webp",

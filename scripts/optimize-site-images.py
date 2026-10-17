@@ -39,7 +39,18 @@ LADDER = (640, 1280, 1920)          # longest-edge targets
 MIN_BYTES = 250 * 1024              # candidates: >=250KB or edge>1920
 MAX_EDGE = 1920
 RASTER = (".jpg", ".jpeg", ".png", ".webp")
+# Lighthouse flagged the earlier q82/q90 webp output as undercompressed.
+# Photos tolerate q72 well; PNG-sourced graphics stay higher to protect
+# edges and flat colour.
+Q_JPEG = 72
+Q_PNG = 85
 ICON_CLASSES = ("site-social-icon", "handwriting-crossout")
+# Icon imgs bypass the photo candidate path — they're tiny and the
+# classes below get their own single-variant edge instead of the ladder.
+# site-social-icon displays at 28px, so 128 covers >4x density;
+# anything not listed keeps its source edge (e.g. handwriting-crossout,
+# whose display width is JS-driven) and only gains webp encoding.
+ICON_EDGE = {"site-social-icon": 128}
 
 # sizes attribute by markup context
 SIZES_HERO = "(max-width: 1536px) 100vw, 1536px"
@@ -246,7 +257,8 @@ def encode_webp(im, width, is_png_source):
             nw = round(w * width / h)
             im = im.resize((nw, width), Image.LANCZOS)
     buf = io.BytesIO()
-    save_kw = {"quality": 90 if is_png_source else 82, "method": 6}
+    save_kw = {"quality": Q_PNG if is_png_source else Q_JPEG,
+               "method": 6}
     # Pillow only embeds the profile when it is passed explicitly —
     # without this the sRGB/converted (or fallback original) profile is
     # silently dropped from the webp
@@ -282,13 +294,17 @@ def collect_candidates(manifest):
             if local is None:
                 continue
             cls = set(attrs.get("class", "").split())
-            if cls & set(ICON_CLASSES) or attrs.get("aria-hidden") == "true" \
-                    or "h-8" in cls:
+            # aria-hidden ornaments still download bytes — icons like
+            # handwriting-crossout must not hide behind that skip
+            if "h-8" in cls or (attrs.get("aria-hidden") == "true"
+                                and not cls & set(ICON_CLASSES)):
                 continue
             entries.append({
                 "page": page, "line": ln, "col": col,
                 "src": src, "local": local, "attrs": attrs,
-                "ancestors": anc,
+                "ancestors": anc, "classes": cls,
+                # icons take the single-variant path, not the ladder
+                "icon": bool(cls & set(ICON_CLASSES)),
                 # a srcset WE generated is not an authored one
                 "has_srcset": "srcset" in attrs and not generated,
                 "gallery": "cursor-pointer" in cls,
@@ -296,7 +312,20 @@ def collect_candidates(manifest):
     return entries
 
 
-RECIPE_VERSION = 2  # v2: MPO-as-still, ICC embed, edge-named paths
+RECIPE_VERSION = 3  # v3: q72/q85 encode, icon single-variant pass
+
+
+def icon_candidate(local):
+    """Icons only need raster + decodable + still — no size floor, since
+    the whole point is that a 240px PNG at a 28px slot is still waste."""
+    if local.startswith(OUT_ROOT + "/") \
+            or not local.lower().endswith(RASTER):
+        return False, "generated or not raster"
+    from PIL import Image
+    with Image.open(local) as im:
+        if getattr(im, "n_frames", 1) > 1 and im.format != "MPO":
+            return False, "animated"
+    return True, ""
 
 
 def is_candidate(local, has_srcset):
@@ -320,8 +349,12 @@ def is_candidate(local, has_srcset):
     return True, ""
 
 
-def process_source(local, manifest, name_registry):
-    """Generate variants for one source. Returns manifest entry."""
+def process_source(local, manifest, name_registry, single_edge=None):
+    """Generate variants for one source. Returns manifest entry.
+
+    single_edge: int -> one variant at min(single_edge, source edge);
+    True -> one variant at the source edge (format swap only);
+    None -> the normal LADDER rungs."""
     orig_bytes = os.path.getsize(local)
     digest = sha256(local)
     old = manifest["sources"].get(local)
@@ -341,7 +374,13 @@ def process_source(local, manifest, name_registry):
         return None, "animated"
     w, h = im.size
     edge = max(w, h)
-    targets = sorted({t for t in LADDER if t <= edge} | {min(edge, max(LADDER))})
+    if single_edge is True:
+        targets = [edge]
+    elif single_edge:
+        targets = [min(single_edge, edge)]
+    else:
+        targets = sorted({t for t in LADDER if t <= edge}
+                         | {min(edge, max(LADDER))})
     is_png = local.lower().endswith(".png")
     odir = out_dir_for(local)
 
@@ -380,8 +419,10 @@ def process_source(local, manifest, name_registry):
     entry = {"sha256": digest, "bytes": orig_bytes,
              "orig_width": w, "orig_height": h,
              "recipe": {"version": RECIPE_VERSION, "format": "webp",
-                        "quality": 90 if is_png else 82, "method": 6,
-                        "ladder": list(LADDER), "source_format": fmt,
+                        "quality": Q_PNG if is_png else Q_JPEG,
+                        "method": 6,
+                        "ladder": list(LADDER) if single_edge is None
+                        else list(targets), "source_format": fmt,
                         "frame": 0 if fmt in ("MPO", "JPEG") else None},
              "variants": variants,
              "skipped_variants": skipped}
@@ -416,6 +457,12 @@ def update_img_tag(tag, attrs, entry, page):
     largest variant, (re)build srcset/sizes from the manifest entry, set
     width/height to the fallback's real dims, and keep the original URL
     in data-full-src on gallery imgs. Pure string transform — unit-testable."""
+    # icons take a single variant and keep their small CSS-driven size —
+    # a bare src swap, no srcset/sizes/dims noise
+    if set(attrs.get("class", "").split()) & set(ICON_CLASSES):
+        v = entry["variants"][-1]
+        return re.sub(r'\ssrc="[^"]*"',
+                      f' src="/{v["path"]}"', tag, count=1)
     variants = sorted(entry["variants"], key=lambda v: v["width"])
     biggest = variants[-1]
     srcset = ", ".join(f"{rel_href(page, v['path'])} {v['width']}w"
@@ -470,13 +517,21 @@ def cmd_write():
     edits_by_page = {}
     report = []
     for e in collect_candidates(manifest):
-        ok, reason = is_candidate(e["local"], e["has_srcset"])
+        if e["icon"]:
+            ok, reason = icon_candidate(e["local"])
+            # single variant at the icon's designated edge, or the
+            # source edge when no override is listed
+            hit = e["classes"] & set(ICON_EDGE)
+            single = ICON_EDGE[next(iter(hit))] if hit else True
+        else:
+            ok, reason = is_candidate(e["local"], e["has_srcset"])
+            single = None
         if not ok:
             report.append((e["page"], e["line"], e["src"][:50],
                            "skip: " + reason))
             continue
         entry, status = process_source(e["local"], manifest,
-                                       name_registry)
+                                       name_registry, single_edge=single)
         if entry is None:
             report.append((e["page"], e["line"], e["src"][:50],
                            "skip: " + status))
