@@ -16,12 +16,13 @@
    font-size override, so browser zoom keeps working.
    ============================================ */
 
-/* Centralised font request — the families the shared type scale uses.
-   Several listing pages didn't load Baskervville even though their
-   cards specify it; one request here covers every consumer.
-   Existing page font requests remain for compatibility; this request
-   ensures the shared faces are available. */
-@import url("https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:wght@400;700&family=Raleway:wght@400;500;600;700&display=swap");
+/* Centralised font request — the families the shared type scale uses,
+   trimmed to the weights actually referenced in the site's CSS
+   (Lato 400/400i/600/700, Raleway 300–700 + 400i, Baskervville 400/400i,
+   Caveat 400/700). Pages also <link> this same URL directly in <head>
+   so it fetches in parallel; the identical URL is deduped, and the
+   @import stays so standalone consumers of this sheet still get fonts. */
+@import url("https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
 
 :root {
 	/* Families */

@@ -3,7 +3,25 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Fonts: one consolidated request listing only the weights the
+		     site uses. preconnect warms the gstatic origin so the font
+		     files start as soon as the CSS arrives. -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+			rel="stylesheet" />
 		<link href="./styles/output.css" rel="stylesheet" />
+		<!-- Shared sheets linked directly so they download in parallel
+		     rather than queueing behind style.css's nested @imports.
+		     Order mirrors the old depth-first import order; the @imports
+		     stay in the sheets for pages that link them directly, and
+		     identical URLs are deduped by the browser. -->
+		<link href="./styles/site-typography.css" rel="stylesheet" />
+		<link href="./styles/site-footer.css" rel="stylesheet" />
+		<link href="./styles/site-navigation.css" rel="stylesheet" />
+		<link href="./styles/site-motion.css" rel="stylesheet" />
+		<link href="./styles/site-header.css" rel="stylesheet" />
 		<link href="./styles/style.css" type="text/css" rel="stylesheet" />
 		<link
 			href="./playground/playground.css"
@@ -23,11 +41,8 @@
 		<link rel="canonical" href="https://terrancehah.com/playground" />
 		<meta property="og:url" content="https://terrancehah.com/playground" />
 
-		<script src="./js/footer.js"></script>
+		<script src="./js/footer.js" defer></script>
 		<title>Terrance's Playground</title>
-		<style>
-			@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-		</style>
 		<!-- Vercel Analytics -->
 		<script>
 			window.va =
@@ -117,7 +132,11 @@
 					<img
 						src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop"
 						alt="Philosophy Sphere"
-						loading="eager" fetchpriority="high" decoding="async" width="1200" height="600" />
+						loading="eager"
+						fetchpriority="high"
+						decoding="async"
+						width="1200"
+						height="600" />
 					<span class="image-credit"
 						>Photo by
 						<a
@@ -153,7 +172,10 @@
 						<img
 							src="./resources/ar/myvi-purple.jpg"
 							alt="Myvi with Marker Test"
-							loading="lazy" decoding="async" width="1024" height="768" />
+							loading="lazy"
+							decoding="async"
+							width="1024"
+							height="768" />
 					</div>
 					<div class="toy-card-content">
 						<h3 class="toy-card-title">Myvi with Marker Test</h3>
@@ -180,7 +202,10 @@
 						<img
 							src="./resources/ar/myvi-purple.jpg"
 							alt="Myvi Test"
-							loading="lazy" decoding="async" width="1024" height="768" />
+							loading="lazy"
+							decoding="async"
+							width="1024"
+							height="768" />
 					</div>
 					<div class="toy-card-content">
 						<h3 class="toy-card-title">Myvi Test</h3>
@@ -206,7 +231,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1647962309326-b77f9732860e?w=800&h=500&fit=crop"
 							alt="T-Rex skeleton towering inside a museum hall"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a

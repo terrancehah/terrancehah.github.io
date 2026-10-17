@@ -3,7 +3,25 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Fonts: one consolidated request listing only the weights the
+		     site uses. preconnect warms the gstatic origin so the font
+		     files start as soon as the CSS arrives. -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+			rel="stylesheet" />
 		<link href="./styles/output.css" rel="stylesheet" />
+		<!-- Shared sheets linked directly so they download in parallel
+		     rather than queueing behind style.css's nested @imports.
+		     Order mirrors the old depth-first import order; the @imports
+		     stay in the sheets for pages that link them directly, and
+		     identical URLs are deduped by the browser. -->
+		<link href="./styles/site-typography.css" rel="stylesheet" />
+		<link href="./styles/site-footer.css" rel="stylesheet" />
+		<link href="./styles/site-navigation.css" rel="stylesheet" />
+		<link href="./styles/site-motion.css" rel="stylesheet" />
+		<link href="./styles/site-header.css" rel="stylesheet" />
 		<link href="./styles/style.css" type="text/css" rel="stylesheet" />
 		<link href="./articles/articles.css" type="text/css" rel="stylesheet" />
 		<link
@@ -19,11 +37,8 @@
 		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
 		<link rel="canonical" href="https://terrancehah.com/articles" />
 		<meta property="og:url" content="https://terrancehah.com/articles" />
-		<script src="../js/footer.js"></script>
+		<script src="../js/footer.js" defer></script>
 		<title>Terrance's Articles</title>
-		<style>
-			@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-		</style>
 		<!-- Vercel Analytics -->
 		<script>
 			window.va =
@@ -105,13 +120,25 @@
 
 		<main class="w-full articles-list-container">
 			<!-- Hero Card - Latest Article -->
-			<article class="article-hero site-pressable" data-url="/articles/rpe-in-running">
+			<article
+				class="article-hero site-pressable"
+				data-url="/articles/rpe-in-running">
 				<div class="article-hero-image object-fit">
 					<img
-					 src="/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp"
+						src="/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp"
 						alt="Runner in a red top running along a road"
 						decoding="async"
-						style="object-position: center" loading="eager" fetchpriority="high" width="1920" height="1280"  srcset="/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-640.webp 640w, /resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1280.webp 1280w, /resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp 1920w" sizes="(max-width: 1536px) 100vw, 1536px"/>
+						style="object-position: center"
+						loading="eager"
+						fetchpriority="high"
+						width="1920"
+						height="1280"
+						srcset="
+							/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-640.webp   640w,
+							/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1280.webp 1280w,
+							/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp 1920w
+						"
+						sizes="(max-width: 1536px) 100vw, 1536px" />
 					<div class="article-hero-overlay"></div>
 					<span class="image-credit"
 						>Photo by
@@ -150,7 +177,10 @@
 						<img
 							src="./resources/articles/mount-kinabalu/peak-sunrise-og.JPG"
 							alt="Mount Kinabalu"
-							loading="lazy" decoding="async" width="1200" height="675" />
+							loading="lazy"
+							decoding="async"
+							width="1200"
+							height="675" />
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
@@ -175,7 +205,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1716471330475-f0669db8947a?w=800&h=500&fit=crop"
 							alt="Colour swatch cards arranged in a circle"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -208,9 +241,18 @@
 					data-url="./articles/tnbyy-my-first-camphike.html">
 					<div class="article-card-image">
 						<img
-						 src="/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp"
+							src="/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp"
 							alt="my silhouette at the peak"
-							loading="lazy" decoding="async" width="1920" height="1080"  srcset="/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-640.webp 640w, /resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1280.webp 1280w, /resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp 1920w" sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px"/>
+							loading="lazy"
+							decoding="async"
+							width="1920"
+							height="1080"
+							srcset="
+								/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-640.webp   640w,
+								/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1280.webp 1280w,
+								/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp 1920w
+							"
+							sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px" />
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
@@ -235,10 +277,19 @@
 					data-url="/articles/rethinking-relationship-between-human-and-nature">
 					<div class="article-card-image object-fit">
 						<img
-						 src="/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp"
+							src="/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp"
 							alt="crown shyness"
 							loading="lazy"
-							style="object-position: center 80%" decoding="async" width="1440" height="1920"  srcset="/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-640.webp 480w, /resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1280.webp 960w, /resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp 1440w" sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px"/>
+							style="object-position: center 80%"
+							decoding="async"
+							width="1440"
+							height="1920"
+							srcset="
+								/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-640.webp   480w,
+								/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1280.webp  960w,
+								/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp 1440w
+							"
+							sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px" />
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
@@ -263,7 +314,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=500&fit=crop"
 							alt="Writing"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -295,7 +349,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop"
 							alt="Minimalist design"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -330,7 +387,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=500&fit=crop"
 							alt="Digital identity"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -364,7 +424,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=500&fit=crop"
 							alt="Learning and studying"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -398,7 +461,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=500&fit=crop"
 							alt="Virtual reality"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -432,7 +498,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&fit=crop"
 							alt="Privacy and security"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -465,7 +534,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?w=800&h=500&fit=crop"
 							alt="Art of writing"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -497,7 +569,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=500&fit=crop"
 							alt="Focus and concentration"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a
@@ -529,7 +604,10 @@
 						<img
 							src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=500&fit=crop"
 							alt="First steps"
-							loading="lazy" decoding="async" width="800" height="500" />
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="500" />
 						<span class="image-credit"
 							>Photo by
 							<a

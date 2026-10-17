@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/* Font request trimmed to the weights actually in use — same URL as
+   site-typography.css's centralised request and the pages' <head> link,
+   so it costs no extra fetch where they overlap (browser dedupes it). */
+@import url("https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Caveat:wght@400;700&family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
 /* Footer + back-to-top styles live in their own sheet so pages that
    skip this legacy file can still style the injected footer; the shared
    header works the same way (site-header.css itself imports
