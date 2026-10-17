@@ -24,7 +24,57 @@
 	}
 }
 
+/* Native cross-document page transitions — a quiet root crossfade
+   between navigations. Opt-in only for users without a reduced-motion
+   preference; browsers that do not support @view-transition simply
+   ignore it and navigate normally. No JS interception, no named
+   elements — header/footer crossfade with the root. */
+@media (prefers-reduced-motion: no-preference) {
+	@view-transition {
+		navigation: auto;
+	}
+}
+
+@keyframes site-page-leave {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes site-page-enter {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+::view-transition-old(root) {
+	mix-blend-mode: normal;
+	animation: site-page-leave 120ms ease-out both;
+}
+
+::view-transition-new(root) {
+	mix-blend-mode: normal;
+	animation: site-page-enter 180ms ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
+	/* Explicitly opt out of navigation transitions too — the
+	   declaration above never matches for these users, but belt and
+	   suspenders in case a UA enables it by default. */
+	@view-transition {
+		navigation: none;
+	}
+
+	::view-transition-group(*) {
+		animation: none;
+	}
+
 	/* No press scale at all for reduced-motion users. */
 	:is(article, a).site-pressable:active {
 		transform: none;
