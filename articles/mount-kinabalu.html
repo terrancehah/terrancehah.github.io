@@ -129,7 +129,7 @@
                         e.preventDefault();
                         e.stopPropagation();
                         
-                        enlargedImage.src = this.src;
+                        enlargedImage.src = this.dataset.fullSrc || this.currentSrc || this.src;
                         enlargedImage.alt = this.alt;
                         
                         // Get caption from nearby figcaption or image-caption
@@ -267,7 +267,7 @@
                     <p class="article-paragraph">Well, not until I saw this with my own eyes.</p>
 
                     <figure class="hero-image">
-                        <img src="../resources/articles/mount-kinabalu/peak-sunrise-landscape.jpeg" alt="Sunrise at the peak" class="cursor-pointer" loading="lazy" decoding="async" width="2364" height="1330">
+                        <img src="/resources/optimized/articles/mount-kinabalu/peak-sunrise-landscape-jpeg-1920.webp" alt="Sunrise at the peak" class="cursor-pointer" loading="lazy" decoding="async" width="1920" height="1080" srcset="/resources/optimized/articles/mount-kinabalu/peak-sunrise-landscape-jpeg-640.webp 640w, /resources/optimized/articles/mount-kinabalu/peak-sunrise-landscape-jpeg-1280.webp 1280w, /resources/optimized/articles/mount-kinabalu/peak-sunrise-landscape-jpeg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 4rem), 1200px" data-full-src="../resources/articles/mount-kinabalu/peak-sunrise-landscape.jpeg">
                         <figcaption>Sunrise at Low's Peak, 4095.2 metres above sea level.</figcaption>
                     </figure>
 
@@ -285,7 +285,7 @@
                         <div class="journey-grid-container">
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/homy-seafront-hostel.jpeg" alt="Homy Seafront Hostel" class="cursor-pointer" loading="lazy" decoding="async" width="2268" height="4032">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/homy-seafront-hostel-jpeg-1920.webp" alt="Homy Seafront Hostel" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/homy-seafront-hostel-jpeg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/homy-seafront-hostel-jpeg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/homy-seafront-hostel-jpeg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/homy-seafront-hostel.jpeg">
                                 </div>
                                 <figcaption>Homy Seafront Hostel, a hostel literally facing the sea, as you can tell from its name.</figcaption>
                             </figure>
@@ -303,19 +303,19 @@
                             </figure>
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/6kg-plus-9kg.JPG" alt="Two bags at 6kg and 9kg" class="cursor-pointer" loading="lazy" decoding="async" width="2268" height="4032">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/6kg-plus-9kg-jpg-1920.webp" alt="Two bags at 6kg and 9kg" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/6kg-plus-9kg-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/6kg-plus-9kg-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/6kg-plus-9kg-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/6kg-plus-9kg.JPG">
                                 </div>
                                 <figcaption>Two bags at 6kg and 9kg. the smaller 20l bag is the one I carried all the way to the summit, while the bigger 50l bag I stored it at the Park HQ for only RM15. <br><br> me being cheapskate, aint gonna pay the RM14/kg porter fee hehe.</figcaption>
                             </figure>
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/carrying-two-bags.JPG" alt="Carrying two bags" class="cursor-pointer" loading="lazy" decoding="async" width="2268" height="4032">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/carrying-two-bags-jpg-1920.webp" alt="Carrying two bags" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/carrying-two-bags-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/carrying-two-bags-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/carrying-two-bags-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/carrying-two-bags.JPG">
                                 </div>
                                 <figcaption>Bagsssssssss.</figcaption>
                             </figure>
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/padang-merdeka-vans.jpeg" alt="Vans at Padang Merdeka" class="cursor-pointer" loading="lazy" decoding="async" width="1182" height="666">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/padang-merdeka-vans-jpeg-1182.webp" alt="Vans at Padang Merdeka" class="cursor-pointer" loading="lazy" decoding="async" width="1182" height="666" srcset="/resources/optimized/articles/mount-kinabalu/padang-merdeka-vans-jpeg-640.webp 640w, /resources/optimized/articles/mount-kinabalu/padang-merdeka-vans-jpeg-1182.webp 1182w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/padang-merdeka-vans.jpeg">
                                 </div>
                                 <figcaption>Got on the van ride at Padang Merdeka, cost me only RM30 to get to Kundasang.</figcaption>
                             </figure>
@@ -336,14 +336,14 @@
                         <div class="journey-grid-container">
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/space-capsule.jpeg" alt="Space Capsule" class="cursor-pointer" loading="lazy" decoding="async" width="1182" height="666">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/space-capsule-jpeg-1182.webp" alt="Space Capsule" class="cursor-pointer" loading="lazy" decoding="async" width="1182" height="666" srcset="/resources/optimized/articles/mount-kinabalu/space-capsule-jpeg-640.webp 640w, /resources/optimized/articles/mount-kinabalu/space-capsule-jpeg-1182.webp 1182w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/space-capsule.jpeg">
                                 </div>
                                 <figcaption>The space capsule I stayed for a night before the hike.</figcaption>
                             </figure>
 
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/capsule-view.jpeg" alt="Space Capsule View" class="cursor-pointer" loading="lazy" decoding="async" width="666" height="1182">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/capsule-view-jpeg-1182.webp" alt="Space Capsule View" class="cursor-pointer" loading="lazy" decoding="async" width="666" height="1182" srcset="/resources/optimized/articles/mount-kinabalu/capsule-view-jpeg-640.webp 361w, /resources/optimized/articles/mount-kinabalu/capsule-view-jpeg-1182.webp 666w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/capsule-view.jpeg">
                                 </div>
                                 <figcaption>Despite the poorly sound-insulated sleeping capsule, the view offered by the hostel was magnificent indeed.</figcaption>
                             </figure>
@@ -367,19 +367,19 @@
                             </figure>
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/park-gate.jpeg" alt="Kinabalu Park Gate" class="cursor-pointer" loading="lazy" decoding="async" width="1350" height="2400">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/park-gate-jpeg-1920.webp" alt="Kinabalu Park Gate" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/park-gate-jpeg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/park-gate-jpeg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/park-gate-jpeg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/park-gate.jpeg">
                                 </div>
                                 <figcaption>Kinabalu Park Gate.</figcaption>
                             </figure>
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/park-sign.jpeg" alt="Kinabalu Park Sign" class="cursor-pointer" loading="lazy" decoding="async" width="666" height="1182">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/park-sign-jpeg-1182.webp" alt="Kinabalu Park Sign" class="cursor-pointer" loading="lazy" decoding="async" width="666" height="1182" srcset="/resources/optimized/articles/mount-kinabalu/park-sign-jpeg-640.webp 361w, /resources/optimized/articles/mount-kinabalu/park-sign-jpeg-1182.webp 666w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/park-sign.jpeg">
                                 </div>
                                 <figcaption>Kinabalu Park World Heritage sign.</figcaption>
                             </figure>
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/random-trees.jpeg" alt="Random Trees" class="cursor-pointer" loading="lazy" decoding="async" width="666" height="1182">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/random-trees-jpeg-1182.webp" alt="Random Trees" class="cursor-pointer" loading="lazy" decoding="async" width="666" height="1182" srcset="/resources/optimized/articles/mount-kinabalu/random-trees-jpeg-640.webp 361w, /resources/optimized/articles/mount-kinabalu/random-trees-jpeg-1182.webp 666w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/random-trees.jpeg">
                                 </div>
                                 <figcaption>Some random trees.</figcaption>
                             </figure>
@@ -398,32 +398,32 @@
                         <div class="journey-grid-container">
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/white-flowers.jpeg" alt="white flowers" class="cursor-pointer" loading="lazy" decoding="async" width="1330" height="2364">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/white-flowers-jpeg-1920.webp" alt="white flowers" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/white-flowers-jpeg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/white-flowers-jpeg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/white-flowers-jpeg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/white-flowers.jpeg">
                                 </div>
                                 <figcaption>White flowers along the trail.</figcaption>
                             </figure>
                             
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/panalaban.jpeg" 
+                                    <img src="/resources/optimized/articles/mount-kinabalu/panalaban-jpeg-1024.webp" 
                                         alt="panalaban" 
                                         class="cursor-pointer" 
                                         loading="lazy" decoding="async"
-                                        style="min-width: 170%; transform: translateX(-80px); object-position: 50% 70%;" width="768" height="1024">
+                                        style="min-width: 170%; transform: translateX(-80px); object-position: 50% 70%;" width="768" height="1024" srcset="/resources/optimized/articles/mount-kinabalu/panalaban-jpeg-640.webp 480w, /resources/optimized/articles/mount-kinabalu/panalaban-jpeg-1024.webp 768w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/panalaban.jpeg">
                                 </div>
                                 <figcaption>Me at Panalaban.</figcaption>
                             </figure>
 
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/panalaban-balcony.JPG" alt="panalaban balcony" class="cursor-pointer" loading="lazy" decoding="async" width="2268" height="4032">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/panalaban-balcony-jpg-1920.webp" alt="panalaban balcony" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/panalaban-balcony-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/panalaban-balcony-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/panalaban-balcony-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/panalaban-balcony.JPG">
                                 </div>
                                 <figcaption>View from the Panalaban restaurant balcony.</figcaption>
                             </figure>
 
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/postbox.jpeg" alt="postbox" class="cursor-pointer" loading="lazy" decoding="async" width="1330" height="2364">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/postbox-jpeg-1920.webp" alt="postbox" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/postbox-jpeg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/postbox-jpeg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/postbox-jpeg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/postbox.jpeg">
                                 </div>
                                 <figcaption>Highest altitude post box in Malaysia.</figcaption>
                             </figure>
@@ -432,7 +432,7 @@
                     
                     <figure class="hero-image-vertical">
                         <div class="image-container">
-                            <img src="../resources/articles/mount-kinabalu/panalaban-sunset.JPG" alt="panalaban sunset" class="cursor-pointer" loading="lazy" decoding="async" width="2268" height="4032">
+                            <img src="/resources/optimized/articles/mount-kinabalu/panalaban-sunset-jpg-1920.webp" alt="panalaban sunset" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/panalaban-sunset-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/panalaban-sunset-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/panalaban-sunset-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/panalaban-sunset.JPG">
                         </div>
                         <figcaption>Panalaban sunset — the calm before the summit attack.</figcaption>
                     </figure>
@@ -458,17 +458,17 @@
                     <p class="article-paragraph"><a href="https://www.alltrails.com/en-gb/members/terrance-hah?utm_campaign=mobile-iphone&sh=zjxu0h" target="_blank" rel="noopener noreferrer" class="article-link">My AllTrails review</a> for the summit attack. No bullshit. The summit attack is basically 50% stairs + 50% bare stone slopes.</p>
 
                     <figure class="hero-image-vertical">
-                        <img src="../resources/articles/mount-kinabalu/milky-way.JPG" alt="milky-way" class="cursor-pointer" loading="lazy" decoding="async" width="1350" height="2400">
+                        <img src="/resources/optimized/articles/mount-kinabalu/milky-way-jpg-1920.webp" alt="milky-way" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/milky-way-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/milky-way-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/milky-way-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/milky-way.JPG">
                         <figcaption>The Milky Way right above me at the 8km mark.</figcaption>
                     </figure>
                     
                     <figure class="hero-image-vertical">
-                        <img src="../resources/articles/mount-kinabalu/lows-peak-under-stars.jpeg" alt="lows-peak-under-stars" class="cursor-pointer" loading="lazy" decoding="async" width="666" height="1182">
+                        <img src="/resources/optimized/articles/mount-kinabalu/lows-peak-under-stars-jpeg-1182.webp" alt="lows-peak-under-stars" class="cursor-pointer" loading="lazy" decoding="async" width="666" height="1182" srcset="/resources/optimized/articles/mount-kinabalu/lows-peak-under-stars-jpeg-640.webp 361w, /resources/optimized/articles/mount-kinabalu/lows-peak-under-stars-jpeg-1182.webp 666w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/lows-peak-under-stars.jpeg">
                         <figcaption>Low's Peak under the stars.</figcaption>
                     </figure>
                     
                     <figure class="hero-image-vertical">
-                        <img src="../resources/articles/mount-kinabalu/peak-sunrise.jpg" alt="peak-sunrise" class="cursor-pointer" loading="lazy" decoding="async" width="2239" height="3981">
+                        <img src="/resources/optimized/articles/mount-kinabalu/peak-sunrise-jpg-1920.webp" alt="peak-sunrise" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/peak-sunrise-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/peak-sunrise-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/peak-sunrise-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/peak-sunrise.jpg">
                         <figcaption>Sunrise at Low's Peak.</figcaption>
                     </figure>
 
@@ -483,7 +483,7 @@
                     </p>
                     
                     <figure class="hero-image">
-                        <img src="../resources/articles/mount-kinabalu/rm100-notes.jpeg" alt="rm100-notes" class="cursor-pointer" loading="lazy" decoding="async" width="1330" height="2364">
+                        <img src="/resources/optimized/articles/mount-kinabalu/rm100-notes-jpeg-1920.webp" alt="rm100-notes" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/rm100-notes-jpeg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/rm100-notes-jpeg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/rm100-notes-jpeg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), 1200px" data-full-src="../resources/articles/mount-kinabalu/rm100-notes.jpeg">
                         <figcaption>The iconic RM100 notes shot.</figcaption>
                     </figure>
                     
@@ -492,14 +492,14 @@
 
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/squatting-guide.JPG" alt="squatting-guide" class="cursor-pointer" loading="lazy" decoding="async" width="4032" height="2268">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/squatting-guide-jpg-1920.webp" alt="squatting-guide" class="cursor-pointer" loading="lazy" decoding="async" width="1920" height="1080" srcset="/resources/optimized/articles/mount-kinabalu/squatting-guide-jpg-640.webp 640w, /resources/optimized/articles/mount-kinabalu/squatting-guide-jpg-1280.webp 1280w, /resources/optimized/articles/mount-kinabalu/squatting-guide-jpg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/squatting-guide.JPG">
                                 </div>
                                 <figcaption>Some random guide.</figcaption>
                             </figure>
                             
                             <figure class="journey-grid-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/uncle-on-slope.jpg" alt="uncle-on-slope" class="cursor-pointer" loading="lazy" decoding="async" style="object-position: 15% 50%;" width="2400" height="1692">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/uncle-on-slope-jpg-1920.webp" alt="uncle-on-slope" class="cursor-pointer" loading="lazy" decoding="async" style="object-position: 15% 50%;" width="1920" height="1354" srcset="/resources/optimized/articles/mount-kinabalu/uncle-on-slope-jpg-640.webp 640w, /resources/optimized/articles/mount-kinabalu/uncle-on-slope-jpg-1280.webp 1280w, /resources/optimized/articles/mount-kinabalu/uncle-on-slope-jpg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/uncle-on-slope.jpg">
                                 </div>
                                 <figcaption>
                                     The 70-year-old uncle that I mentioned earlier, he could keep up with me most of the summit attack, and the entire descent back to Panalaban. 
@@ -516,7 +516,7 @@
                     </p>
 
                     <figure class="hero-image-vertical">
-                        <img src="../resources/articles/mount-kinabalu/group-photo.jpeg" alt="group-photo" class="cursor-pointer" loading="lazy" decoding="async" style="object-position: 80% 50%;" width="768" height="1024">
+                        <img src="/resources/optimized/articles/mount-kinabalu/group-photo-jpeg-1024.webp" alt="group-photo" class="cursor-pointer" loading="lazy" decoding="async" style="object-position: 80% 50%;" width="768" height="1024" srcset="/resources/optimized/articles/mount-kinabalu/group-photo-jpeg-640.webp 480w, /resources/optimized/articles/mount-kinabalu/group-photo-jpeg-1024.webp 768w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/group-photo.jpeg">
                         <figcaption>Me and fellow hikers at Low's Peak, 4095.2 metres.<br>
                         Thank you all for being so accommodating. I wasn't expecting that at all.</figcaption>
                     </figure>
@@ -537,70 +537,70 @@
                         <div class="masonry-grid">
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/tea.JPG" alt="tea" class="cursor-pointer" loading="lazy" decoding="async" width="2218" height="3747">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/tea-jpg-1920.webp" alt="tea" class="cursor-pointer" loading="lazy" decoding="async" width="1137" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/tea-jpg-640.webp 379w, /resources/optimized/articles/mount-kinabalu/tea-jpg-1280.webp 758w, /resources/optimized/articles/mount-kinabalu/tea-jpg-1920.webp 1137w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/tea.JPG">
                                 </div>
                                 <figcaption>A hot cup of tea at Panalaban. What more could a man ask for.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/pitcher-plant.jpeg" alt="pitcher plant" class="cursor-pointer" loading="lazy" decoding="async" width="1330" height="2364">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/pitcher-plant-jpeg-1920.webp" alt="pitcher plant" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/pitcher-plant-jpeg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/pitcher-plant-jpeg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/pitcher-plant-jpeg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/pitcher-plant.jpeg">
                                 </div>
                                 <figcaption>Pitcher plant.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/sayat-sayat.JPG" 
+                                    <img src="/resources/optimized/articles/mount-kinabalu/sayat-sayat-jpg-1920.webp" 
                                         alt="sayat-sayat" 
                                         class="cursor-pointer" 
-                                        loading="lazy" decoding="async" width="1350" height="2400">
+                                        loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/sayat-sayat-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/sayat-sayat-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/sayat-sayat-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/sayat-sayat.JPG">
                                 </div>
                                 <figcaption>Took me one and a half hour to reach Sayat Sayat checkpoint, eligible to get the coloured certificate upon checking in here.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/me-pointing-at-peak.JPG" 
+                                    <img src="/resources/optimized/articles/mount-kinabalu/me-pointing-at-peak-jpg-1920.webp" 
                                         alt="me-pointing-at-peak" 
                                         class="cursor-pointer" 
-                                        loading="lazy" decoding="async" width="2400" height="1350">
+                                        loading="lazy" decoding="async" width="1920" height="1080" srcset="/resources/optimized/articles/mount-kinabalu/me-pointing-at-peak-jpg-640.webp 640w, /resources/optimized/articles/mount-kinabalu/me-pointing-at-peak-jpg-1280.webp 1280w, /resources/optimized/articles/mount-kinabalu/me-pointing-at-peak-jpg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/me-pointing-at-peak.JPG">
                                 </div>
                                 <figcaption>Me and the South Peak of Mount Kinabalu.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/postcards.JPG" 
+                                    <img src="/resources/optimized/articles/mount-kinabalu/postcards-jpg-1920.webp" 
                                         alt="postcards" 
                                         class="cursor-pointer" 
-                                        loading="lazy" decoding="async" width="4032" height="2268">
+                                        loading="lazy" decoding="async" width="1920" height="1080" srcset="/resources/optimized/articles/mount-kinabalu/postcards-jpg-640.webp 640w, /resources/optimized/articles/mount-kinabalu/postcards-jpg-1280.webp 1280w, /resources/optimized/articles/mount-kinabalu/postcards-jpg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/postcards.JPG">
                                 </div>
                                 <figcaption>Postcards with limited edition stamps on.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/climbathon.JPG" 
+                                    <img src="/resources/optimized/articles/mount-kinabalu/climbathon-jpg-1920.webp" 
                                         alt="climbathon" 
                                         class="cursor-pointer" 
-                                        loading="lazy" decoding="async" width="1350" height="2400">
+                                        loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/climbathon-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/climbathon-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/climbathon-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/climbathon.JPG">
                                 </div>
                                 <figcaption>My mind could not comprehend how a human being can complete the entire ascent and descent in about 3 hours, like WTF?</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/surfing.JPG" alt="surfing" class="cursor-pointer" 
+                                    <img src="/resources/optimized/articles/mount-kinabalu/surfing-jpg-1920.webp" alt="surfing" class="cursor-pointer" 
                                     loading="lazy" decoding="async"
-                                    style="min-width: 120%; transform: translateX(-20px); object-position: 50% 90%;" width="3024" height="4032">
+                                    style="min-width: 120%; transform: translateX(-20px); object-position: 50% 90%;" width="1440" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/surfing-jpg-640.webp 480w, /resources/optimized/articles/mount-kinabalu/surfing-jpg-1280.webp 960w, /resources/optimized/articles/mount-kinabalu/surfing-jpg-1920.webp 1440w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/surfing.JPG">
                                 </div>
                                 <figcaption>Surfing in Tanjung Aru after the hike.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/dji-nano.JPG" alt="dji nano" class="cursor-pointer" loading="lazy" decoding="async" width="1737" height="3088">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/dji-nano-jpg-1920.webp" alt="dji nano" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/dji-nano-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/dji-nano-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/dji-nano-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/dji-nano.JPG">
                                 </div>
                                 <figcaption>
                                     Almost lost it in the sea during surfing, me and my coach we searched for it for about half an hour. 
@@ -610,35 +610,35 @@
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/surfing-board.JPG" alt="surfing-board" class="cursor-pointer" loading="lazy" decoding="async" width="1350" height="2400">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/surfing-board-jpg-1920.webp" alt="surfing-board" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/surfing-board-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/surfing-board-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/surfing-board-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/surfing-board.JPG">
                                 </div>
                                 <figcaption>Ended up taking two surfing lessons.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/tanjung-aru-sunset.JPG" alt="tanjung aru sunset" class="cursor-pointer" loading="lazy" decoding="async" width="2268" height="4032">
+                                    <img src="/resources/optimized/articles/mount-kinabalu/tanjung-aru-sunset-jpg-1920.webp" alt="tanjung aru sunset" class="cursor-pointer" loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/tanjung-aru-sunset-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/tanjung-aru-sunset-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/tanjung-aru-sunset-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/tanjung-aru-sunset.JPG">
                                 </div>
                                 <figcaption>Sunset at Tanjung Aru beach.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/plane-on-cotton-candy.JPG" 
+                                    <img src="/resources/optimized/articles/mount-kinabalu/plane-on-cotton-candy-jpg-1920.webp" 
                                         alt="plane-on-cotton-candy" 
                                         class="cursor-pointer" 
                                         loading="lazy" decoding="async"
-                                        style="min-width: 140%; transform: translateX(-55px);" width="1629" height="2400">
+                                        style="min-width: 140%; transform: translateX(-55px);" width="1303" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/plane-on-cotton-candy-jpg-640.webp 434w, /resources/optimized/articles/mount-kinabalu/plane-on-cotton-candy-jpg-1280.webp 869w, /resources/optimized/articles/mount-kinabalu/plane-on-cotton-candy-jpg-1920.webp 1303w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/plane-on-cotton-candy.JPG">
                                 </div>
                                 <figcaption>Plane on cotton candy like clouds.</figcaption>
                             </figure>
 
                             <figure class="masonry-item">
                                 <div class="image-container">
-                                    <img src="../resources/articles/mount-kinabalu/noodles.JPG" 
+                                    <img src="/resources/optimized/articles/mount-kinabalu/noodles-jpg-1920.webp" 
                                         alt="noodles" 
                                         class="cursor-pointer" 
-                                        loading="lazy" decoding="async" width="1350" height="2400">
+                                        loading="lazy" decoding="async" width="1080" height="1920" srcset="/resources/optimized/articles/mount-kinabalu/noodles-jpg-640.webp 360w, /resources/optimized/articles/mount-kinabalu/noodles-jpg-1280.webp 720w, /resources/optimized/articles/mount-kinabalu/noodles-jpg-1920.webp 1080w" sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1023px) 80vw, 720px" data-full-src="../resources/articles/mount-kinabalu/noodles.JPG">
                                 </div>
                                 <figcaption>生肉面 recommended by a friend, this was like my first legit Sabahan meal after having fast food for days before the hike LOL.</figcaption>
                             </figure>

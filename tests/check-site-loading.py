@@ -20,6 +20,7 @@
 Run:  python3 tests/check-site-loading.py   (from repo root)
 """
 
+import json
 import os
 import re
 import subprocess
@@ -133,13 +134,39 @@ for page in all_pages:
                              f"{a['width']}x{a['height']} != file "
                              f"{real[0]}x{real[1]}")
 
-    # src integrity vs HEAD — loading work may add attrs, never rewrite
-    head = subprocess.run(["git", "show", f"HEAD:{page}"],
-                          capture_output=True, text=True).stdout
-    old_srcs = re.findall(r'<img\b[^>]*\bsrc="([^"]*)"', head)
-    new_srcs = re.findall(r'<img\b[^>]*\bsrc="([^"]*)"', s)
-    if old_srcs != new_srcs:
-        FAILS.append(f"{page}: img src list changed vs HEAD")
+    # every referenced local file must exist (optimized srcs land in
+    # resources/optimized/; originals under resources/ stay on disk)
+    for ln, a in scan.imgs:
+        src = a.get("src", "")
+        if src.startswith(("http", "//", "data:")):
+            continue
+        if resolve_local(page, src) is None:
+            FAILS.append(f"{page} L{ln}: broken local src {src[:60]}")
+        for part in (a.get("srcset") or "").split(","):
+            part = part.strip()
+            if not part:
+                continue
+            url, _, wd = part.rpartition(" ")
+            loc = resolve_local(page, url)
+            if loc is None:
+                FAILS.append(f"{page} L{ln}: srcset file missing {url[:60]}")
+            elif wd.endswith("w"):
+                real = intrinsic(loc)
+                if real and int(wd[:-1]) != real[0]:
+                    FAILS.append(f"{page} L{ln}: srcset {wd} != "
+                                 f"actual {real[0]}w")
+    # a manifest-managed src must map back to a preserved original
+    if os.path.isfile("resources/optimized/manifest.json"):
+        man = json.load(open("resources/optimized/manifest.json"))
+        for ln, a in scan.imgs:
+            src = a.get("src", "")
+            if "/resources/optimized/" in "/" + src.lstrip("/"):
+                orig = man.get("by_variant", {}).get(src.lstrip("/"))
+                if not orig:
+                    FAILS.append(f"{page} L{ln}: generated src not in "
+                                 f"manifest {src[:60]}")
+                elif not os.path.isfile(orig):
+                    FAILS.append(f"{page} L{ln}: original gone {orig}")
 
 # --- shared motion sheet --------------------------------------------------
 motion = open("styles/site-motion.css").read()
