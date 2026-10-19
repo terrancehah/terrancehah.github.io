@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="Small interactive experiments by Terrance Hah — demos and toys built while learning." />
 		<!-- Fonts: one consolidated request listing only the weights the
 		     site uses. preconnect warms the gstatic origin so the font
 		     files start as soon as the CSS arrives. -->
@@ -31,18 +34,32 @@
 			rel="icon"
 			href="./resources/icons/TH-logo.png"
 			type="image/x-icon" />
-		<meta property="og:title" content="Terrance's Playground" />
-		<meta property="og:description" content="Terrance's Playground" />
+		<meta property="og:title" content="Playground | Terrance Hah" />
+		<meta
+			property="og:description"
+			content="Small interactive experiments by Terrance Hah — demos and toys built while learning." />
 		<meta
 			property="og:image"
 			content="https://terrancehah.com/resources/icons/TH-logo.png" />
-		<meta property="og:type" content="article" />
+		<meta property="og:type" content="website" />
 		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
 		<link rel="canonical" href="https://terrancehah.com/playground" />
 		<meta property="og:url" content="https://terrancehah.com/playground" />
+		<meta name="twitter:card" content="summary" />
+		<meta property="twitter:domain" content="terrancehah.com" />
+		<meta
+			property="twitter:url"
+			content="https://terrancehah.com/playground" />
+		<meta name="twitter:title" content="Playground | Terrance Hah" />
+		<meta
+			name="twitter:description"
+			content="Small interactive experiments by Terrance Hah — demos and toys built while learning." />
+		<meta
+			name="twitter:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
 
 		<script src="./js/footer.js" defer></script>
-		<title>Terrance's Playground</title>
+		<title>Playground | Terrance Hah</title>
 		<!-- Vercel Analytics -->
 		<script>
 			window.va =
@@ -52,6 +69,43 @@
 				};
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
+		<!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://terrancehah.com/#person",
+						"name": "Terrance Hah",
+						"url": "https://terrancehah.com/"
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://terrancehah.com/#website",
+						"url": "https://terrancehah.com/",
+						"name": "terrancehah.com",
+						"publisher": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					},
+					{
+						"@type": "CollectionPage",
+						"@id": "https://terrancehah.com/playground#collectionpage",
+						"url": "https://terrancehah.com/playground",
+						"name": "Playground | Terrance Hah",
+						"description": "Small interactive experiments by Terrance Hah — demos and toys built while learning.",
+						"inLanguage": "en",
+						"isPartOf": {
+							"@id": "https://terrancehah.com/#website"
+						},
+						"author": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					}
+				]
+			}
+		</script>
 	</head>
 
 	<body class="m-0 relative h-full bg-white overflow-x-hidden">
@@ -59,17 +113,15 @@
 			<div class="site-header-inner">
 				<!-- Left: Logo & Title -->
 				<div class="site-header-brand">
-					<h1 class="site-header-title">Terrance's Playground</h1>
+					<p class="site-header-title">Terrance's Playground</p>
 				</div>
 
 				<!-- Middle: Nav buttons -->
 				<nav class="site-nav">
 					<a href="/">Home</a>
-					<a href="./articles.html">Articles</a>
-					<a href="./projects.html">Projects</a>
-					<a href="./playground.html" aria-current="page"
-						>Playground</a
-					>
+					<a href="/articles">Articles</a>
+					<a href="/projects">Projects</a>
+					<a href="/playground" aria-current="page">Playground</a>
 				</nav>
 
 				<!-- Right side: Social Icons -->
@@ -79,7 +131,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/facebook-png-128.webp"
+							src="/resources/optimized/icons/facebook-png-128.webp"
 							alt="facebook"
 							class="site-social-icon" />
 					</a>
@@ -88,7 +140,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/instagram-png-128.webp"
+							src="/resources/optimized/icons/instagram-png-128.webp"
 							alt="instagram"
 							class="site-social-icon" />
 					</a>
@@ -97,7 +149,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/x-png-128.webp"
+							src="/resources/optimized/icons/x-png-128.webp"
 							alt="x"
 							class="site-social-icon" />
 					</a>
@@ -106,7 +158,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/linkedin-png-128.webp"
+							src="/resources/optimized/icons/linkedin-png-128.webp"
 							alt="linkedin"
 							class="site-social-icon" />
 					</a>
@@ -115,7 +167,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/github-png-128.webp"
+							src="/resources/optimized/icons/github-png-128.webp"
 							alt="github"
 							class="site-social-icon" />
 					</a>
@@ -124,10 +176,14 @@
 		</header>
 
 		<main class="w-full toys-list-container">
+			<!-- Page heading — the hero below is the featured toy, not the page title -->
+			<h1 class="font-lato font-bold text-3xl sm:text-4xl text-[#1d3557]">
+				Playground
+			</h1>
 			<!-- Hero Card - Latest Playground Item -->
 			<article
 				class="toy-hero site-pressable"
-				data-url="./playground/philosophy-sphere.html">
+				data-url="/playground/philosophy-sphere">
 				<div class="toy-hero-image">
 					<img
 						src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop"
@@ -167,7 +223,7 @@
 			<div class="toys-grid">
 				<article
 					class="toy-card site-pressable size-2x2"
-					data-url="./playground/ar-model-test.html">
+					data-url="/playground/ar-model-test">
 					<div class="toy-card-image">
 						<img
 							src="./resources/ar/myvi-purple.jpg"
@@ -197,7 +253,7 @@
 
 				<article
 					class="toy-card site-pressable size-2x2"
-					data-url="./playground/car-ar-test.html">
+					data-url="/playground/car-ar-test">
 					<div class="toy-card-image">
 						<img
 							src="./resources/ar/myvi-purple.jpg"
@@ -226,7 +282,7 @@
 
 				<article
 					class="toy-card site-pressable size-2x2"
-					data-url="./playground/dino-ar-test.html">
+					data-url="/playground/dino-ar-test">
 					<div class="toy-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1647962309326-b77f9732860e?w=800&h=500&fit=crop"

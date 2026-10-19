@@ -32,7 +32,7 @@
         <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
         <link rel="canonical" href="https://terrancehah.com/articles/about-writing">
         <meta property="og:url" content="https://terrancehah.com/articles/about-writing">
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
         <meta property="og:title" content="About Writing - Terrance's Playground">
         <meta property="og:description" content="A reflection on my journey with writing and embracing imperfection.">
         <meta property="og:image" content="https://terrancehah.com/resources/articles/about-writing/about-writing-og.jpg">
@@ -53,6 +53,46 @@
         </script>
         <script defer src="/_vercel/insights/script.js"></script>
         <script defer src="/js/article-reading.js"></script>
+        <!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": "https://terrancehah.com/#person",
+                  "name": "Terrance Hah",
+                  "url": "https://terrancehah.com/"
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://terrancehah.com/#website",
+                  "url": "https://terrancehah.com/",
+                  "name": "terrancehah.com",
+                  "publisher": {
+                    "@id": "https://terrancehah.com/#person"
+                  }
+                },
+                {
+                  "@type": "BlogPosting",
+                  "headline": "About Writing",
+                  "description": "A reflection on my journey with writing and embracing imperfection.",
+                  "url": "https://terrancehah.com/articles/about-writing",
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://terrancehah.com/articles/about-writing"
+                  },
+                  "author": {
+                    "@type": "Person",
+                    "@id": "https://terrancehah.com/#person",
+                    "name": "Terrance Hah"
+                  },
+                  "inLanguage": "en",
+                  "datePublished": "2025-05-20"
+                }
+              ]
+            }
+        </script>
     </head>
 
     <body class="m-0 relative h-full bg-white overflow-x-hidden">
@@ -61,17 +101,17 @@
 
                 <!-- Left: Logo & Title -->
                 <div class="site-header-brand">
-                    <h1 class="site-header-title">
+                    <p class="site-header-title">
                         Terrance's Playground
-                    </h1>
+                    </p>
                 </div>
 
                 <!-- Middle: Nav buttons -->
                 <nav class="site-nav">
                     <a href="/">Home</a>
-                    <a href="../articles.html" aria-current="location">Articles</a>
-                    <a href="../projects.html">Projects</a>
-                    <a href="../playground.html">Playground</a>
+                    <a href="/articles" aria-current="location">Articles</a>
+                    <a href="/projects">Projects</a>
+                    <a href="/playground">Playground</a>
                 </nav>
             
                 <!-- Right side: Social Icons -->

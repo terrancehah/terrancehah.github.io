@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="A working guide to the colours, typography, photo layouts and shared navigation behind terrancehah.com — and the room each project gets to keep its own character." />
 		<!-- Fonts: one consolidated request listing only the weights the
 		     site uses. preconnect warms the gstatic origin so the font
 		     files start as soon as the CSS arrives. -->
@@ -55,6 +56,12 @@
 		<meta
 			property="og:url"
 			content="https://terrancehah.com/articles/my-website-style-guide" />
+		<meta name="twitter:card" content="summary">
+		<meta property="twitter:domain" content="terrancehah.com">
+		<meta property="twitter:url" content="https://terrancehah.com/articles/my-website-style-guide">
+		<meta name="twitter:title" content="Website Style Guide - Terrance's Playground">
+		<meta name="twitter:description" content="A working guide to the colours, typography, photo layouts and shared navigation behind terrancehah.com — and the room each project gets to keep its own character.">
+		<meta name="twitter:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
 
 		<script src="../js/footer.js" defer></script>
 		<title>Website Style Guide - Terrance's Playground</title>
@@ -68,6 +75,45 @@
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
 		<script defer src="/js/article-reading.js"></script>
+		<!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+		<script type="application/ld+json">
+			{
+			  "@context": "https://schema.org",
+			  "@graph": [
+			    {
+			      "@type": "Person",
+			      "@id": "https://terrancehah.com/#person",
+			      "name": "Terrance Hah",
+			      "url": "https://terrancehah.com/"
+			    },
+			    {
+			      "@type": "WebSite",
+			      "@id": "https://terrancehah.com/#website",
+			      "url": "https://terrancehah.com/",
+			      "name": "terrancehah.com",
+			      "publisher": {
+			        "@id": "https://terrancehah.com/#person"
+			      }
+			    },
+			    {
+			      "@type": "BlogPosting",
+			      "headline": "My Website Style Guide",
+			      "description": "A working guide to the colours, typography, photo layouts and shared navigation behind terrancehah.com — and the room each project gets to keep its own character.",
+			      "url": "https://terrancehah.com/articles/my-website-style-guide",
+			      "mainEntityOfPage": {
+			        "@type": "WebPage",
+			        "@id": "https://terrancehah.com/articles/my-website-style-guide"
+			      },
+			      "author": {
+			        "@type": "Person",
+			        "@id": "https://terrancehah.com/#person",
+			        "name": "Terrance Hah"
+			      },
+			      "inLanguage": "en"
+			    }
+			  ]
+			}
+		</script>
 	</head>
 
 	<body class="m-0 relative h-full bg-white overflow-x-hidden">
@@ -75,17 +121,17 @@
 			<div class="site-header-inner">
 				<!-- Left: Logo & Title -->
 				<div class="site-header-brand">
-					<h1 class="site-header-title">Terrance's Playground</h1>
+					<p class="site-header-title">Terrance's Playground</p>
 				</div>
 
 				<!-- Middle: Nav buttons -->
 				<nav class="site-nav">
 					<a href="/">Home</a>
-					<a href="../articles.html" aria-current="location"
+					<a href="/articles" aria-current="location"
 						>Articles</a
 					>
-					<a href="../projects.html">Projects</a>
-					<a href="../playground.html">Playground</a>
+					<a href="/projects">Projects</a>
+					<a href="/playground">Playground</a>
 				</nav>
 
 				<!-- Right side: Social Icons -->
@@ -358,12 +404,12 @@
 							<nav class="site-nav" aria-label="Header preview">
 								<a href="/">Home</a>
 								<a
-									href="../articles.html"
+									href="/articles"
 									aria-current="location"
 									>Articles</a
 								>
-								<a href="../projects.html">Projects</a>
-								<a href="../playground.html">Playground</a>
+								<a href="/projects">Projects</a>
+								<a href="/playground">Playground</a>
 							</nav>
 						</div>
 						<p class="style-guide-preview-label">
@@ -377,12 +423,12 @@
 								aria-label="Footer preview">
 								<a href="/">Home</a>
 								<a
-									href="../articles.html"
+									href="/articles"
 									aria-current="location"
 									>Articles</a
 								>
-								<a href="../projects.html">Projects</a>
-								<a href="../playground.html">Playground</a>
+								<a href="/projects">Projects</a>
+								<a href="/playground">Playground</a>
 							</nav>
 						</div>
 						<div class="style-guide-backtop-row">
@@ -434,7 +480,7 @@
 									height="675" />
 								<div class="style-guide-mini-card-content">
 									<h3 class="style-guide-mini-card-title">
-										<a href="./mount-kinabalu.html"
+										<a href="/articles/mount-kinabalu"
 											>Mount Kinabalu, 30-31 March 2026</a
 										>
 									</h3>

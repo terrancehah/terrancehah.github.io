@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="Personal writing by Terrance Hah on running, hiking, learning, writing and technology." />
 		<!-- Fonts: one consolidated request listing only the weights the
 		     site uses. preconnect warms the gstatic origin so the font
 		     files start as soon as the CSS arrives. -->
@@ -28,17 +31,31 @@
 			rel="icon"
 			href="../resources/icons/TH-logo.png"
 			type="image/x-icon" />
-		<meta property="og:title" content="Terrance's Articles" />
-		<meta property="og:description" content="Terrance's Articles" />
+		<meta property="og:title" content="Articles | Terrance Hah" />
+		<meta
+			property="og:description"
+			content="Personal writing by Terrance Hah on running, hiking, learning, writing and technology." />
 		<meta
 			property="og:image"
 			content="https://terrancehah.com/resources/icons/TH-logo.png" />
-		<meta property="og:type" content="article" />
+		<meta property="og:type" content="website" />
 		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
 		<link rel="canonical" href="https://terrancehah.com/articles" />
 		<meta property="og:url" content="https://terrancehah.com/articles" />
+		<meta name="twitter:card" content="summary" />
+		<meta property="twitter:domain" content="terrancehah.com" />
+		<meta
+			property="twitter:url"
+			content="https://terrancehah.com/articles" />
+		<meta name="twitter:title" content="Articles | Terrance Hah" />
+		<meta
+			name="twitter:description"
+			content="Personal writing by Terrance Hah on running, hiking, learning, writing and technology." />
+		<meta
+			name="twitter:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
 		<script src="../js/footer.js" defer></script>
-		<title>Terrance's Articles</title>
+		<title>Articles | Terrance Hah</title>
 		<!-- Vercel Analytics -->
 		<script>
 			window.va =
@@ -48,6 +65,43 @@
 				};
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
+		<!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://terrancehah.com/#person",
+						"name": "Terrance Hah",
+						"url": "https://terrancehah.com/"
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://terrancehah.com/#website",
+						"url": "https://terrancehah.com/",
+						"name": "terrancehah.com",
+						"publisher": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					},
+					{
+						"@type": "CollectionPage",
+						"@id": "https://terrancehah.com/articles#collectionpage",
+						"url": "https://terrancehah.com/articles",
+						"name": "Articles | Terrance Hah",
+						"description": "Personal writing by Terrance Hah on running, hiking, learning, writing and technology.",
+						"inLanguage": "en",
+						"isPartOf": {
+							"@id": "https://terrancehah.com/#website"
+						},
+						"author": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					}
+				]
+			}
+		</script>
 	</head>
 
 	<body class="m-0 relative h-full bg-white w-full">
@@ -55,15 +109,15 @@
 			<div class="site-header-inner">
 				<!-- Left: Logo & Title -->
 				<div class="site-header-brand">
-					<h1 class="site-header-title">Terrance's Playground</h1>
+					<p class="site-header-title">Terrance's Playground</p>
 				</div>
 
 				<!-- Middle: Nav buttons -->
 				<nav class="site-nav">
 					<a href="/">Home</a>
-					<a href="./articles.html" aria-current="page">Articles</a>
-					<a href="./projects.html">Projects</a>
-					<a href="./playground.html">Playground</a>
+					<a href="/articles" aria-current="page">Articles</a>
+					<a href="/projects">Projects</a>
+					<a href="/playground">Playground</a>
 				</nav>
 
 				<!-- Right side: Social Icons (site-social-* classes give
@@ -74,7 +128,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/facebook-png-128.webp"
+							src="/resources/optimized/icons/facebook-png-128.webp"
 							alt="facebook"
 							class="site-social-icon" />
 					</a>
@@ -83,7 +137,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/instagram-png-128.webp"
+							src="/resources/optimized/icons/instagram-png-128.webp"
 							alt="instagram"
 							class="site-social-icon" />
 					</a>
@@ -92,7 +146,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/x-png-128.webp"
+							src="/resources/optimized/icons/x-png-128.webp"
 							alt="x"
 							class="site-social-icon" />
 					</a>
@@ -101,7 +155,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/linkedin-png-128.webp"
+							src="/resources/optimized/icons/linkedin-png-128.webp"
 							alt="linkedin"
 							class="site-social-icon" />
 					</a>
@@ -110,7 +164,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/github-png-128.webp"
+							src="/resources/optimized/icons/github-png-128.webp"
 							alt="github"
 							class="site-social-icon" />
 					</a>
@@ -119,22 +173,30 @@
 		</header>
 
 		<main class="w-full articles-list-container">
+			<!-- Page heading — the hero below is the featured article, not the page title -->
+			<h1 class="font-lato font-bold text-3xl sm:text-4xl text-[#1d3557]">
+				Articles
+			</h1>
 			<!-- Hero Card - Latest Article -->
 			<article
 				class="article-hero site-pressable"
 				data-url="/articles/rpe-in-running">
 				<div class="article-hero-image object-fit">
 					<img
-					 src="/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp"
+						src="/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp"
 						alt="Runner in a red top running along a road"
 						decoding="async"
 						style="object-position: center"
 						loading="eager"
 						fetchpriority="high"
-					 width="1920"
-					 height="1280"
-					
-					  srcset="/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-640.webp 640w, /resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1280.webp 1280w, /resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp 1920w" sizes="(max-width: 1536px) 100vw, 1536px"/>
+						width="1920"
+						height="1280"
+						srcset="
+							/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-640.webp   640w,
+							/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1280.webp 1280w,
+							/resources/optimized/site/felix-yu-zlwcocz11d8-unsplash-jpg-1920.webp 1920w
+						"
+						sizes="(max-width: 1536px) 100vw, 1536px" />
 					<div class="article-hero-overlay"></div>
 					<span class="image-credit"
 						>Photo by
@@ -196,7 +258,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/my-website-style-guide.html">
+					data-url="/articles/my-website-style-guide">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1716471330475-f0669db8947a?w=800&h=500&fit=crop"
@@ -217,7 +279,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/my-website-style-guide.html"
+							<a href="/articles/my-website-style-guide"
 								>My Website Style Guide</a
 							>
 						</h3>
@@ -234,21 +296,25 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/tnbyy-my-first-camphike.html">
+					data-url="/articles/tnbyy-my-first-camphike">
 					<div class="article-card-image">
 						<img
-						 src="/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp"
+							src="/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp"
 							alt="my silhouette at the peak"
 							loading="lazy"
 							decoding="async"
-						 width="1920"
-						 height="1080"
-						
-						  srcset="/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-640.webp 640w, /resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1280.webp 1280w, /resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp 1920w" sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px"/>
+							width="1920"
+							height="1080"
+							srcset="
+								/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-640.webp   640w,
+								/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1280.webp 1280w,
+								/resources/optimized/articles/tnbyy-my-first-camphike/silhouette-jpg-1920.webp 1920w
+							"
+							sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px" />
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/tnbyy-my-first-camphike.html"
+							<a href="/articles/tnbyy-my-first-camphike"
 								>TNBYY (Tok Nenek – Bubu – Yong Yap) - My First
 								Camphike</a
 							>
@@ -269,15 +335,19 @@
 					data-url="/articles/rethinking-relationship-between-human-and-nature">
 					<div class="article-card-image object-fit">
 						<img
-						 src="/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp"
+							src="/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp"
 							alt="crown shyness"
 							loading="lazy"
 							style="object-position: center 80%"
 							decoding="async"
-						 width="1440"
-						 height="1920"
-						
-						  srcset="/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-640.webp 480w, /resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1280.webp 960w, /resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp 1440w" sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px"/>
+							width="1440"
+							height="1920"
+							srcset="
+								/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-640.webp   480w,
+								/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1280.webp  960w,
+								/resources/optimized/articles/rethinking-relationship-between-human-and-nature/trees-leaves-jpeg-1920.webp 1440w
+							"
+							sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px" />
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
@@ -297,7 +367,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/about-writing.html">
+					data-url="/articles/about-writing">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=500&fit=crop"
@@ -318,9 +388,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/about-writing.html"
-								>About Writing</a
-							>
+							<a href="/articles/about-writing">About Writing</a>
 						</h3>
 						<p class="article-card-description">
 							A reflection on my journey with writing and
@@ -332,7 +400,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/making-things-look-easy-is-hard.html">
+					data-url="/articles/making-things-look-easy-is-hard">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop"
@@ -353,8 +421,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a
-								href="./articles/making-things-look-easy-is-hard.html"
+							<a href="/articles/making-things-look-easy-is-hard"
 								>Making Things Look Easy is Hard</a
 							>
 						</h3>
@@ -370,7 +437,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/alter-ego.html">
+					data-url="/articles/alter-ego">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=500&fit=crop"
@@ -391,7 +458,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/alter-ego.html"
+							<a href="/articles/alter-ego"
 								>Alter Ego: Are we lost in our digital
 								selves?</a
 							>
@@ -407,7 +474,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/my-learning-environment.html">
+					data-url="/articles/my-learning-environment">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=500&fit=crop"
@@ -428,7 +495,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/my-learning-environment.html"
+							<a href="/articles/my-learning-environment"
 								>My Learning Environment</a
 							>
 						</h3>
@@ -444,7 +511,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/metaverse-the-next-big-thing-or-a-gimmick.html">
+					data-url="/articles/metaverse-the-next-big-thing-or-a-gimmick">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=500&fit=crop"
@@ -466,7 +533,7 @@
 					<div class="article-card-content">
 						<h3 class="article-card-title">
 							<a
-								href="./articles/metaverse-the-next-big-thing-or-a-gimmick.html"
+								href="/articles/metaverse-the-next-big-thing-or-a-gimmick"
 								>Metaverse: The Next Big Thing or a Gimmick</a
 							>
 						</h3>
@@ -481,7 +548,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/dear-privacy.html">
+					data-url="/articles/dear-privacy">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&fit=crop"
@@ -502,9 +569,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/dear-privacy.html"
-								>Dear Privacy</a
-							>
+							<a href="/articles/dear-privacy">Dear Privacy</a>
 						</h3>
 						<p class="article-card-description">
 							In this article, I share my view on privacy.
@@ -517,7 +582,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/the-art-of-writing.html">
+					data-url="/articles/the-art-of-writing">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?w=800&h=500&fit=crop"
@@ -538,7 +603,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/the-art-of-writing.html"
+							<a href="/articles/the-art-of-writing"
 								>The Art of Writing</a
 							>
 						</h3>
@@ -552,7 +617,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/how-to-be-indistractable.html">
+					data-url="/articles/how-to-be-indistractable">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=500&fit=crop"
@@ -573,7 +638,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/how-to-be-indistractable.html"
+							<a href="/articles/how-to-be-indistractable"
 								>How to Be Indistractable</a
 							>
 						</h3>
@@ -587,7 +652,7 @@
 
 				<article
 					class="article-card site-pressable size-2x2"
-					data-url="./articles/my-first-article.html">
+					data-url="/articles/my-first-article">
 					<div class="article-card-image">
 						<img
 							src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=500&fit=crop"
@@ -608,7 +673,7 @@
 					</div>
 					<div class="article-card-content">
 						<h3 class="article-card-title">
-							<a href="./articles/my-first-article.html"
+							<a href="/articles/my-first-article"
 								>My First Article</a
 							>
 						</h3>

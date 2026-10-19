@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="My personal collection of food places, browsable by cuisine — each entry lists the address, a rough price and a Google Maps link." />
 		<!-- Fonts: one consolidated request listing only the weights the
 		     site uses. preconnect warms the gstatic origin so the font
 		     files start as soon as the CSS arrives. -->
@@ -20,346 +23,912 @@
 		<link href="/styles/site-navigation.css" rel="stylesheet" />
 		<link href="/styles/site-motion.css" rel="stylesheet" />
 		<link href="/styles/site-header.css" rel="stylesheet" />
-        <link href="/styles/output.css" rel="stylesheet">
-        <!-- Footer-only stylesheet for the footer.js-injected footer -->
-        <link href="/styles/site-footer.css" type="text/css" rel="stylesheet">
-        <!-- Shared header stylesheet (this page doesn't load styles/style.css;
+		<link href="/styles/output.css" rel="stylesheet" />
+		<!-- Footer-only stylesheet for the footer.js-injected footer -->
+		<link href="/styles/site-footer.css" type="text/css" rel="stylesheet" />
+		<!-- Shared header stylesheet (this page doesn't load styles/style.css;
          site-header.css itself imports the shared nav sheet) -->
-        <link href="/styles/site-header.css" type="text/css" rel="stylesheet">
-        <link rel="icon" href="/resources/icons/TH-logo.png" type="image/x-icon">
-        <meta property="og:title" content="Food Tracker - Terrance's Playground">
-        <meta property="og:description" content="Track and discover great food places in Malaysia">
-        <meta property="og:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
-        <meta property="og:type" content="article">
-        <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
-        <link rel="canonical" href="https://terrancehah.com/projects/foodtracker">
-        <meta property="og:url" content="https://terrancehah.com/projects/foodtracker">
+		<link href="/styles/site-header.css" type="text/css" rel="stylesheet" />
+		<link
+			rel="icon"
+			href="/resources/icons/TH-logo.png"
+			type="image/x-icon" />
+		<meta
+			property="og:title"
+			content="Food Tracker - Terrance's Playground" />
+		<meta
+			property="og:description"
+			content="My personal collection of food places, browsable by cuisine — each entry lists the address, a rough price and a Google Maps link." />
+		<meta
+			property="og:image"
+			content="https://terrancehah.com/resources/projects/foodtracker/tanba.jpg" />
+		<meta property="og:type" content="website" />
+		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
+		<link
+			rel="canonical"
+			href="https://terrancehah.com/projects/foodtracker" />
+		<meta
+			property="og:url"
+			content="https://terrancehah.com/projects/foodtracker" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta property="twitter:domain" content="terrancehah.com" />
+		<meta
+			property="twitter:url"
+			content="https://terrancehah.com/projects/foodtracker" />
+		<meta
+			name="twitter:title"
+			content="Food Tracker - Terrance's Playground" />
+		<meta
+			name="twitter:description"
+			content="My personal collection of food places, browsable by cuisine — each entry lists the address, a rough price and a Google Maps link." />
+		<meta
+			name="twitter:image"
+			content="https://terrancehah.com/resources/projects/foodtracker/tanba.jpg" />
 
-        <!-- Shared footer + back-to-top -->
-        <script src="/js/footer.js" defer></script>
-        <title>Food Tracker - Terrance's Playground</title>
-        <!-- Vercel Analytics -->
-        <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-        </script>
-        <script defer src="/_vercel/insights/script.js"></script>
-    </head>
+		<!-- Shared footer + back-to-top -->
+		<script src="/js/footer.js" defer></script>
+		<title>Food Tracker - Terrance's Playground</title>
+		<!-- Vercel Analytics -->
+		<script>
+			window.va =
+				window.va ||
+				function () {
+					(window.vaq = window.vaq || []).push(arguments);
+				};
+		</script>
+		<script defer src="/_vercel/insights/script.js"></script>
+		<!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://terrancehah.com/#person",
+						"name": "Terrance Hah",
+						"url": "https://terrancehah.com/"
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://terrancehah.com/#website",
+						"url": "https://terrancehah.com/",
+						"name": "terrancehah.com",
+						"publisher": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					},
+					{
+						"@type": "WebPage",
+						"@id": "https://terrancehah.com/projects/foodtracker#webpage",
+						"url": "https://terrancehah.com/projects/foodtracker",
+						"name": "Food Tracker - Terrance's Playground",
+						"description": "My personal collection of food places, browsable by cuisine — each entry lists the address, a rough price and a Google Maps link.",
+						"inLanguage": "en",
+						"isPartOf": {
+							"@id": "https://terrancehah.com/#website"
+						},
+						"author": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					}
+				]
+			}
+		</script>
+	</head>
 
-    <body class="m-0 relative h-full bg-white overflow-x-hidden">
-        <header class="site-header">
-            <div class="site-header-inner">
-                <!-- Left: Logo -->
-                <div class="site-header-brand">
-                    <h1 class="site-header-title">
-                        Terrance's Playground
-                    </h1>
-                </div>
+	<body class="m-0 relative h-full bg-white overflow-x-hidden">
+		<header class="site-header">
+			<div class="site-header-inner">
+				<!-- Left: Logo -->
+				<div class="site-header-brand">
+					<p class="site-header-title">Terrance's Playground</p>
+				</div>
 
-                <!-- Middle: Nav buttons -->
-                <nav class="site-nav">
-                    <a href="/">Home</a>
-                    <a href="/articles">Articles</a>
-                    <a href="/projects" aria-current="location">Projects</a>
-                    <a href="/playground">Playground</a>
-                </nav>
-            
-                <!-- Right side: Social Icons -->
-                <div class="site-social-links">
-                    <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/facebook-png-128.webp" alt="facebook" class="site-social-icon">
-                    </a>
-                    <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/instagram-png-128.webp" alt="instagram" class="site-social-icon">
-                    </a>
-                    <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/x-png-128.webp" alt="x" class="site-social-icon">
-                    </a>
-                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/linkedin-png-128.webp" alt="linkedin" class="site-social-icon">
-                    </a>
-                    <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/github-png-128.webp" alt="github" class="site-social-icon">
-                    </a>
-                </div>
-            </div>
-        </header>
+				<!-- Middle: Nav buttons -->
+				<nav class="site-nav">
+					<a href="/">Home</a>
+					<a href="/articles">Articles</a>
+					<a href="/projects" aria-current="location">Projects</a>
+					<a href="/playground">Playground</a>
+				</nav>
 
-        <!-- Food Type Navigation -->
-        <nav class="bg-light-blue relative shadow-md w-[60%] mx-auto my-4 text-center rounded-3xl items-center" id="top">
-            <ul class="p-0 m-0 w-[90%] flex flex-wrap mx-auto justify-center items-center">
-                <li class="p-2 inline-block">
-                    <a href="#Japanese" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
-                        <img src="/resources/projects/foodtracker/Japan.png" alt="Japanese" class="h-8 w-auto m-2">
-                        Japanese
-                    </a>
-                </li>
-                <li class="p-2 inline-block">
-                    <a href="#Korean" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
-                        <img src="/resources/projects/foodtracker/korean.png" alt="Korean" class="h-8 w-auto m-2">
-                        Korean
-                    </a>
-                </li>
-                <li class="p-2 inline-block">
-                    <a href="#Western" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
-                        <img src="/resources/projects/foodtracker/western.png" alt="Western" class="h-8 w-auto m-2">
-                        Western
-                    </a>
-                </li>
-                <li class="p-2 inline-block">
-                    <a href="#Chinese" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
-                        <img src="/resources/projects/foodtracker/chinese.jpg" alt="Chinese" class="h-8 w-auto m-2">
-                        Chinese
-                    </a>
-                </li>
-                <li class="p-2 inline-block">
-                    <a href="#Desserts" class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
-                        <img src="/resources/projects/foodtracker/desert.webp" alt="Desserts" class="h-8 w-auto m-2">
-                        Desserts
-                    </a>
-                </li>
-            </ul>
-        </nav>
+				<!-- Right side: Social Icons -->
+				<div class="site-social-links">
+					<a
+						href="https://facebook.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/facebook-png-128.webp"
+							alt="facebook"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://instagram.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/instagram-png-128.webp"
+							alt="instagram"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://x.com/terrance_hah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/x-png-128.webp"
+							alt="x"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://www.linkedin.com/in/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/linkedin-png-128.webp"
+							alt="linkedin"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://github.com/terrancehah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/github-png-128.webp"
+							alt="github"
+							class="site-social-icon" />
+					</a>
+				</div>
+			</div>
+		</header>
 
-        <main class="w-full">
-            <!-- Japanese Section -->
-            <section id="Japanese" class="mb-12">
-                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Japanese</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
-                    <!-- Tanba Japanese BBQ -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/optimized/projects/foodtracker/tanba-jpg-1920.webp" alt="Tanba Japanese BBQ" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="1920" height="1225" srcset="/resources/optimized/projects/foodtracker/tanba-jpg-640.webp 640w, /resources/optimized/projects/foodtracker/tanba-jpg-1280.webp 1280w, /resources/optimized/projects/foodtracker/tanba-jpg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 2rem), 960px">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Tanba Japanese BBQ</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Tanba Yakiniku</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant serving Japanese BBQ</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">Twin Galaxy, #01-03 #01-05 #01-06, Jalan Dato Abdullah Tahir, Taman Abad</p>
-                            <a href="tel:+6073821368" class="font-raleway text-sky-blue hover:text-secondary">+607-3821368</a>
-                            <a href="https://goo.gl/maps/yq8Zb93UEDQErrhX6" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
+		<!-- Food Type Navigation -->
+		<nav
+			class="bg-light-blue relative shadow-md w-[60%] mx-auto my-4 text-center rounded-3xl items-center"
+			id="top">
+			<ul
+				class="p-0 m-0 w-[90%] flex flex-wrap mx-auto justify-center items-center">
+				<li class="p-2 inline-block">
+					<a
+						href="#Japanese"
+						class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+						<img
+							src="/resources/projects/foodtracker/Japan.png"
+							alt="Japanese"
+							class="h-8 w-auto m-2" />
+						Japanese
+					</a>
+				</li>
+				<li class="p-2 inline-block">
+					<a
+						href="#Korean"
+						class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+						<img
+							src="/resources/projects/foodtracker/korean.png"
+							alt="Korean"
+							class="h-8 w-auto m-2" />
+						Korean
+					</a>
+				</li>
+				<li class="p-2 inline-block">
+					<a
+						href="#Western"
+						class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+						<img
+							src="/resources/projects/foodtracker/western.png"
+							alt="Western"
+							class="h-8 w-auto m-2" />
+						Western
+					</a>
+				</li>
+				<li class="p-2 inline-block">
+					<a
+						href="#Chinese"
+						class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+						<img
+							src="/resources/projects/foodtracker/chinese.jpg"
+							alt="Chinese"
+							class="h-8 w-auto m-2" />
+						Chinese
+					</a>
+				</li>
+				<li class="p-2 inline-block">
+					<a
+						href="#Desserts"
+						class="text-xl sm:text-xl font-raleway font-medium text-[#1D3557] no-underline flex items-center p-2 hover:bg-[#A8DADC]">
+						<img
+							src="/resources/projects/foodtracker/desert.webp"
+							alt="Desserts"
+							class="h-8 w-auto m-2" />
+						Desserts
+					</a>
+				</li>
+			</ul>
+		</nav>
 
-                    <!-- Yakiniku Hinata -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/projects/foodtracker/hinata.jpg" alt="Yakiniku Hinata" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="560" height="340">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Yakiniku Hinata</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Hinata Authentic Japanese Cuisine</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant serving Japanese Yakiniku</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">Ground Floor, St.Mary, 1, Jalan Tengah, Kuala Lumpur</p>
-                            <a href="tel:+60320222349" class="font-raleway text-sky-blue hover:text-secondary">+603-20222349</a>
-                            <a href="https://goo.gl/maps/CfpNLtzcjAQNKbwRA" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
+		<main class="w-full">
+			<!-- Page intro: what this collection is and what each entry gives you -->
+			<section class="mb-12 px-8">
+				<h1
+					class="font-lato font-bold text-3xl sm:text-4xl text-[#1d3557] mb-4">
+					Food Tracker
+				</h1>
+				<p class="font-raleway text-lg text-gray-700 max-w-3xl">
+					My personal collection of food places, browsable by cuisine
+					below. Each entry notes the address, a rough price and a
+					Google Maps link so you can find your way there. It is a
+					personal list rather than an exhaustive or live-verified
+					directory, so it is worth checking the details before you
+					go.
+				</p>
+			</section>
 
-                    <!-- Jyunzen Japanese Food -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/projects/foodtracker/jyunzen.jpg" alt="Jyunzen Japanese Food" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="1322" height="991">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Jyunzen Japanese Food</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Jyunzen Japanese Restaurant</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant serving Japanese food</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">56&58-G, Jalan Pertama 1, Pusat Perdagangan Danga Utama</p>
-                            <a href="tel:+60196111222" class="font-raleway text-sky-blue hover:text-secondary">+6019-6111222</a>
-                            <a href="https://goo.gl/maps/AVQrTtWMjZtP9sb9A" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
+			<!-- Japanese Section -->
+			<section id="Japanese" class="mb-12">
+				<h2
+					class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">
+					Japanese
+				</h2>
 
-                    <!-- Kirishima Shuzou -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/projects/foodtracker/kirishima.jpg" alt="Kirishima Shuzou" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="1200" height="800">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Kirishima Shuzou</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Kirishima Shuzou Japanese Restaurant</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">An authentic izakaya serving Japanese food and umeshu</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">1st floor, Crystal Crown Hotel, 117 Jalan Tebrau, Taman Century</p>
-                            <a href="tel:+607-2762838" class="font-raleway text-sky-blue over:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+					<!-- Tanba Japanese BBQ -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/optimized/projects/foodtracker/tanba-jpg-1920.webp"
+								alt="Tanba Japanese BBQ"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="1920"
+								height="1225"
+								srcset="
+									/resources/optimized/projects/foodtracker/tanba-jpg-640.webp   640w,
+									/resources/optimized/projects/foodtracker/tanba-jpg-1280.webp 1280w,
+									/resources/optimized/projects/foodtracker/tanba-jpg-1920.webp 1920w
+								"
+								sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Tanba Japanese BBQ
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Tanba Yakiniku
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								A restaurant serving Japanese BBQ
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								Twin Galaxy, #01-03 #01-05 #01-06, Jalan Dato
+								Abdullah Tahir, Taman Abad
+							</p>
+							<a
+								href="tel:+6073821368"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+607-3821368</a
+							>
+							<a
+								href="https://goo.gl/maps/yq8Zb93UEDQErrhX6"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
 
-            <!-- Korean Section -->
-            <section id="Korean" class="mb-12">
-                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Korean</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
-                    <!-- Palsaik Korean BBQ -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2 relative">
-                            <div class="carousel">
-                                <img src="/resources/optimized/projects/foodtracker/koreanbbq-jpg-1920.webp" alt="Palsaik Korean BBQ 1" class="w-full h-64 object-cover rounded-lg carousel-item" loading="lazy" decoding="async" width="1920" height="1280" srcset="/resources/optimized/projects/foodtracker/koreanbbq-jpg-640.webp 640w, /resources/optimized/projects/foodtracker/koreanbbq-jpg-1280.webp 1280w, /resources/optimized/projects/foodtracker/koreanbbq-jpg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 2rem), 960px">
-                                <img src="/resources/optimized/projects/foodtracker/palsaik2-jpg-1074.webp" alt="Palsaik Korean BBQ 2" class="w-full h-64 object-cover rounded-lg carousel-item hidden" loading="lazy" decoding="async" width="1074" height="1014" srcset="/resources/optimized/projects/foodtracker/palsaik2-jpg-640.webp 640w, /resources/optimized/projects/foodtracker/palsaik2-jpg-1074.webp 1074w" sizes="(max-width: 767px) calc(100vw - 2rem), 960px">
-                                <img src="/resources/optimized/projects/foodtracker/palsaik3-jpg-1080.webp" alt="Palsaik Korean BBQ 3" class="w-full h-64 object-cover rounded-lg carousel-item hidden" loading="lazy" decoding="async" width="1080" height="1011" srcset="/resources/optimized/projects/foodtracker/palsaik3-jpg-640.webp 640w, /resources/optimized/projects/foodtracker/palsaik3-jpg-1080.webp 1080w" sizes="(max-width: 767px) calc(100vw - 2rem), 960px">
-                            </div>
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Palsaik Korean BBQ</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Palsaik Korean BBQ Sutera</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant serving korean BBQ</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">51, Jalan Sutera Tanjung 8/2, Taman Sutera Utama</p>
-                            <a href="tel:+6075563833" class="font-raleway text-sky-blue hover:text-secondary">+607-5563833</a>
-                            <a href="https://goo.gl/maps/EBPUQkGfAi24i5xJ6" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
+					<!-- Yakiniku Hinata -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/projects/foodtracker/hinata.jpg"
+								alt="Yakiniku Hinata"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="560"
+								height="340" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Yakiniku Hinata
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Hinata Authentic Japanese Cuisine
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								A restaurant serving Japanese Yakiniku
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								Ground Floor, St.Mary, 1, Jalan Tengah, Kuala
+								Lumpur
+							</p>
+							<a
+								href="tel:+60320222349"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+603-20222349</a
+							>
+							<a
+								href="https://goo.gl/maps/CfpNLtzcjAQNKbwRA"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
 
-                    <!-- Gyumore Yakiniku -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/projects/foodtracker/gyumore.jpg" alt="Gyumore Yakiniku" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="999" height="574">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Gyumore Yakiniku</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Gyumore Yakiniku 牛魔日韩烧烤专卖店</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">A restaurant specializing in serving beef</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">32, Jalan Sutera Tanjung 8/3, Taman Sutera Utama</p>
-                            <a href="tel:+60125678606" class="font-raleway text-sky-blue hover:text-secondary">+6012-5678606</a>
-                            <a href="https://goo.gl/maps/fx5uVYHd6T5rGNWw6" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+					<!-- Jyunzen Japanese Food -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/projects/foodtracker/jyunzen.jpg"
+								alt="Jyunzen Japanese Food"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="1322"
+								height="991" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Jyunzen Japanese Food
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Jyunzen Japanese Restaurant
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								A restaurant serving Japanese food
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								56&58-G, Jalan Pertama 1, Pusat Perdagangan
+								Danga Utama
+							</p>
+							<a
+								href="tel:+60196111222"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+6019-6111222</a
+							>
+							<a
+								href="https://goo.gl/maps/AVQrTtWMjZtP9sb9A"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
 
-            <!-- Western Section -->
-            <section id="Western" class="mb-12">
-                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Western</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
-                    <!-- AnMour Western Food -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/optimized/projects/foodtracker/anmour-jpg-1920.webp" alt="AnMour Western Food" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="1920" height="1282" srcset="/resources/optimized/projects/foodtracker/anmour-jpg-640.webp 640w, /resources/optimized/projects/foodtracker/anmour-jpg-1280.webp 1280w, /resources/optimized/projects/foodtracker/anmour-jpg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 2rem), 960px">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">AnMour Western Food</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by AnMour Cafe</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">Steak. Pasta. Burger.</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">36, Jalan Sutera Tanjung 8/3, Taman Sutera Utama</p>
-                            <a href="tel:+6075563420" class="font-raleway text-sky-blue hover:text-secondary">+607-5563420</a>
-                            <a href="https://goo.gl/maps/AVQrTtWMjZtP9sb9A" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
+					<!-- Kirishima Shuzou -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/projects/foodtracker/kirishima.jpg"
+								alt="Kirishima Shuzou"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="1200"
+								height="800" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Kirishima Shuzou
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Kirishima Shuzou Japanese Restaurant
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								An authentic izakaya serving Japanese food and
+								umeshu
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								1st floor, Crystal Crown Hotel, 117 Jalan
+								Tebrau, Taman Century
+							</p>
+							<a
+								href="tel:+607-2762838"
+								class="font-raleway text-sky-blue over:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
+				</div>
+			</section>
 
-                    <!-- Grill Bar -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/projects/foodtracker/grillbar.jpg" alt="Grill Bar" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="1080" height="810">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Grill Bar</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Grill Bar Steakhouse</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">An steakhouse serving beef and lamb steaks</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">202, Jalan Sri Pelangi, Taman Pelangi</p>
-                            <a href="tel:+60193373400" class="font-raleway text-sky-blue hover:text-secondary">+6019-3373400</a>
-                            <a href="https://goo.gl/maps/wWLTjkAej2X7pRqe7" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+			<!-- Korean Section -->
+			<section id="Korean" class="mb-12">
+				<h2
+					class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">
+					Korean
+				</h2>
 
-            <!-- Chinese Section -->
-            <section id="Chinese" class="mb-12">
-                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Chinese</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
-                    <!-- Chua Kee Seafood -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/projects/foodtracker/caiji.jpg" alt="Chua Kee Seafood" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="960" height="720">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Chua Kee Seafood</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Restoran Chua Kee</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">Seafood Restaurant, especially famous with their crabs</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">Jalan Kacang Panjang, Gelang Patah</p>
-                            <a href="tel:+60127610529" class="font-raleway text-sky-blue hover:text-secondary">+6012-7610529</a>
-                            <a href="https://goo.gl/maps/ZsJDr56QUo2awm9VA" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+					<!-- Palsaik Korean BBQ -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2 relative">
+							<div class="carousel">
+								<img
+									src="/resources/optimized/projects/foodtracker/koreanbbq-jpg-1920.webp"
+									alt="Palsaik Korean BBQ 1"
+									class="w-full h-64 object-cover rounded-lg carousel-item"
+									loading="lazy"
+									decoding="async"
+									width="1920"
+									height="1280"
+									srcset="
+										/resources/optimized/projects/foodtracker/koreanbbq-jpg-640.webp   640w,
+										/resources/optimized/projects/foodtracker/koreanbbq-jpg-1280.webp 1280w,
+										/resources/optimized/projects/foodtracker/koreanbbq-jpg-1920.webp 1920w
+									"
+									sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
+								<img
+									src="/resources/optimized/projects/foodtracker/palsaik2-jpg-1074.webp"
+									alt="Palsaik Korean BBQ 2"
+									class="w-full h-64 object-cover rounded-lg carousel-item hidden"
+									loading="lazy"
+									decoding="async"
+									width="1074"
+									height="1014"
+									srcset="
+										/resources/optimized/projects/foodtracker/palsaik2-jpg-640.webp   640w,
+										/resources/optimized/projects/foodtracker/palsaik2-jpg-1074.webp 1074w
+									"
+									sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
+								<img
+									src="/resources/optimized/projects/foodtracker/palsaik3-jpg-1080.webp"
+									alt="Palsaik Korean BBQ 3"
+									class="w-full h-64 object-cover rounded-lg carousel-item hidden"
+									loading="lazy"
+									decoding="async"
+									width="1080"
+									height="1011"
+									srcset="
+										/resources/optimized/projects/foodtracker/palsaik3-jpg-640.webp   640w,
+										/resources/optimized/projects/foodtracker/palsaik3-jpg-1080.webp 1080w
+									"
+									sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
+							</div>
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Palsaik Korean BBQ
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Palsaik Korean BBQ Sutera
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								A restaurant serving korean BBQ
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								51, Jalan Sutera Tanjung 8/2, Taman Sutera Utama
+							</p>
+							<a
+								href="tel:+6075563833"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+607-5563833</a
+							>
+							<a
+								href="https://goo.gl/maps/EBPUQkGfAi24i5xJ6"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
 
-                    <!-- Kiang Kee Bak Kut Teh -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/projects/foodtracker/kiangkee.jpg" alt="Kiang Kee Bak Kut Teh" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="960" height="676">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Bak Kut Teh</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Kiang Kee Bak Kut Teh 強記肉骨茶</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">An infamous Bak Kut Teh shop</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">Batu 8, Jalan Mawai, Kampung Haji Mohd Jambi</p>
-                            <a href="tel:+60197479416" class="font-raleway text-sky-blue hover:text-secondary">+6019-7479416</a>
-                            <a href="https://g.page/KiangKeeBKT?share" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+					<!-- Gyumore Yakiniku -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/projects/foodtracker/gyumore.jpg"
+								alt="Gyumore Yakiniku"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="999"
+								height="574" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Gyumore Yakiniku
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Gyumore Yakiniku 牛魔日韩烧烤专卖店
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								A restaurant specializing in serving beef
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								32, Jalan Sutera Tanjung 8/3, Taman Sutera Utama
+							</p>
+							<a
+								href="tel:+60125678606"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+6012-5678606</a
+							>
+							<a
+								href="https://goo.gl/maps/fx5uVYHd6T5rGNWw6"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
+				</div>
+			</section>
 
-            <!-- Desserts Section -->
-            <section id="Desserts" class="mb-12">
-                <h2 class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">Desserts</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
-                    <!-- Fam Cafe -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/optimized/projects/foodtracker/fam-jpg-1920.webp" alt="Fam Cafe" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="1920" height="1440" srcset="/resources/optimized/projects/foodtracker/fam-jpg-640.webp 640w, /resources/optimized/projects/foodtracker/fam-jpg-1280.webp 1280w, /resources/optimized/projects/foodtracker/fam-jpg-1920.webp 1920w" sizes="(max-width: 767px) calc(100vw - 2rem), 960px">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Fam Cafe Cake</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Fam Cafe</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">A cafe serving main courses and cakes</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">Sutera Mall, Jalan Sutera Tanjung 8/4, Taman Sutera Utama</p>
-                            <a href="tel:+60187704035" class="font-raleway text-sky-blue hover:text-secondary">+6018-7704035</a>
-                            <a href="https://goo.gl/maps/NuZWwEGqkxVkod7E9" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
+			<!-- Western Section -->
+			<section id="Western" class="mb-12">
+				<h2
+					class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">
+					Western
+				</h2>
 
-                    <!-- Dreamz Bakery -->
-                    <div class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/2">
-                            <img src="/resources/projects/foodtracker/dreamz.jpg" alt="Dreamz Bakery" class="w-full h-64 object-cover rounded-lg" loading="lazy" decoding="async" width="1080" height="720">
-                        </div>
-                        <div class="md:w-1/2">
-                            <h3 class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">Monster Lava Cookies</h3>
-                            <p class="font-raleway text-lg text-[#457B9D] mb-2">by Dreamz Bakery</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">A bakery serving out-of-the-box desserts</p>
-                            <p class="font-raleway text-lg text-[#1d3557] mb-2">$$$</p>
-                            <p class="font-raleway text-base text-gray-600 mb-2">No 32-1, The Strand, Jalan PJU 5/20D, Pusat Perdagangan, Kota Damansara</p>
-                            <a href="tel:+60122003441" class="font-raleway text-sky-blue hover:text-secondary">+6012-2003441</a>
-                            <a href="https://goo.gl/maps/qPXt2Ejtsqm9x6XP8" target="_blank" class="block font-raleway text-sky-blue hover:text-secondary mt-2">View on Google Maps</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+					<!-- AnMour Western Food -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/optimized/projects/foodtracker/anmour-jpg-1920.webp"
+								alt="AnMour Western Food"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="1920"
+								height="1282"
+								srcset="
+									/resources/optimized/projects/foodtracker/anmour-jpg-640.webp   640w,
+									/resources/optimized/projects/foodtracker/anmour-jpg-1280.webp 1280w,
+									/resources/optimized/projects/foodtracker/anmour-jpg-1920.webp 1920w
+								"
+								sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								AnMour Western Food
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by AnMour Cafe
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								Steak. Pasta. Burger.
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								36, Jalan Sutera Tanjung 8/3, Taman Sutera Utama
+							</p>
+							<a
+								href="tel:+6075563420"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+607-5563420</a
+							>
+							<a
+								href="https://goo.gl/maps/AVQrTtWMjZtP9sb9A"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
 
-        <!-- Back to Top Button -->
-        <!-- <a href="#top" class="fixed bottom-4 right-4 bg-light-blue text-[#1D3557] px-4 py-2 rounded-lg font-raleway font-semibold text-lg hover:bg-[#457B9D] hover:text-light-blue hover:shadow-all transition-all duration-300">
+					<!-- Grill Bar -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/projects/foodtracker/grillbar.jpg"
+								alt="Grill Bar"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="1080"
+								height="810" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Grill Bar
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Grill Bar Steakhouse
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								An steakhouse serving beef and lamb steaks
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								202, Jalan Sri Pelangi, Taman Pelangi
+							</p>
+							<a
+								href="tel:+60193373400"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+6019-3373400</a
+							>
+							<a
+								href="https://goo.gl/maps/wWLTjkAej2X7pRqe7"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Chinese Section -->
+			<section id="Chinese" class="mb-12">
+				<h2
+					class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">
+					Chinese
+				</h2>
+
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+					<!-- Chua Kee Seafood -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/projects/foodtracker/caiji.jpg"
+								alt="Chua Kee Seafood"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="960"
+								height="720" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Chua Kee Seafood
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Restoran Chua Kee
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								Seafood Restaurant, especially famous with their
+								crabs
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								Jalan Kacang Panjang, Gelang Patah
+							</p>
+							<a
+								href="tel:+60127610529"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+6012-7610529</a
+							>
+							<a
+								href="https://goo.gl/maps/ZsJDr56QUo2awm9VA"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
+
+					<!-- Kiang Kee Bak Kut Teh -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/projects/foodtracker/kiangkee.jpg"
+								alt="Kiang Kee Bak Kut Teh"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="960"
+								height="676" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Bak Kut Teh
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Kiang Kee Bak Kut Teh 強記肉骨茶
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								An infamous Bak Kut Teh shop
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								Batu 8, Jalan Mawai, Kampung Haji Mohd Jambi
+							</p>
+							<a
+								href="tel:+60197479416"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+6019-7479416</a
+							>
+							<a
+								href="https://g.page/KiangKeeBKT?share"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Desserts Section -->
+			<section id="Desserts" class="mb-12">
+				<h2
+					class="font-lato font-bold text-3xl sm:text-3xl text-[#1d3557] px-8 mb-6">
+					Desserts
+				</h2>
+
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
+					<!-- Fam Cafe -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/optimized/projects/foodtracker/fam-jpg-1920.webp"
+								alt="Fam Cafe"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="1920"
+								height="1440"
+								srcset="
+									/resources/optimized/projects/foodtracker/fam-jpg-640.webp   640w,
+									/resources/optimized/projects/foodtracker/fam-jpg-1280.webp 1280w,
+									/resources/optimized/projects/foodtracker/fam-jpg-1920.webp 1920w
+								"
+								sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Fam Cafe Cake
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Fam Cafe
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								A cafe serving main courses and cakes
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								Sutera Mall, Jalan Sutera Tanjung 8/4, Taman
+								Sutera Utama
+							</p>
+							<a
+								href="tel:+60187704035"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+6018-7704035</a
+							>
+							<a
+								href="https://goo.gl/maps/NuZWwEGqkxVkod7E9"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
+
+					<!-- Dreamz Bakery -->
+					<div
+						class="bg-white rounded-xl shadow-all p-6 flex flex-col md:flex-row gap-6">
+						<div class="md:w-1/2">
+							<img
+								src="/resources/projects/foodtracker/dreamz.jpg"
+								alt="Dreamz Bakery"
+								class="w-full h-64 object-cover rounded-lg"
+								loading="lazy"
+								decoding="async"
+								width="1080"
+								height="720" />
+						</div>
+						<div class="md:w-1/2">
+							<h3
+								class="font-lato font-semibold text-2xl text-[#1d3557] mb-2">
+								Monster Lava Cookies
+							</h3>
+							<p class="font-raleway text-lg text-[#457B9D] mb-2">
+								by Dreamz Bakery
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								A bakery serving out-of-the-box desserts
+							</p>
+							<p class="font-raleway text-lg text-[#1d3557] mb-2">
+								$$$
+							</p>
+							<p
+								class="font-raleway text-base text-gray-600 mb-2">
+								No 32-1, The Strand, Jalan PJU 5/20D, Pusat
+								Perdagangan, Kota Damansara
+							</p>
+							<a
+								href="tel:+60122003441"
+								class="font-raleway text-sky-blue hover:text-secondary"
+								>+6012-2003441</a
+							>
+							<a
+								href="https://goo.gl/maps/qPXt2Ejtsqm9x6XP8"
+								target="_blank"
+								class="block font-raleway text-sky-blue hover:text-secondary mt-2"
+								>View on Google Maps</a
+							>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Back to Top Button -->
+		<!-- <a href="#top" class="fixed bottom-4 right-4 bg-light-blue text-[#1D3557] px-4 py-2 rounded-lg font-raleway font-semibold text-lg hover:bg-[#457B9D] hover:text-light-blue hover:shadow-all transition-all duration-300">
             Back to Top
         </a> -->
 
-        <!-- Footer will be inserted by footer.js -->
+		<!-- Footer will be inserted by footer.js -->
 
-        <!-- Carousel Script
+		<!-- Carousel Script
         <script>
             let slideIndex = 1;
             showSlides(slideIndex);
@@ -385,5 +954,5 @@
                 plusSlides(1);
             }, 4000);
         </script> -->
-    </body>
+	</body>
 </html>

@@ -3,7 +3,7 @@
    --------------------------------------------
    Single source of truth for the personal site's standard header:
    <header class="site-header"><div class="site-header-inner">
-   brand (.site-header-brand > h1.site-header-title),
+   brand (.site-header-brand > p.site-header-title),
    nav (.site-nav — pulled in below), socials (.site-social-links).
    Imported by styles/style.css; older pages that skip the legacy
    stylesheet link this file directly. The homepage retunes it with

@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="My personal learning roadmap to move from tuition teaching into web development and machine learning." />
 		<!-- Fonts: one consolidated request listing only the weights the
 		     site uses. preconnect warms the gstatic origin so the font
 		     files start as soon as the CSS arrives. -->
@@ -20,793 +23,2673 @@
 		<link href="/styles/site-navigation.css" rel="stylesheet" />
 		<link href="/styles/site-motion.css" rel="stylesheet" />
 		<link href="/styles/site-header.css" rel="stylesheet" />
-        <link href="/styles/output.css" rel="stylesheet">
-        <link href="/projects/projects.css" type="text/css" rel="stylesheet">
-        <!-- Footer-only stylesheet for the footer.js-injected footer -->
-        <link href="/styles/site-footer.css" type="text/css" rel="stylesheet">
-        <!-- Shared header stylesheet (this page doesn't load styles/style.css;
+		<link href="/styles/output.css" rel="stylesheet" />
+		<link href="/projects/projects.css" type="text/css" rel="stylesheet" />
+		<!-- Footer-only stylesheet for the footer.js-injected footer -->
+		<link href="/styles/site-footer.css" type="text/css" rel="stylesheet" />
+		<!-- Shared header stylesheet (this page doesn't load styles/style.css;
          site-header.css itself imports the shared nav sheet) -->
-        <link href="/styles/site-header.css" type="text/css" rel="stylesheet">
-        <link rel="icon" href="/resources/icons/TH-logo.png" type="image/x-icon">
-        <meta property="og:title" content="Career Plan - Terrance's Playground">
-        <meta property="og:description" content="My plan to transition into web development and machine learning.">
-        <meta property="og:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
-        <meta property="og:type" content="article">
-        <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
-        <link rel="canonical" href="https://terrancehah.com/projects/career-plan">
-        <meta property="og:url" content="https://terrancehah.com/projects/career-plan">
+		<link href="/styles/site-header.css" type="text/css" rel="stylesheet" />
+		<link
+			rel="icon"
+			href="/resources/icons/TH-logo.png"
+			type="image/x-icon" />
+		<meta
+			property="og:title"
+			content="Career Plan - Terrance's Playground" />
+		<meta
+			property="og:description"
+			content="My personal learning roadmap to move from tuition teaching into web development and machine learning." />
+		<meta
+			property="og:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
+		<meta property="og:type" content="website" />
+		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
+		<link
+			rel="canonical"
+			href="https://terrancehah.com/projects/career-plan" />
+		<meta
+			property="og:url"
+			content="https://terrancehah.com/projects/career-plan" />
+		<meta name="twitter:card" content="summary" />
+		<meta property="twitter:domain" content="terrancehah.com" />
+		<meta
+			property="twitter:url"
+			content="https://terrancehah.com/projects/career-plan" />
+		<meta
+			name="twitter:title"
+			content="Career Plan - Terrance's Playground" />
+		<meta
+			name="twitter:description"
+			content="My personal learning roadmap to move from tuition teaching into web development and machine learning." />
+		<meta
+			name="twitter:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
 
-        <!-- Shared footer + back-to-top -->
-        <script src="/js/footer.js" defer></script>
-        <title>Career Plan - Terrance's Playground</title>
-        <!-- Vercel Analytics -->
-    <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-</head>
+		<!-- Shared footer + back-to-top -->
+		<script src="/js/footer.js" defer></script>
+		<title>Career Plan - Terrance's Playground</title>
+		<!-- Vercel Analytics -->
+		<script>
+			window.va =
+				window.va ||
+				function () {
+					(window.vaq = window.vaq || []).push(arguments);
+				};
+		</script>
+		<script defer src="/_vercel/insights/script.js"></script>
+		<!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://terrancehah.com/#person",
+						"name": "Terrance Hah",
+						"url": "https://terrancehah.com/"
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://terrancehah.com/#website",
+						"url": "https://terrancehah.com/",
+						"name": "terrancehah.com",
+						"publisher": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					},
+					{
+						"@type": "WebPage",
+						"@id": "https://terrancehah.com/projects/career-plan#webpage",
+						"url": "https://terrancehah.com/projects/career-plan",
+						"name": "Career Plan - Terrance's Playground",
+						"description": "My personal learning roadmap to move from tuition teaching into web development and machine learning.",
+						"inLanguage": "en",
+						"isPartOf": {
+							"@id": "https://terrancehah.com/#website"
+						},
+						"author": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					}
+				]
+			}
+		</script>
+	</head>
 
-    <body class="m-0 relative h-full bg-white overflow-x-hidden">
-        <header class="site-header">
-            <div class="site-header-inner">
-                <!-- Left: Title -->
-                <div class="site-header-brand">
-                    <h1 class="site-header-title">
-                        Terrance's Playground
-                    </h1>
-                </div>
+	<body class="m-0 relative h-full bg-white overflow-x-hidden">
+		<header class="site-header">
+			<div class="site-header-inner">
+				<!-- Left: Title -->
+				<div class="site-header-brand">
+					<p class="site-header-title">Terrance's Playground</p>
+				</div>
 
-                <!-- Middle: Nav buttons -->
-                <nav class="site-nav">
-                    <a href="/">Home</a>
-                    <a href="/articles">Articles</a>
-                    <a href="/projects" aria-current="location">Projects</a>
-                    <a href="/playground">Playground</a>
-                </nav>
+				<!-- Middle: Nav buttons -->
+				<nav class="site-nav">
+					<a href="/">Home</a>
+					<a href="/articles">Articles</a>
+					<a href="/projects" aria-current="location">Projects</a>
+					<a href="/playground">Playground</a>
+				</nav>
 
-                <!-- Right side: Social Icons -->
-                <div class="site-social-links">
-                    <a href="https://facebook.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/facebook-png-128.webp" alt="facebook" class="site-social-icon">
-                    </a>
-                    <a href="https://instagram.com/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/instagram-png-128.webp" alt="instagram" class="site-social-icon">
-                    </a>
-                    <a href="https://x.com/terrance_hah" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/x-png-128.webp" alt="x" class="site-social-icon">
-                    </a>
-                    <a href="https://www.linkedin.com/in/terrancehah/" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/linkedin-png-128.webp" alt="linkedin" class="site-social-icon">
-                    </a>
-                    <a href="https://github.com/terrancehah" target="_blank" class="site-social-link">
-                        <img src="/resources/optimized/icons/github-png-128.webp" alt="github" class="site-social-icon">
-                    </a>
-                </div>
-            </div>
-        </header>
+				<!-- Right side: Social Icons -->
+				<div class="site-social-links">
+					<a
+						href="https://facebook.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/facebook-png-128.webp"
+							alt="facebook"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://instagram.com/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/instagram-png-128.webp"
+							alt="instagram"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://x.com/terrance_hah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/x-png-128.webp"
+							alt="x"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://www.linkedin.com/in/terrancehah/"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/linkedin-png-128.webp"
+							alt="linkedin"
+							class="site-social-icon" />
+					</a>
+					<a
+						href="https://github.com/terrancehah"
+						target="_blank"
+						class="site-social-link">
+						<img
+							src="/resources/optimized/icons/github-png-128.webp"
+							alt="github"
+							class="site-social-icon" />
+					</a>
+				</div>
+			</div>
+		</header>
 
-        <main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
-            <article class="prose prose-lg lg:prose-xl mx-auto">
-                <!-- Back to Projects Link
+		<main
+			class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8 max-w-screen-2xl mx-auto">
+			<article class="prose prose-lg lg:prose-xl mx-auto">
+				<!-- Back to Projects Link
                 <div class="mb-4">
                     <a href="/projects" class="text-[#457B9D] hover:underline">← Back to Projects</a>
                 </div> -->
 
-                <h1 class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557] text-center mb-4">Career Plan</h1>
-                <p class="text-base sm:text-lg md:text-xl text-gray-600 text-center mb-8 font-light font-raleway">updated on 20 May 2025</p>
+				<h1
+					class="font-lato font-bold text-3xl sm:text-3xl md:text-4xl text-[#1d3557] text-center mb-4">
+					Career Plan
+				</h1>
+				<p
+					class="text-base sm:text-lg md:text-xl text-gray-600 text-center mb-8 font-light font-raleway">
+					updated on 20 May 2025
+				</p>
 
-                <div class="font-lato text-lg sm:text-xl space-y-12">
-                    <!-- Introduction -->
-                    <section>
-                        <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-6">Introduction</h2>
-                        <p>This page outlines my plan to transition from my current role as a tuition teacher to a career in web development and machine learning, with the goal of landing a remote job opportunity.</p>
-                    </section>
+				<div class="font-lato text-lg sm:text-xl space-y-12">
+					<!-- Introduction -->
+					<section>
+						<h2
+							class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-6">
+							Introduction
+						</h2>
+						<p>
+							This page outlines my plan to transition from my
+							current role as a tuition teacher to a career in web
+							development and machine learning, with the goal of
+							landing a remote job opportunity.
+						</p>
+						<p class="mt-4">
+							This is my own learning roadmap — the personal plan
+							I am following, shared in case it helps someone on a
+							similar path. It is not a career-advice service.
+						</p>
+					</section>
 
-                    <!-- Career Roadmap Phases -->
-                    <section id="roadmap-phases" class="mb-12">
-                        <!-- <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-8 text-center">Career Roadmap Phases</h2> -->
-                        <div class="tabs-container">
-                            <!-- Tab Headers -->
-                            <div class="flex flex-wrap w-full justify-between items-center">
-                                <button class="tab-btn p-4 px-6 sm:px-10 lg:px-12 xl:px-14 w-max font-raleway font-medium text-base bg-slate-200 text-[#1d3557] active" data-tab="phase1">Phase 1: Skill Development</button>
-                                <button class="tab-btn p-4 px-6 sm:px-10 lg:px-12 xl:px-14 w-max font-raleway font-medium text-base bg-slate-200 text-[#1d3557]" data-tab="phase2">Phase 2: AI Portfolio Project</button>
-                                <button class="tab-btn p-4 px-6 sm:px-10 lg:px-12 xl:px-14 w-max font-raleway font-medium text-base bg-slate-200 text-[#1d3557]" data-tab="phase3">Phase 3: Job Search</button>
-                                <button class="tab-btn p-4 px-6 sm:px-10 lg:px-12 xl:px-14 w-max font-raleway font-medium text-base bg-slate-200 text-[#1d3557]" data-tab="phase4">Phase 4: Relocation</button>
-                            </div>
-                            
-                            <!-- Tab Content -->
-                            <div class="tabs-content">
+					<!-- Career Roadmap Phases -->
+					<section id="roadmap-phases" class="mb-12">
+						<!-- <h2 class="font-lato font-semibold text-2xl sm:text-3xl text-[#1d3557] mb-8 text-center">Career Roadmap Phases</h2> -->
+						<div class="tabs-container">
+							<!-- Tab Headers -->
+							<div
+								class="flex flex-wrap w-full justify-between items-center">
+								<button
+									class="tab-btn p-4 px-6 sm:px-10 lg:px-12 xl:px-14 w-max font-raleway font-medium text-base bg-slate-200 text-[#1d3557] active"
+									data-tab="phase1">
+									Phase 1: Skill Development
+								</button>
+								<button
+									class="tab-btn p-4 px-6 sm:px-10 lg:px-12 xl:px-14 w-max font-raleway font-medium text-base bg-slate-200 text-[#1d3557]"
+									data-tab="phase2">
+									Phase 2: AI Portfolio Project
+								</button>
+								<button
+									class="tab-btn p-4 px-6 sm:px-10 lg:px-12 xl:px-14 w-max font-raleway font-medium text-base bg-slate-200 text-[#1d3557]"
+									data-tab="phase3">
+									Phase 3: Job Search
+								</button>
+								<button
+									class="tab-btn p-4 px-6 sm:px-10 lg:px-12 xl:px-14 w-max font-raleway font-medium text-base bg-slate-200 text-[#1d3557]"
+									data-tab="phase4">
+									Phase 4: Relocation
+								</button>
+							</div>
 
-                                <!-- Phase 1: Skill Development -->
-                                <div id="phase1" class="tab-pane active bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                                    <h3 class="font-raleway font-bold text-xl sm:text-2xl text-[#1d3557] mb-4">Phase 1: Skill Development</h3>
-                                    <p class="font-lato text-[#457B9D] mb-6 text-base sm:text-lg leading-relaxed">
-                                        Focus on acquiring the necessary skills for web development and machine learning. This foundational phase involves structured learning through courses and practical application of new concepts.
-                                    </p>
-                                    <h4 class="font-lato font-semibold text-lg text-[#457B9D] mb-4">Tasks & Milestones:</h4>
-                                    <div class="space-y-4 text-gray-700 flex-grow">
-                                        <label for="task-1" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-1" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Enroll in the Complete Next.js Developer course</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-3 Months</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Comprehensive course covering Next.js from basics to advanced topics, including building enterprise-level applications. Updated for Next.js 14.</p>
-                                                    <p><strong>Link:</strong> <a href="https://zerotomastery.io/courses/learn-next-js/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Zero To Mastery - Complete Next.js Developer</a></p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-2" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-2" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Complete Module 1: Introduction to Next.js</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Part of the "Complete Next.js Developer course". Covers the fundamentals and setup of Next.js.</p>
-                                                    <p><strong>Link:</strong> <a href="https://zerotomastery.io/courses/learn-next-js/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Refer to main course</a></p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-3" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-3" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Complete Module 2: Routing and Navigation</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Part of the "Complete Next.js Developer course". Focuses on Next.js routing capabilities (App Router and Pages Router).</p>
-                                                    <p><strong>Link:</strong> <a href="https://zerotomastery.io/courses/learn-next-js/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Refer to main course</a></p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-4" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-4" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Complete Module 3: Data Fetching</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1-2 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Part of the "Complete Next.js Developer course". Covers various data fetching strategies in Next.js.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://zerotomastery.io/courses/learn-next-js/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Course Module</a></li>
-                                                        <li><a href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js Docs (App Router)</a></li>
-                                                        <li><a href="https://nextjs.org/docs/pages/building-your-application/data-fetching" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js Docs (Pages Router)</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-5" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-5" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Complete Module 4: Styling in Next.js</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Part of the "Complete Next.js Developer course". Explores different ways to style Next.js applications (CSS Modules, Tailwind CSS, etc.).</p>
-                                                    <p><strong>Link:</strong> <a href="https://zerotomastery.io/courses/learn-next-js/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Refer to main course</a></p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-6" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-6" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Complete Module 5: API Routes</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1-2 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Part of the "Complete Next.js Developer course". Learn to build backend API endpoints within Next.js.</p>
-                                                    <p><strong>Link:</strong> <a href="https://zerotomastery.io/courses/learn-next-js/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Refer to main course</a></p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-7" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-7" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Complete Module 6: Authentication</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Part of the "Complete Next.js Developer course". Implementing authentication strategies in Next.js applications.</p>
-                                                    <p><strong>Link:</strong> <a href="https://zerotomastery.io/courses/learn-next-js/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Refer to main course</a></p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-8" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-8" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Complete Module 7: Deployment</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Part of the "Complete Next.js Developer course". Deploying Next.js applications to platforms like Vercel.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://zerotomastery.io/courses/learn-next-js/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Course Module</a></li>
-                                                        <li><a href="https://vercel.com/docs" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Vercel Documentation</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-9" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-9" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Build a small Next.js project (e.g., a blog or portfolio site)</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1-2 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Apply learned Next.js concepts to build a functional application. Focus on a simple use case to solidify understanding.</p>
-                                                    <p><strong>Note:</strong> This is a practical application task; no specific tutorial link, but course knowledge and Next.js documentation will be key.</p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-10" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-10" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Learn about serverless functions and integrate them into your project</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-3 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Understand serverless architecture and implement serverless functions (e.g., for backend logic, API calls) in the Next.js project.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://vercel.com/docs/functions" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Vercel Functions</a></li>
-                                                        <li><a href="https://docs.aws.amazon.com/lambda/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">AWS Lambda</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-11" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-11" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Explore advanced topics like SSR, SSG, and ISR in Next.js</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Month</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Deep dive into different rendering strategies in Next.js: Server-Side Rendering (SSR), Static Site Generation (SSG), and Incremental Static Regeneration (ISR). Understand their use cases and trade-offs.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Data Fetching (App Router)</a></li>
-                                                        <li><a href="https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">SSG (Pages Router)</a></li>
-                                                        <li><a href="https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">ISR (Pages Router)</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-12" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-12" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Take the Google Machine Learning Crash Course</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1-2 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Google's fast-paced, practical introduction to machine learning concepts and practices (approx 15 hours of content).</p>
-                                                    <p><strong>Link:</strong> <a href="https://developers.google.com/machine-learning/crash-course" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Google ML Crash Course</a></p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-13" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-13" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Complete the course and earn the certificate</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: (Part of Task 12)</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Ensure all modules of the Google ML Crash Course are completed and obtain any available certification or proof of completion.</p>
-                                                    <p><strong>Link:</strong> <a href="https://developers.google.com/machine-learning/crash-course" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Google ML Crash Course</a></p>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-14" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-14" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Learn about TensorFlow.js and its applications</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1-2 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Study TensorFlow.js, a library for machine learning in JavaScript. Understand how it can be used to deploy and run ML models in the browser and Node.js.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.tensorflow.org/js" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">TensorFlow.js Official</a></li>
-                                                        <li><a href="https://www.tensorflow.org/js/tutorials" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">TensorFlow.js Tutorials</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-15" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-15" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Build a simple ML model using TensorFlow.js (e.g., image classification or regression)</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-3 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Practical application of TensorFlow.js by building and training a basic machine learning model.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.tensorflow.org/js/tutorials" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">TensorFlow.js Tutorials</a></li>
-                                                        <li><a href="https://github.com/tensorflow/tfjs-examples" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">TensorFlow.js Examples (GitHub)</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-16" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-16" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Integrate the TensorFlow.js model into your Next.js project</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Combine web development skills with ML by deploying the TensorFlow.js model within the Next.js application built earlier.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://github.com/pravastacaraka/next-tfjs-example" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js + TF.js Example (GitHub)</a></li>
-                                                        <li><a href="https://www.tensorflow.org/js" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">TensorFlow.js Official</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
+							<!-- Tab Content -->
+							<div class="tabs-content">
+								<!-- Phase 1: Skill Development -->
+								<div
+									id="phase1"
+									class="tab-pane active bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+									<h3
+										class="font-raleway font-bold text-xl sm:text-2xl text-[#1d3557] mb-4">
+										Phase 1: Skill Development
+									</h3>
+									<p
+										class="font-lato text-[#457B9D] mb-6 text-base sm:text-lg leading-relaxed">
+										Focus on acquiring the necessary skills
+										for web development and machine
+										learning. This foundational phase
+										involves structured learning through
+										courses and practical application of new
+										concepts.
+									</p>
+									<h4
+										class="font-lato font-semibold text-lg text-[#457B9D] mb-4">
+										Tasks & Milestones:
+									</h4>
+									<div
+										class="space-y-4 text-gray-700 flex-grow">
+										<label
+											for="task-1"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-1"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Enroll in the Complete
+													Next.js Developer
+													course</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-3 Months</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Comprehensive course
+														covering Next.js from
+														basics to advanced
+														topics, including
+														building
+														enterprise-level
+														applications. Updated
+														for Next.js 14.
+													</p>
+													<p>
+														<strong>Link:</strong>
+														<a
+															href="https://zerotomastery.io/courses/learn-next-js/"
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-[#457B9D] hover:text-[#e63946] underline"
+															>Zero To Mastery -
+															Complete Next.js
+															Developer</a
+														>
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-2"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-2"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Complete Module 1:
+													Introduction to
+													Next.js</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Part of the "Complete
+														Next.js Developer
+														course". Covers the
+														fundamentals and setup
+														of Next.js.
+													</p>
+													<p>
+														<strong>Link:</strong>
+														<a
+															href="https://zerotomastery.io/courses/learn-next-js/"
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-[#457B9D] hover:text-[#e63946] underline"
+															>Refer to main
+															course</a
+														>
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-3"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-3"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Complete Module 2: Routing
+													and Navigation</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Part of the "Complete
+														Next.js Developer
+														course". Focuses on
+														Next.js routing
+														capabilities (App Router
+														and Pages Router).
+													</p>
+													<p>
+														<strong>Link:</strong>
+														<a
+															href="https://zerotomastery.io/courses/learn-next-js/"
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-[#457B9D] hover:text-[#e63946] underline"
+															>Refer to main
+															course</a
+														>
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-4"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-4"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Complete Module 3: Data
+													Fetching</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1-2 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Part of the "Complete
+														Next.js Developer
+														course". Covers various
+														data fetching strategies
+														in Next.js.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://zerotomastery.io/courses/learn-next-js/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Course
+																Module</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js Docs
+																(App Router)</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://nextjs.org/docs/pages/building-your-application/data-fetching"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js Docs
+																(Pages
+																Router)</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-5"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-5"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Complete Module 4: Styling
+													in Next.js</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Part of the "Complete
+														Next.js Developer
+														course". Explores
+														different ways to style
+														Next.js applications
+														(CSS Modules, Tailwind
+														CSS, etc.).
+													</p>
+													<p>
+														<strong>Link:</strong>
+														<a
+															href="https://zerotomastery.io/courses/learn-next-js/"
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-[#457B9D] hover:text-[#e63946] underline"
+															>Refer to main
+															course</a
+														>
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-6"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-6"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Complete Module 5: API
+													Routes</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1-2 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Part of the "Complete
+														Next.js Developer
+														course". Learn to build
+														backend API endpoints
+														within Next.js.
+													</p>
+													<p>
+														<strong>Link:</strong>
+														<a
+															href="https://zerotomastery.io/courses/learn-next-js/"
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-[#457B9D] hover:text-[#e63946] underline"
+															>Refer to main
+															course</a
+														>
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-7"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-7"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Complete Module 6:
+													Authentication</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Part of the "Complete
+														Next.js Developer
+														course". Implementing
+														authentication
+														strategies in Next.js
+														applications.
+													</p>
+													<p>
+														<strong>Link:</strong>
+														<a
+															href="https://zerotomastery.io/courses/learn-next-js/"
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-[#457B9D] hover:text-[#e63946] underline"
+															>Refer to main
+															course</a
+														>
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-8"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-8"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Complete Module 7:
+													Deployment</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Part of the "Complete
+														Next.js Developer
+														course". Deploying
+														Next.js applications to
+														platforms like Vercel.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://zerotomastery.io/courses/learn-next-js/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Course
+																Module</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://vercel.com/docs"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Vercel
+																Documentation</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-9"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-9"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Build a small Next.js
+													project (e.g., a blog or
+													portfolio site)</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1-2 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Apply learned Next.js
+														concepts to build a
+														functional application.
+														Focus on a simple use
+														case to solidify
+														understanding.
+													</p>
+													<p>
+														<strong>Note:</strong>
+														This is a practical
+														application task; no
+														specific tutorial link,
+														but course knowledge and
+														Next.js documentation
+														will be key.
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-10"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-10"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Learn about serverless
+													functions and integrate them
+													into your project</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-3 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Understand serverless
+														architecture and
+														implement serverless
+														functions (e.g., for
+														backend logic, API
+														calls) in the Next.js
+														project.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://vercel.com/docs/functions"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Vercel
+																Functions</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://docs.aws.amazon.com/lambda/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>AWS Lambda</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-11"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-11"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Explore advanced topics
+													like SSR, SSG, and ISR in
+													Next.js</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Month</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Deep dive into different
+														rendering strategies in
+														Next.js: Server-Side
+														Rendering (SSR), Static
+														Site Generation (SSG),
+														and Incremental Static
+														Regeneration (ISR).
+														Understand their use
+														cases and trade-offs.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Data Fetching
+																(App Router)</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>SSG (Pages
+																Router)</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>ISR (Pages
+																Router)</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-12"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-12"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Take the Google Machine
+													Learning Crash Course</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1-2 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Google's fast-paced,
+														practical introduction
+														to machine learning
+														concepts and practices
+														(approx 15 hours of
+														content).
+													</p>
+													<p>
+														<strong>Link:</strong>
+														<a
+															href="https://developers.google.com/machine-learning/crash-course"
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-[#457B9D] hover:text-[#e63946] underline"
+															>Google ML Crash
+															Course</a
+														>
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-13"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-13"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Complete the course and
+													earn the certificate</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: (Part of Task
+													12)</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Ensure all modules of
+														the Google ML Crash
+														Course are completed and
+														obtain any available
+														certification or proof
+														of completion.
+													</p>
+													<p>
+														<strong>Link:</strong>
+														<a
+															href="https://developers.google.com/machine-learning/crash-course"
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-[#457B9D] hover:text-[#e63946] underline"
+															>Google ML Crash
+															Course</a
+														>
+													</p>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-14"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-14"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Learn about TensorFlow.js
+													and its applications</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1-2 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Study TensorFlow.js, a
+														library for machine
+														learning in JavaScript.
+														Understand how it can be
+														used to deploy and run
+														ML models in the browser
+														and Node.js.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.tensorflow.org/js"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>TensorFlow.js
+																Official</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://www.tensorflow.org/js/tutorials"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>TensorFlow.js
+																Tutorials</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-15"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-15"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Build a simple ML model
+													using TensorFlow.js (e.g.,
+													image classification or
+													regression)</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-3 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Practical application of
+														TensorFlow.js by
+														building and training a
+														basic machine learning
+														model.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.tensorflow.org/js/tutorials"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>TensorFlow.js
+																Tutorials</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://github.com/tensorflow/tfjs-examples"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>TensorFlow.js
+																Examples
+																(GitHub)</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-16"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-16"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Integrate the TensorFlow.js
+													model into your Next.js
+													project</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Combine web development
+														skills with ML by
+														deploying the
+														TensorFlow.js model
+														within the Next.js
+														application built
+														earlier.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://github.com/pravastacaraka/next-tfjs-example"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js + TF.js
+																Example
+																(GitHub)</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://www.tensorflow.org/js"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>TensorFlow.js
+																Official</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+									</div>
+								</div>
 
-                                <!-- Phase 2: AI Portfolio Project -->
-                                <div id="phase2" class="tab-pane bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                                    <h3 class="font-raleway font-bold text-xl sm:text-2xl text-[#1d3557] mb-4">Phase 2: AI Portfolio Project</h3>
-                                    <p class="font-lato text-[#457B9D] mb-6 text-base sm:text-lg leading-relaxed">
-                                        Goal: Develop a portfolio-worthy AI project using Next.js and TensorFlow.js to showcase practical skills in web development and machine learning.
-                                    </p>
-                                    <h4 class="font-lato font-semibold text-lg text-[#457B9D] mb-4">Tasks & Milestones:</h4>
-                                    <div class="space-y-4 text-gray-700 flex-grow">
-                                        <label for="task-17" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-17" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Brainstorm ideas for an AI-powered portfolio project</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Day</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Consider project ideas that align with your interests and allow you to showcase skills in Next.js (frontend) and TensorFlow.js (client-side ML). Aim for a project that is feasible and demonstrates a practical AI application.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://medium.com/@codebymedu/19-next-js-project-ideas-for-you-to-get-hired-97e0890a9700" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">19 Next.js Project Ideas</a></li>
-                                                        <li><a href="https://www.interviewquery.com/p/ai-project-ideas" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Top 29 AI Project Ideas</a></li>
-                                                        <li><a href="https://www.geeksforgeeks.org/best-artificial-intelligence-project-ideas/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">30+ Best AI Project Ideas</a></li>
-                                                        <li><a href="https://dev.to/ivansing/building-an-ai-powered-web-application-with-nextjs-and-tensorflowjs-nf1" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">AI App with Next.js & TensorFlow.js Tutorial</a></li>
-                                                    </ul>
-                                                    <p><strong>Key Technologies & Guides:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js Documentation</a></li>
-                                                        <li><a href="https://www.tensorflow.org/js/guide" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">TensorFlow.js Guide</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-18" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-18" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Choose a project idea that combines Next.js and TensorFlow.js</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 4-8 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Evaluate brainstormed ideas and select a project that is engaging, showcases Next.js and TensorFlow.js skills, and is completable within the timeframe. Consider scope, tech showcase, learning value, portfolio impact, and personal interest.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://dev.to/ivansing/building-an-ai-powered-web-application-with-nextjs-and-tensorflowjs-nf1" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">AI-Powered Web App Tutorial</a></li>
-                                                        <li><a href="https://medium.com/@neerajvageele451/object-detection-in-the-image-using-tensorflow-in-nextjs-3577e64280bf" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Object Detection with TensorFlow.js in Next.js</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-19" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-19" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Plan the project architecture and features</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 3-6 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Define the structure of your AI project, including frontend components with Next.js and ML model integration with TensorFlow.js. Outline core features and user flow.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js Documentation for Architecture</a></li>
-                                                        <li><a href="https://www.tensorflow.org/js/tutorials" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">TensorFlow.js Tutorials for ML Planning</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-20" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-20" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Set up the Next.js project environment</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Initialize a Next.js project repository on GitHub, set up the development environment, and configure necessary dependencies for TensorFlow.js integration.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://nextjs.org/docs/getting-started" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js Getting Started</a></li>
-                                                        <li><a href="https://github.com/pravastacaraka/next-tfjs-example" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js + TensorFlow.js Example</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-21" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-21" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Implement the front-end using Next.js</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-4 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Develop the user interface with Next.js, focusing on responsive design and user experience for the AI application.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://nextjs.org/learn/basics/create-nextjs-app" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js Learn Basics</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-22" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-22" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Integrate the ML model using TensorFlow.js</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-4 Weeks (Ongoing)</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Incorporate a machine learning model into the Next.js app using TensorFlow.js for client-side processing.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.tensorflow.org/js/tutorials" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">TensorFlow.js Tutorials</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-23" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-23" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Test and debug the project</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Ensure the AI project functions correctly by testing both frontend and ML components, debugging issues as they arise.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://nextjs.org/docs/testing" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Next.js Testing Guide</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-24" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-24" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Deploy the project on Vercel or another platform</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Make the AI project publicly accessible by deploying it on a platform like Vercel, ensuring it’s ready for portfolio展示.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://vercel.com/guides/deploying-nextjs-with-vercel" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Deploying Next.js with Vercel</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-25" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-25" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Write a blog post or documentation about the project</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-4 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Document the development process, challenges, and solutions of your AI project to enhance its portfolio value.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.freecodecamp.org/news/how-to-write-a-great-technical-blog-post/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">How to Write a Technical Blog Post</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-26" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-26" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Share the project on social media and relevant communities</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Promote your completed AI project on platforms like LinkedIn, Twitter, and relevant forums to gain visibility.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.reddit.com/r/webdev/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Reddit WebDev Community</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
+								<!-- Phase 2: AI Portfolio Project -->
+								<div
+									id="phase2"
+									class="tab-pane bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+									<h3
+										class="font-raleway font-bold text-xl sm:text-2xl text-[#1d3557] mb-4">
+										Phase 2: AI Portfolio Project
+									</h3>
+									<p
+										class="font-lato text-[#457B9D] mb-6 text-base sm:text-lg leading-relaxed">
+										Goal: Develop a portfolio-worthy AI
+										project using Next.js and TensorFlow.js
+										to showcase practical skills in web
+										development and machine learning.
+									</p>
+									<h4
+										class="font-lato font-semibold text-lg text-[#457B9D] mb-4">
+										Tasks & Milestones:
+									</h4>
+									<div
+										class="space-y-4 text-gray-700 flex-grow">
+										<label
+											for="task-17"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-17"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Brainstorm ideas for an
+													AI-powered portfolio
+													project</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Day</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Consider project ideas
+														that align with your
+														interests and allow you
+														to showcase skills in
+														Next.js (frontend) and
+														TensorFlow.js
+														(client-side ML). Aim
+														for a project that is
+														feasible and
+														demonstrates a practical
+														AI application.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://medium.com/@codebymedu/19-next-js-project-ideas-for-you-to-get-hired-97e0890a9700"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>19 Next.js
+																Project Ideas</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://www.interviewquery.com/p/ai-project-ideas"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Top 29 AI
+																Project Ideas</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://www.geeksforgeeks.org/best-artificial-intelligence-project-ideas/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>30+ Best AI
+																Project Ideas</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://dev.to/ivansing/building-an-ai-powered-web-application-with-nextjs-and-tensorflowjs-nf1"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>AI App with
+																Next.js &
+																TensorFlow.js
+																Tutorial</a
+															>
+														</li>
+													</ul>
+													<p>
+														<strong
+															>Key Technologies &
+															Guides:</strong
+														>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://nextjs.org/docs"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js
+																Documentation</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://www.tensorflow.org/js/guide"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>TensorFlow.js
+																Guide</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-18"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-18"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Choose a project idea that
+													combines Next.js and
+													TensorFlow.js</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 4-8 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Evaluate brainstormed
+														ideas and select a
+														project that is
+														engaging, showcases
+														Next.js and
+														TensorFlow.js skills,
+														and is completable
+														within the timeframe.
+														Consider scope, tech
+														showcase, learning
+														value, portfolio impact,
+														and personal interest.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://dev.to/ivansing/building-an-ai-powered-web-application-with-nextjs-and-tensorflowjs-nf1"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>AI-Powered Web
+																App Tutorial</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://medium.com/@neerajvageele451/object-detection-in-the-image-using-tensorflow-in-nextjs-3577e64280bf"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Object
+																Detection with
+																TensorFlow.js in
+																Next.js</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-19"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-19"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Plan the project
+													architecture and
+													features</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 3-6 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Define the structure of
+														your AI project,
+														including frontend
+														components with Next.js
+														and ML model integration
+														with TensorFlow.js.
+														Outline core features
+														and user flow.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://nextjs.org/docs"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js
+																Documentation
+																for
+																Architecture</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://www.tensorflow.org/js/tutorials"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>TensorFlow.js
+																Tutorials for ML
+																Planning</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-20"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-20"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Set up the Next.js project
+													environment</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Initialize a Next.js
+														project repository on
+														GitHub, set up the
+														development environment,
+														and configure necessary
+														dependencies for
+														TensorFlow.js
+														integration.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://nextjs.org/docs/getting-started"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js Getting
+																Started</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://github.com/pravastacaraka/next-tfjs-example"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js +
+																TensorFlow.js
+																Example</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-21"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-21"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Implement the front-end
+													using Next.js</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-4 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Develop the user
+														interface with Next.js,
+														focusing on responsive
+														design and user
+														experience for the AI
+														application.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://nextjs.org/learn/basics/create-nextjs-app"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js Learn
+																Basics</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-22"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-22"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Integrate the ML model
+													using TensorFlow.js</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-4 Weeks
+													(Ongoing)</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Incorporate a machine
+														learning model into the
+														Next.js app using
+														TensorFlow.js for
+														client-side processing.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.tensorflow.org/js/tutorials"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>TensorFlow.js
+																Tutorials</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-23"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-23"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Test and debug the
+													project</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Ensure the AI project
+														functions correctly by
+														testing both frontend
+														and ML components,
+														debugging issues as they
+														arise.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://nextjs.org/docs/testing"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Next.js Testing
+																Guide</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-24"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-24"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Deploy the project on
+													Vercel or another
+													platform</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Make the AI project
+														publicly accessible by
+														deploying it on a
+														platform like Vercel,
+														ensuring it’s ready for
+														portfolio展示.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://vercel.com/guides/deploying-nextjs-with-vercel"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Deploying
+																Next.js with
+																Vercel</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-25"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-25"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Write a blog post or
+													documentation about the
+													project</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-4 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Document the development
+														process, challenges, and
+														solutions of your AI
+														project to enhance its
+														portfolio value.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.freecodecamp.org/news/how-to-write-a-great-technical-blog-post/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>How to Write a
+																Technical Blog
+																Post</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-26"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-26"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Share the project on social
+													media and relevant
+													communities</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Promote your completed
+														AI project on platforms
+														like LinkedIn, Twitter,
+														and relevant forums to
+														gain visibility.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.reddit.com/r/webdev/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Reddit WebDev
+																Community</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+									</div>
+								</div>
 
-                                <!-- Phase 3: Job Search -->
-                                <div id="phase3" class="tab-pane bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                                    <h3 class="font-raleway font-bold text-xl sm:text-2xl text-[#1d3557] mb-4">Phase 3: Job Search</h3>
-                                    <p class="font-lato text-[#457B9D] mb-6 text-base sm:text-lg leading-relaxed">
-                                        Prepare for and actively seek remote job opportunities in web development and machine learning. With skills and projects in hand, this phase focuses on strategically navigating the job market to find the right remote opportunity.
-                                    </p>
-                                    <h4 class="font-lato font-semibold text-lg text-[#457B9D] mb-4">Tasks & Milestones:</h4>
-                                    <div class="space-y-4 text-gray-700 flex-grow">
-                                        <label for="task-27" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-27" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Update your resume to highlight your new skills and projects</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Tailor your resume to emphasize web development and machine learning skills, showcasing your AI portfolio project.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.indeed.com/career-advice/resumes-cover-letters/resume-tips-for-machine-learning-engineer" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Resume Tips for Machine Learning Engineer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-28" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-28" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Create a LinkedIn profile or update your existing one</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Build a professional online presence to network and showcase your skills and projects to potential employers.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.linkedin.com/pulse/how-optimize-your-linkedin-profile-remote-jobs-2023-sarah-doyel/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Optimize LinkedIn for Remote Jobs</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-29" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-29" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Join relevant online communities (e.g., Reddit, Discord, Slack)</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1 Week</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Engage with communities to learn, share knowledge, and find job opportunities in web development and AI.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.reddit.com/r/webdev/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Reddit WebDev Community</a></li>
-                                                        <li><a href="https://www.reddit.com/r/MachineLearning/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Reddit Machine Learning Community</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-30" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-30" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Network with professionals in web development and ML</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-4 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Build connections through LinkedIn, conferences, or community events to increase job prospects.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.remoterocketship.com/advice/guide/ml-engineer" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Networking Tips for ML Engineers</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-31" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-31" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Search for remote job openings on Remote.co, We Work Remotely, or FlexJobs</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 4-8 Weeks (Focus)</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Focus on platforms specializing in remote opportunities for web development and machine learning roles.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://remote.co/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Remote.co</a></li>
-                                                        <li><a href="https://weworkremotely.com/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">We Work Remotely</a></li>
-                                                        <li><a href="https://www.flexjobs.com/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">FlexJobs</a></li>
-                                                        <li><a href="https://arc.dev/remote-jobs/machine-learning" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Arc - Remote ML Jobs</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-32" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-32" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Apply to at least 5 job openings per week</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: Ongoing</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Maintain a consistent application rate to increase chances of landing interviews for remote positions.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.jobwiz.io/en/advice/job-search/effective-strategies-successful-remote-job-applications" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Strategies for Remote Job Applications</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-33" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-33" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Practice coding challenges for technical interviews</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: Ongoing</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Sharpen problem-solving skills with platforms like LeetCode to prepare for technical assessments.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">LeetCode</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-34" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-34" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Review ML concepts for technical interviews</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: Ongoing</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Reinforce understanding of machine learning fundamentals to confidently discuss in interviews.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Coursera Machine Learning Course</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-35" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-35" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Attend virtual job fairs or networking events</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: Ongoing</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Participate in online events to meet recruiters and learn about remote job opportunities.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.aigantic.com/ai-jobs/remote-ai-jobs/remote-ai-job-search-strategies/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Remote AI Job Search Strategies</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
+								<!-- Phase 3: Job Search -->
+								<div
+									id="phase3"
+									class="tab-pane bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+									<h3
+										class="font-raleway font-bold text-xl sm:text-2xl text-[#1d3557] mb-4">
+										Phase 3: Job Search
+									</h3>
+									<p
+										class="font-lato text-[#457B9D] mb-6 text-base sm:text-lg leading-relaxed">
+										Prepare for and actively seek remote job
+										opportunities in web development and
+										machine learning. With skills and
+										projects in hand, this phase focuses on
+										strategically navigating the job market
+										to find the right remote opportunity.
+									</p>
+									<h4
+										class="font-lato font-semibold text-lg text-[#457B9D] mb-4">
+										Tasks & Milestones:
+									</h4>
+									<div
+										class="space-y-4 text-gray-700 flex-grow">
+										<label
+											for="task-27"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-27"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Update your resume to
+													highlight your new skills
+													and projects</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Tailor your resume to
+														emphasize web
+														development and machine
+														learning skills,
+														showcasing your AI
+														portfolio project.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.indeed.com/career-advice/resumes-cover-letters/resume-tips-for-machine-learning-engineer"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Resume Tips for
+																Machine Learning
+																Engineer</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-28"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-28"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Create a LinkedIn profile
+													or update your existing
+													one</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Build a professional
+														online presence to
+														network and showcase
+														your skills and projects
+														to potential employers.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.linkedin.com/pulse/how-optimize-your-linkedin-profile-remote-jobs-2023-sarah-doyel/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Optimize
+																LinkedIn for
+																Remote Jobs</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-29"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-29"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Join relevant online
+													communities (e.g., Reddit,
+													Discord, Slack)</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1 Week</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Engage with communities
+														to learn, share
+														knowledge, and find job
+														opportunities in web
+														development and AI.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.reddit.com/r/webdev/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Reddit WebDev
+																Community</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://www.reddit.com/r/MachineLearning/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Reddit Machine
+																Learning
+																Community</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-30"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-30"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Network with professionals
+													in web development and
+													ML</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-4 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Build connections
+														through LinkedIn,
+														conferences, or
+														community events to
+														increase job prospects.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.remoterocketship.com/advice/guide/ml-engineer"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Networking Tips
+																for ML
+																Engineers</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-31"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-31"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Search for remote job
+													openings on Remote.co, We
+													Work Remotely, or
+													FlexJobs</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 4-8 Weeks
+													(Focus)</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Focus on platforms
+														specializing in remote
+														opportunities for web
+														development and machine
+														learning roles.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://remote.co/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Remote.co</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://weworkremotely.com/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>We Work
+																Remotely</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://www.flexjobs.com/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>FlexJobs</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://arc.dev/remote-jobs/machine-learning"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Arc - Remote ML
+																Jobs</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-32"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-32"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Apply to at least 5 job
+													openings per week</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: Ongoing</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Maintain a consistent
+														application rate to
+														increase chances of
+														landing interviews for
+														remote positions.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.jobwiz.io/en/advice/job-search/effective-strategies-successful-remote-job-applications"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Strategies for
+																Remote Job
+																Applications</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-33"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-33"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Practice coding challenges
+													for technical
+													interviews</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: Ongoing</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Sharpen problem-solving
+														skills with platforms
+														like LeetCode to prepare
+														for technical
+														assessments.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://leetcode.com/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>LeetCode</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-34"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-34"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Review ML concepts for
+													technical interviews</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: Ongoing</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Reinforce understanding
+														of machine learning
+														fundamentals to
+														confidently discuss in
+														interviews.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.coursera.org/learn/machine-learning"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Coursera
+																Machine Learning
+																Course</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-35"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-35"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Attend virtual job fairs or
+													networking events</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: Ongoing</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Participate in online
+														events to meet
+														recruiters and learn
+														about remote job
+														opportunities.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.aigantic.com/ai-jobs/remote-ai-jobs/remote-ai-job-search-strategies/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Remote AI Job
+																Search
+																Strategies</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+									</div>
+								</div>
 
-                                <!-- Phase 4: Relocation -->
-                                <div id="phase4" class="tab-pane bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                                    <h3 class="font-raleway font-bold text-xl sm:text-2xl text-[#1d3557] mb-4">Phase 4: Relocation</h3>
-                                    <p class="font-lato text-[#457B9D] mb-6 text-base sm:text-lg leading-relaxed">
-                                        Plan and prepare for relocating to a remote-friendly location. The final phase involves the exciting step of making the lifestyle change a reality by moving to a dream location.
-                                    </p>
-                                    <h4 class="font-lato font-semibold text-lg text-[#457B9D] mb-4">Tasks & Milestones:</h4>
-                                    <div class="space-y-4 text-gray-700 flex-grow">
-                                        <label for="task-36" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-36" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Research potential locations in Japan, Europe, or Australia</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1-2 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Identify remote-friendly locations considering factors like cost of living, internet connectivity, and lifestyle.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://weworkremotely.com/relocation-guide-for-remote-workers-in-the-us" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Relocation Guide for Remote Workers</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-37" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-37" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Evaluate visa requirements and relocation logistics</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-4 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Investigate visa options for remote workers and plan the logistics of moving to your chosen location.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://remote.com/blog/remote-job-relocation" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Remote Job Relocation Steps</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-38" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-38" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Secure a remote job or freelance gigs to support the move</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 4-8 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Ensure financial stability by securing remote work or freelance projects before relocating.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.upwork.com/hire/ai-developers/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Upwork - Hire AI Developers</a></li>
-                                                        <li><a href="https://topaisjobs.com/10-best-freelance-platforms-for-ai-and-data-science-2024/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Top Freelance Platforms for AI</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-39" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-39" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Create a financial plan for relocation costs</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 2-3 Weeks</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Budget for moving expenses, initial living costs, and emergency funds to ensure a smooth transition.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://www.talentlms.com/blog/employee-relocation-strategies/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Employee Relocation Strategies</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <label for="task-40" class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
-                                            <input type="checkbox" id="task-40" class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0">
-                                            <div class="flex-grow flex flex-col">
-                                                <span class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg">Plan the move and settle into the new location</span>
-                                                <span class="text-sm font-raleway text-gray-500 italic mt-1">Timeline: 1-2 Months</span>
-                                                <div class="mt-2 text-sm text-gray-600 space-y-1">
-                                                    <p><strong>Details:</strong> Organize the logistics of the move, set up your new home, and integrate into the local community.</p>
-                                                    <p><strong>Links:</strong></p>
-                                                    <ul class="list-disc list-inside ml-4">
-                                                        <li><a href="https://arcrelocation.com/tech-employee-relocation/" target="_blank" rel="noopener noreferrer" class="text-[#457B9D] hover:text-[#e63946] underline">Tech Employee Relocation Guide</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </article>
-        </main>
+								<!-- Phase 4: Relocation -->
+								<div
+									id="phase4"
+									class="tab-pane bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+									<h3
+										class="font-raleway font-bold text-xl sm:text-2xl text-[#1d3557] mb-4">
+										Phase 4: Relocation
+									</h3>
+									<p
+										class="font-lato text-[#457B9D] mb-6 text-base sm:text-lg leading-relaxed">
+										Plan and prepare for relocating to a
+										remote-friendly location. The final
+										phase involves the exciting step of
+										making the lifestyle change a reality by
+										moving to a dream location.
+									</p>
+									<h4
+										class="font-lato font-semibold text-lg text-[#457B9D] mb-4">
+										Tasks & Milestones:
+									</h4>
+									<div
+										class="space-y-4 text-gray-700 flex-grow">
+										<label
+											for="task-36"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-36"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Research potential
+													locations in Japan, Europe,
+													or Australia</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1-2 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Identify remote-friendly
+														locations considering
+														factors like cost of
+														living, internet
+														connectivity, and
+														lifestyle.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://weworkremotely.com/relocation-guide-for-remote-workers-in-the-us"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Relocation
+																Guide for Remote
+																Workers</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-37"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-37"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Evaluate visa requirements
+													and relocation
+													logistics</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-4 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Investigate visa options
+														for remote workers and
+														plan the logistics of
+														moving to your chosen
+														location.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://remote.com/blog/remote-job-relocation"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Remote Job
+																Relocation
+																Steps</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-38"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-38"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Secure a remote job or
+													freelance gigs to support
+													the move</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 4-8 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Ensure financial
+														stability by securing
+														remote work or freelance
+														projects before
+														relocating.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.upwork.com/hire/ai-developers/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Upwork - Hire
+																AI Developers</a
+															>
+														</li>
+														<li>
+															<a
+																href="https://topaisjobs.com/10-best-freelance-platforms-for-ai-and-data-science-2024/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Top Freelance
+																Platforms for
+																AI</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-39"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-39"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Create a financial plan for
+													relocation costs</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 2-3 Weeks</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Budget for moving
+														expenses, initial living
+														costs, and emergency
+														funds to ensure a smooth
+														transition.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://www.talentlms.com/blog/employee-relocation-strategies/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Employee
+																Relocation
+																Strategies</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+										<label
+											for="task-40"
+											class="group w-full flex items-start gap-2 p-4 hover:bg-slate-200 rounded-md cursor-pointer bg-slate-50 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out [&:has(input:checked)]:bg-[#e9edf0]">
+											<input
+												type="checkbox"
+												id="task-40"
+												class="mr-3 mt-1 h-5 w-5 border border-[#b8b8bb] focus:border-[#457B9D] hover:border-[#457B9D] bg-white checked:bg-[#457B9D] checked:border-transparent cursor-pointer shrink-0" />
+											<div
+												class="flex-grow flex flex-col">
+												<span
+													class="text-left font-raleway text-gray-700 peer-checked:text-[#457B9D] peer-checked:font-medium text-lg"
+													>Plan the move and settle
+													into the new location</span
+												>
+												<span
+													class="text-sm font-raleway text-gray-500 italic mt-1"
+													>Timeline: 1-2 Months</span
+												>
+												<div
+													class="mt-2 text-sm text-gray-600 space-y-1">
+													<p>
+														<strong
+															>Details:</strong
+														>
+														Organize the logistics
+														of the move, set up your
+														new home, and integrate
+														into the local
+														community.
+													</p>
+													<p>
+														<strong>Links:</strong>
+													</p>
+													<ul
+														class="list-disc list-inside ml-4">
+														<li>
+															<a
+																href="https://arcrelocation.com/tech-employee-relocation/"
+																target="_blank"
+																rel="noopener noreferrer"
+																class="text-[#457B9D] hover:text-[#e63946] underline"
+																>Tech Employee
+																Relocation
+																Guide</a
+															>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</article>
+		</main>
 
-        <!-- Footer will be inserted by footer.js -->
+		<!-- Footer will be inserted by footer.js -->
 
-        <style>
-            /* Tab Styling */
-            .tab-btn.active {
-                background-color: #457B9D;
-                color: white;
-            }
-            
-            .tab-pane {
-                opacity: 0;
-                transition: opacity 0.6s ease-in-out;
-                display: none;
-            }
-            
-            .tab-pane.active {
-                opacity: 1;
-                display: block;
-            }
-        </style>
+		<style>
+			/* Tab Styling */
+			.tab-btn.active {
+				background-color: #457b9d;
+				color: white;
+			}
 
-        <script>
-            // Tab Switching Functionality
-            document.addEventListener('DOMContentLoaded', function() {
-                const tabButtons = document.querySelectorAll('.tab-btn');
-                const tabPanes = document.querySelectorAll('.tab-pane');
-                
-                tabButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        tabButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        const tabId = this.getAttribute('data-tab');
-                        const activePane = document.getElementById(tabId);
-                        
-                        tabPanes.forEach(pane => {
-                            if (pane !== activePane) {
-                                pane.classList.remove('active');
-                                setTimeout(() => {
-                                    pane.style.display = 'none';
-                                }, 200);
-                            }
-                        });
-                        
-                        activePane.style.display = 'block';
-                        setTimeout(() => {
-                            activePane.classList.add('active');
-                        }, 10);
-                    });
-                });
-            });
-        </script>
+			.tab-pane {
+				opacity: 0;
+				transition: opacity 0.6s ease-in-out;
+				display: none;
+			}
 
-        <!-- Checklist JavaScript -->
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                const savedStates = JSON.parse(localStorage.getItem('careerChecklist')) || {};
+			.tab-pane.active {
+				opacity: 1;
+				display: block;
+			}
+		</style>
 
-                // Set initial states
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = savedStates[checkbox.id] || false;
-                    const label = checkbox.nextElementSibling;
-                    if (checkbox.checked) {
-                        label.classList.add('line-through', 'text-gray-500');
-                    }
-                });
+		<script>
+			// Tab Switching Functionality
+			document.addEventListener("DOMContentLoaded", function () {
+				const tabButtons = document.querySelectorAll(".tab-btn");
+				const tabPanes = document.querySelectorAll(".tab-pane");
 
-                // Handle checkbox changes
-                checkboxes.forEach(checkbox => {
-                    checkbox.addEventListener('change', () => {
-                        savedStates[checkbox.id] = checkbox.checked;
-                        localStorage.setItem('careerChecklist', JSON.stringify(savedStates));
-                        const label = checkbox.nextElementSibling;
-                        if (checkbox.checked) {
-                            label.classList.add('line-through', 'text-gray-500');
-                        } else {
-                            label.classList.remove('line-through', 'text-gray-500');
-                        }
-                    });
-                });
-            });
-        </script>
-    </body>
+				tabButtons.forEach((button) => {
+					button.addEventListener("click", function () {
+						tabButtons.forEach((btn) =>
+							btn.classList.remove("active"),
+						);
+						this.classList.add("active");
+
+						const tabId = this.getAttribute("data-tab");
+						const activePane = document.getElementById(tabId);
+
+						tabPanes.forEach((pane) => {
+							if (pane !== activePane) {
+								pane.classList.remove("active");
+								setTimeout(() => {
+									pane.style.display = "none";
+								}, 200);
+							}
+						});
+
+						activePane.style.display = "block";
+						setTimeout(() => {
+							activePane.classList.add("active");
+						}, 10);
+					});
+				});
+			});
+		</script>
+
+		<!-- Checklist JavaScript -->
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				const checkboxes = document.querySelectorAll(
+					'input[type="checkbox"]',
+				);
+				const savedStates =
+					JSON.parse(localStorage.getItem("careerChecklist")) || {};
+
+				// Set initial states
+				checkboxes.forEach((checkbox) => {
+					checkbox.checked = savedStates[checkbox.id] || false;
+					const label = checkbox.nextElementSibling;
+					if (checkbox.checked) {
+						label.classList.add("line-through", "text-gray-500");
+					}
+				});
+
+				// Handle checkbox changes
+				checkboxes.forEach((checkbox) => {
+					checkbox.addEventListener("change", () => {
+						savedStates[checkbox.id] = checkbox.checked;
+						localStorage.setItem(
+							"careerChecklist",
+							JSON.stringify(savedStates),
+						);
+						const label = checkbox.nextElementSibling;
+						if (checkbox.checked) {
+							label.classList.add(
+								"line-through",
+								"text-gray-500",
+							);
+						} else {
+							label.classList.remove(
+								"line-through",
+								"text-gray-500",
+							);
+						}
+					});
+				});
+			});
+		</script>
+	</body>
 </html>

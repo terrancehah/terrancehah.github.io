@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="In this article, I share my personal takeaways on being indistractable." />
 		<!-- Fonts: one consolidated request listing only the weights the
 		     site uses. preconnect warms the gstatic origin so the font
 		     files start as soon as the CSS arrives. -->
@@ -31,6 +32,12 @@
         <!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
         <link rel="canonical" href="https://terrancehah.com/articles/how-to-be-indistractable">
         <meta property="og:url" content="https://terrancehah.com/articles/how-to-be-indistractable">
+        <meta name="twitter:card" content="summary">
+        <meta property="twitter:domain" content="terrancehah.com">
+        <meta property="twitter:url" content="https://terrancehah.com/articles/how-to-be-indistractable">
+        <meta name="twitter:title" content="How to be Indistractable - Terrance's Playground">
+        <meta name="twitter:description" content="In this article, I share my personal takeaways on being indistractable.">
+        <meta name="twitter:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
 
         <script src="../js/footer.js" defer></script>
         <title>How to be Indistractable - Terrance's Playground</title>
@@ -40,6 +47,46 @@
         </script>
         <script defer src="/_vercel/insights/script.js"></script>
         <script defer src="/js/article-reading.js"></script>
+        <!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": "https://terrancehah.com/#person",
+                  "name": "Terrance Hah",
+                  "url": "https://terrancehah.com/"
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://terrancehah.com/#website",
+                  "url": "https://terrancehah.com/",
+                  "name": "terrancehah.com",
+                  "publisher": {
+                    "@id": "https://terrancehah.com/#person"
+                  }
+                },
+                {
+                  "@type": "BlogPosting",
+                  "headline": "How to be Indistractable",
+                  "description": "In this article, I share my personal takeaways on being indistractable.",
+                  "url": "https://terrancehah.com/articles/how-to-be-indistractable",
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://terrancehah.com/articles/how-to-be-indistractable"
+                  },
+                  "author": {
+                    "@type": "Person",
+                    "@id": "https://terrancehah.com/#person",
+                    "name": "Terrance Hah"
+                  },
+                  "inLanguage": "en",
+                  "datePublished": "2021-06-23"
+                }
+              ]
+            }
+        </script>
     </head>
 
     <body class="m-0 relative h-full bg-white overflow-x-hidden">
@@ -47,17 +94,17 @@
             <div class="site-header-inner">
                 <!-- Left: Logo & Title -->
                 <div class="site-header-brand">
-                    <h1 class="site-header-title">
+                    <p class="site-header-title">
                         Terrance's Playground
-                    </h1>
+                    </p>
                 </div>
 
                 <!-- Middle: Nav buttons -->
                 <nav class="site-nav">
                     <a href="/">Home</a>
-                    <a href="../articles.html" aria-current="location">Articles</a>
-                    <a href="../projects.html">Projects</a>
-                    <a href="../playground.html">Playground</a>
+                    <a href="/articles" aria-current="location">Articles</a>
+                    <a href="/projects">Projects</a>
+                    <a href="/playground">Playground</a>
                 </nav>
             
                 <!-- Right side: Social Icons -->

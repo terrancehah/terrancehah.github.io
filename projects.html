@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="Things Terrance Hah has built — including Pacey, a marathon training companion, plus smaller tools and experiments." />
 		<!-- Fonts: one consolidated request listing only the weights the
 		     site uses. preconnect warms the gstatic origin so the font
 		     files start as soon as the CSS arrives. -->
@@ -28,17 +31,31 @@
 			rel="icon"
 			href="./resources/icons/TH-logo.png"
 			type="image/x-icon" />
-		<meta property="og:title" content="Terrance's Projects" />
-		<meta property="og:description" content="Terrance's Projects" />
+		<meta property="og:title" content="Projects | Terrance Hah" />
+		<meta
+			property="og:description"
+			content="Things Terrance Hah has built — including Pacey, a marathon training companion, plus smaller tools and experiments." />
 		<meta
 			property="og:image"
 			content="https://terrancehah.com/resources/icons/TH-logo.png" />
-		<meta property="og:type" content="article" />
+		<meta property="og:type" content="website" />
 		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
 		<link rel="canonical" href="https://terrancehah.com/projects" />
 		<meta property="og:url" content="https://terrancehah.com/projects" />
+		<meta name="twitter:card" content="summary" />
+		<meta property="twitter:domain" content="terrancehah.com" />
+		<meta
+			property="twitter:url"
+			content="https://terrancehah.com/projects" />
+		<meta name="twitter:title" content="Projects | Terrance Hah" />
+		<meta
+			name="twitter:description"
+			content="Things Terrance Hah has built — including Pacey, a marathon training companion, plus smaller tools and experiments." />
+		<meta
+			name="twitter:image"
+			content="https://terrancehah.com/resources/icons/TH-logo.png" />
 
-		<title>Terrance's Projects</title>
+		<title>Projects | Terrance Hah</title>
 		<!-- Vercel Analytics -->
 		<script>
 			window.va =
@@ -48,6 +65,43 @@
 				};
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
+		<!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://terrancehah.com/#person",
+						"name": "Terrance Hah",
+						"url": "https://terrancehah.com/"
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://terrancehah.com/#website",
+						"url": "https://terrancehah.com/",
+						"name": "terrancehah.com",
+						"publisher": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					},
+					{
+						"@type": "CollectionPage",
+						"@id": "https://terrancehah.com/projects#collectionpage",
+						"url": "https://terrancehah.com/projects",
+						"name": "Projects | Terrance Hah",
+						"description": "Things Terrance Hah has built — including Pacey, a marathon training companion, plus smaller tools and experiments.",
+						"inLanguage": "en",
+						"isPartOf": {
+							"@id": "https://terrancehah.com/#website"
+						},
+						"author": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					}
+				]
+			}
+		</script>
 	</head>
 
 	<body class="m-0 relative h-full bg-white overflow-x-hidden">
@@ -55,15 +109,15 @@
 			<div class="site-header-inner">
 				<!-- Left: Title -->
 				<div class="site-header-brand">
-					<h1 class="site-header-title">Terrance's Playground</h1>
+					<p class="site-header-title">Terrance's Playground</p>
 				</div>
 
 				<!-- Middle: Nav buttons -->
 				<nav class="site-nav">
 					<a href="/">Home</a>
-					<a href="./articles.html">Articles</a>
-					<a href="./projects.html" aria-current="page">Projects</a>
-					<a href="./playground.html">Playground</a>
+					<a href="/articles">Articles</a>
+					<a href="/projects" aria-current="page">Projects</a>
+					<a href="/playground">Playground</a>
 				</nav>
 
 				<!-- Right side: Social Icons (site-social-* classes give
@@ -74,7 +128,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/facebook-png-128.webp"
+							src="/resources/optimized/icons/facebook-png-128.webp"
 							alt="facebook"
 							class="site-social-icon" />
 					</a>
@@ -83,7 +137,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/instagram-png-128.webp"
+							src="/resources/optimized/icons/instagram-png-128.webp"
 							alt="instagram"
 							class="site-social-icon" />
 					</a>
@@ -92,7 +146,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/x-png-128.webp"
+							src="/resources/optimized/icons/x-png-128.webp"
 							alt="x"
 							class="site-social-icon" />
 					</a>
@@ -101,7 +155,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/linkedin-png-128.webp"
+							src="/resources/optimized/icons/linkedin-png-128.webp"
 							alt="linkedin"
 							class="site-social-icon" />
 					</a>
@@ -110,7 +164,7 @@
 						target="_blank"
 						class="site-social-link">
 						<img
-						 src="/resources/optimized/icons/github-png-128.webp"
+							src="/resources/optimized/icons/github-png-128.webp"
 							alt="github"
 							class="site-social-icon" />
 					</a>
@@ -119,6 +173,10 @@
 		</header>
 
 		<main class="w-full projects-list-container">
+			<!-- Page heading — the hero below is the featured project, not the page title -->
+			<h1 class="font-lato font-bold text-3xl sm:text-4xl text-[#1d3557]">
+				Projects
+			</h1>
 			<!-- Hero Card - Latest Project -->
 
 			<article class="project-hero site-pressable" data-url="/pacey/">
@@ -126,15 +184,19 @@
 					<!-- Local copy of the runner photo — no third-party
                          fetch, and the file is served with the site. -->
 					<img
-					 src="/resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-1920.webp"
+						src="/resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-1920.webp"
 						alt="Runner on a tree-lined path — Pacey's race-readiness companion"
 						loading="eager"
 						fetchpriority="high"
 						decoding="async"
-					 width="1920"
-					 height="1280"
-					
-					  srcset="/resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-640.webp 640w, /resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-1280.webp 1280w, /resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-1920.webp 1920w" sizes="(max-width: 1536px) 100vw, 1536px"/>
+						width="1920"
+						height="1280"
+						srcset="
+							/resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-640.webp   640w,
+							/resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-1280.webp 1280w,
+							/resources/optimized/site/mathias-reding-g96xgokbtum-unsplash-jpg-1920.webp 1920w
+						"
+						sizes="(max-width: 1536px) 100vw, 1536px" />
 					<span class="image-credit"
 						>Photo by
 						<a
@@ -174,14 +236,16 @@
 						<!-- Local illustration (no third-party fetch) — the
                              same autumn field-journal art the app header uses. -->
 						<img
-						 src="/resources/optimized/projects/biwa-ride/assets/brian-kelly-s-dguzqrqi-unsplash-jpg-554.webp"
+							src="/resources/optimized/projects/biwa-ride/assets/brian-kelly-s-dguzqrqi-unsplash-jpg-554.webp"
 							alt="Cyclists riding past autumn trees towards Lake Biwa"
 							loading="lazy"
 							decoding="async"
-						 width="554"
-						 height="304"
-						
-						  srcset="/resources/optimized/projects/biwa-ride/assets/brian-kelly-s-dguzqrqi-unsplash-jpg-554.webp 554w" sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px"/>
+							width="554"
+							height="304"
+							srcset="
+								/resources/optimized/projects/biwa-ride/assets/brian-kelly-s-dguzqrqi-unsplash-jpg-554.webp 554w
+							"
+							sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) calc(100vw - 4rem), 720px" />
 						<span class="image-credit"
 							>Photo by
 							<a

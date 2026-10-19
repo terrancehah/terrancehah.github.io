@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="The personal website of Terrance Hah — runner, adventurer and self-taught programmer. Personal articles, projects and small experiments." />
 		<!-- Fonts: one consolidated request listing only the weights the
 		     site uses. preconnect warms the gstatic origin so the font
 		     files start as soon as the CSS arrives. -->
@@ -24,8 +25,8 @@
 		<link href="./styles/style.css" type="text/css" rel="stylesheet" />
 		<link href="./styles/output.css" rel="stylesheet" />
 		<link href="./styles/homepage.css" type="text/css" rel="stylesheet" />
-		<meta property="og:title" content="Terrance's Homepage" />
-		<meta property="og:description" content="Terrance's Homepage" />
+		<meta property="og:title" content="Terrance Hah | Personal Website" />
+		<meta property="og:description" content="The personal website of Terrance Hah — runner, adventurer and self-taught programmer. Personal articles, projects and small experiments." />
 		<link
 			rel="icon"
 			href="./resources/icons/TH-logo.png"
@@ -33,13 +34,19 @@
 		<meta
 			property="og:image"
 			content="https://terrancehah.com/resources/icons/TH-logo.png" />
-		<meta property="og:type" content="article" />
+		<meta property="og:type" content="website" />
 		<!-- Preferred clean URL — Vercel cleanUrls serves this page extensionless. -->
 		<link rel="canonical" href="https://terrancehah.com/" />
 		<meta property="og:url" content="https://terrancehah.com/" />
+		<meta name="twitter:card" content="summary">
+		<meta property="twitter:domain" content="terrancehah.com">
+		<meta property="twitter:url" content="https://terrancehah.com/">
+		<meta name="twitter:title" content="Terrance Hah | Personal Website">
+		<meta name="twitter:description" content="The personal website of Terrance Hah — runner, adventurer and self-taught programmer. Personal articles, projects and small experiments.">
+		<meta name="twitter:image" content="https://terrancehah.com/resources/icons/TH-logo.png">
 
 		<script src="./js/footer.js" defer></script>
-		<title>Terrance's Homepage</title>
+		<title>Terrance Hah | Personal Website</title>
 		<!-- Vercel Analytics -->
 		<script>
 			window.va =
@@ -49,6 +56,43 @@
 				};
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
+		<!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
+		<script type="application/ld+json">
+			{
+			  "@context": "https://schema.org",
+			  "@graph": [
+			    {
+			      "@type": "Person",
+			      "@id": "https://terrancehah.com/#person",
+			      "name": "Terrance Hah",
+			      "url": "https://terrancehah.com/"
+			    },
+			    {
+			      "@type": "WebSite",
+			      "@id": "https://terrancehah.com/#website",
+			      "url": "https://terrancehah.com/",
+			      "name": "terrancehah.com",
+			      "publisher": {
+			        "@id": "https://terrancehah.com/#person"
+			      }
+			    },
+			    {
+			      "@type": "WebPage",
+			      "@id": "https://terrancehah.com/#webpage",
+			      "url": "https://terrancehah.com/",
+			      "name": "Terrance Hah | Personal Website",
+			      "description": "The personal website of Terrance Hah — runner, adventurer and self-taught programmer. Personal articles, projects and small experiments.",
+			      "inLanguage": "en",
+			      "isPartOf": {
+			        "@id": "https://terrancehah.com/#website"
+			      },
+			      "about": {
+			        "@id": "https://terrancehah.com/#person"
+			      }
+			    }
+			  ]
+			}
+		</script>
 	</head>
 
 	<body
@@ -57,16 +101,16 @@
 			<div class="site-header-inner">
 				<!-- Left: Logo -->
 				<div class="site-header-brand">
-					<h1 class="site-header-title">Terrance's Playground</h1>
+					<p class="site-header-title">Terrance's Playground</p>
 				</div>
 
 				<!-- Middle: Nav buttons (homepage variant — green theme) -->
 				<nav class="site-nav">
 					<!-- Active page: Home — solid green pill -->
 					<a href="/" aria-current="page">Home</a>
-					<a href="./articles.html">Articles</a>
-					<a href="./projects.html">Projects</a>
-					<a href="./playground.html">Playground</a>
+					<a href="/articles">Articles</a>
+					<a href="/projects">Projects</a>
+					<a href="/playground">Playground</a>
 				</nav>
 
 				<!-- Right side: Social Icons (site-social-* classes give
@@ -301,7 +345,7 @@
 							</div>
 							<div class="photo-item square blank"></div>
 							<a
-								href="./articles/tnbyy-my-first-camphike.html"
+								href="/articles/tnbyy-my-first-camphike"
 								class="photo-item article-link site-pressable article-link-short bg-nature-200">
 								<div class="article-link-inner text-nature-900">
 									<span class="article-link-label"
@@ -580,7 +624,7 @@
 							<div class="photo-item square blank"></div>
 
 							<a
-								href="./articles/about-writing.html"
+								href="/articles/about-writing"
 								class="photo-item article-link site-pressable article-link-short bg-tech-100">
 								<div class="article-link-inner text-tech-900">
 									<span class="article-link-label"
@@ -593,7 +637,7 @@
 								</div>
 							</a>
 							<a
-								href="./articles/how-to-be-indistractable.html"
+								href="/articles/how-to-be-indistractable"
 								class="photo-item article-link site-pressable article-link-short bg-tech-100">
 								<div class="article-link-inner text-tech-900">
 									<span class="article-link-label"
