@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Entry routing, before anything paints: the landing is the signed-out
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Entry routing, before anything paints: the landing is the signed-out
          door, and every other intent forwards from here.
 
          ?entry=demo            → /pacey/demo/ (the dedicated demo route)
@@ -17,893 +17,1983 @@
 
          Hashes ride along only when they name a page the app actually has —
          #readiness, #plan and friends keep working through the redirect. -->
-    <script>
-        (function () {
-            var params = new URLSearchParams(location.search);
-            var entry = params.get('entry');
-            // App pages the hash may legitimately name — anything else is
-            // dropped rather than forwarded as a broken anchor.
-            var safeHash = /#(overview|activities|readiness|plan)$/.test(location.hash)
-                ? location.hash : '';
-            if (entry === 'demo') {
-                location.replace('/pacey/demo/' + safeHash);
-                return;
-            }
-            if (entry === 'login') {
-                location.replace('/pacey/app/?entry=login' + safeHash);
-                return;
-            }
-            if (params.get('signed-out')) return;
-            var token = null;
-            try { token = localStorage.getItem('pacey_session_token'); } catch (e) {}
-            if (token && token !== 'demo') {
-                location.replace('/pacey/app/?source=restore' + safeHash);
-            }
-        })();
-    </script>
-    <link href="/pacey/pacey-tokens.css" type="text/css" rel="stylesheet">
-    <!-- The board materials + the real readiness/plan presentation — the
+		<script>
+			(function () {
+				var params = new URLSearchParams(location.search);
+				var entry = params.get("entry");
+				// App pages the hash may legitimately name — anything else is
+				// dropped rather than forwarded as a broken anchor.
+				var safeHash = /#(overview|activities|readiness|plan)$/.test(
+					location.hash,
+				)
+					? location.hash
+					: "";
+				if (entry === "demo") {
+					location.replace("/pacey/demo/" + safeHash);
+					return;
+				}
+				if (entry === "login") {
+					location.replace("/pacey/app/?entry=login" + safeHash);
+					return;
+				}
+				if (params.get("signed-out")) return;
+				var token = null;
+				try {
+					token = localStorage.getItem("pacey_session_token");
+				} catch (e) {}
+				if (token && token !== "demo") {
+					location.replace("/pacey/app/?source=restore" + safeHash);
+				}
+			})();
+		</script>
+		<link href="/pacey/pacey-tokens.css" type="text/css" rel="stylesheet" />
+		<!-- The board materials + the real readiness/plan presentation — the
          sample previews below use the same classes the app renders. -->
-    <link href="/pacey/pinboard-theme.css" type="text/css" rel="stylesheet">
-    <link href="/pacey/pinboard-readiness.css" type="text/css" rel="stylesheet">
-    <link href="/pacey/pinboard-plan.css" type="text/css" rel="stylesheet">
-    <link href="/pacey/pinboard-course.css" type="text/css" rel="stylesheet">
-    <link href="/pacey/pacey-landing.css" type="text/css" rel="stylesheet">
-    <!-- MapLibre for the course card's real basemap — same library and CDN
+		<link
+			href="/pacey/pinboard-theme.css"
+			type="text/css"
+			rel="stylesheet" />
+		<link
+			href="/pacey/pinboard-readiness.css"
+			type="text/css"
+			rel="stylesheet" />
+		<link
+			href="/pacey/pinboard-plan.css"
+			type="text/css"
+			rel="stylesheet" />
+		<link
+			href="/pacey/pinboard-course.css"
+			type="text/css"
+			rel="stylesheet" />
+		<!-- Hand-drawn annotation arrows for the mobile exhibit captions;
+         vendored MIT library, see pacey/vendor/neat-annotations/README.md. -->
+		<link
+			href="/pacey/vendor/neat-annotations/neat-annotations.css"
+			type="text/css"
+			rel="stylesheet" />
+		<link
+			href="/pacey/pacey-landing.css"
+			type="text/css"
+			rel="stylesheet" />
+		<!-- MapLibre for the course card's real basemap — same library and CDN
          build the app loads; the drawn SVG trace stays as the fallback. -->
-    <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
-    <link rel="icon" href="/pacey/assets/icons/pacey-icon-32-white.png" type="image/png">
-    <link rel="apple-touch-icon" href="/pacey/assets/icons/pacey-icon-180-white.png">
-    <!-- The public /pacey URL is the one crawlers should index — the app
+		<link
+			href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+			rel="stylesheet" />
+		<link
+			rel="icon"
+			href="/pacey/assets/icons/pacey-icon-32-white.png"
+			type="image/png" />
+		<link
+			rel="apple-touch-icon"
+			href="/pacey/assets/icons/pacey-icon-180-white.png" />
+		<!-- The public /pacey URL is the one crawlers should index — the app
          shell and demo entries carry noindex,follow instead. -->
-    <meta name="robots" content="index,follow,max-image-preview:large">
-    <meta name="author" content="Terrance Hah">
-    <meta name="description" content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.">
-    <!-- One marathon-focused title, kept identical across the <title>
+		<meta name="robots" content="index,follow,max-image-preview:large" />
+		<meta name="author" content="Terrance Hah" />
+		<meta
+			name="description"
+			content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin." />
+		<!-- One marathon-focused title, kept identical across the <title>
          element, the social meta here and the JSON-LD WebPage name. -->
-    <meta property="og:title" content="Marathon Training Plan for Garmin Runners | Pacey">
-    <meta property="og:description" content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.">
-    <meta property="og:image" content="https://terrancehah.com/pacey/assets/pacey-social-preview.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:alt" content="Pacey race-readiness companion with Garmin metrics, course analysis and training plans.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://terrancehah.com/pacey">
-    <meta property="og:site_name" content="Pacey">
-    <meta property="og:locale" content="en_US">
-    <link rel="canonical" href="https://terrancehah.com/pacey">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Marathon Training Plan for Garmin Runners | Pacey">
-    <meta name="twitter:description" content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.">
-    <meta name="twitter:image" content="https://terrancehah.com/pacey/assets/pacey-social-preview.png">
-    <meta name="twitter:image:alt" content="Pacey race-readiness companion with Garmin metrics, course analysis and training plans.">
+		<meta
+			property="og:title"
+			content="Marathon Training Plan for Garmin Runners | Pacey" />
+		<meta
+			property="og:description"
+			content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin." />
+		<meta
+			property="og:image"
+			content="https://terrancehah.com/pacey/assets/pacey-social-preview.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:type" content="image/png" />
+		<meta
+			property="og:image:alt"
+			content="Pacey race-readiness companion with Garmin metrics, course analysis and training plans." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://terrancehah.com/pacey" />
+		<meta property="og:site_name" content="Pacey" />
+		<meta property="og:locale" content="en_US" />
+		<link rel="canonical" href="https://terrancehah.com/pacey" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta
+			name="twitter:title"
+			content="Marathon Training Plan for Garmin Runners | Pacey" />
+		<meta
+			name="twitter:description"
+			content="Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin." />
+		<meta
+			name="twitter:image"
+			content="https://terrancehah.com/pacey/assets/pacey-social-preview.png" />
+		<meta
+			name="twitter:image:alt"
+			content="Pacey race-readiness companion with Garmin metrics, course analysis and training plans." />
 
-    <title>Marathon Training Plan for Garmin Runners | Pacey</title>
-    <!-- The two handwriting faces the board is set in — Caveat for headings,
+		<title>Marathon Training Plan for Garmin Runners | Pacey</title>
+		<!-- The two handwriting faces the board is set in — Caveat for headings,
          Fuzzy Bubbles for copy. Same faces the app uses; nothing new. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fuzzy+Bubbles&display=swap" rel="stylesheet">
-    <!-- Theme before paint: same rule as the app — a saved pacey_theme choice
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fuzzy+Bubbles&display=swap"
+			rel="stylesheet" />
+		<!-- Theme before paint: same rule as the app — a saved pacey_theme choice
          wins, otherwise dark between 7pm and 7am local time. Inline so the
          first render already carries the right data-theme. -->
-    <script>
-        (function () {
-            var saved = null;
-            try { saved = localStorage.getItem('pacey_theme'); } catch (e) {}
-            var hour = new Date().getHours();
-            var theme = saved || ((hour >= 19 || hour < 7) ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
-    </script>
-    <!-- Chart.js + the hand-drawn roughness plugin, wired exactly as the app
+		<script>
+			(function () {
+				var saved = null;
+				try {
+					saved = localStorage.getItem("pacey_theme");
+				} catch (e) {}
+				var hour = new Date().getHours();
+				var theme =
+					saved || (hour >= 19 || hour < 7 ? "dark" : "light");
+				document.documentElement.setAttribute("data-theme", theme);
+			})();
+		</script>
+		<!-- Chart.js + the hand-drawn roughness plugin, wired exactly as the app
          does — the sample radar is the same chart the readiness page draws.
          The plugin's bare chart.js imports map to the local shim so it
          patches the UMD build above, not a second copy. -->
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script type="importmap">
-    {
-      "imports": {
-        "chart.js": "/pacey/chartjs-roughness-shim.js",
-        "chart.js/helpers": "/pacey/chartjs-roughness-shim.js",
-        "roughjs": "https://cdn.jsdelivr.net/npm/roughjs@4.6.6/+esm",
-        "d3-path": "https://cdn.jsdelivr.net/npm/d3-path@3.1.0/+esm"
-      }
-    }
-    </script>
-    <script type="module">
-    import 'https://cdn.jsdelivr.net/npm/chartjs-plugin-roughness@1.0.6/index.js';
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+		<script type="importmap">
+			{
+				"imports": {
+					"chart.js": "/pacey/chartjs-roughness-shim.js",
+					"chart.js/helpers": "/pacey/chartjs-roughness-shim.js",
+					"roughjs": "https://cdn.jsdelivr.net/npm/roughjs@4.6.6/+esm",
+					"d3-path": "https://cdn.jsdelivr.net/npm/d3-path@3.1.0/+esm"
+				}
+			}
+		</script>
+		<script type="module">
+			import "https://cdn.jsdelivr.net/npm/chartjs-plugin-roughness@1.0.6/index.js";
 
-    // Same ellipse workaround as the app — rough.js has no ellipse, and
-    // Chart.js draws point elements through it.
-    CanvasRenderingContext2D.prototype.ellipse = function (x, y, rx, ry, rot, a0, a1) {
-      return this.arc(x, y, Math.max(rx, ry), a0, a1);
-    };
-    </script>
-    <!-- Machine-readable description of the page: who publishes it, what
+			// Same ellipse workaround as the app — rough.js has no ellipse, and
+			// Chart.js draws point elements through it.
+			CanvasRenderingContext2D.prototype.ellipse = function (
+				x,
+				y,
+				rx,
+				ry,
+				rot,
+				a0,
+				a1,
+			) {
+				return this.arc(x, y, Math.max(rx, ry), a0, a1);
+			};
+		</script>
+		<!-- Machine-readable description of the page: who publishes it, what
          Pacey is, and the questions answered below. Questions and answers
          here mirror the visible FAQ exactly — only fields grounded in the
          product are serialised, no ratings, offers or dates. -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Person",
-                "@id": "https://terrancehah.com/#person",
-                "name": "Terrance Hah",
-                "url": "https://terrancehah.com/"
-            },
-            {
-                "@type": "WebSite",
-                "@id": "https://terrancehah.com/#website",
-                "url": "https://terrancehah.com/",
-                "name": "terrancehah.com",
-                "publisher": { "@id": "https://terrancehah.com/#person" }
-            },
-            {
-                "@type": "ImageObject",
-                "@id": "https://terrancehah.com/pacey#primaryimage",
-                "url": "https://terrancehah.com/pacey/assets/pacey-social-preview.png",
-                "width": 1200,
-                "height": 630,
-                "caption": "Pacey race-readiness companion with Garmin metrics, course analysis and training plans."
-            },
-            {
-                "@type": "SoftwareApplication",
-                "@id": "https://terrancehah.com/pacey#application",
-                "name": "Pacey",
-                "url": "https://terrancehah.com/pacey",
-                "description": "Pacey is a marathon race-readiness companion that uses Garmin training and recovery data to assess fitness against a chosen goal time and shape a marathon training plan.",
-                "applicationCategory": "HealthApplication",
-                "operatingSystem": "Web",
-                "browserRequirements": "Requires JavaScript.",
-                "inLanguage": "en",
-                "creator": { "@id": "https://terrancehah.com/#person" },
-                "image": { "@id": "https://terrancehah.com/pacey#primaryimage" },
-                "featureList": [
-                    "Six-area race readiness against a runner-defined goal",
-                    "Garmin training and recovery metrics",
-                    "GPX route and elevation analysis",
-                    "Training blocks of up to 26 weeks with current-week Garmin sync",
-                    "Post-race goal and result reviews"
-                ]
-            },
-            {
-                "@type": "WebPage",
-                "@id": "https://terrancehah.com/pacey#webpage",
-                "url": "https://terrancehah.com/pacey",
-                "name": "Marathon Training Plan for Garmin Runners | Pacey",
-                "description": "Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.",
-                "inLanguage": "en",
-                "isPartOf": { "@id": "https://terrancehah.com/#website" },
-                "mainEntity": { "@id": "https://terrancehah.com/pacey#application" },
-                "primaryImageOfPage": { "@id": "https://terrancehah.com/pacey#primaryimage" }
-            },
-            {
-                "@type": "FAQPage",
-                "@id": "https://terrancehah.com/pacey#questions",
-                "url": "https://terrancehah.com/pacey#questions",
-                "isPartOf": { "@id": "https://terrancehah.com/pacey#webpage" },
-                "mainEntity": [
-                    {
-                        "@type": "Question",
-                        "name": "What is Pacey?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Pacey is a race-readiness companion. It brings Garmin training and recovery data, your race goal and the course together to explain what is working, what needs attention and how to prepare for your next race." }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Do I need a Garmin account?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Connect your Garmin account to use your own training data, or explore the demo with sample data. Pacey uses python-garminconnect, an open-source project on GitHub, to load your Garmin data." }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "How does race readiness relate to my goal time?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Race readiness compares your current fitness and recent activities with the goal time you set. It constantly highlights your strengths, the areas to develop and what to focus on before race day." }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "How does the training plan reach Garmin?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Pacey shows a training block of up to 26 weeks. You can review the suggested workouts, then sync the current calendar week’s suggested workouts to your Garmin watch." }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Can I upload my own race course for analysis?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can upload a GPX file to view the route and elevation profile. The Pacey coach will study the route, consider the climbs and where they occur when explaining race preparation." }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "How is Pacey different from Garmin Training Readiness?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Garmin Training Readiness helps you judge how ready you are to train today. Pacey compares your recent running fitness with the race goal time you choose, highlights areas to develop and uses the biggest gap to shape your training plan. Pacey is an independent product, not an official Garmin service." }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Does Pacey predict my marathon finish time?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "No. Pacey assesses your readiness against the goal time you set; it does not predict a finish time or guarantee a race result. Your readiness review explains the training evidence and what to work on before race day." }
-                    }
-                ]
-            }
-        ]
-    }
-    </script>
-</head>
-<body class="landing-body">
-
-    <!-- The metric icons the preview tiles use — a subset of the app's own
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Person",
+						"@id": "https://terrancehah.com/#person",
+						"name": "Terrance Hah",
+						"url": "https://terrancehah.com/"
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://terrancehah.com/#website",
+						"url": "https://terrancehah.com/",
+						"name": "terrancehah.com",
+						"publisher": {
+							"@id": "https://terrancehah.com/#person"
+						}
+					},
+					{
+						"@type": "ImageObject",
+						"@id": "https://terrancehah.com/pacey#primaryimage",
+						"url": "https://terrancehah.com/pacey/assets/pacey-social-preview.png",
+						"width": 1200,
+						"height": 630,
+						"caption": "Pacey race-readiness companion with Garmin metrics, course analysis and training plans."
+					},
+					{
+						"@type": "SoftwareApplication",
+						"@id": "https://terrancehah.com/pacey#application",
+						"name": "Pacey",
+						"url": "https://terrancehah.com/pacey",
+						"description": "Pacey is a marathon race-readiness companion that uses Garmin training and recovery data to assess fitness against a chosen goal time and shape a marathon training plan.",
+						"applicationCategory": "HealthApplication",
+						"operatingSystem": "Web",
+						"browserRequirements": "Requires JavaScript.",
+						"inLanguage": "en",
+						"creator": { "@id": "https://terrancehah.com/#person" },
+						"image": {
+							"@id": "https://terrancehah.com/pacey#primaryimage"
+						},
+						"featureList": [
+							"Six-area race readiness against a runner-defined goal",
+							"Garmin training and recovery metrics",
+							"GPX route and elevation analysis",
+							"Training blocks of up to 26 weeks with current-week Garmin sync",
+							"Post-race goal and result reviews"
+						]
+					},
+					{
+						"@type": "WebPage",
+						"@id": "https://terrancehah.com/pacey#webpage",
+						"url": "https://terrancehah.com/pacey",
+						"name": "Marathon Training Plan for Garmin Runners | Pacey",
+						"description": "Build a marathon training plan around your goal time and Garmin data. See your race readiness, what to work on, and workouts you can sync to Garmin.",
+						"inLanguage": "en",
+						"isPartOf": {
+							"@id": "https://terrancehah.com/#website"
+						},
+						"mainEntity": {
+							"@id": "https://terrancehah.com/pacey#application"
+						},
+						"primaryImageOfPage": {
+							"@id": "https://terrancehah.com/pacey#primaryimage"
+						}
+					},
+					{
+						"@type": "FAQPage",
+						"@id": "https://terrancehah.com/pacey#questions",
+						"url": "https://terrancehah.com/pacey#questions",
+						"isPartOf": {
+							"@id": "https://terrancehah.com/pacey#webpage"
+						},
+						"mainEntity": [
+							{
+								"@type": "Question",
+								"name": "What is Pacey?",
+								"acceptedAnswer": {
+									"@type": "Answer",
+									"text": "Pacey is a race-readiness companion. It brings Garmin training and recovery data, your race goal and the course together to explain what is working, what needs attention and how to prepare for your next race."
+								}
+							},
+							{
+								"@type": "Question",
+								"name": "Do I need a Garmin account?",
+								"acceptedAnswer": {
+									"@type": "Answer",
+									"text": "Connect your Garmin account to use your own training data, or explore the demo with sample data. Pacey uses python-garminconnect, an open-source project on GitHub, to load your Garmin data."
+								}
+							},
+							{
+								"@type": "Question",
+								"name": "How does race readiness relate to my goal time?",
+								"acceptedAnswer": {
+									"@type": "Answer",
+									"text": "Race readiness compares your current fitness and recent activities with the goal time you set. It constantly highlights your strengths, the areas to develop and what to focus on before race day."
+								}
+							},
+							{
+								"@type": "Question",
+								"name": "How does the training plan reach Garmin?",
+								"acceptedAnswer": {
+									"@type": "Answer",
+									"text": "Pacey shows a training block of up to 26 weeks. You can review the suggested workouts, then sync the current calendar week’s suggested workouts to your Garmin watch."
+								}
+							},
+							{
+								"@type": "Question",
+								"name": "Can I upload my own race course for analysis?",
+								"acceptedAnswer": {
+									"@type": "Answer",
+									"text": "Yes. You can upload a GPX file to view the route and elevation profile. The Pacey coach will study the route, consider the climbs and where they occur when explaining race preparation."
+								}
+							},
+							{
+								"@type": "Question",
+								"name": "How is Pacey different from Garmin Training Readiness?",
+								"acceptedAnswer": {
+									"@type": "Answer",
+									"text": "Garmin Training Readiness helps you judge how ready you are to train today. Pacey compares your recent running fitness with the race goal time you choose, highlights areas to develop and uses the biggest gap to shape your training plan. Pacey is an independent product, not an official Garmin service."
+								}
+							},
+							{
+								"@type": "Question",
+								"name": "Does Pacey predict my marathon finish time?",
+								"acceptedAnswer": {
+									"@type": "Answer",
+									"text": "No. Pacey assesses your readiness against the goal time you set; it does not predict a finish time or guarantee a race result. Your readiness review explains the training evidence and what to work on before race day."
+								}
+							}
+						]
+					}
+				]
+			}
+		</script>
+	</head>
+	<body class="landing-body">
+		<!-- The metric icons the preview tiles use — a subset of the app's own
          sprite, same <symbol> geometry, referenced in with <use>. -->
-    <svg class="pacey-icon-sprite" width="0" height="0" aria-hidden="true" focusable="false">
-        <symbol id="pacey-icon-lungs" viewBox="0 0 162 121"><path d="M67.8 42.9L76.8 37C77.3 30.1 77.9 23 78.3 15.8C78.5 12.2 78.3 8.5 78.3 4.8C78.2 3.1 78.9 1.8 80.6 1.6C83.9 0.9 87.2 0.5 90.6 0.3C92.7 0.2 94.4 2.5 94.6 5.3C94.8 9.3 94.9 13.2 95 17.1C95 23.3 95 29.4 95 35.6L100.7 38.5C100.7 37.1 100.7 36.3 100.7 35.4C100.4 29.2 101 22.9 102.5 16.7C103.4 13 105.6 9.7 108.7 7.4C112.6 4.4 116.3 4.2 120.6 6.7C125.5 9.7 129.5 14 132.3 19.1C134.5 23.1 136.6 27.2 138.4 31.4C145.4 48 152.2 64.6 157.2 81.8C158.6 86.8 160.2 91.7 161.4 96.7C163 103.4 160.1 108.1 153.4 110C151.4 110.7 149.3 111.1 147.2 111.3C136.9 111.7 126.5 112.3 116.3 110.3C107.8 108.7 102.3 104 100.9 95.2C99.2 84.2 96.5 73.3 97.2 62.2C97.4 58 95.9 56 92.5 54.5C88.5 52.6 84.7 52.3 80.8 55.1C76.4 58.3 71.7 61.2 67.6 64C67.8 67.3 68.1 70.1 68 73C67.7 81.1 67.3 89.2 66.9 97.2C66.7 102 65.6 106.6 63.6 110.9C61.8 114.8 59 117.5 54.7 118.4C52.1 119 49.4 119.7 46.8 119.7C38.4 119.7 29.9 119.5 21.5 119.1C19.2 119 16.9 118.5 14.6 117.7C3.8 114.3 -1.2 105.9 1.8 95C3.6 88.3 6.4 81.7 8.9 75.1C12.6 65.6 16.5 56.2 20.1 46.6C23.4 38 26.9 29.4 33.1 22.4C35.8 19.4 38.7 16.7 42 14.2C45.4 11.6 49.5 10.8 53.8 11.3C58.5 11.9 61.7 14.5 63.2 18.8C64 21 64.5 23.1 64.9 25.4C65.9 31 66.8 36.6 67.8 42.9ZM60.5 69.7L59.6 69.4C58.3 70.2 57 71.1 55.7 71.9C54.6 72.6 53.3 72.9 52.4 71.7C51.4 70.4 51.9 69.1 53 68.1C54 67.2 55.1 66.3 56.2 65.6C63.3 60.5 70.7 55.7 77.6 50.4C84.1 45.5 90.6 45.1 97.3 49.3C102.1 52.4 106.6 55.8 111.2 59.2C112.1 59.8 112.6 60.6 112.8 61.5C113 62.5 112.9 63.5 112.4 64.3C111.4 65.9 109.3 66.4 107.3 65.4C106.4 65 105.5 64.4 104.1 63.6C105.4 74.2 106.5 84.4 108.6 94.4C109.6 98.9 112.3 101.4 116.8 102.1C125 103.5 133.3 103.4 141.6 103C144.5 102.8 147.4 102.4 150.3 101.8C153.5 101.1 154.3 98.9 153 96C152 93.7 151.1 91.4 150.4 89.1C148.9 83.7 147.7 78.2 145.9 72.9C141.4 59.9 136.8 46.8 131.9 34C130 28.9 127.2 24 124.5 19.2C122.8 16.2 120.4 13.6 117.4 11.8C115.7 10.7 114.3 10.9 112.8 12.2C110.8 14.2 109.4 16.7 108.9 19.5C107.6 26.9 107.2 34.4 107.6 41.9C110.2 43.4 112.8 44.8 115.3 46.3C116.4 47 117.5 47.9 118.3 49C118.8 49.5 119 50.2 119.1 51C119.1 51.7 118.9 52.5 118.4 53.1C117.5 54.3 116.2 54.5 114.8 54.2C113.7 53.9 112.7 53.5 111.7 52.9C105.6 49.2 99.6 45.2 93.3 41.7C88.4 39.1 86.9 35.4 87.7 30C88.5 25.3 89 20.5 89.5 15.7C89.8 12.7 89.9 9.7 90.1 6.4L83.8 6.7C83.7 7.7 83.6 8.3 83.6 9C83.6 17.4 83.6 25.8 83.5 34.2C83.5 35.9 83.4 37.8 82.5 39C80.8 41.4 78.7 43.4 76.4 45.1C70.3 49.5 63.9 53.5 57.7 57.7C56.9 58.2 56.1 58.8 55.3 58.9C54.3 58.9 52.8 58.7 52.3 58C51.8 57.2 51.9 55.7 52.2 54.7C52.5 53.8 53.5 53.2 54.3 52.6C57.1 50.4 60 48.3 62.8 46.1C61 38.7 59.2 31.5 57.4 24.4C57.1 23.4 56.8 22.4 56.4 21.5C56.1 20.7 55.5 19.9 54.7 19.4C54 18.9 53.1 18.6 52.2 18.6C49.4 18.4 46.6 19.3 44.4 21C37.2 26.4 32.6 33.6 29.1 41.6C26.8 47 24.8 52.4 22.7 57.9C18.2 69.4 13.6 80.8 9.3 92.4C8.3 95.2 7.7 98.2 7.4 101.2C7.1 103.3 7.6 105.5 8.7 107.4C9.9 109.2 11.6 110.6 13.6 111.4C16 112.5 18.7 113.1 21.3 113.4C29.6 113.8 37.9 114.1 46.2 114C54.6 113.8 57.7 111.3 58.6 102.9C59.7 91.9 59.9 80.8 60.5 69.7Z"/></symbol>
-        <symbol id="pacey-icon-hrv" viewBox="0 0 159 145"><path d="M7.5 84.2C3.4 77 0.9 69 0.3 60.7C-1.3 40.8 4.9 24 20.8 11.3C27.8 5.6 36.7 2.5 45.8 2.6C50.5 2.5 55.2 2.9 59.8 3.7C68.1 5.2 75.9 8 81.7 14.7C84.9 12.7 87.9 10.7 90.9 8.9C97.8 4.6 105.6 2 113.7 1.3C125.2 0.2 134.9 4.5 143.2 12.1C154.9 22.7 158.7 36.3 157.5 51.7C156.8 59.9 154.6 67.9 151.1 75.3C150.7 76 150.5 76.7 150.1 77.5C150.9 77.9 151.7 78.4 152.5 78.9C154.2 80.2 154.1 82.1 152 83.1C151.3 83.6 150.4 83.8 149.5 83.9C146.8 84.1 145.2 85.7 143.7 87.9C134.4 101.2 123.4 113.1 111 123.5C104.5 129 97.7 134.2 90.9 139.4C88.6 141 86.2 142.4 83.7 143.8C82.6 144.5 81.2 144.9 79.9 144.9C78.5 144.9 77.2 144.6 76 143.9C73.2 142.3 70.6 140.4 67.9 138.5C64.6 136.3 61.5 134 58.2 131.9C43.5 122.6 29.9 112 18.3 99C16.1 96.5 14 93.8 12 91.1C11.7 90.5 11.2 90 10.6 89.7C10 89.4 9.4 89.3 8.7 89.3C7 89.3 5.3 89.2 3.7 88.9C2.3 88.8 1.2 88 1.3 86.6C1.4 85 2.4 84.2 4 84.2C5 84.2 6 84.2 7.5 84.2ZM72.7 79.1C75.8 76.9 79.2 76.8 82.7 77.2C85.5 77.6 88.3 77.9 91.1 77.9C106.6 77.9 122.1 77.8 137.6 77.8C139.7 77.8 140.8 76.9 141.8 75.2C147.7 64.9 150.8 54 150.2 42.1C149.5 27.4 142.3 16.9 129.2 10.4C125 8.3 120.2 7.5 115.5 7.9C108.9 8.4 102.4 10.3 96.5 13.4C92.9 15.4 89.4 17.6 85.8 19.7C82.4 21.7 80.2 21.4 77.4 18.7C74.6 15.8 71.2 13.7 67.4 12.6C63.2 11.5 59 10.2 54.6 9.8C41.4 8.4 29.6 11.6 20.4 21.8C6 37.7 3.6 60.9 13.1 79.5C13.7 80.8 14.6 82 15.2 83.1C20.8 82.4 21.7 81.9 24.6 77.8C25.9 75.8 27.3 73.9 28.9 72.2C31.6 69.5 34.5 70 36.4 73.3C37.2 74.8 37.9 76.3 38.5 77.9C39 76.4 39.4 75.4 39.7 74.4C40.7 71.4 41.3 68.3 42.5 65.4C43.4 63.1 44.8 61 46.4 59.2C49.1 56.5 52.5 57.2 54 60.8C54.9 63 55.6 65.4 55.9 67.9C56.7 74.1 57.3 80.3 58 86.6C58.1 87.5 58.4 88.5 58.6 89.4C59.6 86.3 60.2 83.7 61.2 81.2C62 79.5 63.1 77.9 64.5 76.6C66.4 74.8 68.5 74.9 70.5 76.7C71.2 77.4 71.8 78.2 72.7 79.1ZM50.2 64.4L49.2 64.3C48.7 65.7 48.2 67 47.8 68.4C46.6 72.2 45.6 76.1 44.3 80C43.7 82 42.8 83.9 41.6 85.7C40.1 88 37.4 88 35.7 85.8C34.9 84.4 34.2 83 33.7 81.5C33.3 80.3 33.1 79.1 32.6 77.4C30.6 80.1 29.1 82.7 27 84.5C24.7 86.4 21.8 87.4 18.8 88.9C21.6 92.2 24.3 95.7 27.4 98.9C37.7 109.4 49.4 118.5 62.1 125.9C66.4 128.5 70.6 131.4 74.9 133.9C77.2 135.2 79.8 135.8 82.2 134.2C85.2 132.2 88.1 130.1 91 128C104.6 118.1 117 106.8 127.9 94.1C130.5 91.2 132.9 88.1 135.6 84.8C134.9 84.6 134.2 84.5 133.5 84.4C115.8 83.8 98.1 84.7 80.4 82.2C79.2 82.1 78 82.4 76.9 82.9C75.3 83.6 73.7 85.4 72.4 85.2C70.8 84.9 69.6 83 68 81.6C67.5 83 66.9 84.4 66.5 85.9C65.8 88.7 65.4 91.6 64.6 94.4C64.2 96.4 63.4 98.3 62.4 100C60.5 103 57 102.8 55.4 99.7C54.4 97.9 53.6 95.8 53.2 93.7C52.4 87.9 51.8 82 51.2 76.1C50.8 72.2 50.6 68.3 50.2 64.4Z"/></symbol>
-        <symbol id="pacey-icon-sleep" viewBox="0.65 2.60 22.50 18.75"><path d="M2.07 3.82Q1.78 12 2.15 20.15"/><path d="M1.96 8.5Q11 6.92 20.47 8.26C20.88 8.19 21.66 8.54 21.47 9.99Q20.52 15 21.45 20.01"/><path d="M1.85 17.02Q12 17.52 21.95 17.19"/><path d="M6.09 8.14Q5.4 12.5 6.14 17.05"/></symbol>
-        <symbol id="pacey-icon-heart" viewBox="0 0 143 131"><path d="M67.4 125.4L68.1 125.7C70.8 126.5 73.3 127.2 74.9 130.6C75 130.6 75 130.7 75.1 130.8C75.2 130.8 75.3 130.9 75.4 130.9C75.4 130.9 75.5 130.9 75.5 130.9C75.7 130.9 75.8 130.9 75.9 130.8C77.1 130 78.3 129.3 79.4 128.6C81.7 127.2 83.6 125.9 85.5 124.4C92.3 119.3 98.5 113.5 104 107C111.2 98.3 118.6 89.3 125.6 79.8C130 74 133.7 67.4 136.9 61.7C140 55.9 141.9 49.5 142.4 42.9C143.3 32.1 140.7 22.4 134.8 14C128.3 4.6 119.6 0 109 0.4C97 0.8 86.5 5.4 77.7 14.1C77.3 14.6 76.9 15 76.5 15.5C75.9 16.4 75.2 17.3 74.2 17.6C64 7.5 56.2 3.6 44.4 2.6C32.4 1.6 22.7 5.5 15.5 14.2C11.9 18.5 8.8 23.2 6.2 28.1C0.6 38.7 -0.6 50 2.7 61.7C5.7 72.1 10.6 81.8 17.2 90.3C30.5 107.4 47.4 119.2 67.4 125.4ZM17.8 30.1C19.3 27.2 21 24.4 22.9 21.7C27.4 15.1 33.7 11.7 41.7 11.7C42.7 11.7 43.7 11.8 44.7 11.9C55.4 12.9 64 17.7 70.2 26C70.9 27 71.7 27.9 72.4 28.7C72.7 29.1 73 29.4 73.3 29.7C73.4 29.8 73.5 29.9 73.6 29.9C76.5 30.4 77.7 28.9 78.6 27.4C83.5 19.1 91.3 14.1 103 11.8C105.8 11.3 108.6 11.2 111.4 11.5C115.8 12 119.6 14.2 122.6 18.1C126.1 22.6 128.2 28 128.6 33.7C129.2 40.3 128 46.9 125.1 52.8C123 57.4 120.5 61.9 117.7 66.1C112.6 73.7 107.2 81.3 101.9 88.6L100.1 91.1C96.1 96.6 92.1 102.1 88.2 107.4C86.7 109.3 85.3 111.2 83.9 113.1C83.3 113.9 82.7 114.8 82 115.6C81.8 115.9 81.5 116.2 81.3 116.5C79.4 115.7 77.6 114.9 75.8 114.2C71.5 112.4 67.5 110.7 63.5 109C52.3 104.4 42.2 97.5 33.7 88.8C25 79.8 19 70.1 15.3 59.3C12 49.4 12.8 39.9 17.8 30.1Z"/></symbol>
-        <symbol id="pacey-icon-stopwatch" viewBox="0 0 120 126"><path d="M44.7 16.8C44.9 13.6 45.1 10.4 45.3 6.8C43.5 6.8 42 6.8 40.5 6.7C38.1 6.6 37.2 6 37.1 4.4C37 2.7 38 1.7 40.3 1.3C41.5 1.2 42.8 1.1 44 1.1C53.1 0.8 62.2 0.5 71.3 0.2C71.9 0.2 72.4 0.2 73 0.3C74.9 0.7 76 2 76 3.7C76 4.6 75.7 5.4 75.1 6C74.6 6.6 73.8 7 72.9 7.1C71.4 7.4 69.9 7.4 68.1 7.5V16.3C77.8 17.3 86 21.9 94.3 27.4C96.3 25.7 98.4 24.2 100.3 22.4C105.9 17.3 109 17.7 113.1 23.4C114.2 24.7 115.3 25.9 116.5 27C119.7 30.3 119.7 32.9 116.6 36.3C114.6 38.6 112.4 40.7 110.2 43C111.6 45.7 113.1 48.2 114.5 50.8C122.4 65.8 121.3 87.9 108.4 102.4C97.7 114.4 84.6 121.7 68.9 124.6C54 127.4 39.7 125.2 25.9 119.3C16.3 115.1 9.7 107.8 6.1 98.3C-1.2 79.2 -0 60.5 9.7 42.3C13.4 35.4 19.2 30.5 25.6 26.1C29.3 23.7 33.1 21.5 37.1 19.5C39.4 18.3 42.1 17.7 44.7 16.8ZM11.4 74.6C11.4 80.6 12.4 86.6 14.3 92.4C17.7 102.4 24 109.7 34.3 113C57.6 120.4 78.7 116.8 97.1 100.4C110.7 88.3 113.5 70.2 104.5 54.3C97.4 41.6 86.6 33.1 72.9 28.3C66.6 26.1 59.9 25.2 53.2 25.7C45.2 26.2 38.1 29.2 31.4 33.2C24.3 37.3 18.8 43.6 15.7 51.2C12.7 58.5 11.8 66.1 11.4 74.6ZM52.4 7.3C52.6 10.2 52.8 13 52.9 15.8H60.3C60.8 12.9 61.2 10.2 61.6 7.3H52.4ZM112.3 31.6L107.2 25.9L101 32.4L105.2 37L112.3 31.6Z"/><path d="M62.8 68.4C67.4 68.5 71.7 68.6 76 68.8C77.3 68.8 78.6 68.9 79.9 69.2C80.7 69.3 81.4 69.7 81.9 70.3C82.4 70.9 82.7 71.7 82.7 72.5C82.8 73.3 82.5 74.1 82 74.8C81.5 75.5 80.7 76 79.9 76.1C78.7 76.5 77.5 76.7 76.3 76.6C70.3 76.3 64.3 75.9 58.3 75.6C55.7 75.4 54.4 74.4 54.1 71.8C54 70.6 54 69.4 54.2 68.2C55 60.8 55.7 53.5 56.5 46.1C56.7 44.9 56.9 43.7 57.2 42.5C57.6 41.1 58.4 40.2 60 40.1C61.8 40.1 62.6 41.2 62.9 42.7C63.2 43.9 63.3 45.1 63.3 46.3C63.2 52.7 63 59.2 62.8 65.6C62.8 66.3 62.8 67.1 62.8 68.4Z"/></symbol>
-        <symbol id="pacey-icon-readiness-score" viewBox="0 0 172 139"><path d="M2.8 126.8C3 129.2 3.4 131.5 4.2 133.8C5.3 137.5 6.7 138.1 10.4 138.1L13.8 138.2C24.5 138.2 35.6 138.2 46.5 138.2C47.5 138.2 48.6 138.1 49.7 138C50.8 137.8 51.9 137.7 53 137.8C54.8 137.8 56.6 137.9 58.3 138.1C60.5 138.2 62.6 138.4 64.8 138.4C65 138.4 65.1 138.4 65.2 138.4C92.4 138.1 114.4 137.8 134.4 137.4C141.4 137.3 146.5 134.4 149.9 128.6C157.5 115.8 163.4 101.4 169 81.8C169.9 78.7 170.5 75.5 171 72.2C171.2 70.8 171.5 69.3 171.7 67.8C171.7 67.7 171.7 67.7 171.7 67.7V63C171.7 62.9 171.7 62.9 171.7 62.8C171.4 61.9 171.1 61 170.8 60.1C170.3 58 169.6 55.9 168.5 54C165.2 48.5 159.7 45.4 152.5 44.8C145.7 44.4 138.8 44.2 132.1 44.1C130.4 44.1 128.7 44 127 44C123.6 43.9 120.1 44 116.8 44C115.5 44 114.2 44 112.9 44C115.1 38.3 116.5 32.1 117.3 23.7C117.8 18.7 118.1 12.2 116.2 5.9C114.8 1.4 112.7 -0.1 107.9 0.2C104.8 0.3 101.7 1.6 99.4 3.8C98.9 4.3 98.4 4.8 97.8 5.3C95 7.9 92.4 10.7 90 13.7C87 17.6 84.2 21.8 81.5 25.9C80.3 27.6 79.1 29.4 77.9 31.1C72.2 39.4 65.5 45.4 57.3 49.5C56.6 49.8 55.9 50 55.2 50.1C54.5 50.2 53.8 50.1 53.1 49.9C47.1 48.4 42 48 37.1 48.7C33.4 49.3 29.5 49.6 25.7 50C24.3 50.1 22.8 50.2 21.4 50.4C19.8 50.5 18.3 50.7 16.8 50.8C14.3 51 11.7 51.3 9.2 51.5C4.6 52.1 2.7 53.8 1.8 58.5L1.7 58.9C1.6 59.7 1.5 60.4 1.4 61.2C1.4 62.9 1.4 64.7 1.3 66.4C1.2 70.9 1.1 75.6 1.2 80.2C1.6 96.7 2.3 113 2.8 126.8ZM47.9 55.7C47.8 67.9 48.6 80.1 49.5 91.9C50.3 103.7 51.2 115.9 51 127.9H13.2L13.2 127.9C13.2 127.4 13.1 126.9 13.1 126.4C12.7 117.3 12.3 108.2 11.9 99.1C11.6 90.4 11.2 81.8 10.8 73.2C10.8 72.4 10.8 71.5 10.7 70.7C10.6 68 10.5 65.3 10.3 62.5C10.1 60.6 10.7 59.8 12.5 59.6C14.6 59.3 16.8 59 19 58.7C23.1 58.2 27.3 57.6 31.5 57.1C35.4 56.7 39.4 56.3 43.2 56C44.6 55.9 45.9 55.8 47.3 55.7C47.5 55.7 47.7 55.7 47.9 55.7H47.9ZM109.7 22.7C109.2 28.6 107.8 34.8 105 42.2C104.1 44.6 103.4 47.3 104.3 50.5C104.3 50.6 104.4 50.7 104.5 50.8C104.6 50.9 104.7 50.9 104.9 50.9C105.4 51 105.9 51 106.4 51.1C107.6 51.1 108.8 51.2 110 51.2C113.4 51.3 116.8 51.4 120.2 51.4C127.7 51.5 135.4 51.6 143 51.9C147.1 52.2 151.2 53 155 54.4C159.8 56.2 162 59.8 161.8 65.2C161.5 73.6 159.4 82.3 155.3 92.7C152.6 99.5 149.6 106.8 145.4 116.2C144.5 118.2 143.4 120.2 142.2 122.1C141.8 122.7 141.4 123.3 141 123.9C139.2 127 136.4 128.7 132.6 129.1C127.4 129.6 121.4 130.1 115.4 130.1C102.2 130.2 88.8 130.2 75.8 130.2C71.7 130.2 67.6 130.2 63.5 130.2C62.7 130.2 62 130.1 61.3 130.1L61.1 130L55.3 56.1C56.3 55.7 57.2 55.3 58.2 54.9C60.5 53.9 62.8 52.9 65 51.7C73.7 47.1 81.1 39.7 88.1 28.5C91.9 22.4 96.6 15.4 103 9.6C104.2 8.5 105.6 7.6 107.1 6.9C108.2 6.5 108.7 6.6 108.9 6.7C109.2 6.9 109.3 7.4 109.4 8.3C109.8 13.1 109.9 17.9 109.7 22.7Z"/><path d="M31.7 58.3C31.6 58.3 31.6 58.3 31.6 58.3C23.7 59.4 19 63.9 18.8 70.1C18.6 76.3 23.7 81.3 30.2 81.5C30.4 81.5 30.5 81.5 30.6 81.5C33.7 81.5 36.7 80.3 38.9 78.2C39.9 77.3 40.8 76.1 41.3 74.8C41.9 73.5 42.2 72.1 42.3 70.7C42.2 67.3 40.9 64 38.5 61.6C36.5 59.5 34 58.3 31.7 58.3ZM32.1 71.5C31.2 72.5 30 72.6 28.4 71.8C27 71.1 26.6 70.1 27 68.8C27.3 68.1 27.6 67.5 28 66.9C28.2 66.6 28.3 66.4 28.5 66.1C28.8 66.3 29.1 66.5 29.4 66.6C30.2 67.1 30.9 67.6 31.6 68.2C32.3 68.9 33.2 70.2 32.1 71.5Z"/></symbol>
-        <symbol id="pacey-icon-battery" viewBox="0.25 4.40 23.15 15.20"><path d="M9.99 13.95Q9.54 12 9.96 10.16"/><path d="M22 14.1Q21.78 12 22.19 10.18"/><path d="M5.83 13.84Q5.8 12 6.07 9.84"/><path d="M4.49 6.42Q10 6.89 16.47 5.62C16.52 5.71 17.57 6.68 18.29 8.39Q16.68 12 17.88 16.2C17.59 17.03 17.45 17.53 16.01 17.62Q10 18.33 3.68 18.4C3.29 18.21 1.68 16.44 2.47 15.93Q3.33 12 1.45 7.74C1.63 6.44 2.5 6.51 3.86 6.01Q4.46 5.96 3.24 6.52"/></symbol>
-        <symbol id="pacey-icon-stress" viewBox="0.55 0.35 22.85 22.97"><path d="M17.35 12.31C17.81 13.12 19.59 13.35 20.8 13.14C20.71 12.06 21.72 11.04 20.39 10.14Q19.53 9.07 18.87 8.22C19.63 8.81 20.61 8.72 21.53 7.73C22.33 7.37 22.49 5.83 21.49 5.94Q20.65 3.35 18.45 2.63C18 1.4 16.76 0.93 16.07 2.92C14.48 3.83 15.16 4.04 15.52 5.39Q15.32 4.09 13.56 3.16C13.25 2.35 12.6 3.44 11.55 3.55C9.79 4.68 10.42 5.22 11.52 5.91Q15.48 8.52 18.27 12.45"/><path d="M2.49 21.43Q3.27 20.87 3.88 20.21"/><path d="M20.13 3.73Q20.72 3.12 21.36 2.35"/><path d="M5.62 21.49C5.32 22.12 6.89 22.48 7.76 21.53C7.87 22.12 8.82 21.68 8.59 20.43C8.63 19.51 9.23 19.22 8.59 19.08Q8.63 19.97 10.32 19.97C10.26 21.48 12.14 21.45 13.07 20.27C13.81 19.15 12.95 18.74 12.86 17.57Q9.02 14.98 6.07 11.31C5.25 10.14 4.23 10.68 3.24 11.79C2.85 11.4 2.11 13.64 3.85 13.94Q4.67 14.73 5.79 15.58C4.52 15.1 3.55 14.94 2.48 15.65C1.27 16.37 1.91 18.34 2.22 19.19Q3.57 20.43 4.61 20.6"/><path d="M9.61 14.29Q12.42 12.42 14.36 9.69"/></symbol>
-        <symbol id="pacey-icon-calendar" viewBox="0 0 157 148"><path d="M38.6 11.7C38.6 9.2 38.6 7 38.6 4.7C38.7 2 39.4 0.8 40.9 0.7C42.4 0.6 43.2 1.6 43.6 4.4C44 6.6 44.1 8.7 44.4 11.3L111.4 10.8C111.6 9.4 111.7 8.1 111.8 6.8C112 5.5 112.1 4.3 112.4 3C112.7 1.5 113.6 0.5 115.3 0.5C117.1 0.4 118.1 1.5 118.4 3.2C118.7 5.1 118.8 7 119.1 9C119.1 9.5 119.2 10 119.2 10.8C122.4 11 125.5 11.3 128.6 11.3C142.2 11.5 149.8 19.9 152.5 31.7C153.9 37.7 154.2 43.9 154.5 50C155.3 64.3 155.8 78.5 156.3 92.8C156.5 100.8 156.5 108.8 156.5 116.8C156.7 132.9 144.4 141.6 133.7 144.5C130 145.5 126.1 146.1 122.2 146.3C99.6 146.8 77 147.4 54.3 147.5C42.3 147.5 30.3 145.5 18.5 143C9.4 141 2.4 132.6 1.4 122.8C1 119.6 0.9 116.4 0.9 113.1C1.1 102 1.4 90.9 1.4 79.7C1.5 66.8 1.4 53.8 1.3 40.9C1.2 37.3 1 33.8 2.3 30.3C5.9 20.5 12.9 15.1 22.9 13.4C26.9 12.7 31.1 12.5 35.1 12.1C36.2 12 37.2 11.8 38.6 11.7ZM146.2 49C123.2 49.8 100.7 50.6 78.2 51.2C55.6 51.9 33 52.4 10.3 53C10.2 53.3 10.2 53.8 10.2 54.3C10.1 71.6 10.1 88.9 10.1 106.2C10.1 110.8 10.1 115.5 10.3 120.1C10.4 123.4 11.7 126.5 13.8 128.9C16 131.4 18.9 133.1 22.1 133.7C35.2 135.9 48.2 137.9 61.6 137.6C73.8 137.2 85.9 137.4 98.1 137.1C107.8 136.9 117.5 136.5 127.2 136.1C131.4 135.9 135.5 134.5 139 132.1C143.7 128.9 146.8 124.7 146.9 118.8C147 114.1 147.3 109.5 147.2 104.8C146.9 87.2 146.6 69.6 146.2 52C146.2 51 146.2 49.9 146.2 49H146.2ZM9.4 44.9C55 42.5 99.8 40.9 144.9 39.8C144.7 37.5 144.6 35.3 144.2 33.3C142.7 26.9 139.9 21.4 132.9 19.5C128.5 18.3 124 18.7 119.3 18.8C119.2 19.8 119.2 20.6 119.1 21.5C119 22.3 118.8 23.2 118.6 24C118 26.7 116.6 27.9 114.6 27.8C112.5 27.6 111.3 26.2 111.1 23.5C111 21.9 111.1 20.3 111.1 18.8H44.9C44.9 20.3 44.9 21.5 44.9 22.7C44.9 24.3 44.8 25.9 44.7 27.5C44.6 28.3 44.2 29 43.7 29.5C43.1 30 42.4 30.3 41.6 30.3C39.8 30.4 38.8 29.3 38.4 27.7C38.1 26.5 38 25.2 38.1 23.9C38 22.4 38 21 38 19.1C33.1 19.5 28.6 19.4 24.3 20.4C17.2 21.9 11.3 25.4 10 33.4C9.4 37 9.6 40.8 9.4 44.9Z"/><path d="M40.6 123C39.6 123.1 37.8 123.2 36 123.2C32 123.2 29.6 121.4 28.9 117.6C28 113.1 28.2 108.5 29.4 104.1C29.7 103.2 30.2 102.3 30.9 101.6C31.5 101 32.4 100.5 33.3 100.2C38.5 98.7 43.9 98.1 49.3 98.5C52.2 98.7 54.4 100.3 55 103.4C56 107.9 56.3 112.6 55.1 117.1C54 121 51.6 122.9 47.6 123C45.5 123.1 43.5 123 40.6 123ZM45.3 107.6H36.9L37.3 113.2H45.3V107.6Z"/><path d="M92.6 108.5C92.6 109.6 92.6 110.2 92.6 110.9C92.4 117.6 90.2 120.2 83.6 121.4C80.2 122 76.8 122.3 73.4 122.6C69.6 122.9 67.1 121.3 66.4 117.8C65.5 113.3 64.9 108.8 65.9 104.3C66.6 101.1 68.5 99 71.7 98.5C75.9 97.8 80.2 97.4 84.5 97.2C89.3 97.1 91.4 99 92.1 103.8C92.4 105.5 92.5 107.2 92.6 108.5ZM82.9 106.4H73.7C74 108.9 74.2 111 74.5 113.3C76.6 113.1 78.3 112.9 80 112.7C83.1 112.4 83.4 112 83.3 108.9C83.3 108.1 83.1 107.4 82.9 106.4H82.9Z"/><path d="M115.2 121.9C113.1 122 111.1 122 109 121.9C105.3 121.5 103.2 119.5 103 115.9C102.7 111.9 102.8 107.9 103.1 104C103.5 99.9 105.3 98.2 109.4 97.9C113.4 97.6 117.4 97.5 121.3 97.6C125.5 97.7 129.5 100.4 129.2 105.9C129 108.6 129 111.3 128.6 114C128 119.1 125.5 121.3 120.3 121.7C118.6 121.8 116.9 121.9 115.2 122L115.2 121.9ZM111.2 105.4C111.3 108.2 111.4 110.3 111.5 112.3H119C119.2 110.2 119.4 108.4 119.6 106.4L111.2 105.4Z"/><path d="M114.8 86.9C113 87 111.2 87.2 109.4 87.2C104.9 87.1 102.5 85 102.3 80.5C102.1 77.1 102.1 73.6 102.3 70.2C102.5 65.9 104.1 64 108.3 63.6C113 63.1 117.7 62.9 122.5 63C126.9 63.1 129.2 65.5 129.2 70C129.1 73.7 128.7 77.3 128.1 80.9C127.3 84.6 125.1 86.4 121.3 86.7C119.1 86.8 117 86.7 114.8 86.7L114.8 86.9ZM110.3 78.1H119.5C119.8 75.9 120 73.9 120.3 71.4L110.3 71V78.1Z"/><path d="M63.3 75.4C63.5 73.3 63.7 71 64 68.8C64.4 66.2 65.7 64.3 68.4 63.7C73.1 62.8 77.9 61.9 82.8 62.5C87.1 63 89.4 64.8 90 69.1C90.4 72.3 90.3 75.5 89.8 78.7C89.3 82.2 86.9 84.2 83.4 84.7C79.3 85.2 75.1 85.7 70.9 85.9C66.8 86.2 64.4 84.1 63.7 80.1C63.4 78.6 63.4 77.1 63.3 75.4ZM80.8 71.1L71.2 70.5C71.3 72.9 71.4 74.8 71.6 76.9L80.8 76L80.8 71.1Z"/></symbol>
-        <symbol id="pacey-icon-sun" viewBox="0 0 145 134"><path d="M59.5 95.1C65.1 96.6 71.1 97.2 76.7 97.6C77.4 97.7 78.1 97.7 78.8 97.7C83.1 97.7 87.3 96.7 91.1 94.7C101.7 89.1 107.4 79.8 109 65.2V65.2V65.2C108.3 48.1 101.9 38.5 88.4 33.8C84.2 32.5 79.9 31.7 75.6 31.3C68.4 30.6 59.8 33.4 52.7 38.7C44.7 44.7 39.6 53.2 38.4 62.5C36.4 78.4 44.5 90.9 59.5 95.1ZM44.9 64.3C45.8 48.7 57.8 39.6 68.7 36.4C69.5 36.2 70.2 36.1 71 36.1C73.3 36.1 76 36.9 78.2 37.6C82.3 39.1 86.2 41 89.9 43.2C93.1 45 95.7 47.9 97.1 51.4C102 62.4 100.6 73 93 82.8C89.2 87.8 83.4 90.3 75.4 90.4C73.9 90.1 72.3 89.9 70.9 89.6C67.6 89.2 64.3 88.5 61 87.7C46.9 83.9 44.5 72.9 44.9 64.3Z"/><path d="M79.8 111.9C79.5 110.8 78.4 109.5 77.3 109.3C76.5 109.1 75.4 109.6 74 110.7C73.4 111.1 73.2 112 73.1 112.8L73 113C71.9 118.8 72.5 124.6 73.4 129.9C73.5 130.5 73.7 131.1 74 131.6C74.7 133.1 75.8 133.9 76.9 133.9C77.2 133.9 77.5 133.8 77.8 133.7C78.4 133.5 79 133.1 79.5 132.6C80 132.1 80.3 131.6 80.6 130.9C81.1 129.6 81 128 80.9 126.6L80.9 126.5C80.7 124 80.4 121.5 80.2 119C80.1 118 80 117.1 79.9 116.1C79.9 115.7 80 115.2 80 114.8C80.1 113.8 80.1 112.9 79.8 111.9Z"/><path d="M119.5 65C119.6 66.9 120.9 68 123.4 68.1C125.3 68.2 127.2 68.3 128.6 68.4L129.9 68.5H129.9C131.2 68.5 132.5 68.5 133.6 68.5C134.6 68.5 135.5 68.5 136.4 68.5C137.7 68.5 138.9 68.5 140.1 68.4C142.7 68.2 144.4 66.8 144.3 64.8C144.2 62.9 142.7 61.6 139.9 61.3C139.7 61.2 139.4 61.2 139.2 61.2L137.4 61.3C132.7 61.4 127.9 61.6 123.2 61.8C120.8 61.9 119.5 63 119.5 65Z"/><path d="M117.2 108.4C114 105.7 110.5 102.8 106.4 99.5C104.9 98.2 103.3 98 102.1 99.1C100.5 100.4 101 102.1 101.6 103.4C101.8 104 102.1 104.5 102.6 104.9L103.7 105.9C106.6 108.6 109.6 111.4 112.7 114.1C113.3 114.5 114 114.9 114.7 115.1C114.9 115.2 115.1 115.2 115.3 115.3L115.4 115.3H115.5C117.1 115.3 118.4 114.8 119 113.8C119.3 113.3 119.4 112.7 119.4 112.2C119.4 111.6 119.2 111.1 118.9 110.6C118.5 109.8 117.9 109 117.2 108.4Z"/><path d="M72.7 4.2C72.9 7.5 73 10.8 73.1 14L73.1 14.3C73.2 15 73.1 15.8 73.1 16.4C73.1 17.2 73.1 17.9 73.1 18.6C73.2 20.8 74.3 22.2 76.3 22.4C76.5 22.4 76.6 22.4 76.7 22.4C78.5 22.4 79.8 21.3 80.3 19.3C80.5 18.3 80.6 17.3 80.7 16.2C80.7 15.9 80.7 15.6 80.7 15.3V15.3V15.2C80.6 14.5 80.6 13.8 80.5 13.1C80.5 11.8 80.3 10.6 80.1 9.4C79.6 7 79 4.6 78.2 2.4C77.5 0.6 76 -0.3 74.3 0.3C72.4 0.9 72.6 2.5 72.7 3.9L72.7 4.2Z"/><path d="M20.8 114.2C21.4 114.9 22.5 115.3 23.9 115.3C24 115.3 24.1 115.3 24.2 115.3H24.3L24.3 115.2C24.5 115.2 24.7 115.1 24.9 115C25.7 114.7 26.4 114.2 27 113.7C29.8 110.8 32.6 107.6 35.7 104.1C37 102.5 37 100.7 35.7 99.4C34.8 98.5 33.3 97.9 31.1 99.9C27.9 102.7 24.8 105.7 22 108.5C21.2 109.4 20.6 110.4 20.3 111.5C20.2 112 20.2 112.5 20.2 112.9C20.3 113.4 20.5 113.8 20.8 114.2Z"/><path d="M33.2 38.3C33.8 38.9 34.7 39.3 35.5 39.3C35.8 39.3 36 39.2 36.2 39.1C36.9 38.7 37.4 38 37.6 37.3C37.8 37 38 36.6 38.1 36.3L38.2 36.2L38.2 36C37.9 35.6 37.8 35.1 37.6 34.6C37.2 33.7 36.8 32.8 36.2 32C33.8 28.8 31.2 25.6 28.7 22.5L28.2 21.9C27.7 21.2 27.1 20.8 26.3 20.7C25.6 20.5 24.8 20.7 24.2 21.1C23.8 21.2 23.5 21.5 23.3 21.8C23.1 22.1 22.9 22.4 22.9 22.8C22.8 23.2 22.8 23.6 22.9 24C23 24.3 23.1 24.7 23.4 25C26.3 29.3 29.5 33.7 33.2 38.3Z"/><path d="M110.3 30.2C110.9 30.5 111.5 30.6 112.2 30.6C112.9 30.6 113.6 30.5 114.3 30.4C115 30.2 115.7 29.5 116.2 28.7C118.6 25.5 121.1 22.1 123.7 18.6C124 18.1 124.2 17.6 124.4 17.1C124.4 17 124.5 16.8 124.6 16.7L124.6 16.6C124.6 16.1 124.6 15.7 124.4 15.3C124.2 15 124 14.6 123.7 14.4C123.4 14.2 123 14.1 122.7 14C122.3 14 122 14 121.7 14.2C120.9 14.5 120.3 15 119.7 15.6C117.3 18.1 114.6 20.9 111.5 24.3C110.9 24.9 110.4 25.5 110 26.2C109.5 27 109.2 28 109.4 28.9C109.4 29.2 109.6 29.4 109.7 29.7C109.9 29.9 110.1 30.1 110.3 30.2Z"/><path d="M3.7 71.4C5.4 71.7 7 71.9 8.6 72.1C9.3 72.2 10 72.3 10.7 72.4L11 72.4L11 72.1L11.7 72.1C12.5 72.1 13.3 72.1 14.1 72.1C14.9 72 15.7 71.9 16.5 71.8C18.4 71.5 19.8 70.7 20.4 69.7C20.6 69.4 20.7 69.2 20.7 68.9C20.7 68.6 20.7 68.4 20.6 68.1C19.7 65.8 17.5 65.8 15.8 65.9L12.1 65.9C9.5 66 7 66.1 4.5 66.1C3.5 66.2 1.4 66.2 1.1 68.3C0.9 69.9 1.9 71 3.7 71.4Z"/></symbol>
-        <symbol id="pacey-icon-moon" viewBox="0 0 155 146"><path d="M122 103.2C125.9 102.9 129.8 102.9 133.7 102.4C136.9 101.9 140 100.9 143.2 100.1C144.7 99.7 146.2 99.2 147.7 98.9C150 98.5 152 99.2 153.3 101.1C154.6 103 154.3 105 153.3 106.9C148.5 117 140.8 124.7 132 131.1C121.1 139.1 108.7 143.1 95.5 144.7C83.3 146.2 71 146.3 59 143.6C41.4 139.7 26.3 131.6 15.1 117.3C4.1 103.2 -0.1 87 1.5 69.3C2.8 53 8.5 37.4 18 24C23.4 16.2 29.9 9.4 38.1 4.3C41.1 2.4 44.4 0.9 48.1 0.7C51.9 0.5 53.3 2.4 51.6 5.9C49.1 10.8 47 15.8 46 21.3C44.6 28.8 45.1 36.3 46.8 43.7C50.4 59.7 57.4 73.9 69 85.6C78.1 95.1 90.4 101 103.5 102.2C109.6 102.9 115.8 103.1 121.9 103.6C121.9 103.4 121.9 103.3 122 103.2ZM135.2 114.5L134.7 113.7C132.9 113.8 131.1 113.8 129.3 114C121.5 114.7 113.6 114.7 105.8 113.9C85.5 112 69 103.1 56.3 87.2C46.7 75.2 40.2 61.1 37.3 46C35 34.9 35.1 24 39.3 13.3C39.4 13.1 39.2 12.7 39 12.2C37.6 13.4 36.3 14.5 35.1 15.7C18.8 31.9 10.6 51.6 10.2 74.5C9.9 89.8 14.8 103.4 25.4 114.7C34.7 124.8 46.5 130.5 59.7 133.4C72.5 136.3 85.5 136.1 98.5 133.9C108.9 132.2 118.6 128.5 127 121.9C129.9 119.6 132.5 117 135.2 114.5Z"/></symbol>
-    </svg>
+		<svg
+			class="pacey-icon-sprite"
+			width="0"
+			height="0"
+			aria-hidden="true"
+			focusable="false">
+			<symbol id="pacey-icon-lungs" viewBox="0 0 162 121">
+				<path
+					d="M67.8 42.9L76.8 37C77.3 30.1 77.9 23 78.3 15.8C78.5 12.2 78.3 8.5 78.3 4.8C78.2 3.1 78.9 1.8 80.6 1.6C83.9 0.9 87.2 0.5 90.6 0.3C92.7 0.2 94.4 2.5 94.6 5.3C94.8 9.3 94.9 13.2 95 17.1C95 23.3 95 29.4 95 35.6L100.7 38.5C100.7 37.1 100.7 36.3 100.7 35.4C100.4 29.2 101 22.9 102.5 16.7C103.4 13 105.6 9.7 108.7 7.4C112.6 4.4 116.3 4.2 120.6 6.7C125.5 9.7 129.5 14 132.3 19.1C134.5 23.1 136.6 27.2 138.4 31.4C145.4 48 152.2 64.6 157.2 81.8C158.6 86.8 160.2 91.7 161.4 96.7C163 103.4 160.1 108.1 153.4 110C151.4 110.7 149.3 111.1 147.2 111.3C136.9 111.7 126.5 112.3 116.3 110.3C107.8 108.7 102.3 104 100.9 95.2C99.2 84.2 96.5 73.3 97.2 62.2C97.4 58 95.9 56 92.5 54.5C88.5 52.6 84.7 52.3 80.8 55.1C76.4 58.3 71.7 61.2 67.6 64C67.8 67.3 68.1 70.1 68 73C67.7 81.1 67.3 89.2 66.9 97.2C66.7 102 65.6 106.6 63.6 110.9C61.8 114.8 59 117.5 54.7 118.4C52.1 119 49.4 119.7 46.8 119.7C38.4 119.7 29.9 119.5 21.5 119.1C19.2 119 16.9 118.5 14.6 117.7C3.8 114.3 -1.2 105.9 1.8 95C3.6 88.3 6.4 81.7 8.9 75.1C12.6 65.6 16.5 56.2 20.1 46.6C23.4 38 26.9 29.4 33.1 22.4C35.8 19.4 38.7 16.7 42 14.2C45.4 11.6 49.5 10.8 53.8 11.3C58.5 11.9 61.7 14.5 63.2 18.8C64 21 64.5 23.1 64.9 25.4C65.9 31 66.8 36.6 67.8 42.9ZM60.5 69.7L59.6 69.4C58.3 70.2 57 71.1 55.7 71.9C54.6 72.6 53.3 72.9 52.4 71.7C51.4 70.4 51.9 69.1 53 68.1C54 67.2 55.1 66.3 56.2 65.6C63.3 60.5 70.7 55.7 77.6 50.4C84.1 45.5 90.6 45.1 97.3 49.3C102.1 52.4 106.6 55.8 111.2 59.2C112.1 59.8 112.6 60.6 112.8 61.5C113 62.5 112.9 63.5 112.4 64.3C111.4 65.9 109.3 66.4 107.3 65.4C106.4 65 105.5 64.4 104.1 63.6C105.4 74.2 106.5 84.4 108.6 94.4C109.6 98.9 112.3 101.4 116.8 102.1C125 103.5 133.3 103.4 141.6 103C144.5 102.8 147.4 102.4 150.3 101.8C153.5 101.1 154.3 98.9 153 96C152 93.7 151.1 91.4 150.4 89.1C148.9 83.7 147.7 78.2 145.9 72.9C141.4 59.9 136.8 46.8 131.9 34C130 28.9 127.2 24 124.5 19.2C122.8 16.2 120.4 13.6 117.4 11.8C115.7 10.7 114.3 10.9 112.8 12.2C110.8 14.2 109.4 16.7 108.9 19.5C107.6 26.9 107.2 34.4 107.6 41.9C110.2 43.4 112.8 44.8 115.3 46.3C116.4 47 117.5 47.9 118.3 49C118.8 49.5 119 50.2 119.1 51C119.1 51.7 118.9 52.5 118.4 53.1C117.5 54.3 116.2 54.5 114.8 54.2C113.7 53.9 112.7 53.5 111.7 52.9C105.6 49.2 99.6 45.2 93.3 41.7C88.4 39.1 86.9 35.4 87.7 30C88.5 25.3 89 20.5 89.5 15.7C89.8 12.7 89.9 9.7 90.1 6.4L83.8 6.7C83.7 7.7 83.6 8.3 83.6 9C83.6 17.4 83.6 25.8 83.5 34.2C83.5 35.9 83.4 37.8 82.5 39C80.8 41.4 78.7 43.4 76.4 45.1C70.3 49.5 63.9 53.5 57.7 57.7C56.9 58.2 56.1 58.8 55.3 58.9C54.3 58.9 52.8 58.7 52.3 58C51.8 57.2 51.9 55.7 52.2 54.7C52.5 53.8 53.5 53.2 54.3 52.6C57.1 50.4 60 48.3 62.8 46.1C61 38.7 59.2 31.5 57.4 24.4C57.1 23.4 56.8 22.4 56.4 21.5C56.1 20.7 55.5 19.9 54.7 19.4C54 18.9 53.1 18.6 52.2 18.6C49.4 18.4 46.6 19.3 44.4 21C37.2 26.4 32.6 33.6 29.1 41.6C26.8 47 24.8 52.4 22.7 57.9C18.2 69.4 13.6 80.8 9.3 92.4C8.3 95.2 7.7 98.2 7.4 101.2C7.1 103.3 7.6 105.5 8.7 107.4C9.9 109.2 11.6 110.6 13.6 111.4C16 112.5 18.7 113.1 21.3 113.4C29.6 113.8 37.9 114.1 46.2 114C54.6 113.8 57.7 111.3 58.6 102.9C59.7 91.9 59.9 80.8 60.5 69.7Z" />
+			</symbol>
+			<symbol id="pacey-icon-hrv" viewBox="0 0 159 145">
+				<path
+					d="M7.5 84.2C3.4 77 0.9 69 0.3 60.7C-1.3 40.8 4.9 24 20.8 11.3C27.8 5.6 36.7 2.5 45.8 2.6C50.5 2.5 55.2 2.9 59.8 3.7C68.1 5.2 75.9 8 81.7 14.7C84.9 12.7 87.9 10.7 90.9 8.9C97.8 4.6 105.6 2 113.7 1.3C125.2 0.2 134.9 4.5 143.2 12.1C154.9 22.7 158.7 36.3 157.5 51.7C156.8 59.9 154.6 67.9 151.1 75.3C150.7 76 150.5 76.7 150.1 77.5C150.9 77.9 151.7 78.4 152.5 78.9C154.2 80.2 154.1 82.1 152 83.1C151.3 83.6 150.4 83.8 149.5 83.9C146.8 84.1 145.2 85.7 143.7 87.9C134.4 101.2 123.4 113.1 111 123.5C104.5 129 97.7 134.2 90.9 139.4C88.6 141 86.2 142.4 83.7 143.8C82.6 144.5 81.2 144.9 79.9 144.9C78.5 144.9 77.2 144.6 76 143.9C73.2 142.3 70.6 140.4 67.9 138.5C64.6 136.3 61.5 134 58.2 131.9C43.5 122.6 29.9 112 18.3 99C16.1 96.5 14 93.8 12 91.1C11.7 90.5 11.2 90 10.6 89.7C10 89.4 9.4 89.3 8.7 89.3C7 89.3 5.3 89.2 3.7 88.9C2.3 88.8 1.2 88 1.3 86.6C1.4 85 2.4 84.2 4 84.2C5 84.2 6 84.2 7.5 84.2ZM72.7 79.1C75.8 76.9 79.2 76.8 82.7 77.2C85.5 77.6 88.3 77.9 91.1 77.9C106.6 77.9 122.1 77.8 137.6 77.8C139.7 77.8 140.8 76.9 141.8 75.2C147.7 64.9 150.8 54 150.2 42.1C149.5 27.4 142.3 16.9 129.2 10.4C125 8.3 120.2 7.5 115.5 7.9C108.9 8.4 102.4 10.3 96.5 13.4C92.9 15.4 89.4 17.6 85.8 19.7C82.4 21.7 80.2 21.4 77.4 18.7C74.6 15.8 71.2 13.7 67.4 12.6C63.2 11.5 59 10.2 54.6 9.8C41.4 8.4 29.6 11.6 20.4 21.8C6 37.7 3.6 60.9 13.1 79.5C13.7 80.8 14.6 82 15.2 83.1C20.8 82.4 21.7 81.9 24.6 77.8C25.9 75.8 27.3 73.9 28.9 72.2C31.6 69.5 34.5 70 36.4 73.3C37.2 74.8 37.9 76.3 38.5 77.9C39 76.4 39.4 75.4 39.7 74.4C40.7 71.4 41.3 68.3 42.5 65.4C43.4 63.1 44.8 61 46.4 59.2C49.1 56.5 52.5 57.2 54 60.8C54.9 63 55.6 65.4 55.9 67.9C56.7 74.1 57.3 80.3 58 86.6C58.1 87.5 58.4 88.5 58.6 89.4C59.6 86.3 60.2 83.7 61.2 81.2C62 79.5 63.1 77.9 64.5 76.6C66.4 74.8 68.5 74.9 70.5 76.7C71.2 77.4 71.8 78.2 72.7 79.1ZM50.2 64.4L49.2 64.3C48.7 65.7 48.2 67 47.8 68.4C46.6 72.2 45.6 76.1 44.3 80C43.7 82 42.8 83.9 41.6 85.7C40.1 88 37.4 88 35.7 85.8C34.9 84.4 34.2 83 33.7 81.5C33.3 80.3 33.1 79.1 32.6 77.4C30.6 80.1 29.1 82.7 27 84.5C24.7 86.4 21.8 87.4 18.8 88.9C21.6 92.2 24.3 95.7 27.4 98.9C37.7 109.4 49.4 118.5 62.1 125.9C66.4 128.5 70.6 131.4 74.9 133.9C77.2 135.2 79.8 135.8 82.2 134.2C85.2 132.2 88.1 130.1 91 128C104.6 118.1 117 106.8 127.9 94.1C130.5 91.2 132.9 88.1 135.6 84.8C134.9 84.6 134.2 84.5 133.5 84.4C115.8 83.8 98.1 84.7 80.4 82.2C79.2 82.1 78 82.4 76.9 82.9C75.3 83.6 73.7 85.4 72.4 85.2C70.8 84.9 69.6 83 68 81.6C67.5 83 66.9 84.4 66.5 85.9C65.8 88.7 65.4 91.6 64.6 94.4C64.2 96.4 63.4 98.3 62.4 100C60.5 103 57 102.8 55.4 99.7C54.4 97.9 53.6 95.8 53.2 93.7C52.4 87.9 51.8 82 51.2 76.1C50.8 72.2 50.6 68.3 50.2 64.4Z" />
+			</symbol>
+			<symbol id="pacey-icon-sleep" viewBox="0.65 2.60 22.50 18.75">
+				<path d="M2.07 3.82Q1.78 12 2.15 20.15" />
+				<path
+					d="M1.96 8.5Q11 6.92 20.47 8.26C20.88 8.19 21.66 8.54 21.47 9.99Q20.52 15 21.45 20.01" />
+				<path d="M1.85 17.02Q12 17.52 21.95 17.19" />
+				<path d="M6.09 8.14Q5.4 12.5 6.14 17.05" />
+			</symbol>
+			<symbol id="pacey-icon-heart" viewBox="0 0 143 131">
+				<path
+					d="M67.4 125.4L68.1 125.7C70.8 126.5 73.3 127.2 74.9 130.6C75 130.6 75 130.7 75.1 130.8C75.2 130.8 75.3 130.9 75.4 130.9C75.4 130.9 75.5 130.9 75.5 130.9C75.7 130.9 75.8 130.9 75.9 130.8C77.1 130 78.3 129.3 79.4 128.6C81.7 127.2 83.6 125.9 85.5 124.4C92.3 119.3 98.5 113.5 104 107C111.2 98.3 118.6 89.3 125.6 79.8C130 74 133.7 67.4 136.9 61.7C140 55.9 141.9 49.5 142.4 42.9C143.3 32.1 140.7 22.4 134.8 14C128.3 4.6 119.6 0 109 0.4C97 0.8 86.5 5.4 77.7 14.1C77.3 14.6 76.9 15 76.5 15.5C75.9 16.4 75.2 17.3 74.2 17.6C64 7.5 56.2 3.6 44.4 2.6C32.4 1.6 22.7 5.5 15.5 14.2C11.9 18.5 8.8 23.2 6.2 28.1C0.6 38.7 -0.6 50 2.7 61.7C5.7 72.1 10.6 81.8 17.2 90.3C30.5 107.4 47.4 119.2 67.4 125.4ZM17.8 30.1C19.3 27.2 21 24.4 22.9 21.7C27.4 15.1 33.7 11.7 41.7 11.7C42.7 11.7 43.7 11.8 44.7 11.9C55.4 12.9 64 17.7 70.2 26C70.9 27 71.7 27.9 72.4 28.7C72.7 29.1 73 29.4 73.3 29.7C73.4 29.8 73.5 29.9 73.6 29.9C76.5 30.4 77.7 28.9 78.6 27.4C83.5 19.1 91.3 14.1 103 11.8C105.8 11.3 108.6 11.2 111.4 11.5C115.8 12 119.6 14.2 122.6 18.1C126.1 22.6 128.2 28 128.6 33.7C129.2 40.3 128 46.9 125.1 52.8C123 57.4 120.5 61.9 117.7 66.1C112.6 73.7 107.2 81.3 101.9 88.6L100.1 91.1C96.1 96.6 92.1 102.1 88.2 107.4C86.7 109.3 85.3 111.2 83.9 113.1C83.3 113.9 82.7 114.8 82 115.6C81.8 115.9 81.5 116.2 81.3 116.5C79.4 115.7 77.6 114.9 75.8 114.2C71.5 112.4 67.5 110.7 63.5 109C52.3 104.4 42.2 97.5 33.7 88.8C25 79.8 19 70.1 15.3 59.3C12 49.4 12.8 39.9 17.8 30.1Z" />
+			</symbol>
+			<symbol id="pacey-icon-stopwatch" viewBox="0 0 120 126">
+				<path
+					d="M44.7 16.8C44.9 13.6 45.1 10.4 45.3 6.8C43.5 6.8 42 6.8 40.5 6.7C38.1 6.6 37.2 6 37.1 4.4C37 2.7 38 1.7 40.3 1.3C41.5 1.2 42.8 1.1 44 1.1C53.1 0.8 62.2 0.5 71.3 0.2C71.9 0.2 72.4 0.2 73 0.3C74.9 0.7 76 2 76 3.7C76 4.6 75.7 5.4 75.1 6C74.6 6.6 73.8 7 72.9 7.1C71.4 7.4 69.9 7.4 68.1 7.5V16.3C77.8 17.3 86 21.9 94.3 27.4C96.3 25.7 98.4 24.2 100.3 22.4C105.9 17.3 109 17.7 113.1 23.4C114.2 24.7 115.3 25.9 116.5 27C119.7 30.3 119.7 32.9 116.6 36.3C114.6 38.6 112.4 40.7 110.2 43C111.6 45.7 113.1 48.2 114.5 50.8C122.4 65.8 121.3 87.9 108.4 102.4C97.7 114.4 84.6 121.7 68.9 124.6C54 127.4 39.7 125.2 25.9 119.3C16.3 115.1 9.7 107.8 6.1 98.3C-1.2 79.2 -0 60.5 9.7 42.3C13.4 35.4 19.2 30.5 25.6 26.1C29.3 23.7 33.1 21.5 37.1 19.5C39.4 18.3 42.1 17.7 44.7 16.8ZM11.4 74.6C11.4 80.6 12.4 86.6 14.3 92.4C17.7 102.4 24 109.7 34.3 113C57.6 120.4 78.7 116.8 97.1 100.4C110.7 88.3 113.5 70.2 104.5 54.3C97.4 41.6 86.6 33.1 72.9 28.3C66.6 26.1 59.9 25.2 53.2 25.7C45.2 26.2 38.1 29.2 31.4 33.2C24.3 37.3 18.8 43.6 15.7 51.2C12.7 58.5 11.8 66.1 11.4 74.6ZM52.4 7.3C52.6 10.2 52.8 13 52.9 15.8H60.3C60.8 12.9 61.2 10.2 61.6 7.3H52.4ZM112.3 31.6L107.2 25.9L101 32.4L105.2 37L112.3 31.6Z" />
+				<path
+					d="M62.8 68.4C67.4 68.5 71.7 68.6 76 68.8C77.3 68.8 78.6 68.9 79.9 69.2C80.7 69.3 81.4 69.7 81.9 70.3C82.4 70.9 82.7 71.7 82.7 72.5C82.8 73.3 82.5 74.1 82 74.8C81.5 75.5 80.7 76 79.9 76.1C78.7 76.5 77.5 76.7 76.3 76.6C70.3 76.3 64.3 75.9 58.3 75.6C55.7 75.4 54.4 74.4 54.1 71.8C54 70.6 54 69.4 54.2 68.2C55 60.8 55.7 53.5 56.5 46.1C56.7 44.9 56.9 43.7 57.2 42.5C57.6 41.1 58.4 40.2 60 40.1C61.8 40.1 62.6 41.2 62.9 42.7C63.2 43.9 63.3 45.1 63.3 46.3C63.2 52.7 63 59.2 62.8 65.6C62.8 66.3 62.8 67.1 62.8 68.4Z" />
+			</symbol>
+			<symbol id="pacey-icon-readiness-score" viewBox="0 0 172 139">
+				<path
+					d="M2.8 126.8C3 129.2 3.4 131.5 4.2 133.8C5.3 137.5 6.7 138.1 10.4 138.1L13.8 138.2C24.5 138.2 35.6 138.2 46.5 138.2C47.5 138.2 48.6 138.1 49.7 138C50.8 137.8 51.9 137.7 53 137.8C54.8 137.8 56.6 137.9 58.3 138.1C60.5 138.2 62.6 138.4 64.8 138.4C65 138.4 65.1 138.4 65.2 138.4C92.4 138.1 114.4 137.8 134.4 137.4C141.4 137.3 146.5 134.4 149.9 128.6C157.5 115.8 163.4 101.4 169 81.8C169.9 78.7 170.5 75.5 171 72.2C171.2 70.8 171.5 69.3 171.7 67.8C171.7 67.7 171.7 67.7 171.7 67.7V63C171.7 62.9 171.7 62.9 171.7 62.8C171.4 61.9 171.1 61 170.8 60.1C170.3 58 169.6 55.9 168.5 54C165.2 48.5 159.7 45.4 152.5 44.8C145.7 44.4 138.8 44.2 132.1 44.1C130.4 44.1 128.7 44 127 44C123.6 43.9 120.1 44 116.8 44C115.5 44 114.2 44 112.9 44C115.1 38.3 116.5 32.1 117.3 23.7C117.8 18.7 118.1 12.2 116.2 5.9C114.8 1.4 112.7 -0.1 107.9 0.2C104.8 0.3 101.7 1.6 99.4 3.8C98.9 4.3 98.4 4.8 97.8 5.3C95 7.9 92.4 10.7 90 13.7C87 17.6 84.2 21.8 81.5 25.9C80.3 27.6 79.1 29.4 77.9 31.1C72.2 39.4 65.5 45.4 57.3 49.5C56.6 49.8 55.9 50 55.2 50.1C54.5 50.2 53.8 50.1 53.1 49.9C47.1 48.4 42 48 37.1 48.7C33.4 49.3 29.5 49.6 25.7 50C24.3 50.1 22.8 50.2 21.4 50.4C19.8 50.5 18.3 50.7 16.8 50.8C14.3 51 11.7 51.3 9.2 51.5C4.6 52.1 2.7 53.8 1.8 58.5L1.7 58.9C1.6 59.7 1.5 60.4 1.4 61.2C1.4 62.9 1.4 64.7 1.3 66.4C1.2 70.9 1.1 75.6 1.2 80.2C1.6 96.7 2.3 113 2.8 126.8ZM47.9 55.7C47.8 67.9 48.6 80.1 49.5 91.9C50.3 103.7 51.2 115.9 51 127.9H13.2L13.2 127.9C13.2 127.4 13.1 126.9 13.1 126.4C12.7 117.3 12.3 108.2 11.9 99.1C11.6 90.4 11.2 81.8 10.8 73.2C10.8 72.4 10.8 71.5 10.7 70.7C10.6 68 10.5 65.3 10.3 62.5C10.1 60.6 10.7 59.8 12.5 59.6C14.6 59.3 16.8 59 19 58.7C23.1 58.2 27.3 57.6 31.5 57.1C35.4 56.7 39.4 56.3 43.2 56C44.6 55.9 45.9 55.8 47.3 55.7C47.5 55.7 47.7 55.7 47.9 55.7H47.9ZM109.7 22.7C109.2 28.6 107.8 34.8 105 42.2C104.1 44.6 103.4 47.3 104.3 50.5C104.3 50.6 104.4 50.7 104.5 50.8C104.6 50.9 104.7 50.9 104.9 50.9C105.4 51 105.9 51 106.4 51.1C107.6 51.1 108.8 51.2 110 51.2C113.4 51.3 116.8 51.4 120.2 51.4C127.7 51.5 135.4 51.6 143 51.9C147.1 52.2 151.2 53 155 54.4C159.8 56.2 162 59.8 161.8 65.2C161.5 73.6 159.4 82.3 155.3 92.7C152.6 99.5 149.6 106.8 145.4 116.2C144.5 118.2 143.4 120.2 142.2 122.1C141.8 122.7 141.4 123.3 141 123.9C139.2 127 136.4 128.7 132.6 129.1C127.4 129.6 121.4 130.1 115.4 130.1C102.2 130.2 88.8 130.2 75.8 130.2C71.7 130.2 67.6 130.2 63.5 130.2C62.7 130.2 62 130.1 61.3 130.1L61.1 130L55.3 56.1C56.3 55.7 57.2 55.3 58.2 54.9C60.5 53.9 62.8 52.9 65 51.7C73.7 47.1 81.1 39.7 88.1 28.5C91.9 22.4 96.6 15.4 103 9.6C104.2 8.5 105.6 7.6 107.1 6.9C108.2 6.5 108.7 6.6 108.9 6.7C109.2 6.9 109.3 7.4 109.4 8.3C109.8 13.1 109.9 17.9 109.7 22.7Z" />
+				<path
+					d="M31.7 58.3C31.6 58.3 31.6 58.3 31.6 58.3C23.7 59.4 19 63.9 18.8 70.1C18.6 76.3 23.7 81.3 30.2 81.5C30.4 81.5 30.5 81.5 30.6 81.5C33.7 81.5 36.7 80.3 38.9 78.2C39.9 77.3 40.8 76.1 41.3 74.8C41.9 73.5 42.2 72.1 42.3 70.7C42.2 67.3 40.9 64 38.5 61.6C36.5 59.5 34 58.3 31.7 58.3ZM32.1 71.5C31.2 72.5 30 72.6 28.4 71.8C27 71.1 26.6 70.1 27 68.8C27.3 68.1 27.6 67.5 28 66.9C28.2 66.6 28.3 66.4 28.5 66.1C28.8 66.3 29.1 66.5 29.4 66.6C30.2 67.1 30.9 67.6 31.6 68.2C32.3 68.9 33.2 70.2 32.1 71.5Z" />
+			</symbol>
+			<symbol id="pacey-icon-battery" viewBox="0.25 4.40 23.15 15.20">
+				<path d="M9.99 13.95Q9.54 12 9.96 10.16" />
+				<path d="M22 14.1Q21.78 12 22.19 10.18" />
+				<path d="M5.83 13.84Q5.8 12 6.07 9.84" />
+				<path
+					d="M4.49 6.42Q10 6.89 16.47 5.62C16.52 5.71 17.57 6.68 18.29 8.39Q16.68 12 17.88 16.2C17.59 17.03 17.45 17.53 16.01 17.62Q10 18.33 3.68 18.4C3.29 18.21 1.68 16.44 2.47 15.93Q3.33 12 1.45 7.74C1.63 6.44 2.5 6.51 3.86 6.01Q4.46 5.96 3.24 6.52" />
+			</symbol>
+			<symbol id="pacey-icon-stress" viewBox="0.55 0.35 22.85 22.97">
+				<path
+					d="M17.35 12.31C17.81 13.12 19.59 13.35 20.8 13.14C20.71 12.06 21.72 11.04 20.39 10.14Q19.53 9.07 18.87 8.22C19.63 8.81 20.61 8.72 21.53 7.73C22.33 7.37 22.49 5.83 21.49 5.94Q20.65 3.35 18.45 2.63C18 1.4 16.76 0.93 16.07 2.92C14.48 3.83 15.16 4.04 15.52 5.39Q15.32 4.09 13.56 3.16C13.25 2.35 12.6 3.44 11.55 3.55C9.79 4.68 10.42 5.22 11.52 5.91Q15.48 8.52 18.27 12.45" />
+				<path d="M2.49 21.43Q3.27 20.87 3.88 20.21" />
+				<path d="M20.13 3.73Q20.72 3.12 21.36 2.35" />
+				<path
+					d="M5.62 21.49C5.32 22.12 6.89 22.48 7.76 21.53C7.87 22.12 8.82 21.68 8.59 20.43C8.63 19.51 9.23 19.22 8.59 19.08Q8.63 19.97 10.32 19.97C10.26 21.48 12.14 21.45 13.07 20.27C13.81 19.15 12.95 18.74 12.86 17.57Q9.02 14.98 6.07 11.31C5.25 10.14 4.23 10.68 3.24 11.79C2.85 11.4 2.11 13.64 3.85 13.94Q4.67 14.73 5.79 15.58C4.52 15.1 3.55 14.94 2.48 15.65C1.27 16.37 1.91 18.34 2.22 19.19Q3.57 20.43 4.61 20.6" />
+				<path d="M9.61 14.29Q12.42 12.42 14.36 9.69" />
+			</symbol>
+			<symbol id="pacey-icon-calendar" viewBox="0 0 157 148">
+				<path
+					d="M38.6 11.7C38.6 9.2 38.6 7 38.6 4.7C38.7 2 39.4 0.8 40.9 0.7C42.4 0.6 43.2 1.6 43.6 4.4C44 6.6 44.1 8.7 44.4 11.3L111.4 10.8C111.6 9.4 111.7 8.1 111.8 6.8C112 5.5 112.1 4.3 112.4 3C112.7 1.5 113.6 0.5 115.3 0.5C117.1 0.4 118.1 1.5 118.4 3.2C118.7 5.1 118.8 7 119.1 9C119.1 9.5 119.2 10 119.2 10.8C122.4 11 125.5 11.3 128.6 11.3C142.2 11.5 149.8 19.9 152.5 31.7C153.9 37.7 154.2 43.9 154.5 50C155.3 64.3 155.8 78.5 156.3 92.8C156.5 100.8 156.5 108.8 156.5 116.8C156.7 132.9 144.4 141.6 133.7 144.5C130 145.5 126.1 146.1 122.2 146.3C99.6 146.8 77 147.4 54.3 147.5C42.3 147.5 30.3 145.5 18.5 143C9.4 141 2.4 132.6 1.4 122.8C1 119.6 0.9 116.4 0.9 113.1C1.1 102 1.4 90.9 1.4 79.7C1.5 66.8 1.4 53.8 1.3 40.9C1.2 37.3 1 33.8 2.3 30.3C5.9 20.5 12.9 15.1 22.9 13.4C26.9 12.7 31.1 12.5 35.1 12.1C36.2 12 37.2 11.8 38.6 11.7ZM146.2 49C123.2 49.8 100.7 50.6 78.2 51.2C55.6 51.9 33 52.4 10.3 53C10.2 53.3 10.2 53.8 10.2 54.3C10.1 71.6 10.1 88.9 10.1 106.2C10.1 110.8 10.1 115.5 10.3 120.1C10.4 123.4 11.7 126.5 13.8 128.9C16 131.4 18.9 133.1 22.1 133.7C35.2 135.9 48.2 137.9 61.6 137.6C73.8 137.2 85.9 137.4 98.1 137.1C107.8 136.9 117.5 136.5 127.2 136.1C131.4 135.9 135.5 134.5 139 132.1C143.7 128.9 146.8 124.7 146.9 118.8C147 114.1 147.3 109.5 147.2 104.8C146.9 87.2 146.6 69.6 146.2 52C146.2 51 146.2 49.9 146.2 49H146.2ZM9.4 44.9C55 42.5 99.8 40.9 144.9 39.8C144.7 37.5 144.6 35.3 144.2 33.3C142.7 26.9 139.9 21.4 132.9 19.5C128.5 18.3 124 18.7 119.3 18.8C119.2 19.8 119.2 20.6 119.1 21.5C119 22.3 118.8 23.2 118.6 24C118 26.7 116.6 27.9 114.6 27.8C112.5 27.6 111.3 26.2 111.1 23.5C111 21.9 111.1 20.3 111.1 18.8H44.9C44.9 20.3 44.9 21.5 44.9 22.7C44.9 24.3 44.8 25.9 44.7 27.5C44.6 28.3 44.2 29 43.7 29.5C43.1 30 42.4 30.3 41.6 30.3C39.8 30.4 38.8 29.3 38.4 27.7C38.1 26.5 38 25.2 38.1 23.9C38 22.4 38 21 38 19.1C33.1 19.5 28.6 19.4 24.3 20.4C17.2 21.9 11.3 25.4 10 33.4C9.4 37 9.6 40.8 9.4 44.9Z" />
+				<path
+					d="M40.6 123C39.6 123.1 37.8 123.2 36 123.2C32 123.2 29.6 121.4 28.9 117.6C28 113.1 28.2 108.5 29.4 104.1C29.7 103.2 30.2 102.3 30.9 101.6C31.5 101 32.4 100.5 33.3 100.2C38.5 98.7 43.9 98.1 49.3 98.5C52.2 98.7 54.4 100.3 55 103.4C56 107.9 56.3 112.6 55.1 117.1C54 121 51.6 122.9 47.6 123C45.5 123.1 43.5 123 40.6 123ZM45.3 107.6H36.9L37.3 113.2H45.3V107.6Z" />
+				<path
+					d="M92.6 108.5C92.6 109.6 92.6 110.2 92.6 110.9C92.4 117.6 90.2 120.2 83.6 121.4C80.2 122 76.8 122.3 73.4 122.6C69.6 122.9 67.1 121.3 66.4 117.8C65.5 113.3 64.9 108.8 65.9 104.3C66.6 101.1 68.5 99 71.7 98.5C75.9 97.8 80.2 97.4 84.5 97.2C89.3 97.1 91.4 99 92.1 103.8C92.4 105.5 92.5 107.2 92.6 108.5ZM82.9 106.4H73.7C74 108.9 74.2 111 74.5 113.3C76.6 113.1 78.3 112.9 80 112.7C83.1 112.4 83.4 112 83.3 108.9C83.3 108.1 83.1 107.4 82.9 106.4H82.9Z" />
+				<path
+					d="M115.2 121.9C113.1 122 111.1 122 109 121.9C105.3 121.5 103.2 119.5 103 115.9C102.7 111.9 102.8 107.9 103.1 104C103.5 99.9 105.3 98.2 109.4 97.9C113.4 97.6 117.4 97.5 121.3 97.6C125.5 97.7 129.5 100.4 129.2 105.9C129 108.6 129 111.3 128.6 114C128 119.1 125.5 121.3 120.3 121.7C118.6 121.8 116.9 121.9 115.2 122L115.2 121.9ZM111.2 105.4C111.3 108.2 111.4 110.3 111.5 112.3H119C119.2 110.2 119.4 108.4 119.6 106.4L111.2 105.4Z" />
+				<path
+					d="M114.8 86.9C113 87 111.2 87.2 109.4 87.2C104.9 87.1 102.5 85 102.3 80.5C102.1 77.1 102.1 73.6 102.3 70.2C102.5 65.9 104.1 64 108.3 63.6C113 63.1 117.7 62.9 122.5 63C126.9 63.1 129.2 65.5 129.2 70C129.1 73.7 128.7 77.3 128.1 80.9C127.3 84.6 125.1 86.4 121.3 86.7C119.1 86.8 117 86.7 114.8 86.7L114.8 86.9ZM110.3 78.1H119.5C119.8 75.9 120 73.9 120.3 71.4L110.3 71V78.1Z" />
+				<path
+					d="M63.3 75.4C63.5 73.3 63.7 71 64 68.8C64.4 66.2 65.7 64.3 68.4 63.7C73.1 62.8 77.9 61.9 82.8 62.5C87.1 63 89.4 64.8 90 69.1C90.4 72.3 90.3 75.5 89.8 78.7C89.3 82.2 86.9 84.2 83.4 84.7C79.3 85.2 75.1 85.7 70.9 85.9C66.8 86.2 64.4 84.1 63.7 80.1C63.4 78.6 63.4 77.1 63.3 75.4ZM80.8 71.1L71.2 70.5C71.3 72.9 71.4 74.8 71.6 76.9L80.8 76L80.8 71.1Z" />
+			</symbol>
+			<symbol id="pacey-icon-sun" viewBox="0 0 145 134">
+				<path
+					d="M59.5 95.1C65.1 96.6 71.1 97.2 76.7 97.6C77.4 97.7 78.1 97.7 78.8 97.7C83.1 97.7 87.3 96.7 91.1 94.7C101.7 89.1 107.4 79.8 109 65.2V65.2V65.2C108.3 48.1 101.9 38.5 88.4 33.8C84.2 32.5 79.9 31.7 75.6 31.3C68.4 30.6 59.8 33.4 52.7 38.7C44.7 44.7 39.6 53.2 38.4 62.5C36.4 78.4 44.5 90.9 59.5 95.1ZM44.9 64.3C45.8 48.7 57.8 39.6 68.7 36.4C69.5 36.2 70.2 36.1 71 36.1C73.3 36.1 76 36.9 78.2 37.6C82.3 39.1 86.2 41 89.9 43.2C93.1 45 95.7 47.9 97.1 51.4C102 62.4 100.6 73 93 82.8C89.2 87.8 83.4 90.3 75.4 90.4C73.9 90.1 72.3 89.9 70.9 89.6C67.6 89.2 64.3 88.5 61 87.7C46.9 83.9 44.5 72.9 44.9 64.3Z" />
+				<path
+					d="M79.8 111.9C79.5 110.8 78.4 109.5 77.3 109.3C76.5 109.1 75.4 109.6 74 110.7C73.4 111.1 73.2 112 73.1 112.8L73 113C71.9 118.8 72.5 124.6 73.4 129.9C73.5 130.5 73.7 131.1 74 131.6C74.7 133.1 75.8 133.9 76.9 133.9C77.2 133.9 77.5 133.8 77.8 133.7C78.4 133.5 79 133.1 79.5 132.6C80 132.1 80.3 131.6 80.6 130.9C81.1 129.6 81 128 80.9 126.6L80.9 126.5C80.7 124 80.4 121.5 80.2 119C80.1 118 80 117.1 79.9 116.1C79.9 115.7 80 115.2 80 114.8C80.1 113.8 80.1 112.9 79.8 111.9Z" />
+				<path
+					d="M119.5 65C119.6 66.9 120.9 68 123.4 68.1C125.3 68.2 127.2 68.3 128.6 68.4L129.9 68.5H129.9C131.2 68.5 132.5 68.5 133.6 68.5C134.6 68.5 135.5 68.5 136.4 68.5C137.7 68.5 138.9 68.5 140.1 68.4C142.7 68.2 144.4 66.8 144.3 64.8C144.2 62.9 142.7 61.6 139.9 61.3C139.7 61.2 139.4 61.2 139.2 61.2L137.4 61.3C132.7 61.4 127.9 61.6 123.2 61.8C120.8 61.9 119.5 63 119.5 65Z" />
+				<path
+					d="M117.2 108.4C114 105.7 110.5 102.8 106.4 99.5C104.9 98.2 103.3 98 102.1 99.1C100.5 100.4 101 102.1 101.6 103.4C101.8 104 102.1 104.5 102.6 104.9L103.7 105.9C106.6 108.6 109.6 111.4 112.7 114.1C113.3 114.5 114 114.9 114.7 115.1C114.9 115.2 115.1 115.2 115.3 115.3L115.4 115.3H115.5C117.1 115.3 118.4 114.8 119 113.8C119.3 113.3 119.4 112.7 119.4 112.2C119.4 111.6 119.2 111.1 118.9 110.6C118.5 109.8 117.9 109 117.2 108.4Z" />
+				<path
+					d="M72.7 4.2C72.9 7.5 73 10.8 73.1 14L73.1 14.3C73.2 15 73.1 15.8 73.1 16.4C73.1 17.2 73.1 17.9 73.1 18.6C73.2 20.8 74.3 22.2 76.3 22.4C76.5 22.4 76.6 22.4 76.7 22.4C78.5 22.4 79.8 21.3 80.3 19.3C80.5 18.3 80.6 17.3 80.7 16.2C80.7 15.9 80.7 15.6 80.7 15.3V15.3V15.2C80.6 14.5 80.6 13.8 80.5 13.1C80.5 11.8 80.3 10.6 80.1 9.4C79.6 7 79 4.6 78.2 2.4C77.5 0.6 76 -0.3 74.3 0.3C72.4 0.9 72.6 2.5 72.7 3.9L72.7 4.2Z" />
+				<path
+					d="M20.8 114.2C21.4 114.9 22.5 115.3 23.9 115.3C24 115.3 24.1 115.3 24.2 115.3H24.3L24.3 115.2C24.5 115.2 24.7 115.1 24.9 115C25.7 114.7 26.4 114.2 27 113.7C29.8 110.8 32.6 107.6 35.7 104.1C37 102.5 37 100.7 35.7 99.4C34.8 98.5 33.3 97.9 31.1 99.9C27.9 102.7 24.8 105.7 22 108.5C21.2 109.4 20.6 110.4 20.3 111.5C20.2 112 20.2 112.5 20.2 112.9C20.3 113.4 20.5 113.8 20.8 114.2Z" />
+				<path
+					d="M33.2 38.3C33.8 38.9 34.7 39.3 35.5 39.3C35.8 39.3 36 39.2 36.2 39.1C36.9 38.7 37.4 38 37.6 37.3C37.8 37 38 36.6 38.1 36.3L38.2 36.2L38.2 36C37.9 35.6 37.8 35.1 37.6 34.6C37.2 33.7 36.8 32.8 36.2 32C33.8 28.8 31.2 25.6 28.7 22.5L28.2 21.9C27.7 21.2 27.1 20.8 26.3 20.7C25.6 20.5 24.8 20.7 24.2 21.1C23.8 21.2 23.5 21.5 23.3 21.8C23.1 22.1 22.9 22.4 22.9 22.8C22.8 23.2 22.8 23.6 22.9 24C23 24.3 23.1 24.7 23.4 25C26.3 29.3 29.5 33.7 33.2 38.3Z" />
+				<path
+					d="M110.3 30.2C110.9 30.5 111.5 30.6 112.2 30.6C112.9 30.6 113.6 30.5 114.3 30.4C115 30.2 115.7 29.5 116.2 28.7C118.6 25.5 121.1 22.1 123.7 18.6C124 18.1 124.2 17.6 124.4 17.1C124.4 17 124.5 16.8 124.6 16.7L124.6 16.6C124.6 16.1 124.6 15.7 124.4 15.3C124.2 15 124 14.6 123.7 14.4C123.4 14.2 123 14.1 122.7 14C122.3 14 122 14 121.7 14.2C120.9 14.5 120.3 15 119.7 15.6C117.3 18.1 114.6 20.9 111.5 24.3C110.9 24.9 110.4 25.5 110 26.2C109.5 27 109.2 28 109.4 28.9C109.4 29.2 109.6 29.4 109.7 29.7C109.9 29.9 110.1 30.1 110.3 30.2Z" />
+				<path
+					d="M3.7 71.4C5.4 71.7 7 71.9 8.6 72.1C9.3 72.2 10 72.3 10.7 72.4L11 72.4L11 72.1L11.7 72.1C12.5 72.1 13.3 72.1 14.1 72.1C14.9 72 15.7 71.9 16.5 71.8C18.4 71.5 19.8 70.7 20.4 69.7C20.6 69.4 20.7 69.2 20.7 68.9C20.7 68.6 20.7 68.4 20.6 68.1C19.7 65.8 17.5 65.8 15.8 65.9L12.1 65.9C9.5 66 7 66.1 4.5 66.1C3.5 66.2 1.4 66.2 1.1 68.3C0.9 69.9 1.9 71 3.7 71.4Z" />
+			</symbol>
+			<symbol id="pacey-icon-moon" viewBox="0 0 155 146">
+				<path
+					d="M122 103.2C125.9 102.9 129.8 102.9 133.7 102.4C136.9 101.9 140 100.9 143.2 100.1C144.7 99.7 146.2 99.2 147.7 98.9C150 98.5 152 99.2 153.3 101.1C154.6 103 154.3 105 153.3 106.9C148.5 117 140.8 124.7 132 131.1C121.1 139.1 108.7 143.1 95.5 144.7C83.3 146.2 71 146.3 59 143.6C41.4 139.7 26.3 131.6 15.1 117.3C4.1 103.2 -0.1 87 1.5 69.3C2.8 53 8.5 37.4 18 24C23.4 16.2 29.9 9.4 38.1 4.3C41.1 2.4 44.4 0.9 48.1 0.7C51.9 0.5 53.3 2.4 51.6 5.9C49.1 10.8 47 15.8 46 21.3C44.6 28.8 45.1 36.3 46.8 43.7C50.4 59.7 57.4 73.9 69 85.6C78.1 95.1 90.4 101 103.5 102.2C109.6 102.9 115.8 103.1 121.9 103.6C121.9 103.4 121.9 103.3 122 103.2ZM135.2 114.5L134.7 113.7C132.9 113.8 131.1 113.8 129.3 114C121.5 114.7 113.6 114.7 105.8 113.9C85.5 112 69 103.1 56.3 87.2C46.7 75.2 40.2 61.1 37.3 46C35 34.9 35.1 24 39.3 13.3C39.4 13.1 39.2 12.7 39 12.2C37.6 13.4 36.3 14.5 35.1 15.7C18.8 31.9 10.6 51.6 10.2 74.5C9.9 89.8 14.8 103.4 25.4 114.7C34.7 124.8 46.5 130.5 59.7 133.4C72.5 136.3 85.5 136.1 98.5 133.9C108.9 132.2 118.6 128.5 127 121.9C129.9 119.6 132.5 117 135.2 114.5Z" />
+			</symbol>
+		</svg>
 
-    <!-- ===== Header: brand, theme toggle ===== -->
-    <header class="landing-header">
-        <a class="landing-brand" href="/pacey/" aria-label="Pacey home">
-            <img class="landing-brand-mark" src="/pacey/assets/icons/pacey-icon-192.png" alt="" width="36" height="36">
-            <span class="landing-brand-name">Pacey</span>
-        </a>
-        <!-- Same raised chip and sun/moon geometry as the app's own theme
+		<!-- ===== Header: brand, theme toggle ===== -->
+		<header class="landing-header">
+			<a class="landing-brand" href="/pacey/" aria-label="Pacey home">
+				<img
+					class="landing-brand-mark"
+					src="/pacey/assets/icons/pacey-icon-192.png"
+					alt=""
+					width="36"
+					height="36" />
+				<span class="landing-brand-name">Pacey</span>
+			</a>
+			<!-- Same raised chip and sun/moon geometry as the app's own theme
              toggles — .pacey-theme-toggle is the shared presentation, the
              landing class only sizes it. The icon shows the current mode
              (sun in light, moon in dark); the label stays the action. -->
-        <button type="button" id="landing-theme-toggle" class="pacey-theme-toggle landing-theme-toggle"
-                aria-label="Switch theme" title="Switch theme">
-            <svg class="pacey-icon landing-theme-icon landing-theme-icon--sun" width="20" height="20" aria-hidden="true"><use href="#pacey-icon-sun"/></svg>
-            <svg class="pacey-icon landing-theme-icon landing-theme-icon--moon" width="20" height="20" aria-hidden="true"><use href="#pacey-icon-moon"/></svg>
-        </button>
-    </header>
+			<button
+				type="button"
+				id="landing-theme-toggle"
+				class="pacey-theme-toggle landing-theme-toggle"
+				aria-label="Switch theme"
+				title="Switch theme">
+				<svg
+					class="pacey-icon landing-theme-icon landing-theme-icon--sun"
+					width="20"
+					height="20"
+					aria-hidden="true">
+					<use href="#pacey-icon-sun" />
+				</svg>
+				<svg
+					class="pacey-icon landing-theme-icon landing-theme-icon--moon"
+					width="20"
+					height="20"
+					aria-hidden="true">
+					<use href="#pacey-icon-moon" />
+				</svg>
+			</button>
+		</header>
 
-    <main>
-        <!-- ===== The board =====
+		<main>
+			<!-- ===== The board =====
              #pacey-content scopes the app's pinboard presentation to this
              wrapper: the readiness sheet, vitals tiles, agenda cards and
              recap render with the same classes and rules as inside the
              app. Everything on it is for looking — nothing here is live. -->
-        <div id="pacey-content" class="landing-board">
-
-            <!-- ===== Hero: the promise in the app's own words, alone —
+			<div id="pacey-content" class="landing-board">
+				<!-- ===== Hero: the promise in the app's own words, alone —
                  the product previews get their own sections below.
                  The training plan leads here — the goal-time readiness
                  read carries the supporting copy underneath. ===== -->
-            <section class="landing-hero" aria-labelledby="landing-hero-title">
-                <div class="landing-hero-copy">
-                    <h1 class="landing-hero-title" id="landing-hero-title">Your marathon training plan</h1>
-                    <p class="landing-hero-lede">Work toward your goal time with a plan shaped by your Garmin training and recovery data.</p>
-                    <p class="landing-hero-sub">See how your fitness measures up to your goal, where the biggest gap is, and what to work on before race day.</p>
-                    <div class="landing-hero-actions">
-                        <a class="landing-btn landing-btn--primary" href="/pacey/app/?entry=login">Open Pacey</a>
-                        <a class="landing-btn landing-btn--secondary" href="/pacey/demo/">Try the demo</a>
-                    </div>
-                    <p class="landing-hero-note">Explore the demo with sample data, or connect Garmin to see your own training.</p>
-                </div>
-            </section>
+				<section
+					class="landing-hero"
+					aria-labelledby="landing-hero-title">
+					<div class="landing-hero-copy">
+						<h1 class="landing-hero-title" id="landing-hero-title">
+							Your marathon training plan
+						</h1>
+						<p class="landing-hero-lede">
+							Work toward your goal time with a plan shaped by
+							your Garmin training and recovery data.
+						</p>
+						<p class="landing-hero-sub">
+							See how your fitness measures up to your goal, where
+							the biggest gap is, and what to work on before race
+							day.
+						</p>
+						<div class="landing-hero-actions">
+							<a
+								class="landing-btn landing-btn--primary"
+								href="/pacey/app/?entry=login"
+								>Open Pacey</a
+							>
+							<a
+								class="landing-btn landing-btn--secondary"
+								href="/pacey/demo/"
+								>Try the demo</a
+							>
+						</div>
+						<p class="landing-hero-note">
+							Explore the demo with sample data, or connect Garmin
+							to see your own training.
+						</p>
+					</div>
+				</section>
 
-            <!-- Race Readiness — the first feature, so "How Pacey helps"
+				<!-- Race Readiness — the first feature, so "How Pacey helps"
                  opens on it. The app's own readiness card and radar at the
                  Brooks saved scores on the left, the explanation right. -->
-            <section class="landing-section landing-readiness" id="features" aria-labelledby="landing-readiness-title">
-                <figure class="landing-feature-exhibit">
-                    <div class="pacey-readiness-card landing-radar-card">
-                        <p class="pacey-readiness-card-title">Race Readiness</p>
-                        <p class="landing-radar-goal">Brooks Half Marathon · 21.1 km · Goal 01:50:00</p>
-                        <div class="pacey-radar-wrap">
-                            <canvas id="landing-radar" class="pacey-radar-chart" role="img"
-                                aria-label="Six areas of fitness for Brooks Half Marathon: Lactate Threshold 7, Aerobic Endurance 8, Running Economy 7, Strength / Durability 8, VO₂max / Speed 8, Fatigue Resistance 8, each out of 10."></canvas>
-                            <!-- Textual fallback — the scores in plain words for
+				<section
+					class="landing-section landing-readiness"
+					id="features"
+					aria-labelledby="landing-readiness-title">
+					<figure class="landing-feature-exhibit">
+						<div class="pacey-readiness-card landing-radar-card">
+							<p class="pacey-readiness-card-title">
+								Race Readiness
+							</p>
+							<p class="landing-radar-goal">
+								Brooks Half Marathon · 21.1 km · Goal 01:50:00
+							</p>
+							<div class="pacey-radar-wrap">
+								<canvas
+									id="landing-radar"
+									class="pacey-radar-chart"
+									role="img"
+									aria-label="Six areas of fitness for Brooks Half Marathon: Lactate Threshold 7, Aerobic Endurance 8, Running Economy 7, Strength / Durability 8, VO₂max / Speed 8, Fatigue Resistance 8, each out of 10."></canvas>
+								<!-- Textual fallback — the scores in plain words for
                                  screen readers and for no-JS / no-Chart.js loads. -->
-                            <ol class="landing-radar-fallback" id="landing-radar-fallback" aria-label="Six areas of fitness, each out of 10">
-                                <li>Lactate Threshold — 7/10</li>
-                                <li>Aerobic Endurance — 8/10</li>
-                                <li>Running Economy — 7/10</li>
-                                <li>Strength / Durability — 8/10</li>
-                                <li>VO₂max / Speed — 8/10</li>
-                                <li>Fatigue Resistance — 8/10</li>
-                            </ol>
-                        </div>
-                    </div>
-                    <!-- Phone captions label each exhibit in Caveat on the
-                         cork; the little arrow points back up at the paper. -->
-                    <figcaption class="landing-feature-caption landing-mobile-only"><svg class="landing-caption-arrow" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M27 25 C 21 23 12 19 10 9 C 9.6 6.5 10 4.8 11.5 3.5"/><path d="M6.5 9 L 11.5 3.5 L 15.5 9"/></svg>See which areas support your goal—and where to focus.</figcaption>
-                </figure>
+								<ol
+									class="landing-radar-fallback"
+									id="landing-radar-fallback"
+									aria-label="Six areas of fitness, each out of 10">
+									<li>Lactate Threshold — 7/10</li>
+									<li>Aerobic Endurance — 8/10</li>
+									<li>Running Economy — 7/10</li>
+									<li>Strength / Durability — 8/10</li>
+									<li>VO₂max / Speed — 8/10</li>
+									<li>Fatigue Resistance — 8/10</li>
+								</ol>
+							</div>
+						</div>
+						<!-- Phone captions label each exhibit in Caveat on the
+                         cork; the ann classes draw a small arrow in the gap
+                         above the note, pointing back up at the paper. -->
+						<figcaption
+							class="landing-feature-caption landing-caption--readiness ann ann-nw ann-no-mark landing-mobile-only">
+							See which areas support your goal—and where to
+							focus.
+						</figcaption>
+					</figure>
 
-                <div class="landing-readiness-copy">
-                    <h2 class="landing-section-title" id="landing-readiness-title">Race Readiness</h2>
-                    <p class="landing-section-text">See how your recent training measures up to your race goal. The radar brings six areas of fitness together, so you can see where you are strong and what needs work. Pacey explains the evidence behind each area and uses the biggest gap to shape your plan.</p>
-                </div>
-            </section>
+					<div class="landing-readiness-copy">
+						<h2
+							class="landing-section-title"
+							id="landing-readiness-title">
+							Race Readiness
+						</h2>
+						<p class="landing-section-text">
+							See how your recent training measures up to your
+							race goal. The radar brings six areas of fitness
+							together, so you can see where you are strong and
+							what needs work. Pacey explains the evidence behind
+							each area and uses the biggest gap to shape your
+							plan.
+						</p>
+					</div>
+				</section>
 
-            <!-- Evidence chapter — a rail alongside names what the next
+				<!-- Evidence chapter — a rail alongside names what the next
                  four sections prove while the stream scrolls past. The
                  sections keep their own IDs and markup, so every existing
                  anchor and crawler target still lands where it did. -->
-            <section class="landing-evidence" aria-labelledby="landing-evidence-title">
-                <div class="landing-evidence-rail">
-                    <h2 class="landing-section-title" id="landing-evidence-title">The evidence behind your readiness</h2>
-                    <p class="landing-section-text">Your daily metrics, training trends and race course give Pacey the context to explain what to work on next.</p>
-                    <nav class="landing-evidence-nav" aria-label="Evidence sections">
-                        <!-- Each number carries a sketched ring — the same
+				<section
+					class="landing-evidence"
+					aria-labelledby="landing-evidence-title">
+					<div class="landing-evidence-rail">
+						<h2
+							class="landing-section-title"
+							id="landing-evidence-title">
+							The evidence behind your readiness
+						</h2>
+						<p class="landing-section-text">
+							Your daily metrics, training trends and race course
+							give Pacey the context to explain what to work on
+							next.
+						</p>
+						<nav
+							class="landing-evidence-nav"
+							aria-label="Evidence sections">
+							<!-- Each number carries a sketched ring — the same
                              hand-drawn selection scribbles the app's mobile
                              tabs use, drawn on when the link becomes current. -->
-                        <a class="landing-evidence-link" href="#metrics"><span class="landing-evidence-num" aria-hidden="true"><svg class="landing-evidence-sketch" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path class="landing-evidence-sketch-path" pathLength="100" d="M58 7 C 72 4, 84 9, 89 22 C 93 33, 92 42, 90 50 C 88 60, 82 70, 71 79 C 60 88, 46 93, 34 92 C 22 91, 12 84, 8 72 C 4 60, 6 46, 11 34 C 16 22, 26 12, 41 8 C 50 6, 59 7, 66 11"/></svg>01</span> Today's Metrics</a>
-                        <a class="landing-evidence-link" href="#training-trends"><span class="landing-evidence-num" aria-hidden="true"><svg class="landing-evidence-sketch" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path class="landing-evidence-sketch-path" pathLength="100" d="M60 8 C 78 8, 90 20, 91 36 C 92 52, 88 66, 78 76 C 68 86, 52 92, 38 90 C 24 88, 12 79, 8 65 C 4 51, 7 36, 15 25 C 23 14, 38 7, 52 8 C 60 8, 66 10, 72 15"/></svg>02</span> Training Trends</a>
-                        <a class="landing-evidence-link" href="#course"><span class="landing-evidence-num" aria-hidden="true"><svg class="landing-evidence-sketch" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path class="landing-evidence-sketch-path" pathLength="100" d="M56 6 C 70 3, 82 10, 88 20 C 94 30, 90 44, 89 54 C 88 66, 80 76, 68 83 C 56 90, 40 92, 28 87 C 16 82, 7 71, 6 58 C 5 45, 10 31, 20 22 C 30 13, 44 7, 56 6 C 62 6, 68 8, 74 12"/></svg>03</span> Race Course</a>
-                        <a class="landing-evidence-link" href="#picture"><span class="landing-evidence-num" aria-hidden="true"><svg class="landing-evidence-sketch" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path class="landing-evidence-sketch-path" pathLength="100" d="M57 5 C 75 6, 88 16, 91 32 C 94 48, 86 64, 74 76 C 62 88, 44 94, 30 90 C 16 86, 6 73, 5 58 C 4 43, 12 28, 24 18 C 36 8, 50 5, 62 7 C 68 8, 73 10, 78 14"/></svg>04</span> The Big Picture</a>
-                    </nav>
-                </div>
-                <div class="landing-evidence-stream">
-                    <!-- Today's Metrics — the app's own vitals tiles, all nine of
+							<a class="landing-evidence-link" href="#metrics"
+								><span
+									class="landing-evidence-num"
+									aria-hidden="true"
+									><svg
+										class="landing-evidence-sketch"
+										viewBox="0 0 100 100"
+										aria-hidden="true"
+										focusable="false">
+										<path
+											class="landing-evidence-sketch-path"
+											pathLength="100"
+											d="M58 7 C 72 4, 84 9, 89 22 C 93 33, 92 42, 90 50 C 88 60, 82 70, 71 79 C 60 88, 46 93, 34 92 C 22 91, 12 84, 8 72 C 4 60, 6 46, 11 34 C 16 22, 26 12, 41 8 C 50 6, 59 7, 66 11" /></svg
+									>01</span
+								>
+								Today's Metrics</a
+							>
+							<a
+								class="landing-evidence-link"
+								href="#training-trends"
+								><span
+									class="landing-evidence-num"
+									aria-hidden="true"
+									><svg
+										class="landing-evidence-sketch"
+										viewBox="0 0 100 100"
+										aria-hidden="true"
+										focusable="false">
+										<path
+											class="landing-evidence-sketch-path"
+											pathLength="100"
+											d="M60 8 C 78 8, 90 20, 91 36 C 92 52, 88 66, 78 76 C 68 86, 52 92, 38 90 C 24 88, 12 79, 8 65 C 4 51, 7 36, 15 25 C 23 14, 38 7, 52 8 C 60 8, 66 10, 72 15" /></svg
+									>02</span
+								>
+								Training Trends</a
+							>
+							<a class="landing-evidence-link" href="#course"
+								><span
+									class="landing-evidence-num"
+									aria-hidden="true"
+									><svg
+										class="landing-evidence-sketch"
+										viewBox="0 0 100 100"
+										aria-hidden="true"
+										focusable="false">
+										<path
+											class="landing-evidence-sketch-path"
+											pathLength="100"
+											d="M56 6 C 70 3, 82 10, 88 20 C 94 30, 90 44, 89 54 C 88 66, 80 76, 68 83 C 56 90, 40 92, 28 87 C 16 82, 7 71, 6 58 C 5 45, 10 31, 20 22 C 30 13, 44 7, 56 6 C 62 6, 68 8, 74 12" /></svg
+									>03</span
+								>
+								Race Course</a
+							>
+							<a class="landing-evidence-link" href="#picture"
+								><span
+									class="landing-evidence-num"
+									aria-hidden="true"
+									><svg
+										class="landing-evidence-sketch"
+										viewBox="0 0 100 100"
+										aria-hidden="true"
+										focusable="false">
+										<path
+											class="landing-evidence-sketch-path"
+											pathLength="100"
+											d="M57 5 C 75 6, 88 16, 91 32 C 94 48, 86 64, 74 76 C 62 88, 44 94, 30 90 C 16 86, 6 73, 5 58 C 4 43, 12 28, 24 18 C 36 8, 50 5, 62 7 C 68 8, 73 10, 78 14" /></svg
+									>04</span
+								>
+								The Big Picture</a
+							>
+						</nav>
+					</div>
+					<div class="landing-evidence-stream">
+						<!-- Today's Metrics — the app's own vitals tiles, all nine of
                          them in the app's order with the same zone colours it
                          assigns the demo's numbers. Read-only here: in the app a
                          tile opens the detail behind the number. -->
-                    <section class="landing-section" id="metrics" aria-labelledby="landing-metrics-title">
-                    <h2 class="landing-section-title" id="landing-metrics-title">Today's Metrics</h2>
-                    <p class="landing-section-text">Readiness, sleep, recovery, body battery and more — the vitals behind each day, in one place. Your latest Garmin data adds context to the readiness read and the training ahead.</p>
+						<section
+							class="landing-section"
+							id="metrics"
+							aria-labelledby="landing-metrics-title">
+							<h2
+								class="landing-section-title"
+								id="landing-metrics-title">
+								Today's Metrics
+							</h2>
+							<p class="landing-section-text">
+								Readiness, sleep, recovery, body battery and
+								more — the vitals behind each day, in one place.
+								Your latest Garmin data adds context to the
+								readiness read and the training ahead.
+							</p>
 
-                    <div class="pacey-metrics-grid">
-                        <div class="pacey-metric-tile" data-metric-label="Readiness">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon" aria-hidden="true"><use href="#pacey-icon-readiness-score"/></svg></span>
-                                <span class="pacey-metric-label">Readiness</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-blue)">72</span>
-                                <span class="pacey-metric-unit">Moderate</span>
-                            </div>
-                        </div>
-                        <div class="pacey-metric-tile" data-metric-label="Sleep">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon pacey-icon--stroke" aria-hidden="true"><use href="#pacey-icon-sleep"/></svg></span>
-                                <span class="pacey-metric-label">Sleep</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-blue)">81</span>
-                                <span class="pacey-metric-unit">/100</span>
-                            </div>
-                        </div>
-                        <div class="pacey-metric-tile" data-metric-label="Recovery">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon" aria-hidden="true"><use href="#pacey-icon-stopwatch"/></svg></span>
-                                <span class="pacey-metric-label">Recovery</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-blue)">18</span>
-                                <span class="pacey-metric-unit">hrs</span>
-                            </div>
-                        </div>
-                        <div class="pacey-metric-tile" data-metric-label="Body Battery">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon pacey-icon--stroke" aria-hidden="true"><use href="#pacey-icon-battery"/></svg></span>
-                                <span class="pacey-metric-label">Body Battery</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-blue)">72</span>
-                                <span class="pacey-metric-unit">%</span>
-                            </div>
-                        </div>
-                        <div class="pacey-metric-tile" data-metric-label="VO₂max">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon" aria-hidden="true"><use href="#pacey-icon-lungs"/></svg></span>
-                                <span class="pacey-metric-label">VO₂max</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-green)">52</span>
-                                <span class="pacey-metric-unit">ml/kg/min</span>
-                            </div>
-                        </div>
-                        <div class="pacey-metric-tile" data-metric-label="HRV">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon" aria-hidden="true"><use href="#pacey-icon-hrv"/></svg></span>
-                                <span class="pacey-metric-label">HRV</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-green)">34</span>
-                                <span class="pacey-metric-unit">ms</span>
-                            </div>
-                        </div>
-                        <div class="pacey-metric-tile" data-metric-label="Resting HR">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon" aria-hidden="true"><use href="#pacey-icon-heart"/></svg></span>
-                                <span class="pacey-metric-label">Resting HR</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-green)">48</span>
-                                <span class="pacey-metric-unit">bpm</span>
-                            </div>
-                        </div>
-                        <div class="pacey-metric-tile" data-metric-label="Stress">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon pacey-icon--stroke" aria-hidden="true"><use href="#pacey-icon-stress"/></svg></span>
-                                <span class="pacey-metric-label">Stress</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-blue)">28</span>
-                                <span class="pacey-metric-unit">/100</span>
-                            </div>
-                        </div>
-                        <div class="pacey-metric-tile" data-metric-label="Fitness Age">
-                            <div class="pacey-metric-top">
-                                <span class="pacey-metric-icon"><svg class="pacey-icon" aria-hidden="true"><use href="#pacey-icon-calendar"/></svg></span>
-                                <span class="pacey-metric-label">Fitness Age</span>
-                            </div>
-                            <div class="pacey-metric-value-row">
-                                <span class="pacey-metric-value" style="color: var(--pacey-metric-zone-green)">25</span>
-                                <span class="pacey-metric-unit">years</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+							<div class="pacey-metrics-grid">
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="Readiness">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-readiness-score" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>Readiness</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-blue
+												);
+											"
+											>72</span
+										>
+										<span class="pacey-metric-unit"
+											>Moderate</span
+										>
+									</div>
+								</div>
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="Sleep">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon pacey-icon--stroke"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-sleep" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>Sleep</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-blue
+												);
+											"
+											>81</span
+										>
+										<span class="pacey-metric-unit"
+											>/100</span
+										>
+									</div>
+								</div>
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="Recovery">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-stopwatch" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>Recovery</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-blue
+												);
+											"
+											>18</span
+										>
+										<span class="pacey-metric-unit"
+											>hrs</span
+										>
+									</div>
+								</div>
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="Body Battery">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon pacey-icon--stroke"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-battery" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>Body Battery</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-blue
+												);
+											"
+											>72</span
+										>
+										<span class="pacey-metric-unit">%</span>
+									</div>
+								</div>
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="VO₂max">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-lungs" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>VO₂max</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-green
+												);
+											"
+											>52</span
+										>
+										<span class="pacey-metric-unit"
+											>ml/kg/min</span
+										>
+									</div>
+								</div>
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="HRV">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-hrv" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>HRV</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-green
+												);
+											"
+											>34</span
+										>
+										<span class="pacey-metric-unit"
+											>ms</span
+										>
+									</div>
+								</div>
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="Resting HR">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-heart" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>Resting HR</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-green
+												);
+											"
+											>48</span
+										>
+										<span class="pacey-metric-unit"
+											>bpm</span
+										>
+									</div>
+								</div>
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="Stress">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon pacey-icon--stroke"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-stress" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>Stress</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-blue
+												);
+											"
+											>28</span
+										>
+										<span class="pacey-metric-unit"
+											>/100</span
+										>
+									</div>
+								</div>
+								<div
+									class="pacey-metric-tile"
+									data-metric-label="Fitness Age">
+									<div class="pacey-metric-top">
+										<span class="pacey-metric-icon"
+											><svg
+												class="pacey-icon"
+												aria-hidden="true">
+												<use
+													href="#pacey-icon-calendar" /></svg
+										></span>
+										<span class="pacey-metric-label"
+											>Fitness Age</span
+										>
+									</div>
+									<div class="pacey-metric-value-row">
+										<span
+											class="pacey-metric-value"
+											style="
+												color: var(
+													--pacey-metric-zone-green
+												);
+											"
+											>25</span
+										>
+										<span class="pacey-metric-unit"
+											>years</span
+										>
+									</div>
+								</div>
+							</div>
+						</section>
 
-                <!-- Training Trends — the app's own chart cards fed by the
+						<!-- Training Trends — the app's own chart cards fed by the
                      frozen PACEY_SAMPLE.trainingTrends snapshot (a
                      representative demo block, not the visitor's history).
                      Read-only previews: the printed figures inside each wrap
                      are the whole truth without Chart.js. -->
-                <section class="landing-section" id="training-trends" aria-labelledby="landing-trends-title">
-                    <h2 class="landing-section-title" id="landing-trends-title">Training Trends</h2>
-                    <p class="landing-section-text">See how your running builds over time and how your distance is spread across different paces. Weekly mileage and pace distribution make your training habits easier to spot.</p>
+						<section
+							class="landing-section"
+							id="training-trends"
+							aria-labelledby="landing-trends-title">
+							<h2
+								class="landing-section-title"
+								id="landing-trends-title">
+								Training Trends
+							</h2>
+							<p class="landing-section-text">
+								See how your running builds over time and how
+								your distance is spread across different paces.
+								Weekly mileage and pace distribution make your
+								training habits easier to spot.
+							</p>
 
-                    <figure class="landing-feature-exhibit">
-                        <div class="pacey-charts-row landing-trends-charts">
-                            <div class="pacey-chart-card pacey-chart-card--equal">
-                                <h3 class="pacey-card-title">Weekly Mileage</h3>
-                                <p class="pacey-card-sub">Kilometres per week across a 12-week block.</p>
-                                <div class="pacey-chart-wrap landing-trend-wrap">
-                                    <canvas id="landing-mileage-chart" class="pacey-chart-canvas" role="img"
-                                        aria-label="Weekly mileage, kilometres per week: W1 19, W2 22, W3 25, W4 28, W5 25, W6 31, W7 33, W8 30, W9 36, W10 38, W11 36, W12 22."></canvas>
-                                    <p class="landing-chart-fallback" id="landing-mileage-fallback">Kilometres per week, W1 through W12: 19, 22, 25, 28, 25, 31, 33, 30, 36, 38, 36, 22.</p>
-                                </div>
-                            </div>
-                            <div class="pacey-chart-card pacey-chart-card--equal">
-                                <h3 class="pacey-card-title">Pace Distribution</h3>
-                                <p class="pacey-card-sub">Where the distance lands across pace ranges — the middle bucket is goal pace.</p>
-                                <div class="pacey-chart-wrap landing-trend-wrap">
-                                    <canvas id="landing-pace-chart" class="pacey-chart-canvas" role="img"
-                                        aria-label="Distance per pace range: under 5:25 per kilometre 25 km, 5:25 to 5:55 41 km, 5:55 to 6:25 race pace 41.1 km, 6:25 to 6:55 64 km, over 6:55 19 km."></canvas>
-                                    <ul class="landing-chart-fallback" id="landing-pace-fallback">
-                                        <li>Under 5:25/km — 25 km</li>
-                                        <li>5:25–5:55/km — 41 km</li>
-                                        <li>5:55–6:25/km, race pace — 41.1 km</li>
-                                        <li>6:25–6:55/km — 64 km</li>
-                                        <li>Over 6:55/km — 19 km</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <figcaption class="landing-feature-caption landing-mobile-only">Follow your weekly volume and the mix of paces you run.</figcaption>
-                    </figure>
-                </section>
+							<figure class="landing-feature-exhibit">
+								<div
+									class="pacey-charts-row landing-trends-charts">
+									<div
+										class="pacey-chart-card pacey-chart-card--equal">
+										<h3 class="pacey-card-title">
+											Weekly Mileage
+										</h3>
+										<p class="pacey-card-sub">
+											Kilometres per week across a 12-week
+											block.
+										</p>
+										<div
+											class="pacey-chart-wrap landing-trend-wrap">
+											<canvas
+												id="landing-mileage-chart"
+												class="pacey-chart-canvas"
+												role="img"
+												aria-label="Weekly mileage, kilometres per week: W1 19, W2 22, W3 25, W4 28, W5 25, W6 31, W7 33, W8 30, W9 36, W10 38, W11 36, W12 22."></canvas>
+											<p
+												class="landing-chart-fallback"
+												id="landing-mileage-fallback">
+												Kilometres per week, W1 through
+												W12: 19, 22, 25, 28, 25, 31, 33,
+												30, 36, 38, 36, 22.
+											</p>
+										</div>
+									</div>
+									<div
+										class="pacey-chart-card pacey-chart-card--equal">
+										<h3 class="pacey-card-title">
+											Pace Distribution
+										</h3>
+										<p class="pacey-card-sub">
+											Where the distance lands across pace
+											ranges — the middle bucket is goal
+											pace.
+										</p>
+										<div
+											class="pacey-chart-wrap landing-trend-wrap">
+											<canvas
+												id="landing-pace-chart"
+												class="pacey-chart-canvas"
+												role="img"
+												aria-label="Distance per pace range: under 5:25 per kilometre 25 km, 5:25 to 5:55 41 km, 5:55 to 6:25 race pace 41.1 km, 6:25 to 6:55 64 km, over 6:55 19 km."></canvas>
+											<ul
+												class="landing-chart-fallback"
+												id="landing-pace-fallback">
+												<li>Under 5:25/km — 25 km</li>
+												<li>5:25–5:55/km — 41 km</li>
+												<li>
+													5:55–6:25/km, race pace —
+													41.1 km
+												</li>
+												<li>6:25–6:55/km — 64 km</li>
+												<li>Over 6:55/km — 19 km</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<figcaption
+									class="landing-feature-caption landing-caption--trends ann ann-ne ann-no-mark landing-mobile-only">
+									Follow your weekly volume and the mix of
+									paces you run.
+								</figcaption>
+							</figure>
+						</section>
 
-                <!-- Race Course — the app's own course card (the chalkboard
+						<!-- Race Course — the app's own course card (the chalkboard
                      that stays dark in both themes) with the Brooks route and
                      elevation drawn from the supplied GPX's snapshot. -->
-                <section class="landing-section" id="course" aria-labelledby="landing-course-title">
-                    <h2 class="landing-section-title" id="landing-course-title">Race Course</h2>
-                    <p class="landing-section-text">Drop in your race's GPX file and the course joins the board — the route, the climbing and where it arrives. The Pacey coach's read takes the shape of the course into account.</p>
+						<section
+							class="landing-section"
+							id="course"
+							aria-labelledby="landing-course-title">
+							<h2
+								class="landing-section-title"
+								id="landing-course-title">
+								Race Course
+							</h2>
+							<p class="landing-section-text">
+								Drop in your race's GPX file and the course
+								joins the board — the route, the climbing and
+								where it arrives. The Pacey coach's read takes
+								the shape of the course into account.
+							</p>
 
-                    <figure class="landing-feature-exhibit">
-                        <div class="pacey-course-card">
-                            <div class="pacey-course-loaded">
-                                <!-- Same sketch filter and split-dot gradient the app
+							<figure class="landing-feature-exhibit">
+								<div class="pacey-course-card">
+									<div class="pacey-course-loaded">
+										<!-- Same sketch filter and split-dot gradient the app
                                      carries — the landing's route trace uses them the
                                      same way, without a map library. -->
-                                <svg class="pacey-course-defs" width="0" height="0" aria-hidden="true" focusable="false">
-                                    <defs>
-                                        <filter id="pacey-course-sketch" x="-10%" y="-10%" width="120%" height="120%">
-                                            <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="7" result="paceyCourseNoise"/>
-                                            <feDisplacementMap in="SourceGraphic" in2="paceyCourseNoise" scale="2.5"
-                                                               xChannelSelector="R" yChannelSelector="G"/>
-                                        </filter>
-                                        <linearGradient id="pacey-course-split" x1="0" y1="0" x2="1" y2="0">
-                                            <stop offset="0" stop-color="#2f8f4e"/>
-                                            <stop offset="0.5" stop-color="#2f8f4e"/>
-                                            <stop offset="0.5" stop-color="#b83b2e"/>
-                                            <stop offset="1" stop-color="#b83b2e"/>
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
-                                <div class="pacey-course-head">
-                                    <p class="pacey-course-name">Brooks Half Marathon</p>
-                                    <p class="pacey-course-meta">21.27 km · 63 m gain</p>
-                                </div>
+										<svg
+											class="pacey-course-defs"
+											width="0"
+											height="0"
+											aria-hidden="true"
+											focusable="false">
+											<defs>
+												<filter
+													id="pacey-course-sketch"
+													x="-10%"
+													y="-10%"
+													width="120%"
+													height="120%">
+													<feTurbulence
+														type="fractalNoise"
+														baseFrequency="0.02"
+														numOctaves="3"
+														seed="7"
+														result="paceyCourseNoise" />
+													<feDisplacementMap
+														in="SourceGraphic"
+														in2="paceyCourseNoise"
+														scale="2.5"
+														xChannelSelector="R"
+														yChannelSelector="G" />
+												</filter>
+												<linearGradient
+													id="pacey-course-split"
+													x1="0"
+													y1="0"
+													x2="1"
+													y2="0">
+													<stop
+														offset="0"
+														stop-color="#2f8f4e" />
+													<stop
+														offset="0.5"
+														stop-color="#2f8f4e" />
+													<stop
+														offset="0.5"
+														stop-color="#b83b2e" />
+													<stop
+														offset="1"
+														stop-color="#b83b2e" />
+												</linearGradient>
+											</defs>
+										</svg>
+										<div class="pacey-course-head">
+											<p class="pacey-course-name">
+												Brooks Half Marathon
+											</p>
+											<p class="pacey-course-meta">
+												21.27 km · 63 m gain
+											</p>
+										</div>
 
-                                <div class="pacey-course-visual">
-                                    <figure class="pacey-course-route">
-                                        <!-- MapLibre basemap is primary, as in the
+										<div class="pacey-course-visual">
+											<figure class="pacey-course-route">
+												<!-- MapLibre basemap is primary, as in the
                                              app; the drawn SVG trace is the fallback
                                              shown until the map and route are ready,
                                              and forever if tiles never load. -->
-                                        <div class="pacey-course-map-wrap">
-                                            <div class="pacey-course-map" id="landing-course-map" hidden></div>
-                                            <svg class="pacey-course-route-svg" id="landing-course-route-svg"
-                                                 viewBox="0 0 560 320" preserveAspectRatio="xMidYMid meet"
-                                                 role="img" aria-labelledby="landing-course-route-label">
-                                                <path class="pacey-course-route-line" id="landing-course-route-line" d=""
-                                                      filter="url(#pacey-course-sketch)"/>
-                                                <path class="pacey-course-route-pin pacey-course-route-pin--start"
-                                                      id="landing-course-route-start" d=""/>
-                                                <path class="pacey-course-route-pin pacey-course-route-pin--end"
-                                                      id="landing-course-route-end" d="" hidden/>
-                                            </svg>
-                                            <svg class="pacey-course-frame" viewBox="0 0 300 200"
-                                                 preserveAspectRatio="none" aria-hidden="true">
-                                                <rect x="4" y="4" width="292" height="192" rx="4"
-                                                      filter="url(#pacey-course-sketch)"/>
-                                            </svg>
-                                        </div>
-                                        <figcaption class="pacey-course-caption" id="landing-course-route-label">Race route</figcaption>
-                                    </figure>
-                                    <figure class="pacey-course-elevation">
-                                        <div class="pacey-course-chart-wrap" id="landing-course-chart-wrap">
-                                            <p class="landing-course-pending" id="landing-course-pending">The route and profile draw from the course file.</p>
-                                        </div>
-                                        <figcaption class="pacey-course-caption">Elevation profile</figcaption>
-                                    </figure>
-                                </div>
+												<div
+													class="pacey-course-map-wrap">
+													<div
+														class="pacey-course-map"
+														id="landing-course-map"
+														hidden></div>
+													<svg
+														class="pacey-course-route-svg"
+														id="landing-course-route-svg"
+														viewBox="0 0 560 320"
+														preserveAspectRatio="xMidYMid meet"
+														role="img"
+														aria-labelledby="landing-course-route-label">
+														<path
+															class="pacey-course-route-line"
+															id="landing-course-route-line"
+															d=""
+															filter="url(#pacey-course-sketch)" />
+														<path
+															class="pacey-course-route-pin pacey-course-route-pin--start"
+															id="landing-course-route-start"
+															d="" />
+														<path
+															class="pacey-course-route-pin pacey-course-route-pin--end"
+															id="landing-course-route-end"
+															d=""
+															hidden />
+													</svg>
+													<svg
+														class="pacey-course-frame"
+														viewBox="0 0 300 200"
+														preserveAspectRatio="none"
+														aria-hidden="true">
+														<rect
+															x="4"
+															y="4"
+															width="292"
+															height="192"
+															rx="4"
+															filter="url(#pacey-course-sketch)" />
+													</svg>
+												</div>
+												<figcaption
+													class="pacey-course-caption"
+													id="landing-course-route-label">
+													Race route
+												</figcaption>
+											</figure>
+											<figure
+												class="pacey-course-elevation">
+												<div
+													class="pacey-course-chart-wrap"
+													id="landing-course-chart-wrap">
+													<p
+														class="landing-course-pending"
+														id="landing-course-pending">
+														The route and profile
+														draw from the course
+														file.
+													</p>
+												</div>
+												<figcaption
+													class="pacey-course-caption">
+													Elevation profile
+												</figcaption>
+											</figure>
+										</div>
 
-                                <div class="pacey-course-stats">
-                                    <div class="pacey-course-stat">
-                                        <span class="pacey-course-stat-label">Distance</span>
-                                        <span class="pacey-course-stat-value">21.27<span class="pacey-course-stat-unit">km</span></span>
-                                    </div>
-                                    <div class="pacey-course-stat">
-                                        <span class="pacey-course-stat-label">Elevation gain</span>
-                                        <span class="pacey-course-stat-value">63<span class="pacey-course-stat-unit">m</span></span>
-                                    </div>
-                                    <div class="pacey-course-stat">
-                                        <span class="pacey-course-stat-label">Elevation loss</span>
-                                        <span class="pacey-course-stat-value">55<span class="pacey-course-stat-unit">m</span></span>
-                                    </div>
-                                </div>
+										<div class="pacey-course-stats">
+											<div class="pacey-course-stat">
+												<span
+													class="pacey-course-stat-label"
+													>Distance</span
+												>
+												<span
+													class="pacey-course-stat-value"
+													>21.27<span
+														class="pacey-course-stat-unit"
+														>km</span
+													></span
+												>
+											</div>
+											<div class="pacey-course-stat">
+												<span
+													class="pacey-course-stat-label"
+													>Elevation gain</span
+												>
+												<span
+													class="pacey-course-stat-value"
+													>63<span
+														class="pacey-course-stat-unit"
+														>m</span
+													></span
+												>
+											</div>
+											<div class="pacey-course-stat">
+												<span
+													class="pacey-course-stat-label"
+													>Elevation loss</span
+												>
+												<span
+													class="pacey-course-stat-value"
+													>55<span
+														class="pacey-course-stat-unit"
+														>m</span
+													></span
+												>
+											</div>
+										</div>
 
-                                <div class="pacey-course-insight">
-                                    <p class="pacey-course-insight-label">Pacey coach's read on this course</p>
-                                    <p class="pacey-course-insight-text landing-desktop-only">Most of the route is flat, so the early kilometres give you room to settle into a controlled pace. About half of the climbing comes in the final third, when tired legs have less to spare. Keep some effort in reserve rather than trying to build a large lead early. On the late rise, hold a steady effort and let the pace ease if you need to.</p>
-                                    <p class="pacey-course-insight-text landing-mobile-only">Mostly flat, with much of the climbing late. Save enough effort for the closing rise.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <figcaption class="landing-feature-caption landing-mobile-only"><svg class="landing-caption-arrow" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M27 25 C 21 23 12 19 10 9 C 9.6 6.5 10 4.8 11.5 3.5"/><path d="M6.5 9 L 11.5 3.5 L 15.5 9"/></svg>See where the climbs arrive before you reach the start line.</figcaption>
-                    </figure>
-                </section>
+										<div class="pacey-course-insight">
+											<p
+												class="pacey-course-insight-label">
+												Pacey coach's read on this
+												course
+											</p>
+											<p
+												class="pacey-course-insight-text landing-desktop-only">
+												Most of the route is flat, so
+												the early kilometres give you
+												room to settle into a controlled
+												pace. About half of the climbing
+												comes in the final third, when
+												tired legs have less to spare.
+												Keep some effort in reserve
+												rather than trying to build a
+												large lead early. On the late
+												rise, hold a steady effort and
+												let the pace ease if you need
+												to.
+											</p>
+											<p
+												class="pacey-course-insight-text landing-mobile-only">
+												Mostly flat, with much of the
+												climbing late. Save enough
+												effort for the closing rise.
+											</p>
+										</div>
+									</div>
+								</div>
+								<figcaption
+									class="landing-feature-caption landing-caption--course ann ann-n ann-no-mark landing-mobile-only">
+									See where the climbs arrive before you reach
+									the start line.
+								</figcaption>
+							</figure>
+						</section>
 
-                <!-- The Big Picture — the app's overall-insight card: verdict,
+						<!-- The Big Picture — the app's overall-insight card: verdict,
                      summary, top strength, biggest gap and the next focus, in
                      the same words the read would carry. -->
-                <section class="landing-section" id="picture" aria-labelledby="landing-picture-title">
-                    <h2 class="landing-section-title" id="landing-picture-title">The Big Picture</h2>
-                    <p class="landing-section-text">Bring the training, recovery and course into one clear view of your race goal. The Pacey coach highlights what is already working, the main gap to address and where to focus next.</p>
+						<section
+							class="landing-section"
+							id="picture"
+							aria-labelledby="landing-picture-title">
+							<h2
+								class="landing-section-title"
+								id="landing-picture-title">
+								The Big Picture
+							</h2>
+							<p class="landing-section-text">
+								Bring the training, recovery and course into one
+								clear view of your race goal. The Pacey coach
+								highlights what is already working, the main gap
+								to address and where to focus next.
+							</p>
 
-                    <figure class="landing-feature-exhibit">
-                        <div class="pacey-overall-insight">
-                            <div class="pacey-overall-insight-header">
-                                <div class="pacey-overall-insight-verdict">A strong base, with one thing to watch</div>
-                            </div>
-                            <p class="pacey-overall-insight-summary landing-desktop-only">Your longer runs show you can cover the distance and run near your target pace. The main question is how much effort that pace costs when you are tired. The late climbing makes it worth practising a controlled start, so you still have something left for the closing kilometres.</p>
-                            <p class="pacey-overall-insight-summary landing-mobile-only">You have the endurance for the distance. The next step is holding goal pace with less effort, especially on the late climb.</p>
-                            <div class="pacey-overall-insight-takeaways">
-                                <div class="pacey-overall-insight-takeaway pacey-overall-insight-takeaway--strength">
-                                    <span class="pacey-overall-insight-takeaway-label">Top strength</span>
-                                    <span class="pacey-overall-insight-takeaway-name">Aerobic Endurance</span>
-                                    <p class="pacey-overall-insight-takeaway-note">A full-length easy run shows the distance is within reach. Your longer, quicker sessions add useful practice at keeping the effort going.</p>
-                                </div>
-                                <div class="pacey-overall-insight-takeaway pacey-overall-insight-takeaway--gap">
-                                    <span class="pacey-overall-insight-takeaway-label">Biggest gap</span>
-                                    <span class="pacey-overall-insight-takeaway-name">Lactate Threshold</span>
-                                    <p class="pacey-overall-insight-takeaway-note">Goal pace is there, but the harder efforts still take a lot out of you. The next step is holding that pace with more control, not simply adding more speed.</p>
-                                </div>
-                            </div>
-                            <div class="pacey-overall-insight-focus landing-desktop-only">
-                                <span class="pacey-overall-insight-focus-label">What to focus on next</span>
-                                <p class="pacey-overall-insight-focus-text">Practise a controlled effort near goal pace, without starting too hard. Keep the surrounding easy days relaxed so you can absorb the work.</p>
-                            </div>
-                        </div>
-                        <figcaption class="landing-feature-caption landing-mobile-only">Turn the numbers into a clear training focus.</figcaption>
-                    </figure>
-                    </section>
-                </div>
-            </section>
+							<figure class="landing-feature-exhibit">
+								<div class="pacey-overall-insight">
+									<div class="pacey-overall-insight-header">
+										<div
+											class="pacey-overall-insight-verdict">
+											A strong base, with one thing to
+											watch
+										</div>
+									</div>
+									<p
+										class="pacey-overall-insight-summary landing-desktop-only">
+										Your longer runs show you can cover the
+										distance and run near your target pace.
+										The main question is how much effort
+										that pace costs when you are tired. The
+										late climbing makes it worth practising
+										a controlled start, so you still have
+										something left for the closing
+										kilometres.
+									</p>
+									<p
+										class="pacey-overall-insight-summary landing-mobile-only">
+										You have the endurance for the distance.
+										The next step is holding goal pace with
+										less effort, especially on the late
+										climb.
+									</p>
+									<div
+										class="pacey-overall-insight-takeaways">
+										<div
+											class="pacey-overall-insight-takeaway pacey-overall-insight-takeaway--strength">
+											<span
+												class="pacey-overall-insight-takeaway-label"
+												>Top strength</span
+											>
+											<span
+												class="pacey-overall-insight-takeaway-name"
+												>Aerobic Endurance</span
+											>
+											<p
+												class="pacey-overall-insight-takeaway-note">
+												A full-length easy run shows the
+												distance is within reach. Your
+												longer, quicker sessions add
+												useful practice at keeping the
+												effort going.
+											</p>
+										</div>
+										<div
+											class="pacey-overall-insight-takeaway pacey-overall-insight-takeaway--gap">
+											<span
+												class="pacey-overall-insight-takeaway-label"
+												>Biggest gap</span
+											>
+											<span
+												class="pacey-overall-insight-takeaway-name"
+												>Lactate Threshold</span
+											>
+											<p
+												class="pacey-overall-insight-takeaway-note">
+												Goal pace is there, but the
+												harder efforts still take a lot
+												out of you. The next step is
+												holding that pace with more
+												control, not simply adding more
+												speed.
+											</p>
+										</div>
+									</div>
+									<div
+										class="pacey-overall-insight-focus landing-desktop-only">
+										<span
+											class="pacey-overall-insight-focus-label"
+											>What to focus on next</span
+										>
+										<p
+											class="pacey-overall-insight-focus-text">
+											Practise a controlled effort near
+											goal pace, without starting too
+											hard. Keep the surrounding easy days
+											relaxed so you can absorb the work.
+										</p>
+									</div>
+								</div>
+								<figcaption
+									class="landing-feature-caption landing-caption--picture ann ann-ne ann-no-mark landing-mobile-only">
+									Turn the numbers into a clear training
+									focus.
+								</figcaption>
+							</figure>
+						</section>
+					</div>
+				</section>
 
-            <!-- Training Plan — the plan calendar's own week agenda, in the
+				<!-- Training Plan — the plan calendar's own week agenda, in the
                  app's day-row layout. Read-only here: no drag handles, no
                  edit or sync affordances. -->
-            <section class="landing-section" id="plan" aria-labelledby="landing-plan-title">
-                <div class="landing-split">
-                    <div class="landing-split-copy">
-                        <h2 class="landing-section-title" id="landing-plan-title">Marathon training</h2>
-                        <p class="landing-section-text">Build toward your marathon goal with a training plan shaped by your recent Garmin training and recovery data. Pacey uses the biggest gap in your readiness assessment to guide what to work on next. Review a block of up to 26 weeks, with only the current calendar week available to sync to Garmin when you choose.</p>
-                    </div>
+				<section
+					class="landing-section"
+					id="plan"
+					aria-labelledby="landing-plan-title">
+					<div class="landing-split">
+						<div class="landing-split-copy">
+							<h2
+								class="landing-section-title"
+								id="landing-plan-title">
+								Marathon training
+							</h2>
+							<p class="landing-section-text">
+								Build toward your marathon goal with a training
+								plan shaped by your recent Garmin training and
+								recovery data. Pacey uses the biggest gap in
+								your readiness assessment to guide what to work
+								on next. Review a block of up to 26 weeks, with
+								only the current calendar week available to sync
+								to Garmin when you choose.
+							</p>
+						</div>
 
-                    <figure class="landing-feature-exhibit">
-                        <div class="pacey-cal-week-block">
-                            <div class="pacey-cal-week-head">
-                                <span class="pacey-cal-week-title landing-desktop-only">This week</span>
-                                <!-- Phones see a deliberate three-day slice below —
+						<figure class="landing-feature-exhibit">
+							<div class="pacey-cal-week-block">
+								<div class="pacey-cal-week-head">
+									<span
+										class="pacey-cal-week-title landing-desktop-only"
+										>This week</span
+									>
+									<!-- Phones see a deliberate three-day slice below —
                                      the heading names it honestly. -->
-                                <span class="pacey-cal-week-title landing-mobile-only">A few days in your plan</span>
-                            </div>
-                            <div class="pacey-cal-row" data-sample-day="0">
-                                <div class="pacey-cal-date"><span class="pacey-cal-date-dow">Mon</span></div>
-                                <div class="pacey-cal-cards">
-                                    <div class="pacey-cal-card pacey-cal-card--rest">
-                                        <span class="pacey-cal-rest-label">Rest day</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pacey-cal-row" data-sample-day="1">
-                                <div class="pacey-cal-date"><span class="pacey-cal-date-dow">Tue</span></div>
-                                <div class="pacey-cal-cards">
-                                    <div class="pacey-cal-card pacey-cal-card--suggested">
-                                        <div class="pacey-cal-card-body">
-                                            <div class="pacey-cal-card-title-row">
-                                                <span class="pacey-cal-card-title">6 x 400m</span>
-                                                <span class="pacey-run-tag pacey-run-tag--speedwork">Speedwork</span>
-                                            </div>
-                                            <div class="pacey-cal-card-row">
-                                                <span class="pacey-cal-card-meta">6 km · 5:35/km</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pacey-cal-row" data-sample-day="2">
-                                <div class="pacey-cal-date"><span class="pacey-cal-date-dow">Wed</span></div>
-                                <div class="pacey-cal-cards">
-                                    <div class="pacey-cal-card pacey-cal-card--rest">
-                                        <span class="pacey-cal-rest-label">Rest day</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pacey-cal-row" data-sample-day="3">
-                                <div class="pacey-cal-date"><span class="pacey-cal-date-dow">Thu</span></div>
-                                <div class="pacey-cal-cards">
-                                    <div class="pacey-cal-card pacey-cal-card--suggested">
-                                        <div class="pacey-cal-card-body">
-                                            <div class="pacey-cal-card-title-row">
-                                                <span class="pacey-cal-card-title">Easy 6km</span>
-                                                <span class="pacey-run-tag pacey-run-tag--easy">Easy</span>
-                                            </div>
-                                            <div class="pacey-cal-card-row">
-                                                <span class="pacey-cal-card-meta">6 km · 6:30/km</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pacey-cal-row" data-sample-day="4">
-                                <div class="pacey-cal-date"><span class="pacey-cal-date-dow">Fri</span></div>
-                                <div class="pacey-cal-cards">
-                                    <div class="pacey-cal-card pacey-cal-card--rest">
-                                        <span class="pacey-cal-rest-label">Rest day</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pacey-cal-row" data-sample-day="5">
-                                <div class="pacey-cal-date"><span class="pacey-cal-date-dow">Sat</span></div>
-                                <div class="pacey-cal-cards">
-                                    <div class="pacey-cal-card pacey-cal-card--suggested">
-                                        <div class="pacey-cal-card-body">
-                                            <div class="pacey-cal-card-title-row">
-                                                <span class="pacey-cal-card-title">Long 16km</span>
-                                                <span class="pacey-run-tag pacey-run-tag--lsd">Long Run</span>
-                                            </div>
-                                            <div class="pacey-cal-card-row">
-                                                <span class="pacey-cal-card-meta">16 km · 6:25/km</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pacey-cal-row" data-sample-day="6">
-                                <div class="pacey-cal-date"><span class="pacey-cal-date-dow">Sun</span></div>
-                                <div class="pacey-cal-cards">
-                                    <div class="pacey-cal-card pacey-cal-card--rest">
-                                        <span class="pacey-cal-rest-label">Rest day</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <figcaption class="landing-feature-caption landing-mobile-only">Know what each run is for, with recovery built in.</figcaption>
-                    </figure>
-                </div>
-            </section>
+									<span
+										class="pacey-cal-week-title landing-mobile-only"
+										>A few days in your plan</span
+									>
+								</div>
+								<div class="pacey-cal-row" data-sample-day="0">
+									<div class="pacey-cal-date">
+										<span class="pacey-cal-date-dow"
+											>Mon</span
+										>
+									</div>
+									<div class="pacey-cal-cards">
+										<div
+											class="pacey-cal-card pacey-cal-card--rest">
+											<span class="pacey-cal-rest-label"
+												>Rest day</span
+											>
+										</div>
+									</div>
+								</div>
+								<div class="pacey-cal-row" data-sample-day="1">
+									<div class="pacey-cal-date">
+										<span class="pacey-cal-date-dow"
+											>Tue</span
+										>
+									</div>
+									<div class="pacey-cal-cards">
+										<div
+											class="pacey-cal-card pacey-cal-card--suggested">
+											<div class="pacey-cal-card-body">
+												<div
+													class="pacey-cal-card-title-row">
+													<span
+														class="pacey-cal-card-title"
+														>6 x 400m</span
+													>
+													<span
+														class="pacey-run-tag pacey-run-tag--speedwork"
+														>Speedwork</span
+													>
+												</div>
+												<div class="pacey-cal-card-row">
+													<span
+														class="pacey-cal-card-meta"
+														>6 km · 5:35/km</span
+													>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="pacey-cal-row" data-sample-day="2">
+									<div class="pacey-cal-date">
+										<span class="pacey-cal-date-dow"
+											>Wed</span
+										>
+									</div>
+									<div class="pacey-cal-cards">
+										<div
+											class="pacey-cal-card pacey-cal-card--rest">
+											<span class="pacey-cal-rest-label"
+												>Rest day</span
+											>
+										</div>
+									</div>
+								</div>
+								<div class="pacey-cal-row" data-sample-day="3">
+									<div class="pacey-cal-date">
+										<span class="pacey-cal-date-dow"
+											>Thu</span
+										>
+									</div>
+									<div class="pacey-cal-cards">
+										<div
+											class="pacey-cal-card pacey-cal-card--suggested">
+											<div class="pacey-cal-card-body">
+												<div
+													class="pacey-cal-card-title-row">
+													<span
+														class="pacey-cal-card-title"
+														>Easy 6km</span
+													>
+													<span
+														class="pacey-run-tag pacey-run-tag--easy"
+														>Easy</span
+													>
+												</div>
+												<div class="pacey-cal-card-row">
+													<span
+														class="pacey-cal-card-meta"
+														>6 km · 6:30/km</span
+													>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="pacey-cal-row" data-sample-day="4">
+									<div class="pacey-cal-date">
+										<span class="pacey-cal-date-dow"
+											>Fri</span
+										>
+									</div>
+									<div class="pacey-cal-cards">
+										<div
+											class="pacey-cal-card pacey-cal-card--rest">
+											<span class="pacey-cal-rest-label"
+												>Rest day</span
+											>
+										</div>
+									</div>
+								</div>
+								<div class="pacey-cal-row" data-sample-day="5">
+									<div class="pacey-cal-date">
+										<span class="pacey-cal-date-dow"
+											>Sat</span
+										>
+									</div>
+									<div class="pacey-cal-cards">
+										<div
+											class="pacey-cal-card pacey-cal-card--suggested">
+											<div class="pacey-cal-card-body">
+												<div
+													class="pacey-cal-card-title-row">
+													<span
+														class="pacey-cal-card-title"
+														>Long 16km</span
+													>
+													<span
+														class="pacey-run-tag pacey-run-tag--lsd"
+														>Long Run</span
+													>
+												</div>
+												<div class="pacey-cal-card-row">
+													<span
+														class="pacey-cal-card-meta"
+														>16 km · 6:25/km</span
+													>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="pacey-cal-row" data-sample-day="6">
+									<div class="pacey-cal-date">
+										<span class="pacey-cal-date-dow"
+											>Sun</span
+										>
+									</div>
+									<div class="pacey-cal-cards">
+										<div
+											class="pacey-cal-card pacey-cal-card--rest">
+											<span class="pacey-cal-rest-label"
+												>Rest day</span
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+							<figcaption
+								class="landing-feature-caption landing-caption--plan ann ann-nw ann-no-mark landing-mobile-only">
+								Know what each run is for, with recovery built
+								in.
+							</figcaption>
+						</figure>
+					</div>
+				</section>
 
-            <!-- Recap — the app's own recap presentation with the Brooks
+				<!-- Recap — the app's own recap presentation with the Brooks
                  result the runner supplied: the goal as set against the
                  race as run. -->
-            <section class="landing-section" id="recap" aria-labelledby="landing-recap-title">
-                <h2 class="landing-section-title" id="landing-recap-title">Race Recap</h2>
-                <p class="landing-section-text">Compare the goal you set with the race you ran. Your result and saved readiness review stay together in Past Races.</p>
+				<section
+					class="landing-section"
+					id="recap"
+					aria-labelledby="landing-recap-title">
+					<h2 class="landing-section-title" id="landing-recap-title">
+						Race Recap
+					</h2>
+					<p class="landing-section-text">
+						Compare the goal you set with the race you ran. Your
+						result and saved readiness review stay together in Past
+						Races.
+					</p>
 
-                <figure class="landing-feature-exhibit">
-                    <div class="pacey-race-recap landing-recap">
-                        <div class="pacey-race-recap-top">
-                            <div class="pacey-race-recap-id">
-                                <span class="pacey-race-recap-name">Brooks Half Marathon</span>
-                                <span class="pacey-race-recap-verdict is-achieved">Goal achieved — 0:12 under target</span>
-                            </div>
-                        </div>
-                        <!-- Goal and result side by side, as the app renders them. -->
-                        <div class="pacey-race-recap-figures">
-                            <div class="pacey-race-recap-group">
-                                <span class="pacey-race-recap-group-label">The goal</span>
-                                <div class="pacey-race-recap-stats">
-                                    <div class="pacey-race-recap-stat">
-                                        <span class="pacey-race-recap-stat-label">Date</span>
-                                        <span class="pacey-race-recap-stat-value">Sep 20, 2026</span>
-                                    </div>
-                                    <div class="pacey-race-recap-stat">
-                                        <span class="pacey-race-recap-stat-label">Distance</span>
-                                        <span class="pacey-race-recap-stat-value">21.1 km</span>
-                                    </div>
-                                    <div class="pacey-race-recap-stat">
-                                        <span class="pacey-race-recap-stat-label">Target time</span>
-                                        <span class="pacey-race-recap-stat-value">01:50:00</span>
-                                    </div>
-                                    <div class="pacey-race-recap-stat">
-                                        <span class="pacey-race-recap-stat-label">Target pace</span>
-                                        <span class="pacey-race-recap-stat-value">5:13 /km</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pacey-race-recap-group">
-                                <span class="pacey-race-recap-group-label">The result</span>
-                                <div class="pacey-race-recap-stats">
-                                    <div class="pacey-race-recap-stat">
-                                        <span class="pacey-race-recap-stat-label">Finish time</span>
-                                        <span class="pacey-race-recap-stat-value">1:49:48</span>
-                                    </div>
-                                    <div class="pacey-race-recap-stat">
-                                        <span class="pacey-race-recap-stat-label">Average pace</span>
-                                        <span class="pacey-race-recap-stat-value">5:11 /km</span>
-                                    </div>
-                                    <div class="pacey-race-recap-stat">
-                                        <span class="pacey-race-recap-stat-label">Average HR</span>
-                                        <span class="pacey-race-recap-stat-value">176 bpm</span>
-                                    </div>
-                                    <div class="pacey-race-recap-stat">
-                                        <span class="pacey-race-recap-stat-label">Elevation gain</span>
-                                        <span class="pacey-race-recap-stat-value">73 m</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- The coach's read closes the recap, same as in the app —
+					<figure class="landing-feature-exhibit">
+						<div class="pacey-race-recap landing-recap">
+							<div class="pacey-race-recap-top">
+								<div class="pacey-race-recap-id">
+									<span class="pacey-race-recap-name"
+										>Brooks Half Marathon</span
+									>
+									<span
+										class="pacey-race-recap-verdict is-achieved"
+										>Goal achieved — 0:12 under target</span
+									>
+								</div>
+							</div>
+							<!-- Goal and result side by side, as the app renders them. -->
+							<div class="pacey-race-recap-figures">
+								<div class="pacey-race-recap-group">
+									<span class="pacey-race-recap-group-label"
+										>The goal</span
+									>
+									<div class="pacey-race-recap-stats">
+										<div class="pacey-race-recap-stat">
+											<span
+												class="pacey-race-recap-stat-label"
+												>Date</span
+											>
+											<span
+												class="pacey-race-recap-stat-value"
+												>Sep 20, 2026</span
+											>
+										</div>
+										<div class="pacey-race-recap-stat">
+											<span
+												class="pacey-race-recap-stat-label"
+												>Distance</span
+											>
+											<span
+												class="pacey-race-recap-stat-value"
+												>21.1 km</span
+											>
+										</div>
+										<div class="pacey-race-recap-stat">
+											<span
+												class="pacey-race-recap-stat-label"
+												>Target time</span
+											>
+											<span
+												class="pacey-race-recap-stat-value"
+												>01:50:00</span
+											>
+										</div>
+										<div class="pacey-race-recap-stat">
+											<span
+												class="pacey-race-recap-stat-label"
+												>Target pace</span
+											>
+											<span
+												class="pacey-race-recap-stat-value"
+												>5:13 /km</span
+											>
+										</div>
+									</div>
+								</div>
+								<div class="pacey-race-recap-group">
+									<span class="pacey-race-recap-group-label"
+										>The result</span
+									>
+									<div class="pacey-race-recap-stats">
+										<div class="pacey-race-recap-stat">
+											<span
+												class="pacey-race-recap-stat-label"
+												>Finish time</span
+											>
+											<span
+												class="pacey-race-recap-stat-value"
+												>1:49:48</span
+											>
+										</div>
+										<div class="pacey-race-recap-stat">
+											<span
+												class="pacey-race-recap-stat-label"
+												>Average pace</span
+											>
+											<span
+												class="pacey-race-recap-stat-value"
+												>5:11 /km</span
+											>
+										</div>
+										<div class="pacey-race-recap-stat">
+											<span
+												class="pacey-race-recap-stat-label"
+												>Average HR</span
+											>
+											<span
+												class="pacey-race-recap-stat-value"
+												>176 bpm</span
+											>
+										</div>
+										<div class="pacey-race-recap-stat">
+											<span
+												class="pacey-race-recap-stat-label"
+												>Elevation gain</span
+											>
+											<span
+												class="pacey-race-recap-stat-value"
+												>73 m</span
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- The coach's read closes the recap, same as in the app —
                              the prose that turns the figures into the story. -->
-                        <div class="pacey-race-recap-read">
-                            <span class="pacey-race-recap-group-label">The coach's read</span>
-                            <div class="pacey-race-recap-prose">You finished Brooks Half Marathon in 1:49:48, beating your 1:50:00 target by 12 seconds. Your longer runs and faster sessions gave you the distance and pace you needed, and you brought them together on race day. It is a close margin, but the goal was achieved — a result worth recognising.</div>
-                        </div>
-                    </div>
-                    <figcaption class="landing-feature-caption landing-mobile-only">Bring your race result back to the goal you set.</figcaption>
-                </figure>
-            </section>
+							<div class="pacey-race-recap-read">
+								<span class="pacey-race-recap-group-label"
+									>The coach's read</span
+								>
+								<div class="pacey-race-recap-prose">
+									You finished Brooks Half Marathon in
+									1:49:48, beating your 1:50:00 target by 12
+									seconds. Your longer runs and faster
+									sessions gave you the distance and pace you
+									needed, and you brought them together on
+									race day. It is a close margin, but the goal
+									was achieved — a result worth recognising.
+								</div>
+							</div>
+						</div>
+						<figcaption
+							class="landing-feature-caption landing-caption--recap ann ann-n ann-no-mark landing-mobile-only">
+							Bring your race result back to the goal you set.
+						</figcaption>
+					</figure>
+				</section>
 
-            <!-- ===== Questions — plain answers to the things people ask
+				<!-- ===== Questions — plain answers to the things people ask
                  before signing up. The JSON-LD FAQPage in the head mirrors
                  these verbatim. ===== -->
-            <section class="landing-section" id="questions" aria-labelledby="landing-questions-title">
-                <!-- The heavier stroke this heading used to carry inline now
+				<section
+					class="landing-section"
+					id="questions"
+					aria-labelledby="landing-questions-title">
+					<!-- The heavier stroke this heading used to carry inline now
                      lives on .landing-section-title::after, alongside every
                      other heading's — an inline background on the heading
                      itself would draw a second line under the first. -->
-                <h2 class="landing-section-title" id="landing-questions-title">Questions before you start</h2>
-                <!-- Each answer is a disclosure panel that starts open in
+					<h2
+						class="landing-section-title"
+						id="landing-questions-title">
+						Questions before you start
+					</h2>
+					<!-- Each answer is a disclosure panel that starts open in
                      the markup — no-JS visitors and crawlers read every
                      answer. pacey-landing.js then wraps each question in a
                      real button and collapses the panels into an accordion.
                      The question and answer text stays identical to the
                      FAQPage schema in the head. -->
-                <dl class="landing-questions">
-                    <div class="landing-question">
-                        <dt class="landing-question-term" id="landing-q1">What is Pacey?</dt>
-                        <dd class="landing-question-answer is-open" id="landing-q1-answer" aria-labelledby="landing-q1">
-                            <div class="landing-question-answer-inner">
-                                <p class="landing-question-answer-copy">Pacey is a race-readiness companion. It brings Garmin training and recovery data, your race goal and the course together to explain what is working, what needs attention and how to prepare for your next race.</p>
-                            </div>
-                        </dd>
-                    </div>
-                    <div class="landing-question">
-                        <dt class="landing-question-term" id="landing-q2">Do I need a Garmin account?</dt>
-                        <dd class="landing-question-answer is-open" id="landing-q2-answer" aria-labelledby="landing-q2">
-                            <div class="landing-question-answer-inner">
-                                <p class="landing-question-answer-copy">Connect your Garmin account to use your own training data, or explore the demo with sample data. Pacey uses <a href="https://github.com/cyberjunky/python-garminconnect" target="_blank" rel="noopener">python-garminconnect</a>, an open-source project on GitHub, to load your Garmin data.</p>
-                            </div>
-                        </dd>
-                    </div>
-                    <div class="landing-question">
-                        <dt class="landing-question-term" id="landing-q3">How does race readiness relate to my goal time?</dt>
-                        <dd class="landing-question-answer is-open" id="landing-q3-answer" aria-labelledby="landing-q3">
-                            <div class="landing-question-answer-inner">
-                                <p class="landing-question-answer-copy">Race readiness compares your current fitness and recent activities with the goal time you set. It constantly highlights your strengths, the areas to develop and what to focus on before race day.</p>
-                            </div>
-                        </dd>
-                    </div>
-                    <div class="landing-question">
-                        <dt class="landing-question-term" id="landing-q4">How does the training plan reach Garmin?</dt>
-                        <dd class="landing-question-answer is-open" id="landing-q4-answer" aria-labelledby="landing-q4">
-                            <div class="landing-question-answer-inner">
-                                <p class="landing-question-answer-copy">Pacey shows a training block of up to 26 weeks. You can review the suggested workouts, then sync the current calendar week’s suggested workouts to your Garmin watch.</p>
-                            </div>
-                        </dd>
-                    </div>
-                    <div class="landing-question">
-                        <dt class="landing-question-term" id="landing-q5">Can I upload my own race course for analysis?</dt>
-                        <dd class="landing-question-answer is-open" id="landing-q5-answer" aria-labelledby="landing-q5">
-                            <div class="landing-question-answer-inner">
-                                <p class="landing-question-answer-copy">Yes. You can upload a GPX file to view the route and elevation profile. The Pacey coach will study the route, consider the climbs and where they occur when explaining race preparation.</p>
-                            </div>
-                        </dd>
-                    </div>
-                    <!-- These two answer the questions a Garmin runner asks
+					<dl class="landing-questions">
+						<div class="landing-question">
+							<dt class="landing-question-term" id="landing-q1">
+								What is Pacey?
+							</dt>
+							<dd
+								class="landing-question-answer is-open"
+								id="landing-q1-answer"
+								aria-labelledby="landing-q1">
+								<div class="landing-question-answer-inner">
+									<p class="landing-question-answer-copy">
+										Pacey is a race-readiness companion. It
+										brings Garmin training and recovery
+										data, your race goal and the course
+										together to explain what is working,
+										what needs attention and how to prepare
+										for your next race.
+									</p>
+								</div>
+							</dd>
+						</div>
+						<div class="landing-question">
+							<dt class="landing-question-term" id="landing-q2">
+								Do I need a Garmin account?
+							</dt>
+							<dd
+								class="landing-question-answer is-open"
+								id="landing-q2-answer"
+								aria-labelledby="landing-q2">
+								<div class="landing-question-answer-inner">
+									<p class="landing-question-answer-copy">
+										Connect your Garmin account to use your
+										own training data, or explore the demo
+										with sample data. Pacey uses
+										<a
+											href="https://github.com/cyberjunky/python-garminconnect"
+											target="_blank"
+											rel="noopener"
+											>python-garminconnect</a
+										>, an open-source project on GitHub, to
+										load your Garmin data.
+									</p>
+								</div>
+							</dd>
+						</div>
+						<div class="landing-question">
+							<dt class="landing-question-term" id="landing-q3">
+								How does race readiness relate to my goal time?
+							</dt>
+							<dd
+								class="landing-question-answer is-open"
+								id="landing-q3-answer"
+								aria-labelledby="landing-q3">
+								<div class="landing-question-answer-inner">
+									<p class="landing-question-answer-copy">
+										Race readiness compares your current
+										fitness and recent activities with the
+										goal time you set. It constantly
+										highlights your strengths, the areas to
+										develop and what to focus on before race
+										day.
+									</p>
+								</div>
+							</dd>
+						</div>
+						<div class="landing-question">
+							<dt class="landing-question-term" id="landing-q4">
+								How does the training plan reach Garmin?
+							</dt>
+							<dd
+								class="landing-question-answer is-open"
+								id="landing-q4-answer"
+								aria-labelledby="landing-q4">
+								<div class="landing-question-answer-inner">
+									<p class="landing-question-answer-copy">
+										Pacey shows a training block of up to 26
+										weeks. You can review the suggested
+										workouts, then sync the current calendar
+										week’s suggested workouts to your Garmin
+										watch.
+									</p>
+								</div>
+							</dd>
+						</div>
+						<div class="landing-question">
+							<dt class="landing-question-term" id="landing-q5">
+								Can I upload my own race course for analysis?
+							</dt>
+							<dd
+								class="landing-question-answer is-open"
+								id="landing-q5-answer"
+								aria-labelledby="landing-q5">
+								<div class="landing-question-answer-inner">
+									<p class="landing-question-answer-copy">
+										Yes. You can upload a GPX file to view
+										the route and elevation profile. The
+										Pacey coach will study the route,
+										consider the climbs and where they occur
+										when explaining race preparation.
+									</p>
+								</div>
+							</dd>
+						</div>
+						<!-- These two answer the questions a Garmin runner asks
                          next: Pacey's readiness is judged against your chosen
                          goal time, not Garmin's same-day Training Readiness,
                          and the review assesses the goal — it never predicts
                          a finish time. -->
-                    <div class="landing-question">
-                        <dt class="landing-question-term" id="landing-q6">How is Pacey different from Garmin Training Readiness?</dt>
-                        <dd class="landing-question-answer is-open" id="landing-q6-answer" aria-labelledby="landing-q6">
-                            <div class="landing-question-answer-inner">
-                                <p class="landing-question-answer-copy">Garmin Training Readiness helps you judge how ready you are to train today. Pacey compares your recent running fitness with the race goal time you choose, highlights areas to develop and uses the biggest gap to shape your training plan. Pacey is an independent product, not an official Garmin service.</p>
-                            </div>
-                        </dd>
-                    </div>
-                    <div class="landing-question">
-                        <dt class="landing-question-term" id="landing-q7">Does Pacey predict my marathon finish time?</dt>
-                        <dd class="landing-question-answer is-open" id="landing-q7-answer" aria-labelledby="landing-q7">
-                            <div class="landing-question-answer-inner">
-                                <p class="landing-question-answer-copy">No. Pacey assesses your readiness against the goal time you set; it does not predict a finish time or guarantee a race result. Your readiness review explains the training evidence and what to work on before race day.</p>
-                            </div>
-                        </dd>
-                    </div>
-                </dl>
-            </section>
-        </div>
+						<div class="landing-question">
+							<dt class="landing-question-term" id="landing-q6">
+								How is Pacey different from Garmin Training
+								Readiness?
+							</dt>
+							<dd
+								class="landing-question-answer is-open"
+								id="landing-q6-answer"
+								aria-labelledby="landing-q6">
+								<div class="landing-question-answer-inner">
+									<p class="landing-question-answer-copy">
+										Garmin Training Readiness helps you
+										judge how ready you are to train today.
+										Pacey compares your recent running
+										fitness with the race goal time you
+										choose, highlights areas to develop and
+										uses the biggest gap to shape your
+										training plan. Pacey is an independent
+										product, not an official Garmin service.
+									</p>
+								</div>
+							</dd>
+						</div>
+						<div class="landing-question">
+							<dt class="landing-question-term" id="landing-q7">
+								Does Pacey predict my marathon finish time?
+							</dt>
+							<dd
+								class="landing-question-answer is-open"
+								id="landing-q7-answer"
+								aria-labelledby="landing-q7">
+								<div class="landing-question-answer-inner">
+									<p class="landing-question-answer-copy">
+										No. Pacey assesses your readiness
+										against the goal time you set; it does
+										not predict a finish time or guarantee a
+										race result. Your readiness review
+										explains the training evidence and what
+										to work on before race day.
+									</p>
+								</div>
+							</dd>
+						</div>
+					</dl>
+				</section>
+			</div>
 
-        <!-- ===== Final call + the honest footnotes ===== -->
-        <section class="landing-final" aria-labelledby="landing-final-title">
-            <h2 class="landing-section-title" id="landing-final-title">Ready for your next race?</h2>
-            <div class="landing-hero-actions">
-                <a class="landing-btn landing-btn--primary" href="/pacey/app/?entry=login">Open Pacey</a>
-                <a class="landing-btn landing-btn--secondary" href="/pacey/demo/">Try the demo</a>
-            </div>
-            <div class="landing-notes">
-                <p class="landing-note">We use <a href="https://github.com/cyberjunky/python-garminconnect" target="_blank" rel="noopener">python-garminconnect</a> to talk to Garmin.</p>
-                <p class="landing-note">Your credentials are used to log in; the password isn’t saved.</p>
-                <p class="landing-note">We stay signed in so Pacey can load your runs and add workouts when you ask.</p>
-            </div>
-        </section>
-    </main>
+			<!-- ===== Final call + the honest footnotes ===== -->
+			<section
+				class="landing-final"
+				aria-labelledby="landing-final-title">
+				<h2 class="landing-section-title" id="landing-final-title">
+					Ready for your next race?
+				</h2>
+				<div class="landing-hero-actions">
+					<a
+						class="landing-btn landing-btn--primary"
+						href="/pacey/app/?entry=login"
+						>Open Pacey</a
+					>
+					<a
+						class="landing-btn landing-btn--secondary"
+						href="/pacey/demo/"
+						>Try the demo</a
+					>
+				</div>
+				<div class="landing-notes">
+					<p class="landing-note">
+						We use
+						<a
+							href="https://github.com/cyberjunky/python-garminconnect"
+							target="_blank"
+							rel="noopener"
+							>python-garminconnect</a
+						>
+						to talk to Garmin.
+					</p>
+					<p class="landing-note">
+						Your credentials are used to log in; the password isn’t
+						saved.
+					</p>
+					<p class="landing-note">
+						We stay signed in so Pacey can load your runs and add
+						workouts when you ask.
+					</p>
+				</div>
+			</section>
+		</main>
 
-    <footer class="landing-footer">
-        <nav class="landing-footer-links" aria-label="Footer">
-            <a class="landing-footer-link" href="/projects.html">Projects</a>
-            <a class="landing-footer-link" href="/">terrancehah.com</a>
-        </nav>
-        <p class="landing-footer-credit">Made with <span class="pacey-app-footer-heart">♥</span> by Terrance</p>
-    </footer>
+		<footer class="landing-footer">
+			<nav class="landing-footer-links" aria-label="Footer">
+				<a class="landing-footer-link" href="/projects.html"
+					>Projects</a
+				>
+				<a class="landing-footer-link" href="/">terrancehah.com</a>
+			</nav>
+			<p class="landing-footer-credit">
+				Made with <span class="pacey-app-footer-heart">♥</span> by
+				Terrance
+			</p>
+		</footer>
 
-    <!-- The Brooks race example + the shared demo fixture and radar
+		<!-- The Brooks race example + the shared demo fixture and radar
          presentation, then the landing script (theme toggle, fixture sync,
          read-only radar). Loaded after Chart.js so the radar mounts when
          the library is there and stays as the printed scores when it is
          not. -->
-    <script src="/pacey/pacey-brooks-sample.js" defer></script>
-    <script src="/pacey/pacey-sample.js" defer></script>
-    <script src="/pacey/pacey-radar.js" defer></script>
-    <!-- MapLibre renders the course basemap over OpenFreeMap tiles — the
+		<script src="/pacey/pacey-brooks-sample.js" defer></script>
+		<script src="/pacey/pacey-sample.js" defer></script>
+		<script src="/pacey/pacey-radar.js" defer></script>
+		<!-- MapLibre renders the course basemap over OpenFreeMap tiles — the
          same CDN build as the app; deferred so the drawn trace is never
          blocked waiting on it. -->
-    <script defer src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-    <script src="/pacey/pacey-landing.js" defer></script>
-</body>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+		<script src="/pacey/pacey-landing.js" defer></script>
+	</body>
 </html>
