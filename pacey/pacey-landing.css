@@ -1377,7 +1377,7 @@
 	}
 
 	/* Exhibit captions sit on the cork beneath the paper — Caveat, board
-       ink, ~70% wide like a marginal note — so each note reads as the
+       ink, ~80% wide like a marginal note — so each note reads as the
        exhibit's label, not a card footer. neat-annotations supplies the
        arrows, but with deliberate per-caption variation instead of six
        identical marks: bent northwest/northeast arrows sit in the side
@@ -1386,17 +1386,25 @@
        the arrow outside the annotated target, but here the caption IS
        the label, so each arrow is flipped to flank it. The real
        figcaption text is the accessible label — no data-note and no
-       generated ::after duplicate. Per-caption width and arrow tilt are
-       custom-prop driven so each note wanders a little, like a sketch. */
+       generated ::after duplicate. Per-caption width, caption tilt and
+       arrow tilt are custom-prop driven so each note wanders a little,
+       like a sketch. */
 	.landing-feature-caption.ann {
 		display: block;
-		width: var(--landing-caption-width, 70%);
+		width: var(--landing-caption-width, 80%);
 		margin-top: var(--pacey-space-lg);
 		font-family: var(--font-caveat);
 		font-size: 1.25rem;
 		line-height: 1.3;
 		color: var(--pacey-board-copy);
 		text-align: left;
+		overflow-wrap: anywhere; /* long tokens must not overflow a
+           rotated, narrowed note at browser zoom */
+		/* a whisper of whole-caption rotation — the sketch feel the
+           arrows alone couldn't give; origin centred so the note
+           pivots rather than swings */
+		transform: rotate(var(--landing-caption-tilt, 0deg));
+		transform-origin: center center;
 		/* undo the .ann target treatment (mark tint, shadow, radius) —
            this is a label, not a highlighted target */
 		--ann-color: var(--pacey-board-copy);
@@ -1411,8 +1419,12 @@
 	.landing-feature-caption.ann::before {
 		/* keep the arrow visible with no data-note — the library hides
            ::before when the attribute is absent; rotating through the
-           tilt prop also replaces upstream's translateX offsets */
+           tilt prop also replaces upstream's translateX offsets.
+           32x30 shrink + 4px gap + the captions' 4px outer inset let
+           the arrow hug the column's outer edge while the note widens. */
 		display: block;
+		width: 32px;
+		height: 30px;
 		transform: rotate(var(--landing-arrow-tilt, 0deg));
 	}
 
@@ -1421,78 +1433,86 @@
 		display: none;
 	}
 
-	/* Northwest: note hugging the right edge, bent arrow in the left
-       gutter beside the first lines, head up-left into the exhibit. */
+	/* Northwest: note hugging the right edge (4px outer clearance so a
+       tilted corner never kisses the viewport edge), bent arrow in the
+       left gutter beside the first lines, head up-left into the exhibit. */
 	.landing-feature-caption.ann.ann-nw {
 		margin-inline-start: auto;
-		margin-inline-end: 0;
+		margin-inline-end: 4px;
 	}
 
 	.landing-feature-caption.ann.ann-nw::before {
 		left: auto;
-		right: calc(100% + 8px);
+		right: calc(100% + 4px);
 		top: 0;
 		bottom: auto;
 	}
 
-	/* Northeast: the mirror — note on the left edge, arrow in the right
-       gutter, head up-right into the exhibit. */
+	/* Northeast: the mirror — note on the left edge with the same 4px
+       outer clearance, arrow in the right gutter, head up-right. */
 	.landing-feature-caption.ann.ann-ne {
-		margin-inline-start: 0;
+		margin-inline-start: 4px;
 		margin-inline-end: auto;
 	}
 
 	.landing-feature-caption.ann.ann-ne::before {
 		right: auto;
-		left: calc(100% + 8px);
+		left: calc(100% + 4px);
 		top: 0;
 		bottom: auto;
 	}
 
 	/* North: centered note, straight arrow hovering in the gap above —
-       the top margin is widened to reserve its 38px height. */
+       the top margin reserves its 30px height. */
 	.landing-feature-caption.ann.ann-n {
 		margin-inline: auto;
-		margin-top: calc(var(--pacey-space-md) + 38px);
+		margin-top: calc(var(--pacey-space-md) + 30px);
 		text-align: center;
 	}
 
 	.landing-feature-caption.ann.ann-n::before {
 		top: auto;
 		bottom: calc(100% + 4px);
-		left: calc(50% - 23px);
+		left: calc(50% - 16px);
 		right: auto;
 	}
 
-	/* Per-caption variation — small width/tilt offsets so the six notes
-       never read as stamped copies. */
+	/* Per-caption variation — notes wander between 78-84% wide with a
+       degree or two of rotation, arrows a few more, so the six never
+       read as stamped copies. */
 	.landing-caption--readiness {
-		--landing-caption-width: 70%;
+		--landing-caption-width: 80%;
+		--landing-caption-tilt: -1deg;
 		--landing-arrow-tilt: -5deg;
 	}
 
 	.landing-caption--trends {
-		--landing-caption-width: 68%;
+		--landing-caption-width: 78%;
+		--landing-caption-tilt: 1.2deg;
 		--landing-arrow-tilt: 4deg;
 	}
 
 	.landing-caption--course {
-		--landing-caption-width: 72%;
+		--landing-caption-width: 84%;
+		--landing-caption-tilt: 0deg;
 		--landing-arrow-tilt: -3deg;
 	}
 
 	.landing-caption--picture {
-		--landing-caption-width: 70%;
+		--landing-caption-width: 80%;
+		--landing-caption-tilt: -0.8deg;
 		--landing-arrow-tilt: -4deg;
 	}
 
 	.landing-caption--plan {
-		--landing-caption-width: 69%;
+		--landing-caption-width: 79%;
+		--landing-caption-tilt: 1deg;
 		--landing-arrow-tilt: 3deg;
 	}
 
 	.landing-caption--recap {
-		--landing-caption-width: 71%;
+		--landing-caption-width: 83%;
+		--landing-caption-tilt: 0deg;
 		--landing-arrow-tilt: 4deg;
 	}
 

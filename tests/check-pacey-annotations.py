@@ -151,9 +151,12 @@ if not block:
 else:
     body = block.group(1)
     for needle in ("display: block",
-                   "width: var(--landing-caption-width, 70%)",
+                   "width: var(--landing-caption-width, 80%)",
                    "margin-top: var(--pacey-space-lg)",
                    "text-align: left", "font-family: var(--font-caveat)",
+                   "overflow-wrap: anywhere",
+                   "transform: rotate(var(--landing-caption-tilt, 0deg))",
+                   "transform-origin: center center",
                    "--ann-color: var(--pacey-board-copy)",
                    "--ann-mark: transparent", "--ann-rotate: 0deg",
                    "box-shadow: none", "border-radius: 0"):
@@ -165,17 +168,17 @@ base_before = re.search(
 if not base_before:
     FAILS.append("no ::before base override inside ≤46rem block")
 else:
-    for needle in ("display: block",
+    for needle in ("display: block", "width: 32px", "height: 30px",
                    "transform: rotate(var(--landing-arrow-tilt, 0deg))"):
         if needle not in base_before.group(1):
             FAILS.append(f"::before base missing {needle!r}")
 
 # per-direction geometries — each ::before flips the stock placement
 DIRECTION_RULES = {
-    "ann-nw": ("margin-inline-start: auto", "margin-inline-end: 0"),
-    "ann-ne": ("margin-inline-start: 0", "margin-inline-end: auto"),
+    "ann-nw": ("margin-inline-start: auto", "margin-inline-end: 4px"),
+    "ann-ne": ("margin-inline-start: 4px", "margin-inline-end: auto"),
     "ann-n": ("margin-inline: auto",
-              "margin-top: calc(var(--pacey-space-md) + 38px)",
+              "margin-top: calc(var(--pacey-space-md) + 30px)",
               "text-align: center"),
 }
 for direction in ("ann-nw", "ann-ne", "ann-n"):
@@ -197,35 +200,39 @@ for direction in ("ann-nw", "ann-ne", "ann-n"):
         continue
     body = bef.group(1)
     if direction == "ann-nw":
-        need = ("left: auto", "right: calc(100% + 8px)", "top: 0",
+        need = ("left: auto", "right: calc(100% + 4px)", "top: 0",
                 "bottom: auto")
     elif direction == "ann-ne":
-        need = ("right: auto", "left: calc(100% + 8px)", "top: 0",
+        need = ("right: auto", "left: calc(100% + 4px)", "top: 0",
                 "bottom: auto")
     else:  # ann-n — straight arrow above the centered note
         need = ("top: auto", "bottom: calc(100% + 4px)",
-                "left: calc(50% - 23px)", "right: auto")
+                "left: calc(50% - 16px)", "right: auto")
     for needle in need:
         if needle not in body:
             FAILS.append(f"{direction}::before missing {needle!r}")
 
-# per-caption variation props
+# per-caption variation props — (width, caption tilt, arrow tilt)
 MODIFIERS = {
-    "readiness": ("70%", "-5deg"), "trends": ("68%", "4deg"),
-    "course": ("72%", "-3deg"), "picture": ("70%", "-4deg"),
-    "plan": ("69%", "3deg"), "recap": ("71%", "4deg"),
+    "readiness": ("80%", "-1deg", "-5deg"),
+    "trends": ("78%", "1.2deg", "4deg"),
+    "course": ("84%", "0deg", "-3deg"),
+    "picture": ("80%", "-0.8deg", "-4deg"),
+    "plan": ("79%", "1deg", "3deg"),
+    "recap": ("83%", "0deg", "4deg"),
 }
-for name, (width, tilt) in MODIFIERS.items():
+for name, (width, tilt, atilt) in MODIFIERS.items():
     rule = re.search(
         r"\.landing-caption--" + name + r"\s*\{([^}]*)\}", media)
     if not rule:
         FAILS.append(f"no .landing-caption--{name} rule in media block")
         continue
     body = rule.group(1)
-    if f"--landing-caption-width: {width}" not in body:
-        FAILS.append(f"--{name}: width {width} missing")
-    if f"--landing-arrow-tilt: {tilt}" not in body:
-        FAILS.append(f"--{name}: tilt {tilt} missing")
+    for needle in (f"--landing-caption-width: {width}",
+                   f"--landing-caption-tilt: {tilt}",
+                   f"--landing-arrow-tilt: {atilt}"):
+        if needle not in body:
+            FAILS.append(f"--{name}: {needle} missing")
 
 after = re.search(
     r"\.landing-feature-caption\.ann::after\s*\{([^}]*)\}", media)
