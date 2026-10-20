@@ -1,0 +1,444 @@
+/* ============================================
+   TEACHING SYLLABUS TEMPLATE — landing page
+   --------------------------------------------
+   Page-scoped styles for the Notion syllabus
+   planner. Everything hangs off semantic
+   .syllabus-* hooks; every type size comes from
+   the shared --site-text-* scale so this page
+   stays in step with the rest of the site.
+   ============================================ */
+
+/* Shared type scale — tokens only, see styles/site-typography.css.
+   The page also links that sheet directly in <head>; importing it here
+   keeps this file self-contained for any standalone consumer. */
+@import "../../styles/site-typography.css";
+
+/* ---------- page shell ---------- */
+/* Replaces the utility resets that used to sit on <body>. The page's
+   small palette is declared once as local custom props — the shared
+   token sheets stay untouched. */
+body.syllabus-page {
+	--syllabus-ink: #1d3557; /* headings, primary action */
+	--syllabus-accent: #457b9d; /* lede, links, focus rings */
+	--syllabus-copy: #374151; /* prose */
+	--syllabus-rule: #d8dee6; /* hairlines, borders */
+	margin: 0;
+	background: #fff;
+}
+
+.syllabus-main {
+	max-width: 72rem;
+	margin-inline: auto;
+	padding-inline: clamp(1rem, 4vw, 2rem);
+	padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+
+/* uniform breathing room between the major sections */
+.syllabus-main > * + * {
+	margin-top: clamp(3rem, 8vw, 5rem);
+}
+
+/* ---------- type roles ---------- */
+/* Headings, prose and chrome all draw on the shared typography
+   identity — same families, weights and sizes as the articles and the
+   style guide, no local font recipes. */
+.syllabus-title,
+.syllabus-section-title {
+	font-family: var(--site-font-heading);
+	line-height: var(--site-leading-heading);
+	color: var(--syllabus-ink);
+	margin: 0;
+}
+
+.syllabus-title {
+	font-weight: var(--site-weight-heading);
+	font-size: var(--site-text-page-title);
+	line-height: 1.2; /* matches .article-title */
+	margin-bottom: 1.5rem;
+}
+
+.syllabus-section-title {
+	font-weight: var(--site-weight-subheading);
+	font-size: var(--site-text-section-title);
+	margin-bottom: 1rem;
+}
+
+.syllabus-lede,
+.syllabus-intro-copy,
+.syllabus-feature-copy,
+.syllabus-faq-answer,
+.syllabus-pricing-includes {
+	font-family: var(--site-font-prose);
+	font-weight: 400;
+	font-size: var(--site-text-body);
+	line-height: var(--site-leading-body);
+	color: var(--syllabus-copy);
+	margin: 0;
+}
+
+/* prose never stretches past a comfortable measure */
+.syllabus-intro-copy,
+.syllabus-feature-copy,
+.syllabus-faq-answer {
+	max-width: 60ch;
+}
+
+/* ---------- intro ---------- */
+/* Left-aligned read, not a centred billboard. */
+.syllabus-intro {
+	max-width: 65ch;
+}
+
+/* the lede steps up one shared token and reads in ink, not the
+   lower-contrast accent */
+.syllabus-lede {
+	font-size: var(--site-text-lede);
+	color: var(--syllabus-ink);
+	margin-bottom: 1.25rem;
+}
+
+.syllabus-intro-copy {
+	margin-bottom: 1.75rem;
+}
+
+/* intro actions — real anchors styled as tactile buttons */
+.syllabus-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+}
+
+.syllabus-action {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px; /* comfortable touch target */
+	padding-inline: 1.25rem;
+	border-radius: 8px;
+	font-family: var(--site-font-nav);
+	font-weight: 600;
+	font-size: var(--site-text-summary);
+	text-decoration: none;
+}
+
+.syllabus-action--primary {
+	background: var(--syllabus-ink);
+	color: #fff;
+}
+
+.syllabus-action--primary:hover {
+	background: var(--syllabus-accent);
+}
+
+.syllabus-action:focus-visible,
+.syllabus-crosslink-link:focus-visible {
+	outline: 2px solid var(--syllabus-accent);
+	outline-offset: 2px;
+}
+
+/* ---------- screenshots ---------- */
+/* The overview figure; capped at 960px so the screenshot stays legible
+   on wide monitors. */
+.syllabus-overview {
+	width: 100%;
+	max-width: 960px;
+	margin-inline: auto;
+}
+
+/* Screenshots always render whole — width 100%, natural height, a
+   hairline border and small radius instead of the old heavy shadow. */
+.syllabus-screenshot {
+	display: block;
+	width: 100%;
+	height: auto;
+	min-width: 0; /* let it shrink inside the grid column */
+	border: 1px solid var(--syllabus-rule);
+	border-radius: 6px;
+}
+
+/* Every screenshot links to its full-res original; with JS the shared
+   viewer intercepts the click, without it the anchor still navigates.
+   The link is the grid child, so it carries the shrinkability. */
+.syllabus-image-link {
+	display: block;
+	min-width: 0;
+	cursor: zoom-in;
+}
+
+.syllabus-image-link:focus-visible {
+	outline: 2px solid var(--syllabus-accent);
+	outline-offset: 2px;
+	border-radius: 6px;
+}
+
+.syllabus-screenshot-caption {
+	margin-top: 0.75rem;
+	font-family: var(--site-font-nav);
+	font-weight: 400;
+	font-size: var(--site-text-caption);
+	line-height: 1.5;
+	color: #4b5563;
+	text-align: center;
+}
+
+/* ---------- features ---------- */
+/* Each feature is an open editorial row: copy in a narrow column beside
+   a wide screenshot. DOM order is always copy-then-image, so on small
+   screens the single column already reads correctly — no reverse. */
+.syllabus-feature {
+	display: grid;
+	gap: 1.5rem;
+}
+
+.syllabus-feature-text {
+	min-width: 0;
+}
+
+/* On phone widths each feature groups into one surface — a whisper of
+   the accent tint + a hairline so the screenshot and its explanation
+   read as a single exhibit rather than two floating pieces. Desktop
+   keeps the open editorial rows. */
+@media (max-width: 55.999rem) {
+	.syllabus-feature {
+		background: color-mix(in srgb, var(--syllabus-accent) 4%, white);
+		border: 1px solid var(--syllabus-rule);
+		border-radius: 8px;
+		padding: 1rem;
+		gap: 1rem;
+	}
+
+	.syllabus-feature .syllabus-section-title {
+		margin-bottom: 0.5rem;
+	}
+}
+
+@media (min-width: 56rem) {
+	.syllabus-feature {
+		/* minmax(0, …) keeps min-content from forcing overflow */
+		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+		align-items: center;
+		gap: clamp(2rem, 4vw, 4rem);
+	}
+
+	/* Alternating rows: the reversed features swap their tracks and pin
+	   each child to its column. DOM order stays copy-then-image, so the
+	   small-screen stack and the accessibility tree never change. */
+	.syllabus-feature--reverse {
+		grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+	}
+
+	.syllabus-feature--reverse .syllabus-feature-text {
+		grid-column: 2;
+		grid-row: 1;
+	}
+
+	.syllabus-feature--reverse .syllabus-image-link {
+		grid-column: 1;
+		grid-row: 1;
+	}
+}
+
+/* ---------- pricing ---------- */
+/* One centered panel holds the pitch and the live Stripe checkout
+   together — no split columns to squeeze the widget on small screens. */
+.syllabus-pricing {
+	border-top: 1px solid #e2e8f0;
+	padding-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.syllabus-purchase-panel {
+	max-width: 30rem;
+	margin-inline: auto;
+	min-width: 0;
+	border: 1px solid var(--syllabus-rule);
+	border-radius: 12px;
+	padding: clamp(1rem, 2vw, 2rem);
+	text-align: center;
+}
+
+.syllabus-purchase-panel > .stripe-buy-button {
+	display: block;
+	width: 100%;
+	max-width: 22rem;
+	margin-inline: auto;
+	min-width: 0;
+}
+
+.syllabus-pricing-tagline {
+	font-family: var(--site-font-nav);
+	font-size: var(--site-text-summary);
+	color: var(--syllabus-accent);
+	margin: 0 0 1.25rem;
+}
+
+/* the "what's included" list centres as a unit inside the panel while
+   each bullet stays left-aligned and readable */
+.syllabus-pricing-includes {
+	width: fit-content;
+	max-width: 100%;
+	margin-inline: auto;
+	text-align: left;
+	padding-inline-start: 1.25rem;
+	list-style: disc;
+	margin-bottom: 1.5rem;
+}
+
+.syllabus-pricing-includes li + li {
+	margin-top: 0.5rem;
+}
+
+/* ---------- faq ---------- */
+/* Drawer questions separated by hairlines. Panels arrive open
+   (.is-open in the markup) so no-JS readers see every answer; the page
+   script swaps each question into a real toggle button and collapses
+   the panels after binding. The drawer animates grid-template-rows
+   0fr→1fr plus opacity — never height or display — so the transition
+   works on intrinsic height and the panel stays animatable. */
+.syllabus-faq-list {
+	max-width: 60ch;
+}
+
+.syllabus-faq-item {
+	border-top: 1px solid #e2e8f0;
+	padding-block: 0.5rem;
+}
+
+.syllabus-faq-item:last-child {
+	border-bottom: 1px solid #e2e8f0;
+}
+
+/* questions read at regular weight — and the no-JS fallback h3 carries
+   the same face/size so the page looks identical before enhancement */
+.syllabus-faq-question {
+	font-family: var(--site-font-heading);
+	font-weight: 400;
+	font-size: var(--site-text-card-title);
+	line-height: var(--site-leading-heading);
+	color: var(--syllabus-ink);
+	margin: 0;
+}
+
+/* the JS-injected toggle keeps the question's look while becoming a
+   real button — full-width row, chevron at the end, 44px target */
+.syllabus-faq-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	width: 100%;
+	min-height: 44px;
+	padding-block: 0.75rem;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	font-family: var(--site-font-heading);
+	font-weight: 400;
+	font-size: var(--site-text-card-title);
+	line-height: var(--site-leading-heading);
+	color: var(--syllabus-ink);
+	text-align: left;
+}
+
+.syllabus-faq-toggle:focus-visible {
+	outline: 2px solid var(--syllabus-accent);
+	outline-offset: 2px;
+}
+
+.syllabus-faq-chevron {
+	flex: none;
+	transition: transform 200ms ease;
+}
+
+.syllabus-faq-toggle[aria-expanded="true"] .syllabus-faq-chevron {
+	transform: rotate(180deg);
+}
+
+.syllabus-faq-panel {
+	display: grid;
+	grid-template-rows: 0fr;
+	opacity: 0;
+	transition:
+		grid-template-rows 300ms ease,
+		opacity 300ms ease;
+}
+
+.syllabus-faq-panel.is-open {
+	grid-template-rows: 1fr;
+	opacity: 1;
+}
+
+/* the inner is the shrinking track — padding lives on the answer <p>,
+   not here, so a collapsed drawer leaves no dead space */
+.syllabus-faq-panel-inner {
+	min-height: 0;
+	overflow: hidden;
+}
+
+.syllabus-faq-answer {
+	padding-bottom: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.syllabus-faq-panel,
+	.syllabus-faq-chevron {
+		transition: none;
+	}
+
+	/* belt-and-suspenders for the screenshot reveal: the JS skips
+	   arming under reduce and tears down on a live change, but if the
+	   enabled class is ever present while reduce is preferred, the
+	   images must still be fully visible — no reliance on JS alone */
+	.syllabus-reveals-enabled .syllabus-screenshot {
+		transition: none;
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* ---------- screenshot reveal ---------- */
+/* teaching-syllabus-template.js adds .syllabus-reveals-enabled only
+   after every screenshot is being observed — and only when
+   IntersectionObserver exists and reduced motion is not requested — so
+   without JS or observer support the images simply render normally.
+   All three rules sit inside no-preference: the reduce fallback above
+   must win unopposed, not on specificity. */
+@media (prefers-reduced-motion: no-preference) {
+	.syllabus-reveals-enabled .syllabus-screenshot {
+		transition:
+			opacity 350ms ease-out,
+			transform 450ms ease-out;
+	}
+
+	.syllabus-reveals-enabled .syllabus-screenshot:not(.is-visible) {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+
+	.syllabus-reveals-enabled .syllabus-screenshot.is-visible {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* ---------- cross-link ---------- */
+/* A quiet centred sign-off pointing at the travel planner. */
+.syllabus-crosslink {
+	text-align: center;
+}
+
+.syllabus-crosslink-copy {
+	font-family: var(--site-font-nav);
+	font-size: var(--site-text-summary);
+	color: var(--syllabus-accent);
+	margin: 0;
+}
+
+/* keeps the same sky-blue → steel hover pair the utilities painted */
+.syllabus-crosslink-link {
+	color: #4a88c6;
+	text-decoration: underline;
+}
+
+.syllabus-crosslink-link:hover {
+	color: #456789;
+}

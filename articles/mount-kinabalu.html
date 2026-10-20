@@ -24,6 +24,7 @@
         <link href="../styles/output.css" rel="stylesheet">
         <link href="../styles/style.css" type="text/css" rel="stylesheet">
         <link href="./articles.css" type="text/css" rel="stylesheet">
+        <link href="/styles/site-image-viewer.css" rel="stylesheet">
         <link rel="icon" href="../resources/icons/TH-logo.png" type="image/x-icon">
 
         <!-- HTML Meta Tags -->
@@ -57,130 +58,10 @@
           window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
         </script>
         <!-- <script defer src="/_vercel/insights/script.js"></script> -->
-        <!-- Simple Image Viewer - Custom Implementation -->
+        <!-- Shared modal viewer lives in /js/site-image-viewer.js;
+             only aspect-ratio auto-detection stays inline. -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Create overlay elements
-                const overlay = document.createElement('div');
-                overlay.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                    height: 100vh;
-                    background: rgba(0, 0, 0, 0.9);
-                    display: none;
-                    justify-content: center;
-                    align-items: center;
-                    z-index: 9999;
-                    cursor: pointer;
-                `;
-                
-                const imageContainer = document.createElement('div');
-                imageContainer.style.cssText = `
-                    max-width: 90vw;
-                    max-height: 90vh;
-                    text-align: center;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                `;
-                
-                const enlargedImage = document.createElement('img');
-                enlargedImage.style.cssText = `
-                    max-width: 100%;
-                    max-height: 60vh;
-                    object-fit: contain;
-                    margin-bottom: 0.5rem;
-                `;
-                
-                // Increase max-height for larger screens (desktop doesn't have bottom toolbar)
-                if (window.innerWidth >= 768) {
-                    enlargedImage.style.maxHeight = '80vh';
-                }
-                
-                const caption = document.createElement('p');
-                caption.style.cssText = `
-                    color: white;
-                    font-family: 'Raleway', sans-serif;
-                    font-weight: 300;
-                    font-size: 1rem;
-                    text-align: center;
-                    margin: 0.5rem 0;
-                    padding: 0 1rem;
-                    max-width: 70vw;
-                    max-height: 40vh;
-                    overflow-y: auto;
-                    line-height: 1.4;
-                    word-wrap: break-word;
-                    white-space: normal;
-                `;
-                
-                const closeButton = document.createElement('button');
-                closeButton.innerHTML = '×';
-                closeButton.style.cssText = `
-                    position: absolute;
-                    top: 20px;
-                    right: 30px;
-                    background: none;
-                    border: none;
-                    color: white;
-                    font-size: 40px;
-                    cursor: pointer;
-                    z-index: 10000;
-                `;
-                
-                imageContainer.appendChild(enlargedImage);
-                imageContainer.appendChild(caption);
-                overlay.appendChild(imageContainer);
-                overlay.appendChild(closeButton);
-                document.body.appendChild(overlay);
-                
-                // Add click handlers to images
-                document.querySelectorAll('img.cursor-pointer').forEach(function(img) {
-                    img.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        enlargedImage.src = this.dataset.fullSrc || this.currentSrc || this.src;
-                        enlargedImage.alt = this.alt;
-                        
-                        // Get caption from nearby figcaption or image-caption
-                        const figure = this.closest('figure');
-                        const captionDiv = this.parentElement.nextElementSibling;
-                        let captionText = '';
-                        
-                        if (figure) {
-                            const figcaption = figure.querySelector('figcaption');
-                            if (figcaption) captionText = figcaption.textContent;
-                        } else if (captionDiv && captionDiv.classList.contains('image-caption')) {
-                            captionText = captionDiv.textContent;
-                        }
-                        
-                        caption.textContent = captionText;
-                        overlay.style.display = 'flex';
-                        document.body.style.overflow = 'hidden';
-                    });
-                });
-                
-                // Close handlers
-                function closeOverlay() {
-                    overlay.style.display = 'none';
-                    document.body.style.overflow = '';
-                }
-                
-                closeButton.addEventListener('click', closeOverlay);
-                overlay.addEventListener('click', function(e) {
-                    if (e.target === overlay) closeOverlay();
-                });
-                
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && overlay.style.display === 'flex') {
-                        closeOverlay();
-                    }
-                });
-                
                 // Auto-detect image aspect ratios and apply appropriate classes
                 function applyImageAspectClasses() {
                     document.querySelectorAll('.article-image').forEach(function(img) {
@@ -220,6 +101,7 @@
         <!-- Embla (shadcn-style carousel base) -->
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
         <!-- Fix Embla UMD script URL per docs: https://www.embla-carousel.com/get-started/cdn/ -->
+        <script defer src="/js/site-image-viewer.js"></script>
         <script defer src="/js/article-reading.js"></script>
         <!-- Machine-readable description of this page. Only fields grounded in the visible content are serialised — no ratings, offers or invented dates. -->
         <script type="application/ld+json">

@@ -54,6 +54,15 @@ function makeWorld(opts) {
 			return article._rect;
 		};
 	}
+	/* non-article pages opt in via [data-reading-progress]; pass a rect
+	   to simulate a marked <main> */
+	const readingTarget = opts0.readingTarget ? makeEl("main") : null;
+	if (readingTarget) {
+		readingTarget._rect = opts0.readingTarget;
+		readingTarget.getBoundingClientRect = function () {
+			return readingTarget._rect;
+		};
+	}
 
 	const document = {
 		readyState: opts0.readyState || "complete",
@@ -61,6 +70,7 @@ function makeWorld(opts) {
 		createElement: (t) => makeEl(t),
 		querySelector: (sel) => {
 			if (sel === ".article-content") return article;
+			if (sel === "[data-reading-progress]") return readingTarget;
 			if (sel === ".article-reading-progress") {
 				return (
 					created.find(
@@ -101,6 +111,7 @@ function makeWorld(opts) {
 	};
 	world.created = created;
 	world.article = article;
+	world.readingTarget = readingTarget;
 	world.winListeners = winListeners;
 	world.docListeners = docListeners;
 	world.fireWin = (t) => (winListeners[t] || []).forEach((f) => f());
@@ -202,6 +213,24 @@ function check(name, cond) {
 	load(w);
 	check("no article → no bar", w.created.length === 0);
 	check("no article → no scroll listener", !w.winListeners.scroll);
+}
+
+// non-article opt-in: [data-reading-progress] fallback is measured —
+// the element's own rect drives the bar, so the footer is excluded by
+// construction (same math as articles, no duplicated code path)
+{
+	const w = makeWorld({
+		hasArticle: false,
+		readingTarget: { top: -1100, height: 3000, bottom: 1900 },
+	});
+	load(w);
+	w.flushRaf();
+	check("opt-in target gets a bar", !!w.fill());
+	check("opt-in target measured", w.scale() === 0.5);
+	check(
+		"ResizeObserver watches the opt-in target",
+		w.roTarget === w.readingTarget,
+	);
 }
 
 // duplicate init: second run sees the existing bar and bails

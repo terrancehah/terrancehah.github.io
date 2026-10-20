@@ -27,8 +27,10 @@ which keep their own chrome.
 | Navigation                       | `styles/site-navigation.css`                                                  | via `site-header.css`                                |
 | Footer + back-to-top             | `js/footer.js`, `styles/site-footer.css`                                      | injected on the 25 footer.js pages                   |
 | Motion (press, page transitions) | `styles/site-motion.css`                                                      | via `site-header.css`                                |
-| Reading progress                 | `js/article-reading.js`                                                       | the 14 `articles/*.html` pages only                  |
+| Reading progress                 | `js/article-reading.js`, `styles/site-reading-progress.css`                   | 14 article pages + `[data-reading-progress]` opt-ins |
+| Image viewer                     | `js/site-image-viewer.js`, `styles/site-image-viewer.css`                     | 2 photo articles + the syllabus page                 |
 | Listing styles                   | `articles/articles.css`, `projects/projects.css`, `playground/playground.css` | index + listing pages                                |
+| Syllabus planner landing         | `projects/teaching-syllabus-template/teaching-syllabus-template.css`          | `/projects/teaching-syllabus-template`               |
 | Homepage                         | `styles/homepage.css`                                                         | `index.html`                                         |
 | Image pipeline                   | `scripts/optimize-site-images.py`, `resources/optimized/` + `manifest.json`   | markup on the 25 pages                               |
 | Public showcase                  | `articles/my-website-style-guide.html` + `articles/website-style-guide.css`   | linked from the articles page                        |
@@ -72,7 +74,11 @@ override the root font size, so browser zoom keeps working. Roles:
 
 | Token                       | Role                            | Value                    |
 | --------------------------- | ------------------------------- | ------------------------ |
+| `--site-font-heading`       | heading face                    | `'Lato', sans-serif`     |
+| `--site-font-prose`         | body/prose face                 | `'Baskervville', serif`  |
 | `--site-font-nav`           | navigation face                 | `'Raleway', sans-serif`  |
+| `--site-weight-heading`     | h1/title weight                 | `700`                    |
+| `--site-weight-subheading`  | section-heading weight          | `600`                    |
 | `--site-text-navigation`    | header + footer nav links       | `1rem` at every viewport |
 | `--site-text-caption`       | dates, captions, credits        | `0.875rem`               |
 | `--site-text-small`         | legal/notice text               | `0.8125rem`              |
@@ -95,6 +101,12 @@ override the root font size, so browser zoom keeps working. Roles:
 Navigation is `1rem` — the browser-default 16px, scaling with the user's
 zoom/root-size setting — in header and footer at every viewport; there is
 no larger-desktop or smaller-mobile nav size.
+
+Article pages, the style-guide specimens and the Notion syllabus page all
+draw on the same family/weight tokens (`--site-font-heading` for Lato
+headings, `--site-font-prose` for Baskervville body text,
+`--site-font-nav` for Raleway chrome, with the 700/600 heading weights)
+rather than naming faces locally.
 
 ## Header
 
@@ -137,19 +149,24 @@ pointer click leaves focus alone. `prefers-reduced-motion` switches the
 scroll to instant. The button is navy by default; the homepage reskins it
 green (`body.home-page` → `#447f46`, matching hover/focus overrides).
 
-## Reading progress (articles only)
+## Reading progress
 
-`js/article-reading.js` is included with `defer` only on the 14 article
-pages. It injects a decorative (`aria-hidden`) fixed 3px bar at the top —
-a `.article-reading-progress-fill` child that is a bare `scaleX`
-transform (no transition, no inertia; color via
-`--article-reading-progress-color`, default steel blue `#457b9d`). It
-measures the `.article-content` element's rect, not the document, so the
-bar hits 100% exactly when the article's last pixel reaches the viewport
-bottom — the footer never counts. One rect read + one transform write per
-rAF; updates triggered by passive scroll/resize, `pageshow` (bfcache),
-image `load`/`error` (capture, filtered to `IMG`), `document.fonts.ready`,
-and a `ResizeObserver` on the article.
+`js/article-reading.js` is included with `defer` on the 14 article pages
+and on any other page that opts in by marking its measured element with
+`data-reading-progress` (currently only the syllabus-template landing
+page marks its `<main>`). Its presentation lives in
+`styles/site-reading-progress.css` — articles reach it through an
+`articles.css` import, opt-in pages link it directly. The script injects
+a decorative (`aria-hidden`) fixed 3px bar at the top — a
+`.article-reading-progress-fill` child that is a bare `scaleX` transform
+(no transition, no inertia; color via `--article-reading-progress-color`,
+default steel blue `#457b9d`). It measures the resolved element's rect
+(`.article-content`, or the `[data-reading-progress]` element), not the
+document, so the bar hits 100% exactly when the element's last pixel
+reaches the viewport bottom — the footer never counts. One rect read +
+one transform write per rAF; updates triggered by passive scroll/resize,
+`pageshow` (bfcache), image `load`/`error` (capture, filtered to `IMG`),
+`document.fonts.ready`, and a `ResizeObserver` on the element.
 
 ## Motion
 

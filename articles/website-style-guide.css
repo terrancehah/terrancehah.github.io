@@ -8,161 +8,161 @@
 
 /* Section caption — one quiet line of context above each visual group. */
 .website-style-guide .style-guide-caption {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
-    font-size: var(--site-text-summary);
-    color: #4b5563;
-    margin: 0 0 1.25rem;
+	font-family: "Raleway", sans-serif;
+	font-weight: 400;
+	font-size: var(--site-text-summary);
+	color: #4b5563;
+	margin: 0 0 1.25rem;
 }
 
 /* Small group label above a set of specimens. */
 .website-style-guide .style-guide-group-label {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 0.8125rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #457b9d;
-    margin: 0 0 0.75rem;
+	font-family: "Raleway", sans-serif;
+	font-weight: 600;
+	font-size: 0.8125rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: #457b9d;
+	margin: 0 0 0.75rem;
 }
 
 /* --- Colour swatches --------------------------------------------------
    Each figure carries its colour as --swatch-color; the block paints it,
    the caption names its job and its hex. */
 .website-style-guide .style-guide-swatch-group {
-    margin-bottom: 1.75rem;
+	margin-bottom: 1.75rem;
 }
 
 .website-style-guide .style-guide-swatch-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
-    gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+	gap: 1rem;
 }
 
 .website-style-guide .style-guide-swatch {
-    margin: 0;
+	margin: 0;
 }
 
 .website-style-guide .style-guide-swatch-block {
-    display: block;
-    height: 5.5rem;
-    border-radius: 0.5rem 0.5rem 0 0;
-    background: var(--swatch-color);
-    border: 1px solid rgba(29, 53, 87, 0.12);
+	display: block;
+	height: 5.5rem;
+	border-radius: 0.5rem 0.5rem 0 0;
+	background: var(--swatch-color);
+	border: 1px solid rgba(29, 53, 87, 0.12);
 }
 
 .website-style-guide .style-guide-swatch figcaption {
-    border: 1px solid rgba(29, 53, 87, 0.12);
-    border-top: 0;
-    border-radius: 0 0 0.5rem 0.5rem;
-    padding: 0.5rem 0.625rem;
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.8125rem;
-    line-height: 1.4;
-    color: #1d3557;
+	border: 1px solid rgba(29, 53, 87, 0.12);
+	border-top: 0;
+	border-radius: 0 0 0.5rem 0.5rem;
+	padding: 0.5rem 0.625rem;
+	font-family: "Raleway", sans-serif;
+	font-size: 0.8125rem;
+	line-height: 1.4;
+	color: #1d3557;
 }
 
 .website-style-guide .style-guide-swatch-hex {
-    display: block;
-    font-weight: 600;
-    color: #457b9d;
+	display: block;
+	font-weight: 600;
+	color: #457b9d;
 }
 
 /* --- Type specimens ----------------------------------------------------
    Real faces rendering real strings — what the text is for, shown not
    described. */
 .website-style-guide .style-guide-type-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
-    gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+	gap: 1rem;
 }
 
 .website-style-guide .style-guide-type {
-    margin: 0;
-    border: 1px solid rgba(29, 53, 87, 0.12);
-    border-radius: 0.5rem;
-    padding: 1rem;
+	margin: 0;
+	border: 1px solid rgba(29, 53, 87, 0.12);
+	border-radius: 0.5rem;
+	padding: 1rem;
 }
 
 .website-style-guide .style-guide-type figcaption {
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.8125rem;
-    color: #4b5563;
-    margin-bottom: 0.625rem;
+	font-family: "Raleway", sans-serif;
+	font-size: 0.8125rem;
+	color: #4b5563;
+	margin-bottom: 0.625rem;
 }
 
 .website-style-guide .style-guide-sample {
-    margin: 0;
+	margin: 0;
 }
 
 .website-style-guide .style-guide-sample-lato {
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: #1d3557;
+	font-family: "Lato", sans-serif;
+	font-weight: 700;
+	font-size: 1.5rem;
+	color: #1d3557;
 }
 
 .website-style-guide .style-guide-sample-raleway {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: #457b9d;
+	font-family: "Raleway", sans-serif;
+	font-weight: 600;
+	font-size: 1.25rem;
+	color: #457b9d;
 }
 
 .website-style-guide .style-guide-sample-baskervville {
-    font-family: 'Baskervville', 'Baskerville', serif;
-    font-size: 1.125rem;
-    line-height: 1.6;
+	font-family: "Baskervville", "Baskerville", serif;
+	font-size: 1.125rem;
+	line-height: 1.6;
 }
 
 .website-style-guide .style-guide-sample-caveat {
-    font-family: 'Caveat', cursive;
-    font-size: 1.6rem;
-    color: #1d3557;
+	font-family: "Caveat", cursive;
+	font-size: 1.6rem;
+	color: #1d3557;
 }
 
 /* --- Page hierarchy ----------------------------------------------------
    A miniature article header composed like the real pages: Lato title,
    Raleway date, Lato subheading, Baskervville prose. */
 .website-style-guide .style-guide-hierarchy {
-    border: 1px solid rgba(29, 53, 87, 0.12);
-    border-radius: 0.5rem;
-    padding: 1.25rem;
+	border: 1px solid rgba(29, 53, 87, 0.12);
+	border-radius: 0.5rem;
+	padding: 1.25rem;
 }
 
 .website-style-guide .style-guide-hier-title {
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
-    font-size: var(--site-text-page-title);
-    color: #1d3557;
-    text-align: center;
-    line-height: 1.2;
-    margin: 0 0 0.375rem;
+	font-family: var(--site-font-heading);
+	font-weight: var(--site-weight-heading);
+	font-size: var(--site-text-page-title);
+	color: #1d3557;
+	text-align: center;
+	line-height: 1.2;
+	margin: 0 0 0.375rem;
 }
 
 .website-style-guide .style-guide-hier-date {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    font-size: var(--site-text-caption);
-    color: #4b5563;
-    text-align: center;
-    margin: 0 0 1.5rem;
+	font-family: "Raleway", sans-serif;
+	font-weight: 300;
+	font-size: var(--site-text-caption);
+	color: #4b5563;
+	text-align: center;
+	margin: 0 0 1.5rem;
 }
 
 .website-style-guide .style-guide-hier-sub {
-    font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    font-size: var(--site-text-section-title);
-    line-height: var(--site-leading-heading);
-    color: #1d3557;
-    margin: 0 0 0.75rem;
+	font-family: var(--site-font-heading);
+	font-weight: var(--site-weight-subheading);
+	font-size: var(--site-text-section-title);
+	line-height: var(--site-leading-heading);
+	color: #1d3557;
+	margin: 0 0 0.75rem;
 }
 
 .website-style-guide .style-guide-hier-body {
-    font-family: 'Baskervville', 'Baskerville', serif;
-    font-size: var(--site-text-body);
-    line-height: var(--site-leading-body);
-    margin: 0;
+	font-family: var(--site-font-prose);
+	font-size: var(--site-text-body);
+	line-height: var(--site-leading-body);
+	margin: 0;
 }
 
 /* --- Navigation & controls ---------------------------------------------
@@ -174,16 +174,16 @@
    specimen lives in a <section>, never <header>, so footer.js's
    header-nav query can't pick it up. */
 .website-style-guide .style-guide-header-nav {
-    padding: 0.5rem;
-    border: 1px solid rgba(29, 53, 87, 0.12);
-    border-radius: 0.5rem;
+	padding: 0.5rem;
+	border: 1px solid rgba(29, 53, 87, 0.12);
+	border-radius: 0.5rem;
 }
 
 .website-style-guide .style-guide-preview-label {
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.8125rem;
-    color: #4b5563;
-    margin: 1.25rem 0 0.375rem;
+	font-family: "Raleway", sans-serif;
+	font-size: 0.8125rem;
+	color: #4b5563;
+	margin: 1.25rem 0 0.375rem;
 }
 
 /* Frame around the real footer-nav markup — the nav itself is styled by
@@ -192,111 +192,111 @@
    scrolls horizontally instead of overflowing the page; padding leaves
    room for the links' focus outline. */
 .website-style-guide .style-guide-footer-frame {
-    border: 1px solid rgba(29, 53, 87, 0.12);
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    overflow-x: auto;
+	border: 1px solid rgba(29, 53, 87, 0.12);
+	border-radius: 0.5rem;
+	padding: 0.75rem;
+	overflow-x: auto;
 }
 
 .website-style-guide .style-guide-backtop-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 1rem;
 }
 
 /* Same shape and icon as the live .back-to-top button, but a native
    anchor so the preview actually scrolls back to the top of the page. */
 .website-style-guide .style-guide-back-top {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
-    background-color: #1d3557;
-    color: #ffffff;
-    flex: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 8px;
+	background-color: #1d3557;
+	color: #ffffff;
+	flex: none;
 }
 
 .website-style-guide .style-guide-back-top:hover {
-    background-color: #457b9d;
+	background-color: #457b9d;
 }
 
 .website-style-guide .style-guide-back-top:focus-visible {
-    outline: 2px solid #457b9d;
-    outline-offset: 2px;
+	outline: 2px solid #457b9d;
+	outline-offset: 2px;
 }
 
 .website-style-guide .style-guide-backtop-note {
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.85rem;
-    color: #4b5563;
-    margin: 0;
+	font-family: "Raleway", sans-serif;
+	font-size: 0.85rem;
+	color: #4b5563;
+	margin: 0;
 }
 
 /* --- Cards on small screens --------------------------------------------
    One real article card at phone width — content-driven height, native
    title link, clamped summary — matching the listing card styles. */
 .website-style-guide .style-guide-phone {
-    max-width: 20rem;
-    border: 1px solid rgba(29, 53, 87, 0.15);
-    border-radius: 0.5rem;
-    background: #ffffff;
-    overflow: hidden;
+	max-width: 20rem;
+	border: 1px solid rgba(29, 53, 87, 0.15);
+	border-radius: 0.5rem;
+	background: #ffffff;
+	overflow: hidden;
 }
 
 .website-style-guide .style-guide-mini-card img {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    display: block;
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	display: block;
 }
 
 .website-style-guide .style-guide-mini-card-content {
-    padding: 1rem;
+	padding: 1rem;
 }
 
 .website-style-guide .style-guide-mini-card-title {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: var(--site-text-card-title);
-    color: #457b9d;
-    line-height: 1.4;
-    margin: 0 0 0.5rem;
+	font-family: "Raleway", sans-serif;
+	font-weight: 600;
+	font-size: var(--site-text-card-title);
+	color: #457b9d;
+	line-height: 1.4;
+	margin: 0 0 0.5rem;
 }
 
 .website-style-guide .style-guide-mini-card-title a {
-    color: inherit;
-    text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 .website-style-guide .style-guide-mini-card-title a:hover,
 .website-style-guide .style-guide-mini-card-title a:focus-visible {
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
 }
 
 .website-style-guide .style-guide-mini-card-desc {
-    font-family: 'Baskervville', 'Baskerville', serif;
-    font-size: var(--site-text-summary);
-    color: #234960;
-    line-height: 1.5;
-    margin: 0 0 0.5rem;
-    /* Same 3-line clamp the listing cards apply to their summaries. */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    line-clamp: 3;
+	font-family: "Baskervville", "Baskerville", serif;
+	font-size: var(--site-text-summary);
+	color: #234960;
+	line-height: 1.5;
+	margin: 0 0 0.5rem;
+	/* Same 3-line clamp the listing cards apply to their summaries. */
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	line-clamp: 3;
 }
 
 .website-style-guide .style-guide-mini-card-date {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    font-size: var(--site-text-caption);
-    color: #4b5563;
-    margin: 0;
+	font-family: "Raleway", sans-serif;
+	font-weight: 300;
+	font-size: var(--site-text-caption);
+	color: #4b5563;
+	margin: 0;
 }
 
 /* --- Project materials ---------------------------------------------------
@@ -304,74 +304,74 @@
    panel sets its own ink/muted/paper vars so light and dark compare
    side by side. */
 .website-style-guide .style-guide-materials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
-    gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+	gap: 1rem;
 }
 
 .website-style-guide .style-guide-board {
-    margin: 0;
-    border-radius: 0.5rem;
-    padding: 1.25rem;
+	margin: 0;
+	border-radius: 0.5rem;
+	padding: 1.25rem;
 }
 
 .website-style-guide .style-guide-board-light {
-    background: #f1e7d2; /* day cork */
-    --board-ink: #2b2620;
-    --board-muted: #5f5546;
-    --paper: #f3eee3;
-    --paper-ink: #2b2620;
+	background: #f1e7d2; /* day cork */
+	--board-ink: #2b2620;
+	--board-muted: #5f5546;
+	--paper: #f3eee3;
+	--paper-ink: #2b2620;
 }
 
 .website-style-guide .style-guide-board-dark {
-    background: #3a2f26; /* night cork */
-    --board-ink: #f2e9d7;
-    --board-muted: #e8dfca;
-    --paper: #cec6b6;   /* paper dims but stays light */
-    --paper-ink: #241f19;
+	background: #3a2f26; /* night cork */
+	--board-ink: #f2e9d7;
+	--board-muted: #e8dfca;
+	--paper: #cec6b6; /* paper dims but stays light */
+	--paper-ink: #241f19;
 }
 
 .website-style-guide .style-guide-board-name {
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--board-muted);
-    margin: 0 0 0.75rem;
+	font-family: "Raleway", sans-serif;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--board-muted);
+	margin: 0 0 0.75rem;
 }
 
 .website-style-guide .style-guide-board-heading {
-    font-family: 'Caveat', cursive;
-    font-weight: 700;
-    font-size: 1.75rem;
-    line-height: 1.15;
-    color: var(--board-ink);
-    margin: 0 0 0.25rem;
+	font-family: "Caveat", cursive;
+	font-weight: 700;
+	font-size: 1.75rem;
+	line-height: 1.15;
+	color: var(--board-ink);
+	margin: 0 0 0.25rem;
 }
 
 .website-style-guide .style-guide-board-text {
-    font-family: 'Fuzzy Bubbles', 'Caveat', cursive;
-    font-size: 0.95rem;
-    color: var(--board-muted);
-    margin: 0 0 1rem;
+	font-family: "Fuzzy Bubbles", "Caveat", cursive;
+	font-size: 0.95rem;
+	color: var(--board-muted);
+	margin: 0 0 1rem;
 }
 
 .website-style-guide .style-guide-paper-chip {
-    display: block;
-    background: var(--paper);
-    color: var(--paper-ink);
-    border-radius: 0.375rem;
-    padding: 0.625rem 0.75rem;
-    font-family: 'Fuzzy Bubbles', 'Caveat', cursive;
-    font-size: 0.9rem;
-    margin: 0 0 0.75rem;
+	display: block;
+	background: var(--paper);
+	color: var(--paper-ink);
+	border-radius: 0.375rem;
+	padding: 0.625rem 0.75rem;
+	font-family: "Fuzzy Bubbles", "Caveat", cursive;
+	font-size: 0.9rem;
+	margin: 0 0 0.75rem;
 }
 
 .website-style-guide .style-guide-board-hex {
-    display: block;
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.75rem;
-    color: var(--board-muted);
+	display: block;
+	font-family: "Raleway", sans-serif;
+	font-size: 0.75rem;
+	color: var(--board-muted);
 }
 
 /* --- Project materials: Biwa ---------------------------------------------
@@ -379,161 +379,161 @@
    Momo Trust Display heading (regular only, the face ships no bold),
    Quattrocento Sans body, flat fills with no decorative borders. */
 .website-style-guide .style-guide-biwa {
-    background: #eee2df; /* biwa-alabaster */
-    --board-ink: #3a2a26;
-    --board-muted: #6b544d;
+	background: #eee2df; /* biwa-alabaster */
+	--board-ink: #3a2a26;
+	--board-muted: #6b544d;
 }
 
 .website-style-guide .style-guide-biwa-heading {
-    font-family: 'Momo Trust Display', sans-serif;
-    font-weight: 400; /* the only cut the face ships */
-    font-size: 1.5rem;
-    color: #3a2a26;
-    margin: 0 0 0.375rem;
+	font-family: "Momo Trust Display", sans-serif;
+	font-weight: 400; /* the only cut the face ships */
+	font-size: 1.5rem;
+	color: #3a2a26;
+	margin: 0 0 0.375rem;
 }
 
 .website-style-guide .style-guide-biwa-tag {
-    display: inline-block;
-    background: #eed7c5; /* biwa-petal */
-    color: #2f5d6f;      /* biwa-lake */
-    font-family: 'Quattrocento Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.75rem;
-    border-radius: 0.375rem;
-    padding: 0.25rem 0.5rem;
-    margin-bottom: 0.875rem;
+	display: inline-block;
+	background: #eed7c5; /* biwa-petal */
+	color: #2f5d6f; /* biwa-lake */
+	font-family: "Quattrocento Sans", sans-serif;
+	font-weight: 700;
+	font-size: 0.75rem;
+	border-radius: 0.375rem;
+	padding: 0.25rem 0.5rem;
+	margin-bottom: 0.875rem;
 }
 
 /* A paper stop chip — a labelled sample, not a working check-in. */
 .website-style-guide .style-guide-biwa-stop {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    background: #f7f1ec; /* biwa-paper */
-    color: #3a2a26;
-    border-radius: 0.375rem;
-    padding: 0.5rem 0.75rem;
-    font-family: 'Quattrocento Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-bottom: 0.875rem;
+	display: flex;
+	align-items: center;
+	gap: 0.375rem;
+	background: #f7f1ec; /* biwa-paper */
+	color: #3a2a26;
+	border-radius: 0.375rem;
+	padding: 0.5rem 0.75rem;
+	font-family: "Quattrocento Sans", sans-serif;
+	font-weight: 700;
+	font-size: 0.9rem;
+	margin-bottom: 0.875rem;
 }
 
 .website-style-guide .style-guide-biwa-stop svg {
-    flex: none;
-    color: #b36a5e; /* biwa-clay */
+	flex: none;
+	color: #b36a5e; /* biwa-clay */
 }
 
 .website-style-guide .style-guide-biwa-stop small {
-    font-weight: 400;
-    color: #6b544d;
+	font-weight: 400;
+	color: #6b544d;
 }
 
 .website-style-guide .style-guide-biwa-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0 0.875rem;
-    border-radius: 0.375rem;
-    background: #8a4a36; /* biwa-clay-deep — AA with white */
-    color: #ffffff;
-    font-family: 'Quattrocento Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.875rem;
-    text-decoration: none;
-    margin-bottom: 0.875rem;
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 0.875rem;
+	border-radius: 0.375rem;
+	background: #8a4a36; /* biwa-clay-deep — AA with white */
+	color: #ffffff;
+	font-family: "Quattrocento Sans", sans-serif;
+	font-weight: 700;
+	font-size: 0.875rem;
+	text-decoration: none;
+	margin-bottom: 0.875rem;
 }
 
 .website-style-guide .style-guide-biwa-link:focus-visible {
-    outline: 2px solid #2f5d6f; /* biwa lake focus ring */
-    outline-offset: 2px;
+	outline: 2px solid #2f5d6f; /* biwa lake focus ring */
+	outline-offset: 2px;
 }
 
 /* --- Project materials: Travel-Rizz --------------------------------------
    Sampled from styles/travel-rizz.module.css — pale blue planner surface,
    Caveat title, Raleway everything else, #4a88c6 action blue. */
 .website-style-guide .style-guide-rizz {
-    background: #ecf8ff; /* planner background */
-    --board-ink: #123456;
-    --board-muted: #456789;
+	background: #ecf8ff; /* planner background */
+	--board-ink: #123456;
+	--board-muted: #456789;
 }
 
 .website-style-guide .style-guide-rizz-heading {
-    font-family: 'Caveat', cursive;
-    font-weight: 700;
-    font-size: 1.9rem;
-    line-height: 1.1;
-    color: #123456;
-    margin: 0 0 0.25rem;
+	font-family: "Caveat", cursive;
+	font-weight: 700;
+	font-size: 1.9rem;
+	line-height: 1.1;
+	color: #123456;
+	margin: 0 0 0.25rem;
 }
 
 .website-style-guide .style-guide-rizz-sub {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: #456789;
-    margin: 0 0 0.875rem;
+	font-family: "Raleway", sans-serif;
+	font-weight: 500;
+	font-size: 0.95rem;
+	color: #456789;
+	margin: 0 0 0.875rem;
 }
 
 /* A non-interactive itinerary slip styled like the planner's inputs. */
 .website-style-guide .style-guide-rizz-slip {
-    display: block;
-    background: #ffffff;
-    border: 1px solid #dddddd;
-    border-radius: 0.375rem;
-    padding: 0.5rem 0.75rem;
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.9rem;
-    color: #123456;
-    margin-bottom: 0.875rem;
+	display: block;
+	background: #ffffff;
+	border: 1px solid #dddddd;
+	border-radius: 0.375rem;
+	padding: 0.5rem 0.75rem;
+	font-family: "Raleway", sans-serif;
+	font-size: 0.9rem;
+	color: #123456;
+	margin-bottom: 0.875rem;
 }
 
 .website-style-guide .style-guide-rizz-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0 0.875rem;
-    border-radius: 0.375rem;
-    background: #4a88c6;
-    color: #ffffff;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 0.875rem;
-    text-decoration: none;
-    margin-bottom: 0.875rem;
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 0.875rem;
+	border-radius: 0.375rem;
+	background: #4a88c6;
+	color: #ffffff;
+	font-family: "Raleway", sans-serif;
+	font-weight: 600;
+	font-size: 0.875rem;
+	text-decoration: none;
+	margin-bottom: 0.875rem;
 }
 
 .website-style-guide .style-guide-rizz-link:hover {
-    background: #3a6fa0; /* module hover blue */
+	background: #3a6fa0; /* module hover blue */
 }
 
 .website-style-guide .style-guide-rizz-link:focus-visible {
-    outline: 2px solid #123456;
-    outline-offset: 2px;
+	outline: 2px solid #123456;
+	outline-offset: 2px;
 }
 
 /* Palette strip — five/six small chips, colours set inline as --chip. */
 .website-style-guide .style-guide-strip {
-    display: flex;
-    gap: 0.25rem;
-    margin-bottom: 0.5rem;
+	display: flex;
+	gap: 0.25rem;
+	margin-bottom: 0.5rem;
 }
 
 .website-style-guide .style-guide-strip-chip {
-    flex: 1;
-    height: 1.25rem;
-    border-radius: 0.25rem;
-    background: var(--chip);
-    border: 1px solid rgba(29, 53, 87, 0.1);
+	flex: 1;
+	height: 1.25rem;
+	border-radius: 0.25rem;
+	background: var(--chip);
+	border: 1px solid rgba(29, 53, 87, 0.1);
 }
 
 /* --- Footnote ------------------------------------------------------------
    One line naming where the implementation actually lives. */
 .website-style-guide .style-guide-footnote {
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.85rem;
-    color: #4b5563;
-    margin-top: 2rem;
-    /* Long file paths in <code> would otherwise overflow a 320px column. */
-    overflow-wrap: anywhere;
+	font-family: "Raleway", sans-serif;
+	font-size: 0.85rem;
+	color: #4b5563;
+	margin-top: 2rem;
+	/* Long file paths in <code> would otherwise overflow a 320px column. */
+	overflow-wrap: anywhere;
 }

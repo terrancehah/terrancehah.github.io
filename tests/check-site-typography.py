@@ -6,6 +6,8 @@ Verifies:
   * role selectors on the listing/article/homepage/style-guide sheets
     map to --site-text-* tokens, with no stray font-size left (including
     inside media queries — the token replaces breakpoint overrides)
+  * article pages, the style guide and the Notion page share the
+    --site-font-*/--site-weight-* family and weight tokens
   * header + footer nav share the navigation token; brand + footer
     credits use their tokens
   * every footer.js consumer's stylesheet chain reaches

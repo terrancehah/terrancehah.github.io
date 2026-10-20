@@ -4,8 +4,10 @@ pass.
 
   * every articles/*.html detail page includes /js/article-reading.js
     exactly once, with defer
-  * no non-article page includes it
-  * articles.css carries the .article-reading-progress bar rules
+  * no non-article page includes it — except the syllabus template
+    landing page, which opts in via [data-reading-progress]
+  * styles/site-reading-progress.css owns the .article-reading-progress
+    bar rules; articles.css imports it instead of defining them
   * listing/homepage markup marks tappable cards .site-pressable and
     styles/site-motion.css supplies the coarse-pointer :active rule
   * hover lift/zoom rules in the page sheets sit behind
@@ -48,21 +50,43 @@ for p in article_pages:
             or parser.reading_srcs[0]["src"] != "/js/article-reading.js":
         FAILS.append(f"{p}: script tag missing defer or absolute /js/ src")
 
+# the one non-article page allowed the script — it opts in by marking
+# <main> with data-reading-progress
+OPT_IN = "projects/teaching-syllabus-template/index.html"
 for p in glob.glob("*.html") + glob.glob("projects/**/*.html", recursive=True) \
         + glob.glob("playground/*.html"):
+    if p == OPT_IN:
+        continue
     if "article-reading.js" in open(p, errors="ignore").read():
         FAILS.append(f"{p}: non-article page includes article-reading.js")
 
+# the opt-in page must actually wire it up: deferred script + marker
+opt = open(OPT_IN, errors="ignore").read()
+parser = ScriptCheck()
+parser.feed(opt)
+if len(parser.reading_srcs) != 1 or \
+        "defer" not in parser.reading_srcs[0] or \
+        parser.reading_srcs[0]["src"] != "/js/article-reading.js":
+    FAILS.append(f"{OPT_IN}: opt-in script missing/not deferred")
+if "data-reading-progress" not in opt:
+    FAILS.append(f"{OPT_IN}: missing data-reading-progress marker")
+
 # --- CSS: progress bar rules ----------------------------------------------
-css = open("articles/articles.css").read()
+css = open("styles/site-reading-progress.css").read()
 for needle in (".article-reading-progress", "position: fixed",
                "height: 3px", "pointer-events: none",
                ".article-reading-progress-fill", "scaleX(0)",
                "--article-reading-progress-color"):
     if needle not in css:
-        FAILS.append(f"articles.css missing {needle}")
+        FAILS.append(f"site-reading-progress.css missing {needle}")
 if re.search(r"\.article-reading-progress[^{]*\{[^}]*transition", css):
     FAILS.append("progress bar must not have a transition")
+arts = open("articles/articles.css").read()
+if not re.search(r"@import\s+[\"']\.\./styles/site-reading-progress\.css"
+                 r"[\"']", arts):
+    FAILS.append("articles.css does not import site-reading-progress.css")
+if re.search(r"\.article-reading-progress(-fill)?\s*\{", arts):
+    FAILS.append("articles.css still defines the progress rules itself")
 
 # --- pressable markup + shared motion sheet --------------------------------
 for path, names in (("articles.html", ("article-hero", "article-card")),
@@ -137,7 +161,8 @@ for path, sels in WRAPPED.items():
 # --- balance ---------------------------------------------------------------
 for f in ["articles/articles.css", "projects/projects.css",
           "playground/playground.css", "styles/homepage.css",
-          "styles/site-motion.css", "styles/site-header.css"]:
+          "styles/site-motion.css", "styles/site-header.css",
+          "styles/site-reading-progress.css"]:
     d = mn = pa = 0
     for c in open(f).read():
         d += c == "{"

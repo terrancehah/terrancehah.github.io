@@ -1,0 +1,29 @@
+/* ============================================
+   READING PROGRESS BAR
+   --------------------------------------------
+   Shared presentation for the bar injected by js/article-reading.js —
+   a fixed 3px fill driven by a bare scaleX transform with no
+   transition, so it tracks the scroll exactly. Decorative only
+   (aria-hidden in the markup the script injects).
+
+   Imported by articles/articles.css and linked directly by any
+   non-article page that opts in with [data-reading-progress].
+   ============================================ */
+.article-reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 60; /* above content, below nothing functional */
+    pointer-events: none;
+    background: transparent;
+}
+
+.article-reading-progress-fill {
+    display: block;
+    height: 100%;
+    transform-origin: left center;
+    transform: scaleX(0);
+    background: var(--article-reading-progress-color, #457b9d);
+}

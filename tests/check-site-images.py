@@ -146,11 +146,21 @@ for page in sorted(consumers()):
                      f"(offset {m.start()})")
 
 # --- gallery viewers use full-src fallback chain -----------------------------
+# the viewer is now a shared owner (js/site-image-viewer.js) consumed by
+# the two photo articles and the Notion syllabus page
+viewer = open("js/site-image-viewer.js", errors="ignore").read()
+if "fullSrc" not in viewer or "currentSrc" not in viewer or \
+        ".src ||" not in viewer:
+    FAILS.append("shared viewer lost the full-src → currentSrc → src "
+                 "fallback chain")
 for p in ("articles/mount-kinabalu.html",
-          "articles/tnbyy-my-first-camphike.html"):
+          "articles/tnbyy-my-first-camphike.html",
+          "projects/teaching-syllabus-template/index.html"):
     t = open(p).read()
-    if "dataset.fullSrc" not in t or "enlargedImage.src = this.src" in t:
-        FAILS.append(f"{p}: viewer still uses bare this.src")
+    if 'src="/js/site-image-viewer.js"' not in t:
+        FAILS.append(f"{p}: missing shared image viewer script")
+    if "Create overlay elements" in t:
+        FAILS.append(f"{p}: duplicated inline viewer still present")
 
 # --- unit fixtures: scanner context + palette-PNG alpha -----------------------
 # import the optimizer's scanner/sizing to prove ancestor tracking is

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Offline regression check for the loading/motion pass.
 
-  * each root listing page (index/articles/projects/playground) marks
-    exactly its first main-content img eager + fetchpriority=high +
+  * each root listing page (index/articles/projects/playground) — plus
+    the teaching-syllabus-template landing page, the one non-root page
+    whose overview hero is intentionally eager — marks exactly its
+    first main-content img eager + fetchpriority=high +
     decoding=async; every other main-content img is lazy + async
   * header icons (.site-social-icon) and aria-hidden ornaments are
     untouched (no loading attr requirement either way — asserted
@@ -32,6 +34,11 @@ SKIP = {"node_modules", ".archive", ".vercel", ".git", "pacey",
         "biwa-ride", ".venv", "venv", "dist"}
 ROOT_PAGES = ["./index.html", "./articles.html", "./projects.html",
               "./playground.html"]
+# Pages allowed an eager first main img — the four listings plus the
+# syllabus landing page's overview hero (deliberate, not a blanket
+# allowance for other pages).
+EAGER_PAGES = ROOT_PAGES + \
+    ["./projects/teaching-syllabus-template/index.html"]
 ICON_CLASSES = ("site-social-icon", "handwriting-crossout")
 
 
@@ -111,7 +118,7 @@ for page in all_pages:
 
     first = True
     for ln, a in mains:
-        if page in ROOT_PAGES and first:
+        if page in EAGER_PAGES and first:
             first = False
             if not (a.get("loading") == "eager"
                     and a.get("fetchpriority") == "high"
@@ -147,6 +154,9 @@ for page in all_pages:
             if not part:
                 continue
             url, _, wd = part.rpartition(" ")
+            # srcset may separate url and descriptor with several
+            # spaces — strip so the lookup sees the real path
+            url = url.strip()
             loc = resolve_local(page, url)
             if loc is None:
                 FAILS.append(f"{page} L{ln}: srcset file missing {url[:60]}")

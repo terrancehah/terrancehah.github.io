@@ -23,12 +23,13 @@
 		<link href="/styles/site-navigation.css" rel="stylesheet" />
 		<link href="/styles/site-motion.css" rel="stylesheet" />
 		<link href="/styles/site-header.css" rel="stylesheet" />
+		<link href="/styles/site-reading-progress.css" rel="stylesheet" />
+		<link href="/styles/site-image-viewer.css" rel="stylesheet" />
 		<link href="/styles/output.css" rel="stylesheet" />
-		<!-- Footer-only stylesheet for the footer.js-injected footer -->
-		<link href="/styles/site-footer.css" type="text/css" rel="stylesheet" />
-		<!-- Shared header stylesheet (this page doesn't load styles/style.css;
-         site-header.css itself imports the shared nav sheet) -->
-		<link href="/styles/site-header.css" type="text/css" rel="stylesheet" />
+		<!-- Page stylesheet — all .syllabus-* presentation lives here -->
+		<link
+			href="/projects/teaching-syllabus-template/teaching-syllabus-template.css"
+			rel="stylesheet" />
 		<link
 			rel="icon"
 			href="/resources/icons/TH-logo.png"
@@ -120,7 +121,7 @@
 		</script>
 	</head>
 
-	<body class="m-0 relative h-full bg-white overflow-x-hidden">
+	<body class="syllabus-page">
 		<header class="site-header">
 			<div class="site-header-inner">
 				<!-- Left: Logo -->
@@ -187,242 +188,275 @@
 			</div>
 		</header>
 
-		<main class="w-full px-4 md:px-8 lg:px-16 xl:px-32 py-8">
-			<!-- Intro Section -->
-			<section class="text-center mb-16">
-				<h1
-					class="font-lato font-bold text-3xl sm:text-4xl lg:text-5xl text-[#1d3557] mb-6 leading-tight">
-					Supporting Educators: Simplify Lesson Planning with<br />Our
-					Teaching Syllabus Planner
-				</h1>
-				<h3
-					class="font-raleway text-xl sm:text-xl lg:text-2xl text-[#457B9D] max-w-4xl mx-auto">
-					A reusable Notion teaching syllabus and lesson-planning
-					template — made for tutors and educators who want their
-					class schedule, lesson plans and materials in one organised
-					place.
-				</h3>
-				<p
-					class="font-raleway text-lg text-gray-700 max-w-3xl mx-auto mt-6">
-					Inside you get a calendar view of upcoming classes, a
-					dedicated page for each lesson plan (objectives, topics and
-					remarks), a list view of past lessons, built-in sharing so
-					colleagues can edit alongside you, and customisable cover
-					pictures. You need a Notion account — purchase once below,
-					open the link you receive and duplicate the template into
-					your own workspace to start planning.
+		<main class="syllabus-main" data-reading-progress>
+			<!-- Intro: title, lede and the purchase action sit together on
+                 the left inside a readable measure. -->
+			<section class="syllabus-intro">
+				<h1 class="syllabus-title">Notion Teaching Syllabus Planner</h1>
+				<p class="syllabus-lede">
+					A Notion planner for tutors and educators, with your
+					classes, lesson plans and teaching materials in one place.
 				</p>
+				<p class="syllabus-intro-copy">
+					See upcoming classes in the calendar, prepare each lesson
+					with clear objectives, and keep past lessons easy to find.
+					Duplicate the template into your own Notion workspace,
+					customise it for your teaching, and share it with colleagues
+					when you need to.
+				</p>
+				<div class="syllabus-actions">
+					<a
+						class="syllabus-action syllabus-action--primary"
+						href="#pricing"
+						>Get the template</a
+					>
+				</div>
 			</section>
 
-			<!-- Main Image -->
-			<section class="mb-16">
-				<img
-					src="/resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-1920.webp"
-					alt="notion-front-page"
-					class="w-full md:w-2/3 lg:w-4/5 mx-auto rounded-xl shadow-lg"
-					loading="lazy"
-					decoding="async"
-					width="1920"
-					height="1280"
-					srcset="
-						/resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-640.webp   640w,
-						/resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-1280.webp 1280w,
-						/resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-1920.webp 1920w
-					"
-					sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
-				<p
-					class="text-center font-raleway text-xl lg:text-2xl text-[#457B9D] mt-6 max-w-3xl mx-auto">
-					Introducing an user-friendly Notion Teaching Syllabus
+			<!-- Overview: the template's front page. The page's only
+                 eager/high-priority image — every screenshot below stays
+                 lazy. -->
+			<figure class="syllabus-overview" id="template-preview">
+				<a
+					class="syllabus-image-link"
+					href="/resources/projects/teaching-syllabus-template/notion-front-page.png"
+					aria-label="Enlarge The syllabus planner's front page in Notion — the dashboard classes, lesson plans and settings start from">
+					<img
+						src="/resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-1920.webp"
+						alt="The syllabus planner's front page in Notion — the dashboard classes, lesson plans and settings start from"
+						class="syllabus-screenshot"
+						data-gallery-image
+						data-full-src="/resources/projects/teaching-syllabus-template/notion-front-page.png"
+						loading="eager"
+						fetchpriority="high"
+						decoding="async"
+						width="1920"
+						height="1280"
+						srcset="
+							/resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-640.webp   640w,
+							/resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-1280.webp 1280w,
+							/resources/optimized/projects/teaching-syllabus-template/notion-front-page-png-1920.webp 1920w
+						"
+						sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
+				</a>
+				<figcaption class="syllabus-screenshot-caption">
+					Introducing a user-friendly Notion Teaching Syllabus
 					Planner, designed to help educators like you stay organized
 					and focused on your students.
-				</p>
+				</figcaption>
+			</figure>
+
+			<!-- Five features, each an open editorial row: copy beside its
+                 screenshot on desktop; on small screens DOM order already
+                 reads copy-then-image, so no reversal is needed. -->
+			<section
+				class="syllabus-feature"
+				aria-labelledby="syllabus-feature-calendar">
+				<div class="syllabus-feature-text">
+					<h2
+						class="syllabus-section-title"
+						id="syllabus-feature-calendar">
+						Easy-to-view Calendar
+					</h2>
+					<p class="syllabus-feature-copy">
+						With a clear, intuitive calendar view, you can easily
+						view upcoming classes and events, making it a breeze to
+						manage your time effectively.
+					</p>
+				</div>
+				<a
+					class="syllabus-image-link"
+					href="/resources/projects/teaching-syllabus-template/notion-calendar-view-page.png"
+					aria-label="Enlarge Calendar view inside the template showing upcoming classes laid out across a month">
+					<img
+						src="/resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-1920.webp"
+						alt="Calendar view inside the template showing upcoming classes laid out across a month"
+						class="syllabus-screenshot"
+						data-gallery-image
+						data-full-src="/resources/projects/teaching-syllabus-template/notion-calendar-view-page.png"
+						loading="lazy"
+						decoding="async"
+						width="1920"
+						height="1440"
+						srcset="
+							/resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-640.webp   640w,
+							/resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-1280.webp 1280w,
+							/resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-1920.webp 1920w
+						"
+						sizes="(min-width: 72rem) 640px, (min-width: 56rem) 60vw, calc(100vw - 2rem)" />
+				</a>
 			</section>
 
-			<!-- Features Section -->
-			<section class="space-y-24 mb-24">
-				<!-- Calendar Feature -->
-				<div
-					class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-					<div class="lg:w-1/2 text-center lg:text-left">
-						<h3
-							class="font-lato font-bold text-2xl sm:text-3xl text-[#1d3557] mb-4">
-							Easy-to-view Calendar
-						</h3>
-						<p class="font-raleway text-xl text-gray-700">
-							With a clear, intuitive calendar view, you can
-							easily view upcoming classes and events, making it a
-							breeze to manage your time effectively.
-						</p>
-					</div>
-					<div class="lg:w-1/2">
-						<img
-							src="/resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-1920.webp"
-							alt="notion-calendar-view-page"
-							class="w-full md:w-2/3 lg:w-4/5 mx-auto rounded-xl shadow-lg"
-							loading="lazy"
-							decoding="async"
-							width="1920"
-							height="1440"
-							srcset="
-								/resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-640.webp   640w,
-								/resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-1280.webp 1280w,
-								/resources/optimized/projects/teaching-syllabus-template/notion-calendar-view-page-png-1920.webp 1920w
-							"
-							sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
-					</div>
+			<section
+				class="syllabus-feature syllabus-feature--reverse"
+				aria-labelledby="syllabus-feature-lesson">
+				<div class="syllabus-feature-text">
+					<h2
+						class="syllabus-section-title"
+						id="syllabus-feature-lesson">
+						Dedicated Lesson Plan Page
+					</h2>
+					<p class="syllabus-feature-copy">
+						This dedicated space allows you to outline subjects,
+						time, objectives, topics, and class remarks, ensuring
+						that each class is well-planned and tailored to your
+						students' needs.
+					</p>
 				</div>
-
-				<!-- Lesson Plan Feature -->
-				<div
-					class="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-16">
-					<div class="lg:w-1/2">
-						<img
-							src="/resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-1920.webp"
-							alt="lesson-plan-page"
-							class="w-full md:w-2/3 lg:w-4/5 mx-auto rounded-xl shadow-lg"
-							loading="lazy"
-							decoding="async"
-							width="1920"
-							height="1440"
-							srcset="
-								/resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-640.webp   640w,
-								/resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-1280.webp 1280w,
-								/resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-1920.webp 1920w
-							"
-							sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
-					</div>
-					<div class="lg:w-1/2 text-center lg:text-left">
-						<h3
-							class="font-lato font-bold text-2xl sm:text-3xl text-[#1d3557] mb-4">
-							Dedicated Lesson Plan Page
-						</h3>
-						<p class="font-raleway text-xl text-gray-700">
-							This dedicated space allows you to outline subjects,
-							time, objectives, topics, and class remarks,
-							ensuring that each class is well-planned and
-							tailored to your students' needs.
-						</p>
-					</div>
-				</div>
-
-				<!-- Lesson Plan List Feature -->
-				<div
-					class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-					<div class="lg:w-1/2 text-center lg:text-left">
-						<h3
-							class="font-lato font-bold text-2xl sm:text-3xl text-[#1d3557] mb-4">
-							Intuitive Lesson Plan List
-						</h3>
-						<p class="font-raleway text-xl text-gray-700">
-							Keep your lesson plans and class materials neatly
-							organized with our class lessons list. Effortlessly
-							access the previous lessons you have conducted in an
-							easy-to-view list.
-						</p>
-					</div>
-					<div class="lg:w-1/2">
-						<img
-							src="/resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-1920.webp"
-							alt="notion-class-lesson-list"
-							class="w-full md:w-2/3 lg:w-4/5 mx-auto rounded-xl shadow-lg"
-							loading="lazy"
-							decoding="async"
-							width="1920"
-							height="1440"
-							srcset="
-								/resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-640.webp   640w,
-								/resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-1280.webp 1280w,
-								/resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-1920.webp 1920w
-							"
-							sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
-					</div>
-				</div>
-
-				<!-- Collaboration Feature -->
-				<div
-					class="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-16">
-					<div class="lg:w-1/2">
-						<img
-							src="/resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1920.webp"
-							alt="notion-sharing"
-							class="w-full md:w-2/3 lg:w-4/5 mx-auto rounded-xl shadow-lg"
-							loading="lazy"
-							decoding="async"
-							width="1920"
-							height="1440"
-							srcset="
-								/resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-640.webp   640w,
-								/resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1280.webp 1280w,
-								/resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1920.webp 1920w
-							"
-							sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
-					</div>
-					<div class="lg:w-1/2 text-center lg:text-left">
-						<h3
-							class="font-lato font-bold text-2xl sm:text-3xl text-[#1d3557] mb-4">
-							Built-in Collaboration
-						</h3>
-						<p class="font-raleway text-xl text-gray-700">
-							Collaborate effortlessly with colleagues using
-							Notion's real-time, multi-user editing capabilities.
-							Invite them through emails and start working on the
-							syllabus together!
-						</p>
-					</div>
-				</div>
-
-				<!-- Cover Pictures Feature -->
-				<div
-					class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-					<div class="lg:w-1/2 text-center lg:text-left">
-						<h3
-							class="font-lato font-bold text-2xl sm:text-3xl text-[#1d3557] mb-4">
-							Customised Cover Pictures
-						</h3>
-						<p class="font-raleway text-xl text-gray-700">
-							With customised cover pictures, your pages will
-							surely look more vibrant and lively!
-						</p>
-					</div>
-					<div class="lg:w-1/2">
-						<img
-							src="/resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-1920.webp"
-							alt="customised-cover-pictures"
-							class="w-full md:w-2/3 lg:w-4/5 mx-auto rounded-xl shadow-lg"
-							loading="lazy"
-							decoding="async"
-							width="1920"
-							height="1440"
-							srcset="
-								/resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-640.webp   640w,
-								/resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-1280.webp 1280w,
-								/resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-1920.webp 1920w
-							"
-							sizes="(max-width: 767px) calc(100vw - 2rem), 960px" />
-					</div>
-				</div>
+				<a
+					class="syllabus-image-link"
+					href="/resources/projects/teaching-syllabus-template/lesson-plan-page.png"
+					aria-label="Enlarge A lesson plan page with subject, time, objectives, topics and remarks fields filled in">
+					<img
+						src="/resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-1920.webp"
+						alt="A lesson plan page with subject, time, objectives, topics and remarks fields filled in"
+						class="syllabus-screenshot"
+						data-gallery-image
+						data-full-src="/resources/projects/teaching-syllabus-template/lesson-plan-page.png"
+						loading="lazy"
+						decoding="async"
+						width="1920"
+						height="1440"
+						srcset="
+							/resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-640.webp   640w,
+							/resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-1280.webp 1280w,
+							/resources/optimized/projects/teaching-syllabus-template/lesson-plan-page-png-1920.webp 1920w
+						"
+						sizes="(min-width: 72rem) 640px, (min-width: 56rem) 60vw, calc(100vw - 2rem)" />
+				</a>
 			</section>
 
-			<!-- Pricing Section -->
-			<section class="mb-24 text-center">
-				<h2
-					class="font-lato font-bold text-3xl sm:text-4xl text-[#1d3557] mb-4">
-					Pricing
-				</h2>
-				<p class="font-raleway text-xl sm:text-xl text-[#457B9D] mb-8">
-					No subscription. Pay once and use forever.
-				</p>
+			<section
+				class="syllabus-feature"
+				aria-labelledby="syllabus-feature-list">
+				<div class="syllabus-feature-text">
+					<h2
+						class="syllabus-section-title"
+						id="syllabus-feature-list">
+						Intuitive Lesson Plan List
+					</h2>
+					<p class="syllabus-feature-copy">
+						Keep your lesson plans and class materials neatly
+						organized with our class lessons list. Effortlessly
+						access the previous lessons you have conducted in an
+						easy-to-view list.
+					</p>
+				</div>
+				<a
+					class="syllabus-image-link"
+					href="/resources/projects/teaching-syllabus-template/notion-class-lesson-list.png"
+					aria-label="Enlarge The class lessons list view showing past lessons as rows in a table">
+					<img
+						src="/resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-1920.webp"
+						alt="The class lessons list view showing past lessons as rows in a table"
+						class="syllabus-screenshot"
+						data-gallery-image
+						data-full-src="/resources/projects/teaching-syllabus-template/notion-class-lesson-list.png"
+						loading="lazy"
+						decoding="async"
+						width="1920"
+						height="1440"
+						srcset="
+							/resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-640.webp   640w,
+							/resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-1280.webp 1280w,
+							/resources/optimized/projects/teaching-syllabus-template/notion-class-lesson-list-png-1920.webp 1920w
+						"
+						sizes="(min-width: 72rem) 640px, (min-width: 56rem) 60vw, calc(100vw - 2rem)" />
+				</a>
+			</section>
 
-				<div
-					class="w-4/5 md:w-3/5 lg:w-1/3 mx-auto bg-white rounded-xl shadow-all p-8">
-					<ul
-						class="w-3/5 font-raleway text-xl text-gray-700 mb-8 space-y-4 mx-auto text-left list-disc list-inside">
+			<section
+				class="syllabus-feature syllabus-feature--reverse"
+				aria-labelledby="syllabus-feature-sharing">
+				<div class="syllabus-feature-text">
+					<h2
+						class="syllabus-section-title"
+						id="syllabus-feature-sharing">
+						Built-in Collaboration
+					</h2>
+					<p class="syllabus-feature-copy">
+						Collaborate effortlessly with colleagues using Notion's
+						real-time, multi-user editing capabilities. Invite them
+						through emails and start working on the syllabus
+						together!
+					</p>
+				</div>
+				<a
+					class="syllabus-image-link"
+					href="/resources/projects/teaching-syllabus-template/notion-sharing.png"
+					aria-label="Enlarge Notion's sharing panel inviting collaborators by email on the syllabus template">
+					<img
+						src="/resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1920.webp"
+						alt="Notion's sharing panel inviting collaborators by email on the syllabus template"
+						class="syllabus-screenshot"
+						data-gallery-image
+						data-full-src="/resources/projects/teaching-syllabus-template/notion-sharing.png"
+						loading="lazy"
+						decoding="async"
+						width="1920"
+						height="1440"
+						srcset="
+							/resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-640.webp   640w,
+							/resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1280.webp 1280w,
+							/resources/optimized/projects/teaching-syllabus-template/notion-sharing-png-1920.webp 1920w
+						"
+						sizes="(min-width: 72rem) 640px, (min-width: 56rem) 60vw, calc(100vw - 2rem)" />
+				</a>
+			</section>
+
+			<section
+				class="syllabus-feature"
+				aria-labelledby="syllabus-feature-covers">
+				<div class="syllabus-feature-text">
+					<h2
+						class="syllabus-section-title"
+						id="syllabus-feature-covers">
+						Customised Cover Pictures
+					</h2>
+					<p class="syllabus-feature-copy">
+						With customised cover pictures, your pages will surely
+						look more vibrant and lively!
+					</p>
+				</div>
+				<a
+					class="syllabus-image-link"
+					href="/resources/projects/teaching-syllabus-template/customised-cover-pictures.png"
+					aria-label="Enlarge Template pages decorated with colourful custom cover pictures">
+					<img
+						src="/resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-1920.webp"
+						alt="Template pages decorated with colourful custom cover pictures"
+						class="syllabus-screenshot"
+						data-gallery-image
+						data-full-src="/resources/projects/teaching-syllabus-template/customised-cover-pictures.png"
+						loading="lazy"
+						decoding="async"
+						width="1920"
+						height="1440"
+						srcset="
+							/resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-640.webp   640w,
+							/resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-1280.webp 1280w,
+							/resources/optimized/projects/teaching-syllabus-template/customised-cover-pictures-png-1920.webp 1920w
+						"
+						sizes="(min-width: 72rem) 640px, (min-width: 56rem) 60vw, calc(100vw - 2rem)" />
+				</a>
+			</section>
+
+			<!-- Pricing: one centered panel holds the pitch and the Stripe
+                 checkout widget together. The buy button is a live
+                 checkout element — its id, key and class are
+                 load-bearing, do not edit. -->
+			<section class="syllabus-pricing" id="pricing">
+				<div class="syllabus-purchase-panel">
+					<h2 class="syllabus-section-title">Pricing</h2>
+					<p class="syllabus-pricing-tagline">
+						No subscription. Pay once and use forever.
+					</p>
+					<ul class="syllabus-pricing-includes">
 						<li>Easy-to-View Calendar</li>
 						<li>Dedicated Lesson Plan Page</li>
 						<li>Intuitive Lesson Plan List</li>
 						<li>Built-in Collaboration</li>
 					</ul>
-
 					<stripe-buy-button
 						buy-button-id="buy_btn_1N84o8I41yHwVfoxr37OISZv"
 						publishable-key="pk_live_51MtLXgI41yHwVfoxoenCC4Y3iWAv4dwTMPFtBsuAWnJItf6KjcLgtClHE281ixQp5j7tQdmHt9JCtyVSvGaVOI4N00AXx9Bg3a"
@@ -431,71 +465,147 @@
 				</div>
 			</section>
 
-			<!-- FAQ Section -->
-			<section class="mb-24">
-				<h2
-					class="font-lato font-bold text-3xl sm:text-4xl text-[#1d3557] text-center mb-12">
+			<!-- FAQ: seven questions as accessible drawers. Panels carry
+                 is-open in the markup so every answer is visible when
+                 JavaScript is off; teaching-syllabus-template.js injects
+                 the toggle buttons and collapses them after binding. -->
+			<section class="syllabus-faq">
+				<h2 class="syllabus-section-title">
 					Frequently Asked Questions
 				</h2>
 
-				<div class="space-y-8 max-w-3xl mx-auto">
-					<div class="bg-white rounded-xl shadow-lg p-6">
-						<h3
-							class="font-lato font-semibold text-xl text-[#1d3557] mb-4">
-							Is the template compatible with both desktop and
-							mobile versions of Notion?
+				<div class="syllabus-faq-list">
+					<div class="syllabus-faq-item">
+						<h3 class="syllabus-faq-question">
+							Do I need a Notion account?
 						</h3>
-						<p class="font-raleway text-lg text-gray-700">
-							Yes, our template works seamlessly with both desktop
-							and mobile versions of Notion, allowing you to plan
-							and organize your lessons on the go.
-						</p>
+						<div
+							class="syllabus-faq-panel is-open"
+							id="syllabus-faq-panel-1">
+							<div class="syllabus-faq-panel-inner">
+								<p class="syllabus-faq-answer">
+									Yes. You need a Notion account to duplicate
+									the template into your workspace and use it.
+								</p>
+							</div>
+						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg p-6">
-						<h3
-							class="font-lato font-semibold text-xl text-[#1d3557] mb-4">
-							Will I receive updates and improvements to the
-							template in the future?
+					<div class="syllabus-faq-item">
+						<h3 class="syllabus-faq-question">
+							What is included in the template?
 						</h3>
-						<p class="font-raleway text-lg text-gray-700">
-							Yes, we are committed to continuously improving the
-							template based on user feedback and needs. As we
-							roll out updates and enhancements, Notion should
-							allow users to directly access these improvements.
-						</p>
+						<div
+							class="syllabus-faq-panel is-open"
+							id="syllabus-faq-panel-2">
+							<div class="syllabus-faq-panel-inner">
+								<p class="syllabus-faq-answer">
+									A class calendar, individual lesson-plan
+									pages, a list of past lessons, sharing
+									through Notion, and customisable cover
+									pictures.
+								</p>
+							</div>
+						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg p-6">
-						<h3
-							class="font-lato font-semibold text-xl text-[#1d3557] mb-4">
-							How do I import the template into my Notion account
-							after purchase?
+					<div class="syllabus-faq-item">
+						<h3 class="syllabus-faq-question">
+							How do I add the template to my workspace?
 						</h3>
-						<p class="font-raleway text-lg text-gray-700">
-							After completing your purchase, you'll receive a
-							link to the template. Simply click on the link, and
-							you'll be prompted to duplicate the template into
-							your Notion account.
-						</p>
+						<div
+							class="syllabus-faq-panel is-open"
+							id="syllabus-faq-panel-3">
+							<div class="syllabus-faq-panel-inner">
+								<p class="syllabus-faq-answer">
+									After purchase, open the template link you
+									receive and duplicate it into your own
+									Notion workspace.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="syllabus-faq-item">
+						<h3 class="syllabus-faq-question">
+							Can I use it on desktop and mobile?
+						</h3>
+						<div
+							class="syllabus-faq-panel is-open"
+							id="syllabus-faq-panel-4">
+							<div class="syllabus-faq-panel-inner">
+								<p class="syllabus-faq-answer">
+									Yes. The template can be used in both the
+									desktop and mobile versions of Notion.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="syllabus-faq-item">
+						<h3 class="syllabus-faq-question">
+							Can I adapt it to my teaching style?
+						</h3>
+						<div
+							class="syllabus-faq-panel is-open"
+							id="syllabus-faq-panel-5">
+							<div class="syllabus-faq-panel-inner">
+								<p class="syllabus-faq-answer">
+									Yes. Once duplicated, you can edit lesson
+									content, objectives, topics, remarks and
+									cover pictures in your own copy.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="syllabus-faq-item">
+						<h3 class="syllabus-faq-question">
+							Can I plan lessons with colleagues?
+						</h3>
+						<div
+							class="syllabus-faq-panel is-open"
+							id="syllabus-faq-panel-6">
+							<div class="syllabus-faq-panel-inner">
+								<p class="syllabus-faq-answer">
+									Yes. Use Notion's sharing controls to invite
+									colleagues and give them the appropriate
+									access to work on the syllabus together.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="syllabus-faq-item">
+						<h3 class="syllabus-faq-question">
+							Is this a subscription?
+						</h3>
+						<div
+							class="syllabus-faq-panel is-open"
+							id="syllabus-faq-panel-7">
+							<div class="syllabus-faq-panel-inner">
+								<p class="syllabus-faq-answer">
+									No. The template is a one-time purchase. It
+									is used within your own Notion workspace.
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Other Projects Section -->
-			<section class="text-center mb-16">
-				<h3
-					class="font-raleway text-lg sm:text-xl lg:text-2xl text-[#457B9D] max-w-4xl mx-auto">
-					I have also developed an AI-powered travel planner to help
-					you effortlessly plan your travel itinerary.<br />
-					Feel free to
-					<a
-						href="/travel-rizz.html"
-						target="_blank"
-						class="text-sky-blue hover:text-secondary underline"
-						>visit and explore!</a
+			<!-- Cross-links to other projects -->
+			<section class="syllabus-crosslink">
+				<p class="syllabus-crosslink-copy">
+					I have also built other projects like
+					<a href="/travel-rizz.html" class="syllabus-crosslink-link"
+						>Travel-Rizz, a travel itinerary planner</a
 					>
-				</h3>
+					and
+					<a href="/pacey" class="syllabus-crosslink-link"
+						>Pacey, a race-training companion</a
+					>, feel free to give them a try!
+				</p>
 			</section>
 		</main>
 
@@ -503,6 +613,16 @@
 
 		<!-- Scripts -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- Shared reading-progress bar — this page opts in via
+             data-reading-progress on <main> -->
+		<script src="/js/article-reading.js" defer></script>
+		<!-- Shared modal image viewer — upgrades the six
+             screenshot links when <dialog> is supported -->
+		<script src="/js/site-image-viewer.js" defer></script>
+		<!-- FAQ drawers + screenshot reveals -->
+		<script
+			src="/projects/teaching-syllabus-template/teaching-syllabus-template.js"
+			defer></script>
 		<script async src="https://js.stripe.com/v3/buy-button.js"></script>
 		<script>
 			document.addEventListener("DOMContentLoaded", function () {
