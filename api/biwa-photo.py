@@ -44,13 +44,22 @@ MAX_INDEX = 9          # photo summaries are capped at 10 per place
 MIN_WIDTH, MAX_WIDTH = 64, 1600
 
 
-def _image_response(content, media_type):
-    """Private browser cache for a day — the bytes are already stored
-    server-side, so letting the browser reuse them costs nothing extra
-    and kills repeat downloads on reload. `private` keeps shared caches
-    out of it."""
-    return Response(content=content, media_type=media_type,
-                    headers={"Cache-Control": "private, max-age=86400"})
+def _image_response(content, media_type, custom=False):
+    """Cache headers depend on which catalogue the place came from.
+
+    Vary: Cookie rides on every image reply — the resolution path (and so
+    the bytes) can differ by the owner cookie. A CUSTOM place id exists
+    only inside one owner's doc, so its bytes are no-store: two owners
+    could mint the same id with different photos, and a browser-private
+    day cache would leak one owner's photo under another's URL. Canonical
+    places keep the day-private cache — the bytes are already stored
+    server-side, so browser reuse costs nothing and kills repeat
+    downloads (`private` keeps shared caches out of it).
+    """
+    headers = {"Vary": "Cookie"}
+    headers["Cache-Control"] = (
+        "private, no-store" if custom else "private, max-age=86400")
+    return Response(content=content, media_type=media_type, headers=headers)
 
 
 @app.get("/")
@@ -84,9 +93,17 @@ async def get_photo(request: Request):
         return biwa_store.json_error(503, "not_configured",
                                      "Photos are not configured on this deployment.")
 
+    # Custom places resolve from the CALLER's doc only — the owner header,
+    # or the biwa-owner cookie GET /biwa-trip minted for <img src> loads
+    # (a bearer capability, never write auth). The retired shared doc key
+    # is never read.
+    canonical_hit = (
+        biwa_models.CANONICAL is not None and place_id in biwa_models.CANONICAL
+    )
     trip = None
-    if store.configured:
-        trip, _raw = store.get_trip()
+    owner = biwa_store.owner_from_header_or_cookie(request)
+    if owner and store.configured:
+        trip, _raw = store.get_trip(biwa_store.owner_trip_key(owner))
     place = biwa_places.find_trip_place(place_id, biwa_models.CANONICAL, trip)
     if place is None:
         return biwa_store.json_error(404, "unknown_place", "No such place.")
@@ -95,7 +112,7 @@ async def get_photo(request: Request):
     # views inside the 30-day window are free.
     hit = biwa_google_cache.cached_photo(store, place, index, width)
     if hit is not None:
-        return _image_response(hit[0], hit[1])
+        return _image_response(hit[0], hit[1], custom=not canonical_hit)
 
     # Cached photo names skip the details resolve entirely — the next
     # billable step is then only the media call. An empty list is a
@@ -156,4 +173,4 @@ async def get_photo(request: Request):
     # Store the bytes for 30 days — every later request for this image
     # answers from Redis with no Google call.
     biwa_google_cache.save_photo(store, place, index, width, data, content_type)
-    return _image_response(data, content_type)
+    return _image_response(data, content_type, custom=not canonical_hit)

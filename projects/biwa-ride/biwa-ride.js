@@ -60,6 +60,8 @@
 
   var els = {};
   var selectedDayId = null;      // local per phone — deliberately not shared
+  var miniCheckin = null;        // the mini bar's check-in feedback lifecycle
+  var offlineHandle = null;      // the offline-cache module handle (refresh on language switch)
   var mapsNs = undefined;        // undefined=not attempted, null=failed, obj=ready
   var mapsKeyAttempted = null;   // browser key the last loadMaps call used (or null)
   var mapPage = null;            // RoutePreview.createMapPage handle
@@ -140,6 +142,7 @@
       'biwa-next-checkins',
       'biwa-mini-bar', 'biwa-mini-open', 'biwa-mini-photo', 'biwa-mini-name',
       'biwa-mini-tags', 'biwa-mini-directions', 'biwa-mini-complete',
+      'biwa-mini-complete-label',
       'biwa-leaves',
       'biwa-track', 'biwa-add-stop', 'biwa-add-place',
       'biwa-map-canvas', 'biwa-map-legend',
@@ -168,6 +171,17 @@
     wireSheetLifecycle();
     installTrackDrag();
     installCardPress();
+    // Offline cache — registers the scoped service worker silently and
+    // toasts only on genuine connection transitions (offline, interrupted,
+    // restored); a healthy online app stays quiet. No-ops gracefully when
+    // service workers or the module are unavailable.
+    if (window.BiwaOfflineCache) {
+      offlineHandle = window.BiwaOfflineCache.init({
+        store: store,
+        notify: function (message) { showToast(message, 4000); },
+        translate: t
+      });
+    }
     store.onChange(render);
     store.init().then(function () {
       selectedDayId = sessionStorage.getItem('biwa-day') ||
@@ -226,54 +240,28 @@
     });
 
     // Device pairing — personal trips mean two of the owner's devices only
-    // share a trip by claiming the same identity. 'Send' mints a code on
-    // this device; 'receive' claims one shown elsewhere and reloads under
-    // the adopted id so every module reboots cleanly.
-    els['biwa-pair-open'].addEventListener('click', function () {
-      els['biwa-pair-status'].textContent = '';
-      els['biwa-pair-dialog'].showModal();
-    });
-    els['biwa-pair-close'].addEventListener('click', function () {
-      els['biwa-pair-dialog'].close();
-    });
-    els['biwa-pair-show'].addEventListener('click', function () {
-      var btn = els['biwa-pair-show'];
-      btn.disabled = true;
-      els['biwa-pair-status'].textContent = t('Requesting code…');
-      store.createPairCode().then(function (body) {
-        btn.disabled = false;
-        if (!body || !body.ok || !body.code) {
-          els['biwa-pair-status'].textContent = t('Could not create a code — try again.');
-          return;
-        }
-        els['biwa-pair-status'].textContent = '';
-        // Characters get individual spans so letter-spacing can be wide
-        // without the trailing space inflating the visual center.
-        els['biwa-pair-code'].textContent = body.code.split('').join(' ');
-        els['biwa-pair-code'].hidden = false;
-        els['biwa-pair-code-note'].hidden = false;
+    // share a trip by claiming the same identity. The dialog wiring lives
+    // in device-pairing.js; the controller hands it the store, its
+    // elements, the translator and the reboot (a reload restarts every
+    // module under the adopted identity).
+    if (window.BiwaDevicePairing) {
+      window.BiwaDevicePairing.init({
+        store: store,
+        elements: {
+          open: els['biwa-pair-open'],
+          dialog: els['biwa-pair-dialog'],
+          show: els['biwa-pair-show'],
+          code: els['biwa-pair-code'],
+          codeNote: els['biwa-pair-code-note'],
+          input: els['biwa-pair-input'],
+          claim: els['biwa-pair-claim'],
+          status: els['biwa-pair-status'],
+          close: els['biwa-pair-close']
+        },
+        translate: t,
+        reload: function () { location.reload(); }
       });
-    });
-    els['biwa-pair-claim'].addEventListener('click', function () {
-      var code = (els['biwa-pair-input'].value || '').trim().toUpperCase();
-      if (code.length !== 6) {
-        els['biwa-pair-status'].textContent = t('That code is invalid or expired — check it and try again.');
-        return;
-      }
-      els['biwa-pair-claim'].disabled = true;
-      els['biwa-pair-status'].textContent = t('Claiming…');
-      store.claimPairCode(code).then(function (body) {
-        els['biwa-pair-claim'].disabled = false;
-        if (body && body.ok && body.ownerId && store.adoptOwner(body.ownerId)) {
-          els['biwa-pair-status'].textContent = t('Trip claimed — reloading…');
-          // A reload reboots every module under the adopted identity —
-          // cleaner than patching live state mid-flight.
-          location.reload();
-          return;
-        }
-        els['biwa-pair-status'].textContent = t('That code is invalid or expired — check it and try again.');
-      });
-    });
+    }
     els['biwa-nearby-geolocate'].addEventListener('click', updateMyLocation);
     // Language switch: pick a segment to set the language, then repaint
     // every dynamic view through the normal render path (static markup
@@ -283,185 +271,17 @@
       if (!I18n || !btn) return;
       I18n.setLang(btn.getAttribute('data-lang'));
       render(store);
+      // Re-evaluate the connectivity episode after the switch — a pending
+      // transition toast, if any, uses the new language when it fires.
+      if (offlineHandle) offlineHandle.refresh();
     });
 
-    // Masthead scene — the figure GIFs (riders, walkers, passers) are
-    // always animated by request; CSS can't pause a GIF's frames so the
-    // figure imgs are simply hidden under prefers-reduced-motion. What
-    // JS does here is purely CSS-layer gating (.is-paused freezes every
-    // animated belt/landmark/drift transform while the header is
-    // scrolled offscreen or reduced motion is requested) plus a keep-
-    // alive nudge for the GIFs themselves — browsers suspend decoding of
-    // animated images they consider invisible, and walkers clipped deep
-    // inside the transformed belt can come back frozen while their
-    // compositor-driven drift keeps moving them. A per-figure
-    // IntersectionObserver re-assigns src on each real entry, forcing
-    // the GIF to re-decode; the stride restart is invisible at ~50px.
-    var sceneMotionQuery = window.matchMedia
-      ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    var sceneVisible = true;
-
-    // One-time tree arrangement: the six traced assets (3 copies each =
-    // 18 imgs) are Fisher-Yates shuffled, then scattered as 12 groups
-    // (blueprint [1,2,1,1,3,1,2,1,2,1,2,1]) across the belt tile — group
-    // bases at ~j/12 of the half plus 2-4% jitter (clamped inside the
-    // edges), members spread 24-35px around the base. The computed tile is
-    // cloned verbatim into the second half so the -50% wrap is seamless.
-    // Runs at boot and again when the viewport width drifts — trip polls
-    // never touch the masthead. Heights are NOT owned here — each img
-    // keeps its HTML inline height (CSS clamps the range); JS only assigns
-    // which asset fills each slot and how many slots the half needs.
-    var SCENE_TREE_ASSETS = [
-      'assets/tree-01.svg', 'assets/tree-02.svg', 'assets/tree-03.svg',
-      'assets/tree-04.svg', 'assets/tree-05.svg', 'assets/tree-06.svg'
-    ];
-    // Target spacing between tree centres. Each belt half is
-    // max(viewport, 900px) wide and positions are percentages, so a fixed
-    // tree count would crowd together as the screen narrows — ~76px is
-    // the original wide-desktop density (≈21 trees per 1600px) and
-    // narrower halves simply get proportionally fewer trees to hold it.
-    var SCENE_TREE_TARGET_GAP = 76;
-    function arrangeSceneTrees() {
-      var halves = els['biwa-masthead-scene']
-        ? els['biwa-masthead-scene'].querySelectorAll('.biwa-scene-belt-half')
-        : [];
-      if (halves.length < 2) return;
-      var half = halves[0];
-      var halfWidth = half.getBoundingClientRect().width || 900;
-      // Floor of 10 keeps even the narrowest half from going bare —
-      // above that the count purely tracks width against the target gap.
-      var treeCount = Math.max(10, Math.round(halfWidth / SCENE_TREE_TARGET_GAP));
-      var imgs = half.querySelectorAll('.biwa-scene-tree');
-      // Grow the img pool to the target count — clones inherit the class
-      // and an authored src/height baseline; the layout below overwrites
-      // position and src anyway, and generated heights randomise inside
-      // the CSS-clamped band so they blend with the authored trees.
-      var template = imgs[0];
-      while (template && half.querySelectorAll('.biwa-scene-tree').length < treeCount) {
-        var clone = template.cloneNode(false);
-        clone.style.height = (70 + Math.round(Math.random() * 40)) + 'px';
-        half.appendChild(clone);
-      }
-      imgs = half.querySelectorAll('.biwa-scene-tree');
-      var assets = [];
-      for (var i = 0; i < treeCount; i++) {
-        assets.push(SCENE_TREE_ASSETS[i % SCENE_TREE_ASSETS.length]);
-      }
-      for (i = assets.length - 1; i > 0; i--) {
-        var swap = Math.floor(Math.random() * (i + 1));
-        var tmp = assets[i];
-        assets[i] = assets[swap];
-        assets[swap] = tmp;
-      }
-      // Grove sizes follow the authored mix — mostly singles and pairs
-      // with the occasional trio — stretched to whatever count the half
-      // needs. Bases spread evenly over 2–97% of the half's width.
-      var groups = [];
-      for (var remaining = treeCount; remaining > 0;) {
-        var roll = Math.random();
-        var g = remaining >= 3 ? (roll < 0.4 ? 1 : roll < 0.85 ? 2 : 3)
-            : remaining === 2 ? (roll < 0.5 ? 1 : 2) : 1;
-        groups.push(g);
-        remaining -= g;
-      }
-      var cursor = 0;
-      groups.forEach(function (count, gi) {
-        var base = Math.min(97, Math.max(2,
-          (gi / groups.length) * 95 + 2 + Math.random() * 2));
-        var spread = 24 + Math.random() * 11;
-        for (var k = 0; k < count && cursor < treeCount; k++, cursor++) {
-          var img = imgs[cursor];
-          img.setAttribute('src', assets[cursor]);
-          img.style.setProperty('--tree-x', base + '%');
-          var offset = count > 1 ? (k - (count - 1) / 2) * spread : 0;
-          img.style.setProperty('--tree-offset', offset.toFixed(1) + 'px');
-          img.style.display = '';
-        }
-      });
-      // Authored imgs beyond the needed count hide rather than being
-      // deleted — a later narrower arrangement can re-show them.
-      for (var x = cursor; x < imgs.length; x++) imgs[x].style.display = 'none';
-      halves[1].innerHTML = half.innerHTML;
+    // Masthead scene — the decorative header art owns its own observers,
+    // tree layout and motion gating in masthead-scene.js; the controller
+    // only hands it the scene element. init() is idempotent.
+    if (window.BiwaMastheadScene) {
+      window.BiwaMastheadScene.init(els['biwa-masthead-scene']);
     }
-    arrangeSceneTrees();
-    // The half width is viewport-derived — a rotation or window resize
-    // changes the needed tree count, so re-arrange once it drifts. The
-    // belt clone (walkers included) is rebuilt inside arrangeSceneTrees().
-    var sceneTreeHalf = els['biwa-masthead-scene'] &&
-      els['biwa-masthead-scene'].querySelector('.biwa-scene-belt-half');
-    var sceneTreeHalfWidth = sceneTreeHalf ? sceneTreeHalf.getBoundingClientRect().width : 0;
-    var sceneTreeResizeTimer = null;
-    window.addEventListener('resize', function () {
-      clearTimeout(sceneTreeResizeTimer);
-      sceneTreeResizeTimer = setTimeout(function () {
-        var half = els['biwa-masthead-scene'] &&
-          els['biwa-masthead-scene'].querySelector('.biwa-scene-belt-half');
-        if (!half) return;
-        var width = half.getBoundingClientRect().width;
-        if (Math.abs(width - sceneTreeHalfWidth) < 60) return;
-        sceneTreeHalfWidth = width;
-        arrangeSceneTrees();
-        observeSceneFigures();
-        applySceneMotion();
-      }, 200);
-    });
-
-    function sceneMotionAllowed() {
-      return sceneVisible && !(sceneMotionQuery && sceneMotionQuery.matches);
-    }
-    function applySceneMotion() {
-      if (!els['biwa-masthead-scene']) return;
-      els['biwa-masthead-scene'].classList.toggle('is-paused', !sceneMotionAllowed());
-    }
-    if (sceneMotionQuery && sceneMotionQuery.addEventListener) {
-      // A system-level change to reduced motion re-applies instantly.
-      sceneMotionQuery.addEventListener('change', applySceneMotion);
-    }
-    if (els['biwa-masthead-scene'] && 'IntersectionObserver' in window) {
-      // Offscreen: freeze the CSS layers so a scrolled-past header costs
-      // no animation work. The figure GIFs keep decoding — frames can't
-      // be paused — but they stay clipped out of frame.
-      new IntersectionObserver(function (entries) {
-        sceneVisible = entries[0].isIntersecting;
-        applySceneMotion();
-      }).observe(els['biwa-masthead-scene']);
-    }
-    applySceneMotion();
-
-    // Figure GIF keep-alive — rooted on the scene so entries fire only
-    // when a figure actually crosses into the visible masthead (the
-    // 100px margin pre-wakes decode just before it appears). WebKit
-    // suspends GIF decode for never-painted images and only re-checks
-    // on scroll/repaint — the belt's transform drifts walkers in with
-    // neither — so a src self-assign is useless (the in-memory cache
-    // returns the same suspended animation). A display flick forces the
-    // renderer to detach and rebuild while in view, which runs the
-    // real resume path. Cloned belt imgs are re-observed after each
-    // re-arrangement; a per-img cooldown stops clip-boundary flicker
-    // from re-triggering.
-    var sceneFigureIO = null;
-    function observeSceneFigures() {
-      if (!('IntersectionObserver' in window) || !els['biwa-masthead-scene']) return;
-      if (!sceneFigureIO) {
-        sceneFigureIO = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            var img = entry.target;
-            if (!entry.isIntersecting) return;
-            var now = Date.now();
-            if (now - (img._biwaGifNudge || 0) < 1500) return;
-            img._biwaGifNudge = now;
-            img.style.display = 'none';
-            void img.offsetHeight;   // force the detach+rebuild while visible
-            img.style.display = '';
-          });
-        }, { root: els['biwa-masthead-scene'], rootMargin: '100px' });
-      }
-      Array.prototype.slice.call(
-        els['biwa-masthead-scene'].querySelectorAll(
-          '.biwa-scene-walker, .biwa-scene-passer, .biwa-scene-rider'))
-        .forEach(function (img) { sceneFigureIO.observe(img); });
-    }
-    observeSceneFigures();
 
     // Up-next card: the whole card opens the CURRENT next point's sheet,
     // except its interactive children (name button, directions link,
@@ -476,6 +296,24 @@
     // sheet, its tick completes the same live-resolved next stop.
     els['biwa-mini-open'].addEventListener('click', openNextStopSheet);
     els['biwa-mini-complete'].addEventListener('click', completeNextStop);
+    // aria-disabled alone can't stop Enter activating a link — the
+    // check-in episode also cancels the click outright while it runs.
+    els['biwa-mini-directions'].addEventListener('click', function (ev) {
+      if (miniCheckin && miniCheckin.isActive()) ev.preventDefault();
+    });
+    // The mini check-in button owns a saving → green-tick phase machine —
+    // every released episode re-renders through the normal path so the
+    // bar paints whatever stop is next then.
+    if (window.BiwaMiniCheckin) {
+      miniCheckin = window.BiwaMiniCheckin.create({
+        button: els['biwa-mini-complete'],
+        translate: t,
+        onRelease: function () {
+          unlockMini();
+          render(store);
+        }
+      });
+    }
     // A failed thumbnail collapses back to the tinted slot — the bar
     // keeps its height and never flashes a broken image.
     els['biwa-mini-photo'].addEventListener('error', function () {
@@ -486,13 +324,38 @@
   // Tick the CURRENT next stop — resolved live at click time so a poll
   // that advanced the trip since the last paint still lands correctly.
   // Shared by the Up Next card and the mini bar.
-  function completeNextStop() {
+  // While the check-in feedback owns the mini bar, its other controls
+  // must not navigate to the (possibly just completed) stop.
+  function lockMini() {
+    els['biwa-mini-bar'].classList.add('is-checking-in');
+    els['biwa-mini-open'].disabled = true;
+    els['biwa-mini-directions'].setAttribute('aria-disabled', 'true');
+  }
+  function unlockMini() {
+    els['biwa-mini-bar'].classList.remove('is-checking-in');
+    els['biwa-mini-open'].disabled = false;
+    els['biwa-mini-directions'].removeAttribute('aria-disabled');
+  }
+
+  function completeNextStop(ev) {
     if (store._saving) return;
     var day = currentDay(store.trip);
     var next = day && Rules.nextUnvisitedStop(store.trip, day);
     if (!next) return;
     var occurrenceId = next.occurrenceId;
     var placeId = next.placeId;
+    // The mini button gets its own saving→green-tick feedback: begin runs
+    // BEFORE the optimistic progress emit so no repaint can move the bar
+    // out from under it, and a second tap while active is ignored.
+    var fromMini = !!(ev && ev.currentTarget === els['biwa-mini-complete']);
+    var miniToken = null;
+    if (fromMini && miniCheckin) {
+      if (miniCheckin.isActive()) return;
+      miniToken = miniCheckin.begin({
+        name: next.place ? placeName(next.place) : next.label
+      });
+      lockMini();
+    }
     // Progress write — the local mirror updates instantly; the result
     // resolves once the personal doc write lands (or 'local' when the
     // backend is down).
@@ -506,6 +369,12 @@
     // stays silent rather than flashing success.
     resultP.then(function (result) {
       checkinSaved(result, next.place ? placeName(next.place) : null);
+      if (miniToken !== null) {
+        // 'local' only counts when the local mirror is provably durable —
+        // an undurable buffer gets no green tick.
+        miniCheckin.settle(miniToken, result,
+          store.storageAvailable === true && store.draftPersisted === true);
+      }
     });
     // Same celebration gate as the row/sheet ticks: once, only while the
     // timeline view (which owns the leaf layer) is active.
@@ -626,6 +495,13 @@
       btn.addEventListener('click', function () {
         selectedDayId = day.dayId;
         sessionStorage.setItem('biwa-day', day.dayId);
+        // A day switch retires any in-flight mini check-in — the stale
+        // token keeps its settle ignored, so the new day's bar can never
+        // flash the old stop's tick.
+        if (miniCheckin && miniCheckin.isActive()) {
+          miniCheckin.cancel();
+          unlockMini();
+        }
         render(store);
       });
       host.appendChild(btn);
@@ -901,16 +777,28 @@
     // state hides it rather than showing a dead strip.
     var mini = els['biwa-mini-bar'];
     if (mini) {
-      var miniLive = !!(actionsVisible && next);
+      // While the check-in feedback runs the bar is FROZEN: still on
+      // screen (even when its stop was the last one), but nothing
+      // repaints — the settled tick stays put until release.
+      var miniBusy = !!(miniCheckin && miniCheckin.isActive());
+      var miniLive = !!(actionsVisible && next) || miniBusy;
       mini.hidden = !miniLive;
       // The live flag lets CSS lift the shell's bottom padding and the
       // toast above the bar only while it is actually on screen.
       document.body.classList.toggle('biwa-mini-live', miniLive);
-      if (miniLive) {
+      if (miniLive && !miniBusy) {
         els['biwa-mini-name'].textContent = placeName(next);
         els['biwa-mini-open'].setAttribute('aria-label',
           t('{name} — details', { name: placeName(next) }));
         els['biwa-mini-directions'].href = dirEl.href;
+        var dirLabel = t('Navigate to {name}', { name: placeName(next) });
+        els['biwa-mini-directions'].setAttribute('aria-label', dirLabel);
+        els['biwa-mini-directions'].title = dirLabel;
+        els['biwa-mini-complete'].setAttribute('aria-label',
+          t('Check in at {name}', { name: placeName(next) }));
+        // Idle re-paint keeps the translated label fresh across language
+        // switches — while busy the module's label owns the button.
+        els['biwa-mini-complete-label'].textContent = t('Check in');
         var miniTags = els['biwa-mini-tags'];
         miniTags.innerHTML = '';
         placeBadgesNodes(next.place).forEach(function (n) { miniTags.appendChild(n); });
@@ -1328,17 +1216,24 @@
   // ticks simply replace the text and restart the fade instead of
   // stacking pills. It is a live region, so each update announces itself.
   var checkinToastTimer = null;
-  function showCheckinToast(name) {
+  // One shared pill for every transient confirmation — check-in ticks and
+  // the offline module's connection transitions alike. Successive calls
+  // replace the text and restart the fade instead of stacking toasts.
+  function showToast(message, durationMs) {
     var toast = els['biwa-toast'];
     if (!toast) return;
-    els['biwa-toast-text'].textContent = name
-      ? t('Checked in — {name}', { name: name })
-      : t('Checked in');
+    els['biwa-toast-text'].textContent = message;
     toast.classList.add('is-visible');
     clearTimeout(checkinToastTimer);
     checkinToastTimer = setTimeout(function () {
       toast.classList.remove('is-visible');
-    }, 2600);
+    }, durationMs || 2600);
+  }
+  function showCheckinToast(name) {
+    showToast(
+      name ? t('Checked in — {name}', { name: name }) : t('Checked in'),
+      2600
+    );
   }
   // Toast gate for save() results — the only two states that mean the
   // tick is now durable.

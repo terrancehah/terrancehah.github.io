@@ -38,6 +38,7 @@ function stubGlobals(fetchImpl) {
 }
 
 const TripStore = require('../../projects/biwa-ride/trip-store.js');
+const Offline = require('../../projects/biwa-ride/offline-cache.js');
 
 function jsonRes(status, body) {
   return {
@@ -494,4 +495,142 @@ test('idempotent checkbox intent rebases once and drops cleanly when target dele
   assert.ok(!(server.trip.visitStatus && server.trip.visitStatus[occ]),
     'deleted occurrence is not resurrected');
   assert.equal(gone, null); // fixture sanity: the slice actually removed it
+});
+
+// --- connectionIssue: the real-failure flag the offline module toasts on ----
+
+test('a 503 refresh flags connectionIssue and a successful read clears it', async () => {
+  const server = makeServer();
+  server.trip = tripWithRev(1); server.rev = 1;
+  server.down = true;
+  const store = await makeStore(server);
+  assert.equal(store.state, 'unavailable');
+  assert.equal(store.connectionIssue, true, 'a 5xx read is a real outage');
+  server.down = false;
+  await store.refresh();
+  assert.equal(store.state, 'saved');
+  assert.equal(store.connectionIssue, false, 'authoritative response cleared it');
+});
+
+test('a guard 401/403 is never a connection issue', async () => {
+  const server = makeServer();
+  server.authFail = true;
+  const store = await makeStore(server);
+  assert.equal(store.state, 'unauthorized');
+  assert.equal(store.connectionIssue, false,
+    'rejections are identity problems, not connectivity');
+});
+
+test('a rejected fetch flags the outage and a saved PUT clears it', async () => {
+  const server = makeServer();
+  server.trip = tripWithRev(1); server.rev = 1;
+  const base = makeFetch(server);
+  let failApi = false;
+  stubGlobals((url, opts) => {
+    if (failApi && String(url).includes('biwa-trip')) {
+      return Promise.reject(new Error('offline'));
+    }
+    return base(url, opts);
+  });
+  failApi = true;
+  const store = new TripStore();
+  await store.init();
+  assert.equal(store.connectionIssue, true, 'rejected wire = real failure');
+  // The connection is back: a queued draft PUT lands 'saved'.
+  failApi = false;
+  const r = await store.save(d => { d.notes = 'recovered'; });
+  assert.equal(r, 'saved');
+  assert.equal(store.connectionIssue, false, 'the save proved the wire');
+});
+
+test('a PUT 503 flags connectionIssue too', async () => {
+  const server = makeServer();
+  server.trip = tripWithRev(1); server.rev = 1;
+  const store = await makeStore(server);
+  assert.equal(store.connectionIssue, false);
+  server.down = true;
+  const r = await store.save(d => { d.notes = 'while-down'; });
+  assert.equal(r, 'unavailable');
+  assert.equal(store.connectionIssue, true, 'PUT failure is a real outage');
+  assert.ok(store.pendingDraft, 'the unsent draft is kept');
+});
+
+test('a PUT 401/403 is an error, never a connection issue — and clears a stale flag', async () => {
+  const server = makeServer();
+  server.trip = tripWithRev(1); server.rev = 1;
+  const store = await makeStore(server);
+  // A real outage first so the flag is provably set.
+  server.down = true;
+  const r1 = await store.save(d => { d.notes = 'while-down'; });
+  assert.equal(r1, 'unavailable');
+  assert.equal(store.connectionIssue, true);
+  // The wire comes back answering guard rejections: the HTTP answer
+  // itself proves connectivity, so the flag clears and no disconnected
+  // handling runs — but the draft stays pending and recoverable.
+  server.down = false;
+  server.authFail = true;
+  const r2 = await store.save(d => { d.notes = 'rejected'; });
+  assert.equal(r2, 'error');
+  assert.equal(store.connectionIssue, false,
+    'a guard answer clears the outage flag');
+  assert.ok(store.pendingDraft, 'the unsent draft is still recoverable');
+});
+
+test('a GET 401 clears a prior connectionIssue without a false recovery', async () => {
+  const server = makeServer();
+  server.trip = tripWithRev(1); server.rev = 1;
+  server.down = true;
+  const store = await makeStore(server);
+  assert.equal(store.connectionIssue, true, 'outage flagged');
+  server.down = false;
+  server.authFail = true;
+  await store.refresh();
+  assert.equal(store.state, 'unauthorized');
+  assert.equal(store.connectionIssue, false,
+    'the identity answer proved the wire — flag cleared, never a recovery');
+});
+
+test('discarding a draft offline never emits a false recovery frame', async () => {
+  const server = makeServer();
+  server.trip = tripWithRev(1); server.rev = 1;
+  const store = await makeStore(server);
+  // Wire the REAL offline notifier so a transient bad emission would
+  // surface as a fake 'Connection restored' toast.
+  const toasts = [];
+  Offline.init({
+    store,
+    notify: m => toasts.push(m),
+    translate: s => s
+  });
+  // Park a durable draft while the server is up, then go dark.
+  const r = await store.save(d => { d.notes = 'queued'; });
+  assert.equal(r, 'saved');
+  server.down = true;
+  const r2 = await store.save(d => { d.notes = 'while-down'; });
+  assert.equal(r2, 'unavailable');
+  assert.equal(store.connectionIssue, true);
+  assert.ok(
+    toasts.some(m => /interrupted|Offline/.test(m)),
+    'the outage toasted once — ' + JSON.stringify(toasts)
+  );
+  // Record every emission frame during the failed discard — the cached
+  // latestServer adoption must never publish 'saved' or a cleared flag.
+  const frames = [];
+  store.onChange(() => {
+    frames.push({ state: store.state, connectionIssue: store.connectionIssue });
+  });
+  await store.discardPendingDraft();
+  assert.equal(store.connectionIssue, true,
+    'a cached adoption is not a wire success');
+  assert.ok(frames.length > 0, 'the adoption emitted');
+  for (const f of frames) {
+    assert.notEqual(f.state, 'saved',
+      'no transient saved frame may reach listeners');
+    assert.equal(f.connectionIssue, true,
+      'no transient cleared-flag frame may reach listeners');
+  }
+  assert.ok(
+    !toasts.some(m => /restored/.test(m)),
+    'the notifier never claimed a recovery'
+  );
 });

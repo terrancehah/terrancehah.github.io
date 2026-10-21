@@ -22,6 +22,13 @@
  *  - Only idempotent checkbox intents (arrival ticks) are rebased, once,
  *    after a successful refresh; an intent whose target stop/place no
  *    longer exists is dropped cleanly rather than re-adding it.
+ *  - Unsent work is durable: every draft (network failure, 503, 409) is
+ *    written to localStorage BEFORE the wire attempt so a reload can
+ *    never lose it. init restores a persisted draft as pendingDraft
+ *    ahead of any refresh — a later server read may update latestServer
+ *    but must not adopt over the draft — and only acknowledged saves
+ *    clear the durable copy. The last-known server snapshot keeps its
+ *    own key as the labelled-stale offline fallback.
  *  - Polling runs every 60 s while the tab is visible plus on focus —
  *    slower than the shared era since foreign writes are impossible;
  *    paired same-owner devices are the only thing it can ever learn.
@@ -101,6 +108,10 @@
     // Sharing unavailable (no backend configured) → drafts stay local until
     // a poll sees the service come back; never a permanent mode.
     this.localOnly = false;
+    // A real wire failure — rejected fetch, 5xx, PUT failure — not the
+    // provisional 'disconnected' label a restored doc wears before the
+    // first read answers. The offline module toasts only on this proof.
+    this.connectionIssue = false;
     this.conflict = null;           // {draft, server} while unresolved
     this.pendingDraft = null;       // unsent whole-snapshot draft (recoverable)
     this.latestServer = null;       // last authoritative server snapshot seen
@@ -118,6 +129,14 @@
     // editor entry, which would otherwise strand provider config forever.
     this._configReadSeq = 0;
     this._pollTimer = null;
+    // Whether localStorage actually works — probed once here, and flipped
+    // false by any later access that throws. The UI turns this flag into
+    // an honest "may not persist" warning instead of letting the app
+    // claim offline persistence it does not have.
+    this.storageAvailable = probeStorage();
+    // True while the durable localStorage copy of pendingDraft matches
+    // the in-memory draft — cleared drafts and write failures read false.
+    this.draftPersisted = false;
   }
 
   TripStore.prototype.onChange = function (fn) {
@@ -156,7 +175,7 @@
   // yet — it simply stays unloaded for the next emit.
   TripStore.prototype._loadProgress = function (doc) {
     var stored = null;
-    try { stored = JSON.parse(global.localStorage.getItem(LOCAL_PROGRESS_KEY) || 'null'); } catch (e) {}
+    try { stored = JSON.parse(this._storageGet(LOCAL_PROGRESS_KEY) || 'null'); } catch (e) {}
     if (stored && typeof stored === 'object') {
       this.localProgress = {
         visitStatus: stored.visitStatus || {},
@@ -171,7 +190,7 @@
       programmeStatus: JSON.parse(JSON.stringify(doc.programmeStatus || {}))
     };
     this._progressLoaded = true;
-    try { global.localStorage.setItem(LOCAL_PROGRESS_KEY, JSON.stringify(this.localProgress)); } catch (e) {}
+    this._storageSet(LOCAL_PROGRESS_KEY, JSON.stringify(this.localProgress));
   };
 
   // Replace a doc's progress fields with deep copies of the local state.
@@ -194,7 +213,7 @@
     var progressDraft = JSON.parse(JSON.stringify(this.localProgress));
     try { mutator(progressDraft); } catch (e) { return Promise.resolve('error'); }
     this.localProgress = progressDraft;
-    try { global.localStorage.setItem(LOCAL_PROGRESS_KEY, JSON.stringify(progressDraft)); } catch (e) {}
+    this._storageSet(LOCAL_PROGRESS_KEY, JSON.stringify(progressDraft));
     this._emit();
     // No trip doc loaded at all (catalogue fetch failed hard): the local
     // copy already persisted above — skip the doc write entirely.
@@ -220,7 +239,7 @@
   //     flags are preserved; a visited legacy row also marks the canonical
   //     record's official check so progress is not lost.
   // Returns the same object (mutated in place). Revisions, day order,
-  // occurrence ids, visit/programme status and unrelated place metadata
+  // occurrence ids, visit/programme status and user-edited place metadata
   // are never reset; the correction persists on the next normal save —
   // normalization alone never triggers a write.
   TripStore.prototype._normalizeTrip = function (trip) {
@@ -330,6 +349,102 @@
     if (active) this._readSeq++;
   };
 
+  // A one-time probe so storage failures are known before first use rather
+  // than discovered mid-write (private windows can throw on setItem).
+  function probeStorage() {
+    try {
+      var key = 'biwa:v2:storage-probe';
+      global.localStorage.setItem(key, '1');
+      global.localStorage.removeItem(key);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // --- durable local state --------------------------------------------------
+  // Every localStorage access below funnels through these helpers so an
+  // unavailable or throwing store degrades to honest flags instead of
+  // silently pretending work was persisted.
+
+  TripStore.prototype._flagStorageFailure = function () {
+    // Deliberately no _emit here — a failure can surface mid-notify; the
+    // next state change carries the flag to listeners.
+    this.storageAvailable = false;
+  };
+
+  TripStore.prototype._storageGet = function (key) {
+    try {
+      return global.localStorage.getItem(key);
+    } catch (e) {
+      this._flagStorageFailure();
+      return null;
+    }
+  };
+
+  TripStore.prototype._storageSet = function (key, value) {
+    try {
+      global.localStorage.setItem(key, value);
+      return true;
+    } catch (e) {
+      this._flagStorageFailure();
+      return false;
+    }
+  };
+
+  TripStore.prototype._storageRemove = function (key) {
+    try {
+      global.localStorage.removeItem(key);
+      return true;
+    } catch (e) {
+      this._flagStorageFailure();
+      return false;
+    }
+  };
+
+  // Persist an unsent draft BEFORE it travels — a reload, crash or closed
+  // tab between "user saved" and "server acked" must never lose the work.
+  // The snapshot's own revision field is the CAS base, so the durable copy
+  // alone is enough to retry from.
+  TripStore.prototype._persistDraft = function (draft) {
+    if (!draft) return;
+    this.draftPersisted = this._storageSet(
+      LOCAL_DRAFT_KEY, JSON.stringify(draft));
+  };
+
+  // Clear the durable copy ONLY for work the server acknowledged — a newer
+  // queued mutation re-persists first (writes are serial), so removing
+  // here can never drop newer work. A throwing removeItem leaves the copy
+  // on disk (it would resurrect on reload), so draftPersisted stays true
+  // rather than claiming a clean slate the device does not have.
+  TripStore.prototype._clearPersistedDraft = function () {
+    this.draftPersisted = !this._storageRemove(LOCAL_DRAFT_KEY);
+  };
+
+  // Read back a persisted unsent draft, or null when absent/unreadable —
+  // corrupt data must fail open to the other fallbacks, never throw.
+  TripStore.prototype._restorePersistedDraft = function () {
+    var draft = null;
+    try {
+      draft = JSON.parse(this._storageGet(LOCAL_DRAFT_KEY) || 'null');
+    } catch (e) {
+      draft = null;
+    }
+    return draft && typeof draft === 'object' && draft.days ? draft : null;
+  };
+
+  // The last-known server snapshot is the labelled-stale offline view and
+  // the restored CAS anchor — same fail-open treatment as the draft.
+  TripStore.prototype._restoreLastKnown = function () {
+    var trip = null;
+    try {
+      trip = JSON.parse(this._storageGet(LOCAL_LAST_KNOWN_KEY) || 'null');
+    } catch (e) {
+      trip = null;
+    }
+    return trip && typeof trip === 'object' && trip.days ? trip : null;
+  };
+
   // --- boot ------------------------------------------------------------------
 
   TripStore.prototype.init = function () {
@@ -341,6 +456,41 @@
     if (global.navigator && navigator.storage && navigator.storage.persist) {
       navigator.storage.persist().catch(function () {});
     }
+    // Adopt durable local state BEFORE the first network wait so an
+    // offline start renders real content instead of a blank shell:
+    //  - a persisted unsent draft is the newest work on this device — it
+    //    becomes pendingDraft now so no refresh can adopt over it later;
+    //  - the last-known server snapshot restores both the labelled-stale
+    //    view and the CAS anchor latestServer.
+    var restoredDraft = this._restorePersistedDraft();
+    if (restoredDraft) {
+      this.pendingDraft = restoredDraft;
+      this.draftPersisted = true;
+    }
+    var lastKnown = this._restoreLastKnown();
+    if (lastKnown) this.latestServer = lastKnown;
+    // A draft is newer than anything last-known can offer, so it wins
+    // the visible slot when both exist.
+    if (restoredDraft) this.trip = restoredDraft;
+    else if (lastKnown) this.trip = lastKnown;
+    if (this.trip) {
+      // Paint the restored doc NOW — the catalogue/seed fetch below may
+      // be slow or unreachable, and blanking an offline relaunch serves
+      // nobody. The restored draft's own progress fields are the newest
+      // unsent work, so they seed localProgress ahead of the (possibly
+      // older) mirror; without a draft the normal _loadProgress ordering
+      // runs on the first emit. State stays 'disconnected' until a real
+      // server read confirms anything — never a false 'saved'.
+      if (restoredDraft) {
+        this.localProgress = {
+          visitStatus: JSON.parse(JSON.stringify(restoredDraft.visitStatus || {})),
+          programmeStatus: JSON.parse(JSON.stringify(restoredDraft.programmeStatus || {}))
+        };
+        this._progressLoaded = true;
+        this._storageSet(LOCAL_PROGRESS_KEY, JSON.stringify(this.localProgress));
+      }
+      this._setState('disconnected');
+    }
     return Promise.all([
       fetch('data/checkpoints.json').then(function (r) { return r.json(); }),
       fetch('data/trip-seed.json').then(function (r) { return r.json(); })
@@ -351,9 +501,17 @@
       seed.places = self.places;
       self._seed = seed;
       return self.refresh();
-    }).then(function () {
-      self._startPolling();
-      return self;
+    }).then(function (adopted) {
+      // A restored draft shouldn't idle until the first poll tick — send
+      // it now that the initial read succeeded, through the same guarded
+      // recovery path (own-base CAS; a 409 surfaces, never overwrites).
+      var retry = (adopted && self.pendingDraft && !self.localOnly && !self.conflict)
+        ? self._retryPendingDraft()
+        : Promise.resolve('skipped');
+      return retry.then(function () {
+        self._startPolling();
+        return self;
+      });
     }).catch(function () {
       // Even catalogue fetch failure shouldn't white-screen the app.
       if (!self.trip) self._adoptLocalFallback(false);
@@ -366,11 +524,8 @@
   // last-known shared copy: offline reads may show it (labelled stale by the
   // UI); a permanently-local session starts from the seed/local draft.
   TripStore.prototype._adoptLocalFallback = function (allowSharedCache) {
-    var draft = null, cached = null;
-    try { draft = JSON.parse(global.localStorage.getItem(LOCAL_DRAFT_KEY) || 'null'); } catch (e) {}
-    if (allowSharedCache) {
-      try { cached = JSON.parse(global.localStorage.getItem(LOCAL_LAST_KNOWN_KEY) || 'null'); } catch (e) {}
-    }
+    var draft = this._restorePersistedDraft();
+    var cached = allowSharedCache ? this._restoreLastKnown() : null;
     if (!this.trip) this.trip = draft || cached || this._seed;
     // The caller may follow with a more specific state (e.g. 'unauthorized').
     this._setState(this.localOnly ? 'local' : 'disconnected');
@@ -393,6 +548,7 @@
           if (stale()) return false;
           // Sharing is down or not configured — temporary, keep polling.
           self.localOnly = true;
+          self.connectionIssue = true;
           self._ensureFallbackSnapshot();
           self._setState('unavailable');
           return false;
@@ -402,7 +558,10 @@
           // A guard response means shared state is off-limits — reset the
           // display to the local seed/draft. A cached shared snapshot must
           // never surface after a rejection, so the fallback deliberately
-          // skips it, and browser provider config is cleared.
+          // skips it, and browser provider config is cleared. The HTTP
+          // answer itself proves the wire works, so any earlier outage
+          // flag clears — an identity problem is never a connection issue.
+          self.connectionIssue = false;
           self.localOnly = true;
           self.capabilities = {};
           self.browserMapsKey = null;
@@ -446,6 +605,7 @@
           // The server may answer while its backend is unconfigured: the
           // trip still renders (static seed, local drafts) but writes stay
           // local until a later poll sees the service come back.
+          self.connectionIssue = false;
           self.localOnly = body.sharingAvailable === false;
           if (body.trip) {
             self._adoptServerTrip(body.trip);
@@ -457,7 +617,13 @@
             self._setState('unavailable');
             return false;
           }
-          // This owner has never saved: seed their personal doc now.
+          // This owner has no server doc. A restored/unsent draft
+          // IS the trip — retry it against its own base rather than
+          // seeding the blueprint over it; only a genuinely fresh
+          // device seeds.
+          if (self.pendingDraft) {
+            return self._retryPendingDraft().then(function () { return true; });
+          }
           return self._seedOwner().then(function () { return true; });
         });
       })
@@ -478,13 +644,21 @@
   // unsent draft is visible — a background read must never hide the user's
   // un-synced work. latestServer always tracks the newest server state (the
   // CAS anchor for explicit replaces and the conflict base).
-  TripStore.prototype._adoptServerTrip = function (trip) {
+  TripStore.prototype._adoptServerTrip = function (trip, statusOverride) {
     // Normalize before the last-known cache write so a stale-metadata
     // snapshot is never persisted as "known good".
     this._normalizeTrip(trip);
     this.latestServer = trip;
     this.localOnly = false;
-    try { global.localStorage.setItem(LOCAL_LAST_KNOWN_KEY, JSON.stringify(trip)); } catch (e) {}
+    this.connectionIssue = false;
+    if (statusOverride) {
+      // A cached adoption after a failed read is not a wire success —
+      // the caller's failed status wins before ANYTHING emits, so no
+      // transient 'saved'/connected frame can reach listeners.
+      this.localOnly = statusOverride.localOnly;
+      this.connectionIssue = statusOverride.connectionIssue;
+    }
+    this._storageSet(LOCAL_LAST_KNOWN_KEY, JSON.stringify(trip));
     if (this.pendingDraft) {
       this.trip = this.pendingDraft;
       this._emit();   // draft stays visible; no 'saved' label while unsent
@@ -501,11 +675,13 @@
         programmeStatus: JSON.parse(JSON.stringify(trip.programmeStatus || {}))
       };
       this._progressLoaded = true;
-      try { global.localStorage.setItem(LOCAL_PROGRESS_KEY, JSON.stringify(this.localProgress)); } catch (e) {}
+      this._storageSet(LOCAL_PROGRESS_KEY, JSON.stringify(this.localProgress));
     }
     this.trip = trip;
     this.conflict = null;
-    if (this.state !== 'saving') this._setState('saved');
+    if (this.state !== 'saving') {
+      this._setState(statusOverride ? statusOverride.state : 'saved');
+    }
   };
 
   TripStore.prototype._seedOwner = function () {
@@ -522,6 +698,7 @@
   TripStore.prototype._markDisconnected = function () {
     // Keep showing the last-known snapshot (invite holders only) or the seed
     // rather than a blank app — labelled stale by the UI, never live.
+    this.connectionIssue = true;
     this._ensureFallbackSnapshot();
     if (this.state !== 'saving') this._setState('disconnected');
   };
@@ -552,7 +729,7 @@
       this._normalizeTrip(localDraft);
       this.pendingDraft = localDraft;
       this.trip = localDraft;
-      try { global.localStorage.setItem(LOCAL_DRAFT_KEY, JSON.stringify(localDraft)); } catch (e) {}
+      this._persistDraft(localDraft);
       this._setState('local');
       return 'local';
     }
@@ -563,6 +740,9 @@
     var hadPendingDraft = !!this.pendingDraft || !!this.conflict;
     var draft = JSON.parse(JSON.stringify(this.pendingDraft || this.trip));
     try { mutator(draft); } catch (e) { return 'error'; }
+    // Durable before the wire: a reload or crash between mutation and
+    // ack can only lose the in-flight flag, never the user's work.
+    this._persistDraft(draft);
     this._saving = true;
     this._readSeq++;                 // in-flight reads are now obsolete
     this._setState('saving');
@@ -573,6 +753,7 @@
         // adoption deliberately declined to flip state while a draft was up.
         self.pendingDraft = null;
         self.trip = draft;
+        self._clearPersistedDraft();
         self._setState('saved');
         return 'saved';
       }
@@ -613,7 +794,18 @@
           return 'conflict';
         }).catch(function () { self.refresh(); return 'conflict'; });
       }
-      if (res.status === 503) { self._setState('unavailable'); return 'unavailable'; }
+      if (res.status === 503) {
+        self.connectionIssue = true;
+        self._setState('unavailable');
+        return 'unavailable';
+      }
+      if (res.status === 401 || res.status === 403) {
+        // Identity rejection, not connectivity — the wire answered, so a
+        // stale outage flag clears too. The save still resolves 'error'
+        // so _applySave keeps the draft pending and recoverable.
+        self.connectionIssue = false;
+        return 'error';
+      }
       if (!res.ok) { self._markDisconnected(); return 'error'; }
       return res.json().then(function (body) {
         trip.revision = body.revision;
@@ -661,6 +853,7 @@
         // Could not get a trustworthy base — keep the draft recoverable.
         self.pendingDraft = draft;
         self.trip = draft;
+        self._persistDraft(draft);
         self._emit();
         return 'error';
       }
@@ -687,9 +880,14 @@
       }
       if (!self._intentApplicable(intent, current) || already === intent.value) {
         // Target deleted (drop the intent) or it already landed on the
-        // server — either way nothing to write. A prior pendingDraft still
-        // carries any other unsent edits and stays recoverable.
-        if (!self.pendingDraft) { self.trip = current; self._setState('saved'); }
+        // server — either way nothing to write, and the intent was
+        // acknowledged so its durable draft copy can go. A prior
+        // pendingDraft still carries any other unsent edits and stays.
+        if (!self.pendingDraft) {
+          self.trip = current;
+          self._clearPersistedDraft();
+          self._setState('saved');
+        }
         return 'saved';
       }
       var rebased = JSON.parse(JSON.stringify(current));
@@ -728,6 +926,7 @@
         if (result === 'saved') {
           self.pendingDraft = null;
           self.trip = rebased;
+          self._clearPersistedDraft();
           self._setState('saved');
           return 'saved';
         }
@@ -739,6 +938,7 @@
         // is not re-applied automatically a second time.
         self.pendingDraft = draft;
         self.trip = draft;
+        self._persistDraft(draft);
         self._setState(result === 'unavailable' ? 'unavailable' : 'disconnected');
         return result;
       });
@@ -747,9 +947,11 @@
 
   TripStore.prototype._declareConflict = function (draft) {
     // The draft stays visible AND recoverable; the server snapshot is kept
-    // separately as the conflict's other side.
+    // separately as the conflict's other side. The 409 must be durable too —
+    // a reload before the user resolves keeps the draft, not a silent drop.
     this.pendingDraft = draft;
     this.trip = draft;
+    this._persistDraft(draft);
     this.conflict = { draft: draft, server: this.latestServer };
     this._setState('conflict');
     return 'conflict';
@@ -761,10 +963,13 @@
     var server = (this.conflict && this.conflict.server) || this.latestServer;
     this.conflict = null;
     this.pendingDraft = null;
+    // The user chose the server side — the abandoned draft's durable
+    // copy goes with it.
+    this._clearPersistedDraft();
     if (!server) return this.refresh();
-    this.latestServer = server;
-    this.trip = server;
-    this._setState('saved');
+    // Route through the normal adoption lifecycle so progress mirroring,
+    // the last-known cache and the 'saved' label all stay consistent.
+    this._adoptServerTrip(server);
     return Promise.resolve('saved');
   };
 
@@ -783,6 +988,7 @@
         // No trustworthy server base — do not write; keep the draft.
         self.pendingDraft = draft;
         self.trip = draft;
+        self._persistDraft(draft);
         self._emit();
         return 'error';
       }
@@ -795,12 +1001,14 @@
         if (result === 'saved') {
           self.pendingDraft = null;
           self.trip = draft;
+          self._clearPersistedDraft();
           self._setState('saved');
           return 'saved';
         }
         if (result === 'conflict') return self._declareConflict(draft);
         self.pendingDraft = draft;
         self.trip = draft;
+        self._persistDraft(draft);
         self._setState(result === 'unavailable' ? 'unavailable' : 'disconnected');
         return result;
       });
@@ -827,6 +1035,7 @@
       if (result === 'saved') {
         self.pendingDraft = null;
         self.trip = draft;
+        self._clearPersistedDraft();
         self._setState('saved');
         return 'saved';
       }
@@ -844,10 +1053,44 @@
   };
 
   // Discard the recoverable unsent draft and adopt the latest shared state.
+  // The discard only completes when an authoritative view exists: a failed
+  // refresh adopts the last-known server snapshot if there is one, or — when
+  // nothing authoritative was ever seen — keeps the draft recoverable rather
+  // than silently losing the work (or leaving an abandoned draft displayed
+  // where a later save could quietly re-send it).
   TripStore.prototype.discardPendingDraft = function () {
+    var self = this;
+    var discarded = this.pendingDraft || (this.conflict && this.conflict.draft);
     this.pendingDraft = null;
     this.conflict = null;
-    return this.refresh();
+    this._clearPersistedDraft();
+    return this.refresh().then(function (ok) {
+      if (ok || !discarded) return ok;
+      // The failed read already painted the honest state ('unavailable'/
+      // 'disconnected') — keep it over any adoption below, which would
+      // otherwise relabel an unreachable server 'saved'.
+      var failedState = self.state;
+      if (self.latestServer) {
+        // An authoritative base exists — adopt it through the normal
+        // lifecycle so the view, progress mirror and last-known cache
+        // stay consistent. The adoption is cached, not a wire success:
+        // the failed read's honest status rides into the adoption
+        // itself, so no transient 'saved'/connected emission slips out.
+        self._adoptServerTrip(self.latestServer, {
+          state: self.state,
+          connectionIssue: self.connectionIssue,
+          localOnly: self.localOnly
+        });
+      } else {
+        // Nothing authoritative was ever confirmed: keep the draft
+        // recoverable instead of dropping unsent work into the void.
+        self.pendingDraft = discarded;
+        self.trip = discarded;
+        self._persistDraft(discarded);
+        self._setState(failedState);
+      }
+      return ok;
+    });
   };
 
   // --- polling ---------------------------------------------------------------
@@ -878,6 +1121,10 @@
     }
     if (global.addEventListener) {
       global.addEventListener('focus', tick);
+      // navigator.onLine flipping true is only a hint — the reconnect
+      // runs the same guarded read-then-retry path as a poll tick,
+      // never a blind whole-snapshot replay.
+      global.addEventListener('online', tick);
     }
   };
 
@@ -908,12 +1155,11 @@
   // page so every module reboots under the new identity.
   TripStore.prototype.adoptOwner = function (ownerId) {
     if (!ownerId || !OWNER_ID_RE.test(ownerId)) return false;
-    try {
-      global.localStorage.removeItem(LOCAL_PROGRESS_KEY);
-      global.localStorage.removeItem(LOCAL_DRAFT_KEY);
-      global.localStorage.removeItem(LOCAL_LAST_KNOWN_KEY);
-      global.localStorage.setItem(LOCAL_OWNER_KEY, ownerId);
-    } catch (e) {}
+    this._storageRemove(LOCAL_PROGRESS_KEY);
+    this._storageRemove(LOCAL_DRAFT_KEY);
+    this._storageRemove(LOCAL_LAST_KNOWN_KEY);
+    this._storageSet(LOCAL_OWNER_KEY, ownerId);
+    this.draftPersisted = false;
     this.ownerId = ownerId;
     return true;
   };
@@ -944,7 +1190,9 @@
   // Transient Google place details by INTERNAL id (never a raw Google id —
   // the server resolves the mapping so the endpoint is not an open proxy).
   TripStore.prototype.fetchPlace = function (placeId) {
-    return fetch(this.apiBase + 'biwa-place?placeId=' + encodeURIComponent(placeId))
+    // The owner header lets the server resolve this owner's custom places.
+    return fetch(this.apiBase + 'biwa-place?placeId=' + encodeURIComponent(placeId),
+      { headers: this._headers() })
       .then(function (res) { return res.json(); })
       .catch(function () { return { ok: false, error: 'network' }; });
   };

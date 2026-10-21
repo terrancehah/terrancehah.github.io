@@ -11,10 +11,15 @@ dedicated Redis database:
     BIWA_GOOGLE_BROWSER_KEY                      — Maps JS (referrer-restricted)
     BIWA_DEV_ALLOW_MEMORY=1                      — local-dev-only in-memory store
 
-Access model (schema v2): the trip is PUBLIC — no invite token. Reads are
-open; mutations/provider calls are abuse-guarded (same-origin check, bounded
-bodies, global + per-IP rate limits) and still go through atomic CAS so two
-riders can never silently overwrite each other.
+Access model (schema v2): the trip is PERSONAL — each request carries an
+X-Biwa-Owner identity ('dev:<uuid>' minted client-side) and its durable doc
+lives under biwa:v2:owner:<id>:trip; the retired shared key biwa:v2:trip:state
+is never read by new code. Mutations/provider calls are abuse-guarded
+(same-origin check, bounded bodies, global + per-IP rate limits) and still go
+through atomic CAS so two same-owner devices can never silently overwrite
+each other. A successful owner GET also mints the HttpOnly biwa-owner cookie
+— a bearer capability so header-less <img src> requests can resolve that
+owner's custom places; it is never accepted as write auth.
 
 Fail-closed rule: without a configured backend (Redis, or the local
 BIWA_DEV_ALLOW_MEMORY=1 opt-in — never under VERCEL) writes and provider
@@ -334,6 +339,29 @@ def owner_from_request(request):
 def owner_trip_key(owner_id):
     """Redis key for one owner's personal trip doc — durable, no TTL."""
     return OWNER_KEY_PREFIX + owner_id + ":trip"
+
+
+# HttpOnly cookie mirroring the owner id, set by a successful GET /biwa-trip.
+# It exists so requests that cannot carry headers — <img src> photo loads —
+# can still resolve the owner's custom places. It holds the same bearer
+# capability the header already is; it is never accepted as write auth
+# (biwa-trip PUT still requires the header).
+OWNER_COOKIE_NAME = "biwa-owner"
+
+
+def owner_from_header_or_cookie(request):
+    """Resolve the owner identity for READ-side personalisation.
+
+    The X-Biwa-Owner header wins; the biwa-owner cookie is the fallback for
+    header-less same-origin requests. The cookie value is validated against
+    the same owner-id shape — a malformed or absent identity resolves to
+    None, which simply means canonical places only.
+    """
+    owner = owner_from_request(request)
+    if owner:
+        return owner
+    raw = (request.cookies.get(OWNER_COOKIE_NAME) or "").strip()
+    return raw if OWNER_ID_RE.match(raw) else None
 
 
 def create_pair_code(store, owner_id):

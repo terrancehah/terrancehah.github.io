@@ -83,7 +83,19 @@ async def get_trip(request: Request):
     }
     if biwa_store.GOOGLE_BROWSER_KEY:
         response["browserMapsKey"] = biwa_store.GOOGLE_BROWSER_KEY
-    return biwa_store.json_ok(response)
+    # Mint/refresh the HttpOnly owner cookie so header-less <img src> photo
+    # requests can resolve this owner's custom places (biwa-photo reads it).
+    # It carries the same bearer capability the header already is — never
+    # write auth. SameSite=Strict keeps it off cross-site requests; Secure
+    # follows the actual request scheme (x-forwarded-proto is the reliable
+    # signal on the real deployment where TLS terminates at the edge).
+    response_obj = biwa_store.json_ok(response)
+    secure = request.url.scheme == "https" or \
+        request.headers.get("x-forwarded-proto") == "https"
+    response_obj.set_cookie(
+        biwa_store.OWNER_COOKIE_NAME, owner,
+        httponly=True, samesite="strict", path="/", secure=secure)
+    return response_obj
 
 
 @app.put("/")

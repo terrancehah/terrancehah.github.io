@@ -729,5 +729,115 @@ class PlaceAndPhotoEndpointTests(unittest.TestCase):
             biwa_store.GOOGLE_PLACES_KEY = old
 
 
+class OwnerAwareProviderTests(unittest.TestCase):
+    """Custom places resolve only from the CALLER's personal doc — reached
+    via the X-Biwa-Owner header or the biwa-owner cookie that GET /biwa-trip
+    mints for header-less <img src> loads. The retired shared doc key is
+    never consulted, and the cookie is never write auth."""
+
+    OWNER_A = "dev:00000000-0000-4000-8000-00000000000a"
+    OWNER_B = "dev:00000000-0000-4000-8000-00000000000b"
+    CUSTOM_ID = "custom-secret"
+    CUSTOM = {"placeId": CUSTOM_ID, "label": "A-only", "lat": 35.0,
+              "lng": 135.9, "programmes": [], "category": "custom",
+              "nameConfirmed": True, "notes": "", "googlePlaceId": "ChIJx"}
+
+    def setUp(self):
+        biwa_trip.store._memory.clear()
+        self.place_client = TestClient(biwa_place.app)
+        self.photo_client = TestClient(biwa_photo.app)
+        self.trip_client = TestClient(
+            biwa_trip.app, headers={"X-Biwa-Owner": self.OWNER_A})
+        self._old_key = biwa_store.GOOGLE_PLACES_KEY
+        biwa_store.GOOGLE_PLACES_KEY = "fake"
+        self._old_resolve = biwa_places.resolve_place_details
+        biwa_places.resolve_place_details = lambda *a, **k: (
+            {"displayName": {"text": "Resolved Stub"}}, "stub")
+        self._old_photo = biwa_photo.biwa_google_cache.cached_photo
+        biwa_photo.biwa_google_cache.cached_photo = lambda *a, **k: (b"img", "image/png")
+
+    def tearDown(self):
+        biwa_store.GOOGLE_PLACES_KEY = self._old_key
+        biwa_places.resolve_place_details = self._old_resolve
+        biwa_photo.biwa_google_cache.cached_photo = self._old_photo
+        biwa_trip.store._memory.clear()
+
+    def seed_owner_trip(self, owner, places=()):
+        trip = seed_trip()
+        trip["places"] = trip["places"] + [dict(p) for p in places]
+        biwa_trip.store._memory[biwa_store.owner_trip_key(owner)] = \
+            json.dumps(trip)
+
+    def test_custom_details_resolve_for_their_owner(self):
+        self.seed_owner_trip(self.OWNER_A, [self.CUSTOM])
+        res = self.place_client.get(
+            "/?placeId=" + self.CUSTOM_ID,
+            headers={"X-Biwa-Owner": self.OWNER_A})
+        self.assertEqual(res.status_code, 200, res.text)
+        self.assertEqual(res.json()["details"]["name"], "Resolved Stub")
+
+    def test_other_owner_and_anonymous_cannot_resolve_a_custom(self):
+        self.seed_owner_trip(self.OWNER_A, [self.CUSTOM])
+        for headers in ({"X-Biwa-Owner": self.OWNER_B}, {}):
+            res = self.place_client.get(
+                "/?placeId=" + self.CUSTOM_ID, headers=headers)
+            self.assertEqual(res.status_code, 404, headers)
+
+    def test_retired_shared_doc_key_is_never_read(self):
+        # A sentinel doc at the old shared key must be invisible even to an
+        # owner with no personal doc.
+        sentinel = seed_trip()
+        sentinel["places"] = sentinel["places"] + [dict(self.CUSTOM)]
+        biwa_trip.store._memory[biwa_store.TRIP_KEY] = json.dumps(sentinel)
+        res = self.place_client.get(
+            "/?placeId=" + self.CUSTOM_ID,
+            headers={"X-Biwa-Owner": self.OWNER_B})
+        self.assertEqual(res.status_code, 404)
+
+    def test_canonical_details_work_without_identity(self):
+        res = self.place_client.get("/?placeId=stay-hana")
+        self.assertEqual(res.status_code, 200, res.text)
+
+    def test_trip_get_mints_the_owner_capability_cookie(self):
+        res = self.trip_client.get("/")
+        self.assertEqual(res.status_code, 200, res.text)
+        cookie = res.headers.get("set-cookie", "")
+        self.assertIn("biwa-owner=" + self.OWNER_A, cookie)
+        self.assertIn("HttpOnly", cookie)
+        self.assertIn("samesite=strict", cookie.lower())
+        self.assertIn("Path=/", cookie)
+        # HTTP test transport → no Secure flag; it is added only under TLS.
+        self.assertNotIn("Secure", cookie)
+
+    def test_photo_resolves_custom_via_cookie_and_stays_no_store(self):
+        self.seed_owner_trip(self.OWNER_A, [self.CUSTOM])
+        res = self.photo_client.get(
+            "/?placeId=" + self.CUSTOM_ID + "&index=0",
+            headers={"Cookie": "biwa-owner=" + self.OWNER_A})
+        self.assertEqual(res.status_code, 200, res.text)
+        self.assertEqual(res.headers.get("cache-control"), "private, no-store")
+        self.assertIn("Cookie", res.headers.get("vary", ""))
+
+    def test_photo_cookie_never_leaks_another_owners_custom(self):
+        self.seed_owner_trip(self.OWNER_A, [self.CUSTOM])
+        res = self.photo_client.get(
+            "/?placeId=" + self.CUSTOM_ID + "&index=0",
+            headers={"Cookie": "biwa-owner=" + self.OWNER_B})
+        self.assertEqual(res.status_code, 404)
+
+    def test_canonical_photo_keeps_day_cache_and_vary(self):
+        res = self.photo_client.get("/?placeId=stay-hana&index=0")
+        self.assertEqual(res.status_code, 200, res.text)
+        self.assertEqual(
+            res.headers.get("cache-control"), "private, max-age=86400")
+        self.assertIn("Cookie", res.headers.get("vary", ""))
+
+    def test_cookie_is_never_write_auth(self):
+        res = TestClient(biwa_trip.app).put(
+            "/", headers={"Cookie": "biwa-owner=" + self.OWNER_A},
+            json={"expectedRevision": 0, "trip": seed_trip()})
+        self.assertEqual(res.status_code, 401)
+
+
 if __name__ == "__main__":
     unittest.main()

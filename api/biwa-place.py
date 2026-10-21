@@ -40,10 +40,19 @@ app = biwa_store.create_biwa_app("biwa-place")
 store = biwa_store.BiwaStore()
 
 
-def _current_trip():
+def _current_trip(request):
+    """The caller's personal doc — custom places resolve from it only.
+
+    The retired shared doc key is never read: without a valid owner
+    identity (header, or the biwa-owner cookie minted by GET /biwa-trip)
+    only canonical manifest places resolve.
+    """
     if not store.configured:
         return None
-    trip, _raw = store.get_trip()
+    owner = biwa_store.owner_from_header_or_cookie(request)
+    if not owner:
+        return None
+    trip, _raw = store.get_trip(biwa_store.owner_trip_key(owner))
     return trip
 
 
@@ -66,7 +75,7 @@ async def get_place(request: Request):
         return biwa_store.json_error(503, "not_configured",
                                      "Place details are not configured on this deployment.")
 
-    place = biwa_places.find_trip_place(place_id, biwa_models.CANONICAL, _current_trip())
+    place = biwa_places.find_trip_place(place_id, biwa_models.CANONICAL, _current_trip(request))
     if place is None:
         return biwa_store.json_error(404, "unknown_place", "No such place.")
 

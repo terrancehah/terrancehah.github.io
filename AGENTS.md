@@ -4,6 +4,11 @@
 
 This is a static HTML/CSS/vanilla JS personal website (terrancehah.com), deployed via Vercel. It is **not** a Next.js application, despite what `.windsurfrules` describes. The `.windsurfrules` file was written for a different project and does not apply to this codebase.
 
+## Agent Model And Deployment Permissions
+
+- Use SWE-2 as the implementation model for subagent code changes. Do not substitute another model that requires a fee or payment. If SWE-2 cannot be selected or confirmed, explain the limitation and ask the user before proceeding with delegated implementation.
+- Never add a serverless function to the Vercel deployment without the user's explicit permission. The Vercel Hobby plan has a limited serverless-function allowance; this applies to new function entry points and configuration changes that create additional deployed functions.
+
 ## Tech Stack
 
 - Static HTML pages (`index.html`, `articles.html`, `projects.html`, `playground.html`)

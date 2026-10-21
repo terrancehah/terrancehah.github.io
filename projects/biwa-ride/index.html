@@ -1,26 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <!-- Public companion app. Referrer policy is strict-origin-when-cross-origin
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<!-- Public companion app. Referrer policy is strict-origin-when-cross-origin
        rather than no-referrer: Google's referrer-restricted browser key needs
        the origin referrer on its script/tile requests. No invite token
        exists in v2 — the trip is publicly shared. No analytics are loaded. -->
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>Lake Biwa Ride Companion</title>
-  <!-- Canonical base: the app lives at /projects/biwa-ride/, so the
+		<meta name="referrer" content="strict-origin-when-cross-origin" />
+		<title>Lake Biwa Ride Companion</title>
+		<!-- Canonical base: the app lives at /projects/biwa-ride/, so the
        no-trailing-slash URL still resolves styles, data, api/ calls and
        the terms/privacy links identically locally and on Vercel. -->
-  <base href="/projects/biwa-ride/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="biwa-tokens.css">
-  <link rel="stylesheet" href="biwa-ride.css">
-</head>
-<body class="biwa-page">
-  <!-- Full-width masthead banner: the supplied-art scene. Layers paint
+		<base href="/projects/biwa-ride/" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="biwa-tokens.css" />
+		<link rel="stylesheet" href="biwa-ride.css" />
+	</head>
+	<body class="biwa-page">
+		<!-- Full-width masthead banner: the supplied-art scene. Layers paint
        back-to-front — sky gradient, self-drawn mountains + water band with
        slow sparkles, vector-traced autumn trees drifting right-to-left on a
        seamless doubled belt, the supplied torii and pagoda passing
@@ -30,414 +34,1168 @@
        (reduced motion / offscreen), there is no user control. The figure
        GIFs are always animated; under prefers-reduced-motion they hide
        outright since CSS cannot freeze a GIF's frames. -->
-  <header class="biwa-masthead">
-    <div class="biwa-masthead-scene" id="biwa-masthead-scene" aria-hidden="true">
-      <!-- Twin-halved ridge belt: both halves are the same tile whose
+		<header class="biwa-masthead">
+			<div
+				class="biwa-masthead-scene"
+				id="biwa-masthead-scene"
+				aria-hidden="true">
+				<!-- Twin-halved ridge belt: both halves are the same tile whose
            ridge heights match at x=0 and x=720, so the translateX(-50%)
            loop wraps seamlessly while the range creeps almost
            imperceptibly. Ridge endpoints are authored equal on purpose —
            change a peak and keep the first/last vertex pairs in sync. -->
-      <div class="biwa-scene-mountains">
-        <div class="biwa-scene-mountains-belt">
-          <svg class="biwa-scene-mountains-half" viewBox="0 0 720 140" preserveAspectRatio="none">
-            <path fill="#aac39b" d="M0 96L60 74L120 104L200 62L280 108L360 78L440 110L520 66L600 104L660 84L720 96L720 140L0 140Z"/>
-            <path fill="#7f9f6e" opacity="0.85" d="M0 118L80 96L160 122L240 92L320 120L420 96L500 124L580 100L660 122L720 118L720 140L0 140Z"/>
-          </svg>
-          <svg class="biwa-scene-mountains-half" viewBox="0 0 720 140" preserveAspectRatio="none">
-            <path fill="#aac39b" d="M0 96L60 74L120 104L200 62L280 108L360 78L440 110L520 66L600 104L660 84L720 96L720 140L0 140Z"/>
-            <path fill="#7f9f6e" opacity="0.85" d="M0 118L80 96L160 122L240 92L320 120L420 96L500 124L580 100L660 122L720 118L720 140L0 140Z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="biwa-scene-water">
-        <!-- Flat calm-lake reflections — long thin oblongs of varying
+				<div class="biwa-scene-mountains">
+					<div class="biwa-scene-mountains-belt">
+						<svg
+							class="biwa-scene-mountains-half"
+							viewBox="0 0 720 140"
+							preserveAspectRatio="none">
+							<path
+								fill="#aac39b"
+								d="M0 96L60 74L120 104L200 62L280 108L360 78L440 110L520 66L600 104L660 84L720 96L720 140L0 140Z" />
+							<path
+								fill="#7f9f6e"
+								opacity="0.85"
+								d="M0 118L80 96L160 122L240 92L320 120L420 96L500 124L580 100L660 122L720 118L720 140L0 140Z" />
+						</svg>
+						<svg
+							class="biwa-scene-mountains-half"
+							viewBox="0 0 720 140"
+							preserveAspectRatio="none">
+							<path
+								fill="#aac39b"
+								d="M0 96L60 74L120 104L200 62L280 108L360 78L440 110L520 66L600 104L660 84L720 96L720 140L0 140Z" />
+							<path
+								fill="#7f9f6e"
+								opacity="0.85"
+								d="M0 118L80 96L160 122L240 92L320 120L420 96L500 124L580 100L660 122L720 118L720 140L0 140Z" />
+						</svg>
+					</div>
+				</div>
+				<div class="biwa-scene-water">
+					<!-- Flat calm-lake reflections — long thin oblongs of varying
              length hugging the far shore line, on a doubled belt so the
              -50% wrap slides them endlessly along the shore, slower than
              the trees and faster than the mountains (far-water parallax). -->
-        <div class="biwa-scene-reflection-belt">
-          <div class="biwa-scene-reflection-half">
-            <span class="biwa-scene-reflection" style="left:6%;top:9%;width:17%"></span>
-            <span class="biwa-scene-reflection" style="left:29%;top:5%;width:8%;opacity:0.28"></span>
-            <span class="biwa-scene-reflection" style="left:44%;top:15%;width:13%"></span>
-            <span class="biwa-scene-reflection" style="left:63%;top:8%;width:20%;opacity:0.5"></span>
-            <span class="biwa-scene-reflection" style="left:88%;top:13%;width:9%"></span>
-            <span class="biwa-scene-reflection" style="left:15%;top:21%;width:6%;opacity:0.24"></span>
-            <span class="biwa-scene-reflection" style="left:72%;top:23%;width:12%;opacity:0.3"></span>
-          </div>
-          <div class="biwa-scene-reflection-half">
-            <span class="biwa-scene-reflection" style="left:6%;top:9%;width:17%"></span>
-            <span class="biwa-scene-reflection" style="left:29%;top:5%;width:8%;opacity:0.28"></span>
-            <span class="biwa-scene-reflection" style="left:44%;top:15%;width:13%"></span>
-            <span class="biwa-scene-reflection" style="left:63%;top:8%;width:20%;opacity:0.5"></span>
-            <span class="biwa-scene-reflection" style="left:88%;top:13%;width:9%"></span>
-            <span class="biwa-scene-reflection" style="left:15%;top:21%;width:6%;opacity:0.24"></span>
-            <span class="biwa-scene-reflection" style="left:72%;top:23%;width:12%;opacity:0.3"></span>
-          </div>
-        </div>
-      </div>
-      <div class="biwa-scene-trees">
-        <div class="biwa-scene-belt">
-          <!-- 18 traced trees per half (each asset 3x). The belt is at
+					<div class="biwa-scene-reflection-belt">
+						<div class="biwa-scene-reflection-half">
+							<span
+								class="biwa-scene-reflection"
+								style="left: 6%; top: 9%; width: 17%"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="
+									left: 29%;
+									top: 5%;
+									width: 8%;
+									opacity: 0.28;
+								"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="left: 44%; top: 15%; width: 13%"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="
+									left: 63%;
+									top: 8%;
+									width: 20%;
+									opacity: 0.5;
+								"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="left: 88%; top: 13%; width: 9%"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="
+									left: 15%;
+									top: 21%;
+									width: 6%;
+									opacity: 0.24;
+								"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="
+									left: 72%;
+									top: 23%;
+									width: 12%;
+									opacity: 0.3;
+								"></span>
+						</div>
+						<div class="biwa-scene-reflection-half">
+							<span
+								class="biwa-scene-reflection"
+								style="left: 6%; top: 9%; width: 17%"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="
+									left: 29%;
+									top: 5%;
+									width: 8%;
+									opacity: 0.28;
+								"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="left: 44%; top: 15%; width: 13%"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="
+									left: 63%;
+									top: 8%;
+									width: 20%;
+									opacity: 0.5;
+								"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="left: 88%; top: 13%; width: 9%"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="
+									left: 15%;
+									top: 21%;
+									width: 6%;
+									opacity: 0.24;
+								"></span>
+							<span
+								class="biwa-scene-reflection"
+								style="
+									left: 72%;
+									top: 23%;
+									width: 12%;
+									opacity: 0.3;
+								"></span>
+						</div>
+					</div>
+				</div>
+				<div class="biwa-scene-trees">
+					<div class="biwa-scene-belt">
+						<!-- 18 traced trees per half (each asset 3x). The belt is at
                least 1800px wide so a half is never denser than ~900px —
                JS arranges the placeholders into jittered groups once and
                clones the computed tile into the second half so the
                translateX(-50%) loop stays seamless. The inline --tree-x
                spread is the no-JS fallback order. -->
-          <div class="biwa-scene-belt-half">
-            <img class="biwa-scene-tree" style="--tree-x:4%;height:68px" src="assets/tree-02.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:7.6%;height:96px" src="assets/tree-06.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:9.4%;height:84px" src="assets/tree-05.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:12.2%;height:84px" src="assets/tree-01.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:14.8%;height:84px" src="assets/tree-01.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:20.2%;height:72px" src="assets/tree-03.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:25.6%;height:96px" src="assets/tree-06.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:31%;height:60px" src="assets/tree-04.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:34.8%;height:82px" src="assets/tree-03.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:36.4%;height:84px" src="assets/tree-01.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:41.8%;height:60px" src="assets/tree-04.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:47.2%;height:68px" src="assets/tree-02.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:52.6%;height:96px" src="assets/tree-06.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:58%;height:72px" src="assets/tree-03.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:63.4%;height:64px" src="assets/tree-05.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:68.8%;height:64px" src="assets/tree-04.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:74.2%;height:84px" src="assets/tree-01.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:79.6%;height:96px" src="assets/tree-06.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:85%;height:64px" src="assets/tree-05.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:90.4%;height:82px" src="assets/tree-02.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:95.8%;height:82px" src="assets/tree-03.svg" alt="">
-            <!-- Roadside strollers riding the belt — their base pace IS
+						<div class="biwa-scene-belt-half">
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 4%; height: 68px"
+								src="assets/tree-02.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 7.6%; height: 96px"
+								src="assets/tree-06.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 9.4%; height: 84px"
+								src="assets/tree-05.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 12.2%; height: 84px"
+								src="assets/tree-01.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 14.8%; height: 84px"
+								src="assets/tree-01.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 20.2%; height: 72px"
+								src="assets/tree-03.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 25.6%; height: 96px"
+								src="assets/tree-06.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 31%; height: 60px"
+								src="assets/tree-04.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 34.8%; height: 82px"
+								src="assets/tree-03.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 36.4%; height: 84px"
+								src="assets/tree-01.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 41.8%; height: 60px"
+								src="assets/tree-04.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 47.2%; height: 68px"
+								src="assets/tree-02.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 52.6%; height: 96px"
+								src="assets/tree-06.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 58%; height: 72px"
+								src="assets/tree-03.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 63.4%; height: 64px"
+								src="assets/tree-05.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 68.8%; height: 64px"
+								src="assets/tree-04.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 74.2%; height: 84px"
+								src="assets/tree-01.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 79.6%; height: 96px"
+								src="assets/tree-06.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 85%; height: 64px"
+								src="assets/tree-05.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 90.4%; height: 82px"
+								src="assets/tree-02.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 95.8%; height: 82px"
+								src="assets/tree-03.svg"
+								alt="" />
+							<!-- Roadside strollers riding the belt — their base pace IS
                  tree speed; --walker-flip faces them with the scroll and
                  --walker-dur/--walker-delay de-sync the small meander. -->
-            <img class="biwa-scene-walker" style="--walker-x:17%;--walker-flip:-1;--walker-dur:21s;--walker-delay:-6s;height:52px"
-                 src="assets/walker-01-loop.gif" alt="">
-            <img class="biwa-scene-walker" style="--walker-x:60%;--walker-flip:-1;--walker-dur:19s;--walker-delay:-2s;height:50px"
-                 src="assets/walker-02-loop.gif" alt="">
-            <img class="biwa-scene-walker" style="--walker-x:63.4%;--walker-flip:-1;--walker-dur:17s;--walker-delay:-9s;height:55px"
-                 src="assets/walker-03-loop.gif" alt="">
-            <img class="biwa-scene-walker" style="--walker-x:66.6%;--walker-flip:-1;--walker-dur:23s;--walker-delay:-14s;height:48px"
-                 src="assets/walker-04-loop.gif" alt="">
-          </div>
-          <div class="biwa-scene-belt-half">
-            <img class="biwa-scene-tree" style="--tree-x:4%;height:68px" src="assets/tree-02.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:7.6%;height:96px" src="assets/tree-06.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:9.4%;height:84px" src="assets/tree-05.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:12.2%;height:84px" src="assets/tree-01.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:14.8%;height:84px" src="assets/tree-01.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:20.2%;height:72px" src="assets/tree-03.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:25.6%;height:96px" src="assets/tree-06.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:31%;height:60px" src="assets/tree-04.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:34.8%;height:82px" src="assets/tree-03.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:36.4%;height:84px" src="assets/tree-01.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:41.8%;height:60px" src="assets/tree-04.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:47.2%;height:68px" src="assets/tree-02.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:52.6%;height:96px" src="assets/tree-06.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:58%;height:72px" src="assets/tree-03.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:63.4%;height:64px" src="assets/tree-05.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:68.8%;height:64px" src="assets/tree-04.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:74.2%;height:84px" src="assets/tree-01.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:79.6%;height:96px" src="assets/tree-06.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:85%;height:64px" src="assets/tree-05.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:90.4%;height:82px" src="assets/tree-02.svg" alt="">
-            <img class="biwa-scene-tree" style="--tree-x:95.8%;height:82px" src="assets/tree-03.svg" alt="">
-            <!-- Same walkers as the first half — the no-JS fallback tile;
+							<img
+								class="biwa-scene-walker"
+								style="
+									--walker-x: 17%;
+									--walker-flip: -1;
+									--walker-dur: 21s;
+									--walker-delay: -6s;
+									height: 52px;
+								"
+								src="assets/walker-01-loop.gif"
+								alt="" />
+							<img
+								class="biwa-scene-walker"
+								style="
+									--walker-x: 60%;
+									--walker-flip: -1;
+									--walker-dur: 19s;
+									--walker-delay: -2s;
+									height: 50px;
+								"
+								src="assets/walker-02-loop.gif"
+								alt="" />
+							<img
+								class="biwa-scene-walker"
+								style="
+									--walker-x: 63.4%;
+									--walker-flip: -1;
+									--walker-dur: 17s;
+									--walker-delay: -9s;
+									height: 55px;
+								"
+								src="assets/walker-03-loop.gif"
+								alt="" />
+							<img
+								class="biwa-scene-walker"
+								style="
+									--walker-x: 66.6%;
+									--walker-flip: -1;
+									--walker-dur: 23s;
+									--walker-delay: -14s;
+									height: 48px;
+								"
+								src="assets/walker-04-loop.gif"
+								alt="" />
+						</div>
+						<div class="biwa-scene-belt-half">
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 4%; height: 68px"
+								src="assets/tree-02.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 7.6%; height: 96px"
+								src="assets/tree-06.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 9.4%; height: 84px"
+								src="assets/tree-05.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 12.2%; height: 84px"
+								src="assets/tree-01.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 14.8%; height: 84px"
+								src="assets/tree-01.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 20.2%; height: 72px"
+								src="assets/tree-03.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 25.6%; height: 96px"
+								src="assets/tree-06.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 31%; height: 60px"
+								src="assets/tree-04.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 34.8%; height: 82px"
+								src="assets/tree-03.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 36.4%; height: 84px"
+								src="assets/tree-01.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 41.8%; height: 60px"
+								src="assets/tree-04.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 47.2%; height: 68px"
+								src="assets/tree-02.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 52.6%; height: 96px"
+								src="assets/tree-06.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 58%; height: 72px"
+								src="assets/tree-03.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 63.4%; height: 64px"
+								src="assets/tree-05.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 68.8%; height: 64px"
+								src="assets/tree-04.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 74.2%; height: 84px"
+								src="assets/tree-01.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 79.6%; height: 96px"
+								src="assets/tree-06.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 85%; height: 64px"
+								src="assets/tree-05.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 90.4%; height: 82px"
+								src="assets/tree-02.svg"
+								alt="" />
+							<img
+								class="biwa-scene-tree"
+								style="--tree-x: 95.8%; height: 82px"
+								src="assets/tree-03.svg"
+								alt="" />
+							<!-- Same walkers as the first half — the no-JS fallback tile;
                  JS re-clones half one over this anyway. -->
-            <img class="biwa-scene-walker" style="--walker-x:17%;--walker-flip:-1;--walker-dur:21s;--walker-delay:-6s;height:52px"
-                 src="assets/walker-01-loop.gif" alt="">
-            <img class="biwa-scene-walker" style="--walker-x:60%;--walker-flip:-1;--walker-dur:19s;--walker-delay:-2s;height:50px"
-                 src="assets/walker-02-loop.gif" alt="">
-            <img class="biwa-scene-walker" style="--walker-x:63.4%;--walker-flip:-1;--walker-dur:17s;--walker-delay:-9s;height:55px"
-                 src="assets/walker-03-loop.gif" alt="">
-            <img class="biwa-scene-walker" style="--walker-x:66.6%;--walker-flip:-1;--walker-dur:23s;--walker-delay:-14s;height:48px"
-                 src="assets/walker-04-loop.gif" alt="">
-          </div>
-        </div>
-      </div>
-      <!-- Straggler strollers — they enter at the right edge and drift
+							<img
+								class="biwa-scene-walker"
+								style="
+									--walker-x: 17%;
+									--walker-flip: -1;
+									--walker-dur: 21s;
+									--walker-delay: -6s;
+									height: 52px;
+								"
+								src="assets/walker-01-loop.gif"
+								alt="" />
+							<img
+								class="biwa-scene-walker"
+								style="
+									--walker-x: 60%;
+									--walker-flip: -1;
+									--walker-dur: 19s;
+									--walker-delay: -2s;
+									height: 50px;
+								"
+								src="assets/walker-02-loop.gif"
+								alt="" />
+							<img
+								class="biwa-scene-walker"
+								style="
+									--walker-x: 63.4%;
+									--walker-flip: -1;
+									--walker-dur: 17s;
+									--walker-delay: -9s;
+									height: 55px;
+								"
+								src="assets/walker-03-loop.gif"
+								alt="" />
+							<img
+								class="biwa-scene-walker"
+								style="
+									--walker-x: 66.6%;
+									--walker-flip: -1;
+									--walker-dur: 23s;
+									--walker-delay: -14s;
+									height: 48px;
+								"
+								src="assets/walker-04-loop.gif"
+								alt="" />
+						</div>
+					</div>
+				</div>
+				<!-- Straggler strollers — they enter at the right edge and drift
            left across the whole shore while facing right, moonwalking as
            the riders drop them; the wrap re-enters fully offscreen. The
            second's margin keeps it in step just behind. -->
-      <img class="biwa-scene-passer" style="--walker-dur:20s;--walker-delay:0s;height:54px"
-           src="assets/walker-05-loop.gif" alt="">
-      <img class="biwa-scene-passer" style="--walker-dur:15s;--walker-delay:0s;height:50px;margin-left:48px"
-           src="assets/walker-01-loop.gif" alt="">
-      <!-- Static supplied landmark art — no GIF-swap needed; the drifts
+				<img
+					class="biwa-scene-passer"
+					style="--walker-dur: 20s; --walker-delay: 0s; height: 54px"
+					src="assets/walker-05-loop.gif"
+					alt="" />
+				<img
+					class="biwa-scene-passer"
+					style="
+						--walker-dur: 15s;
+						--walker-delay: 0s;
+						height: 50px;
+						margin-left: 48px;
+					"
+					src="assets/walker-01-loop.gif"
+					alt="" />
+				<!-- Static supplied landmark art — no GIF-swap needed; the drifts
            are pure CSS so .is-paused and prefers-reduced-motion handle
            them. All four share the 45s pass quarter-spaced in phase
            (0s / -11.25s / -22.5s / -33.75s): neighbours stay ~100vw
            apart on the extended 400vw track. -->
-      <img class="biwa-scene-torii" src="assets/wired-flat-1984-torii.svg" alt="">
-      <img class="biwa-scene-shrine" style="--shrine-h:112px;--ground-y:2.15%;--pass-delay:-11.25s"
-           src="assets/shrine-01.png" alt="">
-      <img class="biwa-scene-pagoda" src="assets/wired-flat-1940-pagoda.svg" alt="">
-      <img class="biwa-scene-shrine" style="--shrine-h:118px;--ground-y:2.93%;--pass-delay:-33.75s"
-           src="assets/shrine-02.png" alt="">
-      <div class="biwa-scene-road"></div>
-      <!-- Each rider runs a cadence-variant GIF: the fade spins slowest,
+				<img
+					class="biwa-scene-torii"
+					src="assets/wired-flat-1984-torii.svg"
+					alt="" />
+				<img
+					class="biwa-scene-shrine"
+					style="
+						--shrine-h: 112px;
+						--ground-y: 2.15%;
+						--pass-delay: -11.25s;
+					"
+					src="assets/shrine-01.png"
+					alt="" />
+				<img
+					class="biwa-scene-pagoda"
+					src="assets/wired-flat-1940-pagoda.svg"
+					alt="" />
+				<img
+					class="biwa-scene-shrine"
+					style="
+						--shrine-h: 118px;
+						--ground-y: 2.93%;
+						--pass-delay: -33.75s;
+					"
+					src="assets/shrine-02.png"
+					alt="" />
+				<div class="biwa-scene-road"></div>
+				<!-- Each rider runs a cadence-variant GIF: the fade spins slowest,
            the weaver sits at baseline, the attacker spins quickest. -->
-      <img class="biwa-scene-rider biwa-scene-rider-a" style="--rider-x:30%;--drift-dur:23s;--drift-delay:-4s"
-           src="assets/cyclist-01-loop.gif" alt="">
-      <img class="biwa-scene-rider biwa-scene-rider-b" style="--rider-x:50%;--drift-dur:18s;--drift-delay:-11s"
-           src="assets/cyclist-02-loop.gif" alt="">
-      <img class="biwa-scene-rider biwa-scene-rider-c" style="--rider-x:70%;--drift-dur:14s;--drift-delay:-7s"
-           src="assets/cyclist-03-loop.gif" alt="">
-    </div>
-    <div class="biwa-masthead-text">
-      <h1 data-i18n="Lake Biwa Ride">Lake Biwa Ride</h1>
-      <p class="biwa-masthead-sub" data-i18n="Otsu - Hikone - Takashima - Otsu">Otsu - Hikone - Takashima - Otsu</p>
-    </div>
-    <!-- Language switch: two segments in one track — the active language
+				<img
+					class="biwa-scene-rider biwa-scene-rider-a"
+					style="--rider-x: 30%; --drift-dur: 23s; --drift-delay: -4s"
+					src="assets/cyclist-01-loop.gif"
+					alt="" />
+				<img
+					class="biwa-scene-rider biwa-scene-rider-b"
+					style="
+						--rider-x: 50%;
+						--drift-dur: 18s;
+						--drift-delay: -11s;
+					"
+					src="assets/cyclist-02-loop.gif"
+					alt="" />
+				<img
+					class="biwa-scene-rider biwa-scene-rider-c"
+					style="--rider-x: 70%; --drift-dur: 14s; --drift-delay: -7s"
+					src="assets/cyclist-03-loop.gif"
+					alt="" />
+			</div>
+			<div class="biwa-masthead-text">
+				<h1 data-i18n="Lake Biwa Ride">Lake Biwa Ride</h1>
+				<p
+					class="biwa-masthead-sub"
+					data-i18n="Otsu - Hikone - Takashima - Otsu">
+					Otsu - Hikone - Takashima - Otsu
+				</p>
+			</div>
+			<!-- Language switch: two segments in one track — the active language
          rides raised, the other sits sunken (aria-pressed carries state). -->
-    <div class="biwa-lang-switch" id="biwa-lang-switch" role="group" aria-label="Language / 语言" data-active="en">
-      <button class="biwa-lang-option" type="button" data-lang="en" aria-pressed="true">EN</button>
-      <button class="biwa-lang-option" type="button" data-lang="zh" aria-pressed="false">中文</button>
-    </div>
-  </header>
-  <div class="biwa-shell">
+			<div
+				class="biwa-lang-switch"
+				id="biwa-lang-switch"
+				role="group"
+				aria-label="Language / 语言"
+				data-active="en">
+				<button
+					class="biwa-lang-option"
+					type="button"
+					data-lang="en"
+					aria-pressed="true">
+					EN
+				</button>
+				<button
+					class="biwa-lang-option"
+					type="button"
+					data-lang="zh"
+					aria-pressed="false">
+					中文
+				</button>
+			</div>
+		</header>
+		<div class="biwa-shell">
+			<nav
+				class="biwa-nav"
+				aria-label="Views"
+				data-i18n-aria-label="Views">
+				<button
+					class="biwa-nav-button"
+					id="nav-timeline"
+					data-view="timeline"
+					aria-current="page">
+					<span class="biwa-nav-icon" aria-hidden="true"
+						><svg viewBox="0 0 24 24" width="24" height="24">
+							<g fill="currentColor">
+								<circle cx="6.5" cy="6" r="2.6" />
+								<rect
+									x="11"
+									y="4.7"
+									width="9"
+									height="2.6"
+									rx="1.3" />
+								<circle cx="6.5" cy="12" r="2.6" />
+								<rect
+									x="11"
+									y="10.7"
+									width="9"
+									height="2.6"
+									rx="1.3" />
+								<circle cx="6.5" cy="18" r="2.6" />
+								<rect
+									x="11"
+									y="16.7"
+									width="9"
+									height="2.6"
+									rx="1.3" />
+							</g></svg></span
+					><span data-i18n="Timeline">Timeline</span>
+				</button>
+				<button
+					class="biwa-nav-button"
+					id="nav-map"
+					data-view="map"
+					aria-current="false">
+					<span class="biwa-nav-icon" aria-hidden="true"
+						><svg viewBox="0 0 24 24" width="24" height="24">
+							<g fill="currentColor">
+								<path d="M3.5 6.1l5-1.6v13.5l-5 1.7z" />
+								<path d="M9.5 4.4l5 1.6v13.6l-5-1.6z" />
+								<path d="M15.5 5.9l5-1.5v13.5l-5 1.6z" />
+							</g></svg></span
+					><span data-i18n="Map">Map</span>
+				</button>
+				<button
+					class="biwa-nav-button"
+					id="nav-nearby"
+					data-view="nearby"
+					aria-current="false">
+					<span class="biwa-nav-icon" aria-hidden="true"
+						><svg viewBox="0 0 24 24" width="24" height="24">
+							<path
+								d="M12 21s-6-5.4-6-10a6 6 0 1 1 12 0c0 4.6-6 10-6 10zm0-7.8a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z"
+								fill="currentColor"
+								fill-rule="evenodd" /></svg></span
+					><span data-i18n="Nearby">Nearby</span>
+				</button>
+			</nav>
 
-    <!-- No connection indicator or banners by design — a healthy app stays
-         quiet; the only state surface is the explicit conflict dialog. -->
+			<main id="biwa-main">
+				<!-- ============ TIMELINE VIEW ============ -->
+				<section
+					class="biwa-view is-active"
+					id="view-timeline"
+					aria-labelledby="nav-timeline">
+					<!-- Compact certificate progress heading (the stamp view merged in) -->
+					<div
+						class="biwa-progress-strip"
+						id="biwa-progress-strip"></div>
 
-    <nav class="biwa-nav" aria-label="Views" data-i18n-aria-label="Views">
-      <button class="biwa-nav-button" id="nav-timeline" data-view="timeline" aria-current="page">
-        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><g fill="currentColor"><circle cx="6.5" cy="6" r="2.6"/><rect x="11" y="4.7" width="9" height="2.6" rx="1.3"/><circle cx="6.5" cy="12" r="2.6"/><rect x="11" y="10.7" width="9" height="2.6" rx="1.3"/><circle cx="6.5" cy="18" r="2.6"/><rect x="11" y="16.7" width="9" height="2.6" rx="1.3"/></g></svg></span><span data-i18n="Timeline">Timeline</span>
-      </button>
-      <button class="biwa-nav-button" id="nav-map" data-view="map" aria-current="false">
-        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><g fill="currentColor"><path d="M3.5 6.1l5-1.6v13.5l-5 1.7z"/><path d="M9.5 4.4l5 1.6v13.6l-5-1.6z"/><path d="M15.5 5.9l5-1.5v13.5l-5 1.6z"/></g></svg></span><span data-i18n="Map">Map</span>
-      </button>
-      <button class="biwa-nav-button" id="nav-nearby" data-view="nearby" aria-current="false">
-        <span class="biwa-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 21s-6-5.4-6-10a6 6 0 1 1 12 0c0 4.6-6 10-6 10zm0-7.8a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" fill-rule="evenodd"/></svg></span><span data-i18n="Nearby">Nearby</span>
-      </button>
-    </nav>
+					<div
+						class="biwa-day-tabs"
+						id="biwa-day-selector"
+						role="group"
+						aria-label="Choose riding day"
+						data-i18n-aria-label="Choose riding day"></div>
+					<h2 class="biwa-day-title" id="biwa-day-title"></h2>
 
-    <main id="biwa-main">
-      <!-- ============ TIMELINE VIEW ============ -->
-      <section class="biwa-view is-active" id="view-timeline" aria-labelledby="nav-timeline">
-        <!-- Compact certificate progress heading (the stamp view merged in) -->
-        <div class="biwa-progress-strip" id="biwa-progress-strip"></div>
-
-        <div class="biwa-day-tabs" id="biwa-day-selector" role="group" aria-label="Choose riding day" data-i18n-aria-label="Choose riding day"></div>
-        <h2 class="biwa-day-title" id="biwa-day-title"></h2>
-
-        <div class="biwa-card biwa-next-stop" id="biwa-next-stop" hidden>
-          <!-- Content wrapper keeps the text above the absolute photo layer.
+					<div
+						class="biwa-card biwa-next-stop"
+						id="biwa-next-stop"
+						hidden>
+						<!-- Content wrapper keeps the text above the absolute photo layer.
                Every slot is permanent and height-reserved so async photos,
                credits and completion copy never shift the card's size. -->
-          <div class="biwa-next-content">
-            <p class="biwa-next-stop-label" id="biwa-next-stop-label" data-i18n="Up Next">Up Next</p>
-            <!-- The name is a real button: keyboard users get Enter/Space
+						<div class="biwa-next-content">
+							<p
+								class="biwa-next-stop-label"
+								id="biwa-next-stop-label"
+								data-i18n="Up Next">
+								Up Next
+							</p>
+							<!-- The name is a real button: keyboard users get Enter/Space
                  natively; it is styled to read as plain text and disabled
                  in completion states so no sheet can open there. -->
-            <button type="button" class="biwa-next-stop-name" id="biwa-next-stop-name"></button>
-            <!-- Reserved-height action row: both controls hide via
+							<button
+								type="button"
+								class="biwa-next-stop-name"
+								id="biwa-next-stop-name"></button>
+							<!-- Reserved-height action row: both controls hide via
                  visibility (never display) so the card keeps its size in
                  finished and empty states. -->
-            <div class="biwa-next-actions">
-              <a class="biwa-btn biwa-btn-primary" id="biwa-next-stop-directions" target="_blank" rel="noopener noreferrer" data-i18n="Directions">Directions</a>
-              <button class="biwa-btn biwa-btn-secondary" id="biwa-next-complete" type="button" data-i18n="Mark as Completed">Mark as Completed</button>
-            </div>
-            <!-- Programme check-in links for the CURRENT next stop only —
+							<div class="biwa-next-actions">
+								<a
+									class="biwa-btn biwa-btn-primary"
+									id="biwa-next-stop-directions"
+									target="_blank"
+									rel="noopener noreferrer"
+									data-i18n="Directions"
+									>Directions</a
+								>
+								<button
+									class="biwa-btn biwa-btn-secondary"
+									id="biwa-next-complete"
+									type="button"
+									data-i18n="Mark as Completed">
+									Mark as Completed
+								</button>
+							</div>
+							<!-- Programme check-in links for the CURRENT next stop only —
                  a permanently reserved row: inapplicable states hide the
                  links via visibility (never display) so the card height
                  stays constant. Populated per render by renderNextCard. -->
-            <div class="biwa-next-checkins" id="biwa-next-checkins"></div>
-            <p class="biwa-next-credit" id="biwa-next-credit"></p>
-          </div>
-        </div>
+							<div
+								class="biwa-next-checkins"
+								id="biwa-next-checkins"></div>
+							<p
+								class="biwa-next-credit"
+								id="biwa-next-credit"></p>
+						</div>
+					</div>
 
-        <!-- Calendar-style vertical track: endpoints pinned first/last. -->
-        <ol class="biwa-track" id="biwa-track"></ol>
+					<!-- Calendar-style vertical track: endpoints pinned first/last. -->
+					<ol class="biwa-track" id="biwa-track"></ol>
 
-        <div class="biwa-timeline-actions">
-          <button class="biwa-btn biwa-btn-secondary" id="biwa-add-stop" data-i18n="+ Add stop">+ Add stop</button>
-          <button class="biwa-btn biwa-btn-secondary" id="biwa-add-place" data-i18n="+ New custom place">+ New custom place</button>
-        </div>
+					<div class="biwa-timeline-actions">
+						<button
+							class="biwa-btn biwa-btn-secondary"
+							id="biwa-add-stop"
+							data-i18n="+ Add stop">
+							+ Add stop
+						</button>
+						<button
+							class="biwa-btn biwa-btn-secondary"
+							id="biwa-add-place"
+							data-i18n="+ New custom place">
+							+ New custom place
+						</button>
+					</div>
 
-        <!-- Decorative leaf-burst layer for manual completion ticks. It lives
+					<!-- Decorative leaf-burst layer for manual completion ticks. It lives
              inside the timeline view so it only exists while that view is
              visible, and it never intercepts input. -->
-        <div class="biwa-leaves" id="biwa-leaves" aria-hidden="true"></div>
-      </section>
+					<div
+						class="biwa-leaves"
+						id="biwa-leaves"
+						aria-hidden="true"></div>
+				</section>
 
-      <!-- ============ MAP VIEW ============ -->
-      <section class="biwa-view" id="view-map" aria-labelledby="nav-map">
-        <div class="biwa-map-page">
-          <div class="biwa-map-canvas" id="biwa-map-canvas"></div>
-          <!-- The legend doubles as the layer control — every entry is a
+				<!-- ============ MAP VIEW ============ -->
+				<section
+					class="biwa-view"
+					id="view-map"
+					aria-labelledby="nav-map">
+					<div class="biwa-map-page">
+						<div class="biwa-map-canvas" id="biwa-map-canvas"></div>
+						<!-- The legend doubles as the layer control — every entry is a
                show/hide toggle for its markers or day route line. -->
-          <div class="biwa-map-legend" id="biwa-map-legend" role="group" aria-label="Map layers" data-i18n-aria-label="Map layers"></div>
-          <!-- Provider content (route lines, distances) only appears
+						<div
+							class="biwa-map-legend"
+							id="biwa-map-legend"
+							role="group"
+							aria-label="Map layers"
+							data-i18n-aria-label="Map layers"></div>
+						<!-- Provider content (route lines, distances) only appears
                alongside this Google attribution. -->
-          <p class="biwa-map-attribution" id="biwa-map-attribution" hidden>
-            <span data-i18n="Map data ©">Map data ©</span> <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">Google</a>
-            · <a href="https://maps.google.com/help/terms_maps/" target="_blank" rel="noopener noreferrer" data-i18n="Google Maps terms">Google Maps terms</a>
-            · <a href="terms" data-i18n="Our terms">Our terms</a> · <a href="privacy" data-i18n="Privacy">Privacy</a>
-          </p>
-          <div class="biwa-dayroutes" id="biwa-day-routes"></div>
-          <p class="biwa-caveat" data-i18n="Road preview, not cycling guidance. Avoidance is a preference, not a guarantee — the line may still include restricted road features.">Road preview, not cycling guidance. Avoidance is a preference, not a guarantee — the line may still include restricted road features.</p>
-        </div>
-      </section>
+						<p
+							class="biwa-map-attribution"
+							id="biwa-map-attribution"
+							hidden>
+							<span data-i18n="Map data ©">Map data ©</span>
+							<a
+								href="https://www.google.com/maps"
+								target="_blank"
+								rel="noopener noreferrer"
+								>Google</a
+							>
+							·
+							<a
+								href="https://maps.google.com/help/terms_maps/"
+								target="_blank"
+								rel="noopener noreferrer"
+								data-i18n="Google Maps terms"
+								>Google Maps terms</a
+							>
+							·
+							<a href="terms" data-i18n="Our terms">Our terms</a>
+							· <a href="privacy" data-i18n="Privacy">Privacy</a>
+						</p>
+						<div class="biwa-dayroutes" id="biwa-day-routes"></div>
+						<p
+							class="biwa-caveat"
+							data-i18n="Road preview, not cycling guidance. Avoidance is a preference, not a guarantee — the line may still include restricted road features.">
+							Road preview, not cycling guidance. Avoidance is a
+							preference, not a guarantee — the line may still
+							include restricted road features.
+						</p>
+					</div>
+				</section>
 
-      <!-- ============ NEARBY VIEW ============ -->
-      <section class="biwa-view" id="view-nearby" aria-labelledby="nav-nearby">
-        <div class="biwa-card">
-          <h2 data-i18n="Find nearby">Find nearby</h2>
-          <p class="biwa-nearby-lead" data-i18n="Shortcut searches open in Google Maps around the anchor below — ordinary map listings, never labelled bike-friendly.">Shortcut searches open in Google Maps around
-            the anchor below — ordinary map listings, never labelled
-            bike-friendly.</p>
-          <!-- GPS only fires on this button — never automatically, and the
+				<!-- ============ NEARBY VIEW ============ -->
+				<section
+					class="biwa-view"
+					id="view-nearby"
+					aria-labelledby="nav-nearby">
+					<div class="biwa-card">
+						<h2 data-i18n="Find nearby">Find nearby</h2>
+						<p
+							class="biwa-nearby-lead"
+							data-i18n="Shortcut searches open in Google Maps around the anchor below — ordinary map listings, never labelled bike-friendly.">
+							Shortcut searches open in Google Maps around the
+							anchor below — ordinary map listings, never labelled
+							bike-friendly.
+						</p>
+						<!-- GPS only fires on this button — never automatically, and the
                point is used for searches only, never stored or shared. -->
-          <button class="biwa-btn biwa-btn-primary" id="biwa-nearby-geolocate" type="button" data-i18n="Update my location">Update my location</button>
-          <p class="biwa-field-hint" id="biwa-nearby-geo-status" role="status"></p>
-          <p class="biwa-field-hint" id="biwa-nearby-anchor-note"></p>
-          <div class="biwa-nearby-grid" id="biwa-nearby-grid"></div>
-        </div>
+						<button
+							class="biwa-btn biwa-btn-primary"
+							id="biwa-nearby-geolocate"
+							type="button"
+							data-i18n="Update my location">
+							Update my location
+						</button>
+						<p
+							class="biwa-field-hint"
+							id="biwa-nearby-geo-status"
+							role="status"></p>
+						<p
+							class="biwa-field-hint"
+							id="biwa-nearby-anchor-note"></p>
+						<div
+							class="biwa-nearby-grid"
+							id="biwa-nearby-grid"></div>
+					</div>
 
-        <!-- Collapses entirely when the group has no curated spots yet — a
+					<!-- Collapses entirely when the group has no curated spots yet — a
              big empty card is worse than no card. -->
-        <div class="biwa-card" id="biwa-parking-card" hidden>
-          <h2 data-i18n="Bike-friendly parking">Bike-friendly parking</h2>
-          <ul class="biwa-stamp-list" id="biwa-parking-list"></ul>
-        </div>
-      </section>
-    </main>
+					<div class="biwa-card" id="biwa-parking-card" hidden>
+						<h2 data-i18n="Bike-friendly parking">
+							Bike-friendly parking
+						</h2>
+						<ul class="biwa-stamp-list" id="biwa-parking-list"></ul>
+					</div>
+				</section>
+			</main>
 
-    <!-- Quiet site footer inside the shell — plain links back to the
+			<!-- Quiet site footer inside the shell — plain links back to the
          portfolio, no framing; the shell's bottom padding already lifts
          it clear of the fixed mobile nav. -->
-    <footer class="biwa-footer">
-      <nav class="biwa-footer-nav" aria-label="Footer" data-i18n-aria-label="Footer">
-        <a class="biwa-footer-link" href="/projects.html" data-i18n="Projects">Projects</a>
-        <a class="biwa-footer-link" href="/">terrancehah.com</a>
-        <!-- Device pairing entry — the trip is personal (per-owner Redis
+			<footer class="biwa-footer">
+				<nav
+					class="biwa-footer-nav"
+					aria-label="Footer"
+					data-i18n-aria-label="Footer">
+					<a
+						class="biwa-footer-link"
+						href="/projects.html"
+						data-i18n="Projects"
+						>Projects</a
+					>
+					<a class="biwa-footer-link" href="/">terrancehah.com</a>
+					<!-- Device pairing entry — the trip is personal (per-owner Redis
              doc), so this is how a second device claims the same identity. -->
-        <button class="biwa-footer-link biwa-pair-open" id="biwa-pair-open"
-                type="button" data-i18n="Pair devices">Pair devices</button>
-      </nav>
-      <p class="biwa-footer-credit"><span data-i18n="Made with">Made with</span> <span class="biwa-footer-heart" aria-hidden="true">♥</span><span data-i18n=" by Terrance"> by Terrance</span></p>
-    </footer>
-  </div>
+					<button
+						class="biwa-footer-link biwa-pair-open"
+						id="biwa-pair-open"
+						type="button"
+						data-i18n="Pair devices">
+						Pair devices
+					</button>
+				</nav>
+				<p class="biwa-footer-credit">
+					<span data-i18n="Made with">Made with</span>
+					<span class="biwa-footer-heart" aria-hidden="true">♥</span
+					><span data-i18n=" by Terrance"> by Terrance</span>
+				</p>
+			</footer>
+		</div>
 
-  <!-- Mini next-stop bar — a persistent "now playing"-style strip pinned
+		<!-- Mini next-stop bar — a persistent "now playing"-style strip pinned
        just above the bottom nav on phones: small square photo, place
-       name and badges, plus the two field actions (directions, tick).
+       name and badges, plus the two field actions (navigate, check-in).
        The left zone is one big tap target opening the same sheet as the
        Up Next card. Hidden on ≥56rem — the sidebar layout keeps the
        full card in reach already. Rendered by renderNextCard. -->
-  <div class="biwa-mini-bar" id="biwa-mini-bar" hidden>
-    <button class="biwa-mini-open" id="biwa-mini-open" type="button">
-      <span class="biwa-mini-photo-slot" aria-hidden="true"><img class="biwa-mini-photo" id="biwa-mini-photo" alt="" hidden></span>
-      <span class="biwa-mini-text">
-        <span class="biwa-mini-name" id="biwa-mini-name"></span>
-        <span class="biwa-mini-tags" id="biwa-mini-tags"></span>
-      </span>
-    </button>
-    <a class="biwa-btn biwa-btn-secondary biwa-mini-directions" id="biwa-mini-directions"
-       target="_blank" rel="noopener noreferrer" data-i18n="Directions">Directions</a>
-    <button class="biwa-btn biwa-btn-primary biwa-mini-complete" id="biwa-mini-complete"
-            type="button" data-i18n="Done">Done</button>
-  </div>
+		<div class="biwa-mini-bar" id="biwa-mini-bar" hidden>
+			<button class="biwa-mini-open" id="biwa-mini-open" type="button">
+				<span class="biwa-mini-photo-slot" aria-hidden="true"
+					><img
+						class="biwa-mini-photo"
+						id="biwa-mini-photo"
+						alt=""
+						hidden
+				/></span>
+				<span class="biwa-mini-text">
+					<span class="biwa-mini-name" id="biwa-mini-name"></span>
+					<span class="biwa-mini-tags" id="biwa-mini-tags"></span>
+				</span>
+			</button>
+			<a
+				class="biwa-btn biwa-btn-secondary biwa-mini-directions"
+				id="biwa-mini-directions"
+				target="_blank"
+				rel="noopener noreferrer">
+				<!-- Tabler Icons "route" (MIT, © Paweł Kuna — verbatim upstream
+				     geometry, assets/tabler-icons-license.txt):
+				     https://raw.githubusercontent.com/tabler/tabler-icons/main/icons/outline/route.svg
+				     aria-label/title carry the resolved stop name and are repainted
+				     by renderNextCard. -->
+				<svg
+					viewBox="0 0 24 24"
+					width="22"
+					height="22"
+					aria-hidden="true"
+					focusable="false"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round">
+					<path d="M3 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M19 7a2 2 0 1 0 0 -4a2 2 0 0 0 0 4" />
+					<path
+						d="M11 19h5.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h4.5" />
+				</svg>
+			</a>
+			<button
+				class="biwa-btn biwa-btn-primary biwa-mini-complete"
+				id="biwa-mini-complete"
+				type="button">
+				<!-- The label lifts away, the green tick draws itself
+				     (pathLength=1 dashoffset sweep), holds, then "Check in"
+				     fades back before the bar advances — mini-checkin.js owns
+				     that phase machine. -->
+				<span
+					class="biwa-mini-complete-label"
+					id="biwa-mini-complete-label"
+					>Check in</span
+				>
+				<svg
+					class="biwa-mini-complete-tick"
+					viewBox="0 0 24 24"
+					width="20"
+					height="20"
+					aria-hidden="true"
+					focusable="false"
+					hidden>
+					<!-- Tabler Icons "check" (MIT — same license file as above):
+					     https://raw.githubusercontent.com/tabler/tabler-icons/main/icons/outline/check.svg
+					     pathLength="1" normalises the stroke so CSS can draw it. -->
+					<path
+						class="biwa-mini-checkmark"
+						pathLength="1"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M5 12l5 5l10 -10" />
+				</svg>
+			</button>
+		</div>
 
-  <!-- ============ Destination bottom sheet ============ -->
-  <div class="biwa-sheet-backdrop" id="biwa-sheet-backdrop" hidden></div>
-  <section class="biwa-sheet" id="biwa-sheet" role="dialog" aria-modal="true"
-           aria-labelledby="biwa-sheet-title" hidden>
-    <div class="biwa-sheet-grab" aria-hidden="true"></div>
-    <button class="biwa-sheet-close" id="biwa-sheet-close" type="button"
-            aria-label="Close place details" data-i18n-aria-label="Close place details">✕</button>
-    <div class="biwa-sheet-body" id="biwa-sheet-body"></div>
-    <!-- Sticky action footer: rendered per place, outside the scroll body
+		<!-- ============ Destination bottom sheet ============ -->
+		<div class="biwa-sheet-backdrop" id="biwa-sheet-backdrop" hidden></div>
+		<section
+			class="biwa-sheet"
+			id="biwa-sheet"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="biwa-sheet-title"
+			hidden>
+			<div class="biwa-sheet-grab" aria-hidden="true"></div>
+			<button
+				class="biwa-sheet-close"
+				id="biwa-sheet-close"
+				type="button"
+				aria-label="Close place details"
+				data-i18n-aria-label="Close place details">
+				✕
+			</button>
+			<div class="biwa-sheet-body" id="biwa-sheet-body"></div>
+			<!-- Sticky action footer: rendered per place, outside the scroll body
          so directions/check-in stay reachable at any scroll depth. -->
-    <div class="biwa-sheet-actions" id="biwa-sheet-actions"></div>
-  </section>
+			<div class="biwa-sheet-actions" id="biwa-sheet-actions"></div>
+		</section>
 
-  <!-- Pill toast: transient confirmation that a check-in write landed.
+		<!-- Pill toast: transient confirmation that a check-in write landed.
        A polite live region so screen readers announce each tick without
        stealing focus; visibility is class-driven (never `hidden`) so the
        fade/slide transition can actually run. -->
-  <div class="biwa-toast" id="biwa-toast" role="status" aria-live="polite">
-    <svg class="biwa-toast-icon" viewBox="0 0 16 16" width="14" height="14"
-         aria-hidden="true" focusable="false">
-      <path d="M3 8.6l3.1 3.1L13 5" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="biwa-toast-text" id="biwa-toast-text"></span>
-  </div>
+		<div
+			class="biwa-toast"
+			id="biwa-toast"
+			role="status"
+			aria-live="polite">
+			<svg
+				class="biwa-toast-icon"
+				viewBox="0 0 16 16"
+				width="14"
+				height="14"
+				aria-hidden="true"
+				focusable="false">
+				<path
+					d="M3 8.6l3.1 3.1L13 5"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round" />
+			</svg>
+			<span class="biwa-toast-text" id="biwa-toast-text"></span>
+		</div>
 
-  <!-- Editor dialog (place fields / add stop) — opened from rows and the sheet -->
-  <dialog class="biwa-dialog" id="biwa-stop-dialog" aria-labelledby="biwa-stop-dialog-title">
-    <h2 id="biwa-stop-dialog-title" data-i18n="Stop">Stop</h2>
-    <div id="biwa-stop-dialog-body"></div>
-    <div class="biwa-dialog-actions">
-      <button class="biwa-btn biwa-btn-secondary" id="biwa-stop-dialog-cancel" type="button" data-i18n="Cancel">Cancel</button>
-      <button class="biwa-btn biwa-btn-primary" id="biwa-stop-dialog-save" type="button" data-i18n="Save">Save</button>
-    </div>
-  </dialog>
+		<!-- Editor dialog (place fields / add stop) — opened from rows and the sheet -->
+		<dialog
+			class="biwa-dialog"
+			id="biwa-stop-dialog"
+			aria-labelledby="biwa-stop-dialog-title">
+			<h2 id="biwa-stop-dialog-title" data-i18n="Stop">Stop</h2>
+			<div id="biwa-stop-dialog-body"></div>
+			<div class="biwa-dialog-actions">
+				<button
+					class="biwa-btn biwa-btn-secondary"
+					id="biwa-stop-dialog-cancel"
+					type="button"
+					data-i18n="Cancel">
+					Cancel
+				</button>
+				<button
+					class="biwa-btn biwa-btn-primary"
+					id="biwa-stop-dialog-save"
+					type="button"
+					data-i18n="Save">
+					Save
+				</button>
+			</div>
+		</dialog>
 
-  <dialog class="biwa-dialog" id="biwa-endpoint-dialog" aria-labelledby="biwa-endpoint-dialog-title">
-    <h2 id="biwa-endpoint-dialog-title" data-i18n="Overnight point">Overnight point</h2>
-    <div id="biwa-endpoint-dialog-body"></div>
-    <div class="biwa-dialog-actions">
-      <button class="biwa-btn biwa-btn-secondary" id="biwa-endpoint-dialog-cancel" type="button" data-i18n="Cancel">Cancel</button>
-      <button class="biwa-btn biwa-btn-primary" id="biwa-endpoint-dialog-save" type="button" data-i18n="Save">Save</button>
-    </div>
-  </dialog>
+		<dialog
+			class="biwa-dialog"
+			id="biwa-endpoint-dialog"
+			aria-labelledby="biwa-endpoint-dialog-title">
+			<h2 id="biwa-endpoint-dialog-title" data-i18n="Overnight point">
+				Overnight point
+			</h2>
+			<div id="biwa-endpoint-dialog-body"></div>
+			<div class="biwa-dialog-actions">
+				<button
+					class="biwa-btn biwa-btn-secondary"
+					id="biwa-endpoint-dialog-cancel"
+					type="button"
+					data-i18n="Cancel">
+					Cancel
+				</button>
+				<button
+					class="biwa-btn biwa-btn-primary"
+					id="biwa-endpoint-dialog-save"
+					type="button"
+					data-i18n="Save">
+					Save
+				</button>
+			</div>
+		</dialog>
 
-  <dialog class="biwa-dialog" id="biwa-conflict-dialog" aria-labelledby="biwa-conflict-title">
-    <h2 id="biwa-conflict-title" data-i18n="Someone else saved first">Someone else saved first</h2>
-    <p data-i18n="Another phone updated the trip while you were editing. Your unsaved draft is still on this phone — you can load the shared version, or explicitly replace the whole shared trip with your snapshot (their edits would be overwritten).">Another phone updated the trip while you were editing. Your unsaved draft
-      is still on this phone — you can load the shared version, or explicitly
-      replace the whole shared trip with your snapshot (their edits would be
-      overwritten).</p>
-    <div class="biwa-dialog-actions">
-      <button class="biwa-btn biwa-btn-secondary" id="biwa-conflict-keep" type="button" data-i18n="Replace shared trip with mine">Replace shared trip with mine</button>
-      <button class="biwa-btn biwa-btn-primary" id="biwa-conflict-reload" type="button" data-i18n="Load shared version">Load shared version</button>
-    </div>
-  </dialog>
+		<dialog
+			class="biwa-dialog"
+			id="biwa-conflict-dialog"
+			aria-labelledby="biwa-conflict-title">
+			<h2 id="biwa-conflict-title" data-i18n="Someone else saved first">
+				Someone else saved first
+			</h2>
+			<p
+				data-i18n="Another phone updated the trip while you were editing. Your unsaved draft is still on this phone — you can load the shared version, or explicitly replace the whole shared trip with your snapshot (their edits would be overwritten).">
+				Another phone updated the trip while you were editing. Your
+				unsaved draft is still on this phone — you can load the shared
+				version, or explicitly replace the whole shared trip with your
+				snapshot (their edits would be overwritten).
+			</p>
+			<div class="biwa-dialog-actions">
+				<button
+					class="biwa-btn biwa-btn-secondary"
+					id="biwa-conflict-keep"
+					type="button"
+					data-i18n="Replace shared trip with mine">
+					Replace shared trip with mine
+				</button>
+				<button
+					class="biwa-btn biwa-btn-primary"
+					id="biwa-conflict-reload"
+					type="button"
+					data-i18n="Load shared version">
+					Load shared version
+				</button>
+			</div>
+		</dialog>
 
-  <!-- Device pairing: trips are personal per-owner docs, so pairing is how
+		<!-- Device pairing: trips are personal per-owner docs, so pairing is how
        two of YOUR devices share one identity. 'Send' mints a 10-minute
        code on this device; 'receive' claims one shown on another. -->
-  <dialog class="biwa-dialog" id="biwa-pair-dialog" aria-labelledby="biwa-pair-title">
-    <h2 id="biwa-pair-title" data-i18n="Pair devices">Pair devices</h2>
-    <p data-i18n="Your trip and check-ins are personal to each device. To see the same trip on another of your devices, show a code here and enter it there.">Your trip and check-ins are personal to each device. To see the same
-      trip on another of your devices, show a code here and enter it
-      there.</p>
+		<dialog
+			class="biwa-dialog"
+			id="biwa-pair-dialog"
+			aria-labelledby="biwa-pair-title">
+			<h2 id="biwa-pair-title" data-i18n="Pair devices">Pair devices</h2>
+			<p
+				data-i18n="Your trip and check-ins are personal to each device. To see the same trip on another of your devices, show a code here and enter it there.">
+				Your trip and check-ins are personal to each device. To see the
+				same trip on another of your devices, show a code here and enter
+				it there.
+			</p>
 
-    <div class="biwa-pair-section">
-      <h3 data-i18n="Send this trip to another device">Send this trip to another device</h3>
-      <button class="biwa-btn biwa-btn-secondary" id="biwa-pair-show" type="button"
-              data-i18n="Show a code">Show a code</button>
-      <p class="biwa-pair-code" id="biwa-pair-code" hidden aria-live="polite"></p>
-      <p class="biwa-field-hint" id="biwa-pair-code-note" hidden
-         data-i18n="Valid for 10 minutes — enter it on the other device to claim this trip.">Valid for 10 minutes — enter it on the other device to claim this trip.</p>
-    </div>
+			<div class="biwa-pair-section">
+				<h3 data-i18n="Send this trip to another device">
+					Send this trip to another device
+				</h3>
+				<button
+					class="biwa-btn biwa-btn-secondary"
+					id="biwa-pair-show"
+					type="button"
+					data-i18n="Show a code">
+					Show a code
+				</button>
+				<p
+					class="biwa-pair-code"
+					id="biwa-pair-code"
+					hidden
+					aria-live="polite"></p>
+				<p
+					class="biwa-field-hint"
+					id="biwa-pair-code-note"
+					hidden
+					data-i18n="Valid for 10 minutes — enter it on the other device to claim this trip.">
+					Valid for 10 minutes — enter it on the other device to claim
+					this trip.
+				</p>
+			</div>
 
-    <div class="biwa-pair-section">
-      <h3 data-i18n="This device is new">This device is new</h3>
-      <div class="biwa-pair-claim-row">
-        <input class="biwa-input biwa-pair-input" id="biwa-pair-input" type="text"
-               inputmode="text" autocomplete="off" autocapitalize="characters"
-               maxlength="6" data-i18n-placeholder="6-letter code"
-               placeholder="6-letter code">
-        <button class="biwa-btn biwa-btn-primary" id="biwa-pair-claim" type="button"
-                data-i18n="Claim trip">Claim trip</button>
-      </div>
-      <p class="biwa-field-hint" id="biwa-pair-status" role="status"></p>
-    </div>
+			<div class="biwa-pair-section">
+				<h3 data-i18n="This device is new">This device is new</h3>
+				<div class="biwa-pair-claim-row">
+					<input
+						class="biwa-input biwa-pair-input"
+						id="biwa-pair-input"
+						type="text"
+						inputmode="text"
+						autocomplete="off"
+						autocapitalize="characters"
+						maxlength="6"
+						data-i18n-placeholder="6-letter code"
+						placeholder="6-letter code" />
+					<button
+						class="biwa-btn biwa-btn-primary"
+						id="biwa-pair-claim"
+						type="button"
+						data-i18n="Claim trip">
+						Claim trip
+					</button>
+				</div>
+				<p
+					class="biwa-field-hint"
+					id="biwa-pair-status"
+					role="status"></p>
+			</div>
 
-    <div class="biwa-dialog-actions">
-      <button class="biwa-btn biwa-btn-secondary" id="biwa-pair-close" type="button"
-              data-i18n="Close">Close</button>
-    </div>
-  </dialog>
+			<div class="biwa-dialog-actions">
+				<button
+					class="biwa-btn biwa-btn-secondary"
+					id="biwa-pair-close"
+					type="button"
+					data-i18n="Close">
+					Close
+				</button>
+			</div>
+		</dialog>
 
-  <script src="geo-distance.js" defer></script>
-  <script src="checkpoint-rules.js" defer></script>
-  <script src="map-links.js" defer></script>
-  <script src="trip-store.js" defer></script>
-  <script src="route-preview.js" defer></script>
-  <script src="stop-distances.js" defer></script>
-  <script src="biwa-i18n.js" defer></script>
-  <script src="biwa-ride.js" defer></script>
-</body>
+		<script src="geo-distance.js" defer></script>
+		<script src="checkpoint-rules.js" defer></script>
+		<script src="map-links.js" defer></script>
+		<script src="trip-store.js" defer></script>
+		<script src="route-preview.js" defer></script>
+		<script src="stop-distances.js" defer></script>
+		<script src="biwa-i18n.js" defer></script>
+		<!-- Self-contained modules before the application controller so it can
+       hand them their seams: the decorative masthead owns its observers
+       and motion gating, the pairing dialog owns its controls, and the
+       offline cache registers the scoped service worker. -->
+		<script src="masthead-scene.js" defer></script>
+		<script src="device-pairing.js" defer></script>
+		<script src="offline-cache.js" defer></script>
+		<script src="mini-checkin.js" defer></script>
+		<script src="biwa-ride.js" defer></script>
+	</body>
 </html>

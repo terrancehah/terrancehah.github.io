@@ -57,12 +57,14 @@ test('临湖庄 is one place — no separate 1-17/108-17 Katsuno record', () => 
     (p.label || '').includes('108-17')).length, 0);
 });
 
-test('official areas hold exactly 5 / 4 / 5 / 3 checkpoints', () => {
+test('official areas hold exactly 5 / 5 / 5 / 2 checkpoints', () => {
   const trip = freshTrip();
   assert.strictEqual(Rules.officialPlacesForArea(trip, 'south').length, 5);
-  assert.strictEqual(Rules.officialPlacesForArea(trip, 'east').length, 4);
+  // The information centre carries an official-east override despite its
+  // west-geography name; west keeps the boat pier and STAGEX only.
+  assert.strictEqual(Rules.officialPlacesForArea(trip, 'east').length, 5);
   assert.strictEqual(Rules.officialPlacesForArea(trip, 'north').length, 5);
-  assert.strictEqual(Rules.officialPlacesForArea(trip, 'west').length, 3);
+  assert.strictEqual(Rules.officialPlacesForArea(trip, 'west').length, 2);
 });
 
 test('canonical places keep verbatim source coords; extras stay null-coord with resolvers', () => {
@@ -101,7 +103,9 @@ test('seed order matches the blueprint: endpoints and every stop in order', () =
     },
     'day-3': {
       start: 'stay-rinkoso', end: 'rally-rental',
-      stops: ['extra-takashima-station', 'extra-ukawa',
+      // Day 3 opens on the canonical information-centre record — the
+      // legacy extra-takashima-station id is compatibility-only.
+      stops: ['official-west-information', 'extra-ukawa',
         'official-south-otsuka', 'rally-kitahira', 'official-south-shiga',
         'rally-ogoto', 'rally-otsukan', 'official-south-otsu']
     }
