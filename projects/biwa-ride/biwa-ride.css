@@ -2248,6 +2248,10 @@ body.biwa-page {
 .biwa-toast-icon {
 	flex: none;
 }
+/* Notices/errors are not successes — the checkmark stays out of them. */
+.biwa-toast[data-tone="notice"] .biwa-toast-icon {
+	display: none;
+}
 /* Long place names truncate instead of stretching the pill wide. */
 .biwa-toast-text {
 	overflow: hidden;

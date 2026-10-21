@@ -30,7 +30,7 @@
  */
 "use strict";
 
-var SHELL_VERSION = "v8";
+var SHELL_VERSION = "v9";
 var SHELL_CACHE = "biwa-ride-shell-" + SHELL_VERSION;
 var NAV_TIMEOUT_MS = 3500;
 
@@ -69,6 +69,7 @@ var SHELL_ASSETS = [
 	"device-pairing.js",
 	"offline-cache.js",
 	"mini-checkin.js",
+	"endpoint-change.js",
 	"biwa-ride.js",
 	"data/checkpoints.json",
 	"data/trip-seed.json",

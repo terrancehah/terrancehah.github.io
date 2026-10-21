@@ -330,7 +330,6 @@ test("a throwing localStorage is flagged, never silently claimed", async () => {
 	);
 });
 
-
 test("a restored doc renders before the network answers", async () => {
 	const local = new Map();
 	const server = makeServer();
@@ -355,7 +354,9 @@ test("a restored doc renders before the network answers", async () => {
 	store.init(); // deliberately not awaited — the catalogue never resolves
 	assert.ok(store.trip, "restored doc visible before any network answer");
 	assert.ok(emissions.length > 0, "an emit painted the restored doc");
-	assert.equal(store.trip, store.pendingDraft);
+	// The view carries the draft's content but is a detached clone —
+	// progress overlays must never write into the raw pending object.
+	assert.deepEqual(store.trip, store.pendingDraft);
 	assert.equal(store.state, "disconnected", "no false saved before ack");
 });
 
@@ -426,4 +427,3 @@ test("a discard with no authoritative snapshot keeps the draft recoverable", asy
 	assert.ok(draftPlaces(local), "and it is durable again");
 	assert.equal(first.store.state, "unavailable");
 });
-

@@ -177,6 +177,11 @@
 		"This also becomes the next day’s start — the group sleeps where the day ended.":
 			"这也会成为次日的起点——小队在当天结束的地方过夜。",
 		"Clear endpoint": "清除端点",
+		// Destructive endpoint edit confirmations (native confirm dialogs).
+		"Clear this destination? The connected day boundary will also be cleared and its arrival check-ins removed. This cannot be undone.":
+			"要清除此目的地吗？相邻天的边界也会被清除，相关到达打卡会被移除。此操作无法撤销。",
+		"Change this destination? Existing arrival check-ins for this day boundary will be reset. This cannot be undone.":
+			"要更改此目的地吗？此天边界已有的到达打卡会被重置。此操作无法撤销。",
 		Stop: "站点",
 		Cancel: "取消",
 		Save: "保存",
@@ -204,6 +209,19 @@
 		"That code is invalid or expired — check it and try again.":
 			"配对码无效或已过期——请核对后重试。",
 		"Trip claimed — reloading…": "已获取行程——正在重新加载…",
+		// Pairing block reasons — honest causes, never 'invalid code' for a
+		// connection problem.
+		"No connection. Unable to pair devices. Your unsaved changes stay on this phone.":
+			"没有网络连接。无法配对设备。未保存的修改会保留在此手机上。",
+		"Your changes are not saved online yet. Wait for them to save before pairing.":
+			"你的修改尚未保存到网络。请等待保存完成后再配对。",
+		"Wait for the trip to finish loading before pairing.":
+			"请等待行程加载完成后再配对。",
+		"Unable to pair because this browser cannot safely store the device identity.":
+			"无法配对——此浏览器无法安全地存储设备身份。",
+		"Too many pairing attempts. Try again shortly.":
+			"配对尝试过于频繁——请稍后重试。",
+		"Unable to pair right now. Try again.": "暂时无法配对——请重试。",
 
 		// Offline escape-hatch toasts — transient connection-transition
 		// messages only; there is no offline mode or status readout. English
