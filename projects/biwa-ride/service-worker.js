@@ -30,7 +30,7 @@
  */
 "use strict";
 
-var SHELL_VERSION = "v9";
+var SHELL_VERSION = "v15";
 var SHELL_CACHE = "biwa-ride-shell-" + SHELL_VERSION;
 var NAV_TIMEOUT_MS = 3500;
 

@@ -61,9 +61,17 @@ async def get_place(request: Request):
     blocked = biwa_store.guard_mutation(request, store)
     if blocked:
         return blocked
-    if not biwa_store.check_dual_rate_limit(
-        request, store, "places", biwa_store.PLACES_RATE_LIMIT
-    ):
+    # General read budget first — generous because cache hits cost no
+    # Google call. The 20/min provider budget is checked only just before
+    # an actual billed resolve. A counter backend failure answers 503,
+    # never a silent skip past abuse protection.
+    try:
+        read_ok = biwa_store.check_dual_rate_limit(
+            request, store, "places-read", biwa_store.CACHED_READ_RATE_LIMIT)
+    except Exception:
+        return biwa_store.json_error(503, "cache_unavailable",
+                                     "Cached content is temporarily unavailable.")
+    if not read_ok:
         return biwa_store.json_error(429, "rate_limited", "Too many place lookups — wait a minute.")
 
     place_id = request.query_params.get("placeId")
@@ -71,11 +79,14 @@ async def get_place(request: Request):
     if problems:
         return biwa_store.json_error(422, "invalid_request", "; ".join(problems))
 
-    if not biwa_store.GOOGLE_PLACES_KEY:
-        return biwa_store.json_error(503, "not_configured",
-                                     "Place details are not configured on this deployment.")
-
-    place = biwa_places.find_trip_place(place_id, biwa_models.CANONICAL, _current_trip(request))
+    # The owner-doc read inside _current_trip can hit a backend error —
+    # that answers 503 rather than silently degrading to canonical-only.
+    try:
+        trip = _current_trip(request)
+    except Exception:
+        return biwa_store.json_error(503, "cache_unavailable",
+                                     "Cached content is temporarily unavailable.")
+    place = biwa_places.find_trip_place(place_id, biwa_models.CANONICAL, trip)
     if place is None:
         return biwa_store.json_error(404, "unknown_place", "No such place.")
 
@@ -89,8 +100,14 @@ async def get_place(request: Request):
     }
 
     # A provider answer within its 30-day window skips Google entirely —
-    # a repeat view of the same place costs no billed call.
-    cached = biwa_google_cache.cached_details(store, place)
+    # a repeat view of the same place costs no billed call. STRICT read:
+    # a backend error or corrupt entry fails closed (503) instead of
+    # disguising itself as a miss that would spend a billed resolve.
+    try:
+        cached = biwa_google_cache.cached_details(store, place, strict=True)
+    except Exception:
+        return biwa_store.json_error(503, "cache_unavailable",
+                                     "Cached content is temporarily unavailable.")
     if cached is not None:
         source_info["resolvedBy"] = "cache"
         return biwa_store.json_ok({
@@ -99,11 +116,32 @@ async def get_place(request: Request):
             "source": source_info,
         })
 
+    # Only a genuine cache MISS needs the provider key — a valid cached
+    # answer above serves even with no Places key configured.
+    if not biwa_store.GOOGLE_PLACES_KEY:
+        return biwa_store.json_error(503, "not_configured",
+                                     "Place details are not configured on this deployment.")
+
+    # The cached Google id can shortcut the search step and is always
+    # tried BEFORE falling back to a fresh lookup — same strict contract
+    # as the details read.
+    try:
+        cached_id = biwa_google_cache.cached_google_id(
+            store, place, strict=True)
+    except Exception:
+        return biwa_store.json_error(503, "cache_unavailable",
+                                     "Cached content is temporarily unavailable.")
+
+    # Every cache path ran — the resolve below is the billed call, so the
+    # 20/min Places budget gates exactly here.
+    if not biwa_store.check_dual_rate_limit(
+        request, store, "places", biwa_store.PLACES_RATE_LIMIT
+    ):
+        return biwa_store.json_error(429, "rate_limited", "Too many place lookups — wait a minute.")
+
     # Resolution lives in biwa-places so /biwa-photo resolves searchText
     # candidates identically — a place without a stored Google id can still
-    # serve its provider photos. The cached Google id can shortcut the
-    # search step and is always tried BEFORE falling back to a fresh lookup.
-    cached_id = biwa_google_cache.cached_google_id(store, place)
+    # serve its provider photos.
     body, resolved_by = biwa_places.resolve_place_details(
         place, biwa_store.GOOGLE_PLACES_KEY, cached_id=cached_id)
     source_info["resolvedBy"] = resolved_by
@@ -112,7 +150,12 @@ async def get_place(request: Request):
         # Live details failed — the ONLY provider data we may still surface
         # is the policy-cached lat/lng (Google's 30-day allowance), exposed
         # separately from details so it is never mistaken for place content.
-        source_info["cachedLocation"] = biwa_google_cache.cached_location(store, place)
+        try:
+            source_info["cachedLocation"] = biwa_google_cache.cached_location(
+                store, place, strict=True)
+        except Exception:
+            return biwa_store.json_error(503, "cache_unavailable",
+                                         "Cached content is temporarily unavailable.")
         return biwa_store.json_ok({
             "ok": True,
             "details": None,

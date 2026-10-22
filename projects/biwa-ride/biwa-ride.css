@@ -182,7 +182,10 @@ body.biwa-page {
    slower/faster drift around it. --walker-dur/--walker-delay de-sync
    each walker's wander. GIF frames pad 17/256 at the bottom —
    translateY(6.64%) grounds the feet. Heights sit below the trees'
-   70–110px band. */
+   70–110px band.
+   DORMANT: the walker imgs are commented out in index.html (inactive
+   art kept for later restoration) — this rule and its keyframes stay
+   so restoring the markup is a pure HTML change. */
 .biwa-scene-walker {
 	position: absolute;
 	left: var(--walker-x, 50%);
@@ -214,7 +217,9 @@ body.biwa-page {
    left slower than the tree scroll while facing RIGHT: a deliberate
    moonwalk, as if the riders have already swept past and dropped them.
    They exit off the left edge and re-enter at the right — the wrap
-   happens fully offscreen, same convention as the torii pass. */
+   happens fully offscreen, same convention as the torii pass.
+   DORMANT with the walkers — passer imgs are commented out in
+   index.html. */
 .biwa-scene-passer {
 	position: absolute;
 	left: 0;
@@ -241,7 +246,9 @@ body.biwa-page {
    the right never shows. The track runs to -295vw (400vw of travel in
    45s ≈ the original ~8.9vw/s drift) so four landmarks quarter-spaced
    in phase stay ~100vw apart. The translateY grounds the artwork's
-   visible base (its 430 viewBox pads ~13.1% below the torii's feet). */
+   visible base (its 430 viewBox pads ~13.1% below the torii's feet).
+   DORMANT: all four landmark imgs (torii, shrines, pagoda) are
+   commented out in index.html — the pass rules stay for restoration. */
 .biwa-scene-torii {
 	position: absolute;
 	left: 0;
@@ -745,13 +752,16 @@ body.biwa-page {
 	font-size: 1.05rem;
 }
 
-/* The up-next card stands out via a warm full-surface tint, no side stripe.
-   When the stop's own Google photo loads it sits blurred behind the content
-   under a paper fade — position/overflow contain the absolute layer. */
+/* The next-stop node is ONE stable element that lives in two places: inside
+   .biwa-next-host it is the compact status/fallback card (finished, empty,
+   missing-endpoint); while a live target exists renderTrack moves it into
+   that row's .biwa-stop-card as a flat full-width action panel. The panel
+   never paints its own blurred backdrop — .biwa-next-photo/-veil stay
+   dormant — the OUTER card's photo layer covers the expanded row once,
+   and z-index keeps the veil from swallowing the panel's controls. */
 .biwa-next-stop {
 	position: relative;
 	overflow: hidden;
-	background: var(--biwa-peach-wash);
 }
 .biwa-next-photo {
 	position: absolute;
@@ -775,35 +785,53 @@ body.biwa-page {
 .biwa-next-content {
 	position: relative;
 }
-/* Every slot in the next card is height-reserved — 'Up Next' labels,
-   clamped names, the 48px directions button and the credit line all keep
-   their space whether content is live, loading or absent, so the card
-   never resizes under async updates. */
+/* Fallback/host mode keeps the plain status card; embedded inside the
+   track the same node is a borderless action panel — the row itself
+   carries the name + 'Up Next' tag so the duplicated slots hide. */
+#biwa-track .biwa-next-stop {
+	flex: 1 1 100%;
+	background: transparent;
+	box-shadow: none;
+	border-radius: 0;
+	padding: var(--biwa-space-xs) 0 0;
+	margin: 0;
+	/* The row card's photo/veil layers paint absolutely across the whole
+     expanded card — the panel must sit above them or taps hit the veil. */
+	position: relative;
+	z-index: 1;
+}
+#biwa-track .biwa-next-stop-label,
+#biwa-track .biwa-next-stop-name {
+	display: none;
+}
+#biwa-track .biwa-next-stop.biwa-card-press {
+	transform: none;
+}
+/* The small 'Up Next' tag the current row's header wears above the place
+   name — text plus the row wash carry the signal, never colour alone. */
+.biwa-row-next-label {
+	display: block;
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--biwa-clay-deep);
+}
 .biwa-next-stop-label {
 	font-size: 0.8rem;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 	color: var(--biwa-ink-soft);
 	margin: 0 0 2px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 .biwa-next-stop-name {
 	font-family: var(--biwa-font-heading);
 	font-size: 1.25rem;
 	line-height: 1.3;
 	margin: 0 0 var(--biwa-space-sm);
-	/* Exactly three lines tall — longer names clamp and the full text stays
-     reachable on the title attribute. */
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	line-clamp: 3;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	height: calc(1.25rem * 1.3 * 3);
 	/* The name is a <button> (it opens the sheet) styled as plain text —
-     no chrome, full width, left-aligned, pointer only while enabled. */
+     no chrome, full width, left-aligned, pointer only while enabled.
+     Natural height — fallback copy is short status text. */
 	padding: 0;
 	border: 0;
 	background: none;
@@ -816,8 +844,8 @@ body.biwa-page {
 	cursor: default;
 }
 /* Two equal 48px actions side by side; the row wraps on narrow screens.
-   Buttons hide by visibility (never display) so the row always holds its
-   height and the card never resizes between states. */
+   Hidden slots collapse outright ([hidden] wins over the flex display) so
+   no state reserves phantom height. */
 .biwa-next-actions {
 	display: flex;
 	flex-wrap: wrap;
@@ -831,46 +859,43 @@ body.biwa-page {
 	justify-content: center;
 	text-align: center;
 }
+.biwa-next-actions[hidden],
+.biwa-next-checkins[hidden],
+.biwa-next-credit[hidden] {
+	display: none;
+}
 .biwa-next-credit {
-	position: relative;
 	font-size: 0.72rem;
 	line-height: 1.35;
 	color: var(--biwa-ink-soft);
 	margin: var(--biwa-space-sm) 0 0;
-	/* Exactly three lines tall — long attribution scrolls inside the
-     reserved block (vertical only) so the card never grows; the title
-     attribute carries the full text too. */
-	height: calc(0.72rem * 1.35 * 3);
-	overflow-y: auto;
-	overflow-x: hidden;
 }
 .biwa-next-credit a {
 	color: var(--biwa-lake-deep);
 }
-/* Programme check-in row — permanently reserved below the action row at
-   exactly two 48px slots (grid rows, full width) so single, dual and empty
-   states are all the same height at every screen size; links for
-   non-programme next stops hide by visibility (never display). */
+/* Programme check-in row — ordinary secondary buttons in one wrapping
+   flow below the actions; an inapplicable next stop leaves the host
+   empty and it collapses entirely. */
 .biwa-next-checkins {
-	display: grid;
-	grid-template-rows: repeat(2, var(--biwa-tap));
+	display: flex;
+	flex-wrap: wrap;
 	gap: var(--biwa-space-sm);
-	height: calc(var(--biwa-tap) * 2 + var(--biwa-space-sm));
 	margin-top: var(--biwa-space-sm);
 }
-/* Check-in links are filled paper blocks on the peach wash — bounded by
-   their shape, no outline. */
-/* Check-in links are ordinary secondary buttons — same pill geometry,
-   petal fill and 48px floor as Directions/complete — so the up-next card
-   reads as one uniform action family. The class stays for grid placement
-   and the visibility-hidden placeholder. */
-.biwa-next-checkin-empty {
-	visibility: hidden;
+.biwa-next-checkins:empty {
+	margin-top: 0;
 }
-/* Skeleton overlay — a quiet rectangle covering the credit slot while
-   details or the photo itself are still in flight. It sits over whatever
-   content is already resolved, so nothing needs to be emptied or moved,
-   and it is static under reduced motion. */
+.biwa-next-checkins .biwa-next-checkin {
+	flex: 1 1 10rem;
+	min-height: var(--biwa-tap);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+/* Skeleton overlay — DORMANT: the JS no longer appends .biwa-next-skeleton
+   (no reserved credit slot to cover); the rules stay for the photo-backdrop
+   restore path. */
 .biwa-next-skeleton {
 	display: none;
 	position: absolute;
@@ -1088,13 +1113,18 @@ body.biwa-page {
 	color: var(--biwa-ink-soft);
 }
 
-/* Stop card: tap target for the sheet, with a 48px tick and a drag handle. */
+/* Stop card: tap target for the sheet, with a 48px tick and a drag handle.
+   Ordinary timeline rows keep their rounded paper surface and quiet
+   shadow; colour does fewer jobs — no per-type wash — so the one live row
+   reads through its subtle current wash, weight and expanded action
+   panel instead. flex-wrap lets the moved-in next-stop panel drop to a
+   full-width second line. */
 .biwa-stop-card {
 	flex: 1;
 	min-width: 0;
 	display: flex;
 	align-items: center;
-	/* gap: var(--biwa-space-xs); */
+	flex-wrap: wrap;
 	background: var(--biwa-paper);
 	border-radius: var(--biwa-radius-md);
 	box-shadow: var(--biwa-shadow-card);
@@ -1134,7 +1164,9 @@ body.biwa-page {
 /* Quiet photo credit — a real link pinned to its own bottom strip. The
    has-photo padding reserves that strip so the credit can never overlay
    the tick, body or handle; height changes once on first paint only. */
-/* .biwa-stop-card.has-photo { padding-bottom: calc(var(--biwa-space-xs) + 0.85rem); } */
+.biwa-stop-card.has-photo {
+	padding-bottom: calc(var(--biwa-space-xs) + 0.85rem);
+}
 .biwa-card-photo-credit {
 	position: absolute;
 	right: 6px;
@@ -1146,14 +1178,15 @@ body.biwa-page {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	display: none;
+	display: block;
 }
 
-/* Clickable rows — flagged data-interactive by the renderers — sit one
-   shadow step above static cards and press down on tap: translateY + a
-   lower shadow, never scale, so nothing shifts layout. The press class is
-   delegated JS (more reliable than :active across Safari/touch), cleared
-   on release/cancel/leave/dragstart so a native drag leaves no residue. */
+/* Clickable rows — flagged data-interactive by the renderers — lift
+   above the page and press down on tap: translateY, never scale, so
+   nothing shifts layout. The embedded action panel stays flat; the press
+   class is delegated JS (more reliable than :active across Safari/touch),
+   cleared on release/cancel/leave/dragstart so a native drag leaves no
+   residue. */
 .biwa-stop-card[data-interactive="true"],
 .biwa-next-stop[data-interactive="true"] {
 	box-shadow: var(--biwa-shadow-interactive);
@@ -1162,9 +1195,8 @@ body.biwa-page {
 		transform 0.12s ease;
 }
 /* Hover lift only on devices that can actually hover — no sticky states
-   on touch. Declared BEFORE the press rule so a held press always wins
-   over hover at equal specificity. */
-@media (hover: hover) and (pointer: fine) {
+   on touch. Declared BEFORE the press rule so a held press always wins. */
+@media (hover: hover) {
 	.biwa-stop-card[data-interactive="true"]:hover {
 		box-shadow: 0 2px 8px rgba(var(--biwa-ink-rgb), 0.1);
 	}
@@ -1182,11 +1214,18 @@ body.biwa-page {
 }
 
 /* The day's live target: exactly one data-current row (the next unvisited
-   visible point, endpoints included). A stronger warm wash replaces the
-   old bold border — same box, same padding, no geometry change; the name
+   visible point, endpoints included). A soft warm wash replaces the old
+   bold border — same box, same padding, no geometry change; the name
    gains weight and the photo veil warms to match instead of a stroke. */
 .biwa-track-row[data-current="true"] .biwa-stop-card {
 	background: var(--biwa-wash-current);
+}
+/* The embedded action panel grows this row, and the marker column centres
+   on the whole flex line — pin the current row's dot to the header so it
+   still connects to the stop name, not the buttons below. */
+.biwa-track-row[data-current="true"] .biwa-track-marker {
+	align-items: flex-start;
+	padding-top: var(--biwa-space-md);
 }
 .biwa-track-row[data-current="true"] .biwa-card-veil {
 	background: linear-gradient(
@@ -1227,10 +1266,10 @@ body.biwa-page {
 	--biwa-card-wash: var(--biwa-wash-extra);
 	--biwa-card-edge: var(--biwa-line);
 }
-.biwa-stop-card[data-card-type],
-.biwa-next-stop[data-card-type] {
-	background: var(--biwa-card-wash, var(--biwa-paper));
-}
+/* Timeline surfaces no longer wear their family wash — colour does fewer
+   jobs: rows are flat paper, the live row alone takes --biwa-wash-current.
+   The --biwa-card-wash tokens stay defined for a restore, and the edge
+   tokens below still tint the sheet grab. */
 /* The sheet echoes the family quietly through the grab tint; the surface
    itself stays opaque paper. */
 .biwa-sheet[data-card-type] .biwa-sheet-grab {
@@ -1531,14 +1570,19 @@ body.biwa-page {
 	width: 22px;
 	height: 22px;
 }
-/* Fixed width reserved for the longest label (Check in / 打卡 / Saving…)
-   — the bar's layout never moves when the phase changes. */
+/* Fixed width reserved for the longest label (Mark as Completed /
+   标记为已完成 / Saving…) — the bar's layout never moves when the phase
+   changes. English wraps to two short lines inside the 44px target. */
 .biwa-mini-bar .biwa-mini-complete {
 	position: relative;
-	width: 5.5rem;
+	width: 7rem;
 }
 .biwa-mini-bar .biwa-mini-complete-label {
-	white-space: nowrap;
+	white-space: normal;
+	width: 100%;
+	padding-inline: 4px;
+	line-height: 1.15;
+	text-align: center;
 	transition:
 		opacity 0.22s ease-out,
 		transform 0.22s ease-out;
@@ -1558,15 +1602,16 @@ body.biwa-page {
 	stroke-dasharray: 1;
 	stroke-dashoffset: 1;
 }
-/* Structural exclusivity — "Check in" and the tick never coexist: the
-   tick is display:none in every face except the acknowledged one, and
-   the label is display:none inside it. Opacity alone once let a parked
-   tick read beside the text. */
+/* Structural exclusivity — "Mark as Completed" and the tick never
+   coexist: the tick is display:none in every face except the
+   acknowledged one, and the label is display:none inside it. Opacity
+   alone once let a parked tick read beside the text. */
 .biwa-mini-bar .biwa-mini-complete-tick[hidden],
 .biwa-mini-bar .biwa-mini-complete-label[hidden] {
 	display: none;
 }
-/* Phase 1 — "Check in" lifts away before the tick face appears. */
+/* Phase 1 — "Mark as Completed" lifts away before the tick face
+   appears. */
 .biwa-mini-bar .biwa-mini-complete.is-text-exiting .biwa-mini-complete-label {
 	opacity: 0;
 	transform: translateY(-2px);
@@ -1598,7 +1643,8 @@ body.biwa-page {
 	transition: stroke-dashoffset 0.32s ease-out;
 }
 /* Phase 3 — restoring is a marker only: the tick is already display:none
-   and "Check in" fades back over 220ms via its base transition. */
+   and "Mark as Completed" fades back over 220ms via its base
+   transition. */
 /* While the check-in feedback owns the bar, its other controls must not
    navigate to the (possibly just completed) stop. */
 .biwa-mini-bar.is-checking-in .biwa-mini-open,
@@ -1644,8 +1690,8 @@ body.biwa-page {
 	align-items: center;
 	padding: var(--biwa-space-xs) 0;
 }
-/* The sheet footer's Completed toggle reuses this box — it fills green
-   under the button's own aria-pressed. */
+/* Dormant — the sheet's Completed toggle is text-only now, but the filled
+   stamp-box language is preserved if a checklist control needs it. */
 .biwa-btn[aria-pressed="true"] .biwa-stamp-box {
 	background: var(--biwa-success);
 	color: #fff;
@@ -1668,8 +1714,8 @@ body.biwa-page {
 	}
 }
 .biwa-stamp-box {
-	/* flex:none — the box must not shrink inside the footer's flex buttons.
-     Same filled-square language as the arrival checks: petal pending. */
+	/* flex:none — the box must not shrink inside a flex button. Same
+     filled-square language as the arrival checks: petal pending. */
 	flex: none;
 	width: 26px;
 	height: 26px;
@@ -1704,45 +1750,18 @@ body.biwa-page {
 	gap: 6px;
 	flex-wrap: wrap;
 }
-/* Programme chips are full tints — lake wash for official, peach wash for
-   rally — so the family reads at a glance without a ring. */
+/* Programme chips are quiet text labels on neutral paper — the name still
+   spells the family/area out, so colour never carries meaning alone and
+   the timeline reads in one ink. (Map markers and the legend keep their
+   shore colours — only the text chips are neutral.) */
 .biwa-badge {
 	font-size: 0.72rem;
 	font-weight: 700;
 	padding: 1px 8px;
 	border-radius: 999px;
-	color: var(--biwa-lake-deep);
+	color: var(--biwa-ink);
 	background: var(--biwa-alabaster);
 	white-space: nowrap;
-}
-.biwa-badge[data-programme="rally"] {
-	color: var(--biwa-clay-deep);
-	background: var(--biwa-wash-rally);
-}
-.biwa-badge[data-programme="official"] {
-	color: var(--biwa-lake-deep);
-	background: var(--biwa-lake-wash);
-}
-/* Official shore badges wear their map-marker colour as a solid chip — the
-   same --biwa-area-* tokens that fill the pins, so a row's tag reads as the
-   same colour the rider sees on the map. All four are deep enough for white
-   text at AA. Kept before the checked rule so a stamped badge still flips
-   green (equal specificity, later rule wins). */
-.biwa-badge[data-area="south"] {
-	background: var(--biwa-area-south);
-	color: #fff;
-}
-.biwa-badge[data-area="east"] {
-	background: var(--biwa-area-east);
-	color: #fff;
-}
-.biwa-badge[data-area="north"] {
-	background: var(--biwa-area-north);
-	color: #fff;
-}
-.biwa-badge[data-area="west"] {
-	background: var(--biwa-area-west);
-	color: #fff;
 }
 .biwa-badge[data-checked="true"] {
 	background: var(--biwa-success);

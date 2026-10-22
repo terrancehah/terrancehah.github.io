@@ -103,6 +103,11 @@ WRITE_RATE_LIMIT = 30          # trip writes per window (per IP)
 ROUTE_RATE_LIMIT = 20          # route provider calls per window (per IP)
 PLACES_RATE_LIMIT = 20         # Places detail calls — global AND per IP
 PHOTO_RATE_LIMIT = 20          # photo media calls — global AND per IP
+# General read protection for the cached-content endpoints — deliberately
+# much looser than the billed-provider budgets below: cache hits cost no
+# Google call, so ordinary browsing must not be starved by the 20/min
+# provider allowance. Checked BEFORE the 20/min gates.
+CACHED_READ_RATE_LIMIT = 240   # cached reads — global AND per IP
 RATE_WINDOW_S = 60
 MAX_BODY_BYTES = 200 * 1024    # bounded request bodies
 
@@ -133,6 +138,14 @@ class BiwaStore:
       redis.call('EXPIRE', KEYS[1], ARGV[1])
     end
     return count
+    """
+
+    # Read-only atomic GET+TTL for private-cache budgeting — never writes,
+    # never extends an entry's life. ''/-2 marks a genuinely absent key.
+    _CACHE_READ_SCRIPT = """
+    local raw = redis.call('GET', KEYS[1])
+    if not raw then return {'', -2} end
+    return {raw, redis.call('TTL', KEYS[1])}
     """
 
     # Compare stored revision with ARGV[1]; on match write ARGV[2] (which the
@@ -259,12 +272,20 @@ class BiwaStore:
         # Fail closed: no backend, no allowance.
         return False
 
-    def get_cached_json(self, key):
+    def get_cached_json(self, key, strict=False):
         """Read a small JSON cache payload.
 
-        Returns None when the key is absent, expired or unreadable — cache
-        misses must never raise. Memory entries store an expiry beside the
-        payload so TTLs behave like Redis EX.
+        Returns None when the key is absent, expired or unreadable — by
+        default cache misses never raise. strict=True flips that contract
+        for billed-provider paths: a backend exception, an unconfigured
+        store, undecodable JSON or a non-dict payload raises
+        RuntimeError('Biwa cache unavailable') — a broken cache must never
+        masquerade as a miss that would spend a Google call. The raised
+        message carries no backend details ('from None' keeps a Redis URL
+        out of the chain). Only a genuinely absent/expired key is None.
+
+        Memory entries store an expiry beside the payload so TTLs behave
+        like Redis EX.
         """
         raw = None
         try:
@@ -281,16 +302,110 @@ class BiwaStore:
                         raw = entry["value"]
                     else:
                         raw = entry
+            elif strict:
+                raise RuntimeError("Biwa cache unavailable")
         except Exception:
+            if strict:
+                raise RuntimeError("Biwa cache unavailable") from None
             return None
+        if raw is None:
+            return None
+        if strict and not raw:
+            # An EXISTING-but-empty payload is corrupt, not absent — a miss
+            # here would fall through to a billed provider call.
+            raise RuntimeError("Biwa cache unavailable")
         if not raw:
             return None
-        if isinstance(raw, bytes):
-            raw = raw.decode("utf-8")
         try:
-            return json.loads(raw)
+            if isinstance(raw, bytes):
+                raw = raw.decode("utf-8")
+            data = json.loads(raw)
         except (ValueError, TypeError):
+            if strict:
+                raise RuntimeError("Biwa cache unavailable") from None
             return None
+        if strict and not isinstance(data, dict):
+            raise RuntimeError("Biwa cache unavailable")
+        return data
+
+    def get_cached_json_with_ttl(self, key):
+        """Strict cache read that also reports the entry's remaining TTL.
+
+        Returns (payload_dict_or_None, seconds_remaining). STRICT by design
+        — it exists for read paths that budget a private browser cache, and
+        a backend error there must fail closed, never fall through to a
+        billed provider call: unconfigured store, backend exception,
+        undecodable JSON or a non-dict payload raise
+        RuntimeError('Biwa cache unavailable').
+
+        A genuinely absent/expired key is (None, 0). An entry with NO
+        expiry reports 0 — the browser may not re-use content past a TTL
+        the server cannot see, so an old no-TTL record gets no cache
+        lifetime. The Redis path is one atomic eval (GET + TTL) so the
+        reported age can never race a concurrent expire.
+        """
+        if self._redis is not None:
+            try:
+                result = self._redis.eval(
+                    self._CACHE_READ_SCRIPT, [key], [])
+            except Exception:
+                raise RuntimeError("Biwa cache unavailable") from None
+            # Accept a single wrapper when present; the direct adapter
+            # returns the pair itself.
+            if (isinstance(result, (list, tuple)) and len(result) == 1
+                    and isinstance(result[0], (list, tuple))):
+                result = result[0]
+            if not (isinstance(result, (list, tuple)) and len(result) == 2):
+                raise RuntimeError("Biwa cache unavailable")
+            raw, ttl = result[0], result[1]
+            # Parse the TTL BEFORE testing absence — only the script's
+            # {'', -2} sentinel is a genuine miss; any other shape is
+            # corrupt and must fail closed.
+            try:
+                if isinstance(ttl, bytes):
+                    ttl = ttl.decode("utf-8")
+                ttl = int(ttl)
+            except (ValueError, TypeError, UnicodeDecodeError):
+                raise RuntimeError("Biwa cache unavailable") from None
+            if ttl == -2 and not raw:
+                return None, 0
+            if not raw:
+                # A live key with an EMPTY payload is corrupt, not absent.
+                raise RuntimeError("Biwa cache unavailable")
+            # Negative TTL (no expiry / gone) is conservative: no lifetime.
+            remaining = max(0, ttl)
+        elif self._memory is not None:
+            with self._lock:
+                entry = self._memory.get(key)
+                if isinstance(entry, dict) and "expires" in entry:
+                    if (entry["expires"] is not None
+                            and entry["expires"] <= time.time()):
+                        del self._memory[key]
+                        return None, 0
+                    raw = entry["value"]
+                    remaining = (
+                        max(0, int(entry["expires"] - time.time()))
+                        if entry["expires"] is not None else 0
+                    )
+                else:
+                    if entry is None:
+                        return None, 0
+                    raw = entry
+                    remaining = 0
+            if not raw:
+                # Same corrupt-vs-absent contract as the Redis path.
+                raise RuntimeError("Biwa cache unavailable")
+        else:
+            raise RuntimeError("Biwa cache unavailable")
+        try:
+            if isinstance(raw, bytes):
+                raw = raw.decode("utf-8")
+            data = json.loads(raw)
+        except (ValueError, TypeError):
+            raise RuntimeError("Biwa cache unavailable") from None
+        if not isinstance(data, dict):
+            raise RuntimeError("Biwa cache unavailable")
+        return data, remaining
 
     def set_cached_json(self, key, value, ex=None):
         """Write a small JSON cache payload with optional TTL seconds.

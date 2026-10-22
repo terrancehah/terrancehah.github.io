@@ -29,7 +29,7 @@ function fakeEl() {
 function fakeButton() {
 	const classes = new Set();
 	const attrs = {};
-	const label = Object.assign(fakeEl(), { textContent: "Check in" });
+	const label = Object.assign(fakeEl(), { textContent: "Mark as Completed" });
 	const tick = fakeEl();
 	tick.setAttribute("hidden", ""); // the markup ships the tick hidden
 	return {
@@ -113,7 +113,7 @@ const phase = (b) =>
 		b.classList.contains(c),
 	);
 
-test('begin keeps the visible "Check in" text and locks + busies the button', () => {
+test('begin keeps the visible "Mark as Completed" text and locks + busies the button', () => {
 	const { button, mc } = rig();
 	const token = mc.begin({ name: "Hikone Castle" });
 	assert.equal(typeof token, "number");
@@ -129,12 +129,12 @@ test('begin keeps the visible "Check in" text and locks + busies the button', ()
 	assert.equal(button.label.hasAttribute("hidden"), false);
 	assert.equal(
 		button.label.textContent,
-		"Check in",
-		"the visible text stays Check in — not Saving…",
+		"Mark as Completed",
+		"the visible text stays Mark as Completed — not Saving…",
 	);
 	assert.equal(
 		button.getAttribute("aria-label"),
-		"Checking in at Hikone Castle",
+		"Marking Hikone Castle as completed",
 		"only aria reports the write",
 	);
 });
@@ -155,7 +155,7 @@ test("saved settles through the staged sequence, then releases once", () => {
 	assert.deepEqual(phase(button), ["is-checked"], "tick drawing phase");
 	assert.equal(
 		button.getAttribute("aria-label"),
-		"Checked in at Hikone Castle",
+		"Completed Hikone Castle",
 	);
 	assert.equal(released.length, 0, "no release while the tick draws");
 
@@ -165,7 +165,7 @@ test("saved settles through the staged sequence, then releases once", () => {
 	assert.deepEqual(phase(button), ["is-restoring"], "text restoring");
 	assert.equal(
 		button.getAttribute("aria-label"),
-		"Check in at Hikone Castle",
+		"Mark Hikone Castle as completed",
 		"the accessible label restores with the face",
 	);
 	assert.equal(released.length, 0, "the bar still shows the old stop");
@@ -175,7 +175,7 @@ test("saved settles through the staged sequence, then releases once", () => {
 	assert.equal(mc.isActive(), false);
 	assert.deepEqual(phase(button), [], "back to the idle face");
 	assert.equal(button.disabled, false);
-	assert.equal(button.label.textContent, "Check in");
+	assert.equal(button.label.textContent, "Mark as Completed");
 	assert.equal(
 		button.getAttribute("aria-label"),
 		null,
@@ -219,7 +219,7 @@ test("error, unavailable and conflict reset with no green tick", () => {
 		);
 		assert.equal(mc.isActive(), false, result + " released immediately");
 		assert.equal(button.disabled, false);
-		assert.equal(button.label.textContent, "Check in");
+		assert.equal(button.label.textContent, "Mark as Completed");
 		assert.equal(released.length, 1, result + " repaints once");
 	}
 });
@@ -299,13 +299,13 @@ test("reduced motion shows a static tick for the hold, then idles", () => {
 		["is-checked"],
 		"the tick appears instantly — no text-exit stage",
 	);
-	assert.equal(button.getAttribute("aria-label"), "Checked in at A");
+	assert.equal(button.getAttribute("aria-label"), "Completed A");
 	clock.advance(T.HOLD_MS - 1);
 	assert.deepEqual(phase(button), ["is-checked"], "held statically");
 	clock.advance(1);
 	assert.equal(mc.isActive(), false);
 	assert.deepEqual(phase(button), [], "straight back to idle, no restoring");
-	assert.equal(button.label.textContent, "Check in");
+	assert.equal(button.label.textContent, "Mark as Completed");
 	assert.equal(released.length, 1);
 });
 

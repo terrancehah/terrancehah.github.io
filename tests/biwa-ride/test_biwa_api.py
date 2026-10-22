@@ -754,7 +754,11 @@ class OwnerAwareProviderTests(unittest.TestCase):
         biwa_places.resolve_place_details = lambda *a, **k: (
             {"displayName": {"text": "Resolved Stub"}}, "stub")
         self._old_photo = biwa_photo.biwa_google_cache.cached_photo
-        biwa_photo.biwa_google_cache.cached_photo = lambda *a, **k: (b"img", "image/png")
+        # The endpoint reads (bytes, type, ttl_remaining) with
+        # with_ttl=True — an 86400s remainder keeps the capped browser
+        # max-age at exactly the day the canonical test asserts.
+        biwa_photo.biwa_google_cache.cached_photo = lambda *a, **k: (
+            b"img", "image/png", 86400)
 
     def tearDown(self):
         biwa_store.GOOGLE_PLACES_KEY = self._old_key

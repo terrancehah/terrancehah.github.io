@@ -161,10 +161,12 @@
 			"biwa-progress-strip",
 			"biwa-day-selector",
 			"biwa-day-title",
+			"biwa-next-host",
 			"biwa-next-stop",
 			"biwa-next-stop-label",
 			"biwa-next-stop-name",
 			"biwa-next-stop-directions",
+			"biwa-next-actions",
 			"biwa-next-complete",
 			"biwa-next-credit",
 			"biwa-next-checkins",
@@ -245,12 +247,18 @@
 				translate: t,
 			});
 		}
+		// Welcome-back scroll reads its entry stamp and arms its listeners
+		// now; the actual scroll gates on the first render below.
+		welcomeBack.init();
 		store.onChange(render);
 		store.init().then(function () {
 			selectedDayId =
 				sessionStorage.getItem("biwa-day") ||
 				(store.trip && store.trip.days[0] && store.trip.days[0].dayId);
 			applyHashView();
+			// Boot is settled only after the saved day + hash view apply —
+			// earlier emits must not scroll toward the wrong day's row.
+			welcomeBack.markBootReady();
 			render(store);
 		});
 	});
@@ -580,6 +588,9 @@
 		}
 		restoreUiState(ui);
 		maybeShowConflict(s);
+		// Welcome-back scroll requests its one frame here, at the very end —
+		// rows, view and conflict state are all final for this render.
+		welcomeBack.maybe();
 	}
 
 	// No connection indicator or banners by design — a healthy shared app
@@ -594,6 +605,177 @@
 			store.setEditorActive(true);
 		}
 	}
+
+	// --- welcome-back scroll ------------------------------------------------------
+	// A coarse "came back after being away" affordance: on a cold open, or on
+	// a return after >=5 minutes away, the first timeline render scrolls the
+	// live target row's card to just under the top margin. It fires at most
+	// once per eligible entry — polls, photo paints, check-ins and day
+	// switches never re-arm it — and any user input before the frame runs
+	// cancels it outright.
+	// WELCOME_SCROLL_BEGIN — extracted verbatim by
+	// tests/biwa-ride/welcome-scroll.test.js; keep this IIFE self-contained:
+	// it may only reach the module deps named inside (els, store,
+	// isSheetOpen, prefersReducedMotion, miniCheckin, touchDrag).
+	var welcomeBack = (function () {
+		var KEY = "biwa:v2:last-active-at";
+		var AWAY_MS = 5 * 60 * 1000;
+		var WRITE_THROTTLE_MS = 10 * 1000;
+		var TOP_MARGIN = 16;
+		var bootReady = false; // first render has applied hash view + day
+		var pending = false; // an eligible entry waiting for its frame
+		var scheduled = false; // at most one requestAnimationFrame in flight
+		var awayAt = null; // in-memory departure stamp (visibility/pagehide)
+		var lastWrite = 0; // interaction-write throttle marker
+
+		function now() {
+			return Date.now();
+		}
+		function readStamp() {
+			try {
+				var v = Number(localStorage.getItem(KEY));
+				return Number.isFinite(v) && v > 0 ? v : null;
+			} catch (e) {
+				return null; // storage blocked — in-memory tracking still works
+			}
+		}
+		function writeStamp() {
+			var t = now();
+			lastWrite = t;
+			try {
+				localStorage.setItem(KEY, String(t));
+			} catch (e) {}
+		}
+		function throttledWrite() {
+			if (now() - lastWrite > WRITE_THROTTLE_MS) writeStamp();
+		}
+		function isShown(el) {
+			return !!(
+				el &&
+				!el.hidden &&
+				window.getComputedStyle(el).display !== "none"
+			);
+		}
+		// The lowest floating control bounds the "fully visible" test — a
+		// card tucked under the mini bar or bottom nav counts as NOT
+		// visible. Only a FIXED nav occludes: on desktop it becomes a
+		// sticky sidebar and must not clamp the viewport.
+		function usableBottom() {
+			var mini = els["biwa-mini-bar"];
+			if (isShown(mini)) return mini.getBoundingClientRect().top;
+			var nav = document.querySelector(".biwa-nav");
+			if (
+				isShown(nav) &&
+				window.getComputedStyle(nav).position === "fixed"
+			)
+				return nav.getBoundingClientRect().top;
+			return window.innerHeight;
+		}
+		function alreadyVisible(card) {
+			var rect = card.getBoundingClientRect();
+			var bottom = usableBottom();
+			return (
+				rect.top >= TOP_MARGIN &&
+				rect.top + Math.min(rect.height, bottom - TOP_MARGIN) <= bottom
+			);
+		}
+		// Interactive states win over the scroll: any open dialog or sheet,
+		// an editor, an in-flight drag or a running mini check-in consumes
+		// the attempt rather than deferring it.
+		function blocked() {
+			return !!(
+				document.querySelector("dialog[open]") ||
+				isSheetOpen() ||
+				(store && store.editorActive) ||
+				touchDrag ||
+				document.querySelector("[data-dragging]") ||
+				(miniCheckin && miniCheckin.isActive())
+			);
+		}
+		function onTimeline() {
+			var v = document.getElementById("view-timeline");
+			return !!(v && v.classList.contains("is-active"));
+		}
+		function maybeScroll() {
+			if (!pending || !bootReady || scheduled) return;
+			scheduled = true;
+			requestAnimationFrame(function () {
+				scheduled = false;
+				if (!pending) return; // user input cancelled meanwhile
+				pending = false; // one attempt per entry — spent either way
+				if (
+					document.visibilityState === "hidden" ||
+					!onTimeline() ||
+					blocked()
+				)
+					return;
+				var card = document.querySelector(
+					'.biwa-track-row[data-current="true"] .biwa-stop-card',
+				);
+				if (!card || alreadyVisible(card)) return;
+				var rect = card.getBoundingClientRect();
+				window.scrollTo({
+					top: Math.max(0, window.scrollY + rect.top - TOP_MARGIN),
+					behavior: prefersReducedMotion() ? "instant" : "smooth",
+				});
+			});
+		}
+		// Departure stamps the clock once — duplicate exits must not move it.
+		function depart() {
+			if (awayAt !== null) return;
+			awayAt = now();
+			writeStamp();
+		}
+		// Resume only from a real recorded absence AND a visible document:
+		// a focus/pageshow that lands while still hidden must keep the
+		// away stamp for the genuine visible event, or the absence time is
+		// lost. A cold pageshow or a duplicate resume is a no-op.
+		function resume() {
+			if (awayAt === null || document.visibilityState !== "visible")
+				return;
+			var age = now() - awayAt;
+			awayAt = null;
+			writeStamp();
+			if (age >= AWAY_MS) {
+				pending = true;
+				maybeScroll();
+			}
+		}
+		function onInput() {
+			pending = false; // user-driven — never scroll out from under them
+			throttledWrite();
+		}
+		function init() {
+			var stamp = readStamp();
+			// Missing/invalid stamp = first visit (eligible); a stamp younger
+			// than the away window means a quick reload or a sibling tab —
+			// preserve position instead.
+			pending = !stamp || now() - stamp >= AWAY_MS;
+			writeStamp();
+			document.addEventListener("visibilitychange", function () {
+				if (document.visibilityState === "hidden") depart();
+				else resume();
+			});
+			window.addEventListener("pagehide", depart);
+			window.addEventListener("pageshow", resume);
+			window.addEventListener("blur", depart);
+			window.addEventListener("focus", resume);
+			["pointerdown", "touchstart", "wheel", "keydown"].forEach(
+				function (type) {
+					window.addEventListener(type, onInput, { passive: true });
+				},
+			);
+		}
+		function markBootReady() {
+			bootReady = true;
+		}
+		return {
+			init: init,
+			markBootReady: markBootReady,
+			maybe: maybeScroll,
+		};
+	})();
+	// WELCOME_SCROLL_END
 
 	// --- day selector -------------------------------------------------------------
 	function currentDay(trip) {
@@ -876,23 +1058,30 @@
 			labelEl.textContent = t("Up Next");
 			nameEl.textContent = placeName(next);
 			dirEl.href = MapLinks.directionsUrl(next);
+			// Paint the canonical action name — the static fallback can't
+			// drift (or hold a stale language) across re-renders.
+			dirEl.textContent = t("Navigate");
 			actionsVisible = true;
 			nextCard.dataset.cardType = placeCardType(next.place);
 		}
-		dirEl.style.visibility = actionsVisible ? "" : "hidden";
-		compEl.style.visibility = actionsVisible ? "" : "hidden";
+		// Fallback states hide the whole action cluster outright — nothing
+		// reserves phantom rows in the compact status card.
+		els["biwa-next-actions"].hidden = !actionsVisible;
+		els["biwa-next-checkins"].hidden = !actionsVisible;
 		compEl.disabled = !actionsVisible;
 		nameEl.disabled = !actionsVisible;
+		// The action label matches the mini bar's completion wording — one
+		// verb for the same write, in either slot.
+		compEl.textContent = t("Mark as Completed");
 		// Only a live next stop makes the card a sheet-opener — static
 		// finished/empty states keep the plain card surface, no interactive
 		// shadow.
 		nextCard.dataset.interactive = actionsVisible ? "true" : "false";
-		// The name clamps at three reserved lines — the full text stays
-		// reachable on the title attribute.
+		// The full text stays reachable on the title attribute.
 		nameEl.title = nameEl.textContent;
 
 		// Programme check-in links apply to the live next stop only —
-		// finished/empty/missing states get the inert hidden row.
+		// finished/empty/missing states hide the row entirely.
 		renderNextCheckins(
 			els["biwa-next-checkins"],
 			actionsVisible && next ? next.place : null,
@@ -921,6 +1110,12 @@
 				: null;
 
 		// Rebuild the photo layer only when the chosen place actually changed.
+		// The photo BACKDROP is retired (timeline visuals stripped to flat
+		// surfaces) — paintNextPhoto stays intact but is no longer invoked;
+		// the resolved photo still feeds the mini thumbnail and the credit
+		// below. A restore needs the two commented paintNextPhoto calls plus
+		// a revisit of the dormant .biwa-next-photo/-veil/-skeleton rules —
+		// the permanent credit slot they were sized around is gone.
 		if (nextPhotoKey !== nextChosenId) {
 			nextPhotoKey = nextChosenId;
 			nextPhotoLoading = false;
@@ -931,10 +1126,10 @@
 				stale[i].parentNode.removeChild(stale[i]);
 			}
 			nextCard.classList.remove("has-photo");
-			if (photo) paintNextPhoto(nextCard, photo);
+			// if (photo) paintNextPhoto(nextCard, photo);
 		} else if (photo && !nextCard.classList.contains("has-photo")) {
 			// Same place — its photo arrived after the first paint.
-			paintNextPhoto(nextCard, photo);
+			// paintNextPhoto(nextCard, photo);
 		}
 		// is-loading marks either a pending details fetch or a painted image
 		// still on its way — the skeleton credit rides on this flag.
@@ -943,28 +1138,17 @@
 			(nextChosenId && details === "loading") || nextPhotoLoading,
 		);
 
-		// The credit element is a permanent height-reserved slot — its content
-		// and title are rewritten, never the node itself, so the card cannot
-		// jump when attribution arrives or disappears.
+		// Provider attribution stays REQUIRED while a Google photo is on
+		// screen — the backdrop is gone but the mini bar still shows the same
+		// resolved photo, so the active panel carries the credit. With no
+		// photo the slot collapses entirely (no phantom reserved strip).
 		var creditEl = els["biwa-next-credit"];
 		creditEl.innerHTML = "";
 		creditEl.removeAttribute("title");
-		// The skeleton is an absolute overlay over the whole credit slot — it
-		// covers the slot while is-loading without touching the content
-		// beneath, so nothing shifts when it hides.
-		creditEl.appendChild(
-			el("span", { class: "biwa-next-skeleton", "aria-hidden": "true" }),
-		);
-		if (
-			nextCard.classList.contains("has-photo") &&
-			details &&
-			details !== "loading" &&
-			details !== "unavailable" &&
-			details.photos &&
-			details.photos.length
-		) {
+		creditEl.hidden = !photo;
+		if (photo) {
 			var names = [];
-			(details.photos[0].authorAttributions || []).forEach(function (a) {
+			(photo.authorAttributions || []).forEach(function (a) {
 				if (a.displayName && names.indexOf(a.displayName) === -1)
 					names.push(a.displayName);
 			});
@@ -1017,11 +1201,12 @@
 				els["biwa-mini-directions"].title = dirLabel;
 				els["biwa-mini-complete"].setAttribute(
 					"aria-label",
-					t("Check in at {name}", { name: placeName(next) }),
+					t("Mark {name} as completed", { name: placeName(next) }),
 				);
 				// Idle re-paint keeps the translated label fresh across language
 				// switches — while busy the module's label owns the button.
-				els["biwa-mini-complete-label"].textContent = t("Check in");
+				els["biwa-mini-complete-label"].textContent =
+					t("Mark as Completed");
 				var miniTags = els["biwa-mini-tags"];
 				miniTags.innerHTML = "";
 				placeBadgesNodes(next.place).forEach(function (n) {
@@ -1058,7 +1243,8 @@
 			return p.indexOf("official-") === 0;
 		});
 		var rally = programmes.indexOf("rally") !== -1;
-		var dual = official && rally;
+		// One label per programme site regardless of membership count — the
+		// action is the same hand-off on a shared (dual) stop.
 		if (official) {
 			host.appendChild(
 				el("a", {
@@ -1066,9 +1252,7 @@
 					href: OFFICIAL_CHECKIN_URL,
 					target: "_blank",
 					rel: "noopener noreferrer",
-					text: dual
-						? t("Official Certificate Check-In")
-						: t("Check In on Official Site"),
+					text: t("Check In on Official Site"),
 				}),
 			);
 		}
@@ -1079,28 +1263,36 @@
 					href: RALLY_CHECKIN_URL,
 					target: "_blank",
 					rel: "noopener noreferrer",
-					text: dual
-						? t("Rally Check-In")
-						: t("Check In on Rally Site"),
+					text: t("Check In on Rally Site"),
 				}),
 			);
 		}
-		if (!official && !rally) {
-			// Reserved-height placeholder — hidden by visibility, not display,
-			// wearing the same button geometry so the row height never moves.
-			host.appendChild(
-				el("span", {
-					class: "biwa-btn biwa-btn-secondary biwa-next-checkin biwa-next-checkin-empty",
-					"aria-hidden": "true",
-				}),
-			);
-		}
+		// No programmes → the host stays empty and collapses outright — the
+		// panel never reserves phantom rows for links that don't apply.
 	}
 
 	// The vertical track: start endpoint, stops in order, end endpoint.
 	// Endpoint rows are fixed (never draggable); stop rows carry the handle.
 	function renderTrack(trip, day) {
 		var list = els["biwa-track"];
+		var nextCard = els["biwa-next-stop"];
+		var nextHost = els["biwa-next-host"];
+		// Reparenting can blur a focused control — remember which stable
+		// panel control (Navigate / Mark as Completed / a programme link)
+		// owns focus
+		// before the move so the rebuild can hand it back. Nothing outside
+		// the panel is stable across a re-render, and focus elsewhere must
+		// never be stolen.
+		var nextCardFocus =
+			nextCard && nextCard.contains(document.activeElement)
+				? document.activeElement
+				: null;
+		// The stable next-stop panel may live inside the current row — lift
+		// it back into its permanent host BEFORE the rows are torn down, so
+		// the innerHTML clear can never discard the node or its listeners.
+		if (nextCard && nextHost && !nextHost.contains(nextCard)) {
+			nextHost.appendChild(nextCard);
+		}
 		list.innerHTML = "";
 		var places = Rules.placesById(trip);
 
@@ -1219,9 +1411,42 @@
 			}
 			if (nextOccurrenceId && item.occId === nextOccurrenceId) {
 				item.node.dataset.current = "true";
+				// The live target IS a normal row — mark it with a small 'Up
+				// Next' tag above the place name, then move the stable
+				// next-stop node inside its card as the expanded action
+				// panel (Navigate / Mark as Completed / programme links /
+				// credit).
+				var card = item.node.querySelector(".biwa-stop-card");
+				if (card && nextCard) {
+					var text = card.querySelector(".biwa-card-text");
+					if (text) {
+						text.insertBefore(
+							el("span", {
+								class: "biwa-row-next-label",
+								text: t("Up Next"),
+							}),
+							text.firstChild,
+						);
+					}
+					card.appendChild(nextCard);
+				}
 			}
 			list.appendChild(item.node);
 		});
+
+		// Hand focus back to the captured panel control — but only while it
+		// is still connected, laid out (a fallback state hides the actions)
+		// and enabled. preventScroll keeps a poll-triggered rebuild from
+		// scrolling the page under the user.
+		if (
+			nextCardFocus &&
+			nextCard.contains(nextCardFocus) &&
+			!nextCardFocus.disabled &&
+			nextCardFocus.offsetParent !== null &&
+			document.activeElement !== nextCardFocus
+		) {
+			nextCardFocus.focus({ preventScroll: true });
+		}
 	}
 
 	// The quiet road-leg line between consecutive cards — its distance
@@ -1446,6 +1671,9 @@
 			});
 		});
 		card.appendChild(body);
+		// Lazy photo backdrop — registers against the row's own card and
+		// occurrence; the same shared details fetch also feeds the sheet
+		// and the mini thumbnail.
 		decorateStopCardPhoto(card, displayPlace, occurrenceId);
 		row.appendChild(card);
 		return row;
@@ -1628,7 +1856,7 @@
 	}
 	function showCheckinToast(name) {
 		showToast(
-			name ? t("Checked in — {name}", { name: name }) : t("Checked in"),
+			name ? t("Completed — {name}", { name: name }) : t("Completed"),
 			2600,
 		);
 	}
@@ -1656,7 +1884,7 @@
 	var cardPhotoDom = {}; // occKey -> {placeId, nodes:[img,veil,credit]}
 	var cardPhotoFailed = {}; // placeId -> true after a failed DETAILS attempt
 	var cardPhotoImageFailed = {}; // placeId -> true after photo BYTES fail
-	var CARD_PHOTO_SLOTS = 2;
+	var CARD_PHOTO_SLOTS = 4;
 
 	function cardPhotoObserver() {
 		if (cardPhotoIO || typeof IntersectionObserver === "undefined")
@@ -2032,6 +2260,8 @@
 			}
 		});
 		card.appendChild(body);
+		// Same lazy backdrop as the endpoint rows — the stop's own
+		// occurrence key scopes the painted layer.
 		decorateStopCardPhoto(card, place, stop.occurrenceId);
 		row.appendChild(card);
 		return row;
@@ -2820,7 +3050,7 @@
 	}
 
 	// Footer action set — deliberately small and always in the same order:
-	// Get Directions (primary, full width, a free Maps URL — never a provider
+	// Navigate (primary, full width, a free Maps URL — never a provider
 	// call), then Check In on Official Site for official checkpoints and the
 	// manual Completed toggle. No removal or programme explainer UI lives here.
 	function renderSheetActions(ctx) {
@@ -2834,7 +3064,7 @@
 				href: MapLinks.directionsUrl(place),
 				target: "_blank",
 				rel: "noopener noreferrer",
-				text: t("Get Directions"),
+				text: t("Navigate"),
 			}),
 		);
 
@@ -2845,7 +3075,8 @@
 		});
 		var isRally = programmes.indexOf("rally") !== -1;
 		// Check-in hands off to each programme's own organiser flow. A shared
-		// checkpoint (Mizudori) shows both with unambiguous labels.
+		// checkpoint (Mizudori) shows both — one fixed label per site,
+		// identical to the next-panel links.
 		if (isOfficial) {
 			row.appendChild(
 				el("a", {
@@ -2853,9 +3084,7 @@
 					href: OFFICIAL_CHECKIN_URL,
 					target: "_blank",
 					rel: "noopener noreferrer",
-					text: isRally
-						? t("Official Certificate Check-In")
-						: t("Check In on Official Site"),
+					text: t("Check In on Official Site"),
 				}),
 			);
 		}
@@ -2868,9 +3097,7 @@
 					rel: "noopener noreferrer",
 					// A rally-only stop's link goes to the RALLY site — matching the
 					// next-card copy (was 'Check In on Official Site', which lied).
-					text: isOfficial
-						? t("Rally Check-In")
-						: t("Check In on Rally Site"),
+					text: t("Check In on Rally Site"),
 				}),
 			);
 		}
@@ -2881,25 +3108,15 @@
 		var checked = occ
 			? Rules.arrivalChecked(store.trip, occ, place)
 			: Rules.placeProgrammeChecked(store.trip, place);
-		var tick = el(
-			"button",
-			{
-				class: "biwa-btn biwa-btn-secondary",
-				type: "button",
-				"aria-pressed": String(checked),
-				"data-focus-key": "sheet-tick",
-			},
-			[
-				el("span", {
-					class: "biwa-stamp-box",
-					"aria-hidden": "true",
-					text: "✓",
-				}),
-				document.createTextNode(
-					" " + t(checked ? "Completed" : "Mark as Completed"),
-				),
-			],
-		);
+		// Text-only like every other destination action — the decorative
+		// stamp box once left a blank icon slot in the pending state.
+		var tick = el("button", {
+			class: "biwa-btn biwa-btn-secondary",
+			type: "button",
+			"aria-pressed": String(checked),
+			"data-focus-key": "sheet-tick",
+			text: t(checked ? "Completed" : "Mark as Completed"),
+		});
 		if (checked) tick.dataset.tone = "visited";
 		tick.addEventListener("click", function () {
 			if (store._saving) return;
@@ -3001,7 +3218,7 @@
 	// Direct in-app details, provider data where it exists: photos with
 	// credits first, then address, opening hours, and contact links. Nothing
 	// is fabricated — a field the provider did not return simply does not
-	// appear, and generic states name the fallback (Get Directions opens
+	// appear, and generic states name the fallback (Navigate opens
 	// Google Maps with the latest info).
 	function fillSheetDetails(place) {
 		var slot = document.getElementById("biwa-sheet-details");
@@ -3165,13 +3382,13 @@
 			if (!(store.capabilities && store.capabilities.places)) {
 				note = t(
 					"Opening hours and photos are not configured on this app — " +
-						"Get Directions opens Google Maps with the latest details.",
+						"Navigate opens Google Maps with the latest details.",
 				);
 			} else if (cached === "loading" || cached === undefined) {
 				note = t("Loading details…");
 			} else {
 				note = t(
-					"Details unavailable for this place — Get Directions opens " +
+					"Details unavailable for this place — Navigate opens " +
 						"Google Maps with the latest info.",
 				);
 			}
@@ -3222,7 +3439,7 @@
 		}
 
 		// Contact links — website and phone only (the Maps listing is not
-		// repeated here; Get Directions already hands off to it).
+		// repeated here; Navigate already hands off to it).
 		if (d && (d.website || d.phone)) {
 			var contacts = el("div", {
 				class: "biwa-sheet-links biwa-sheet-section",
@@ -3795,10 +4012,10 @@
 			var message =
 				endpoint === null
 					? t(
-							"Clear this destination? The connected day boundary will also be cleared and its arrival check-ins removed. This cannot be undone.",
+							"Clear this destination? The connected day boundary will also be cleared and its arrival completion marks removed. This cannot be undone.",
 						)
 					: t(
-							"Change this destination? Existing arrival check-ins for this day boundary will be reset. This cannot be undone.",
+							"Change this destination? Existing arrival completion marks for this day boundary will be reset. This cannot be undone.",
 						);
 			if (!window.confirm(message)) return false;
 		}
@@ -4784,7 +5001,9 @@
 						href: MapLinks.pinUrl(p),
 						target: "_blank",
 						rel: "noopener noreferrer",
-						text: t("Open in Maps"),
+						// A place VIEW, not a route — pinUrl pins the listing, so
+						// the copy says view, not navigate.
+						text: t("View in Google Maps"),
 					}),
 				]),
 			);

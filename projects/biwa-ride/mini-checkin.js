@@ -1,14 +1,15 @@
-/* mini-checkin.js — the mini bar's check-in button feedback lifecycle.
+/* mini-checkin.js — the mini bar's completion button feedback lifecycle.
  *
- * The compact "Check in" action owns a staged state machine. A tap begins
- * the saving phase (disabled, aria-busy — the visible text stays
- * "Check in", only the accessible label reports the in-flight write).
- * When the async progress write resolves, a DURABLE ack runs the staged
- * confirmation:
+ * The compact "Mark as Completed" action owns a staged state machine. A
+ * tap begins the saving phase (disabled, aria-busy — the visible text
+ * stays "Mark as Completed", only the accessible label reports the
+ * in-flight write). When the async progress write resolves, a DURABLE
+ * ack runs the staged confirmation:
  *
- *   "Check in" lifts away (140ms)  →  the green tick draws itself
- *   (320ms dashoffset sweep)  →  hold (650ms)  →  "Check in" fades back
- *   (220ms)  →  release — the bar may repaint its next target.
+ *   "Mark as Completed" lifts away (140ms)  →  the green tick draws
+ *   itself (320ms dashoffset sweep)  →  hold (650ms)  →  "Mark as
+ *   Completed" fades back (220ms)  →  release — the bar may repaint its
+ *   next target.
  *
  * Any failure resets silently with no tick, and every scheduled step is
  * guarded by the episode token so a cancel/day switch can never flash the
@@ -17,8 +18,9 @@
  *
  * create({button, translate, onRelease, prefersReducedMotion,
  *         setTimeout, clearTimeout})
- *   button      — the check-in <button>; owns .biwa-mini-complete-label
- *                 and .biwa-mini-complete-tick > .biwa-mini-checkmark
+ *   button      — the completion <button>; owns
+ *                 .biwa-mini-complete-label and
+ *                 .biwa-mini-complete-tick > .biwa-mini-checkmark
  *   translate   — the app's t(), keeps the labels localized
  *   onRelease   — fires once when an episode fully closes so the caller
  *                 can re-render and paint the bar's new target
@@ -116,9 +118,9 @@
 			}
 		}
 
-		// Idle face — enabled, "Check in" text only, no phase classes.
-		// Every close path ends here; the caller's re-render paints the
-		// new target's labels.
+		// Idle face — enabled, "Mark as Completed" text only, no phase
+		// classes. Every close path ends here; the caller's re-render
+		// paints the new target's labels.
 		function paintIdle() {
 			button.disabled = false;
 			button.removeAttribute("aria-busy");
@@ -129,7 +131,7 @@
 			button.classList.remove("is-restoring");
 			hideTick();
 			showLabel();
-			if (labelEl) labelEl.textContent = translate("Check in");
+			if (labelEl) labelEl.textContent = translate("Mark as Completed");
 		}
 
 		// The acknowledged face — tick ONLY: the label leaves the layout
@@ -146,7 +148,7 @@
 			if (active.name) {
 				button.setAttribute(
 					"aria-label",
-					translate("Checked in at {name}", { name: active.name }),
+					translate("Completed {name}", { name: active.name }),
 				);
 			}
 		}
@@ -164,8 +166,9 @@
 		return {
 			// Start the saving phase — BEFORE the optimistic progress emit,
 			// so no render can repaint the bar out from under the feedback.
-			// The visible text stays "Check in" (the staged return needs it
-			// back anyway); only the accessible label reports the write.
+			// The visible text stays "Mark as Completed" (the staged return
+			// needs it back anyway); only the accessible label reports the
+			// write.
 			// Returns a unique token to settle with, or null when an
 			// episode is already running (a double tap is a no-op).
 			begin: function (context) {
@@ -181,7 +184,7 @@
 				button.setAttribute(
 					"aria-label",
 					active.name
-						? translate("Checking in at {name}", {
+						? translate("Marking {name} as completed", {
 								name: active.name,
 							})
 						: translate("Saving…"),
@@ -191,7 +194,8 @@
 				// until (and unless) a durable ack stages it.
 				hideTick();
 				showLabel();
-				if (labelEl) labelEl.textContent = translate("Check in");
+				if (labelEl)
+					labelEl.textContent = translate("Mark as Completed");
 				return token;
 			},
 
@@ -229,8 +233,9 @@
 					);
 					return;
 				}
-				// Staged path: "Check in" exits, the tick draws and holds,
-				// then the label fades back before release repaints.
+				// Staged path: "Mark as Completed" exits, the tick draws
+				// and holds, then the label fades back before release
+				// repaints.
 				active.phase = "text-exit";
 				button.classList.remove("is-saving");
 				button.classList.add("is-text-exiting");
@@ -250,12 +255,13 @@
 								flush(labelEl);
 								button.classList.remove("is-checked");
 								button.classList.add("is-restoring");
-								// The face is returning to "Check in" — the
-								// accessible label restores with it.
+								// The face is returning to "Mark as
+								// Completed" — the accessible label
+								// restores with it.
 								if (active.name) {
 									button.setAttribute(
 										"aria-label",
-										translate("Check in at {name}", {
+										translate("Mark {name} as completed", {
 											name: active.name,
 										}),
 									);

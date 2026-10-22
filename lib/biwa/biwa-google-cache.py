@@ -71,14 +71,25 @@ def _valid_location(loc):
             and math.isfinite(lng) and -180 <= lng <= 180)
 
 
-def _safe_get(store, key):
+def _safe_get(store, key, strict=False):
     """Cache reads fail open — a backend error must never break the live
-    request the cache was accelerating."""
+    request the cache was accelerating. strict=True flips the contract for
+    billed-provider paths: backend exceptions and corrupt entries
+    propagate as cache failures so a broken cache can never masquerade as
+    a miss that would spend a Google call."""
     try:
-        data = store.get_cached_json(key)
+        data = store.get_cached_json(key, strict=strict)
     except Exception:
+        if strict:
+            raise
         return None
-    return data if isinstance(data, dict) else None
+    if data is not None and not isinstance(data, dict):
+        # A non-dict payload is corrupt, not a miss — under strict it must
+        # fail closed rather than falling through to a billed call.
+        if strict:
+            raise RuntimeError("Biwa cache unavailable")
+        return None
+    return data
 
 
 def _safe_set(store, key, payload, ex=None):
@@ -88,17 +99,22 @@ def _safe_set(store, key, payload, ex=None):
         pass
 
 
-def cached_google_id(store, place):
+def cached_google_id(store, place, strict=False):
     """A previously resolved Google place id for this record, or None."""
-    data = _safe_get(store, ID_PREFIX + _fingerprint(place))
+    data = _safe_get(store, ID_PREFIX + _fingerprint(place), strict=strict)
     gid = data.get("id") if data else None
+    if data is not None and not _valid_google_id(gid) and strict:
+        raise RuntimeError("Biwa cache unavailable")
     return gid if _valid_google_id(gid) else None
 
 
-def cached_location(store, place):
+def cached_location(store, place, strict=False):
     """Cached {lat, lng} within the 30-day policy window, or None."""
-    data = _safe_get(store, COORDS_PREFIX + _fingerprint(place))
+    data = _safe_get(store, COORDS_PREFIX + _fingerprint(place),
+                     strict=strict)
     loc = {"lat": data.get("lat"), "lng": data.get("lng")} if data else None
+    if data is not None and not _valid_location(loc) and strict:
+        raise RuntimeError("Biwa cache unavailable")
     return loc if _valid_location(loc) else None
 
 
@@ -120,9 +136,10 @@ def save_resolution(store, place, details):
                   {"lat": loc["lat"], "lng": loc["lng"]}, ex=COORDS_TTL_S)
 
 
-def cached_details(store, place):
+def cached_details(store, place, strict=False):
     """A normalized details payload within its 30-day window, or None."""
-    return _safe_get(store, DETAILS_PREFIX + _fingerprint(place))
+    return _safe_get(store, DETAILS_PREFIX + _fingerprint(place),
+                     strict=strict)
 
 
 def save_details(store, place, details):
@@ -133,13 +150,22 @@ def save_details(store, place, details):
                   ex=CONTENT_TTL_S)
 
 
-def cached_photo_names(store, place):
+def cached_photo_names(store, place, strict=False):
     """The cached 'places/…' resource names for this record, or None.
     An empty list is a legitimate cached negative — the provider had no
-    photos at last resolve, and the photo endpoint can 404 cheaply."""
-    data = _safe_get(store, PHOTONAMES_PREFIX + _fingerprint(place))
-    names = data.get("names") if data else None
-    return names if isinstance(names, list) else None
+    photos at last resolve, and the photo endpoint can 404 cheaply. Under
+    strict an entry whose 'names' is missing or not a list is corrupt:
+    it raises rather than falling through to a billed resolve."""
+    data = _safe_get(store, PHOTONAMES_PREFIX + _fingerprint(place),
+                     strict=strict)
+    if data is None:
+        return None
+    names = data.get("names")
+    if not isinstance(names, list):
+        if strict:
+            raise RuntimeError("Biwa cache unavailable")
+        return None
+    return names
 
 
 def save_photo_names(store, place, body):
@@ -160,17 +186,39 @@ def _photo_key(place, index, width):
     return f"{PHOTO_PREFIX}{_fingerprint(place)}:{index}:{width}"
 
 
-def cached_photo(store, place, index, width):
-    """(bytes, content_type) for a previously fetched image, or None."""
-    data = _safe_get(store, _photo_key(place, index, width))
-    raw, ctype = (data.get("bytes"), data.get("type")) if data else (None, None)
-    if not (isinstance(raw, str) and isinstance(ctype, str)):
+def cached_photo(store, place, index, width, strict=False, with_ttl=False):
+    """(bytes, content_type) for a previously fetched image, or None.
+
+    with_ttl=True returns (bytes, content_type, ttl_seconds_remaining)
+    instead — the endpoint bounds its private browser max-age by the
+    server-side TTL so an expiring entry never outlives its policy window.
+    strict=True propagates backend errors and treats a malformed entry
+    (bad base64/type, oversized blob) as a cache failure — never as a
+    miss that would spend a Google call.
+    """
+    remaining = 0
+    if with_ttl:
+        data, remaining = store.get_cached_json_with_ttl(
+            _photo_key(place, index, width))
+    else:
+        data = _safe_get(store, _photo_key(place, index, width),
+                         strict=strict)
+    if data is None:
         return None
-    try:
-        blob = base64.b64decode(raw)
-    except Exception:
+    raw, ctype = data.get("bytes"), data.get("type")
+    blob = None
+    malformed = not (isinstance(raw, str) and isinstance(ctype, str))
+    if not malformed:
+        try:
+            blob = base64.b64decode(raw)
+        except Exception:
+            malformed = True
+    if (malformed or blob is None
+            or not 0 < len(blob) <= MAX_CACHED_PHOTO_BYTES):
+        if strict:
+            raise RuntimeError("Biwa cache unavailable")
         return None
-    return (blob, ctype) if 0 < len(blob) <= MAX_CACHED_PHOTO_BYTES else None
+    return ((blob, ctype, remaining) if with_ttl else (blob, ctype))
 
 
 def save_photo(store, place, index, width, blob, content_type):

@@ -76,14 +76,18 @@
   --biwa-wash-shared: rgba(200, 159, 156, 0.24);       /* rosy taupe */
   --biwa-wash-completed: rgba(63, 107, 79, 0.12);      /* success-tinted */
   --biwa-wash-extra: var(--biwa-paper);                /* plain stops */
-  /* The day's live target reads through a stronger warm wash — the flat
+  /* The day's live target reads through a soft warm wash — the flat
      style has no border to carry it, so the tint must do the work alone. */
-  --biwa-wash-current: rgba(201, 124, 93, 0.30);       /* strong peach */
+  --biwa-wash-current: rgba(201, 124, 93, 0.18);       /* soft peach */
 
-  /* Masthead scene — the supplied-art illustration gets its own bright
-     daytime pair, outside the warm surface palette (art colours, not UI). */
-  --biwa-scene-sky: #d9f1ff;                            /* clear blue */
-  --biwa-scene-lake: #2f78ac;                           /* deeper lake */
+  /* Masthead scene — the supplied-art illustration gets its own muted
+     daytime set, outside the warm surface palette (art colours, not UI).
+     Sky, lake and both ridge planes are softened so the rider GIFs stay
+     the focal figures against a hazy background. */
+  --biwa-scene-sky: #caf9f9;                            /* misty sage sky */
+  --biwa-scene-lake: #7bc7da;                           /* softened lake */
+  --biwa-scene-ridge-far: #b8c6af;                      /* hazy far ridge */
+  --biwa-scene-ridge-near: #b3df9b;                     /* muted near ridge */
 
   /* Type */
   --biwa-font-heading: 'Momo Trust Display', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;

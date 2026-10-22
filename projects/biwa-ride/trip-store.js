@@ -823,6 +823,9 @@
 			fetch("data/trip-seed.json").then(function (r) {
 				return r.json();
 			}),
+			// Best-effort third promise — a missing scope must never block
+			// the catalogue/seed boot (results[2] is intentionally unused).
+			self._photoCacheScopePromise(),
 		])
 			.then(function (results) {
 				self.places = results[0].places;
@@ -1985,18 +1988,98 @@
 			});
 	};
 
+	// sha256(ownerId) for the photo URL's `scope` partition token — it is
+	// NOT auth (the owner header/cookie still authorizes); it only makes a
+	// custom-place image URL owner-specific so each owner's browser caches
+	// under its own key and the raw owner id never enters a URL. Best
+	// effort: unavailable crypto or a failed digest resolves null, and a
+	// missing scope simply leaves custom images uncacheable (no-store,
+	// exactly like before).
+	TripStore.prototype._photoCacheScopePromise = function () {
+		var self = this;
+		try {
+			if (
+				typeof TextEncoder === "undefined" ||
+				!global.crypto ||
+				!global.crypto.subtle ||
+				typeof global.crypto.subtle.digest !== "function"
+			) {
+				return Promise.resolve(null);
+			}
+			return global.crypto.subtle
+				.digest("SHA-256", new TextEncoder().encode(this.ownerId))
+				.then(function (buf) {
+					var bytes = new Uint8Array(buf);
+					var hex = "";
+					for (var i = 0; i < bytes.length; i++)
+						hex += bytes[i].toString(16).padStart(2, "0");
+					self._photoCacheScope = hex;
+					return null;
+				})
+				.catch(function () {
+					return null;
+				});
+		} catch (e) {
+			return Promise.resolve(null);
+		}
+	};
+
 	// Photo URL for <img src> — the server proxies, bounds and hosts-checks
 	// Google's photo bytes; the client never touches provider credentials.
 	TripStore.prototype.photoUrl = function (placeId, index, width) {
-		return (
+		var url =
 			this.apiBase +
 			"biwa-photo?placeId=" +
 			encodeURIComponent(placeId) +
 			"&index=" +
 			index +
 			"&width=" +
-			width
-		);
+			width;
+		// Custom places only (ids absent from the catalogue): append the
+		// owner-scope partition plus a tiny record-version token so this
+		// owner's browser can cache the image privately under an
+		// owner-specific URL — canonical URLs stay byte-identical.
+		if (
+			this._photoCacheScope &&
+			!(this.places || []).some(function (p) {
+				return p.placeId === placeId;
+			})
+		) {
+			var record = ((this.trip && this.trip.places) || []).filter(
+				function (p) {
+					return p && p.placeId === placeId;
+				},
+			)[0];
+			// No record → leave scope off entirely: an unversioned
+			// owner-cached URL could outlive the edit it was keyed to, so
+			// the conservative answer is the plain no-store URL.
+			if (record) {
+				// v is pure cache-busting — the same anchor fields the
+				// server's Redis fingerprint hashes (label/address/
+				// googlePlaceId/lat/lng/source), so an edit flips the URL
+				// and a stale private copy is never re-served. It is NOT
+				// auth and is never validated server-side.
+				var descriptor = JSON.stringify([
+					record.label,
+					record.address,
+					record.googlePlaceId,
+					record.lat,
+					record.lng,
+					record.source,
+				]);
+				var version = 0;
+				for (var i = 0; i < descriptor.length; i++)
+					version =
+						((version << 5) - version + descriptor.charCodeAt(i)) |
+						0;
+				url +=
+					"&scope=" +
+					this._photoCacheScope +
+					"&v=" +
+					(version >>> 0).toString(16);
+			}
+		}
+		return url;
 	};
 
 	if (typeof module !== "undefined" && module.exports)

@@ -25,11 +25,12 @@
 	</head>
 	<body class="biwa-page">
 		<!-- Full-width masthead banner: the supplied-art scene. Layers paint
-       back-to-front — sky gradient, self-drawn mountains + water band with
-       slow sparkles, vector-traced autumn trees drifting right-to-left on a
-       seamless doubled belt, the supplied torii and pagoda passing
-       occasionally, the lakeside road, then the three supplied rider GIFs
-       in the foreground.
+       back-to-front — a softened sky gradient, muted self-drawn mountains +
+       water band with slow sparkles, vector-traced autumn trees drifting
+       right-to-left on a seamless doubled belt, the lakeside road, then the
+       three supplied rider GIFs in the foreground (now the scene's sole
+       figures — the walker, straggler and landmark art is commented out in
+       place below, never deleted, so a later pass can restore it).
        aria-hidden and purely decorative — motion is gated automatically
        (reduced motion / offscreen), there is no user control. The figure
        GIFs are always animated; under prefers-reduced-motion they hide
@@ -50,11 +51,15 @@
 							class="biwa-scene-mountains-half"
 							viewBox="0 0 720 140"
 							preserveAspectRatio="none">
+							<!-- Ridge fills are scene tokens (far softened to a misty
+                 sage, near kept muted) so the range recedes behind the
+                 riders — fill lives in style since presentation attributes
+                 cannot take var(). -->
 							<path
-								fill="#aac39b"
+								style="fill: var(--biwa-scene-ridge-far)"
 								d="M0 96L60 74L120 104L200 62L280 108L360 78L440 110L520 66L600 104L660 84L720 96L720 140L0 140Z" />
 							<path
-								fill="#7f9f6e"
+								style="fill: var(--biwa-scene-ridge-near)"
 								opacity="0.85"
 								d="M0 118L80 96L160 122L240 92L320 120L420 96L500 124L580 100L660 122L720 118L720 140L0 140Z" />
 						</svg>
@@ -63,10 +68,10 @@
 							viewBox="0 0 720 140"
 							preserveAspectRatio="none">
 							<path
-								fill="#aac39b"
+								style="fill: var(--biwa-scene-ridge-far)"
 								d="M0 96L60 74L120 104L200 62L280 108L360 78L440 110L520 66L600 104L660 84L720 96L720 140L0 140Z" />
 							<path
-								fill="#7f9f6e"
+								style="fill: var(--biwa-scene-ridge-near)"
 								opacity="0.85"
 								d="M0 118L80 96L160 122L240 92L320 120L420 96L500 124L580 100L660 122L720 118L720 140L0 140Z" />
 						</svg>
@@ -282,7 +287,12 @@
 								alt="" />
 							<!-- Roadside strollers riding the belt — their base pace IS
                  tree speed; --walker-flip faces them with the scroll and
-                 --walker-dur/--walker-delay de-sync the small meander. -->
+                 --walker-dur/--walker-delay de-sync the small meander.
+                 INACTIVE ART: the four walkers are commented out (never
+                 deleted) so the riders carry the scene — restore by
+                 removing the comment markers around the imgs below (and
+                 the matching pair in the second belt half). -->
+							<!--
 							<img
 								class="biwa-scene-walker"
 								style="
@@ -327,6 +337,7 @@
 								"
 								src="assets/walker-04-loop.gif"
 								alt="" />
+							-->
 						</div>
 						<div class="biwa-scene-belt-half">
 							<img
@@ -435,7 +446,10 @@
 								src="assets/tree-03.svg"
 								alt="" />
 							<!-- Same walkers as the first half — the no-JS fallback tile;
-                 JS re-clones half one over this anyway. -->
+                 JS re-clones half one over this anyway. INACTIVE ART:
+                 commented out with the first half's group — restore both
+                 halves together so the tile stays symmetric. -->
+							<!--
 							<img
 								class="biwa-scene-walker"
 								style="
@@ -480,13 +494,17 @@
 								"
 								src="assets/walker-04-loop.gif"
 								alt="" />
+							-->
 						</div>
 					</div>
 				</div>
 				<!-- Straggler strollers — they enter at the right edge and drift
            left across the whole shore while facing right, moonwalking as
            the riders drop them; the wrap re-enters fully offscreen. The
-           second's margin keeps it in step just behind. -->
+           second's margin keeps it in step just behind. INACTIVE ART:
+           commented out with the belt walkers — restore by removing the
+           comment markers around the two imgs below. -->
+				<!--
 				<img
 					class="biwa-scene-passer"
 					style="--walker-dur: 20s; --walker-delay: 0s; height: 54px"
@@ -502,11 +520,15 @@
 					"
 					src="assets/walker-01-loop.gif"
 					alt="" />
+				-->
 				<!-- Static supplied landmark art — no GIF-swap needed; the drifts
            are pure CSS so .is-paused and prefers-reduced-motion handle
            them. All four share the 45s pass quarter-spaced in phase
            (0s / -11.25s / -22.5s / -33.75s): neighbours stay ~100vw
-           apart on the extended 400vw track. -->
+           apart on the extended 400vw track. INACTIVE ART: commented out
+           so the riders stay the scene's focus — restore by removing the
+           comment markers around the four imgs below. -->
+				<!--
 				<img
 					class="biwa-scene-torii"
 					src="assets/wired-flat-1984-torii.svg"
@@ -533,6 +555,7 @@
 					"
 					src="assets/shrine-02.png"
 					alt="" />
+				-->
 				<div class="biwa-scene-road"></div>
 				<!-- Each rider runs a cadence-variant GIF: the fade spins slowest,
            the weaver sits at baseline, the attacker spins quickest. -->
@@ -673,57 +696,63 @@
 						data-i18n-aria-label="Choose riding day"></div>
 					<h2 class="biwa-day-title" id="biwa-day-title"></h2>
 
-					<div
-						class="biwa-card biwa-next-stop"
-						id="biwa-next-stop"
-						hidden>
-						<!-- Content wrapper keeps the text above the absolute photo layer.
-               Every slot is permanent and height-reserved so async photos,
-               credits and completion copy never shift the card's size. -->
-						<div class="biwa-next-content">
-							<p
-								class="biwa-next-stop-label"
-								id="biwa-next-stop-label"
-								data-i18n="Up Next">
-								Up Next
-							</p>
-							<!-- The name is a real button: keyboard users get Enter/Space
-                 natively; it is styled to read as plain text and disabled
-                 in completion states so no sheet can open there. -->
-							<button
-								type="button"
-								class="biwa-next-stop-name"
-								id="biwa-next-stop-name"></button>
-							<!-- Reserved-height action row: both controls hide via
-                 visibility (never display) so the card keeps its size in
-                 finished and empty states. -->
-							<div class="biwa-next-actions">
-								<a
-									class="biwa-btn biwa-btn-primary"
-									id="biwa-next-stop-directions"
-									target="_blank"
-									rel="noopener noreferrer"
-									data-i18n="Directions"
-									>Directions</a
-								>
+					<!-- Permanent host for the day's live-target surface. The
+               #biwa-next-stop node is STABLE and singular — while the day
+               has a next stop the render moves it into that row's card as
+           an expanded action panel; with nothing to visit it stays here
+           as a compact finished/empty status. Both slots collapse fully
+           when not live — nothing reserves phantom height. -->
+					<div class="biwa-next-host" id="biwa-next-host">
+						<div
+							class="biwa-card biwa-next-stop"
+							id="biwa-next-stop"
+							hidden>
+							<div class="biwa-next-content">
+								<p
+									class="biwa-next-stop-label"
+									id="biwa-next-stop-label"
+									data-i18n="Up Next">
+									Up Next
+								</p>
+								<!-- The name is a real button: keyboard users get Enter/Space
+                   natively; it is styled to read as plain text and disabled
+                   in completion states so no sheet can open there. Inside the
+                   track the row header carries the name and this pair hides —
+                   the listeners stay as compatibility fields. -->
 								<button
-									class="biwa-btn biwa-btn-secondary"
-									id="biwa-next-complete"
 									type="button"
-									data-i18n="Mark as Completed">
-									Mark as Completed
-								</button>
+									class="biwa-next-stop-name"
+									id="biwa-next-stop-name"></button>
+								<div
+									class="biwa-next-actions"
+									id="biwa-next-actions">
+									<a
+										class="biwa-btn biwa-btn-primary"
+										id="biwa-next-stop-directions"
+										target="_blank"
+										rel="noopener noreferrer"
+										data-i18n="Navigate"
+										>Navigate</a
+									>
+									<button
+										class="biwa-btn biwa-btn-secondary"
+										id="biwa-next-complete"
+										type="button"
+										data-i18n="Mark as Completed">
+										Mark as Completed
+									</button>
+								</div>
+								<!-- Programme check-in links for the CURRENT next stop only —
+                   populated per render by renderNextCard; the row collapses
+                   entirely when the next stop belongs to neither programme. -->
+								<div
+									class="biwa-next-checkins"
+									id="biwa-next-checkins"></div>
+								<p
+									class="biwa-next-credit"
+									id="biwa-next-credit"
+									hidden></p>
 							</div>
-							<!-- Programme check-in links for the CURRENT next stop only —
-                 a permanently reserved row: inapplicable states hide the
-                 links via visibility (never display) so the card height
-                 stays constant. Populated per render by renderNextCard. -->
-							<div
-								class="biwa-next-checkins"
-								id="biwa-next-checkins"></div>
-							<p
-								class="biwa-next-credit"
-								id="biwa-next-credit"></p>
 						</div>
 					</div>
 
@@ -936,13 +965,13 @@
 				id="biwa-mini-complete"
 				type="button">
 				<!-- The label lifts away, the green tick draws itself
-				     (pathLength=1 dashoffset sweep), holds, then "Check in"
-				     fades back before the bar advances — mini-checkin.js owns
-				     that phase machine. -->
+				     (pathLength=1 dashoffset sweep), holds, then "Mark as
+				     Completed" fades back before the bar advances —
+				     mini-checkin.js owns that phase machine. -->
 				<span
 					class="biwa-mini-complete-label"
 					id="biwa-mini-complete-label"
-					>Check in</span
+					>Mark as Completed</span
 				>
 				<svg
 					class="biwa-mini-complete-tick"
@@ -1111,8 +1140,8 @@
 			aria-labelledby="biwa-pair-title">
 			<h2 id="biwa-pair-title" data-i18n="Pair devices">Pair devices</h2>
 			<p
-				data-i18n="Your trip and check-ins are personal to each device. To see the same trip on another of your devices, show a code here and enter it there.">
-				Your trip and check-ins are personal to each device. To see the
+				data-i18n="Your trip and progress are personal to each device. To see the same trip on another of your devices, show a code here and enter it there.">
+				Your trip and progress are personal to each device. To see the
 				same trip on another of your devices, show a code here and enter
 				it there.
 			</p>

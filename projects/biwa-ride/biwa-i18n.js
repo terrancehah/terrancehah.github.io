@@ -51,10 +51,15 @@
 		"Set the missing start or finish point to complete this day.":
 			"请补上缺少的起点或终点，以完成当日计划。",
 		Directions: "导航",
+		Navigate: "导航",
 		"Mark as Completed": "标记为已完成",
 		Done: "完成",
-		// Mini-bar check-in lifecycle (label, aria and phase text)
+		// Mini-bar completion lifecycle (label, aria and phase text) — the
+		// retired "Check in…" keys stay for older snapshots.
 		"Navigate to {name}": "导航前往{name}",
+		"Mark {name} as completed": "将{name}标记为已完成",
+		"Marking {name} as completed": "正在将{name}标记为已完成",
+		"Completed {name}": "已完成{name}",
 		"Check in": "打卡",
 		"Check in at {name}": "在{name}打卡",
 		"Checking in at {name}": "正在{name}打卡",
@@ -109,6 +114,7 @@
 		"Reorder {name} by dragging": "拖动以调整{name}的顺序",
 		"Checked in": "已打卡",
 		"Checked in — {name}": "已打卡——{name}",
+		"Completed — {name}": "已完成——{name}",
 		Stay: "住宿",
 		"Bike-friendly parking — group curated": "自行车友好停车点——小队精选",
 		"Bike-friendly — group curated": "自行车友好——小队精选",
@@ -129,9 +135,13 @@
 		"Google contributors": "Google 供图者",
 		"Details via ": "详情来自 ",
 		Address: "地址",
+		"Opening hours and photos are not configured on this app — Navigate opens Google Maps with the latest details.":
+			"本应用未配置营业时间与照片——“导航”可在 Google 地图查看最新详情。",
 		"Opening hours and photos are not configured on this app — Get Directions opens Google Maps with the latest details.":
 			"本应用未配置营业时间与照片——“获取路线”可在 Google 地图查看最新详情。",
 		"Loading details…": "正在加载详情…",
+		"Details unavailable for this place — Navigate opens Google Maps with the latest info.":
+			"无法获取该地点详情——“导航”可在 Google 地图查看最新信息。",
 		"Details unavailable for this place — Get Directions opens Google Maps with the latest info.":
 			"无法获取该地点详情——“获取路线”可在 Google 地图查看最新信息。",
 		"Open now": "正在营业",
@@ -178,8 +188,12 @@
 			"这也会成为次日的起点——小队在当天结束的地方过夜。",
 		"Clear endpoint": "清除端点",
 		// Destructive endpoint edit confirmations (native confirm dialogs).
+		"Clear this destination? The connected day boundary will also be cleared and its arrival completion marks removed. This cannot be undone.":
+			"要清除此目的地吗？相邻天的边界也会被清除，相关到达完成标记会被移除。此操作无法撤销。",
 		"Clear this destination? The connected day boundary will also be cleared and its arrival check-ins removed. This cannot be undone.":
 			"要清除此目的地吗？相邻天的边界也会被清除，相关到达打卡会被移除。此操作无法撤销。",
+		"Change this destination? Existing arrival completion marks for this day boundary will be reset. This cannot be undone.":
+			"要更改此目的地吗？此天边界已有的到达完成标记会被重置。此操作无法撤销。",
 		"Change this destination? Existing arrival check-ins for this day boundary will be reset. This cannot be undone.":
 			"要更改此目的地吗？此天边界已有的到达打卡会被重置。此操作无法撤销。",
 		Stop: "站点",
@@ -194,6 +208,8 @@
 
 		// Device pairing — personal trips claimed across your own devices
 		"Pair devices": "配对设备",
+		"Your trip and progress are personal to each device. To see the same trip on another of your devices, show a code here and enter it there.":
+			"你的行程和进度记录是各设备独立的。要在你的另一台设备上看到相同的行程，请在此处生成配对码，并在那台设备上输入。",
 		"Your trip and check-ins are personal to each device. To see the same trip on another of your devices, show a code here and enter it there.":
 			"你的行程和打卡记录是各设备独立的。要在你的另一台设备上看到相同的行程，请在此处生成配对码，并在那台设备上输入。",
 		"Send this trip to another device": "将此行程发送到另一台设备",
@@ -298,6 +314,7 @@
 		"Location unavailable — searches use the plan anchor below. Check the browser permission and try again.":
 			"无法获取位置——搜索将使用下方计划锚点。请检查浏览器定位权限后重试。",
 		"Open in Maps": "在地图中打开",
+		"View in Google Maps": "在 Google 地图中查看",
 		"+ Add stop": "+ 添加站点",
 		"+ New custom place": "+ 新增自定义地点",
 	};
