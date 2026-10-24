@@ -71,7 +71,25 @@
 		"Rally Check-In": "集章打卡",
 		"Check In on Rally Site": "前往集章官网打卡",
 
-		// Certificate progress strip
+		// Certificate progress accordion (the retired metric labels below are
+		// kept rather than deleted, matching this table's legacy-key habit).
+		"Official checkpoints": "官方打卡点",
+		"Rally checkpoints": "集章打卡点",
+		"{done}/{total} areas covered": "已覆盖 {done}/{total} 个区域",
+		"{done}/{total} completed": "已完成 {done}/{total}",
+		// Unit captions for the stacked summary counts — the full phrases
+		// above stay the accessible names; these are the visible captions.
+		"areas covered": "区域已覆盖",
+		completed: "已完成",
+		"Not yet": "未完成",
+		"Complete at least one checkpoint in each area.":
+			"每个区域至少完成一个打卡点。",
+		"Complete all {total} Rally checkpoints.":
+			"完成全部 {total} 个集章打卡点。",
+		"Progress is recorded here — complete the programme check-in separately on the official site.":
+			"进度记录在此——计划打卡需在官方网站另行完成。",
+		"A shared checkpoint counts toward both programmes.":
+			"共享打卡点会同时计入两个计划。",
 		"rally stops": "集章站点",
 		"official areas": "官方区域",
 		"of {total} {label}": "/ {total} {label}",

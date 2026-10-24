@@ -595,129 +595,278 @@ body.biwa-page {
 }
 
 /* ---------- Bottom navigation (mobile) ---------- */
+/* One paper bar with an inset rounded selection — the same surface
+   language as the cards. Total content height stays 60px (4px pad + 52px
+   row + 4px pad) so the shell's bottom clearance is unchanged. */
 .biwa-nav {
 	position: fixed;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	display: flex;
+	gap: var(--biwa-space-xs);
 	background: var(--biwa-paper);
 	/* Lineless — a whisper of upward shadow separates the fixed bar from
      content scrolling beneath it. */
 	box-shadow: 0 -1px 8px rgba(var(--biwa-ink-rgb), 0.07);
-	padding-bottom: env(safe-area-inset-bottom);
+	padding: var(--biwa-space-xs) var(--biwa-space-sm)
+		calc(var(--biwa-space-xs) + env(safe-area-inset-bottom));
 	z-index: 30;
 }
 
 .biwa-nav-button {
 	flex: 1;
-	min-height: 60px;
+	min-width: 0;
+	min-height: 52px;
 	border: 0;
+	border-radius: calc(var(--biwa-radius-md) - var(--biwa-space-xs));
 	background: none;
 	font: inherit;
-	font-size: 0.9rem;
+	font-size: 1rem;
+	font-weight: 700; /* one weight in every state — no label jitter */
 	color: var(--biwa-ink-soft);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	/* gap: 1px; */
+	gap: var(--biwa-space-xs);
 	cursor: pointer;
+	transition:
+		background-color 0.16s ease,
+		color 0.16s ease;
 }
-/* The active view is a filled petal wash with deep clay text — colour and
-   weight carry the current page, no outlined pill. */
+/* Non-current press gets the existing peach wash; hover is limited to
+   fine pointers. The selected rule below stays last so the current view
+   keeps its petal tile even under :active. */
+.biwa-nav-button:active {
+	background: var(--biwa-peach-wash);
+}
+@media (hover: hover) and (pointer: fine) {
+	.biwa-nav-button:hover {
+		background: var(--biwa-peach-wash);
+	}
+}
+/* The active view reads as an inset petal tile with deep clay text —
+   colour carries the current page, no badge or line. */
 .biwa-nav-button[aria-current="page"] {
 	color: var(--biwa-clay-deep);
-	font-weight: 700;
 	background: var(--biwa-petal);
 }
 .biwa-nav-icon {
 	line-height: 1;
 	display: inline-flex;
 }
+.biwa-nav-icon svg {
+	width: 22px;
+	height: 22px;
+}
+@media (prefers-reduced-motion: reduce) {
+	.biwa-nav-button {
+		transition: none;
+	}
+}
 
-/* ---------- Certificate progress strip ---------- */
-/* Emphasis block: two big counts with bars on plain paper. */
+/* ---------- Certificate progress accordion ---------- */
+/* Two native disclosures stacked on ONE paper surface — no nested cards.
+   The hairline between them is structural separation, not decoration. */
 .biwa-progress-strip {
 	background: var(--biwa-paper);
 	border-radius: var(--biwa-radius-md);
+	box-shadow: var(--biwa-shadow-card);
 	margin: var(--biwa-space-md) 0;
+	font-family: var(--biwa-font-body);
+	color: var(--biwa-ink);
 }
 .biwa-progress-content {
 	position: relative;
 	display: flex;
-	flex-wrap: wrap;
-	gap: var(--biwa-space-sm) var(--biwa-space-xl);
-	align-items: baseline;
-	padding: var(--biwa-space-sm) var(--biwa-space-md);
+	flex-direction: column;
 }
-.biwa-progress-metric {
+.biwa-progress-section + .biwa-progress-section {
+	border-top: 1px solid var(--biwa-line);
+}
+/* The summary is a three-column grid — wrapping title, right-aligned
+   stacked count, disclosure chevron — so the count never squeezes the
+   title or pushes the chevron off-row. */
+.biwa-progress-toggle {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: var(--biwa-space-md);
+	min-height: var(--biwa-tap);
+	padding: var(--biwa-space-md);
+	font-size: 1rem;
+	list-style: none;
+	cursor: pointer;
+}
+/* A quiet petal wash on press, clipped to the card's own corners. */
+.biwa-progress-toggle:active {
+	background: var(--biwa-petal);
+}
+.biwa-progress-section:first-child > .biwa-progress-toggle {
+	border-radius: var(--biwa-radius-md) var(--biwa-radius-md) 0 0;
+}
+.biwa-progress-section:last-child:not([open]) > .biwa-progress-toggle {
+	border-radius: 0 0 var(--biwa-radius-md) var(--biwa-radius-md);
+}
+/* The native marker is replaced by the trailing chevron, which rotates. */
+.biwa-progress-toggle::-webkit-details-marker {
+	display: none;
+}
+.biwa-progress-heading {
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+/* Momo stays regular 400 — the heading face carries the title on its own
+   weight; nothing here may synthesise a bold. */
+.biwa-progress-title {
+	font-family: var(--biwa-font-heading);
+	font-weight: 400;
+	font-size: 1.05rem;
+	line-height: 1.3;
+}
+/* The count is a small right-aligned stack: Momo numeral over a quiet
+   unit caption. role="img" on the wrapper speaks the full phrase. */
+.biwa-progress-count {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
+	align-items: flex-end;
+	gap: 1px;
+	min-width: 0;
 }
-/* Keep the count and its label on one baseline, with the bar below. */
-.biwa-progress-summary {
-	display: flex;
-	align-items: baseline;
-	gap: var(--biwa-space-xs);
-}
-.biwa-progress-num {
+.biwa-progress-count-num {
 	font-family: var(--biwa-font-heading);
-	font-size: 2.5rem;
 	font-weight: 400;
+	font-size: 1.5rem;
 	line-height: 1.1;
-	color: var(--biwa-lake-deep);
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+	color: var(--biwa-clay-deep);
 }
-.biwa-progress-metric[data-done="true"] .biwa-progress-num {
-	color: var(--biwa-success);
-}
-.biwa-progress-label {
-	font-size: 1rem;
+.biwa-progress-count-unit {
+	max-width: 7rem;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	text-align: right;
 	color: var(--biwa-ink-soft);
 }
-.biwa-progress-bar {
-	width: 100%;
-	height: 4px;
-	border-radius: 999px;
-	background: var(--biwa-line);
+.biwa-progress-area-name,
+.biwa-progress-place-name {
+	flex: 1;
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+/* The shared status mark is a 14px dot glyph — the original map design:
+   green disc with a paper check when completed, petal disc with a rosy
+   inner dot while pending. The wrapper's role="img" label speaks
+   Completed/Not yet for assistive tech. */
+.biwa-progress-state-tick {
+	flex: none;
+	display: inline-flex;
+	align-items: center;
+	line-height: 1;
+}
+.biwa-progress-chev {
+	flex: none;
+	display: inline-flex;
+	align-items: center;
+	color: var(--biwa-ink-soft);
+}
+/* Disclosure chevrons read the REQUESTED state: down while closed (or
+   mid-close — [data-closing] keeps 'open' until the animation lands) and
+   up while open. The base glyph points right; 90° tips it down, 270° up. */
+.biwa-progress-toggle .biwa-progress-chev {
+	transform: rotate(90deg);
+	transition: transform 0.22s ease;
+}
+.biwa-progress-section[open]:not([data-closing])
+	> .biwa-progress-toggle
+	.biwa-progress-chev {
+	transform: rotate(270deg);
+}
+/* The clip wrapper gives the panel a measurable track for the JS-driven
+   open/close transition; resting states are plain CSS — an open section
+   restored after a re-render is simply expanded, no animation replayed. */
+.biwa-progress-clip {
+	display: grid;
+	grid-template-rows: 0fr;
+}
+.biwa-progress-section[open] .biwa-progress-clip {
+	grid-template-rows: 1fr;
+}
+.biwa-progress-clip-inner {
+	min-height: 0;
 	overflow: hidden;
 }
-.biwa-progress-bar > span {
-	display: block;
-	height: 100%;
-	background: var(--biwa-clay-deep);
+.biwa-progress-body {
+	padding: 0 var(--biwa-space-md) var(--biwa-space-md);
 }
-.biwa-progress-metric[data-done="true"] .biwa-progress-bar > span {
-	background: var(--biwa-success);
+.biwa-progress-rule {
+	margin: 0 0 var(--biwa-space-sm);
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--biwa-ink-soft);
+}
+.biwa-progress-note {
+	margin: var(--biwa-space-md) 0 0;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	color: var(--biwa-ink-soft);
+}
+/* Every progress row — Official shore or Rally stop — is the same
+   read-only line: wrapping ink name beside the state tick, body weight. */
+.biwa-progress-area-row,
+.biwa-progress-place {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--biwa-space-md);
+	min-height: 2.5rem;
+	padding: var(--biwa-space-sm) 0;
+	font-size: 1rem;
+	font-weight: 400;
 }
 .biwa-progress-complete {
+	font-size: 1rem;
 	font-weight: 700;
 	color: var(--biwa-success);
+	padding: var(--biwa-space-sm) var(--biwa-space-md);
 }
 
 /* ---------- Day tabs ---------- */
+/* One gapless segmented row on a petal track — the same radius as the
+   progress strip and cards, not three floating pills. */
 .biwa-day-tabs {
 	display: flex;
-	gap: var(--biwa-space-sm);
+	gap: 0;
 	margin: var(--biwa-space-sm) 0;
+	background: var(--biwa-petal);
+	border-radius: var(--biwa-radius-md);
 }
 
-/* Filled tabs, no outlines: petal resting, solid clay-deep when selected
-   (the deep stop keeps the paper label AA). */
+/* Square buttons inside the track; only the two ends carry the outer
+   corners. Corner rules rather than overflow:hidden keep the focus
+   ring fully visible. */
 .biwa-day-tab {
 	flex: 1;
-	min-height: 44px;
+	min-width: 0;
+	min-height: var(--biwa-tap);
 	padding: 0 var(--biwa-space-sm);
-	border-radius: 999px;
 	border: 0;
-	background: var(--biwa-petal);
+	border-radius: 0;
+	background: none;
 	font: inherit;
 	font-size: 1rem;
 	align-content: center;
 	color: var(--biwa-ink);
 	cursor: pointer;
 	white-space: nowrap;
+}
+.biwa-day-tab:first-child {
+	border-radius: var(--biwa-radius-md) 0 0 var(--biwa-radius-md);
+}
+.biwa-day-tab:last-child {
+	border-radius: 0 var(--biwa-radius-md) var(--biwa-radius-md) 0;
 }
 .biwa-day-tab[aria-pressed="true"] {
 	background: var(--biwa-clay-deep);
@@ -1164,9 +1313,9 @@ body.biwa-page {
 /* Quiet photo credit — a real link pinned to its own bottom strip. The
    has-photo padding reserves that strip so the credit can never overlay
    the tick, body or handle; height changes once on first paint only. */
-.biwa-stop-card.has-photo {
+/* .biwa-stop-card.has-photo {
 	padding-bottom: calc(var(--biwa-space-xs) + 0.85rem);
-}
+} */
 .biwa-card-photo-credit {
 	position: absolute;
 	right: 6px;
@@ -2404,8 +2553,8 @@ body.biwa-page {
 	gap: var(--biwa-space-xs);
 	flex-wrap: wrap;
 }
-/* Read-only itinerary for the day: plain static rows mirroring the
-   timeline's visited state — no controls, no links. */
+/* The day's itinerary list: real rows are full-width buttons opening
+   the existing destination sheet; missing/empty rows stay static. */
 .biwa-dayroute-locations {
 	list-style: none;
 	margin: 0;
@@ -2420,6 +2569,24 @@ body.biwa-page {
 	flex-wrap: wrap;
 	align-items: baseline;
 	gap: 2px var(--biwa-space-sm);
+}
+/* The row button mirrors the li's flex layout so a tappable row reads
+   identically to the static ones — only the cursor and the global focus
+   ring betray it. The list stays compact: content height, no tap floor. */
+.biwa-dayroute-location-button {
+	flex: 1 1 auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 2px var(--biwa-space-sm);
+	min-width: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	font: inherit;
+	text-align: left;
+	color: inherit;
+	cursor: pointer;
 }
 /* The name gets the flexible width and may wrap; the status keeps its own
    space at the end instead of squeezing it. */
@@ -2436,22 +2603,35 @@ body.biwa-page {
 	color: var(--biwa-ink-soft);
 	font-size: 0.78rem;
 }
-.biwa-dayroute-status {
+/* The shared state tick and the sheet chevron travel as one end cluster —
+   non-shrinking, so the icon can never wrap away from it. */
+.biwa-dayroute-location-end {
 	flex: none;
 	margin-left: auto;
 	display: inline-flex;
 	align-items: center;
-	gap: 4px;
-	font-size: 0.78rem;
-	color: var(--biwa-ink-soft);
-	white-space: nowrap;
+	gap: var(--biwa-space-xs);
 }
-.biwa-dayroute-status[data-done="true"] {
-	color: var(--biwa-success);
-}
-.biwa-dayroute-status-icon {
+/* The chevron only hints the sheet affordance — 12px, centred on the
+   line, so the compact row height never changes. */
+.biwa-dayroute-location-chevron {
 	display: inline-flex;
+	align-items: center;
 	line-height: 1;
+}
+.biwa-dayroute-location-chevron svg {
+	width: 12px;
+	height: 12px;
+}
+/* A quiet petal response marks the row tappable — press feedback plus a
+   pointer-accurate hover only; no scale, motion or layout shift. */
+.biwa-dayroute-location-button:active {
+	background: var(--biwa-petal);
+}
+@media (hover: hover) and (pointer: fine) {
+	.biwa-dayroute-location-button:hover {
+		background: var(--biwa-petal);
+	}
 }
 
 .biwa-route-meta {
@@ -2669,7 +2849,8 @@ body.biwa-page {
 	}
 
 	/* The mobile bottom bar becomes a vertical rail: one paper tile of
-     icon+label rows, sticky so it rides alongside the scrolled view.
+     icon+label rows on the card surface (shadow-card like every paper
+     element), sticky so it rides alongside the scrolled view.
      align-self:start keeps it out of the full-height row stretch so the
      sticky constraint has room to travel. */
 	.biwa-nav {
@@ -2684,21 +2865,24 @@ body.biwa-page {
 		flex-direction: column;
 		align-items: stretch;
 		gap: var(--biwa-space-xs);
-		padding: var(--biwa-space-xs);
+		padding: var(--biwa-space-sm);
 		margin-top: var(--biwa-space-md);
 		margin-bottom: 0;
 		background: var(--biwa-paper);
 		border-radius: var(--biwa-radius-md);
-		box-shadow: none;
+		box-shadow: var(--biwa-shadow-card);
 		z-index: auto;
 	}
+	/* Row geometry: 48px tap height, concentric 6px corners (card 14 − pad
+     8), horizontal icon+label. The base press/hover washes carry over —
+     only the petal selection differs. */
 	.biwa-nav-button {
 		flex: none;
 		flex-direction: row;
 		justify-content: flex-start;
 		min-height: var(--biwa-tap);
-		padding: 0 var(--biwa-space-md);
-		border-radius: var(--biwa-radius-sm);
+		padding: 0 var(--biwa-space-sm);
+		border-radius: calc(var(--biwa-radius-md) - var(--biwa-space-sm));
 		background: none;
 		gap: var(--biwa-space-sm);
 	}

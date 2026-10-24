@@ -78,6 +78,7 @@
 	var geoPoint = null; // one-shot geolocation, never persisted
 	var dialogTrigger = null; // element focus returns to on dialog close
 	var sheetTrigger = null; // element focus returns to on sheet close
+	var sheetTriggerKey = null; // its data-focus-key — survives a re-render
 	var dragState = null; // active pointer/html5 drag bookkeeping
 	var suppressClickUntil = 0; // a finished drag must not open the sheet
 
@@ -149,6 +150,15 @@
 		warn: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3 22 20H2zM11.1 9.6h1.8v4.6h-1.8zM11.1 15.6h1.8v1.8h-1.8z" fill="currentColor" fill-rule="evenodd"/></svg>',
 		grip: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="9" cy="6" r="1.6" fill="currentColor"/><circle cx="15" cy="6" r="1.6" fill="currentColor"/><circle cx="9" cy="12" r="1.6" fill="currentColor"/><circle cx="15" cy="12" r="1.6" fill="currentColor"/><circle cx="9" cy="18" r="1.6" fill="currentColor"/><circle cx="15" cy="18" r="1.6" fill="currentColor"/></svg>',
 		chev: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5-2-2L12 12 7.5 7.5z" fill="currentColor"/></svg>',
+		// The original map status dots — the shared read-only completion
+		// glyph for the progress drawers and the map's location list: a
+		// filled success disc punched with a paper check when completed,
+		// a petal disc with a rosy inner dot while pending. Decorative —
+		// the wrapper's role="img" label carries the words.
+		statusDone:
+			'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="var(--biwa-success)"/><path d="M4.4 8.2 5.9 6.7 7.1 8.2 10.9 4.5 12.1 6.1 7.1 11.2z" fill="var(--biwa-paper)"/></svg>',
+		statusPending:
+			'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="var(--biwa-petal)"/><circle cx="8" cy="8" r="2" fill="var(--biwa-rosy)"/></svg>',
 		stay: '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 11 12 4l8 7v8h-5v-5h-6v5H4z" fill="currentColor"/></svg>',
 		star: '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.5l-5.8 3 1.1-6.5-4.7-4.6 6.5-.9z" fill="currentColor"/></svg>',
 	};
@@ -540,8 +550,12 @@
 		var active = document.activeElement;
 		return {
 			focusKey: active && active.dataset ? active.dataset.focusKey : null,
+			// [data-closing] sections are mid-exit animation — still [open]
+			// natively but heading for closed, so they must not be restored.
 			openDetails: Array.prototype.map.call(
-				document.querySelectorAll("details[data-dkey][open]"),
+				document.querySelectorAll(
+					"details[data-dkey][open]:not([data-closing])",
+				),
 				function (d) {
 					return d.dataset.dkey;
 				},
@@ -815,67 +829,26 @@
 			dayLabel(day) + (dayTitle(day) ? " — " + dayTitle(day) : "");
 	}
 
-	// --- certificate progress strip ------------------------------------------------
-	// Emphasis block: two certificate counts (large numeral, small label,
-	// progress bar) on plain paper — the photo backdrop lives on the up-next
-	// card instead, so this strip never fetches or holds provider imagery.
+	// --- certificate progress accordion ----------------------------------------------
+	// Two native details/summary sections stacked on ONE paper surface —
+	// Official first, then Rally, each independent and initially closed.
+	// The block rebuilds on every render, so data-dkey markers hand the open
+	// state to captureUiState/restoreUiState and polls/saves/language changes
+	// never collapse an expanded section. No provider imagery lives here.
 	function renderProgressStrip(trip) {
 		var host = els["biwa-progress-strip"];
-		var rally = Rules.rallyProgress(trip);
 		var official = Rules.officialAreaProgress(trip);
 		var checklist = Rules.groupChecklist(trip);
 
 		if (!host.querySelector(".biwa-progress-content")) {
 			host.appendChild(el("div", { class: "biwa-progress-content" }));
 		}
-		// Counts repaint every render.
+		// Sections repaint every render; data-dkey re-opens the expanded ones.
 		var content = host.querySelector(".biwa-progress-content");
 		content.innerHTML = "";
-		[
-			{
-				label: t("rally stops"),
-				done: rally.done,
-				total: rally.total,
-				complete: rally.complete,
-			},
-			{
-				label: t("official areas"),
-				done: official.coveredCount,
-				total: official.totalAreas,
-				complete: official.complete,
-			},
-		].forEach(function (item) {
-			var pct = item.total
-				? Math.round((item.done / item.total) * 100)
-				: 0;
-			content.appendChild(
-				el(
-					"span",
-					{
-						class: "biwa-progress-metric",
-						dataset: { done: String(item.complete) },
-					},
-					[
-						el("span", { class: "biwa-progress-summary" }, [
-							el("span", {
-								class: "biwa-progress-num",
-								text: String(item.done),
-							}),
-							el("span", {
-								class: "biwa-progress-label",
-								text: t("of {total} {label}", {
-									total: item.total,
-									label: item.label,
-								}),
-							}),
-						]),
-						el("span", { class: "biwa-progress-bar" }, [
-							el("span", { style: "width:" + pct + "%" }),
-						]),
-					],
-				),
-			);
-		});
+		content.appendChild(renderOfficialProgress(official));
+		content.appendChild(renderRallyProgress(trip));
+
 		// Certificate wording stays honest: the shared checklist completing is
 		// not the same as an official certificate being earned.
 		if (checklist.complete) {
@@ -895,6 +868,336 @@
 					text: t("All three riding days completed"),
 				}),
 			);
+		}
+	}
+
+	// Small shared pieces for the read-only progress marks — the progress
+	// accordion drawers and the map's day-location list all use the same
+	// glyph: the original map status dot (green disc + paper check done,
+	// petal disc + rosy dot pending). The wrapper speaks Completed/Not yet
+	// for assistive tech and the glyph itself stays decorative.
+	function progressStateTick(done) {
+		var tick = el("span", {
+			class: "biwa-progress-state-tick",
+			role: "img",
+			"aria-label": t(done ? "Completed" : "Not yet"),
+			dataset: { done: String(done) },
+		});
+		tick.innerHTML = done ? ICONS.statusDone : ICONS.statusPending;
+		return tick;
+	}
+
+	function progressChevron() {
+		var chev = el("span", {
+			class: "biwa-progress-chev",
+			"aria-hidden": "true",
+		});
+		chev.innerHTML = ICONS.chev;
+		return chev;
+	}
+
+	// The summary count is a stacked number-over-unit block. The FULL
+	// translated phrase stays the accessible name on a role="img" wrapper —
+	// the numeral and unit caption inside are presentation only, so no
+	// translated string is ever split or re-read.
+	function progressCount(done, total, isOfficial) {
+		return el(
+			"span",
+			{
+				class: "biwa-progress-count",
+				role: "img",
+				"aria-label": t(
+					isOfficial
+						? "{done}/{total} areas covered"
+						: "{done}/{total} completed",
+					{ done: done, total: total },
+				),
+			},
+			[
+				el("span", {
+					class: "biwa-progress-count-num",
+					"aria-hidden": "true",
+					text: done + "/" + total,
+				}),
+				el("span", {
+					class: "biwa-progress-count-unit",
+					"aria-hidden": "true",
+					text: t(isOfficial ? "areas covered" : "completed"),
+				}),
+			],
+		);
+	}
+
+	// Official: the programme asks for one checkpoint per shore. The summary
+	// is just title + count + chevron; the panel lists the rule and the four
+	// named area rows — no per-area checkpoint lists or new actions.
+	function renderOfficialProgress(official) {
+		var section = el("details", {
+			class: "biwa-progress-section",
+			dataset: { dkey: "official-progress" },
+		});
+		var toggle = el("summary", {
+			class: "biwa-progress-toggle",
+			dataset: { focusKey: "progress-official-summary" },
+		});
+		toggle.appendChild(
+			el("span", { class: "biwa-progress-heading" }, [
+				el("span", {
+					class: "biwa-progress-title",
+					text: t("Official checkpoints"),
+				}),
+			]),
+		);
+		toggle.appendChild(
+			progressCount(official.coveredCount, official.totalAreas, true),
+		);
+		toggle.appendChild(progressChevron());
+		section.appendChild(toggle);
+
+		var body = el("div", { class: "biwa-progress-body" });
+		body.appendChild(
+			el("p", {
+				class: "biwa-progress-rule",
+				text: t("Complete at least one checkpoint in each area."),
+			}),
+		);
+		official.areas.forEach(function (area) {
+			var row = el("div", {
+				class: "biwa-progress-area-row",
+				dataset: { covered: String(area.covered) },
+			});
+			row.appendChild(
+				el("span", {
+					class: "biwa-progress-area-name",
+					// Shore names live in the AREA_ZH tables, not the generic
+					// string map — areaText routes through I18n.areaLabel.
+					text: areaText(area),
+				}),
+			);
+			row.appendChild(progressStateTick(area.covered));
+			body.appendChild(row);
+		});
+		body.appendChild(
+			el("p", {
+				class: "biwa-progress-note",
+				text: t(
+					"Progress is recorded here — complete the programme check-in separately on the official site.",
+				),
+			}),
+		);
+		section.appendChild(
+			el("div", { class: "biwa-progress-clip" }, [
+				el("div", { class: "biwa-progress-clip-inner" }, [body]),
+			]),
+		);
+		wireProgressDisclosure(section);
+		return section;
+	}
+
+	// Rally: all stops in the programme must be completed. The expanded panel
+	// lists every rally place in stable catalogue order as a read-only row —
+	// full name plus an always-present state tick, green when completed and
+	// a faint grey when not. No links or completion controls live here; the
+	// shared-checkpoint note explains Mizudori counts for both programmes.
+	function renderRallyProgress(trip) {
+		var rally = Rules.rallyProgress(trip);
+		var section = el("details", {
+			class: "biwa-progress-section",
+			dataset: { dkey: "rally-progress" },
+		});
+		var toggle = el("summary", {
+			class: "biwa-progress-toggle",
+			dataset: { focusKey: "progress-rally-summary" },
+		});
+		toggle.appendChild(
+			el("span", { class: "biwa-progress-heading" }, [
+				el("span", {
+					class: "biwa-progress-title",
+					text: t("Rally checkpoints"),
+				}),
+			]),
+		);
+		toggle.appendChild(progressCount(rally.done, rally.total, false));
+		toggle.appendChild(progressChevron());
+		section.appendChild(toggle);
+
+		var body = el("div", { class: "biwa-progress-body" });
+		body.appendChild(
+			el("p", {
+				class: "biwa-progress-rule",
+				text: t("Complete all {total} Rally checkpoints.", {
+					total: rally.total,
+				}),
+			}),
+		);
+		var rallyChecks =
+			(trip.programmeStatus && trip.programmeStatus.rally) || {};
+		Rules.rallyPlaces(trip).forEach(function (p) {
+			var done = !!rallyChecks[p.placeId];
+			var row = el("div", { class: "biwa-progress-place" });
+			row.appendChild(
+				el("span", {
+					class: "biwa-progress-place-name",
+					text: placeName(p),
+				}),
+			);
+			row.appendChild(progressStateTick(done));
+			body.appendChild(row);
+		});
+		body.appendChild(
+			el("p", {
+				class: "biwa-progress-note",
+				text:
+					t(
+						"Progress is recorded here — complete the programme check-in separately on the official site.",
+					) +
+					" " +
+					t("A shared checkpoint counts toward both programmes."),
+			}),
+		);
+		section.appendChild(
+			el("div", { class: "biwa-progress-clip" }, [
+				el("div", { class: "biwa-progress-clip-inner" }, [body]),
+			]),
+		);
+		wireProgressDisclosure(section);
+		return section;
+	}
+
+	// One shared wire-up for both disclosures. A summary click (which native
+	// summary keyboard use also dispatches) is intercepted ONLY to animate the
+	// panel — the section keeps real <details> semantics throughout: 'open'
+	// stays true for the whole exit animation and drops only when it ends.
+	// data-closing marks an in-flight exit so captureUiState never re-opens a
+	// section that is mid-close, and the chevron reads the REQUESTED state.
+	// Reduced motion (or a missing rAF) skips interception — resetRun first
+	// clears any in-flight run, so even a mid-animation preference change
+	// leaves the native instant toggle a clean slate.
+	function wireProgressDisclosure(section) {
+		var CLIP_MS = 220;
+		var clip = section.querySelector(".biwa-progress-clip");
+		var inner = section.querySelector(".biwa-progress-clip-inner");
+		var toggle = section.querySelector(".biwa-progress-toggle");
+		if (!clip || !inner || !toggle) return;
+		section._clipTimer = null;
+		section._clipRaf = null;
+		toggle.addEventListener("click", function (ev) {
+			if (
+				prefersReducedMotion() ||
+				typeof requestAnimationFrame !== "function"
+			) {
+				// Native instant toggle — first hand back a clean slate:
+				// no pending callbacks, inline styles or stale marks.
+				resetRun();
+				return;
+			}
+			ev.preventDefault();
+			// The requested state is what the click should END at — a section
+			// mid-close still counts as open until its animation lands.
+			if (section.open && !section.dataset.closing) startClose();
+			else startOpen();
+		});
+		// Retire any queued work from an interrupted run: the pending frame,
+		// the settle timeout and the transitionend listener.
+		function cancelRun() {
+			if (section._clipRaf !== null) {
+				cancelAnimationFrame(section._clipRaf);
+				section._clipRaf = null;
+			}
+			clearTimeout(section._clipTimer);
+			section._clipTimer = null;
+			clip.ontransitionend = null;
+		}
+		// The reduced-motion / no-rAF path: cancel in-flight work AND clear
+		// every trace — inline styles, the closing mark and the inert seal —
+		// then let the native toggle run cleanly.
+		function resetRun() {
+			cancelRun();
+			clip.style.transition = "";
+			clip.style.gridTemplateRows = "";
+			clip.inert = false;
+			delete section.dataset.closing;
+		}
+		// Freeze the clip at its CURRENT rendered fraction so a reversed
+		// animation resumes from the visible size. Height is measured BEFORE
+		// the transition is disabled, as a fraction of the inner's full
+		// intrinsic height — the frozen value stays in 'fr' like both
+		// endpoints, so no px→fr discrete jump can occur.
+		function freezeClip() {
+			var full = inner.scrollHeight;
+			var now = clip.getBoundingClientRect().height;
+			var fraction = full > 0 ? Math.min(1, Math.max(0, now / full)) : 0;
+			clip.style.transition = "none";
+			clip.style.gridTemplateRows = fraction + "fr";
+			void clip.offsetHeight; // commit the freeze before the next frame
+			cancelRun();
+		}
+		// Settle = transitionend OR a small timeout fallback, so a browser
+		// that never fires grid-rows transitions still finishes the run.
+		function settle(done) {
+			var finished = false;
+			function finish() {
+				if (finished) return;
+				finished = true;
+				clearTimeout(section._clipTimer);
+				section._clipTimer = null;
+				clip.ontransitionend = null;
+				done();
+			}
+			clip.ontransitionend = function (ev) {
+				if (
+					ev.target === clip &&
+					ev.propertyName === "grid-template-rows"
+				)
+					finish();
+			};
+			section._clipTimer = setTimeout(finish, CLIP_MS + 80);
+		}
+		function startOpen() {
+			var wasOpen = section.open;
+			freezeClip();
+			delete section.dataset.closing;
+			clip.inert = false;
+			section.open = true;
+			// A reversal mid-close keeps the frozen fraction — only a fully
+			// closed section grows out of a true 0fr start.
+			if (!wasOpen) clip.style.gridTemplateRows = "0fr";
+			void clip.offsetHeight;
+			section._clipRaf = requestAnimationFrame(function () {
+				section._clipRaf = null;
+				clip.style.transition =
+					"grid-template-rows " +
+					CLIP_MS +
+					"ms cubic-bezier(0.4, 0, 0.2, 1)";
+				clip.style.gridTemplateRows = "1fr";
+				settle(function () {
+					clip.style.transition = "";
+					clip.style.gridTemplateRows = "";
+				});
+			});
+		}
+		function startClose() {
+			freezeClip();
+			section.dataset.closing = "true";
+			// A clipped region must not stay focusable — hand focus back to
+			// the summary if it sat inside, then seal the clip for the exit.
+			if (clip.contains(document.activeElement)) toggle.focus();
+			clip.inert = true;
+			section._clipRaf = requestAnimationFrame(function () {
+				section._clipRaf = null;
+				clip.style.transition =
+					"grid-template-rows " +
+					CLIP_MS +
+					"ms cubic-bezier(0.4, 0, 0.2, 1)";
+				clip.style.gridTemplateRows = "0fr";
+				settle(function () {
+					section.open = false;
+					delete section.dataset.closing;
+					clip.style.transition = "";
+					clip.style.gridTemplateRows = "";
+					clip.inert = false;
+				});
+			});
 		}
 	}
 
@@ -1296,16 +1599,14 @@
 		list.innerHTML = "";
 		var places = Rules.placesById(trip);
 
-		// Cards are about to be torn down — drop pending lazy-photo
+		// Cards are about to be torn down — drop pending photo
 		// registrations so only the new rows can trigger fetches, and prune
-		// detached queue waiters so the map can't grow or paint a torn-down
-		// card later.
-		if (cardPhotoIO && cardPhotoTargets.size) {
-			cardPhotoTargets.forEach(function (job, card) {
-				cardPhotoIO.unobserve(card);
-			});
-			cardPhotoTargets.clear();
-		}
+		// detached queue waiters and queued jobs so the map can't grow or
+		// paint a torn-down card later.
+		cardPhotoRegistrations.clear();
+		cardPhotoPending = cardPhotoPending.filter(function (job) {
+			return document.contains(job.card);
+		});
 		Object.keys(cardPhotoWaiters).forEach(function (placeId) {
 			cardPhotoWaiters[placeId] = cardPhotoWaiters[placeId].filter(
 				function (job) {
@@ -1447,6 +1748,12 @@
 		) {
 			nextCardFocus.focus({ preventScroll: true });
 		}
+
+		// Every row of the selected day is attached now — drain the render
+		// registrations into the shared fetch queue (bounded slots, per-place
+		// dedupe, cached details paint for free) and clear for the next build.
+		cardPhotoRegistrations.forEach(enqueueCardPhoto);
+		cardPhotoRegistrations.clear();
 	}
 
 	// The quiet road-leg line between consecutive cards — its distance
@@ -1867,17 +2174,18 @@
 	}
 
 	// --- timeline card photos ---------------------------------------------------
-	// Lazy first-photo backdrops on every rendered stop/endpoint card, in the
+	// First-photo backdrops on every rendered stop/endpoint card, in the
 	// same visual language as the up-next card (absolute image, 1px blur,
 	// opaque paper veil, quiet author credit). Rows recreate their DOM on
 	// every render, so painted photo NODES are kept keyed by occurrence id
 	// and reattached to the new card — never a refetch and never a cached
-	// card (its handlers would go stale). Detail fetches only fire when a
-	// card nears the viewport (IntersectionObserver, 100px margin), queued
-	// with at most 2 in flight, and each place's result/failure is
-	// remembered for the session so nothing loops.
-	var cardPhotoIO = null; // one shared IntersectionObserver
-	var cardPhotoTargets = new Map(); // card element -> pending observe job
+	// card (its handlers would go stale). Detail fetches queue once the row
+	// list is attached — renderTrack drains the registration map after every
+	// card is connected — with at most 4 in flight, and each place's
+	// result/failure is remembered for the session so nothing loops. Only
+	// the rendered day ever queues (renderTrack builds just the current
+	// day), and a day switch drops stale pending work.
+	var cardPhotoRegistrations = new Map(); // card element -> pending job
 	var cardPhotoPending = []; // queued jobs awaiting a fetch slot
 	var cardPhotoInflight = {}; // placeId -> true while its fetch owns a slot
 	var cardPhotoWaiters = {}; // placeId -> [{card, place, occKey}]
@@ -1885,24 +2193,6 @@
 	var cardPhotoFailed = {}; // placeId -> true after a failed DETAILS attempt
 	var cardPhotoImageFailed = {}; // placeId -> true after photo BYTES fail
 	var CARD_PHOTO_SLOTS = 4;
-
-	function cardPhotoObserver() {
-		if (cardPhotoIO || typeof IntersectionObserver === "undefined")
-			return cardPhotoIO;
-		cardPhotoIO = new IntersectionObserver(
-			function (entries) {
-				entries.forEach(function (entry) {
-					if (!entry.isIntersecting) return;
-					cardPhotoIO.unobserve(entry.target);
-					var job = cardPhotoTargets.get(entry.target);
-					cardPhotoTargets.delete(entry.target);
-					if (job) enqueueCardPhoto(job);
-				});
-			},
-			{ rootMargin: "100px" },
-		);
-		return cardPhotoIO;
-	}
 
 	// Register a rendered card for its place's photo. Called for stop and
 	// populated endpoint rows; pins and missing endpoints have no placeId
@@ -1945,14 +2235,13 @@
 			}
 			return;
 		}
-		var observer = cardPhotoObserver();
-		if (!observer) return;
-		cardPhotoTargets.set(card, {
+		// The card is still detached while its row is being built — register
+		// rather than enqueue; renderTrack drains the map after attachment.
+		cardPhotoRegistrations.set(card, {
 			card: card,
 			place: place,
 			occKey: occKey,
 		});
-		observer.observe(card);
 	}
 
 	function enqueueCardPhoto(job) {
@@ -2778,8 +3067,14 @@
 		sheetContext = context;
 		if (!reopening) {
 			// First open owns the return-focus target and the scroll lock — a
-			// place switch inside an open sheet must not overwrite either.
+			// place switch inside an open sheet must not overwrite either. The
+			// key is captured too: re-renders rebuild the opener's node, so
+			// the raw element ref alone can go stale before close.
 			sheetTrigger = document.activeElement;
+			sheetTriggerKey =
+				sheetTrigger && sheetTrigger.dataset
+					? sheetTrigger.dataset.focusKey || null
+					: null;
 			// Lock the page behind the sheet — the original inline style is
 			// restored verbatim on the final close so an app-level overflow
 			// setting survives.
@@ -2842,10 +3137,21 @@
 		els["biwa-sheet-actions"].innerHTML = "";
 		document.body.style.overflow = sheetPrevOverflow;
 		store.setEditorActive(false);
-		if (sheetTrigger && document.contains(sheetTrigger)) {
-			sheetTrigger.focus();
+		// The saved element may have been detached by a re-render while the
+		// sheet was open — fall back to its stable focus key so focus still
+		// lands on the control that opened the sheet.
+		var trigger =
+			sheetTrigger && document.contains(sheetTrigger)
+				? sheetTrigger
+				: null;
+		if (!trigger && sheetTriggerKey) {
+			trigger = document.querySelector(
+				'[data-focus-key="' + sheetTriggerKey + '"]',
+			);
 		}
+		if (trigger) trigger.focus();
 		sheetTrigger = null;
+		sheetTriggerKey = null;
 		// After hiding: cancel the exit animations so their fill:forwards does
 		// not pin the sheet at opacity:0 on the next open, clear the flag, and
 		// bump the generation so any close callbacks still queued are retired.
@@ -4561,24 +4867,19 @@
 	}
 
 	// Per-day status rows: distance when routed, the specific blocked reason
-	// when not, and a read-only list of the day's locations with their
-	// manual check-in state. The map is viewing-only — no external directions
-	// links, and the list never opens the sheet or ticks anything.
-	// Filled status dots: solid green disc with a white check polygon when
-	// done, a quiet petal disc with a rosy inner dot while pending — no
-	// outlined shapes.
-	var DAYLOC_CHECK_SVG =
-		'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">' +
-		'<circle cx="8" cy="8" r="7" fill="var(--biwa-success)"/>' +
-		'<path d="M4.4 8.2 5.9 6.7 7.1 8.2 10.9 4.5 12.1 6.1 7.1 11.2z" fill="#fff"/></svg>';
-	var DAYLOC_EMPTY_SVG =
-		'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">' +
-		'<circle cx="8" cy="8" r="7" fill="var(--biwa-petal)"/>' +
-		'<circle cx="8" cy="8" r="2" fill="var(--biwa-rosy)"/></svg>';
+	// when not, and the day's locations with their manual check-in state.
+	// The map adds no external directions links and nothing here ticks
+	// state — real rows open the existing destination sheet instead;
+	// missing/empty rows stay plain static text.
 
-	// One static list item: name, an optional quiet endpoint role, and the
-	// visited status exactly as the timeline computes it (no GPS inference).
-	function dayRouteLocationItem(name, role, visited, missing) {
+	// One list item: name, an optional quiet endpoint role, and the visited
+	// status exactly as the timeline computes it (no GPS inference) shown
+	// with the shared progressStateTick. A real point passes sheetContext
+	// and wraps the same spans in a full-width button opening the existing
+	// destination sheet; a missing/empty row passes nothing and stays
+	// plain static text — missing rows get no tick at all (there is no
+	// destination to complete).
+	function dayRouteLocationItem(name, role, visited, missing, sheetContext) {
 		var li = el("li", { class: "biwa-dayroute-location" });
 		if (missing) li.dataset.missing = "true";
 		var nameSpan = el("span", { class: "biwa-dayroute-locname" }, [
@@ -4594,24 +4895,37 @@
 				}),
 			);
 		}
-		li.appendChild(nameSpan);
-		li.appendChild(
-			el(
-				"span",
-				{
-					class: "biwa-dayroute-status",
-					dataset: { done: String(visited) },
-				},
-				[
-					el("span", {
-						class: "biwa-dayroute-status-icon",
-						"aria-hidden": "true",
-						html: visited ? DAYLOC_CHECK_SVG : DAYLOC_EMPTY_SVG,
-					}),
-					el("span", { text: t(visited ? "Completed" : "Pending") }),
-				],
-			),
-		);
+		// The shared read-only tick — same green/waypoint state the progress
+		// drawers show — or nothing at all when there is no destination.
+		var statusSpan = missing ? null : progressStateTick(visited);
+		if (sheetContext) {
+			// Stable focus key — the sheet's return-focus fallback finds
+			// this button even after a re-render rebuilds the list.
+			var rowButton = el("button", {
+				class: "biwa-dayroute-location-button",
+				type: "button",
+				"data-focus-key": "map-location-" + sheetContext.occurrenceId,
+			});
+			rowButton.addEventListener("click", function () {
+				openSheet(sheetContext);
+			});
+			rowButton.appendChild(nameSpan);
+			// Status and the sheet-affordance chevron travel as one
+			// non-wrapping end cluster — the icon can never orphan onto
+			// its own line away from the state it decorates.
+			var endCluster = el("span", {
+				class: "biwa-dayroute-location-end",
+			});
+			if (statusSpan) endCluster.appendChild(statusSpan);
+			var hint = chevronHint();
+			hint.classList.add("biwa-dayroute-location-chevron");
+			endCluster.appendChild(hint);
+			rowButton.appendChild(endCluster);
+			li.appendChild(rowButton);
+		} else {
+			li.appendChild(nameSpan);
+			if (statusSpan) li.appendChild(statusSpan);
+		}
 		return li;
 	}
 
@@ -4650,8 +4964,29 @@
 					: p.kind === "end"
 						? t("Finish")
 						: null;
+			// The same context the timeline sheet uses — occurrence + day +
+			// kind — so endpoint completion and pin stand-ins match exactly.
+			var context = {
+				place: p.place || {
+					placeId: null,
+					label: p.label,
+					programmes: [],
+					category: "pin",
+					lat: p.lat,
+					lng: p.lng,
+				},
+				occurrenceId: p.occurrenceId,
+				day: day,
+				kind: p.kind,
+			};
 			ol.appendChild(
-				dayRouteLocationItem(placeName(p), role, p.visited, false),
+				dayRouteLocationItem(
+					placeName(p),
+					role,
+					p.visited,
+					false,
+					context,
+				),
 			);
 		});
 		if (points[points.length - 1].kind !== "end") {
